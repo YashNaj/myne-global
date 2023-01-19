@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input {
+    @apply input-bordered;
+  }
+
+  .btn {
+  }
+
+  .link {
+    @apply no-underline link-hover;
+  }
+}
