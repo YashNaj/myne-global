@@ -42,8 +42,10 @@
       <slot />
     </div>
   </main>
-  <Footer />
-{/if}
+  <footer>
+    <Footer/>
+  </footer>
+  {/if}
 
 
 <style lang="postcss">
