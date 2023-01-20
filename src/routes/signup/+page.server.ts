@@ -6,9 +6,9 @@ import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import type { PageServerLoad, Actions } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
 import { z } from "zod";
-import { SENDGRID_API_KEY } from "$env/static/private";
+import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import sgMail from "@sendgrid/mail";
-sgMail.setApiKey(SENDGRID_API_KEY);
+sgMail.setApiKey(VITE_SENDGRID_API_KEY);
 
 const sendEmailVerificationLink = async (userId: string, origin: string) => {
   const request = await EmailVerificationRequests.create({ userId });
