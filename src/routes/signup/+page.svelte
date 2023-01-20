@@ -8,6 +8,7 @@
   import { enhance } from '$app/forms';
 	import { fade, slide } from 'svelte/transition';
 	import  springPress  from  '$lib/animationActions';
+  import PageSlide from "$lib/components/PageSlide.svelte";
 	export let form: { message?: string };
 	let duration = 100;
 	console.log(form?.message);
@@ -77,13 +78,8 @@
     <a class="link" href="/forgot-password">Forgot Password?</a>
   </p>
 </form> -->
-
-<div
-	in:slide={{ duration, delay: duration }}
-	out:slide={{ duration }}
-	class="flex-col m-2 p-2 h-full justify-evenly"
->
-	<h1 class="font-bold text-3xl text-center my-2">Create an account</h1>
+	<PageSlide>
+		<h1 class="font-bold text-3xl text-center my-2">Create an account</h1>
 	<form
     method ='POST'
     use:enhance={({ data, cancel }) => {
@@ -114,66 +110,16 @@
 				</div>
 			{/if}
 		</div>
-		<button use:springPress class="tropical-blue flex bg-white my-2  rounded justify-center align-center "
-			>Sign Up!</button
-		>
-		
-	</form>
+		<button use:springPress 
+		class="btn btn-primary"
+		 type="submit">Sign up</button>
+		 <a use:springPress 
+		 href = '/signin'
+		 class="btn btn-accent"
+		  >Sign in</a>
+	  </form>
+	</PageSlide>
 	
-</div>
+	
 
 
-<style>
-	label {
-		font-weight: bold;
-		box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-			rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-			rgba(0, 0, 0, 0.09) 0px 32px 16px;
-	}
-	input {
-		width: 100%;
-		height: 2rem;
-		box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-			rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-			rgba(0, 0, 0, 0.09) 0px 32px 16px;
-	}
-	button {
-		color: white;
-		font-weight: 600;
-		padding: 1rem;
-		width: 100%;
-		font-size: 1.4rem;
-		margin: 2rem 0rem;
-		box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-			rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-			rgba(0, 0, 0, 0.09) 0px 32px 16px;
-		background: rgb(108, 91, 154);
-		background: -moz-radial-gradient(
-			circle,
-			rgba(108, 91, 154, 1) 0%,
-			rgba(104, 104, 169, 1) 33%,
-			rgba(101, 114, 180, 1) 94%,
-			rgba(99, 119, 186, 1) 100%
-		);
-		background: -webkit-radial-gradient(
-			circle,
-			rgba(108, 91, 154, 1) 0%,
-			rgba(104, 104, 169, 1) 33%,
-			rgba(101, 114, 180, 1) 94%,
-			rgba(99, 119, 186, 1) 100%
-		);
-		background: radial-gradient(
-			circle,
-			rgba(108, 91, 154, 1) 0%,
-			rgba(104, 104, 169, 1) 33%,
-			rgba(101, 114, 180, 1) 94%,
-			rgba(99, 119, 186, 1) 100%
-		);
-	}
-	.error {
-		background-color: rgba(204, 133, 133, 0.795);
-	}
-	.error-tag {
-		background-color: red;
-	}
-</style>

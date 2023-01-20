@@ -9,8 +9,7 @@
 
 
 <div
-	in:fade={{ duration: 200, delay: 0 }}
-	out:slide={{ duration: 200 }}
+	in:fade={{ duration: 200, delay: 200}}
 	class=" myne_sign-container container flex-col justify-center"
 >
 	<div class="flex-col justify-center content-center m-2 w-100">

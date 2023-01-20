@@ -2,30 +2,51 @@
   import Navbar from "$lib/components/navbar.svelte";
   import "../app.css";
   import { page } from "$app/stores";
-  import { handleSession } from "@lucia-auth/sveltekit/client";
+  import { handleSession, getUser } from "@lucia-auth/sveltekit/client";
   import Nav from "$lib/components/Nav.svelte";
   import Footer from "$lib/components/Footer.svelte";
-  import { fade, slide } from 'svelte/transition';
-	import springPress from '$lib/animationActions';
+  import { fade, slide } from "svelte/transition";
+  import springPress from "$lib/animationActions";
   import MobileNav from "$lib/components/MobileNav.svelte";
-
-
   handleSession(page);
+  const user = getUser();
+  console.log(1, user?.userId);
+  console.log(handleSession(page));
 </script>
 
 <svelte:head>
-	<link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
-	<meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
+  <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
+  <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
 </svelte:head>
+{#if user.userId != null}
+  <header>
+    <MobileNav />
+  </header>
+  <main
+    in:slide={{ delay: 200, duration: 200 }}
+    out:slide={{ delay: 200 }}
+    class="mx-1 my-4 flex-col justify-center"
+  >
+    <slot />
+  </main>
+{:else}
+  <header>
+    <Nav />
+  </header>
+  <main 
+  in:slide={{ delay: 200, duration: 200 }}
+  out:slide={{ delay: 200 }}
 
+  class="mx-1 my-4 flex-col justify-center">
+    <slot />
+  </main>
+  <Footer />
+{/if}
 
-<header>
-  <MobileNav/>
-</header>
+{#if user.userId}
+  <Footer />
+{/if}
 
-<main class="mx-1 my-4 flex-col justify-center">
-  <slot />
-</main>
 <style lang="postcss">
   :global(:root) {
     --myne-blue: #002d72;

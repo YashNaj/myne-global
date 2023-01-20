@@ -2,12 +2,9 @@
 	import { signOut, getUser } from '@lucia-auth/sveltekit/client';
 	import { invalidateAll } from '$app/navigation';
 	import UserHeader from '$lib/components/UserHeader.svelte';
-	import MobileNav from '$lib/components/MobileNav.svelte';
 	import Dashboard from '$lib/components/Dashboard.svelte';
 	import DashboardFunctions from '$lib/components/DashboardFunctions.svelte';
-	import { fade, slide } from 'svelte/transition';
-	import { horizontalSlide } from '$lib/animationActions';
-	export const user = getUser();
+	import { fade, slide } from 'svelte/transition';	export const user = getUser();
 	const duration = 200;
 	console.log(user);
 </script>

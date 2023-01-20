@@ -10,7 +10,6 @@ const anyoneAllowed = [
     "/reset-password",
     "/api/verify-email",
     "/unverified-email",
-    "/",
     '/api/send-mail'
 ]
 
@@ -21,8 +20,8 @@ export const load = handleServerSession(
         if (onUnauthedRoute) return {}
 
         const user = await getUser(locals, { url })
-
-        if (user.emailVerified) return {}
+        if (!user) redirect (302, '/signin')
+        if (user.emailVerified)  redirect(302, "/profile")
         else throw redirect(302, "/unverified-email")
     }) satisfies LayoutServerLoad
 )
