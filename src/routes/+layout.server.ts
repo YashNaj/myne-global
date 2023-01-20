@@ -8,10 +8,10 @@ const anyoneAllowed = [
     "/signin",
     "/forgot-password",
     "/reset-password",
-    "/verify-email",
+    "/api/verify-email",
     "/unverified-email",
     "/",
-    '/api/send-verification'
+    '/api/send-mail'
 ]
 
 

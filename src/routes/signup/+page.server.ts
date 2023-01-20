@@ -19,18 +19,15 @@ const msg = {
 const sendEmailVerificationLink = async (userId: string, origin: string) => {
   const request = await EmailVerificationRequests.create({ userId });
   const href = `${origin}/api/verify-email?token=${request.token}`;
+  const buttonSlug = `<a class = 'btn btn-primary' href =${href} > Verify </a>`;
   console.log(href);
   console.log("TODO: sendEmail");
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("Email sent");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  try {
+    await fetch("/api/verify-email");
+  } catch (e) {
+    console.log(e);
+  }
 };
-
 export const actions: Actions = {
   default: async ({ request, locals, url }) => {
     const form = await request.formData();
