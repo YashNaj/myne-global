@@ -19,7 +19,7 @@
 <PageSlide>
   <center>
     <form
-      class="w-full h-[100%] justify-center content-center flex-col h-[500px]"
+      class="w-full h-[100%] justify-center content-center flex-col h-auto"
       method="POST"
       use:enhance={({ data, cancel }) => {
         form = {};
@@ -35,7 +35,7 @@
       <input id="email" name="email w-full" class="rounded p-2" /><br />
       <label for="password">Password</label><br />
       <input type="password" id="password" name="password" class="" /> -->
-      <h1 class="text-3xl font-bold text-center my-2">Sign in</h1>
+      <h1 class="text-3xl font-bold text-center my-2 " style = 'color:white;' >Sign in</h1>
 
       <div class="form-control w-full max-w-xs">
         <label for="email" class="label">

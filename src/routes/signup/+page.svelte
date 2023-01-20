@@ -81,7 +81,7 @@
   <center>
     <form
       method="POST"
-      class="flex-col justify-center align-center h-[500px]"
+      class="flex-col justify-center align-center h-auto"
       use:enhance={({ data, cancel }) => {
         form = {};
         const email = data.get("email")?.toString() || "";
@@ -93,7 +93,7 @@
         }
       }}
     >
-      <h1 class="font-bold text-3xl text-center my-2">Create an account</h1>
+      <h1 class="font-bold text-3xl text-center my-2" style = 'color:white;' >Create an account</h1>
       <div class="form-control flex-col justify-center w-full max-w-xs">
         <label for="email" class="label">
           <span class="label-text">Email</span>
