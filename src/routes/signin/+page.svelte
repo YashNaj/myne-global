@@ -19,7 +19,7 @@
 <PageSlide>
   <center>
     <form
-      class="w-full h-[100%] justify-center content-center flex-col h-auto"
+      class="w-full h-[100%] justify-center content-center flex-col"
       method="POST"
       use:enhance={({ data, cancel }) => {
         form = {};
@@ -31,14 +31,10 @@
         }
       }}
     >
-      <!-- <label for="email" class="rounded w-full">Email</label><br />
-      <input id="email" name="email w-full" class="rounded p-2" /><br />
-      <label for="password">Password</label><br />
-      <input type="password" id="password" name="password" class="" /> -->
       <h1 class="text-3xl font-bold text-center my-2 " style = 'color:white;' >Sign in</h1>
 
       <div class="form-control w-full max-w-xs">
-        <label for="email" class="label">
+        <label for="email" class="label ">
           <span class="label-text">Email</span>
           <span class="label-text-alt" />
         </label>
@@ -111,8 +107,12 @@
           class="btn btn-primary flex mx-1 flex-1"
           type="submit">Sign In</button
         >
-     
       </div>
     </form>
   </center>
 </PageSlide>
+<style lang='postcss'>
+  span{
+    color:white;
+  }
+</style>

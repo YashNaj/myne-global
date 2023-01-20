@@ -34,7 +34,7 @@
     <Nav />
   </header>
   <main
-    class="mx-1 my-4 h-full flex-col justify-center"
+    class="mx-1 my-4 h-full flex-col w-full h-auto justify-center"
   >
     <div
       class="container h-full w-full"
@@ -96,7 +96,7 @@
     font-family: futura-pt;
   }
   :global(body) {
-    height: auto;
+    min-height: 100vw;
     width: 100%;
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
       env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -176,5 +176,8 @@
   .center {
     text-align: center;
     margin: 0 auto;
+  }
+  :global(label){
+
   }
 </style>
