@@ -6,7 +6,6 @@
   import axios from "axios";
   import { getProps } from "$lib/utils";
   import type { D } from "$lib/interfaces";
-  import { redirect, type ActionResult } from "@sveltejs/kit";
   import { enhance } from "$app/forms";
   import { fade, slide } from "svelte/transition";
   import springPress from "$lib/animationActions";
@@ -14,35 +13,13 @@
   let duration = 200;
   let email: string;
   let password: string;
-  let { err, loading, suc } = getProps();
   export let form: { message?: string };
-  const signin = async () => {
-    loading = true;
-    err = suc = "";
-
-    try {
-      const { data }: D<ActionResult> = await axios.postForm("", {
-        email,
-        password,
-      });
-
-      email = password = "";
-      suc = "Sign in successful";
-      if (data.type === "redirect") set_href(data.location);
-    } catch (error) {
-      console.log(error);
-      err = getActionErrorMsg(error);
-    }
-    loading = false;
-  };
-
-  $: if (email || password) err = suc = "";
 </script>
 
 <PageSlide>
   <center>
     <form
-      class="w-full h-[100%] justify-center content-center flex-col"
+      class="w-full h-[100%] justify-center content-center flex-col h-[500px]"
       method="POST"
       use:enhance={({ data, cancel }) => {
         form = {};
@@ -83,9 +60,9 @@
           <span class="label-text-alt" />
         </label>
         <input
-          id="email"
-          name="email"
-          type="email"
+          id="password"
+          name="password"
+          type="password"
           placeholder=""
           class="flex input input-bordered w-full max-w-xs"
         />
@@ -95,14 +72,14 @@
         </label>
       </div>
 
-      <div class="flex-col justify-center content-center  w-full h-10 my-2">
+      <div class="flex-col justify-center content-center  w-full h-20 my-2">
         {#if form?.message}
           <div
             class="flex-col rounded w-full error"
             out:fade={{ duration: 200, delay: duration }}
             in:slide={{ duration: 200 }}
           >
-            <div class="alert flex alert-error shadow-lg">
+            <div class="alert flex alert-error shadow-lg content-start " style = 'align-items:flex-start; width: 320px;'>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +93,7 @@
                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                   /></svg
                 >
-                <span class="flex content-start text-left">
+                <span class="text-left">
                   {form.message || " "}
                 </span>
               </div>

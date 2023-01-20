@@ -3,12 +3,12 @@ import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests
 import { passwordSchema } from "$lib/schema/index";
 import { Parsers } from "$lib/schema/parsers";
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
-import { fail, error, redirect, type Actions } from "@sveltejs/kit";
+import type { PageServerLoad, Actions } from "./$types";
+import { fail, redirect } from "@sveltejs/kit";
 import { z } from "zod";
 import { SENDGRID_API_KEY } from "$env/static/private";
 import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(SENDGRID_API_KEY);
-
 
 const sendEmailVerificationLink = async (userId: string, origin: string) => {
   const request = await EmailVerificationRequests.create({ userId });
@@ -24,43 +24,46 @@ const sendEmailVerificationLink = async (userId: string, origin: string) => {
     html: `<a href= ${href}> Verify Here </a>`,
   };
 
-
   await sgMail.send(data).then(console.log("success")).catch(error);
+};
+ 
+// If the user exists, redirect authenticated users to the profile page.
+export const load: PageServerLoad = async ({ locals }) => {
+	const session = await locals.validate();
+	if (session) throw redirect(302, "/profile");
+	return {};
+};
 
-  };
 export const actions: Actions = {
-  default: async ({ request, locals, url }) => {
-    const form = await request.formData();
-    const email = form.get("email");
-    const password = form.get("password");
+	default: async ({ request, locals }) => {
+		const form = await request.formData();
+		console.log(form)
+		const email = form.get("email");
+		const password = form.get("password");
 
-    try {
-      const { userId } = await auth.createUser("email", email, {
-        password,
-        attributes: {
-          email,
-          roles: [],
-          emailVerified: false,
-        },
-      });
+		// check for empty values
+		if (!email || !password || typeof email !== "string" || typeof password !== "string") {
+			return fail(400);
+		}
 
-      await sendEmailVerificationLink(userId, url.origin);
-
-      const session = await auth.createSession(userId);
-      locals.setSession(session);
-    } catch (e) {
-      const { message } = e as Error;
-      if (
-        message === "AUTH_DUPLICATE_PROVIDER_ID" ||
-        message === "AUTH_DUPLICATE_USER_DATA"
-      )
-        return fail(400, {
-          message: "Email already in use",
-        });
-
-      return INTERNAL_SERVER_ERROR(e);
-    }
-
-    throw redirect(302, "/");
-  },
+		try {
+			const user = await auth.createUser("email", email, {
+				password,
+			});
+			console.log('User Created')
+			const session = await auth.createSession(user.userId);
+			locals.setSession(session);
+		} catch (error) {
+			if (
+				error instanceof LuciaError &&
+				(error.message === 'AUTH_DUPLICATE_PROVIDER_ID')
+			) {
+				return fail(400, {
+					message: 'User with current email already exists'
+				});
+			}
+			console.log(error)
+			return fail(400);
+		}
+	}
 };

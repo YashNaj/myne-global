@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
   <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
 </svelte:head>
-{#if user?.userId != null}
+{#if $user != null}
   <header>
     <MobileNav />
   </header>

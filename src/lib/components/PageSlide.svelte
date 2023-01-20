@@ -1,7 +1,8 @@
 <script>
-  import { slide } from "svelte/transition";
+  import { fade, slide } from "svelte/transition";
 </script>
 
-<div class = 'flex-col justify-center content-center' transition:slide={{ delay: 200, duration: 200 }}>
+<div class = 'flex-col justify-center content-center' in:slide={{ delay: 200, duration: 200 }}
+out:slide={{delay:200}}>
     <slot/>
 </div>

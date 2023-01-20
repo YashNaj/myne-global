@@ -81,11 +81,12 @@
   <center>
     <form
       method="POST"
-      class="flex-col justify-center align-center"
+      class="flex-col justify-center align-center h-[500px]"
       use:enhance={({ data, cancel }) => {
         form = {};
         const email = data.get("email")?.toString() || "";
         const password = data.get("password")?.toString() || "";
+        console.log(form)
         if (!email || !password) {
           form.message = "Invalid input";
           cancel();
@@ -109,16 +110,15 @@
           <span class="label-text-alt" />
           <span class="label-text-alt" />
         </label>
-      </div>
       <div class="form-control w-full max-w-xs">
         <label for="password" class="label">
           <span class="label-text">Password</span>
           <span class="label-text-alt" />
         </label>
         <input
-          id="email"
-          name="email"
-          type="email"
+          id="password"
+          name="password"
+          type="password"
           placeholder=""
           class="input input-bordered w-full max-w-xs"
         />
@@ -127,11 +127,12 @@
           <span class="label-text-alt" />
         </label>
       </div>
-      <div class="container w-full h-10 my-2">
+      <div class="container w-full h-20 my-2">
         {#if form?.message}
           <div
             transition:slide={{ duration: 200 }}
-            class="alert content-start w-full alert-error shadow-lg"
+            class="alert content-start w-full alert-error shadow-lg "
+            style = 'align-items:flex-start; width: 320px;'
           >
             <div>
               <svg

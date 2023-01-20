@@ -11,12 +11,11 @@
 <button
 in:slide={{ duration, delay: duration }}
 out:slide={{ delay: duration }}
-class=" bottom-0 right-20 bg-black p-2 h-auto-lg w-full h-full"
+class=" btn btn-primary"
 style = 'background-color: #0010101' 
 on:click={async () => {
     await signOut();
     invalidateAll();
-    redirect(302, '/signin');
     console.log('pressed')
 }}>Sign out</button
 >
