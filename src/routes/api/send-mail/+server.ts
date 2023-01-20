@@ -1,5 +1,5 @@
 import { json, type RequestHandler, error } from "@sveltejs/kit";
-import { SENDGRID_API_KEY } from "$env/static/private";
+import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(VITE_SENDGRID_API_KEY);
 
