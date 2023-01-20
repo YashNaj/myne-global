@@ -42,9 +42,6 @@
       <slot />
     </div>
   </main>
-  <footer>
-    <Footer/>
-  </footer>
   {/if}
 
 
