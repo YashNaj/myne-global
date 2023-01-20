@@ -18,34 +18,33 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
   <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
 </svelte:head>
-{#if user.userId != null}
+{#if user?.userId != null}
   <header>
     <MobileNav />
   </header>
-  <main
-    in:slide={{ delay: 200, duration: 200 }}
-    out:slide={{ delay: 200 }}
-    class="mx-1 my-4 flex-col justify-center"
-  >
-    <slot />
+  <main class="mx-1 h-full my-4 flex-col w-full h-auto justify-center">
+    <div
+      class="container h-full w-full"
+    >
+      <slot />
+    </div>
   </main>
 {:else}
   <header>
     <Nav />
   </header>
-  <main 
-  in:slide={{ delay: 200, duration: 200 }}
-  out:slide={{ delay: 200 }}
-
-  class="mx-1 my-4 flex-col justify-center">
-    <slot />
+  <main
+    class="mx-1 my-4 h-full flex-col justify-center"
+  >
+    <div
+      class="container h-full w-full"
+    >
+      <slot />
+    </div>
   </main>
   <Footer />
 {/if}
 
-{#if user.userId}
-  <Footer />
-{/if}
 
 <style lang="postcss">
   :global(:root) {

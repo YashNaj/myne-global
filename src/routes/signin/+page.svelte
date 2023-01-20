@@ -10,11 +10,12 @@
   import { enhance } from "$app/forms";
   import { fade, slide } from "svelte/transition";
   import springPress from "$lib/animationActions";
+  import PageSlide from "$lib/components/PageSlide.svelte";
   let duration = 200;
   let email: string;
   let password: string;
   let { err, loading, suc } = getProps();
-	export let form: { message?: string };
+  export let form: { message?: string };
   const signin = async () => {
     loading = true;
     err = suc = "";
@@ -38,43 +39,103 @@
   $: if (email || password) err = suc = "";
 </script>
 
-	<h1 class="text-3xl font-bold text-center my-2">Sign in</h1>
-	<form
-		method="POST"
-    class = 'flex-col w-full h-full justify-center justify '
-		use:enhance={({ data, cancel }) => {
-			form = {};
-			const email = data.get('email')?.toString() || '';
-			const password = data.get('password')?.toString() || '';
-			if (!email || !password) {
-				form.message = 'Invalid input';
-				cancel();
-			}
-		}}
-	>
-		<label for="email" class="rounded w-full">Email</label><br />
-		<input id="email" name="email w-full" class="rounded p-2" /><br />
-		<label for="password">Password</label><br />
-		<input type="password" id="password" name="password" class="rounded p-2" /><br />
-		<div class="flex w-full h-10 my-2">
-			{#if form?.message}
-				<div
-					class="flex rounded w-full error"
-					out:fade={{ duration: 100, delay: duration }}
-					in:slide={{ duration: 100}}
-				>
-					<span class="error-tag h-full w-5 bg-black rounded " />
-					<p class="error w-full h-10 flex bg-white rounded  p-2">
-						{form.message || ' '}
-					</p>
-				</div>
-			{/if}
-		</div>
-		<button use:springPress 
-    class="btn btn-primary"
-     type="submit">Sign In</button>
-     <a use:springPress 
-     href = '/signup'
-     class="btn btn-accent"
-      >Sign Up </a>
-  </form>
+<PageSlide>
+  <center>
+    <form
+      class="w-full h-[100%] justify-center content-center flex-col"
+      method="POST"
+      use:enhance={({ data, cancel }) => {
+        form = {};
+        const email = data.get("email")?.toString() || "";
+        const password = data.get("password")?.toString() || "";
+        if (!email || !password) {
+          form.message = "Invalid input";
+          cancel();
+        }
+      }}
+    >
+      <!-- <label for="email" class="rounded w-full">Email</label><br />
+      <input id="email" name="email w-full" class="rounded p-2" /><br />
+      <label for="password">Password</label><br />
+      <input type="password" id="password" name="password" class="" /> -->
+      <h1 class="text-3xl font-bold text-center my-2">Sign in</h1>
+
+      <div class="form-control w-full max-w-xs">
+        <label for="email" class="label">
+          <span class="label-text">Email</span>
+          <span class="label-text-alt" />
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          class="flex input input-bordered w-full max-w-xs"
+        />
+        <label for="email" class="label">
+          <span class="label-text-alt" />
+          <span class="label-text-alt" />
+        </label>
+      </div>
+      <div class="form-control w-full max-w-xs">
+        <label for="password" class="label">
+          <span class="label-text">Password</span>
+          <span class="label-text-alt" />
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder=""
+          class="flex input input-bordered w-full max-w-xs"
+        />
+        <label for="password" class="label">
+          <span class="label-text-alt" />
+          <span class="label-text-alt" />
+        </label>
+      </div>
+
+      <div class="flex-col justify-center content-center  w-full h-10 my-2">
+        {#if form?.message}
+          <div
+            class="flex-col rounded w-full error"
+            out:fade={{ duration: 200, delay: duration }}
+            in:slide={{ duration: 200 }}
+          >
+            <div class="alert flex alert-error shadow-lg">
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="stroke-current flex-shrink-0 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  /></svg
+                >
+                <span class="flex content-start text-left">
+                  {form.message || " "}
+                </span>
+              </div>
+            </div>
+          </div>
+        {/if}
+      </div>
+      <div />
+      <div class="flex my-2 w-[320px] justify-around">
+        <a use:springPress href="/signup" class="btn btn-accent mx-1 flex flex-1"
+        >Sign Up
+      </a>
+        <button
+          use:springPress
+          class="btn btn-primary flex mx-1 flex-1"
+          type="submit">Sign In</button
+        >
+     
+      </div>
+    </form>
+  </center>
+</PageSlide>
