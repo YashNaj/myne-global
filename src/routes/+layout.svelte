@@ -22,7 +22,7 @@
   <header>
     <MobileNav />
   </header>
-  <main class="mx-1 h-full my-4 flex-col w-full h-auto justify-center">
+  <main class="mx-1 h-full my-4 flex-col w-full h-full justify-center">
     <div
       class="container h-full w-full"
     >
@@ -34,7 +34,7 @@
     <Nav />
   </header>
   <main
-    class="mx-1 my-4 h-full flex-col w-full h-auto justify-center"
+    class="mx-1 my-4 h-full flex-col w-full h-full justify-center"
   >
     <div
       class="container h-full w-full"
@@ -75,14 +75,6 @@
       circle,
       rgb(82, 151, 224) 0%,
       rgb(141, 162, 184) 100%
-    );
-  }
-  :global(.app) {
-    color: rgb(233, 225, 225);
-    background: -webkit-radial-gradient(
-      circle,
-      rgba(240, 236, 236, 0.212) 40%,
-      rgba(230, 231, 233, 0.212) 100%
     );
   }
   :global(html) {
@@ -175,7 +167,7 @@
   }
   .center {
     text-align: center;
-    margin: 0 auto;
+    margin: 0 full;
   }
   :global(label){
 
