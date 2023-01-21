@@ -24,8 +24,8 @@
       <input id="email" name="email" class ='input input-sm w-full'/><br />
       <label for="password" class ="label font-semibold" >Password</label><br />
       <input type="password" id="password" name="password" class ='input input-sm w-full' /><br />
-      <input type="submit" value="Sign Up" class ='btn btn-primary text-secondary my-4'/>
-      <a class="btn btn-secondary my-4" href="/signin">Sign Up</a>
+      <input type="submit" value="Sign Up" class ='btn btn-primary text-secondary my-4 flex w-full'/>
+      <a class="btn btn-secondary flex w-full my-4" href="/signin">Sign In</a>
     </form>
   </div>
         <div class="flex-col h-20 w-full justify center content-center">
