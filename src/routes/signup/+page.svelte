@@ -35,10 +35,6 @@
         </div>
       {/if}
     </div>
-
-    <p class="my-3 text-secondary">
-      <a class="link" href="/forgot-password">Forgot Password?</a>
-    </p>
 </div>
 <style lang="postcss">
   :global(label){

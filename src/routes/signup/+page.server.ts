@@ -1,13 +1,10 @@
-import { auth } from "$lib/auth/lucia";
+import { auth  } from "$lib/auth/lucia";
 import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests";
-import { passwordSchema } from "$lib/schema/index";
-import { Parsers } from "$lib/schema/parsers";
 import { LuciaError } from 'lucia-auth';
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
-import { error, redirect, type Actions } from "@sveltejs/kit";
-import sgMail from '@sendgrid/mail'
-import {VITE_SENDGRID_API_KEY} from "$env/static/private"
-import { z } from "zod";
+import {errro ,fail, redirect, type Actions } from "@sveltejs/kit";
+import sgMail from '@sendgrid/mail';
+import {VITE_SENDGRID_API_KEY} from "$env/static/private";
 sgMail.setApiKey(VITE_SENDGRID_API_KEY)
 const sendEmailVerificationLink = async (userId: string, origin: string, email:string) => {
   const request = await EmailVerificationRequests.create({ userId });
@@ -28,13 +25,17 @@ const sendEmailVerificationLink = async (userId: string, origin: string, email:s
     console.log(err)
   }
 };
+export const load: PageServerLoad = async ({ locals }) => {
+  const session = await locals.validate();
+  if (session) throw redirect(302, "/");
+};
+
 
 export const actions: Actions = {
   default: async ({ request, locals, url }) => {
     const form = await request.formData();
 		const email = form.get('email');
 		const password = form.get('password');
-    console.log(form);
     try {
       const { userId } = await auth.createUser("email", email, {
         password,
@@ -44,6 +45,7 @@ export const actions: Actions = {
           emailVerified: false,
         },
       });
+      console.log(userId)
 
       await sendEmailVerificationLink(userId, url.origin ,email);
 

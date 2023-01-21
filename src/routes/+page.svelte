@@ -17,7 +17,7 @@
   {limit}
   getData={async (skip, limit) => {
     const all = await fetchJson(
-      `https://jsonplaceholder.typicode.com/comments`
+      'http://localhost:5173/api./get-record'
     );
     return all.slice(skip, skip + limit);
   }}
