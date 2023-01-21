@@ -8,9 +8,9 @@
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<div class="flex flex-col gap-1">
+<div class="flex flex-col gap-1 justify-center w-full">
   <label class="{cls} label font-semibold">
-    <span class="label-text text-base">{lbl}</span>
+    <span class="label-text text-secondary">{lbl}</span>
     {#if alt !== null}
       <span class="label-text-alt">
         <InfoTooltip tip={alt} />
@@ -18,7 +18,7 @@
     {/if}
   </label>
 
-  <div>
+  <div class = 'flex justify-center ' >
     <slot />
   </div>
 </div>

@@ -1,15 +1,9 @@
-import { redirect } from "@sveltejs/kit";
-
-export const actions: Actions = {
-	default: async ({ locals }) => {
-		const session = await locals.validate();
-		if (!session) {
-			if (!session) throw redirect(302, "/");
-		}
-	}
-};
+import type { PageServerLoad } from "./$types";
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.validate();
-	if (!session) throw redirect(302, "/");
-};
+	if (!session) {
+		throw redirect(301, '/signin')
+	}
+}

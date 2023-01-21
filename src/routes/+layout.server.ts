@@ -8,9 +8,8 @@ const anyoneAllowed = [
   "/signin",
   "/forgot-password",
   "/reset-password",
-  "/api/verify-email",
+  "/verify-email",
   "/unverified-email",
-  "/api/send-mail",
 ];
 
 export const load = handleServerSession((async ({ url, locals }) => {
@@ -19,6 +18,9 @@ export const load = handleServerSession((async ({ url, locals }) => {
   );
   if (onUnauthedRoute) return {};
   const session = await locals.validate();
-  const user = await getUser(locals, { url });
-  throw redirect(302, "/unverified-email");
+  if (!session) {
+    throw redirect(303, "/signin");
+  }
+  if (user.emailVerified) return {};
+  else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);

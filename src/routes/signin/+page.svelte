@@ -6,113 +6,79 @@
   import axios from "axios";
   import { getProps } from "$lib/utils";
   import type { D } from "$lib/interfaces";
-  import { enhance } from "$app/forms";
-  import { fade, slide } from "svelte/transition";
-  import springPress from "$lib/animationActions";
-  import PageSlide from "$lib/components/PageSlide.svelte";
-  let duration = 200;
+  import type { ActionResult } from "@sveltejs/kit";
+  import Alert from "$lib/components/Alert.svelte";
+  import { slide } from "svelte/transition";
+
   let email: string;
   let password: string;
-  export let form: { message?: string };
+  let { err, loading, suc } = getProps();
+
+  const signin = async () => {
+    loading = true;
+    err = suc = "";
+
+    try {
+      const { data }: D<ActionResult> = await axios.postForm("", {
+        email,
+        password,
+      });
+
+      email = password = "";
+      suc = "Sign in successful";
+      if (data.type === "redirect") set_href(data.location);
+    } catch (error) {
+      console.log(error);
+      err = getActionErrorMsg(error);
+    }
+    loading = false;
+  };
+
+  $: if (email || password) err = suc = "";
 </script>
 
-<PageSlide>
-  <center>
-    <form
-      class="w-full h-[100%] justify-center content-center flex-col"
-      method="POST"
-      use:enhance={({ data, cancel }) => {
-        form = {};
-        const email = data.get("email")?.toString() || "";
-        const password = data.get("password")?.toString() || "";
-        if (!email || !password) {
-          form.message = "Invalid input";
-          cancel();
-        }
-      }}
+<center>
+  <form on:submit|preventDefault={signin}>
+    <Label lbl="Email">
+      <input
+        class="input w-full input-sm"
+        class:input-error={err}
+        class:input-success={suc}
+        type="email"
+        autocomplete="email"
+        bind:value={email}
+      />
+    </Label>
+    <Label lbl="Password">
+      <input
+        class="input w-full input-sm"
+        class:input-error={err}
+        class:input-success={suc}
+        type="password"
+        autocomplete="current-password"
+        bind:value={password}
+      />
+    </Label>
+    <a class="btn btn-secondary" href="/signup">Sign Up</a>
+
+    <button
+      class="my-4 btn btn-primary text-secondary"
+      class:loading
+      type="submit"
+      disabled={!email || !password || loading}
     >
-      <h1 class="text-3xl font-bold text-center my-2 " style = 'color:white;' >Sign in</h1>
+      Sign in
+    </button>
+    <div class="flex-col h-20 w-full justify center content-center">
+      {#if err}
+        <div>
+          <Alert message={err} />
+        </div>
+      {/if}
+    </div>
 
-      <div class="form-control w-full max-w-xs">
-        <label for="email" class="label ">
-          <span class="label-text">Email</span>
-          <span class="label-text-alt" />
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          class="flex input input-bordered w-full max-w-xs"
-        />
-        <label for="email" class="label">
-          <span class="label-text-alt" />
-          <span class="label-text-alt" />
-        </label>
-      </div>
-      <div class="form-control w-full max-w-xs">
-        <label for="password" class="label">
-          <span class="label-text">Password</span>
-          <span class="label-text-alt" />
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder=""
-          class="flex input input-bordered w-full max-w-xs"
-        />
-        <label for="password" class="label">
-          <span class="label-text-alt" />
-          <span class="label-text-alt" />
-        </label>
-      </div>
-
-      <div class="flex-col justify-center content-center  w-full h-20 my-2">
-        {#if form?.message}
-          <div
-            class="flex-col rounded w-full error"
-            out:fade={{ duration: 200, delay: duration }}
-            in:slide={{ duration: 200 }}
-          >
-            <div class="alert flex alert-error shadow-lg content-start " style = 'align-items:flex-start; width: 320px;'>
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="stroke-current flex-shrink-0 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  /></svg
-                >
-                <span class="text-left">
-                  {form.message || " "}
-                </span>
-              </div>
-            </div>
-          </div>
-        {/if}
-      </div>
-      <div />
-      <div class="flex my-2 w-[320px] justify-around">
-        <a use:springPress href="/signup" class="btn btn-accent mx-1 flex flex-1"
-        >Sign Up
-      </a>
-        <button
-          use:springPress
-          class="btn btn-primary flex mx-1 flex-1"
-          type="submit">Sign In</button
-        >
-      </div>
-    </form>
-  </center>
-</PageSlide>
-<style lang='postcss'>
-  span{
-    color:white;
-  }
-</style>
+    <p class="my-3 text-secondary">
+      <a class="link" href="/forgot-password">Forgot Password?</a>
+    </p>
+  </form>
+</center>
