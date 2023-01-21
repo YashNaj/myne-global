@@ -7,36 +7,23 @@
   import { getProps } from "$lib/utils";
   import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
-
-  let email: string;
-  let password: string;
+	export let form: { message?: string };
   let { err, loading, suc } = getProps();
-
-  const signup = async () => {
-    loading = true;
-    err = suc = "";
-
-    try {
-      await axios.postForm("", {
-        email,
-        password,
-      });
-
-      email = password = "";
-      suc = "Sign up successful";
-      set_href();
-    } catch (error) {
-      console.log(error);
-      err = getActionErrorMsg(error);
-    }
-    loading = false;
-  };
-
-  $: if (email || password) err = "";
 </script>
 
 <center>
-  <form on:submit|preventDefault={signup}>
+ 	<form
+  method="POST"
+  use:enhance={({ data, cancel }) => {
+    form = {};
+    const email = data.get('email')?.toString() || '';
+    const password = data.get('password')?.toString() || '';
+    if (!email || !password) {
+      form.message = 'Invalid input';
+      cancel();
+    }
+  }}
+>
     <Label lbl="Email">
       <input
         class="input input w-full input-sm"
@@ -44,7 +31,6 @@
         class:input-success={suc}
         type="email"
         autocomplete="email"
-        bind:value={email}
       />
     </Label>
     <Label lbl="Password">
@@ -54,10 +40,8 @@
         class:input-success={suc}
         type="password"
         autocomplete="new-password"
-        bind:value={password}
       />
     </Label>
-    <a class="btn btn-secondary" href="/auth/signin">Sign In</a>
 
     <button
       class="my-4 btn btn-primary"
@@ -65,10 +49,12 @@
     >
       Signup
     </button>
+    <a class="btn btn-secondary" href="/auth/signin">Sign In</a>
+
     <div class="flex-col h-20 w-full justify center content-center">
-      {#if err}
+      {#if form?.message}
         <div>
-          <Alert message={err} />
+          <Alert message={form.message} />
         </div>
       {/if}
     </div>

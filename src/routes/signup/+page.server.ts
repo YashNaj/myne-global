@@ -2,6 +2,7 @@ import { auth } from "$lib/auth/lucia";
 import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests";
 import { passwordSchema } from "$lib/schema/index";
 import { Parsers } from "$lib/schema/parsers";
+import { LuciaError } from 'lucia-auth';
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import { error, redirect, type Actions } from "@sveltejs/kit";
 import sgMail from '@sendgrid/mail'
@@ -30,14 +31,9 @@ const sendEmailVerificationLink = async (userId: string, origin: string, email:s
 
 export const actions: Actions = {
   default: async ({ request, locals, url }) => {
-    const { email, password } = await Parsers.form(
-      request,
-      z.object({
-        email: z.string().email(),
-        password: passwordSchema,
-      })
-    );
-
+    const form = await request.formData();
+		const email = form.get('email');
+		const password = form.get('password');
     try {
       const { userId } = await auth.createUser("email", email, {
         password,
@@ -52,17 +48,26 @@ export const actions: Actions = {
 
       const session = await auth.createSession(userId);
       locals.setSession(session);
-    } catch (e) {
-      const { message } = e as Error;
-      if (
-        message === "AUTH_DUPLICATE_PROVIDER_ID" ||
-        message === "AUTH_DUPLICATE_USER_DATA"
-      )
-        throw error(400, "Email already in use");
-
-      throw INTERNAL_SERVER_ERROR(e);
-    }
-
+    }  catch (error) {
+			if (
+				error instanceof LuciaError &&
+				(error.message === 'AUTH_INVALID_PROVIDER_ID')
+			) {
+				return fail(400, {
+					message: 'Invalid Email'
+				});
+			}
+			else if (
+				error instanceof LuciaError &&
+				(error.message === 'AUTH_INVALID_PASSWORD')
+			) {
+				return fail(400, {
+					message: 'Invalid Password.'
+				});
+			}
+			console.log(error)
+			return fail(400);
+		}
     throw redirect(302, "/");
   },
 };
