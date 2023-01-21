@@ -16,7 +16,7 @@ const sendEmailVerificationLink = async (userId: string, origin: string, email:s
   const data = {
     to:   email, // Change to your recipient
     from: "support@myneglobal.com", // Change to your verified sender
-    subject: "Verrify your Myne Global Account",
+    subject: "Verify your Myne Global Account",
     text: "Click the linke to verify",
     html: buttonSlug
   };
@@ -34,6 +34,7 @@ export const actions: Actions = {
     const form = await request.formData();
 		const email = form.get('email');
 		const password = form.get('password');
+    console.log(form);
     try {
       const { userId } = await auth.createUser("email", email, {
         password,
