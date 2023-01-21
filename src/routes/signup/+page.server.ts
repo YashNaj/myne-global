@@ -5,8 +5,9 @@ import { Parsers } from "$lib/schema/parsers";
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import { error, redirect, type Actions } from "@sveltejs/kit";
 import sgMail from '@sendgrid/mail'
+import {VITE_SENDGRID_API_KEY} from "$env/static/private"
 import { z } from "zod";
-
+sgMail.setApiKey(VITE_SENDGRID_API_KEY)
 const sendEmailVerificationLink = async (userId: string, origin: string, email:string) => {
   const request = await EmailVerificationRequests.create({ userId });
   const href = `${origin}/api/verify-email?token=${request.token}`;
@@ -18,9 +19,9 @@ const sendEmailVerificationLink = async (userId: string, origin: string, email:s
     text: "Click the linke to verify",
     html: buttonSlug
   };
-  const msg = JSON.stringify(data)
   try{
-    sgMail.send(msg)
+    sgMail.send(data)
+    console.log("Sent message")
   }
   catch (err){
     console.log(err)
