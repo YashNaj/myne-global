@@ -6,5 +6,5 @@ import {stolenWatchesCollection} from '$lib/mongoose.ts'
 export const GET: RequestHandler = async ({   }) => {
     const documents = await db.collection('watch_jewlery').find({}).limit(100).toArray();
 
-    return json(JSON.stringify(documents))
+    return json((documents))
 }

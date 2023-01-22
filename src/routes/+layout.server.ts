@@ -10,6 +10,7 @@ const anyoneAllowed = [
   "/reset-password",
   "/verify-email",
   "/unverified-email",
+  "/test"
 ];
 
 export const load = handleServerSession((async ({ url, locals }) => {

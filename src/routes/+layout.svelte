@@ -15,7 +15,7 @@
 <header>
 </header>
 
-<main class="mx-14 my-4">
+<main class="mx-3 my-4">
   <slot />
 </main>
 <style lang='postcss'>
