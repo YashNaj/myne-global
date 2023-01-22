@@ -3,5 +3,6 @@
   import Helcim from '$lib/components/Helcim.svelte';
 </script>
 <div> 
-    <CreditCard/>
+    <!-- <CreditCard/> -->
+    <Helcim/>
 </div>

@@ -62,14 +62,8 @@
     
     
     </script>
-    
-    
     <style>
-    @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap");
-    
-    * {
-      box-sizing: border-box;
-    }
+
     *:focus {
       outline: none;
     }
@@ -134,7 +128,7 @@
       margin-right: 0;
     }
     @media screen and (max-width: 480px) {
-      .card-form__col {
+        .col-form__col{
         margin-right: 0;
         flex: unset;
         width: 100%;
@@ -755,32 +749,4 @@
           </button>
         </form>
       </div>
-    </div>
-    <form name="helcimForm" id="helcimForm" action="your-checkout-page.php" method="POST">
-
-        <!--RESULTS-->
-        <div id="helcimResults"></div>
-    
-        <!--SETTINGS-->
-        <input type="hidden" id="token" value="58ae1d44d7ac6959332969">
-        <input type="hidden" id="language" value="en">
-    
-        <!--CARD-INFORMATION-->
-        Card Token: <input type="text" id="cardToken" value="1"><br/>
-        Credit Card Number: <input type="text" id="cardNumber" value=""><br/>
-        Expiry Month: <input type="text" id="cardExpiryMonth" value=""> Expiry Year: <input type="text" id="cardExpiryYear" value=""><br/>
-        CVV: <input type="text" id="cardCVV" value=""><br/>
-    
-        <!--OPTIONAL-AVS-->
-        Card Holder Name: <input type="text" id="cardHolderName" value=""><br/>
-        Card Holder Address: <input type="text" id="cardHolderAddress" value=""><br/>
-        Card Holder Postal Code: <input type="text" id="cardHolderPostalCode" value=""><br/>
-    
-        <!--OPTIONAL-AMOUNT-->
-        Amount: <input type="text" id="amount" value="100.00"><br/>
-    
-        <!--BUTTON-->
-        <input type="button" id="buttonProcess" value="Process"/>
-    
-    </form>
-    
+    </div>  
