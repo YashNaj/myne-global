@@ -780,7 +780,7 @@
         Amount: <input type="text" id="amount" value="100.00"><br/>
     
         <!--BUTTON-->
-        <input type="button" id="buttonProcess" value="Process" on:click={javascript:helcimProcess();}>
+        <input type="button" id="buttonProcess" value="Process"/>
     
     </form>
     
