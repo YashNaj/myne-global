@@ -700,7 +700,7 @@
             </div>
           </div>
         </div>
-        <div class="card-form__inner">
+    <form name="helcimForm" id="helcimForm" action="your-checkout-page.php" method="POST" class ='card-form__inner'>
             <input type="hidden" id="token" value="58ae1d44d7ac6959332969">
             <input type="hidden" id="language" value="en">
 
@@ -710,13 +710,13 @@
           </div>
           <div class="card-input">
             <label for="cardName" class="card-input__label">Card Holder</label>
-            <input type="text" id="cardName" class="input input-sm w-full" bind:value={cardName} on:focus={focusInput} on:blur={blurInput} data-ref="cardName" autocomplete="off">
+            <input type="text" id="cardHolderName" class="input input-sm w-full" bind:value={cardName} on:focus={focusInput} on:blur={blurInput} data-ref="cardName" autocomplete="off">
           </div>
           <div class="card-form__row">
             <div class="card-form__col">
               <div class="card-form__group">
                 <label for="cardMonth" class="card-input__label">Expiration Date</label>
-                <select class="card-input__input dropdown select " id="cardMonth" bind:value={cardMonth} on:focus={focusInput} on:blur={blurInput} data-ref="cardDate">
+                <select class="card-input__input dropdown select " id="cardExpiryMonth" bind:value={cardMonth} on:focus={focusInput} on:blur={blurInput} data-ref="cardDate">
                   <option value="" disabled selected>Month</option>
                   {#each Array(12) as _, n}
                     <option value={(n+1) < 10 ? '0' + (n+1) : (n+1)} disabled={(n+1) < minCardMonth}>
@@ -724,7 +724,7 @@
                     </option>
                   {/each}
                 </select>
-                <select class="card-input__input select" id="cardYear" bind:value={cardYear} on:focus={focusInput} on:blur={blurInput} data-ref="cardDate">
+                <select class="card-input__input select" id="cardExpiryYear" bind:value={cardYear} on:focus={focusInput} on:blur={blurInput} data-ref="cardDate">
                   <option value="" disabled selected>Year</option>
                   {#each Array(12) as _, n}
                     <option value={n + minCardYear}>
@@ -743,14 +743,44 @@
             <div class="card-form__col cvv">
                 <div class="card-input">
                   <label for="billingzip" class="card-input__label">ZIP | Postal</label>
-                  <input type="text" class="input input-sm w-full" id="cardZIP" v-mask="'####'" maxlength="4" bind:value={cardCvv} on:focus={() => isCardFlipped = true} on:blur={() => isCardFlipped = false} autocomplete="off">
+                  <input type="text" class="input input-sm w-full" id="cardHolderPostalCode" v-mask="'####'" maxlength="4" bind:value={cardCvv} on:focus={() => isCardFlipped = true} on:blur={() => isCardFlipped = false} autocomplete="off">
                 </div>
               </div>
           </div>
-    
+          <button class = 'btn btn-primary'>
+
+          </button>
           <button class="btn btn-primary w-100">
             Submit
           </button>
-        </div>
+        </form>
       </div>
     </div>
+    <form name="helcimForm" id="helcimForm" action="your-checkout-page.php" method="POST">
+
+        <!--RESULTS-->
+        <div id="helcimResults"></div>
+    
+        <!--SETTINGS-->
+        <input type="hidden" id="token" value="58ae1d44d7ac6959332969">
+        <input type="hidden" id="language" value="en">
+    
+        <!--CARD-INFORMATION-->
+        Card Token: <input type="text" id="cardToken" value="1"><br/>
+        Credit Card Number: <input type="text" id="cardNumber" value=""><br/>
+        Expiry Month: <input type="text" id="cardExpiryMonth" value=""> Expiry Year: <input type="text" id="cardExpiryYear" value=""><br/>
+        CVV: <input type="text" id="cardCVV" value=""><br/>
+    
+        <!--OPTIONAL-AVS-->
+        Card Holder Name: <input type="text" id="cardHolderName" value=""><br/>
+        Card Holder Address: <input type="text" id="cardHolderAddress" value=""><br/>
+        Card Holder Postal Code: <input type="text" id="cardHolderPostalCode" value=""><br/>
+    
+        <!--OPTIONAL-AMOUNT-->
+        Amount: <input type="text" id="amount" value="100.00"><br/>
+    
+        <!--BUTTON-->
+        <input type="button" id="buttonProcess" value="Process" on:click={javascript:helcimProcess();}>
+    
+    </form>
+    
