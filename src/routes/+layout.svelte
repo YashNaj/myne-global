@@ -80,5 +80,6 @@
 <style lang='postcss'>
   :global(html){
     font-family: futura-pt;
-  }
+    background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,45,114,1) 100%);  }
 </style>

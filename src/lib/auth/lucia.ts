@@ -10,13 +10,15 @@ export interface DBUser {
     email: string;
     roles: string[];
     emailVerified: boolean;
+    firstName: string; 
+    lastName: string;
 }
 
 export const User: Model<DBUser> = mongoose.models['user'] ||
     mongoose.model(
         "user",
         new mongoose.Schema({
-            _id: String,
+            _id: String``,
             provider_id: {
                 type: String,
                 unique: true,
@@ -30,6 +32,8 @@ export const User: Model<DBUser> = mongoose.models['user'] ||
                 required: true,
                 default: false
             },
+            firstName: {type:String, required: false, default: 'Myne' }, 
+            lastName: {type:String, required: false, default: 'Global' }, 
         }, { _id: false })
     );
 
@@ -61,11 +65,13 @@ export const auth = lucia({
     adapter: adapter(mongoose),
     env: dev ? "DEV" : "PROD",
     generateCustomUserId: async () => generateRandomString(8),
-    transformUserData: ({ id, email, emailVerified, roles }) => ({
+    transformUserData: ({ id, email, emailVerified, roles, firstName, lastName}) => ({
         userId: id,
         email,
         roles,
         emailVerified,
+        firstName, 
+        lastName
     })
 });
 

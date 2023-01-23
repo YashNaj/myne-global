@@ -10,21 +10,17 @@
 </script>
 
 <a
-	use:springPress
-	in:slide={{ duration: 200, delay: 200 }}
-	out:slide={{ duration: 200 }}
 	href="/api/{link}"
-	class="square p-5 rounded-[1.4rem] w-full relative"
-	style="background: {background};}"
+	class="w-auto h-40 relative {background}  btn-ghost rounded-lg  shadow-lg p-2"
 >
-	<h1 transition:slide={{ duration: 200, delay: 200 }} class="h-full w-full leading-10">
+	<h1 transition:slide={{ duration: 200, delay: 200 }} class="h-full text-secondary w-full  leading-10">
 		{title}
 	</h1>
-	<div transition:slide={{ duration: 200, delay: 200 }} class="h-auto w-auto">
+	<div class="h-auto w-auto">
 		<Icon
 			src={icon}
 			color="white"
-			size="110px"
+			size="90px"
 			class={'opacity-20 absolute  bottom-[1rem] right-[1rem] z-0'}
 		/>
 	</div>

@@ -29,6 +29,8 @@ module.exports = {
           warning: "#FBBD23",
 
           error: "#f76c5e",
+          
+          vault: "#5d6169"
         },
       },
     ],

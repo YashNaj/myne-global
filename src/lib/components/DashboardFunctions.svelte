@@ -7,11 +7,11 @@
 </script>
 <div 
 transition:slide={{duration:100, delay: 100}}
-class= "container h-[47vh] relative  p-2 w-full"> 
+class= " h-auto relative w-full my-2"> 
     <div 
     transition:slide={{duration:100, delay: 100}}
 
-    class = 'h-auto w-full rounded-lg grid grid-cols-2 grid-rows-auto h-auto gap-4 place-items-center'> 
+    class = ' w-full rounded-lg grid grid-cols-2 grid-rows-auto h-auto gap-4'> 
         <!-- <a 
             href = '/api/import' 
             class = 'square h-full rounded-lg w-full relative'>
@@ -20,10 +20,10 @@ class= "container h-[47vh] relative  p-2 w-full">
             </h1>
             <Icon src = {Database} color = 'white' size = '90px' class = {'absolute bottom-0 right-0'}/>
         </a> -->
-        <DashboardSquareButton background = 'var(--import-card-gradient)'   title = 'Import Your Cards' icon = {Database} link = 'import'/>
-        <DashboardSquareButton background = 'var(--add-a-card-gradient)'   title = 'Add a Card' icon = {DocumentAdd} link = 'addCard'/>
-        <DashboardSquareButton background = 'var(--search-gradient)' title = 'Search For Items' icon = {Search} link = 'search'/>
-        <DashboardSquareButton background = 'var(--child-id-gradient)' title = 'Child ID' icon = {UserAdd} link = 'import'/>
+        <DashboardSquareButton  background = 'bg-error'  title = 'Import Your Cards' icon = {Database} link = 'import'/>
+        <DashboardSquareButton   background = 'bg-success' title = 'Add a Card' icon = {DocumentAdd} link = 'addCard'/>
+        <DashboardSquareButton   background = 'bg-warning' title = 'Search For Items' icon = {Search} link = 'search'/>
+        <DashboardSquareButton   background = 'bg-info' title = 'Child ID' icon = {UserAdd} link = 'import'/>
 
     </div>    
  </div>

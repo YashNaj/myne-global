@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="myne" class = 'bg-primary' lang="en">
+<html data-theme="myne" class = 'gradient-home' lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
@@ -8,8 +8,15 @@
 		<meta name="viewport" content="initial-scale=1, viewport-fit=cover" />	
 		%sveltekit.head%
 	</head>
-	<body class = 'bg-primary h-screen w-screen'>
+	<body class = 'bg-transparent h-screen w-screen'>
 		<div>%sveltekit.body%</div>
 	</body>
 </html>
 <script async defer type="text/javascript" src="<https://secure.helcim.app/helcim-pay/services/start.js>"></script>
+<style lang="postcss">
+	:global(html){
+		background: rgb(255,255,255);
+		background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,45,114,1) 100%);
+		
+	}
+</style>
