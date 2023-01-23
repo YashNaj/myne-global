@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import Dashboard from "$lib/components/Dashboard.svelte";
   import PaginateFetch from "$lib/components/paginateFetch.svelte";
   import Table from "$lib/components/table.svelte";
   import { fetchJson } from "$lib/utils";
@@ -10,18 +11,4 @@
   const limit = Number($page.url.searchParams.get("limit") ?? 10);
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<div class="my-3" />
-<PaginateFetch
-  {pageNo}
-  {limit}
-  getData={async (skip, limit) => {
-    const all = await fetchJson(
-      'http://localhost:5173/api./get-record'
-    );
-    return all.slice(skip, skip + limit);
-  }}
-  bind:data
-/>
-<div class="my-3" />
-<Table preview={0} rows={data} />
+<Dashboard/>

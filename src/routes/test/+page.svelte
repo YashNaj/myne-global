@@ -28,8 +28,8 @@
       in:slide={{ duration: 200, delay: 200 }}
       out:slide={{ delay: 200 }}
     >
-      <Helcim />
-    </div>
+    <CreditCard/>
+  </div>
   {/if}
   <div class="flex">
     {#if page > 0}
