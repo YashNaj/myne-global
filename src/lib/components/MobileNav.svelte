@@ -10,19 +10,12 @@
 <nav
   transition:slide={{ delay: duration, duration }}
   class="flex w-screen h-16 content-center justify-between"
->
-  <div class="container">
-    <img alt="Myne Logo" class="h-full p-1" src={logo} />
-  </div>
-  <div class="container flex w-full h-full justify-end content-end relative">
-    <button
-      use:springPress
-      class="flex  justify-center  mx-2 h-full
-                    content-center absolute bottom-0"
-    >
-      <Drawer />
-    </button>
-  </div>
+> <div>
+  <img alt="Myne Logo" class="h-full p-1" src={logo} />
+</div>
+<div>
+  <Drawer/>
+</div>
 </nav>
 <div class="spacer container h-16">&nbsp;</div>
 
@@ -32,6 +25,7 @@
     position: fixed;
     top: 0;
     z-index: 99;
+    height: 10re,;
   }
   .spacer {
     width: 100%;

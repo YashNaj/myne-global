@@ -3,6 +3,7 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
+  import MobileNav from "$lib/components/MobileNav.svelte";
 
   handleSession(page);
 </script>
@@ -13,6 +14,7 @@
 </svelte:head>
 
 <header>
+  <MobileNav/> 
 </header>
 
 <main class="mx-3 my-4">
