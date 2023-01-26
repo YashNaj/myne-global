@@ -1,9 +1,8 @@
-import mongoose , {type Model} from 'mongoose
+import mongoose , {type Model} from 'mongoose'
 
 export interface Card {
     __id: string; 
     __myneId: string; 
-    division: string;
     category: string;
     subCategory: string; 
     brand: string; 
@@ -24,13 +23,10 @@ export const MyneCardGeneralSchema: Model<MyneCardGeneralSchema> = mongoose.mode
         modelName, 
         new mongoose.Schema(
             {     __id: {
-                type: string, required:true 
+                type: String, required:true 
             }
                 __myneId: 
-                {type: string , required: true, default: ''},
-                division: 
-                {   type: String, 
-                    required: true },
+                {type: String , required: true, default: ''},
                 category: 
                 { type: String, required: true },
                 subCategory: 
@@ -50,6 +46,7 @@ export const MyneCardGeneralSchema: Model<MyneCardGeneralSchema> = mongoose.mode
                 isStolen: { type: Boolean, required: true, default: false },
                 isHeriloom: { type: Boolean, required: true, default: false },
                 defualt: {type: ()=> Date.now(), required: true,} ,
-                pictures: [] 
+                pictures: [String], 
+                documents: [String] 
             })
        );

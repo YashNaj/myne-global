@@ -5,5 +5,4 @@
     import Helcim from "$lib/components/Helcim.svelte";
 </script>
 
-<CreditCard/>
 <AddCard/>
