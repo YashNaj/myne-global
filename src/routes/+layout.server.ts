@@ -13,20 +13,16 @@ const anyoneAllowed = [
   "/unverified-email",
   "/test"
 ];
-const adminOnly = [
-  '/admin'
-]
 
 export const load = handleServerSession((async ({ url, locals }) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
-  const onAdminRoute = adminOnly.some((route) => 
-    url.pathname.startsWith(route)
-  );
   if (onUnauthedRoute) return {};
-  const {user} = await auth.getUser(locals, { url })
-
-  if (user.emailVerified) return {}
-  else throw redirect(302, "/unverified-email")
+  const { session, user } = await locals.validateUser();
+  if (!session) {
+    throw redirect(303, "/signin");
+  }
+  if (user.emailVerified) return {};
+  else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);

@@ -1,5 +1,4 @@
-import mongoose, {type Model} from 'mongoose';
-
+import mongoose , {type Model } from 'mongoose'; 
 export interface Watches { 
     brand: string;
     reference_number: string;
@@ -26,7 +25,7 @@ export const Watches: Model<Watches> = mongoose.models[modelName] ||
             reference_number: {
                 type: String
             },            
-            reference_number: {
+            serial_number: {
                 type: String
             },
             movement: {

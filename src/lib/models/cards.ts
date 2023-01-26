@@ -53,4 +53,3 @@ export const MyneCardGeneralSchema: Model<MyneCardGeneralSchema> = mongoose.mode
                 pictures: [] 
             })
        );
-
