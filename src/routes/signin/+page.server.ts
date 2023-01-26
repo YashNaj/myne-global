@@ -1,6 +1,6 @@
 import { auth } from "$lib/auth/lucia";
-import { fail, redirect } from "@sveltejs/kit";
-import type { PageServerLoad, Actions } from "./$types";
+import {  fail, redirect } from "@sveltejs/kit";
+import type {  PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -46,5 +46,4 @@ export const actions: Actions = {
       console.log(error);
       return fail(400);
     }
-  },
-};
+  },};

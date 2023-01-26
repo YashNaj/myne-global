@@ -18,7 +18,7 @@ export const User: Model<DBUser> = mongoose.models['user'] ||
     mongoose.model(
         "user",
         new mongoose.Schema({
-            _id: String``,
+            _id: String,
             provider_id: {
                 type: String,
                 unique: true,

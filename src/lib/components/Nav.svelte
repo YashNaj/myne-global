@@ -1,4 +1,4 @@
-``<script>
+<script lang='ts'>
 	import logo from '../images/white_myne_logo.png';
 </script>
 

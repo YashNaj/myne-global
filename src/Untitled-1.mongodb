@@ -6,3 +6,4 @@
 // Select the database to use.
 use('myne')
 db.users.drop()
+db.sessions.drop()

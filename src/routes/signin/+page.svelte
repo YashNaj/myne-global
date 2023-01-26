@@ -26,7 +26,7 @@
       <label for="password" class ="label font-semibold" >Password</label><br />
       <input type="password" id="password" name="password" class ='input input-sm w-full' /><br />
       <input type="submit" value="Sign In" class ='btn btn-primary text-secondary flex w-full my-4'/>
-      <a class="btn btn-secondary my-4 w-full" href="/signup">Sign Up</a>
+      <a class="btn btn-secondary my-4 w-full" href="/signup">Register</a>
     </form>
   </div>
         <div class="flex-col h-20 w-full justify center content-center">

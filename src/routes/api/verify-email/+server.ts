@@ -5,6 +5,7 @@ import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
 
 export const GET: RequestHandler = async ({ url }) => {
+
     const { token } = Parsers.params(url, z.object({ token: z.string() }));
 
     const verificationRequest = await EmailVerificationRequests.findOne({ token }).exec();
