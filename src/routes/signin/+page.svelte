@@ -21,10 +21,25 @@
       }
     }}
   >
-      <label for="email" class ="label font-semibold">Email</label><br />
-      <input id="email" name="email" class ='input input-sm w-full'/><br />
-      <label for="password" class ="label font-semibold" >Password</label><br />
-      <input type="password" id="password" name="password" class ='input input-sm w-full' /><br />
+  <div class="form-control flex w-full">
+    <label for='email' class="label">
+      <span class="flex-1 label-text">Your Email</span>
+    </label>
+    <label class="input-group">
+      <span class = 'bg-primary flex-1'>Email</span>
+      <input type="email" name = 'email'  placeholder="info@site.com" class="input input-bordered" />
+    </label>
+  </div>
+
+  <div class="form-control flex">
+    <label class="label" for='password'>
+      <span class="label-text">Your Email</span>
+    </label>
+    <label class="input-group">
+      <span class = 'bg-primary flex-1'>Password</span>
+      <input type="password" id = 'password' name = 'password' placeholder="password" class="input input-bordered" />
+    </label>
+  </div>
       <input type="submit" value="Sign In" class ='btn btn-primary text-secondary flex w-full my-4'/>
       <a class="btn btn-secondary my-4 w-full" href="/signup">Register</a>
     </form>
