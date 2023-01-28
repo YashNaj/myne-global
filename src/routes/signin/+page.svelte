@@ -5,6 +5,7 @@
   import Alert from "$lib/components/Alert.svelte";
 	export let form: { message?: string };
   let { err, loading, suc } = getProps();
+  let extension = ' ';
   
 </script>
 <div class ='flex-col flex justify-center align-center h-auto'>
@@ -13,7 +14,7 @@
     method="POST"
     class=  'flex flex-col justify-center flex-wrap content-center'
     use:enhance={({ data, cancel }) => {
-      form = {};
+      form = {}; 
       const email = data.get("email")?.toString() || "";
       const password = data.get("password")?.toString() || "";
       if (!email || !password) {
