@@ -19,22 +19,16 @@
     }}
   >
   <div class="form-control flex w-full">
-    <label for='email' class="label">
-      <span class="flex-1 label-text">Your Email</span>
-    </label>
     <label class="input-group">
       <span class = 'bg-primary flex-1'>Email</span>
-      <input type="email" name = 'email'  placeholder="info@site.com" class="input input-bordered" />
+      <input type="email" name = 'email'  placeholder="info@site.com" class="input text-primary  input-bordered" />
     </label>
   </div>
 
-  <div class="form-control flex">
-    <label class="label" for='password'>
-      <span class="label-text">Your Email</span>
-    </label>
+  <div class="form-control flex my-3">
     <label class="input-group">
       <span class = 'bg-primary flex-1'>Password</span>
-      <input type="password" id = 'password' name = 'password' placeholder="password" class="input input-bordered" />
+      <input type="password" id = 'password' name = 'password' placeholder="password" class="input text-primary input-bordered" />
     </label>
   </div>
   
@@ -42,8 +36,8 @@
       <input id="email" name="email" class = 'input input-md w-full'/><br />
       <label for="password" class ="label font-semibold" >Password</label><br />
       <input type="password" id="password" name="password" class ='input input-md w-full' /><br /> -->
-      <input type="submit" value="Register" class ='btn btn-primary text-secondary my-4 flex w-full'/>
-      <a class="btn btn-secondary flex w-full my-4" href="/signin">Sign In</a>
+      <input type="submit" class="btn btn-secondary flex w-full my-4" value="Register" />
+      <a class ='btn btn-primary text-secondary my-4 flex w-full' href="/signin">Sign In</a>
     </form>
   </div>
         <div class="flex-col h-20 w-full justify center content-center">

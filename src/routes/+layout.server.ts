@@ -11,10 +11,13 @@ const anyoneAllowed = [
   "/reset-password",
   "/verify-email",
   "/unverified-email",
-  "/test"
-];
+  "/test",
+  "/api/addCards",
+  "/api/test"
+]; 
+let isSession = false; 
 
-export const load = handleServerSession((async ({ url, locals }) => {
+export const load = handleServerSession((async ({ url, locals , isSession}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
@@ -26,3 +29,5 @@ export const load = handleServerSession((async ({ url, locals }) => {
   if (user.emailVerified) return {};
   else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);
+
+console.log(isSession)

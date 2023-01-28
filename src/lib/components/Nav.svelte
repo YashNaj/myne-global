@@ -3,7 +3,7 @@
 </script>
 
 <nav class="flex ">
-	<img src={logo} alt="myne-logo" class=".w-12 .h.24  p-2" />
+	<img src={logo} alt="myne-logo" class= "p-2" />
 </nav>
 <style>
 	nav{

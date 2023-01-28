@@ -5,8 +5,8 @@
 </script>
 
 <div
-  in:slide={{ duration: 200 }}
-  out:slide={{ duration: 200 }}
+  in:slide={{ }}
+  out:slide={{  }}
   class="alert alert-error shadow-lg"
 >
   <div>

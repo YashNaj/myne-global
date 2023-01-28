@@ -5,6 +5,7 @@
   import { enhance } from "$app/forms";
   export let selectedCategory = null;
   export let subcategories = [];
+  export let form : {message?:string};
   let page = 0;
   const categories = [
     {
@@ -100,30 +101,6 @@
   let purchasedFrom = "Purchased from";
   let purchasedValue = "Purchased value";
   let description = "Keep the description to a few words";
-
-  let focusElementStyle = null;
-  let isInputFocused = false;
-  let refs = {};
-  let values = ["Jewlery", "Watches", "Guns", "NFT"];
-  onMount(function () {
-    document.getElementById("cardNumber").focus();
-  });
-
-  function focusInput(e) {
-    isInputFocused = true;
-    let targetRef = e.target.dataset.ref;
-    let target = refs[targetRef];
-    focusElementStyle = `opacity: 1;width: ${target.offsetWidth}px;height: ${target.offsetHeight}px;transform: translateX(${target.offsetLeft}px) translateY(${target.offsetTop}px)`;
-  }
-
-  function blurInput() {
-    setTimeout(() => {
-      if (!isInputFocused) {
-        focusElementStyle = null;
-      }
-    }, 300);
-    isInputFocused = false;
-  }
   let iconColor = "black";
 </script>
 
@@ -233,7 +210,18 @@
     </div>
   </div>
   <form
-   use:enhance 
+   use:enhance={({data})=>{
+       form = {}
+       category      = data.get('category')?.toString() || ''
+       subCategory   = data.get('subCategory')?.toString() || ''
+       brand         = data.get('brand')?.toString() || ''
+       size          = data.get('size')?.toString() || ''
+       purchasedFrom = data.get('purchasedFrom')?.toString() || ''
+       purchasedValue= data.get('purchasedValue')?.toString() || ''
+       description   = data.get('description')?.toString() || ''
+      console.log(form)
+   }}
+   method = 'POST' 
    action = "/api/addCards"
   class="h-auto w-full p-4 pt-40 bg-white flex flex-col justify-between flex-wrap rounded-lg"
   >

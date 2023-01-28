@@ -1,13 +1,10 @@
 <script lang="ts">
   import { invalidateAll } from "$app/navigation";
   import springPress, { horizontalSlide } from "$lib/animationActions";
-  import { signOut } from "@lucia-auth/sveltekit/client";
   import { spring } from "svelte/motion";
   import { quintOut } from "svelte/easing";
-  import { fade, fly, slide, blur } from "svelte/transition";
-  import { spin } from "$lib/animationActions";
   import Listbox from "../../lib/components/Listbox.svelte";
-  export let user;
+  import { blur, slide } from "svelte/transition";
   let isOpen = false;
   let heightScale = 20;
   let drawerHeight = spring(heightScale, {

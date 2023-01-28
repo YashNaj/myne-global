@@ -8,9 +8,10 @@
   
 </script>
 <div class ='flex-col flex justify-center align-center'>
-  <div>
+  <div class = 'flex-col flex justify-center flex-wrap content-center'>
     <form
     method="POST"
+    class=  'flex flex-col justify-center flex-wrap content-center'
     use:enhance={({ data, cancel }) => {
       form = {};
       const email = data.get("email")?.toString() || "";
@@ -21,30 +22,23 @@
       }
     }}
   >
-  <div class="form-control flex w-full">
-    <label for='email' class="label">
-      <span class="flex-1 label-text">Your Email</span>
-    </label>
-    <label class="input-group">
+  <div class="form-control flex w-full text-primary">
+    <label for='email' class="input-group">
       <span class = 'bg-primary flex-1'>Email</span>
-      <input type="email" name = 'email'  placeholder="info@site.com" class="input input-bordered" />
+      <input type="email" name = 'email'  placeholder="info@site.com" class="text-primary input input-bordered" />
     </label>
   </div>
-
-  <div class="form-control flex">
-    <label class="label" for='password'>
-      <span class="label-text">Your Email</span>
-    </label>
+  <div class="form-control flex my-3">
     <label class="input-group">
       <span class = 'bg-primary flex-1'>Password</span>
-      <input type="password" id = 'password' name = 'password' placeholder="password" class="input input-bordered" />
+      <input type="password" id = 'password' name = 'password' placeholder="password" class="input input-bordered text-primary" />
     </label>
   </div>
-      <input type="submit" value="Sign In" class ='btn btn-primary text-secondary flex w-full my-4'/>
-      <a class="btn btn-secondary my-4 w-full" href="/signup">Register</a>
+      <input type="submit" value="Sign In" class="btn btn-secondary my-4 w-full" />
+      <a  class ='btn btn-primary text-secondary flex w-full my-4' href="/signup">Register</a>
     </form>
   </div>
-        <div class="flex-col h-20 w-full justify center content-center">
+        <div class="flex-col h-20 w-full px-4 justify center content-center">
       {#if form?.message}
         <div>
           <Alert message={form.message} />
@@ -52,7 +46,7 @@
       {/if}
     </div>
 
-    <p class="my-3 text-secondary">
+    <p class="my-3 text-secondary flex w-full justify-center">
       <a class="link" href="/forgot-password">Forgot Password?</a>
     </p>
 </div>

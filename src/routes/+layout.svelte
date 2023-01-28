@@ -4,7 +4,18 @@
   import { handleSession } from "@lucia-auth/sveltekit/client";
   import MobileNav from "$lib/components/MobileNav.svelte";
   import { invalidateAll } from "$app/navigation";
-  import { signOut } from "@lucia-auth/sveltekit/client";
+  import { signOut } from "@lucia-auth/sveltekit/client"
+  import type { LayoutData } from './$types';
+  import Nav from "$lib/components/Nav.svelte";
+	import logo from '$lib/images/white_myne_logo.png';
+
+  export let data: LayoutData;
+  const authRoutes = [
+    '/signup',
+    'signin'
+  ]
+
+
   let menuItems = [
     "Import",
     "Request History Reports",
@@ -20,7 +31,6 @@
             invalidateAll();
   }
 </script>
-
 <svelte:head>
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
   <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
@@ -30,7 +40,7 @@
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col">
     <div class="navbar bg-primary">
-      <div class="flex-1 px-2 mx-2 font-bold text-white">Quick Actions</div>
+      <div class="flex-1 px-2 mx-2 font-bold text-white"><img class = 'max-w-s w-20' alt ='logo' src ={logo}/></div>
       <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">
           <svg
@@ -85,6 +95,8 @@
     </ul>
   </div>
 </div>
+
+
 
 <style lang="postcss">
   :global(.gradient-background) {

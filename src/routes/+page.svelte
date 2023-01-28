@@ -8,5 +8,5 @@
 	handleSession(page);
 </script>
 <ProfileCard/>
-<Dashboard/>
+<Dashboard/> 
 <DashboardFunctions/>
