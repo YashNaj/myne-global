@@ -7,7 +7,7 @@
   let { err, loading, suc } = getProps();
   
 </script>
-<div class ='flex-col flex justify-center align-center'>
+<div class ='flex-col flex justify-center align-center h-auto'>
   <div class = 'flex-col flex justify-center flex-wrap content-center'>
     <form
     method="POST"

@@ -41,7 +41,7 @@
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col">
     <div class="navbar bg-primary">
-      <div class="flex-1 px-2 mx-2 font-bold text-white"><img class = 'max-w-s w-20' alt ='logo' src ={logo}/></div>
+      <div class="px-2 mx-2 font-bold text-white w-full"><img class = 'max-w-s w-20 lg:max-w-md ' alt ='logo' src ={logo}/></div>
       <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">
           <svg

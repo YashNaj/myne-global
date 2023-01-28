@@ -209,190 +209,193 @@
       </div>
     </div>
   </div>
-  <form
-   use:enhance={({data})=>{
-       form = {}
-       category      = data.get('category')?.toString() || ''
-       subCategory   = data.get('subCategory')?.toString() || ''
-       brand         = data.get('brand')?.toString() || ''
-       size          = data.get('size')?.toString() || ''
-       purchasedFrom = data.get('purchasedFrom')?.toString() || ''
-       purchasedValue= data.get('purchasedValue')?.toString() || ''
-       description   = data.get('description')?.toString() || ''
-      console.log(form)
-   }}
-   method = 'POST' 
-   action = "/api/addCards"
-  class="h-auto w-full p-4 pt-40 bg-white flex flex-col justify-between flex-wrap rounded-lg"
-  >
-
-    <div class="w-full  flex  justify-between ">
-      {#if page === 0}
-      <div class="flex w-full "       in:slide={{delay: 100, duration: 100}}
-      out:slide={{delay:100}}  >
-    
-      <select
-      bind:value={category}
-  
-      id="dropdown-add-card"
-      class="select flex-1 w-full"
-      name="category"
-      placeholder="Category"
-      on:change={handleCategoryChange}
-    >
-      <option selected disabled placeholder="Category">Category</option>
-
-      {#each categories as category}
-        <option value={category.name}>{category.name}</option>
-      {/each}
-    </select>
-    <select bind:value={subCategory} class="select flex-1 w-full"  >
-      <option selected disabled placeholder="Subcategory"
-        >Subcategory</option
-      >
-
-      {#each subcategories as subcategory}
-        <option selected value={subcategory}>{subcategory}</option>
-      {/each}
-    </select>
-      </div>
-        
-      {/if}
+  <div class = 'flex w-full justify-center'>
+    <form
+    use:enhance={({data})=>{
+        form = {}
+        category      = data.get('category')?.toString() || ''
+        subCategory   = data.get('subCategory')?.toString() || ''
+        brand         = data.get('brand')?.toString() || ''
+        size          = data.get('size')?.toString() || ''
+        purchasedFrom = data.get('purchasedFrom')?.toString() || ''
+        purchasedValue= data.get('purchasedValue')?.toString() || ''
+        description   = data.get('description')?.toString() || ''
+       console.log(form)
+    }}
+    method = 'POST' 
+    action = "/api/addCards"
+   class="h-auto w-full p-4 pt-40 bg-white flex flex-col justify-between flex-wrap rounded-lg md:w-[30rem] lg:w-[40rem]"
+   >
+ 
+     <div class="w-full  flex  justify-between  ">
+       {#if page === 0}
+       <div class="flex w-full "       in:slide={{delay: 100, duration: 100}}
+       out:slide={{delay:100}}  >
+     
+       <select
+       bind:value={category}
+   
+       id="dropdown-add-card"
+       class="select flex-1 w-full"
+       name="category"
+       placeholder="Category"
+       on:change={handleCategoryChange}
+     >
+       <option selected disabled placeholder="Category">Category</option>
+ 
+       {#each categories as category}
+         <option value={category.name}>{category.name}</option>
+       {/each}
+     </select>
+     <select bind:value={subCategory} class="select flex-1 w-full"  >
+       <option selected disabled placeholder="Subcategory"
+         >Subcategory</option
+       >
+ 
+       {#each subcategories as subcategory}
+         <option selected value={subcategory}>{subcategory}</option>
+       {/each}
+     </select>
+       </div>
+         
+       {/if}
+     </div>
+     {#if page === 1}
+     <div class="w-full  flex  justify-between  "     >
+       <div class="flex"
+       in:slide={{delay: 100, duration: 100}}
+       out:slide={{delay:100}}      >
+         <div class="form-control w-full max-w-xs flex-1 mx-1">
+           <label class="label" for = "brand">
+             <span class="label-text font-bold ">Brand</span>
+           </label>
+           <input
+             type="text"
+             name = "brand"
+             placeholder = '"Rolex ... etc"'
+             class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
+             bind:value={brand}
+ 
+           />
+         </div>
+         <div class="form-control w-full max-w-xs flex-1 mx-1 ">
+           <label class="label flex w-full justiy-end text-right" for = 'size'>
+             <span class="label-text font-bold flex w-full justiy-end text-right">Size</span>
+           </label>
+           <input
+             type="text"
+             name="size"
+             placeholder="Size"
+             class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
+             bind:value={size}
+           />
+         </div>
+       </div>
+       </div>
+     {/if}
+     {#if page === 2}
+     <div class="w-full  flex  justify-between  "     >
+       <div class="flex"
+       in:slide={{delay: 100, duration: 100}}
+       out:slide={{delay:100}}      >
+         <div class="form-control w-full max-w-xs flex-1 mx-1">
+           <label class="label" for = "purchasedFrom">
+             <span class="label-text font-bold ">Purchased From</span>
+           </label>
+           <input
+             type="text"
+             name = "purchasedFrom"
+             placeholder = '"Rolex ... etc"'
+             class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
+             bind:value={purchasedFrom}
+ 
+           />
+         </div>
+         <div class="form-control w-full max-w-xs flex-1 mx-1">
+           <label class="label flex w-full justiy-end text-right" for = 'size'>
+             <span class="label-text font-bold flex w-full justiy-end text-right">Purchased Value</span>
+           </label>
+           <input
+             type="text"
+             name="purchasedValue"
+             placeholder="Size"
+             class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
+             bind:value={purchasedValue}
+           />
+         </div>
+       </div>
+       </div>
+     {/if}
+ 
+     {#if page === 3}
+     <div class="flex w-full justify-between "
+     >
+       <div class="form-control w-full max-w-xs flex-1 mx-1"
+       in:slide={{delay: 100, duration: 100}}
+       out:slide={{delay:100}}>
+         <label class="label" for = "description" >
+           <span class="label-text font-bold ">Description</span>
+         </label>
+         <input
+           type="text"
+           name = "decription"
+           placeholder = 'Keep it short!'
+           class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
+           bind:value={description}
+         />
+       </div>
+     </div>
+     {/if}
+ 
+     {#if page === 4 }
+     <div class = 'flex flex-col w-full'
+     in:slide={{delay: 100, duration: 100}}
+     out:slide={{delay:100}} 
+     >
+       <h1 class = 'flex w-full justify-center font-bold'>Upload Cetificates or Reciepts if necessary</h1>
+       <input type="file" class="file-input w-full max-w-xs normal-case" />
+     </div>
+     {/if}
+     {#if page ===5}
+      <h1 class = 'flex justify-center w-full font-bold'>
+       Review Your Details and Submit! 
+     </h1>
+     {/if}
+ 
+ 
+     <div class="w-full flex self-end my-2">
+       <div>
+         
+       </div>
+       {#if page > 0}
+         <button
+         type="button"
+           on:click={() => {
+             page === page--;
+           }}
+           class="btn ghost flex-1 normal-case shadow-s bg-error">Previous page</button
+         >
+       {/if}
+       {#if page === 0 || page < 5}
+       <button
+         type="button"
+         on:click={() => {
+           page === page++;
+         }}
+         class="btn ghost flex-1 normal-case shadow-sm">Next</button
+       >
+       {/if}
+       {#if page === 5 }
+             <button
+         type="submit"
+         on:click={() => {
+         }}
+         class="btn btn-success ghost flex-1 normal-case shadow-sm">Submit</button>
+       {/if}
+     </div>
+   </form>
     </div>
-    {#if page === 1}
-    <div class="w-full  flex  justify-between  "     >
-      <div class="flex"
-      in:slide={{delay: 100, duration: 100}}
-      out:slide={{delay:100}}      >
-        <div class="form-control w-full max-w-xs flex-1 mx-1">
-          <label class="label" for = "brand">
-            <span class="label-text font-bold ">Brand</span>
-          </label>
-          <input
-            type="text"
-            name = "brand"
-            placeholder = '"Rolex ... etc"'
-            class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
-            bind:value={brand}
-
-          />
-        </div>
-        <div class="form-control w-full max-w-xs flex-1 mx-1">
-          <label class="label flex w-full justiy-end text-right" for = 'size'>
-            <span class="label-text font-bold flex w-full justiy-end text-right">Size</span>
-          </label>
-          <input
-            type="text"
-            name="size"
-            placeholder="Size"
-            class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
-            bind:value={size}
-          />
-        </div>
-      </div>
-      </div>
-    {/if}
-    {#if page === 2}
-    <div class="w-full  flex  justify-between  "     >
-      <div class="flex"
-      in:slide={{delay: 100, duration: 100}}
-      out:slide={{delay:100}}      >
-        <div class="form-control w-full max-w-xs flex-1 mx-1">
-          <label class="label" for = "purchasedFrom">
-            <span class="label-text font-bold ">Purchased From</span>
-          </label>
-          <input
-            type="text"
-            name = "purchasedFrom"
-            placeholder = '"Rolex ... etc"'
-            class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
-            bind:value={purchasedFrom}
-
-          />
-        </div>
-        <div class="form-control w-full max-w-xs flex-1 mx-1">
-          <label class="label flex w-full justiy-end text-right" for = 'size'>
-            <span class="label-text font-bold flex w-full justiy-end text-right">Purchased Value</span>
-          </label>
-          <input
-            type="text"
-            name="purchasedValue"
-            placeholder="Size"
-            class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
-            bind:value={purchasedValue}
-          />
-        </div>
-      </div>
-      </div>
-    {/if}
-
-    {#if page === 3}
-    <div class="flex w-full justify-between "
-    >
-      <div class="form-control w-full max-w-xs flex-1 mx-1"
-      in:slide={{delay: 100, duration: 100}}
-      out:slide={{delay:100}}>
-        <label class="label" for = "description" >
-          <span class="label-text font-bold ">Description</span>
-        </label>
-        <input
-          type="text"
-          name = "decription"
-          placeholder = 'Keep it short!'
-          class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
-          bind:value={description}
-        />
-      </div>
-    </div>
-    {/if}
-
-    {#if page === 4 }
-    <div class = 'flex flex-col w-full'
-    in:slide={{delay: 100, duration: 100}}
-    out:slide={{delay:100}} 
-    >
-      <h1 class = 'flex w-full justify-center font-bold'>Upload Cetificates or Reciepts if necessary</h1>
-      <input type="file" class="file-input w-full max-w-xs normal-case" />
-    </div>
-    {/if}
-    {#if page ===5}
-     <h1 class = 'flex justify-center w-full font-bold'>
-      Review Your Details and Submit! 
-    </h1>
-    {/if}
-
-
-    <div class="w-full flex self-end my-2">
-      <div>
-        
-      </div>
-      {#if page > 0}
-        <button
-        type="button"
-          on:click={() => {
-            page === page--;
-          }}
-          class="btn ghost flex-1 normal-case shadow-s bg-error">Previous page</button
-        >
-      {/if}
-      {#if page === 0 || page < 5}
-      <button
-        type="button"
-        on:click={() => {
-          page === page++;
-        }}
-        class="btn ghost flex-1 normal-case shadow-sm">Next</button
-      >
-      {/if}
-      {#if page === 5 }
-            <button
-        type="submit"
-        on:click={() => {
-        }}
-        class="btn btn-success ghost flex-1 normal-case shadow-sm">Submit</button>
-      {/if}
-    </div>
-  </form>
+ 
 </div>
 
 <style lang="postcss">
