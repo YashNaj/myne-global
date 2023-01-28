@@ -8,6 +8,7 @@
   import type { LayoutData } from './$types';
   import Nav from "$lib/components/Nav.svelte";
 	import logo from '$lib/images/white_myne_logo.png';
+  import Footer2 from "$lib/components/Footer2.svelte";
 
   export let data: LayoutData;
   const authRoutes = [
@@ -59,12 +60,13 @@
         </label>
       </div>
       <div class="flex-none hidden lg:block">
-        <ul class="menu menu-horizontal">
+        <ul class="menu menu-horizontal flex justify-end z-1 relative lg:text-white">
+          
           <!-- Navbar menu content here -->
           {#each menuItems as menuItem}
             <li><a href="/addCard">{menuItem}</a></li>
           {/each}
-          <li class="w-full">
+          <li>
             <button
               class="btn btn-primary text-accent"
               on:click={logOut}
@@ -74,9 +76,10 @@
         </ul>
       </div>
     </div>
-    <main class="mx-3 my-4 order-last">
+    <main class="mx-3 my-4 lg:w-auto lg:h-full">
       <slot />
     </main>
+    <Footer2/>
   </div>
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />
@@ -95,8 +98,6 @@
     </ul>
   </div>
 </div>
-
-
 
 <style lang="postcss">
   :global(.gradient-background) {

@@ -15,7 +15,7 @@ const anyoneAllowed = [
   "/api/addCards",
   "/api/test"
 ]; 
-let isSession = false; 
+
 
 export const load = handleServerSession((async ({ url, locals , isSession}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
@@ -26,8 +26,7 @@ export const load = handleServerSession((async ({ url, locals , isSession}) => {
   if (!session) {
     throw redirect(303, "/signin");
   }
-  if (user.emailVerified) return {};
+  if (user.emailVerified) return {isUser:true};
   else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);
 
-console.log(isSession)
