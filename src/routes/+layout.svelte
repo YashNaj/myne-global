@@ -76,7 +76,7 @@
         </ul>
       </div>
     </div>
-    <main class="mx-3 my-4 lg:w-auto lg:h-full">
+    <main class="mx-3 my-4 xl:h-full lg:w-auto lg:h-auto md:h-auto">
       <slot />
     </main>
     <Footer2/>
