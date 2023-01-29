@@ -39,7 +39,7 @@
           </div>
           <div class = 'vault-cards bg-white h-[40rem] w-full rounded-3xl flex-grow'>
             <div class = 'vault-cards-scroll w-full h-full rounded-2xl flex-grow px-8 py-5 overflow-hidden'>
-              <div class = 'vault-cards-scroll-content bg-vault h-full w-full grid grid-cols-4 grid-rows-auto 2xl:gap-1 xl:gap-1.5 lg:gap-[.8rem] xl:grid-cols-5 place-items-center rounded-xl p-3 glass overflow-y-auto'>
+              <div class = 'vault-cards-scroll-content bg-vault h-full w-full grid grid-cols-4 grid-rows-auto 2xl:gap-1 xl:gap-2 lg:gap-[1rem] 2xl:grid-cols-6 xl:grid-cols-5 lg:grid=cols-5 md:grid-cols-5 place-items-center rounded-xl p-3 glass overflow-y-auto'>
                 <Card/>
                 <Card/>
                 <Card/>
