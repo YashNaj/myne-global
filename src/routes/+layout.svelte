@@ -97,7 +97,7 @@
         </ul>
       </div>
     </div>
-    <main class="px-3 py-4 h-[100vh] w-full lg:w-auto lg:h-auto md:h-auto">
+    <main class=" h-[100vh] w-full lg:h-[100vh] md:h-auto relative">
       <slot />
     </main>
     <Footer2/>

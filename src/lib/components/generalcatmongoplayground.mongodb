@@ -1,0 +1,116 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('myne');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.itemInfastructure.insertOne({
+    jewelry: {
+      subcategory: [
+        "bracelet",
+        "brooch",
+        "charm",
+        "cufflinks",
+        "earrings",
+        "engagement ring",
+        "high jewelry",
+        "necklace",
+        "pendant",
+        "ring",
+        "wedding band",
+        "other jewelry",
+      ],
+      brand: "default",
+    },
+    watch: { subcategory: "default", brand: "default" },
+    art: {
+      subcategory: [
+        "bowl",
+        "table art",
+        "painting",
+        "sculpture",
+        "vase",
+        "other art",
+      ],
+      brand: "default",
+    },
+    leather_goods: {
+      subcategory: [
+        "briefcase",
+        "evening bag",
+        "exotic",
+        "handbag",
+        "made to order",
+        "purse",
+        "shoulder bag",
+        "tote",
+        "travel bag",
+        "trunk",
+        "other leather goods",
+      ],
+      brand: "default",
+    },
+    guns: {
+      subcategory: [
+        "assault riffle",
+        "machine gun",
+        "revolver",
+        "rifle/carbine",
+        "pistol",
+        "shotgun",
+        "sub-machine gun",
+        "other gun",
+      ],
+      brand: "default",
+    },
+    technology: {
+      subcategory: [
+        "camera",
+        "cell phone",
+        "computer",
+        "earphone",
+        "tablets",
+        "watch",
+        "other technology",
+      ],
+      brand: "default",
+    },
+    trading_card: {
+      subcategory: [
+        "baseball",
+        "basketball",
+        "football",
+        "hockey",
+        "soccer",
+        "other trading card",
+      ],
+      brand: "default",
+    },
+    crypto: {
+      subcategory: ["cryptocurrency", "token", "other crypto"],
+      brand: "default",
+    },
+    nft: {
+      subcategory: [
+        "nft digital artwork",
+        "nft game asset",
+        "nft music",
+        "nft video",
+        "other nft",
+      ],
+      brand: "default",
+    },
+    vintage: { subcategory: "default", brand: "default" },
+    automobile: { subcategory: "default", brand: "default" },
+    animal: {
+      subcategory: ["bird", "cat", "dog", "other animal"],
+      brand: "default",
+    },
+    child_id_kit: { subcategory: ["child id kit"], brand: "default" },
+    other: { subcategory: "default", brand: "default" },
+  })
+
