@@ -9,6 +9,7 @@
   import Nav from "$lib/components/Nav.svelte";
 	import logo from '$lib/images/white_myne_logo.png';
   import Footer2 from "$lib/components/Footer2.svelte";
+  import ProfileCard from "$lib/components/ProfileCard.svelte";
 
   export let data: LayoutData;
   const authRoutes = [
@@ -39,7 +40,7 @@
 
 <div class="drawer drawer-end">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col">
+  <div class="drawer-content flex flex-col h-[100vh] w-full lg:w-auto lg:h-auto md:h-auto">
     <div class="navbar bg-primary">
       <div class="px-2 mx-2 font-bold text-white w-full"><img class = 'max-w-s w-20 lg:max-w-md ' alt ='logo' src ={logo}/></div>
       <div class="flex-none lg:hidden">
@@ -60,12 +61,30 @@
         </label>
       </div>
       <div class="flex-none hidden lg:block">
-        <ul class="menu menu-horizontal flex justify-end z-1 relative lg:text-white">
+        <ul class="menu menu-horizontal w-full  flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white">
           
           <!-- Navbar menu content here -->
-          {#each menuItems as menuItem}
-            <li><a href="/addCard">{menuItem}</a></li>
+          <div class = 'flex'>
+            {#each menuItems as menuItem}
+            <li class = 'hidden'><a href="/addCard">{menuItem}</a></li>
           {/each}
+          {#if data?.isUser}
+          <div class = ' w-[120px] flex h-[100%] rounded-lg p-1'>
+            <div class ='flex-[2-2-0%] flex justify-center content-centerw-[30%] h-full'>
+              <div class="avatar">
+                <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                </div>
+              </div>
+            </div>
+            <div class ='flex w-[70%] h-full justify-center content-center flex-wrap'>
+              <h1 class = 'ml-2 font-bold text-white w-full flex h-full justify-start content-center flex-wrap'>
+                  Arnaud
+              </h1>
+            </div>
+
+          </div>
+                      {/if}
+
           <li>
             <button
               class="btn btn-primary text-accent"
@@ -73,17 +92,19 @@
               >Sign out</button
             >
           </li>
+          </div>
+   
         </ul>
       </div>
     </div>
-    <main class="mx-3 my-4 h-screen lg:w-auto lg:h-auto md:h-auto">
+    <main class="px-3 py-4 h-[100vh] w-full lg:w-auto lg:h-auto md:h-auto">
       <slot />
     </main>
     <Footer2/>
   </div>
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />
-    <ul class="menu p-4 w-80 bg-base-100">
+    <ul class="menu p-4 w-80 bg-base-100 text-primary">
       <!-- Sidebar content here -->
       {#each menuItems as menuItem}
         <li><a href="/{menuItem}">{menuItem}</a></li>

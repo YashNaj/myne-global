@@ -47,6 +47,7 @@
             </TabPanel>
           </div>
           {/each}
+          </div>
       </TabPanels>
     </TabGroup>
   </div>
