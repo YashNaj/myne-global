@@ -20,7 +20,7 @@
         <div class = 'vault-cards w-full h-[100%] rounded-3xl'>
           <div class = 'vault-cards-scroll w-full h-[90%] relative rounded-2xl overflow-hidden px-8 py-5 '>
             <div class = 'max-h-full vault-cards-scroll-content bg-vault relative w-full 
-            grid grid-cols-4 grid-rows-auto 2xl:gap-1 xl:gap-2 lg:gap-[1rem] 2xl:grid-cols-6 xl:grid-cols-5 lg:grid=cols-5 md:grid-cols-5 place-items-center rounded-xl p-3 glass overflow-y-auto'>
+            grid grid-cols-4 grid-rows-auto 2xl:gap-1 xl:gap-2 lg:gap-[1rem] 2xl:grid-cols-7 xl:grid-cols-7 lg:grid=cols-7 md:grid-cols-7 place-items-center rounded-xl p-3 glass overflow-y-auto'>
               <CardFlippable/>
               <CardFlippable/>
               <CardFlippable/>
@@ -59,7 +59,7 @@
       </div>
     </div>
     <style lang='postcss'>
-        .vault, .vault-content{
+        .vault  , .vault-content{
           background-color: rgb(87, 87, 87);
         }
         .vault-cards-scroll-content{

@@ -12,7 +12,7 @@
     let content = ["1", "2", "3", "4"];
   </script>
   
-  <div class="flex flex-col justify-center ">
+  <div class="flex flex-col w-full justify-center ">
     <!-- <button class = 'btn btn-primary absolute top-o' on:click={()=> open = !open}>
           {open ? "close" : "open"}
   </button> -->

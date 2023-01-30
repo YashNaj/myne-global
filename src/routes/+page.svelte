@@ -11,11 +11,12 @@
   handleSession(page);
 </script>
 
-<div class="lg:hidden">
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden">
   <ProfileCard />
   <Dashboard />
   <DashboardFunctions />
 </div>
-<div>
+<div class = 'hidden lg:flex xl:flex 2xl:flex md:flex'>
   <HomeTabs/>
+
 </div>
