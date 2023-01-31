@@ -47,8 +47,14 @@ module.exports = {
       'technology': '#080631',
       'trading': '#FCF7DE',
       'collectibles': '#61E1A3',
-      'crypto':    
-    }.
+      'crypto':  '#B6B1B1',
+      'nft': '#7C1EB6',
+      'vintage': '#FF5F09',
+      'motor': '#E10909',
+      'animal': '#278001',
+      'childId': '#00BFFF',
+      'other': '#ffffff'  
+    },
     extend: {},
   },
   plugins: [

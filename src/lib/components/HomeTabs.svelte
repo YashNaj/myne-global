@@ -1,13 +1,7 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
-  import AddCard from "$lib/components/AddCard.svelte";
-  import CardFlippable from "$lib/components/CardFlippable.svelte";
   import CardVault from "$lib/components/CardVault.svelte";
-  import CreditCard from "$lib/components/CreditCard.svelte";
   import DesktopWidget from "$lib/components/DesktopWidget.svelte";
-  import DialogueBox from "$lib/components/DialogueBox.svelte";
-  import Helcim from "$lib/components/Helcim.svelte";
-  import PageContainer from "$lib/components/PageContainer.svelte";
+
   import {
     Tab,
     TabGroup,

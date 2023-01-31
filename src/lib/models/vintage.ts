@@ -14,4 +14,5 @@ const vintageSchema = new mongoose.Schema({
     trademarks: { type: String, default: "", required : true },
     otherFeatures: { type: String, default: "", required : true },
     });
-export const VintageCard = mongoose.model('VintageCard', vintageSchema);
+
+    const VintageCard = mongoose.model('VintageCard', vintageSchema);

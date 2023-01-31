@@ -82,5 +82,5 @@ const cryptoSchema = new mongoose.Schema({
     }
   });
   
-  export const CryptoCard = mongoose.model('CryptoCard', cryptoSchema);
+   const CryptoCard = mongoose.model('CryptoCard', cryptoSchema);
   

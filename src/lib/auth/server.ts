@@ -40,6 +40,3 @@ export const getUser = async (
 
     return user;
 }
-export const GET: RequestHandler = () => {
-    return new Response.(JSON.stringify({message: "hello"} , {status: 200}))
-}

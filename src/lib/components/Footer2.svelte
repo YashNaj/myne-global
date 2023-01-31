@@ -1,5 +1,5 @@
 <script lang='ts'> 
-  import  logo  from "$lib/images/blue_myne_icon.png";
+  import  logo  from "$lib/images/blue_icon.png";
 </script> 
 <footer class="footer p-10 bg-base-200 text-base-content order-last relative">
     <div>

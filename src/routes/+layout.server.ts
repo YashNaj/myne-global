@@ -12,8 +12,6 @@ const anyoneAllowed = [
   "/verify-email",
   "/unverified-email",
   "/test",
-  "/api/addCards",
-  "/api/test"
 ]; 
 
 

@@ -2,14 +2,11 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import MobileNav from "$lib/components/MobileNav.svelte";
   import { invalidateAll } from "$app/navigation";
   import { signOut } from "@lucia-auth/sveltekit/client"
   import type { LayoutData } from './$types';
-  import Nav from "$lib/components/Nav.svelte";
 	import logo from '$lib/images/white_myne_logo.png';
   import Footer2 from "$lib/components/Footer2.svelte";
-  import ProfileCard from "$lib/components/ProfileCard.svelte";
 
   export let data: LayoutData;
   const authRoutes = [

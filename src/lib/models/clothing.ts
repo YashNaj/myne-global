@@ -13,5 +13,5 @@ const clothingSchema= new mongoose.Schema({
     uniqueFeatures: { type: String, required: true, default: "" },
   });
   
-  export const ClothingCard = mongoose.model("ClothingCard", clothingSchema);
+   const ClothingCard = mongoose.model("ClothingCard", clothingSchema);
   
