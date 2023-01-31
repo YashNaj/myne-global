@@ -4,68 +4,66 @@
   import Nav from "$lib/components/Nav.svelte";
   import { slide } from "svelte/transition";
   export let form: { message?: string };
-  let email = ''
+  let email = "";
 </script>
-<div class=" flex md:justify-center content-center flex-wrap h-[100vh] pb-32 px-4">
-  <div class="form-box  flex flex-col justify-start md:justify-center content-center flex-wrap  card w-[12rem] md:w-[20rem] h-auto p-5 b rounded-3xl">
-    <Nav/>
-  <form
-    method="POST"
-    class="flex flex-col justify-center flex-wrap content-center"
-    use:enhance={({ data, cancel }) => {
-      form = {};
-      const email = data.get("email")?.toString() || "";
-      const password = data.get("password")?.toString() || "";
-      if (!email || !password) {
-        form.message = "Invalid input";
-        cancel();
-      }
-    }}
-  >
-  <div class="flex flex-col ">
-      <label for="email" class="input-group flex">
-        <span class="bg-primary flex-1">Email</span>
-        <input
-          type="email"
-          name="email"
-          placeholder="info@site.com"
-          class="text-primary  w-[70%] input-sm shadow-sm"
-          bind:value={email }
-        />
-      </label>
-        {#if email != ''}
-        <div transition:slide> 
 
-        <label class="input-group flex " for = 'password'>
-          <span class="bg-primary flex-1">Password</span>
+<div
+  class=" flex md:justify-center content-center flex-wrap h-[100vh] pb-32 px-4"
+>
+  <div
+    class="form-box  flex flex-col justify-start md:justify-center content-center flex-wrap  card w-[12rem] md:w-[20rem] h-auto p-5 b rounded-3xl"
+  >
+    <Nav />
+    <form
+      method="POST"
+      class="flex flex-col justify-center flex-wrap content-center"
+      use:enhance={({ data, cancel }) => {
+        form = {};
+        const email = data.get("email")?.toString() || "";
+        const password = data.get("password")?.toString() || "";
+        if (!email || !password) {
+          form.message = "Invalid input";
+          cancel();
+        }
+      }}
+    >
+      <div class="flex flex-col ">
+        <label for="email" class="input-group flex">
+          <span class="bg-primary flex-1">Email</span>
           <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-            class="input input-sm  w-[70%] text-primary shadow-sm"
+            type="email"
+            name="email"
+            placeholder="info@site.com"
+            class="text-primary inpuit-borderd flex-2  bg-neutral input-sm shadow-sm"
+            bind:value={email}
           />
-          
         </label>
+        {#if email != ""}
+          <div transition:slide>
+            <label class="input-group flex " for="password">
+              <span class="bg-primary flex-1">Password</span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="password"
+                class="input input-sm input-bordered  bg-neutral flex-2 text-primary shadow-sm"
+              />
+            </label>
+          </div>
+        {/if}
       </div>
 
-        {/if}
- 
-
-
-  </div>
-
-  <div class = 'w-full flex my-2'>
-    <input
-    type="submit"
-    value="register"
-    class="btn  btn-secondary  flex-1 w-[50%]"
-  />
-  <a
-    class="btn  btn-primary text-secondary flex-1 w-[50%]"
-    href="/signin">Sign In</a
-  >
-  </div>
+      <div class="w-full flex my-2">
+        <a class="btn btn-neutral text-primary flex-1 w-[50%]" href="/signin"
+          >Sign In</a
+        >
+        <input
+          type="submit"
+          value="register"
+          class="btn  btn-primary flex-1 w-[50%]"
+        />s
+      </div>
     </form>
     <div class="flex-col h-20 w-full justify center content-center">
       {#if form?.message}
@@ -76,19 +74,17 @@
     </div>
   </div>
 </div>
+
 <style lang="postcss">
   :global(label) {
     color: white;
   }
-  .form-box{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; 
-    background: rgb(231,240,255);
-background: -moz-radial-gradient(circle, rgba(231,240,255,1) 0%, rgba(213,215,218,1) 100%);
-background: -webkit-radial-gradient(circle, rgba(231,240,255,1) 0%, rgba(213,215,218,1) 100%);
-background: radial-gradient(circle, rgba(231,240,255,1) 0%, rgba(213,215,218,1) 100%);
-
-;   }
-      form{
-    
+  .form-box {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    background: rgb(231, 240, 255);
+  }
+  form {
   }
 </style>

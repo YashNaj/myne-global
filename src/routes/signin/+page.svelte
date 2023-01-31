@@ -35,7 +35,7 @@
               type="email"
               name="email"
               placeholder="info@site.com"
-              class="text-primary  bg-neutral flex-2 input-sm shadow-sm"
+              class="text-primary  bg-neutral marker:flex-2 input-sm shadow-sm"
               bind:value={email }
             />
           </label>
@@ -62,15 +62,15 @@
       </div>
 
         <div class = 'w-full flex my-2'>
-          <input
-          type="submit"
-          value="Sign In"
-          class="btn  btn-primary text-secondary order-last flex-1 w-[50%]"
-        />
-        <a
+          <a
           class="btn  btn-neutral text-primary  flex-1 w-[50%]"
           href="/signup">Register</a
         >
+          <input
+          type="submit"
+          value="Sign In"
+          class="btn  btn-primary text-secondary  flex-1 w-[50%]"
+        />
         </div>
  
       </form>
@@ -81,7 +81,7 @@
           </div>
         {/if}
         <p class="my-3 text-secondary flex w-full justify-center">
-          <a class="link" href="/forgot-password">Forgot Password?</a>
+          <a class="linka text-primary" href="/forgot -password">Forgot Password?</a>
         </p>
       </div>
     </div>
