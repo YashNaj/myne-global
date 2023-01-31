@@ -36,6 +36,19 @@ module.exports = {
     ],
   },
   theme: {
+    color: {
+      'jewelry': '#F192E8',
+      'wacthes': '#2B2C31',
+      'art': '#FFE609',
+      'leather': '#984E1D',
+      'clothes': '#59898A',
+      'sneakers': '#B3F5F7',
+      'gun': '#3A5130',
+      'technology': '#080631',
+      'trading': '#FCF7DE',
+      'collectibles': '#61E1A3',
+      'crypto':    
+    }.
     extend: {},
   },
   plugins: [
