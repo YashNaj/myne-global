@@ -1,7 +1,9 @@
-import {mongoose} from 'mongoose' 
+import { mongoose } from 'mongoose';
 import { auth } from '$lib/auth/lucia';
 import { handleHooks } from "@lucia-auth/sveltekit";
 import {VITE_MONGO_URI} from '$env/static/private';
+import { MotorCylcleCard, motorcycleSchema } from './lib/models/motorcycle';
+import * as db from '$lib/mongoose'
 export const handle = handleHooks(auth);
 try{ 
     await mongoose.connect(VITE_MONGO_URI)
@@ -11,4 +13,4 @@ try{
 }finally{
     console.log("Successfully connected to MongoDB")
 }
-export let db = mongoose.connection; 
+const newDocument = MotorCylcleCard.schema.statics.create

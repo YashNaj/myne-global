@@ -30,7 +30,7 @@
     "Card Vault",
     "Import",
     "Request History ",
-    "Requst Item Certificate",
+    "Request Item Certificate",
     "Download Inventory",
   ];
 

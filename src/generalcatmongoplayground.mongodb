@@ -72,9 +72,10 @@ db.itemInfastructure.insertOne({
         "camera",
         "cell phone",
         "computer",
-        "earphone",
+        "Headphones/Earphones/Audio",
         "tablets",
         "watch",
+        "drone", 
         "other technology",
       ],
       brand: "default",
@@ -90,8 +91,12 @@ db.itemInfastructure.insertOne({
       ],
       brand: "default",
     },
+      collectibles:{
+      subcategory: [],
+      brand: "default", 
+    },
     crypto: {
-      subcategory: ["cryptocurrency", "token", "other crypto"],
+      subcategory: ["coin", "token", "other crypto"],
       brand: "default",
     },
     nft: {
@@ -104,13 +109,20 @@ db.itemInfastructure.insertOne({
       ],
       brand: "default",
     },
+
     vintage: { subcategory: "default", brand: "default" },
-    automobile: { subcategory: "default", brand: "default" },
+    motor_vehicle: { subcategory: ["automobile", "motorcycle"], brand: "default" },
     animal: {
       subcategory: ["bird", "cat", "dog", "other animal"],
       brand: "default",
     },
     child_id_kit: { subcategory: ["child id kit"], brand: "default" },
+        clothing:{
+      brand: [''],
+    },
+    sneakers: {
+      brand: [''],
+    },
     other: { subcategory: "default", brand: "default" },
   })
 

@@ -10,8 +10,8 @@
 </script>
 
 <a
-	href="/api/{link}"
-	class="w-auto h-40 relative {background}  btn normal-case btn-ghost rounded-lg  shadow-lg p-2"
+	href="/add_card"
+	class="w-auto h-40 relative {background}  btn normal-case  rounded-lg  shadow-lg p-2"
 >
 	<h1 transition:slide={{ duration: 200, delay: 200 }} class="h-full text-secondary w-full  leading-10">
 		{title}

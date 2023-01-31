@@ -45,8 +45,10 @@ export const MyneCardGeneralSchema: Model<MyneCardGeneralSchema> = mongoose.mode
                 { type: String, required: false, default: 'You can add a decription as you please' },
                 isStolen: { type: Boolean, required: true, default: false },
                 isHeriloom: { type: Boolean, required: true, default: false },
-                defualt: {type: ()=> Date.now(), required: true,} ,
+                date: {type: ()=> Date.now(), required: true,} ,
                 pictures: [String], 
-                documents: [String] 
+                certificateOfAuth: [String],
+                valuationReport: [String],  
+                receipts: [String]
             })
        );

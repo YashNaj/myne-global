@@ -1,17 +1,22 @@
 import mongoose , {type Model } from 'mongoose'; 
 export interface Watches { 
     brand: string;
-    reference_number: string;
-    serial_number: string; 
+    referenceNUmber: string;
+    serialk: string; 
     movement: string;
-    case_diameter: string;
-    water_resistance: string;
+    caseDiameter: string;
+    waterResistance: string;
     dial: string; 
     material: string;
     strap: string;
     uniqueMarks: [string];
     engraving: string;
     msrp: string; 
+    purchasedFrom: string;
+    purchaseValue: string; 
+    uniqueMarks: [string];
+    engraving: string;
+    description: [string]; 
 }
 const modelName = 'Watches'
 export const Watches: Model<Watches> = mongoose.models[modelName] ||
@@ -19,42 +24,66 @@ export const Watches: Model<Watches> = mongoose.models[modelName] ||
         modelName,
         new mongoose.Schema({
             brand: {
-                type: String,
-                required: true
+                type: String
+                required : true,
+                default: ''
             },
-            reference_number: {
+            brandReference: {
                 type: String
+                required : true,
+                default: ''
             },            
-            serial_number: {
+            serial: {
                 type: String
+                required : true,
+                default: ''
             },
             movement: {
                 type: String
+                required : true,
+                default: ''
             },
-            case_diameter: {
+            caseDiameter: {
                 type: String
+                required : true,
+                default: ''
             },
-            water_resistance: {
+            waterResistance: {
                 type: String
+                required : true,
+                default: ''
             },
             dial: {
                 type: String
+                required : true,
+                default: ''
             },
             material: {
                 type: String
+                required : true,
+                default: ''
             },
             strap: {
                 type: String
+                required : true,
+                default: ''
             },
             uniqueMarks: {
                 type: String
+                required : true,
+                default: ''
             },
             engraving: {
                 type: String
+                required : true,
+                default: ''
             },
-            msrp: {
-                type: String
-            }
+            purchasedFrom: { type: String, required: true, default: "" },
+            purchaseValue: { type: String, required: true, default: "" },
+            description: { type: String, required: true, default: "" },
+            engraving: { type: String, required: true, default: "" },   
+            reciepts: { type: [String], required: true, default: "" },
+            date: {type: Date()}
         }),
         modelName
     );

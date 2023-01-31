@@ -8,7 +8,7 @@
   
   </script>
       <div in:fly={{x:-1000, duration: 200, delay: 250, easing:quintOut }}
-      out:fly={{x:1000, duration: 250, easing:quintOut}} class = 'h-[60rem] lg:h-[39rem] w-full rounded-3xl  p-4 glass'>
+      out:fly={{x:1000, duration: 250, easing:quintOut}} class = 'h-[60rem] xl:h-[58rem] lg:h-[39rem] w-full rounded-3xl  p-4 glass'>
         <div class = 'content flex flex-col w-full rounded-2xl '>
           <div class = 'title h-auto  min-w-full flex px-4  justify-between'>
             <h1 class = 'font-bold flex justify-start text-white text-[5rem] md:text-[3rem] p-3'>
