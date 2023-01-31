@@ -58,7 +58,6 @@
                       </div>
                     </div>
                     <div
-                      transition:fly
                       class=" flex flex-col flex-1 w-full h-full"
                     >
                       <div class="flex w-full justify-end">
@@ -91,7 +90,6 @@
                       </div>
                     </div>
                     <div
-                      transition:fly
                       class=" flex flex-col flex-1 w-full h-full"
                     >
                       <div class="flex w-full justify-end">

@@ -35,7 +35,7 @@
               type="email"
               name="email"
               placeholder="info@site.com"
-              class="text-primary  w-[70%] input-sm shadow-sm"
+              class="text-primary  bg-neutral flex-2 input-sm shadow-sm"
               bind:value={email }
             />
           </label>
@@ -49,7 +49,7 @@
                 id="password"
                 name="password"
                 placeholder="password"
-                class="input input-sm  w-[70%] text-primary shadow-sm"
+                class="input input-sm bg-neutral flex-2 text-primary shadow-sm"
               />
               
             </label>
@@ -65,10 +65,10 @@
           <input
           type="submit"
           value="Sign In"
-          class="btn  btn-secondary  flex-1 w-[50%]"
+          class="btn  btn-primary text-secondary order-last flex-1 w-[50%]"
         />
         <a
-          class="btn  btn-primary text-secondary flex-1 w-[50%]"
+          class="btn  btn-neutral text-primary  flex-1 w-[50%]"
           href="/signup">Register</a
         >
         </div>
@@ -94,10 +94,6 @@
   .form-box{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; 
     background: rgb(231,240,255);
-background: -moz-radial-gradient(circle, rgba(231,240,255,1) 0%, rgba(213,215,218,1) 100%);
-background: -webkit-radial-gradient(circle, rgba(231,240,255,1) 0%, rgba(213,215,218,1) 100%);
-background: radial-gradient(circle, rgba(231,240,255,1) 0%, rgba(213,215,218,1) 100%);
-
 ;   }
       form{
     

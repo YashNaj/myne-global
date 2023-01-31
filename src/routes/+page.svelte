@@ -16,7 +16,7 @@
   <Dashboard />
   <DashboardFunctions />
 </div>
-<div class = 'hidden lg:flex xl:flex 2xl:flex md:flex'>
+<div class = 'hidden lg:flex xl:flex 2xl:flex md:flex w-full justify-center'>
   <HomeTabs/>
 
 </div>
