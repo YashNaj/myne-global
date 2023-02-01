@@ -43,14 +43,16 @@ export const actions: Actions = {
     )
       return fail(400);
     try {
-      const { userId } = await auth.createUser("email", email, {
-        password,
-        attributes: {
-          email,
-          roles: [],
-          emailVerified: false,
-        },
-      });
+      const userId  = await auth.createUser("email", email, {
+        key: {
+					providerId: "email",
+					providerUserID: email,
+					password
+				},
+				attributes: {
+					email
+				}
+			});
       console.log({userId});
       const session = await auth.createSession(userId);
       locals.setSession(session);

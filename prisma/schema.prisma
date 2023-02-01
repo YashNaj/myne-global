@@ -6,13 +6,77 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Todo {
-  uid        String  @id @default(cuid())
-  created_at DateTime
-  text       String
-  done       Boolean
+model User {
+  id         Int    @id @default(autoincrement())
+  myne_id    String @unique
+  email      String @unique
+  firstName  String
+  middleName String
+  postalZip  String
+
+  session Session[]
+  Key     Key[]
+  role    Role      @default(USER)
+
+  @@map("user")
+}
+
+model Profile {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [myne_id], references: [id])
+  myne_id Int  @unique
+}
+
+model Session {
+  id             String @id @unique
+  myne_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User   @relation(references: [id], fields: [myne_id], onDelete: Cascade)
+
+  @@index([myne_id])
+  @@map("session")
+}
+
+model Key {
+  id              String  @id @unique
+  hashed_password String?
+  myne_id         String
+  primary         Boolean
+  user            User    @relation(references: [id], fields: [myne_id], onDelete: Cascade)
+
+  @@index([myne_id])
+  @@map("key")
+}
+
+model MyneCard {
+  id                 String   @id @unique
+  user               User     @relation(references: [id], fields: [myne_id], onDelete: Cascade)
+  userId             String 
+  myneId             String   @unique
+  category           String
+  subCategory        String
+  brand              String
+  size               String
+  purchasedFrom      String
+  purchasedValue     String
+  createdOn          DateTime @default(now())
+  isStolen           Boolean  @default(false)
+  reportedStolenDate DateTime
+  isHeriloom         Boolean  @default(false)
+  pictures           String[]
+
+  @@map("myneCard")
+}
+
+enum Role {
+  OWNR
+  USER
+  ADMIN
+  DISTR
 }

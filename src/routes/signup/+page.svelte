@@ -7,71 +7,161 @@
   let email = "";
 </script>
 
-<div
-  class=" flex md:justify-center content-center flex-wrap h-[100vh] pb-32 px-4"
->
-  <div
-    class="form-box  flex flex-col justify-start md:justify-center content-center flex-wrap  card w-[12rem] md:w-[20rem] h-auto p-5 b rounded-3xl"
-  >
-    <Nav />
+<div class="w-full h-full flex justify-center my-2 content-center flex-wrap ">
+  <div class="flex flex-col">
     <form
+      class="flex text-black flex-col justify-between content-center  bg-white h-[40rem] w-[40rem] p-6 rounded-3xl"
       method="POST"
-      class="flex flex-col justify-center flex-wrap content-center"
-      use:enhance={({ data, cancel }) => {
-        form = {};
-        const email = data.get("email")?.toString() || "";
-        const password = data.get("password")?.toString() || "";
-        if (!email || !password) {
-          form.message = "Invalid input";
-          cancel();
-        }
-      }}
+      use:enhance
     >
-      <div class="flex flex-col ">
-        <label for="email" class="input-group flex">
-          <span class="bg-primary flex-1">Email</span>
+      <Nav />
+      <h1
+        class="text-center flex font-bold text-primary text-[2rem] justify-center"
+      >
+        Create an account
+      </h1>
+      <div class="text-black">
+        <div class="flex justify-center my-2">
+          <div class="flex  justify-between">
+            <label class="label hidden  text-black" for="firstName"
+              >First Name</label
+            ><br />
+            <input
+              class="input input-md rouned-lg"
+              id="firstName"
+              name="firstName"
+              placeholder="First Name"
+            />
+          </div>
+          <div class="flex justify-between">
+            <label
+              class=" hidden after: overflow-x-hidden label text-black"
+              for="lastName">Last Name</label
+            ><br />
+            <input
+              class="input input-md rouned-lg"
+              type="lastName"
+              id="lastName"
+              name="lastName"
+              placeholder="Last Name "
+            />
+          </div>
+        </div>
+        <div class  = "flex justify-center">
+          <div class="flex my-2">
+            <label
+              class="  rouned-lg flex-1  mx-1 text-primary font-bold mr-1"
+            
+              placeholder="Date of Birth"
+              for ='birthday'
+            >
+            Date of Birth
+          </label>
+            <input
+              class="input input-md flex-1 rouned-lg mx-1"
+              type="date"
+              id="birthday"
+              name="birthday"
+              placeholder="Date of Birth"
+            />
+        </div>
+        </div>
+        
+
+        <div class="flex justify-center my-2">
+          <div class="flex  justify-between">
+            <label class=" hidden label  text-black" for="country"
+              >Country</label
+            >
+            <input
+              class="input input-md rouned-lg"
+              type="int"
+              id="country"
+              name="country"
+              placeholder="Country"
+            />
+          </div>
+          <div class="flex  justify-between">
+            <label class=" hidden label  text-black" for="postalZip"
+              >Postal/ZIP</label
+            >
+            <input
+              class="input input-md rouned-lg"
+              type="int"
+              id="postal"
+              name="postal"
+              placeholder="ZIP/Postal Code"
+            />
+          </div>
+        </div>
+
+        <div class="flex justify-center my-2">
+          <div class="flex  justify-between">
+            <label class="label  text-black hidden" for="label email"
+              >Email</label
+            ><br />
+            <input
+              class="input w-= input-md rouned-lg"
+              id="email"
+              name="email"
+              placeholder="Email "
+            />
+          </div>
+
+          <div class="flex justify-between">
+            <label class="label hidden  text-black" for="password"
+              >Password</label
+            ><br />
+            <input
+              class="input input-md rouned-lg"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center my-2">
+        <div class="flex  justify-between">
+          <label class="label  text-black hidden" for="label email"
+            >Phone Number</label
+          ><br />
           <input
-            type="email"
-            name="email"
-            placeholder="info@site.com"
-            class="text-primary inpuit-borderd flex-2  bg-neutral input-sm shadow-sm"
-            bind:value={email}
+            class="input w-= input-md rouned-lg"
+            id="phone"
+            name="phone"
+            placeholder="+(1) (999)-999-9999"
+            type="tel"
+            pattern="[+][0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{4}"
           />
-        </label>
-        {#if email != ""}
-          <div transition:slide>
-            <label class="input-group flex " for="password">
-              <span class="bg-primary flex-1">Password</span>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="password"
-                class="input input-sm input-bordered  bg-neutral flex-2 text-primary shadow-sm"
-              />
-            </label>
+        </div>
+    </div>
+
+      <input
+        class="btn btn-primary rouned-lg"
+        type="submit btn btn-neutral text-primary"
+        value="Register"
+      />
+    </form>
+    <div class="flex  flex-col content-center flex-wrap justify-center">
+      <h1 class="text-center my-2">Have An Account?</h1>
+      <div class="flex w-full justify-center">
+        <a class="btn btn-secondary text-primary w-full my-2" href="/signin"
+          >Sign in</a
+        >
+      </div>
+      <div
+        class="flex-col justify-between h-20 w-full justify center content-center"
+      >
+        {#if form?.message}
+          <div>
+            <Alert message={form.message} />
           </div>
         {/if}
       </div>
-
-      <div class="w-full flex my-2">
-        <a class="btn btn-neutral text-primary flex-1 w-[50%]" href="/signin"
-          >Sign In</a
-        >
-        <input
-          type="submit"
-          value="register"
-          class="btn  btn-primary flex-1 w-[50%]"
-        />s
-      </div>
-    </form>
-    <div class="flex-col h-20 w-full justify center content-center">
-      {#if form?.message}
-        <div>
-          <Alert message={form.message} />
-        </div>
-      {/if}
     </div>
+    <div />
   </div>
 </div>
 

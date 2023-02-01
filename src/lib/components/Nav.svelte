@@ -1,16 +1,13 @@
 <script lang='ts'>
 	import logo from '../images/blue_myne_logo.png';
 </script>
+<div class = 'flex justify-center content-center'>
+	<img src={logo} alt="myne-logo" class= "m-w-full p-2 w-52" />
 
-<nav class="flex justify-center">
-	<img src={logo} alt="myne-logo" class= "p-2" />
-</nav>
+</div>
 <style>
 	nav{
 		background: var(--myne-blue);
 	}
-	img{
-		max-width:100%;
-		width: 60%;
-	}
+
 </style>
