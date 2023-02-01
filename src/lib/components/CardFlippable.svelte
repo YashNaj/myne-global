@@ -1,10 +1,9 @@
-<script>
+<script lang='ts'>
   // className={(isFlipped ? "flipped" : "" ) + " flip-card" }
   // onClick={()=> setIsFlipped(!isFlipped)}
   import { fly } from "svelte/transition";
 
   import { Icon, Photograph } from "svelte-hero-icons";
-
   export let category = "Category";
   export let subCategory = "Subcategory";
   export let brand = "Brand";
@@ -13,19 +12,37 @@
   export let purchasedValue = "Purchased value";
   export let description = "Keep the description to a few words";
   export let iconColor = "black";
-  export let clue;
-  export let answer;
-  export let showCardBack;
+  let cardBackground = ''; 
+  const colors = new Map
+  ([  ['Jewlery', 'jewlery'],
+  ['Watches', 'watches'],
+  ['Art', 'art'],
+  ['Leather Goods', 'leather'],
+  ['Clothes', 'clothes'],
+  ['Sneakers', 'sneakers'],
+  ['Guns', 'gun'],
+  ['Technology', 'technology'],
+  ['Trading Cards', 'trading'],
+  ['Collectibles', '#collectibles'],
+  ['Crypto', 'crypto'],
+  ['NFT', 'nft'],
+  ['Vintage', 'vintage'],
+  ['Motor Vehicles', 'motor'],
+  ['Animal', 'animal'],
+  ['Child ID', 'childId'],
+  ['Other', 'other']
+]);
+
   let flipped = false;
 </script>
 
 <div
-  class:flipped class = 'w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem] '
+  class:flipped class = 'w-72 2xl:[12rem] 2xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem] '
   on:click={() => (flipped = !flipped)}
   on:keydown={() => (flipped = !flipped)}
 >
   <div
-    class="flip-card  w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]  "
+    class="flip-card  w-72 2xl:[32rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]  "
   >
     <div class="flip-card-inner">
       <div
@@ -34,7 +51,7 @@
         <div
           class="card-item bg-white rounded-2xl shadow-2xl w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]    z-2 "
         >
-          <div class="w-full h-[50%] bg-error rounded-t-2xl  ">
+          <div class="w-full h-[50%] bg-watches rounded-t-2xl  ">
             <div class="w-full h-full  p-3">
               <div class="upload-pictures w-full h-full rounded-md shadow-md">
                 <Icon src={Photograph} color={iconColor} class="opacity-20" />
@@ -214,5 +231,8 @@
 
   .flip-card-back {
     transform: rotateY(180deg);
+  }
+  .background-class{
+    background-color: #00BFFF;
   }
 </style>

@@ -106,7 +106,7 @@
     let iconColor = "black";
   </script>
   <div class = 'flex justify-center flex-wrap content-center w-full h-full'>
-      <AddCard/>
+   <AddCard/>
     </div>
   <style lang="postcss">
     .upload-pictures {

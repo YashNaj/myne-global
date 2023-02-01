@@ -1,7 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 import type { User } from "lucia-auth/types";
 import type { Role } from "./roles";
-import { RequestHandler } from '../../../.svelte-kit/types/src/routes/api/test/$types';
 
 
 const hasRole = (user: User, role: Role) => user.roles.includes(role)

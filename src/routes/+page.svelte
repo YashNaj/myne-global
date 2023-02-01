@@ -9,6 +9,9 @@
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import HomeTabs from "$lib/components/HomeTabs.svelte";
   handleSession(page);
+  export let data;
+    let { countries } = data;
+    $: ({ countries } = data);
 </script>
 
 <div class="lg:hidden md:hidden xl:hidden 2xl:hidden">
@@ -16,7 +19,6 @@
   <Dashboard />
   <DashboardFunctions />
 </div>
-<div class = 'hidden lg:flex xl:flex 2xl:flex md:flex w-full justify-center'>
+<div class = 'hidden md:flex w-full h-full justify-center px-2'>
   <HomeTabs/>
-
 </div>

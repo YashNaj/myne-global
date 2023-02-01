@@ -7,82 +7,126 @@
   export let subcategories = [];
   export let form: { message?: string };
   let page = 0;
-  const categories = [
-    {
-      name: "Jewlery",
-      subCategories: ["High Jewlery", "Fine Jewlery", "Fashion Jewelry"],
+  const categories = {
+    jewelry: {
+      subcategory: [
+        "bracelet",
+        "brooch",
+        "charm",
+        "cufflinks",
+        "earrings",
+        "engagement ring",
+        "high jewelry",
+        "necklace",
+        "pendant",
+        "ring",
+        "wedding band",
+        "other jewelry",
+      ],
+      brand: "default",
+    },
+    watch: { subcategory: "default", brand: "default" },
+    art: {
+      subcategory: [
+        "bowl",
+        "table art",
+        "painting",
+        "sculpture",
+        "vase",
+        "other art",
+      ],
+      brand: "default",
+    },
+    leather_goods: {
+      subcategory: [
+        "briefcase",
+        "evening bag",
+        "exotic",
+        "handbag",
+        "made to order",
+        "purse",
+        "shoulder bag",
+        "tote",
+        "travel bag",
+        "trunk",
+        "other leather goods",
+      ],
+      brand: "default",
+    },
+    guns: {
+      subcategory: [
+        "assault riffle",
+        "machine gun",
+        "revolver",
+        "rifle/carbine",
+        "pistol",
+        "shotgun",
+        "sub-machine gun",
+        "other gun",
+      ],
+      brand: "default",
+    },
+    technology: {
+      subcategory: [
+        "camera",
+        "cell phone",
+        "computer",
+        "Headphones/Earphones/Audio",
+        "tablets",
+        "watch",
+        "drone",
+        "other technology",
+      ],
+      brand: "default",
+    },
+    trading_card: {
+      subcategory: [
+        "baseball",
+        "basketball",
+        "football",
+        "hockey",
+        "soccer",
+        "other trading card",
+      ],
+      brand: "default",
+    },
+    collectibles: {
+      subcategory: [],
+      brand: "default",
+    },
+    crypto: {
+      subcategory: ["coin", "token", "other crypto"],
+      brand: "default",
+    },
+    nft: {
+      subcategory: [
+        "nft digital artwork",
+        "nft game asset",
+        "nft music",
+        "nft video",
+        "other nft",
+      ],
+      brand: "default",
     },
 
-    {
-      name: "Watches",
-      subCategories: ["Women's Watches", "Men's Watches"],
+    vintage: { subcategory: "default", brand: "default" },
+    motor_vehicle: {
+      subcategory: ["automobile", "motorcycle"],
+      brand: "default",
     },
-
-    {
-      name: "Art",
-      subCategories: ["Paintings", "Sculptures", "Table Art"],
+    animal: {
+      subcategory: ["bird", "cat", "dog", "other animal"],
+      brand: "default",
     },
-    {
-      name: "Leather Goods",
-      subCategories: [
-        "Totes",
-        "Purses",
-        "Evening Bags",
-        "Handbags",
-        "Shoulder Bags",
-        "Travel Bags",
-        "Trunks",
-        "Briefcase",
-        "Other",
-      ],
+    child_id_kit: { subcategory: ["child id kit"], brand: "default" },
+    clothing: {
+      brand: [""],
     },
-    {
-      name: "Guns",
-      subCategories: [
-        "Revolvers",
-        "Pistols",
-        "Shotguns",
-        "Rifles/Carbines",
-        "Assault Rifles",
-        "Sub Machine Guns",
-        "Machine Guns",
-        "Other",
-      ],
+    sneakers: {
+      brand: [""],
     },
-    {
-      name: "Technology",
-      subCategories: [
-        "Computers",
-        "Tablets",
-        "Watches",
-        "Cell Phones",
-        "Cameras",
-        "Earphones",
-      ],
-    },
-    {
-      name: "Trading Cards",
-      subCategories: ["Baseball", "Football", "Basketball", "Soccer", "Hockey"],
-    },
-    {
-      name: "Crypto",
-      subCategories: ["CryptoCurrency", "Tokens"],
-    },
-    {
-      name: "NFT",
-      subCategories: [
-        "NFT Digital Works",
-        "NFT Videos",
-        "NFT Game Assets",
-        "NFT Music",
-      ],
-    },
-    { name: "Vintage", subCategories: [] },
-    { name: "Automobile", subCategories: [] },
-    { name: "Animal", subCategories: ["Dog", "Cat", "Bird", "Other"] },
-    { name: "Child ID Kit", subCategories: [] },
-  ];
-  onMount(() => {
+    other: { subcategory: "default", brand: "default" },
+  };  onMount(() => {
     subcategories = categories[0].subCategories;
     selectedCategory = categories[0].name;
   });
@@ -93,6 +137,24 @@
       (category) => category.name === selectedCategory
     ).subCategories;
   }
+  function getCapitalizedKeys(obj: any) {
+    return Object.keys(obj).map((key) => {
+      let capitalizedKey = key.replace(/_/g, " ");
+      capitalizedKey = capitalizedKey
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      return capitalizedKey;
+    });
+  }
+  function getSubcategory(obj, key) {
+  const subcategory = obj[key]?.subcategory || "default";
+  return Array.isArray(subcategory)
+    ? subcategory.map((word) => word.toLowerCase().replace(/\b(\w)/g, (letter) => letter.toUpperCase()))
+    : subcategory;
+}
+
+
 
   let category = "Category";
   let subCategory = "Subcategory";
@@ -102,6 +164,11 @@
   let purchasedValue = "Purchased value";
   let description = "Keep the description to a few words";
   let iconColor = "black";
+  
+  const categoryArray = getCapitalizedKeys(categories);
+  const subcategoryArray = getSubcategory(categories, category); 
+  console.log(1, categoryArray, subcategoryArray);
+
 </script>
 
 <div class=" w-full px-2 h-[80vh] relative rounded-lg">
@@ -220,7 +287,7 @@
         const purchasedFrom = data.get("purchasedFrom")?.toString() || "";
         const purchasedValue = data.get("purchasedValue")?.toString() || "";
         const description = data.get("description")?.toString() || "";
-        console.log(form);
+        console.log(form.data);
         if (
           !!category ||
           !!subCategory ||
@@ -232,7 +299,6 @@
           !!description
         ) {
           form.message = "Invalid input";
-
           cancel();
         }
       }}
@@ -254,8 +320,8 @@
             >
               <option selected disabled placeholder="Category">Category</option>
 
-              {#each categories as category}
-                <option value={category.name}>{category.name}</option>
+              {#each categoryArray as category}
+                <option value={category}>{category}</option>
               {/each}
             </select>
             <select bind:value={subCategory} class="select flex-1 w-full">
@@ -263,7 +329,7 @@
                 >Subcategory</option
               >
 
-              {#each subcategories as subcategory}
+              {#each subcategoryArray as subcategory}
                 <option selected value={subcategory}>{subcategory}</option>
               {/each}
             </select>
@@ -284,7 +350,7 @@
               <input
                 type="text"
                 name="brand"
-                placeholder=""Rolex ... etc""
+                placeholder="Rolex ... etc"
                 class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
                 bind:value={brand}
               />
@@ -321,7 +387,7 @@
               <input
                 type="text"
                 name="purchasedFrom"
-                placeholder=""Rolex ... etc""
+                placeholder="Rolex ... etc"
                 class=" input input-sm shadow-sm input-bordered w-full max-w-xs"
                 bind:value={purchasedFrom}
               />
@@ -392,7 +458,7 @@
             on:click={() => {
               page === page--;
             }}
-            class="btn ghost flex-1 normal-case shadow-s bg-error"
+            class="btn ghost flex-1 normal-case shadow-s bg-"
             >Previous page</button
           >
         {/if}

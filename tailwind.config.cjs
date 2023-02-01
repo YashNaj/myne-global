@@ -1,6 +1,34 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
+  theme: {
+    extend: {
+      colors: {
+        jewelery: "#F192E8",
+        watches: "#2B2C31",
+        art: "#FFE609",
+        leather: "#984E1D",
+        clothes: "#59898A",
+        sneakers: "#B3F5F7",
+        gun: "#3A5130",
+        technology: "#080631",
+        trading: "#FCF7DE",
+        collectibles: "#61E1A3",
+        crypto: "#B6B1B1",
+        nft: "#7C1EB6",
+        vintage: "#FF5F09",
+        motor: "#E10909",
+        animal: "#278001",
+        childId: "#00BFFF",
+        other: "#ffffff",
+      },
+    },
+  },
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    require("daisyui"),
+  ],
   daisyui: {
     styled: true,
     themes: true,
@@ -29,37 +57,10 @@ module.exports = {
           warning: "#FBBD23",
 
           error: "#f76c5e",
-          
-          vault: "#5d6169"
+
+          vault: "#5d6169",
         },
       },
     ],
   },
-  theme: {
-    color: {
-      'jewelry': '#F192E8',
-      'wacthes': '#2B2C31',
-      'art': '#FFE609',
-      'leather': '#984E1D',
-      'clothes': '#59898A',
-      'sneakers': '#B3F5F7',
-      'gun': '#3A5130',
-      'technology': '#080631',
-      'trading': '#FCF7DE',
-      'collectibles': '#61E1A3',
-      'crypto':  '#B6B1B1',
-      'nft': '#7C1EB6',
-      'vintage': '#FF5F09',
-      'motor': '#E10909',
-      'animal': '#278001',
-      'childId': '#00BFFF',
-      'other': '#ffffff'  
-    },
-    extend: {},
-  },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("daisyui"),
-  ],
 };

@@ -25,7 +25,7 @@
   </footer> 
   <footer class="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
     <div class="items-center grid-flow-col">
-     <img class = 'w-full' src = {logo} alt  = 'logo'/>
+     <img class = 'w-12' src = {logo} alt  = 'logo'/>
       <p>Myne Global. <br/>Safety and Security Since 20222</p>
     </div> 
     <div class="md:place-self-center md:justify-self-end">

@@ -9,6 +9,7 @@ const animalSchema = new mongoose.Schema({
     bodyLength: { type: String, default: "", required: true },
     weight: { type: String, default: "", required: true },
     pedigree: { type: String, default: "", required: true },
+    dob:   { type: Date, default: "", required: true}
     purchasedFrom: { type: String, default: "", required: true },
     purchaseValue: { type: String, default: "", required: true },
     description: { type: String, default: "", required: true },

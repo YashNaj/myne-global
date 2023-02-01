@@ -9,6 +9,9 @@
   import Footer2 from "$lib/components/Footer2.svelte";
 
   export let data: LayoutData;
+  const isUser = data?.isUser;
+
+  console.log( 1, isUser)
   const authRoutes = [
     '/signup',
     'signin'
@@ -37,7 +40,7 @@
 
 <div class="drawer drawer-end">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col h-[100vh] w-full lg:w-auto lg:h-auto md:h-auto">
+  <div class="drawer-content flex flex-col  w-full  lg:w-auto overflow-hidden">
     <div class="navbar bg-primary">
       <div class="px-2 mx-2 font-bold text-white w-full"><img class = 'max-w-s w-20 lg:max-w-md ' alt ='logo' src ={logo}/></div>
       <div class="flex-none lg:hidden">
@@ -94,11 +97,11 @@
         </ul>
       </div>
     </div>
-    <main class=" h-[100vh] w-full lg:h-[100vh] md:h-auto relative">
+    <main class=" h-[96vh] w-full lg:relative">
       <slot />
     </main>
-    <Footer2/>
   </div>
+
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />
     <ul class="menu p-4 w-80 bg-base-100 text-primary">
@@ -115,7 +118,9 @@
       </li>
     </ul>
   </div>
+  
 </div>
+<Footer2/>
 
 <style lang="postcss">
   :global(.gradient-background) {

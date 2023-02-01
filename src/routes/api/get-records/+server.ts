@@ -1,10 +1,12 @@
-import { json, type RequestHandler } from "@sveltejs/kit"
-import  { db }  from "../../../hooks.server"
-import { getUser } from '$lib/auth/server';
-import {mongoose}  from 'mongoose';
-import {stolenWatchesCollection} from '$lib/mongoose.ts'
-export const GET: RequestHandler = async ({   }) => {
-    const documents = await db.collection('watch_jewlery').find({}).limit(100).toArray();
-
-    return json((documents))
+import { error, type RequestHandler } from '@sveltejs/kit';
+export async function GET() {
+  const product = {
+        name: 'sticker',
+        src: 'https://cdn.shopify.com/s/files/1/0434/0285/4564/products/Cup-front-black.png?v=1623159405',
+        price: '$10'
+    };
+  if (!product) {
+    throw error(400, 'No product exists.');
+  }
+  return new Response(JSON.stringify(product));
 }

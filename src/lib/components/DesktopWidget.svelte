@@ -7,9 +7,9 @@
     import CardFlippable from "./CardFlippable.svelte";
   
   </script>
-      <div in:fly={{x:-1000, duration: 200, delay: 250, easing:quintOut }}
-      out:fly={{x:1000, duration: 250, easing:quintOut}} class = 'h-[60rem] xl:h-[58rem] lg:h-[39rem] w-full rounded-3xl  p-4 glass'>
-        <div class = 'content flex flex-col w-full rounded-2xl '>
+      <div in:fly={{x:1000, y:0 ,duration:100, delay: 300, }}
+      out:fly={{x:-1000, y:0 ,duration: 150,  }} class = 'h-full w-full rounded-3xl  p-4 glass'>
+        <div class = ' w-full rounded-3xl k p-4 flex flex-col h-full'>
           <div class = 'title h-auto  min-w-full flex px-4  justify-between'>
             <h1 class = 'font-bold flex justify-start text-white text-[5rem] md:text-[3rem] p-3'>
                 {title}
@@ -17,9 +17,40 @@
             <div class = 'dropdown dropdown-end dropdown-bottom font-bold justify-start text-white text-[5rem] md:text-[3rem] p-3'>
               </div>
           </div>
+          <div class = 'w-full glass h-full rounded-2xl flex justify-center content-center flex-wrap'>
+            <div class = 'overflow-y-auto w-full h-[30rem] xl:[40rem] relative flex flex-wrap p-2 justify-center'>
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+              <CardFlippable />
+            </div>
+          </div>
         </div>
-        <div class = 'h-auto w-full bg-black relative'/>
-
       </div>
       <style lang='postcss'>
           .vault  , .vault-content{

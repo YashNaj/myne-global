@@ -1,7 +1,9 @@
 <script lang="ts">
-  import CardVault from "$lib/components/CardVault.svelte";
+	import { fade, fly } from 'svelte/transition';
+	import Tabs from './Tabs.svelte';
+	import Slide from "./Slide.svelte";
+	import CardVault from "$lib/components/CardVault.svelte";
   import DesktopWidget from "$lib/components/DesktopWidget.svelte";
-
   import {
     Tab,
     TabGroup,
@@ -10,7 +12,6 @@
     TabPanels,
   } from "@rgossiaux/svelte-headlessui";
   import { quintOut } from "svelte/easing";
-  import { fade, fly } from "svelte/transition";
   let open = false;
   let tabs = [
     "Card Vault",
@@ -28,13 +29,41 @@
     "Download Inventory",
   ];
 
+	let name = 'Tabby';
 
+	let tabItems = [
+		{ id: 1, label: 'Tab1', back: 'red' },
+		{ id: 2, label: 'Tab2', back: 'blue' },
+		{ id: 3, label: 'Tab3', back: 'green' },
+	];
+	let activeTab = 0, state = 0;
+
+	let slideWrapper, anim;
+
+	function animController() {
+		if(activeTab == state) return;
+	
+		const nodeWidth = slideWrapper.offsetWidth; 
+		const currentMultiplier = activeTab > state ? 1 : -1;
+
+		console.log(`activeTab ${activeTab > state ? ">" : "<"} state`);
+
+		anim = {
+			in: nodeWidth * currentMultiplier,
+			out: nodeWidth * -currentMultiplier,
+		};
+	}
+
+	$: if (slideWrapper) {
+		animController();
+		state = activeTab;
+	}
+	$: currentTab = tabItems[activeTab];
+	$: slideWrapper && console.log(slideWrapper.offsetWidth);
 </script>
 
-  <!-- <button class = 'btn btn-primary absolute top-o' on:click={()=> open = !open}>
-        {open ? "close" : "open"}
-</button> -->
-    <TabGroup defaultIndex={0} class="flex flex-col w-full h-full justify-center rounded-lg">
+<h1>Hello {name}!</h1>
+ <TabGroup defaultIndex={0} class="flex flex-col w-full h-full justify-center rounded-lg">
       <TabList
         class={"flex font-bold justify-center bg-accent rounded-lg mb-2 p-1 text-primary"}
       >
@@ -66,10 +95,32 @@
       </TabPanels>
     </TabGroup>
 
-<!-- <AddCard/> -->
+<main>
+	{#key currentTab.id}
+		<div
+				 style="--back: {currentTab.back}"
 
-<style lang="postcss">
-  * > :global(.selected) {
-    background-color: rgb(191 219 254);
-  }
+				 bind:this={slideWrapper}
+				 in:fly={{ x: anim.in, duration: 500, opacity: 1 }}
+				 out:fly={{ x: anim.out, duration: 500, opacity: 1 }}
+		>
+			<Slide text={currentTab.label} />
+		</div>
+	{/key}
+
+	<Tabs bind:activeTab items={tabItems} />
+</main>
+
+<style>
+	main {overflow: hidden; position: relative}
+	div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		background: var(--back);
+		overflow: hidden;
+		color: white;
+		text-align: center;
+	}
 </style>
