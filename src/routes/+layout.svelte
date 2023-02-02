@@ -3,20 +3,16 @@
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
   import { invalidateAll } from "$app/navigation";
-  import type { LayoutData } from './$types';
-	import logo from '$lib/images/white_myne_logo.png';
+  import type { LayoutData } from "./$types";
+  import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
 
   export let data: LayoutData;
   const isUser = data?.isUser;
 
-  console.log( 1, isUser)
-  const authRoutes = [
-    '/signup',
-    'signin'
-  ]
-
+  console.log(1, isUser);
+  const authRoutes = ["/signup", "signin"];
 
   let menuItems = [
     "Import",
@@ -28,8 +24,8 @@
     "Delete A Card",
   ];
   handleSession(page);
-
 </script>
+
 <svelte:head>
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
   <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
@@ -39,7 +35,9 @@
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col  w-full  lg:w-auto overflow-hidden">
     <div class="navbar bg-primary">
-      <div class="px-2 mx-2 font-bold text-white w-full"><img class = 'max-w-s w-20 lg:max-w-md ' alt ='logo' src ={logo}/></div>
+      <div class="px-2 mx-2 font-bold text-white w-full">
+        <img class="max-w-s w-20 lg:max-w-md " alt="logo" src={logo} />
+      </div>
       <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">
           <svg
@@ -58,35 +56,41 @@
         </label>
       </div>
       <div class="flex-none hidden lg:block">
-        <ul class="menu menu-horizontal w-full  flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white">
-          
+        <ul
+          class="menu menu-horizontal w-full  flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white"
+        >
           <!-- Navbar menu content here -->
-          <div class = 'flex'>
+          <div class="flex">
             {#each menuItems as menuItem}
-            <li class = 'hidden'><a href="/addCard">{menuItem}</a></li>
-          {/each}
-          {#if data?.isUser}
-          <div class = ' w-[120px] flex h-[100%] rounded-lg p-1'>
-            <div class ='flex-[2-2-0%] flex justify-center content-centerw-[30%] h-full'>
-              <div class="avatar">
-                <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+              <li class="hidden"><a href="/addCard">{menuItem}</a></li>
+            {/each}
+            {#if data?.isUser}
+              <div class=" w-[120px] flex h-[100%] rounded-lg p-1">
+                <div
+                  class="flex-[2-2-0%] flex justify-center content-centerw-[30%] h-full"
+                >
+                  <div class="avatar">
+                    <div
+                      class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="flex w-[70%] h-full justify-center content-center flex-wrap"
+                >
+                  <h1
+                    class="ml-2 font-bold text-white w-full flex h-full justify-start content-center flex-wrap"
+                  >
+                    Arnaud
+                  </h1>
                 </div>
               </div>
-            </div>
-            <div class ='flex w-[70%] h-full justify-center content-center flex-wrap'>
-              <h1 class = 'ml-2 font-bold text-white w-full flex h-full justify-start content-center flex-wrap'>
-                  Arnaud
-              </h1>
-            </div>
+            {/if}
 
+            <li>
+              <LogOut />
+            </li>
           </div>
-                      {/if}
-
-          <li>
-          <LogOut/> 
-          </li>
-          </div>
-   
         </ul>
       </div>
     </div>
@@ -103,17 +107,12 @@
         <li><a href="/{menuItem}">{menuItem}</a></li>
       {/each}
       <li>
-        <button
-          class="bg-accent"
-          on:click={logOut}
-          >Sign out</button
-        >
+        <LogOut/>
       </li>
     </ul>
   </div>
-  
 </div>
-<Footer2/>
+<Footer2 />
 
 <style lang="postcss">
   :global(.gradient-background) {
@@ -121,9 +120,7 @@
     background: linear-gradient(
       30deg,
       rgba(0, 45, 114, 1) 10%,
-      rgba(255, 255, 255, 1) 10%,
+      rgba(255, 255, 255, 1) 10%
     );
-
   }
-  
 </style>
