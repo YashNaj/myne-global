@@ -3,7 +3,6 @@
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
   import { invalidateAll } from "$app/navigation";
-  import { signOut } from "@lucia-auth/sveltekit/client"
   import type { LayoutData } from './$types';
 	import logo from '$lib/images/white_myne_logo.png';
   import Footer2 from "$lib/components/Footer2.svelte";

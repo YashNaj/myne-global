@@ -4,7 +4,7 @@ import { passwordSchema } from "$lib/schema";
 import { Parsers } from "$lib/schema/parsers";
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import { error, type Actions } from "@sveltejs/kit";
-import { prisma } from '$/lib/prisma';
+import { prisma } from '$lib/prisma';
 
 export const actions: Actions = {
     default: async ({ request }) => {
