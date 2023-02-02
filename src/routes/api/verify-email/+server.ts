@@ -3,7 +3,7 @@ import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests
 import { Parsers } from "$lib/schema/parsers";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
-import prisma from "$lib/prisma";
+import {prisma} from "$lib/prisma";
 export const GET: RequestHandler = async ({ url }) => {
     const { token } = Parsers.params(url, z.object({ token: z.string() }));
     console.log(token);
