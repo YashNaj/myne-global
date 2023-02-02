@@ -41,6 +41,7 @@ const sendEmailVerificationLink = async (
 };
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.validate();
+  console.log(session);
 	if (session) throw redirect(302, "/");
 	return {};
 };
