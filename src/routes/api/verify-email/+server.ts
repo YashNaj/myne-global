@@ -6,9 +6,7 @@ import { z } from "zod";
 
 export const GET: RequestHandler = async ({ url }) => {
 
-    const { token } = Parsers.params(url, z.object({ token: z.string() }));
-
-    const verificationRequest = await EmailVerificationRequests.findOne({ token }).exec();
+    const verificationRequest = await prisma.EmailVerificationRequests.create().exec();
     if (!verificationRequest) throw error(400, "Invalid token");
     const { userId, expiresAt } = verificationRequest;
 
@@ -17,7 +15,7 @@ export const GET: RequestHandler = async ({ url }) => {
     const user = await auth.getUser(userId);
     if (!user) throw error(400, "Invalid token");
 
-    await auth.updateUserAttributes(userId, {
+    await auth.updateUserAttributes(user, {
         valid: true,
     });
 

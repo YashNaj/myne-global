@@ -23,9 +23,9 @@ export const actions: Actions = {
       return fail(400);
 
     try {
-      const user = await auth.authenticateUser("email", email, password);
+			const key = await auth.validateKeyPassword("email", email, password);
 
-      const session = await auth.createSession(user.userId);
+			const session = await auth.createSession(key.userId);
       locals.setSession(session);
     } catch (error) {
       if (

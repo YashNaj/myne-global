@@ -6,20 +6,21 @@ import { PrismaClient } from '@prisma/client'
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { Role } from '../../lib/auth/roles';
-// If the user exists, redirect authenticated users to the profile page.
 const prisma = new PrismaClient()
 
 
 const sendEmailVerificationLink = async (
-  userId: string,
+  user: string,
   origin: string,
   email: string
 ) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
-  const request = await prisma.EmailVerificationRequests.create(
+  const request = await prisma.users.create(
     { 
     data:{
-    user_id: userId.id
+      emailVerificationRequest:{
+        user_id : user.user_id
+      }
     }
    });
   const href = `${origin}/api/verify-email?token=${request.token}`;
@@ -81,6 +82,21 @@ export const actions: Actions = {
           
         },
       });
+      const profileUpsert = await prisma.user.update({
+        where: {
+          id: user.userId,
+        },
+        data: {
+          Profile: {
+            firstName,
+            lastName,
+            country,
+            phone,
+            birthday,
+            postalZip
+          }
+      }});   
+      await sendEmailVerificationLink(user, origin, email)
       console.log("success");
       console.log(user);
       const session = await auth.createSession(user?.userId);
@@ -92,6 +108,6 @@ export const actions: Actions = {
       console.log(error);
       // username already in use
       return fail(400), { message: "Error" };
-    }
+    } 
   },
 };
