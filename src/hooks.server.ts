@@ -13,10 +13,3 @@ try{
 }finally{
     console.log("Successfully connected to MongoDB")
 }
-try{
-    await supabase()
-    consol.log("Supabase Online")
-}
-catch(error){
-    console.log(error)
-}
