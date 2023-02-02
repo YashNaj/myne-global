@@ -7,6 +7,7 @@ import { auth } from '$lib/auth/lucia';
 import { supabase } from "$lib/supabase";
 const anyoneAllowed = [
   "/signup",
+  "/signout",
   "/signin",
   "/forgot-password",
   "/reset-password",
@@ -15,7 +16,6 @@ const anyoneAllowed = [
   "/test",
   "/api/get-records",
   "/api",
-  "/signout"
 ]; 
 
 
@@ -29,7 +29,7 @@ export const load = handleServerSession((async ({ url, locals}) => {
     throw redirect(303, "/signin");
   }
   console.log(user);
-  if (user.valid) return {{}, isUser:true};
+  if (user.valid) return { isUser:true};
   else throw redirect(302, "/unverified-email");
 
 }) satisfies LayoutServerLoad);
