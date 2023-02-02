@@ -2,7 +2,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import { auth } from "$lib/auth/lucia";
 import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
-import { PrismaClient } from '@prisma/client'Please verify your email using the link we sent you
+import { PrismaClient } from '@prisma/client'
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { Role } from '../../lib/auth/roles';
