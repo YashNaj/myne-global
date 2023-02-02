@@ -8,7 +8,7 @@ declare namespace Lucia {
 		id: string,
 		email:string,
 		valid: boolean
-		role: string; 
+		role: string[]; 
 	}
 }
 /// <reference types="@sveltejs/kit" />

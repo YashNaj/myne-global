@@ -1,6 +1,5 @@
 <script>
   import { invalidateAll } from "$app/navigation";
-import { signOut } from "@lucia-auth/sveltekit/client";
 
 
 </script>
