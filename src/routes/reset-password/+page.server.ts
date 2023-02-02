@@ -4,16 +4,16 @@ import { passwordSchema } from "$lib/schema";
 import { Parsers } from "$lib/schema/parsers";
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import { error, type Actions } from "@sveltejs/kit";
-import { z } from "zod";
+import { prisma } from '$/lib/prisma';
 
 export const actions: Actions = {
     default: async ({ request }) => {
-        const { newPass, token } = await Parsers.form(request, z.object({
+        const { newPass, token } = await prisma.form(request, z.object({
             newPass: passwordSchema,
             token: z.string()
         }))
 
-        const resetRequest = await PasswordResetRequests.findOne({ token }).exec()
+        const resetRequest = await prisma.findOne({ token }).exec()
         if (!resetRequest) throw error(400, "Invalid token")
         if (resetRequest.expiresAt < new Date()) {
             await resetRequest.remove()

@@ -18,7 +18,7 @@ export const GET: RequestHandler = async ({ url }) => {
     if (!user) throw error(400, "Invalid token");
 
     await auth.updateUserAttributes(userId, {
-        emailVerified: true,
+        valid: true,
     });
 
     await verificationRequest.remove();

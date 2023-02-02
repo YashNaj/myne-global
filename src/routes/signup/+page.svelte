@@ -2,9 +2,7 @@
   import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
   import Nav from "$lib/components/Nav.svelte";
-  import { slide } from "svelte/transition";
   export let form: { message?: string };
-  let email = "";
 </script>
 
 <div class="w-full h-full flex justify-center my-2 content-center flex-wrap ">
@@ -40,7 +38,6 @@
             ><br />
             <input
               class="input input-md rouned-lg"
-              type="lastName"
               id="lastName"
               name="lastName"
               placeholder="Last Name "
@@ -75,7 +72,6 @@
             >
             <input
               class="input input-md rouned-lg"
-              type="int"
               id="country"
               name="country"
               placeholder="Country"
@@ -101,7 +97,7 @@
               >Email</label
             ><br />
             <input
-              class="input w-= input-md rouned-lg"
+              class="input input-md rouned-lg"
               id="email"
               name="email"
               placeholder="Email "
@@ -132,15 +128,13 @@
             id="phone"
             name="phone"
             placeholder="+(1) (999)-999-9999"
-            type="tel"
-            pattern="[+][0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          />
+            type="tel"          />
         </div>
     </div>
 
       <input
         class="btn btn-primary rouned-lg"
-        type="submit btn btn-neutral text-primary"
+        type="submit"
         value="Register"
       />
     </form>

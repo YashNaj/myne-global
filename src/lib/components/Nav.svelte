@@ -5,7 +5,7 @@
 	<img src={logo} alt="myne-logo" class= "m-w-full p-2 w-52" />
 
 </div>
-<style>
+<style lang='postcss'>
 	nav{
 		background: var(--myne-blue);
 	}

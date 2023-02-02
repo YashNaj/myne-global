@@ -17,18 +17,16 @@ const anyoneAllowed = [
 ]; 
 
 
-export const load = handleServerSession((async ({ url, locals , isSession}) => {
+export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
-  const { data } = await supabase.from("countries").select();
-  console.log(data);
   if (onUnauthedRoute) return {};
   const { session, user } = await locals.validateUser();
   if (!session) {
     throw redirect(303, "/signin");
   }
-  if (user.emailVerified) return {isUser:true};
+  if (user.valid) return {isUser:true};
   else throw redirect(302, "/unverified-email");
 
 }) satisfies LayoutServerLoad);

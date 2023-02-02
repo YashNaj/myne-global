@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const animalSchema = new mongoose.Schema({
+  
     subCategory: { type: String, default: "", required: true },
     breed: { type: String, default: "", required: true },
     color: { type: String, default: "", required: true },
@@ -18,7 +19,9 @@ const animalSchema = new mongoose.Schema({
     });
     
 const AnimalCard = mongoose.model('AnimalCard', animalSchema);    import mongoost from 'mongoose';
+
 const childIdSchema = new mongoose.Schema({
+  
     firstName: { type: String, default: "", required: true  },
     middleName: { type: String, default: "", required: true  },
     lastName: { type: String, default: "", required: true  },
@@ -47,8 +50,10 @@ const childIdSchema = new mongoose.Schema({
     otherFeatures: { type: [String], default: "", required: true  },
     });
 const ChildIdCard = mongoose.model("ChildIdCard", cardSchema);
+
     
 const cryptoSchema = new mongoose.Schema({
+  
     subCategory: {
       type: String,
       required: true,
@@ -132,8 +137,10 @@ const cryptoSchema = new mongoose.Schema({
   });
   
    const CryptoCard = mongoose.model('CryptoCard', cryptoSchema);
+   
   import { mongoose } from 'mongoose';
 const jewelrySchema = new mongoose.Schema({
+  
   subCategory: { type: String, required: true, default: "" },
   brand: { type: String, required: true, default: "" },
   brandReference: { type: String, required: true, default: "" },
@@ -162,8 +169,10 @@ const jewelrySchema = new mongoose.Schema({
 const JewelryCard = mongoose.model("JewelryCard", jewelrySchema
 
 
+
 import mongoose from 'mongoose';
 const nftSchema = new mongoose.Schema({
+  
     subCategory: { type: String, default: '', required: true },
     author: { type: String, default: '', required: true },
     smartContractAddress: { type: String, default: '', required: true },
@@ -179,7 +188,9 @@ const nftSchema = new mongoose.Schema({
     });
 
 const NFTCard = mongoose.model('NFTCard', nftSchema);import {mongoose } from mongoose; 
+
 const sneakersSchema = new mongoose.Schema({
+  
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
     serial: { type: String, required: true, default: "" },
@@ -196,8 +207,10 @@ const sneakersSchema = new mongoose.Schema({
   });
   
   export const SneakersCard = mongoose.model("SneakersCard", sneakersSchema);
+  
   import mongoose from 'mongoose';
 const vintageSchema = new mongoose.Schema({
+  
     brand: { type: String, default: "", required : true },
     brandReference: { type: String, default: "", required : true },
     artist: { type: String, default: "", required : true },
@@ -214,7 +227,9 @@ const vintageSchema = new mongoose.Schema({
     });
 
     const VintageCard = mongoose.model('VintageCard', vintageSchema);import mongoose from 'mongoose';
+    
 const artSchema = new mongoose.Schema({
+  
     subcategory: {type: string, required: true, default: string} , ,
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
@@ -231,7 +246,9 @@ const artSchema = new mongoose.Schema({
   });
   
   const ArtCard = mongoose.model("ArtCard", artSchema);import {mongoose } from mongoose; 
+  
 const clothingSchema= new mongoose.Schema({
+  
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
     serial: { type: String, required: true, default: "" },
@@ -246,8 +263,10 @@ const clothingSchema= new mongoose.Schema({
   });
   
    const ClothingCard = mongoose.model("ClothingCard", clothingSchema);
+   
   import mongoose, { type Model } from "mongoose";
 import { ONE_DAY } from "$lib/const";
+
 
 export interface EmailVerificationRequest {
   _id: string;
@@ -257,7 +276,9 @@ export interface EmailVerificationRequest {
 }
 
 const modelName = "EmailVerificationRequest";
+
 export const EmailVerificationRequests: Model<EmailVerificationRequest> =
+
   mongoose.models[modelName] ||
   mongoose.model(
     modelName,
@@ -282,6 +303,7 @@ export const EmailVerificationRequests: Model<EmailVerificationRequest> =
   );
 import { mongoose } from "mongoose";
 const leatherSchema = new mongoose.Schema({
+  
   subcategory:{type:String, required: true, default: ""} ,
   brand: { type: String, required: true, default: "" },
   brandReference: { type: String, required: true, default: "" },
@@ -297,8 +319,10 @@ const leatherSchema = new mongoose.Schema({
 });
 
 const LeatherCard = mongoose.model("LeatherCard", leatherSchema);
+
 import mongoose from 'mongoose';
 const otherSchema = new mongoose.Schema({
+  
     brand: { type: String, default: "", required: true },
     brandReference: { type: String, default: "", required: true },
     serial: { type: String, default: "", required: true },
@@ -312,7 +336,9 @@ const otherSchema = new mongoose.Schema({
     otherFeatures: { type: String, default: "", required: true },
     });
     const OtherCard = mongoose.model('OtherCard', otherSchema);import mongoose from 'mongoose';
+    
 const techSchema = new mongoose.Schema({
+  
     subCategory: { type: String, required: true, default: "" },
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
@@ -328,6 +354,7 @@ const techSchema = new mongoose.Schema({
     uniqueFeatures: { type: String, required: true, default: "" },
   });
   const TechCard = mongoose.model("TechCard", techSchema);
+  
 import mongoose , {type Model} from 'mongoose'
 
 export interface Card {
@@ -348,7 +375,9 @@ export interface Card {
 
 const modelName = "MyneCardGeneralSchema";
 
+
 export const MyneCardGeneralSchema: Model<MyneCardGeneralSchema> = mongoose.models[modelName] ||
+
     mongoose.model( 
         modelName, 
         new mongoose.Schema(
@@ -384,6 +413,7 @@ export const MyneCardGeneralSchema: Model<MyneCardGeneralSchema> = mongoose.mode
        );
 import mongoose from 'mongoose';
 const collectiblesSchema = new mongoose.Schema({
+  
     subCategory: { type: String, required: true, default: "" },
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
@@ -400,8 +430,10 @@ const collectiblesSchema = new mongoose.Schema({
     uniqueFeatures: { type: String, required: true, default: "" },
   });
   const CollectiblesCard = mongoose.model("CollectiblesCard", collectiblesSchema);
+  
 import mongoose from 'mongoose';
 const gunSchema = new mongoose.Schema({
+  
     subCategory: { type: String, required: true, default: "" },
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
@@ -417,8 +449,10 @@ const gunSchema = new mongoose.Schema({
     uniqueFeatures: { type: String, required: true, default: "" },
   });
   const GunCard = mongoose.model("GunCard", gunSchema);
+  
 import {mongoose} from 'mongoose';
 const motorVehicleSchema = new mongoose.Schema({
+  
     subCategory: { type: String, default: "",required: true },
     brand: { type: String, default: "",required: true },
     brandReference: { type: String, default: "",required: true },
@@ -441,6 +475,8 @@ const motorVehicleSchema = new mongoose.Schema({
     });
 
 const MotorVehicleCard = mongoose.model('MotorVehicleCard', motorVehicleSchema);import { ONE_DAY } from "$lib/const";
+
+
 import mongoose, { type Model } from "mongoose";
 
 export interface PasswordResetRequest {
@@ -451,7 +487,9 @@ export interface PasswordResetRequest {
 }
 
 const modelName = "PasswordResetRequest";
+
 export const PasswordResetRequests: Model<PasswordResetRequest> = mongoose.models[modelName] ||
+
     mongoose.model(
         modelName,
         new mongoose.Schema({
@@ -475,6 +513,7 @@ export const PasswordResetRequests: Model<PasswordResetRequest> = mongoose.model
     );
 import mongoose from 'mongoose';
 const tradingCardSchema = new mongoose.Schema({
+  
     subCategory: { type: String, required: true, default: "" },
     brand: { type: String, required: true, default: "" },
     brandReference: { type: String, required: true, default: "" },
@@ -492,3 +531,4 @@ const tradingCardSchema = new mongoose.Schema({
 
   });
   const TradingCard = mongoose.model("TradingCard", tradingCardSchema);
+  

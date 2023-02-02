@@ -1,4 +1,2 @@
-import {PrismaClient} from '@prisma/client';
-const prisma = new PrismaClient();
-let data = await prisma.user.findMany();
-console.log(data);
+import { PrismaClient } from "@prisma/client";
+export const prisma = new PrismaClient();
