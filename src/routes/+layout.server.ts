@@ -13,7 +13,7 @@ const anyoneAllowed = [
   "/verify-email",
   "/unverified-email",
   "/test",
-  "/api/get-records"
+  "/api/get-records",
   "/api"
 ]; 
 
