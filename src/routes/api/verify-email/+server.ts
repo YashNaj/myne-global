@@ -3,10 +3,18 @@ import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests
 import { Parsers } from "$lib/schema/parsers";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
-
+import prisma from "$lib/prisma";
 export const GET: RequestHandler = async ({ url }) => {
-
-    const verificationRequest = await prisma.EmailVerificationRequests.create().exec();
+    const { token } = Parsers.params(url, z.object({ token: z.string() }));
+    console.log(token);
+    const verificationRequest = await prisma.EmailVerificationRequests.findUnique(
+        {
+            where: { 
+                token 
+            },
+        }
+    );
+    console.log(verificationRequest);
     if (!verificationRequest) throw error(400, "Invalid token");
     const { userId, expiresAt } = verificationRequest;
 

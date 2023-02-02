@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
   import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
   import Nav from "$lib/components/Nav.svelte";
   export let form: { message?: string };
+  export let url = $page.url.origin; 
+  console.log(url)
 </script>
 
 <div class="w-full h-full flex justify-center my-2 content-center flex-wrap ">
@@ -83,9 +86,8 @@
             >
             <input
               class="input input-md rouned-lg"
-              type="int"
-              id="postal"
-              name="postal"
+              id="postalZip"
+              name="postalZip"
               placeholder="ZIP/Postal Code"
             />
           </div>

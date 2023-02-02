@@ -12,29 +12,30 @@ datasource db {
 }
 
 model User {
-  id       String     @id @unique
-  email    String     @unique
-  session  Session[]
-  Key      Key[]
-  role     Role       @default(USER)
-  valid    Boolean
-  Profile  Profile[]
-  MyneCard MyneCard[]
-  emailVerificationRequest EmailVerificationRequest[]
+  id                          String                        @id @unique
+  email                       String                        @unique
+  session                     Session[]
+  Key                         Key[]
+  role                        Role                          @default(USER)
+  valid                       Boolean
+  Profile                     Profile[]
+  MyneCard                    MyneCard[]
+  emailVerificationRequest    EmailVerificationRequest[]
+  passwordVerificationRequest PasswordVerificationRequest[]
+
   @@map("user")
 }
 
 model Profile {
-  id        String     @id @unique
+  id        String     @id @unique @default(uuid())
   user      User       @relation(references: [id], fields: [user_id], onDelete: Cascade)
   user_id   String
   firstName String
   lastName  String
-  country   String     @default("default")
-  postalZip String     @default("default")
-  birthday  String     @default("default")
-  phone     String     @default("default")
-  verified  Boolean    @default(false)
+  country   String
+  postalZip String
+  birthday  String
+  phone     String
   cards     MyneCard[]
 
   @@map("profile")
@@ -63,21 +64,20 @@ model Key {
 }
 
 model MyneCard {
-  id      String @id @unique
-  user_id String
-  user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
-  category           String
+  id                 String    @id @unique
+  user_id            String
+  user               User      @relation(references: [id], fields: [user_id])
   subCategory        String
   brand              String
   size               String
   purchasedFrom      String
-  purchasedValue     Decimal  @db.Money
-  createdOn          DateTime @default(now())
-  isStolen           Boolean  @default(false)
+  purchasedValue     Decimal   @db.Money
+  createdOn          DateTime  @default(now())
+  isStolen           Boolean   @default(false)
   reportedStolenDate DateTime?
-  isHeriloom         Boolean  @default(false)
+  isHeriloom         Boolean   @default(false)
   pictures           String[]
-  Profile            Profile? @relation(fields: [profileId], references: [id])
+  Profile            Profile?  @relation(fields: [profileId], references: [id])
   profileId          String?
 
   @@map("myneCard")
@@ -85,18 +85,22 @@ model MyneCard {
 
 model EmailVerificationRequest {
   id        String   @id @unique
+  email     String
   token     String   @default(uuid())
   user_id   String
   expiresAt DateTime @db.Timestamp(1)
-  user    User   @relation(references: [id], fields: [user_id])
-
+  user      User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
 }
 
 model PasswordVerificationRequest {
-  id        String   @id @unique
-  token     String   @default(uuid())
+  id    String @id @unique
+  email String
+
+  token String @default(uuid())
+
   user_id   String
   expiresAt DateTime @db.Timestamp(1)
+  user      User     @relation(references: [id], fields: [user_id])
 }
 
 enum Role {
