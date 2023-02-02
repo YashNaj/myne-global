@@ -14,7 +14,8 @@ const anyoneAllowed = [
   "/unverified-email",
   "/test",
   "/api/get-records",
-  "/api"
+  "/api",
+  "/signout"
 ]; 
 
 

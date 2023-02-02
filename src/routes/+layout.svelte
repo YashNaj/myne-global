@@ -6,6 +6,7 @@
   import type { LayoutData } from './$types';
 	import logo from '$lib/images/white_myne_logo.png';
   import Footer2 from "$lib/components/Footer2.svelte";
+  import LogOut from "$lib/components/LogOut.svelte";
 
   export let data: LayoutData;
   const isUser = data?.isUser;
@@ -27,10 +28,7 @@
     "Delete A Card",
   ];
   handleSession(page);
-  async function logOut ()  {
-            await signOut();
-            invalidateAll();
-  }
+
 </script>
 <svelte:head>
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
@@ -85,11 +83,7 @@
                       {/if}
 
           <li>
-            <button
-              class="btn btn-primary text-accent"
-              on:click={logOut}
-              >Sign out</button
-            >
+          <LogOut/> 
           </li>
           </div>
    

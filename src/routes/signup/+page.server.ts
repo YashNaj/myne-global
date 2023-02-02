@@ -9,6 +9,7 @@ import { Role } from '../../lib/auth/roles';
 // If the user exists, redirect authenticated users to the profile page.
 const prisma = new PrismaClient()
 
+
 const sendEmailVerificationLink = async (
   userId: string,
   origin: string,
@@ -38,7 +39,11 @@ const sendEmailVerificationLink = async (
     console.log("Failed to send message");
   }
 };
-
+export const load: PageServerLoad = async ({ locals }) => {
+	const session = await locals.validate();
+	if (session) throw redirect(302, "/");
+	return {};
+};
 export const actions: Actions = {
   default: async ({ request, locals, url }) => {
     const form = await request.formData();
@@ -77,7 +82,6 @@ export const actions: Actions = {
       });
       console.log("success");
       console.log(user);
-      const userId = user.userId 
       const session = await auth.createSession(user?.userId);
       locals.setSession(session);
     } catch (error) {
