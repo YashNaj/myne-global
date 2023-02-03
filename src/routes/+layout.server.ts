@@ -17,15 +17,13 @@ const anyoneAllowed = [
   "/api/get-records",
   "/api",
 ]; 
-const onlyAdmin = [
-  "/admin"
-]
+
 
 export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
-  ); 
-  const adminRoute = onlyAdmin.some((route) => url.pathname.startsWith(route));
+  );
+  if (onUnauthedRoute) return {};
   const { session, user } = await locals.validateUser();
   if (!session) {
     throw redirect(303, "/signin");
@@ -33,8 +31,6 @@ export const load = handleServerSession((async ({ url, locals}) => {
   console.log(user);
   if (user.valid) return { isUser:true};
   else throw redirect(302, "/unverified-email");
-  if (onUnauthedRoute) return {};
-
 
 }) satisfies LayoutServerLoad);
 

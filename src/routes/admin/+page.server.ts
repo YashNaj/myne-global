@@ -1,5 +1,6 @@
 import type { PageServerLoad } from "./$types";
 import { redirect } from '@sveltejs/kit';
+import type { RequestHandler } from "./$types";
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { session, user } = await locals.validateUser();
@@ -9,5 +10,5 @@ export const load: PageServerLoad = async ({ locals }) => {
 	}
     if(user?.role === 'ADMIN' || 'OWNR'){
 		return {}; 
-	}else throw redirect(302, '/')
+	}
 }
