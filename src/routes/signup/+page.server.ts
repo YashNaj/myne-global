@@ -117,6 +117,7 @@ export const actions: Actions = {
           },
         },
       });
+      console.log(profileUpsert);
       await sendEmailVerificationLink(user, origin, email);
       console.log("success");
       const session = await auth.createSession(user?.userId);
