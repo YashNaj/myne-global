@@ -6,31 +6,44 @@ import { PrismaClient } from "@prisma/client";
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { Role } from "../../lib/auth/roles";
-import { page } from '$app/stores';
-const origin = 'https://myneglobal.com' || 'http://localhost:5173';
-const prisma = new PrismaClient();
+import { page } from "$app/stores";
+import { prisma } from "$lib/prisma";
+const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (
   user: string,
   origin: string,
-  email: string
+  email: string,
+  url: string 
 ) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
   const request = await prisma.user.update({
     where: {
-      id: user.userId
+      id: user.userId,
     },
-    data:{
-      emailVerificationRequest:{
-        create:{
-              id: user.userId, 
-              email,
-              expiresAt : new Date(Date.now() + 1 * 60 * 60),
-          },
-      }
-    }
+    data: {
+      emailVerificationRequest: {
+        create: {
+          id: user.userId,
+          email,
+          expiresAt: new Date(Date.now() + 1 * 60 * 60),
+        },
+      },
+    },
   });
-  console.log(request)
-  const href = `${origin}/api/verify-email?token=${request.token}`;
+  const verificationRequest = await prisma.EmailVerificationRequest.findUnique({
+    where: {
+      id: user.userId,
+    },
+    select: {
+  
+          token: true,
+    },
+  });
+  console.log(parserCheck)
+  console.log(token)
+  console.log("token", verificationRequest );
+  const href = `${origin}/api/verify-email?token=${token}`;
+  console.log(href)
   const buttonSlug = `<a href= "${href}"> Verify Here </a>`;
   const data = {
     to: email, // Change to your recipient
@@ -39,7 +52,7 @@ const sendEmailVerificationLink = async (
     text: "Click the link to verify",
     html: buttonSlug,
   };
-  console.log(origin)
+  console.log(2, origin, request);
   try {
     await sgMail.send(data);
     console.log("Sent message");

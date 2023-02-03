@@ -3,31 +3,32 @@ import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests
 import { Parsers } from "$lib/schema/parsers";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
-import {prisma} from "$lib/prisma";
-export const GET: RequestHandler = async ({ url }) => {
-    const { token } = Parsers.params(url, z.object({ token: z.string() }));
-    console.log(1, token);
-    const verificationRequest = await prisma.EmailVerificationRequests.findUnique(
-        {
-            where: { 
-                token 
-            },
-        }
-    );
-    console.log(verificationRequest);
-    if (!verificationRequest) throw error(400, "Invalid token");
-    const { userId, expiresAt } = verificationRequest;
+import { prisma } from "$lib/prisma";
+export const GET: RequestHandler = async ({ url, request, response }) => {
+  const { token } = Parsers.params(url, z.object({ token: z.string() }));
 
-    if (expiresAt < new Date()) throw error(400, "Token expired");
+  const verificationRequest = await prisma.EmailVerificationRequests.findUnique(
+    {
+      where: {
+        token: token,
+      },
+    }
+  );
+  console.log(verificationRequest);
+  if (!verificationRequest) throw error(400, "Invalid token");
+  const { userId, expiresAt } = verificationRequest;
 
-    const user = await auth.getUser(userId);
-    if (!user) throw error(400, "Invalid token");
+  if (expiresAt < new Date()) throw error(400, "Token expired");
 
-    await auth.updateUserAttributes(user, {
-        valid: true,
-    });
+  const user = await auth.getUser(userId);
+  if (!user) throw error(400, "Invalid token");
 
-    await verificationRequest.remove();
+  await auth.updateUserAttributes(user, {
+    valid: true,
+  });
 
-    throw redirect(302, "/");
-}
+  await verificationRequest.remove();
+
+  throw redirect(302, "/");
+  return Response.send(JSON.stringify(token));
+};
