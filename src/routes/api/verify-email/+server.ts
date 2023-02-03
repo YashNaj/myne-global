@@ -1,10 +1,9 @@
 import { auth } from "$lib/auth/lucia";
-import { EmailVerificationRequests } from "$lib/models/emailVerificationRequests";
 import { Parsers } from "$lib/schema/parsers";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
 import {prisma}  from "$lib/prisma";
-export const GET: RequestHandler = async ({ url, request, response }) => {
+export const GET: RequestHandler = async ({ url }) => {
   const { token } = Parsers.params(url, z.object({ token: z.string() }));
 
   const verificationRequest = await prisma.EmailVerificationRequests.findUnique(

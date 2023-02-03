@@ -119,7 +119,6 @@ export const actions: Actions = {
       });
       await sendEmailVerificationLink(user, origin, email);
       console.log("success");
-      console.log(user);
       const session = await auth.createSession(user?.userId);
       locals.setSession(session);
     } catch (error) {
