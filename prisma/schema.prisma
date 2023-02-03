@@ -86,11 +86,13 @@ model MyneCard {
 model EmailVerificationRequest {
   id        String   @id @unique
   email     String
-  token     String   @unique @default(uuid())
+  token     String   @default(uuid()) @unique
   user_id   String
   expiresAt DateTime @db.Timestamp(1)
   user      User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
-}
+  @@map("emailVerificationRequest")
+  }
+
 
 model PasswordVerificationRequest {
   id    String @id @unique
