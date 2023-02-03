@@ -86,7 +86,7 @@ model MyneCard {
 model EmailVerificationRequest {
   id        String   @id @unique
   email     String
-  token     String   @default(uuid())
+  token     String   @unique @default(uuid())
   user_id   String
   expiresAt DateTime @db.Timestamp(1)
   user      User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
