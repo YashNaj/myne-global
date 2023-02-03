@@ -25,7 +25,7 @@ const sendEmailVerificationLink = async (
         create: {
           id: user.userId,
           email,
-          expiresAt: new Date(Date.now() +( 1 * 60 * 60)),
+          expiresAt: new Date(Date.now() +( 1 * 60 * 60 * 1000)),
         },
       },
     },
