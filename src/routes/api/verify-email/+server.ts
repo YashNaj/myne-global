@@ -29,7 +29,9 @@ export const GET: RequestHandler = async ({ url, user }) => {
   } catch (error) {
     console.log(error);
   }finally{
-    return new Response({"message": "success!"})
     throw redirect(302, "/");
+
   }
+  return new Response({"message": "success!"})
+
 };
