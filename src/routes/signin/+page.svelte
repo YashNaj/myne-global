@@ -1,14 +1,9 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-  import Label from "$lib/components/label.svelte";
-  import { getProps } from "$lib/utils";
   import Alert from "$lib/components/Alert.svelte";
   import Nav from "$lib/components/Nav.svelte";
   import { slide } from "svelte/transition";
-  import { dataset_dev } from "svelte/internal";
   export let form: { message?: string };
-  let { err, loading, suc } = getProps();
-  let extension = " ";
   let email = ''
 </script>
 
