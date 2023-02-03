@@ -7,5 +7,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (!session) {
 		throw redirect(301, '/signin')
 	}
-    if(user.rolls = ['rolls']) return {}; 
+    if(user.role === 'ADMIN' || 'OWNR')
+	return {}; 
+	else throw redirect(302, '/')
 }

@@ -17,14 +17,21 @@ const anyoneAllowed = [
   "/api/get-records",
   "/api",
 ]; 
-
+const onlyAdmin = [
+  "/admin"
+]
 
 export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
-  );
+  ); 
+  const adminRoute = onlyAdmin.some((route) => url.pathname.startsWith(route));
   if (onUnauthedRoute) return {};
   const { session, user } = await locals.validateUser();
+  if (user.roll === 'OWNR' || user.role === 'ADMIN') {
+  
+    throw redirect(302, '/admin');
+  }
   if (!session) {
     throw redirect(303, "/signin");
   }
