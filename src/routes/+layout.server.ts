@@ -27,7 +27,6 @@ export const load = handleServerSession((async ({ url, locals}) => {
   ); 
   const adminRoute = onlyAdmin.some((route) => url.pathname.startsWith(route));
   const { session, user } = await locals.validateUser();
-  
   if (!session) {
     throw redirect(303, "/signin");
   }
