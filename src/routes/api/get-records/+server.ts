@@ -1,5 +1,5 @@
 import { type RequestHandler } from '@sveltejs/kit';
-export const GET() {
+export async function GET() {
   const product = {
         name: 'sticker',
         src: 'https://cdn.shopify.com/s/files/1/0434/0285/4564/products/Cup-front-black.png?v=1623159405',
