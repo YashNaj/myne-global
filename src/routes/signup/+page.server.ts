@@ -39,8 +39,7 @@ const sendEmailVerificationLink = async (
           token: true,
     },
   });
-  console.log(parserCheck)
-  console.log(token)
+  const token = verificationRequest?.token 
   console.log("token", verificationRequest );
   const href = `${origin}/api/verify-email?token=${token}`;
   console.log(href)
