@@ -1,9 +1,9 @@
-import { getUser } from "$lib/auth/server";
+import { getUser } from "$lib/server/server";
 import { handleServerSession } from "@lucia-auth/sveltekit";
 import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
-import { getSessionUser } from '$lib/auth/lucia';
-import { auth } from '$lib/auth/lucia';
+import { getSessionUser } from '$lib/server/lucia';
+import { auth } from '$lib/server/lucia';
 import { supabase } from "$lib/supabase";
 const anyoneAllowed = [
   "/signup",
@@ -17,7 +17,6 @@ const anyoneAllowed = [
   "/api/get-records",
   "/api",
 ]; 
-
 
 export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>

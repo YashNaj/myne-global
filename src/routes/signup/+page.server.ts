@@ -1,13 +1,12 @@
 import { fail, redirect } from "@sveltejs/kit";
-import { auth } from "$lib/auth/lucia";
+import { auth } from "$lib/server/lucia";
 import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
 import { PrismaClient } from "@prisma/client";
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
-import { Role } from "../../lib/auth/roles";
 import { page } from "$app/stores";
-import { prisma } from "$lib/prisma";
+import * as prisma from '$lib/auth/prisma'
 const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (
   user: string,

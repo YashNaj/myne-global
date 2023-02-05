@@ -126,16 +126,10 @@
       brand: [""],
     },
     other: { subcategory: "default", brand: "default" },
-  };  onMount(() => {
-    subcategories = categories[0].subCategories;
-    selectedCategory = categories[0].name;
-  });
+  };  
 
   function handleCategoryChange(e) {
     selectedCategory = e.target.value;
-    subcategories = categories.find(
-      (category) => category.name === selectedCategory
-    ).subCategories;
   }
   function getCapitalizedKeys(obj: any) {
     return Object.keys(obj).map((key) => {
@@ -287,7 +281,7 @@
         const purchasedFrom = data.get("purchasedFrom")?.toString() || "";
         const purchasedValue = data.get("purchasedValue")?.toString() || "";
         const description = data.get("description")?.toString() || "";
-        console.log(form.data);
+        console.log(form);
         if (
           !!category ||
           !!subCategory ||

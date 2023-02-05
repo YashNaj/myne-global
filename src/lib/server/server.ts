@@ -3,6 +3,7 @@ import type { User } from "lucia-auth/types";
 import type { Role } from "./roles";
 
 
+
 const hasRole = (user: User, role: Role) => user.roles.includes(role)
 export const hasSomeRoles = (user: User, ...roles: Role[]) => roles.some(r => hasRole(user, r))
 export const hasAllRoles = (user: User, ...roles: Role[]) => roles.every(r => hasRole(user, r))
@@ -39,3 +40,10 @@ export const getUser = async (
 
     return user;
 }
+
+// PrismaClient is attached to the `global` object in development to prevent
+// exhausting your database connection limit.
+//
+// Learn more: 
+// https://pris.ly/d/help/next-js-best-practices
+

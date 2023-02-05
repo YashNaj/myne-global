@@ -12,7 +12,6 @@
   export let purchasedValue = "Purchased value";
   export let description = "Keep the description to a few words";
   export let iconColor = "black";
-  let cardBackground = ''; 
   const colors = new Map
   ([  ['Jewlery', 'jewlery'],
   ['Watches', 'watches'],
@@ -22,7 +21,7 @@
   ['Sneakers', 'sneakers'],
   ['Guns', 'gun'],
   ['Technology', 'technology'],
-  ['Trading Cards', 'trading'],
+  ['Trading Card', 'trading'],
   ['Collectibles', '#collectibles'],
   ['Crypto', 'crypto'],
   ['NFT', 'nft'],
@@ -32,26 +31,29 @@
   ['Child ID', 'childId'],
   ['Other', 'other']
 ]);
-
+  export let setBackground = colors.get(category)
+  console.log(setBackground)
+  export let backgroundSlug = 'bg-' + setBackground;
+  console.log(backgroundSlug)
   let flipped = false;
 </script>
 
 <div
-  class:flipped class = 'w-72 2xl:[12rem] 2xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem] '
+  class:flipped class = 'aspect-[5/7]'
   on:click={() => (flipped = !flipped)}
   on:keydown={() => (flipped = !flipped)}
 >
   <div
-    class="flip-card  w-72 2xl:[32rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]  "
+    class="flip-card  aspect-[5/7]  "
   >
     <div class="flip-card-inner">
       <div
-        class="flip-card-front  w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]  "
+        class="flip-card-front aspect-[5/7]  "
       >
         <div
-          class="card-item bg-white rounded-2xl shadow-2xl w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]    z-2 "
+          class="card-item h-full bg-white rounded-2xl shadow-2xl aspect-[5/7  z-2 "
         >
-          <div class="w-full h-[50%] bg-watches rounded-t-2xl  ">
+          <div class="w-full h-[50%] {backgroundSlug} rounded-t-2xl  ">
             <div class="w-full h-full  p-3">
               <div class="upload-pictures w-full h-full rounded-md shadow-md">
                 <Icon src={Photograph} color={iconColor} class="opacity-20" />
@@ -173,12 +175,12 @@
         </div>
       </div>
       <div
-        class="flip-card-back  text-black w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]  "
+        class="flip-card-back  text-black   aspect-[5/7 "
       >
         <div
-          class="card-item bg-white rounded-2xl shadow-2xl w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]    z-2 "
+          class="card-item bg-white rounded-2xl shadow-2xl  z-2  aspect-[5/7]"
         >
-          <div class="w-full h-[50%] bg-error rounded-t-2xl  ">
+          <div class="w-full  h-[50%] bg-error rounded-t-2xl  ">
             <div class="w-full h-full  p-3">
               <div class="upload-pictures w-full h-full rounded-md shadow-md">
                 <Icon src={Photograph} color={iconColor} class="opacity-20" />

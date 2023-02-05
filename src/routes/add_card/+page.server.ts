@@ -1,36 +1,45 @@
-import { auth } from "$lib/auth/lucia";
-import {  fail, redirect } from "@sveltejs/kit";
-import type {  PageServerLoad, Actions } from "./$types";
+import { auth } from "$lib/server/lucia";
+import { fail, redirect } from "@sveltejs/kit";
+import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
-import { prisma } from "$lib/prisma";
-
+import { PrismaClient, Prisma } from "@prisma/client";
+const prisma = new PrismaClient();
 export const actions: Actions = {
-      default: async ({ request, locals}) => {
-      const form = await request.formData();
-        const { user } = locals.validat
-        const category = form.get("category");
-        const subCategory = form.get('subCategory');
-        const brand = form.get('brand');
-        const size = form.get("size");
-        const purchasedFrom = form.get("purchasedFrom");
-        const purchasedValue = form.get("purchasedValue");
-        const description  = form.get("description");
-        
-          const card = await prisma.user.upsert(
-         {   where : {
-              id : user.id, 
+  default: async ({ request, locals }) => {
+    const { session, user } = await locals.validateUser();
+    console.log("\u001b[1;31m user", user);
 
-            },
-            create: {
-              MyneCard :{
-                category,
-                subCategory,
-                brand,
-                size,
-                purchasedFrom,
-                purchasedValue,
-                description
-              }
-            }}
-          )
-    }};
+    const form = await request.formData();
+    const category = form.get("category");
+    const subCategory = form.get("subCategory");
+    const brand = form.get("brand");
+    const size = form.get("size");
+    const purchasedFrom = form.get("purchasedFrom");
+    const purchasedValue = form.get("purchasedValue");
+    const description = form.get("description");
+    console.log(form);
+    const profile = await prisma.profile.findUnique({
+      where:{
+        user_id: user.userId,
+      }
+    })
+    console.log(profile);
+    const card = await prisma.profile.update({
+      where: {
+        user_id: user.userId,
+      },
+      data: {
+        myneCard: {
+          create: {
+             
+               category, subCategory, brand, size, purchasedFrom, purchasedValue, description 
+     
+          },
+        },
+      },
+    
+    });
+
+    prisma.$disconnect();
+  },
+};

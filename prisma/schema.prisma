@@ -19,7 +19,6 @@ model User {
   role                        Role                          @default(USER)
   valid                       Boolean
   Profile                     Profile[]
-  MyneCard                    MyneCard[]
   emailVerificationRequest    EmailVerificationRequest[]
   passwordVerificationRequest PasswordVerificationRequest[]
 
@@ -27,16 +26,16 @@ model User {
 }
 
 model Profile {
-  id        String     @id @unique @default(uuid())
+  id        String     @id @default(uuid())
   user      User       @relation(references: [id], fields: [user_id], onDelete: Cascade)
-  user_id   String
+  user_id   String     @unique
   firstName String
   lastName  String
   country   String
   postalZip String
   birthday  String
   phone     String
-  cards     MyneCard[]
+  myneCard  MyneCard[]
 
   @@map("profile")
 }
@@ -64,21 +63,21 @@ model Key {
 }
 
 model MyneCard {
-  id                 String    @id @unique
-  user_id            String
-  user               User      @relation(references: [id], fields: [user_id])
+  id                 String    @id @unique @default(uuid())
+  user_id            String    
+  category           String
   subCategory        String
   brand              String
   size               String
   purchasedFrom      String
-  purchasedValue     Decimal   @db.Money
+  description        String
+  purchasedValue     String
   createdOn          DateTime  @default(now())
   isStolen           Boolean   @default(false)
   reportedStolenDate DateTime?
   isHeriloom         Boolean   @default(false)
-  pictures           String[]
-  Profile            Profile?  @relation(fields: [profileId], references: [id])
-  profileId          String?
+  pictures           String[]  @default([])
+  Profile            Profile?  @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@map("myneCard")
 }

@@ -5,9 +5,8 @@ import { PrismaClient } from "@prisma/client";
 
 
   
-const client = new PrismaClient();
 export const auth = lucia({
-    adapter: prisma(client),
+    adapter: prisma(new PrismaClient()),
     env: dev ? "DEV" : "PROD",
     generateCustomUserId: async () => generateRandomString(8),
     transformUserData: ( userData ) => ({

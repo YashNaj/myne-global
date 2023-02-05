@@ -97,9 +97,9 @@
     <main class=" h-[96vh] w-full lg:relative">
       <slot />
     </main>
-    <Footer2 />
-
+    
   </div>
+  
 
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />
@@ -114,6 +114,7 @@
     </ul>
   </div>
 </div>
+<Footer2 />
 
 <style lang="postcss">
   :global(.gradient-background) {
