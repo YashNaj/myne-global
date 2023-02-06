@@ -4,6 +4,7 @@
   import { fly } from "svelte/transition";
 
   import { Icon, Photograph } from "svelte-hero-icons";
+  import Carousel from "./Carousel.svelte";
   export let category = "Category";
   export let subCategory = "Subcategory";
   export let brand = "Brand";
@@ -11,6 +12,7 @@
   export let purchasedFrom = "Purchased from";
   export let purchasedValue = "Purchased value";
   export let description = "Keep the description to a few words";
+  export let [setBackground, backgroundSlug] = ' '
   export let iconColor = "black";
   const colors = new Map
   ([  ['Jewlery', 'jewlery'],
@@ -31,20 +33,16 @@
   ['Child ID', 'childId'],
   ['Other', 'other']
 ]);
-  export let setBackground = colors.get(category)
-  console.log(setBackground)
-  export let backgroundSlug = 'bg-' + setBackground;
-  console.log(backgroundSlug)
   let flipped = false;
 </script>
 
 <div
-  class:flipped class = 'aspect-[5/7]'
+  class:flipped class = 'flex flex-wrap justify-center content-center relative'
   on:click={() => (flipped = !flipped)}
   on:keydown={() => (flipped = !flipped)}
 >
   <div
-    class="flip-card  aspect-[5/7]  "
+    class="flip-card w-[80%]  aspect-[5/7]  "
   >
     <div class="flip-card-inner">
       <div
@@ -56,7 +54,7 @@
           <div class="w-full h-[50%] {backgroundSlug} rounded-t-2xl  ">
             <div class="w-full h-full  p-3">
               <div class="upload-pictures w-full h-full rounded-md shadow-md">
-                <Icon src={Photograph} color={iconColor} class="opacity-20" />
+                <Carousel/>
               </div>
             </div>
             <div
@@ -180,7 +178,7 @@
         <div
           class="card-item bg-white rounded-2xl shadow-2xl  z-2  aspect-[5/7]"
         >
-          <div class="w-full  h-[50%] bg-error rounded-t-2xl  ">
+          <div class="w-full  h-[50%] {backgroundSlug} rounded-t-2xl  ">
             <div class="w-full h-full  p-3">
               <div class="upload-pictures w-full h-full rounded-md shadow-md">
                 <Icon src={Photograph} color={iconColor} class="opacity-20" />
@@ -236,5 +234,8 @@
   }
   .background-class{
     background-color: #00BFFF;
+  }
+  .upload-picures{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   }
 </style>

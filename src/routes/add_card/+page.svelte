@@ -123,8 +123,8 @@
       brand: [""],
     },
     other: { subcategory: "default", brand: "default" },
-  };  
-    function handleCategoryChange(e) {
+  };
+  function handleCategoryChange(e) {
     selectedCategory = e.target.value;
   }
   function getCapitalizedKeys(obj: any) {
@@ -138,12 +138,15 @@
     });
   }
   function getSubcategory(obj, key) {
-  const subcategory = obj[key]?.subcategory || "default";
-  return Array.isArray(subcategory)
-    ? subcategory.map((word) => word.toLowerCase().replace(/\b(\w)/g, (letter) => letter.toUpperCase()))
-    : subcategory;
-}
-
+    const subcategory = obj[key]?.subcategory || "default";
+    return Array.isArray(subcategory)
+      ? subcategory.map((word) =>
+          word
+            .toLowerCase()
+            .replace(/\b(\w)/g, (letter) => letter.toUpperCase())
+        )
+      : subcategory;
+  }
 
   export let form: { message?: string };
   let category = "Category";
@@ -154,7 +157,6 @@
   let purchasedValue = "Purchased value";
   let description = "Keep the description to a few words";
   const addCardFields = [
-
     "brand",
     "size",
     "purchasedFrom",
@@ -163,33 +165,35 @@
   ];
   const categoryArray = getCapitalizedKeys(categories);
 
-const subcategoryArray = getSubcategory(categories, category); 
-const colors = new Map
-  ([  ['Jewlery', 'jewlery'],
-  ['Watches', 'watches'],
-  ['Art', 'art'],
-  ['Leather Goods', 'leather'],
-  ['Clothes', 'clothes'],
-  ['Sneakers', 'sneakers'],
-  ['Guns', 'gun'],
-  ['Technology', 'technology'],
-  ['Trading Cards', 'trading'],
-  ['Collectibles', '#collectibles'],
-  ['Crypto', 'crypto'],
-  ['NFT', 'nft'],
-  ['Vintage', 'vintage'],
-  ['Motor Vehicles', 'motor'],
-  ['Animal', 'animal'],
-  ['Child ID', 'childId'],
-  ['Other', 'other']
-]);
+  const subcategoryArray = getSubcategory(categories, category);
+  const colors = new Map([
+    ["Jewlery", "jewlery"],
+    ["Watches", "watches"],
+    ["Art", "art"],
+    ["Leather Goods", "leather"],
+    ["Clothes", "clothes"],
+    ["Sneakers", "sneakers"],
+    ["Guns", "gun"],
+    ["Technology", "technology"],
+    ["Trading Cards", "trading"],
+    ["Collectibles", "#collectibles"],
+    ["Crypto", "crypto"],
+    ["NFT", "nft"],
+    ["Vintage", "vintage"],
+    ["Motor Vehicles", "motor"],
+    ["Animal", "animal"],
+    ["Child ID", "childId"],
+    ["Other", "other"],
+  ]);
+  let setBackground = colors.get(category);
+  console.log(setBackground);
+  let backgroundSlug = "bg-" + setBackground;
+  console.log(backgroundSlug);
 
   let flipped = false;
 </script>
 
-<div
-  class="w-full h-full flex flex-col justify-start  content-center p-3"
->
+<div class=" flex justify-center content-center flex-wrap p-3">
   <div class="add-card-form-container w-[90%] h-[90%] bg-black">
     <CardFlippable
       {category}
@@ -199,33 +203,30 @@ const colors = new Map
       {purchasedFrom}
       {purchasedValue}
       {description}
-
     />
   </div>
   <form method="POST" use:enhance class="flex flex-col">
     <select
-              bind:value={category}
-              id="dropdown-add-card"
-              class="select flex-1 w-full"
-              name="category"
-              placeholder="Category"
-              on:change={handleCategoryChange}
-            >
-              <option selected disabled placeholder="Category">Category</option>
+      bind:value={category}
+      id="dropdown-add-card"
+      class="select flex-1 w-full"
+      name="category"
+      placeholder="Category"
+      on:change={handleCategoryChange}
+    >
+      <option selected disabled placeholder="Category">Category</option>
 
-              {#each categoryArray as category}
-                <option value={category}>{category}</option>
-              {/each}
-            </select>
-            <select bind:value={subCategory} class="select flex-1 w-full">
-              <option selected disabled placeholder="Subcategory"
-                >Subcategory</option
-              >
+      {#each categoryArray as category}
+        <option value={category}>{category}</option>
+      {/each}
+    </select>
+    <select bind:value={subCategory} class="select flex-1 w-full">
+      <option selected disabled placeholder="Subcategory">Subcategory</option>
 
-              {#each subcategoryArray as subcategory}
-                <option selected value={subcategory}>{subcategory}</option>
-              {/each}
-            </select>
+      {#each subcategoryArray as subcategory}
+        <option selected value={subcategory}>{subcategory}</option>
+      {/each}
+    </select>
     {#each addCardFields as addCardField}
       <input
         name={addCardField}
@@ -234,7 +235,12 @@ const colors = new Map
         class="input-md "
       />
     {/each}
-    <input type = 'submit' name = 'submit' value = 'Add Card' class='btn btn-primary normal-case'/>
+    <input
+      type="submit"
+      name="submit"
+      value="Add Card"
+      class="btn btn-primary normal-case"
+    />
   </form>
 </div>
 

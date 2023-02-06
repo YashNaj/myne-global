@@ -32,8 +32,13 @@ export const actions: Actions = {
         myneCard: {
           create: {
              
-               category, subCategory, brand, size, purchasedFrom, purchasedValue, description 
-     
+               category,
+               subCategory, 
+               brand, 
+               size, 
+               purchasedFrom, 
+               purchasedValue, 
+               description
           },
         },
       },
