@@ -1,6 +1,6 @@
 import { type Actions, fail } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { auth } from "$lib/auth/lucia";
+import { auth } from "$lib/server/lucia";
 
 export const actions: Actions = {
 	default: async ({  request, locals }) => {

@@ -3,7 +3,7 @@
   import Alert from "$lib/components/Alert.svelte";
   import Nav from "$lib/components/Nav.svelte";
   import { slide } from "svelte/transition";
-  export let form: { message?: string };
+  export let form = {message: ''}; 
   let email = ''
 </script>
 
@@ -14,7 +14,7 @@
         method="POST"
         class="flex flex-col justify-center flex-wrap content-center text-primary"
         use:enhance={({ data, cancel }) => {
-          form = {};
+          form = {message:''};
           const email = data.get("email")?.toString() || "";
           const password = data.get("password")?.toString() || "";
           if (!email || !password) {

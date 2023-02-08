@@ -23,7 +23,7 @@ export const actions: Actions = {
         user_id: user.userId,
       }
     })
-    console.log(profile);
+    console.log(2, profile);
     const card = await prisma.profile.update({
       where: {
         user_id: user.userId,
@@ -31,7 +31,6 @@ export const actions: Actions = {
       data: {
         myneCard: {
           create: {
-             
                category,
                subCategory, 
                brand, 

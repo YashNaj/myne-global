@@ -99,9 +99,36 @@ model PasswordVerificationRequest {
   user      User     @relation(fields: [user_id], references: [id])
 }
 
-/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
-// model stolenWatches {
-// }
+model brand {
+  jewlery    String?
+  watch      String?
+  leather    String?
+  frirearms  String?
+  technology String?
+  token      String?
+  automobile String?
+  motorcyle  String?
+  dog        String?
+  cat        String?
+  bird       String?
+  id         Int     @id @unique @default(autoincrement())
+}
+
+model stolenWatches {
+  manufacture       String?
+  reference_        String? @map("reference ")
+  model             String?
+  caseSerialNumber  String? @unique
+  description       String?
+  city              String?
+  state             String?
+  country           String?
+  stolenDate        String?
+  policeReference   String?
+  interpolReference String?
+  origin            String?
+  id                Int     @id @unique @default(autoincrement())
+}
 
 enum Role {
   OWNR

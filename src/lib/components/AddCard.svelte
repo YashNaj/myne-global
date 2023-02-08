@@ -3,6 +3,7 @@
   import { fade, fly, slide } from "svelte/transition";
   import { Icon, Photograph } from "svelte-hero-icons";
   import { enhance } from "$app/forms";
+  import CardFlippable from "./CardFlippable.svelte";
   export let selectedCategory = null;
   export let subcategories = [];
   export let form: { message?: string };
@@ -170,107 +171,19 @@
   <div
     class="card-list w-full flex justify-center pt-10 content-center relative h-80 "
   >
-    <div class="card-item bg-white  rounded-lg shadow-lg w-72 h-[26rem] z-2 ">
-      <div class="w-full h-[50%] bg-error rounded-t-lg  ">
-        <div class="w-full h-full  p-3">
-          <div class="upload-pictures w-full h-full rounded-md shadow-md">
-            <Icon src={Photograph} color={iconColor} class="opacity-20" />
-          </div>
-        </div>
-        <div
-          class="card body w-full h-full text-black rounded-b-lg p-3 px-5 flex flex-col  justify-start"
-        >
-          <div class="flex w-full justify-between flex-1">
-            <div class="flex w-full justify-between">
-              <div class="flex w-full justify-between ">
-                <div class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-start">
-                    <span class="label-tex text-xs font-bold">Category</span>
-                  </div>
-                  <div class="text-xs flex">
-                    {category}
-                  </div>
-                </div>
-                <div transition:fly class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-end">
-                    <span class="label-tex text-xs font-bold">Subcategory</span>
-                  </div>
-                  <div class="text-xs flex justify-end">
-                    {subCategory}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full justify-between my-3 flex-1">
-            <div class="flex w-full justify-between">
-              <div class="flex w-full justify-between ">
-                <div class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-start">
-                    <span class="label-tex text-xs font-bold">Brand</span>
-                  </div>
-                  <div class="text-xs flex">
-                    {brand}
-                  </div>
-                </div>
-                <div transition:fly class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-end">
-                    <span class="label-tex text-xs font-bold">Size</span>
-                  </div>
-                  <div class="text-xs flex justify-end">
-                    {size}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full justify-between my-3 flex-1">
-            <div class="flex w-full justify-between">
-              <div class="flex w-full justify-between ">
-                <div class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-start">
-                    <span class="label-tex text-xs font-bold"
-                      >Purchased From</span
-                    >
-                  </div>
-                  <div class="text-xs flex">
-                    {purchasedFrom}
-                  </div>
-                </div>
-                <div class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-end">
-                    <span class="label-tex text-xs font-bold"
-                      >Purchased Value</span
-                    >
-                  </div>
-                  <div class="text-xs flex justify-end">
-                    {purchasedValue}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full justify-between my-3 flex-1">
-            <div class="flex w-full justify-between">
-              <div class="flex w-full justify-between ">
-                <div class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-start">
-                    <span class="label-tex text-xs font-bold">Description</span>
-                  </div>
-                  <div class="text-xs flex">
-                    {description}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <CardFlippable
+  {category}
+  {subCategory}
+  {brand}
+  {size}
+  {purchasedFrom}
+  {purchasedValue}
+  {description}/>
   </div>
   <div class="flex w-full justify-center">
     <form
       method="POST"
+      action="/add_card"
       class="h-auto w-full p-4 pt-40 bg-white text-black flex flex-col justify-between flex-wrap rounded-lg md:w-[30rem] lg:w-[40rem]"
       use:enhance={({ data, cancel }) => {
         form = {};

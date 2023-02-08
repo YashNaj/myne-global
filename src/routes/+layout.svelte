@@ -94,7 +94,7 @@
         </ul>
       </div>
     </div>
-    <main class=" h-[96vh] w-full lg:relative">
+    <main class=" h-[96vh] w-full lg:relative bg-primary">
       <slot />
     </main>
     

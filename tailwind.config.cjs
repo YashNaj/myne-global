@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        jewelery: "#F192E8",
+        jewelry: "#F192E8",
         watches: "#2B2C31",
         art: "#FFE609",
         leather: "#984E1D",

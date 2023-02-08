@@ -149,13 +149,14 @@
   }
 
   export let form: { message?: string };
-  let category = "Category";
-  let subCategory = "Subcategory";
-  let brand = "Brand";
-  let size = "Size";
-  let purchasedFrom = "Purchased from";
-  let purchasedValue = "Purchased value";
-  let description = "Keep the description to a few words";
+  export let category = "";
+  export let subCategory = "";
+  export let brand = "";
+  export let size = "";
+  export let purchasedFrom = " ";
+  export let purchasedValue = " ";
+  export let description = "      ";
+  console.log(subCategory);
   const addCardFields = [
     "brand",
     "size",
@@ -193,22 +194,22 @@
   let flipped = false;
 </script>
 
-<div class=" flex justify-center content-center flex-wrap p-3">
-  <div class="add-card-form-container w-[90%] h-[90%] bg-black">
-    <CardFlippable
-      {category}
-      {subCategory}
-      {brand}
-      {size}
-      {purchasedFrom}
-      {purchasedValue}
-      {description}
-    />
-  </div>
-  <form method="POST" use:enhance class="flex flex-col">
+<div class=" flex flex-col justify-center content-center  p-3">
+  <CardFlippable
+    {category}
+    {subCategory}
+    {brand}
+    {size}
+    {purchasedFrom}
+    {purchasedValue}
+    {description}
+  />
+
+  <div class="add-card-form-container w-[90%] h-[90%] bg-black" />
+  <form method="POST" use:enhance class="flex flex-col text-primary">
     <select
       bind:value={category}
-      id="dropdown-add-card"
+      id="category"
       class="select flex-1 w-full"
       name="category"
       placeholder="Category"
@@ -220,21 +221,57 @@
         <option value={category}>{category}</option>
       {/each}
     </select>
-    <select bind:value={subCategory} class="select flex-1 w-full">
+    <select bind:value={subCategory}
+    id="subCategory"
+    name="subCategory"
+    placeholder="Sub-Category"
+    class="select flex-1 w-full">
       <option selected disabled placeholder="Subcategory">Subcategory</option>
 
       {#each subcategoryArray as subcategory}
-        <option selected value={subcategory}>{subcategory}</option>
+        <option selected value={subCategory}>{subcategory}</option>
       {/each}
     </select>
-    {#each addCardFields as addCardField}
-      <input
-        name={addCardField}
-        id={addCardField}
-        placeholder={addCardField}
-        class="input-md "
-      />
-    {/each}
+    <input
+      type="text"
+      name="brand"
+      id="brand"
+      placeholder="brand"
+      class="input-md "
+      bind:value={brand}
+    />
+    <input
+      type="text"
+      name="size"
+      id="size"
+      placeholder="size"
+      class="input-md "
+      bind:value={size}
+    />
+    <input
+      type="text"
+      name="purchasedFrom"
+      id="purchasedFrom"
+      placeholder="purchasedFrom"
+      class="input-md "
+      bind:value={purchasedFrom}
+    />
+    <input
+      type="text"
+      name="purchasedValue"
+      id="purchasedValue"
+      placeholder="purchasedValue"
+      class="input-md "
+      bind:value={purchasedValue}
+    />
+    <input
+      type="text"
+      name="description"
+      id="description"
+      placeholder="description"
+      class="input-md "
+      bind:value={description}
+    />
     <input
       type="submit"
       name="submit"
