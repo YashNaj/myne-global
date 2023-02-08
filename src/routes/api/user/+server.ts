@@ -1,5 +1,5 @@
-import { auth } from "$lib/auth/lucia";
-import { getUser } from "$lib/auth/server";
+import { auth } from "$lib/server/lucia";
+import { getUser } from "$lib/server/server";
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import { json, type RequestHandler } from "@sveltejs/kit";
 

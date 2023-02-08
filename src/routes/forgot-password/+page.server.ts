@@ -1,4 +1,4 @@
-import { auth } from "$lib/auth/lucia";
+import { auth } from "$lib/server/lucia";
 import { PasswordResetRequests } from "$lib/models/passwordResetRequests";
 import { Parsers } from "$lib/schema/parsers";
 import { error, type Actions } from "@sveltejs/kit";

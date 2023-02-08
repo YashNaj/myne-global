@@ -6,7 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { page } from "$app/stores";
-import * as prisma from '$lib/auth/prisma'
+import * as prisma from '$lib/server/db'
 const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (
   user: string,

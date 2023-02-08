@@ -1,11 +1,10 @@
-import { auth } from "$lib/auth/lucia";
+import { auth } from "$lib/server/lucia";
 import { PasswordResetRequests } from "$lib/models/passwordResetRequests";
 import { passwordSchema } from "$lib/schema";
 import { Parsers } from "$lib/schema/parsers";
 import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
 import { error, type Actions } from "@sveltejs/kit";
-import { prisma } from '$lib/prisma';
-
+import * as prisma from "$lib/server/db";
 export const actions: Actions = {
     default: async ({ request }) => {
         const { newPass, token } = await prisma.form(request, z.object({

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { set_href } from "$lib/auth/client";
   import Label from "$lib/components/label.svelte";
   import ResultText from "$lib/components/resultText.svelte";
   import { getProps } from "$lib/utils";

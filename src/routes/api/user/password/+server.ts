@@ -1,5 +1,5 @@
-import { auth } from "$lib/auth/lucia";
-import { getUser } from "$lib/auth/server";
+import { auth } from "$lib/server/lucia";
+import { getUser } from "$lib/server/server";
 import { passwordSchema } from "$lib/schema";
 import { Parsers } from "$lib/schema/parsers";
 import { json, type RequestHandler } from "@sveltejs/kit";

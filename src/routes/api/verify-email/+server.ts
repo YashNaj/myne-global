@@ -1,9 +1,9 @@
 
-import { auth } from "$lib/auth/lucia";
+import { auth } from "$lib/server/lucia";
 import { Parsers } from "$lib/schema/parsers";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
-import { prisma } from "$lib/prisma";
+import * as prisma from '$lib/server/db';
 export const GET: RequestHandler = async ({ url, user }) => {
   const  {token}  = Parsers.params(url, z.object({ token: z.string() }));
   console.log(token);
