@@ -1,6 +1,5 @@
 
 import { auth } from "$lib/server/lucia";
-import { Parsers } from "$lib/schema/parsers";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
 import * as prisma from '$lib/server/db';
