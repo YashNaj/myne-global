@@ -8,17 +8,16 @@
   import AddCard from "$lib/components/AddCard.svelte";
   import type { PageData } from "./$types";
   import Stat from "$lib/components/Stat.svelte";
-  import { page } from '$app/stores';
   import { trpc } from '$lib/trpc/client';
+  //trpc test environment :
+  // let greeting = 'press the button to load data';
+  // let loading = false;
 
-  let greeting = 'press the button to load data';
-  let loading = false;
-
-  const loadData = async () => {
-    loading = true;
-    greeting = await trpc($page).greeting.query();
-    loading = false;
-  };
+  // const loadData = async () => {
+  //   loading = true;
+  //   greeting = await trpc($page).greeting.query();
+  //   loading = false;
+  // };
   console.log(1, $page);
   export let data: PageData;
   console.log(5, data?.stolenWatches);
