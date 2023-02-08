@@ -5,7 +5,6 @@ import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
 import * as prisma from '$lib/server/db';
 export const GET: RequestHandler = async ({ url, user }) => {
-  const  {token}  = Parsers.params(url, z.object({ token: z.string() }));
   console.log(token);
   try {
     const request = await prisma.emailVerificationRequest.findUnique({
