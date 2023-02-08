@@ -36,7 +36,9 @@
   <div class="drawer-content flex flex-col  w-full  lg:w-auto overflow-hidden">
     <div class="navbar bg-primary">
       <div class="px-2 mx-2 font-bold text-white w-full">
-        <img class="max-w-s w-20 lg:max-w-md " alt="logo" src={logo} />
+        <a href="/">
+          <img class="max-w-s w-20 lg:max-w-md " alt="logo" src={logo} />
+        </a>
       </div>
       <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">

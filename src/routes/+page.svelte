@@ -14,8 +14,7 @@
     $: ({ countries } = data);
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden">
-  <ProfileCard />
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2">
   <Dashboard />
   <DashboardFunctions />
 </div>

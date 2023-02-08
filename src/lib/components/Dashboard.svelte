@@ -36,7 +36,7 @@
     style="height: {$drawerHeight}vh"
   >
     {#if isOpen}
-      <div transition:slide class=" flex-col h-full w-full">
+      <div transition:slide={{duration:200, delay: 200}} class=" flex-col h-full w-full">
         <div
           in:slide={{ duration }}
           out:slide={{ delay: duration }}

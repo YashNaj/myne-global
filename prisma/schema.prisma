@@ -115,10 +115,10 @@ model brand {
 }
 
 model stolenWatches {
-  manufacture       String?
+  brand             String?
   reference_        String? @map("reference ")
   model             String?
-  caseSerialNumber  String? @unique
+  serialNumber      String? @unique(map: "stolenWatches_caseSerialNumber_key")
   description       String?
   city              String?
   state             String?

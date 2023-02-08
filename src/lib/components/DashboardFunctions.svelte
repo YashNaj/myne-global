@@ -21,8 +21,8 @@ class= " h-auto relative w-full my-2">
             <Icon src = {Database} color = 'white' size = '90px' class = {'absolute bottom-0 right-0'}/>
         </a> -->
         <DashboardSquareButton  background = 'bg-error'  title = 'Import Your Cards' icon = {Database} link = 'import'/>
-        <DashboardSquareButton   background = 'bg-success' title = 'Add a Card' icon = {DocumentAdd} link = 'addCard'/>
-        <DashboardSquareButton   background = 'bg-warning' title = 'Search For Items' icon = {Search} link = 'search'/>
+        <DashboardSquareButton   background = 'bg-success' title = 'Add a Card' icon = {DocumentAdd} link = 'add_card'/>
+        <DashboardSquareButton   background = 'bg-warning' title = 'Search For Items' icon = {Search} link = 'search_stolen'/>
         <DashboardSquareButton   background = 'bg-info' title = 'Child ID' icon = {UserAdd} link = 'import'/>
 
     </div>    

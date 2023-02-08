@@ -10,10 +10,10 @@
 </script>
 
 <a
-	href="/add_card"
+	href="/{link}"
 	class="w-auto h-40 relative {background}  btn normal-case  rounded-lg  shadow-lg p-2"
 >
-	<h1 transition:slide={{ duration: 200, delay: 200 }} class="h-full text-secondary w-full  leading-10">
+	<h1 class="h-full text-secondary w-full  leading-10">
 		{title}
 	</h1>
 	<div class="h-auto w-auto z-[0] flex justify-center content-ce">

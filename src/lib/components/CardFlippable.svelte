@@ -111,24 +111,17 @@
         <div
           class="card-item bg-white rounded-2xl shadow-2xl  z-2  aspect-[5/7]"
         >
-          <div class="w-full  h-[50%]  rounded-t-2xl  ">
-            <div class="w-full h-full  p-3">
-              <div class="upload-pictures w-full h-full rounded-md shadow-md">
-                <Icon src={Photograph} color={iconColor} class="opacity-20" />
-              </div>
-            </div>
-            <div class="flex w-full justify-between">
-              <div class="flex w-full justify-between ">
-                <div class=" flex flex-col flex-1 w-full h-full">
-                  <div class="flex w-full justify-start">
-                    <span
-                      class="label-tex text-md lg:text-[1rem] md:text-[.6rem] font-bold"
-                      >Purchased From</span
-                    >
-                  </div>
-                  <div class="text-md lg:text-[1rem] md:text-[.6rem] flex">
-                    {purchasedFrom}
-                  </div>
+          <div class="flex flex-col w-full justify-between ">
+            <div class=" flex flex-col flex-1 w-full h-full">
+              <div class = 'w-full h-full rounded-b-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start '>
+                <div class="flex w-full justify-start">
+                  <span
+                    class="label-tex text-md lg:text-[1rem] md:text-[.6rem] font-bold"
+                    >Purchased From</span
+                  >
+                </div>
+                <div class="text-md lg:text-[1rem] md:text-[.6rem] flex">
+                  {purchasedFrom}
                 </div>
                 <div class=" flex flex-col flex-1 w-full h-full">
                   <div class="flex w-full justify-end">
@@ -153,14 +146,13 @@
                   {description}
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <style>
   /* Flip card toggle */
   .flip-card {
