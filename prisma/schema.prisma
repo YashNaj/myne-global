@@ -99,21 +99,6 @@ model PasswordVerificationRequest {
   user      User     @relation(fields: [user_id], references: [id])
 }
 
-model brand {
-  jewlery    String?
-  watch      String?
-  leather    String?
-  frirearms  String?
-  technology String?
-  token      String?
-  automobile String?
-  motorcyle  String?
-  dog        String?
-  cat        String?
-  bird       String?
-  id         Int     @id @unique @default(autoincrement())
-}
-
 model stolenWatches {
   brand             String?
   reference_        String? @map("reference ")
@@ -130,6 +115,85 @@ model stolenWatches {
   id                Int     @id @unique @default(autoincrement())
 }
 
+model automobile_brands {
+  automobile_brands String?
+  id                BigInt  @id @unique @default(autoincrement())
+}
+
+model bird_breeds {
+  bird_breeds String?
+  id          BigInt  @id @unique @default(autoincrement())
+}
+
+model cat_breeds {
+  cat_breeds String?
+  id         BigInt  @id @unique @default(autoincrement())
+}
+
+model coin_brands {
+  coin_brands String?
+  id          BigInt  @id @unique @default(autoincrement())
+}
+
+model dog_breeds {
+  dog_breeds String?
+  id         BigInt  @id @unique @default(autoincrement())
+}
+
+model firearms_brands {
+  firearms_brands String?
+  id              BigInt  @id @unique @default(autoincrement())
+}
+
+model leather_brands {
+  leather_brands String?
+  id             BigInt  @id @unique @default(autoincrement())
+}
+
+model motorcycle_brands {
+  motorcycle_brands String?
+  id                BigInt  @id @unique @default(autoincrement())
+}
+
+model technology_brands {
+  technology_brands String?
+  id                BigInt  @id @unique @default(autoincrement())
+}
+
+model token_brands {
+  token_brands String?
+  id           BigInt  @id @unique @default(autoincrement())
+}
+
+model watch_brands {
+  watch_brands String?
+  id           BigInt  @id @unique @default(autoincrement())
+}
+
+model jewelry_brands {
+  jewelry_brands String?
+  id             BigInt  @id(map: "jewlery_brands_pkey") @unique(map: "jewlery_brands_id_key") @default(autoincrement())
+}
+
+model countries {
+  id         BigInt      @id @default(autoincrement())
+  name       String?
+  iso2       String
+  iso3       String?
+  local_name String?
+  continent  continents?
+}
+
+
+enum continents {
+  Africa
+  Antarctica
+  Asia
+  Europe
+  Oceania
+  North_America @map("North America")
+  South_America @map("South America")
+}
 enum Role {
   OWNR
   USER
