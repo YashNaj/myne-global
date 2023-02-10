@@ -3,15 +3,49 @@
 
   import { Icon, Photograph } from "svelte-hero-icons";
   import Carousel from "./Carousel.svelte";
+  import type { string } from "zod";
   export let category = "Category";
-  export let subCategory = "Subcategory";
+  export let subcategory = "Subcategory";
   export let brand = "Brand";
   export let size = "Size";
   export let purchasedFrom = "Purchased from";
   export let purchasedValue = "Purchased value";
   export let description = "Keep the description to a few words";
-  export let iconColor = "black";
-  let flipped = false;
+  export let backgroundColor: keyof typeof colors;
+  $: backgroundColor = category.toLowerCase();
+  let colorKey: keyof typeof colors; 
+  $: colorKey = backgroundColor
+  $: console.log(
+    "🚀 ~ file: CardFlippable.svelte:17 ~ colorKey",
+    colorKey
+  );
+  export let flipped = false;
+  const colors = {
+    jewelry: "#F192E8",
+    watch: "#2B2C31",
+    art: "#FFE609",
+    leather: "#984E1D",
+    clothing: "#59898A",
+    sneakers: "#B3F5F7",
+    firearms: "#3A5130",
+    technology: "#080631",
+    trading: "#FCF7DE",
+    collectibles: "#61E1A3",
+    coin: "#B6B1B1",
+    token: "#7C1EB6",
+    vintage: "#FF5F09",
+    automobile: "#E10909",
+    motorcycle: "#E10909",
+    dog: "#278001",
+    cat: "#278001",
+    bird: "#278001",
+    childId: "#00BFFF",
+    other: "#ffffff",
+  };
+  let pickedColor:string; 
+  $: pickedColor = colors[colorKey];
+  $: console.log("🚀 ~ file: CardFlippable.svelte:41 ~ pickedColor", pickedColor)
+  
 </script>
 
 <div
@@ -24,9 +58,13 @@
     <div class="flip-card-inner ">
       <div class="flip-card-front aspect-[5/7]  ">
         <div
-          class="card-item  bg-jewelery rounded-2xl shadow-2xl aspect-[5/7]  z-2  bg-white "
+          style="background: {pickedColor};"
+          class="card-item rounded-2xl shadow-2xl aspect-[5/7]  z-2 bg-white"
         >
-          <div class="w-full h-[50%] bg-jewlery rounded-t-2xl  ">
+          <div
+            class="w-full h-[50%] rounded-t-2xl"
+            style="background: {pickedColor};"
+          >
             <div class="w-full h-full  p-3">
               <div class="upload-pictures w-full h-full rounded-md shadow-md">
                 <Carousel />
@@ -59,7 +97,7 @@
                       <div
                         class="text-md lg:text-[1rem] md:text-[.6rem] flex justify-end"
                       >
-                        {subCategory}
+                        {subcategory}
                       </div>
                     </div>
                   </div>
@@ -113,7 +151,9 @@
         >
           <div class="flex flex-col w-full justify-between ">
             <div class=" flex flex-col flex-1 w-full h-full">
-              <div class = 'w-full h-full rounded-b-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start '>
+              <div
+                class="w-full h-full rounded-b-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start "
+              >
                 <div class="flex w-full justify-start">
                   <span
                     class="label-tex text-md lg:text-[1rem] md:text-[.6rem] font-bold"
@@ -146,14 +186,15 @@
                   {description}
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-<style>
+
+<style lang='postcss'>
   /* Flip card toggle */
   .flip-card {
     background-color: transparent;

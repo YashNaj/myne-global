@@ -49,7 +49,6 @@ export const GET: RequestHandler = async () => {
   );
   const token = token_brands.map((object) => object.token_brands);
   const coin = coin_brands.map((object) => object.coin_brands);
-  console.log(coin);
   const masterBrandObject = [
     {
       name: "jewlery",
@@ -73,6 +72,11 @@ export const GET: RequestHandler = async () => {
     {
       name: "watch",
       brands: watch,
+      subcategories: [null],
+    },
+    {
+      name: "art",
+      brands: null,
       subcategories: [
         "bowl",
         "table ",
@@ -118,15 +122,16 @@ export const GET: RequestHandler = async () => {
     {
       name: "firearms",
       brands: firearms,
-      subcategories: [assault riffle 
+      subcategories: [
+        "assault rifle ",
         "machine gun",
         "revolver	",
-        "rifle/carbine"	,
-        "pistol"	,
+        "rifle/carbine",
+        "pistol",
         "shotgun	",
-        'sub-machine-gun'	,
-        "other gun"
-    ],
+        "sub-machine-gun",
+        "other gun",
+      ],
     },
     {
       name: "automobile",
@@ -141,12 +146,28 @@ export const GET: RequestHandler = async () => {
     {
       name: "technology",
       brands: technology,
-      subcategories: [],
+      subcategories: [
+        "camera",
+        "cell phone",
+        "computer",
+        "drone",
+        "earphone",
+        "tablet",
+        "watch",
+        "other",
+        "technology",
+      ],
     },
     {
       name: "token",
       brands: token,
-      subcategories: [],
+      subcategories: [
+        "nft digital artwork",
+        "nft game asset",
+        "nft music",
+        "nft video",
+        "other nft",
+      ],
     },
     {
       name: "coin",
@@ -154,20 +175,20 @@ export const GET: RequestHandler = async () => {
       subcategories: [],
     },
     {
-        name: "clothing",
-        brands: null,
-        subcategories: [],
-      },
-      {
-        name: "sneakers",
-        brands: null,
-        subcategories: [],
-      },
-      {
-        name: "trading cards",
-        brands: null,
-        subcategories: [],
-      },
+      name: "clothing",
+      brands: null,
+      subcategories: [],
+    },
+    {
+      name: "sneakers",
+      brands: null,
+      subcategories: [],
+    },
+    {
+      name: "trading cards",
+      brands: null,
+      subcategories: [],
+    },
   ];
   return json(masterBrandObject);
   // console.log(jewleryBrands);

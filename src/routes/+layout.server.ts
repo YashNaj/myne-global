@@ -15,8 +15,9 @@ const anyoneAllowed = [
   "/unverified-email",
   "/test",
 ]; 
-
 export const load = handleServerSession((async ({ url, locals}) => {
+
+
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
