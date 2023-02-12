@@ -63,7 +63,8 @@ model MyneCard {
   id                 String    @id @unique @default(uuid())
   user_id            String
   subCategory        String
-  brand              String
+  brand              String?
+  breed              String?
   size               String
   purchasedFrom      String
   purchasedValue     String
@@ -184,7 +185,6 @@ model countries {
   continent  continents?
 }
 
-
 enum continents {
   Africa
   Antarctica
@@ -194,6 +194,7 @@ enum continents {
   North_America @map("North America")
   South_America @map("South America")
 }
+
 enum Role {
   OWNR
   USER
