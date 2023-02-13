@@ -98,8 +98,9 @@
     </div>
     <main class=" h-[96vh] w-full lg:relative bg-primary">
       <slot />
-    </main>
-    
+    </main> 
+    <Footer2 />
+
   </div>
   
 
@@ -116,7 +117,6 @@
     </ul>
   </div>
 </div>
-<Footer2 />
 
 <style lang="postcss">
   :global(.gradient-background) {
