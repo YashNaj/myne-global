@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import UploadWidget from './../../lib/components/UploadWidget.svelte';
   import AddCard from "$lib/components/AddCard.svelte";
 import ComboBox from "$lib/components/ComboBox.svelte";
   import { myneMasterBrandsAndBreeds } from "../..";
@@ -6,5 +7,4 @@ import ComboBox from "$lib/components/ComboBox.svelte";
   console.log(brands)
 
 </script>
-<AddCard/>
-<!-- <ComboBox/> -->
+<UploadWidget/>

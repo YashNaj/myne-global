@@ -4,7 +4,6 @@ import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 import { getSessionUser } from '$lib/server/lucia';
 import { auth } from '$lib/server/lucia';
-import { supabase } from "$lib/supabase";
 const anyoneAllowed = [
   "/signup",
   "/signout",
