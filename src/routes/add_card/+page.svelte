@@ -9,10 +9,10 @@
   import { enhance } from "$app/forms";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import { myneMasterBrandsAndBreeds } from "../../index";
-  import type { PageData } from "./$types";
+  import type { PageData, Snapshot } from "./$types";
   import { fly, slide } from "svelte/transition";
   import { firstCapital } from "$lib/caps";
-  import {sizes} from '$lib/size'
+  import { sizes } from "$lib/size";
 
   export let data: PageData;
   export let form: { message?: string };
@@ -53,18 +53,29 @@
   export let purchasedValue: string = "";
   export let description: string = "";
 
-  export let justCategory: string = "";
-  export let justSubcategory: string = "";
-  export let justBreed: string = "";
-  export let justBrand: string = "";
-  export let justSize: string = "";
-  export let justPurchasedFrom: string = "";
-  export let justPurchasedValue: string = "";
-  export let justDescription: string = "";
-
-  console.log("🚀 ~ file: +page.svelte:66 ~ category", category);
-
-  $: console.log("🚀 ~ file: AddCard.svelte:66 ~ category", category);
+  export let formData = {
+    category,
+    subcategory,
+    brand,
+    breed,
+    purchasedFrom,
+    purchasedValue,
+    description,
+  };
+  $: formData  = formData = {
+    category,
+    subcategory,
+    brand,
+    breed,
+    purchasedFrom,
+    purchasedValue,
+    description,
+  };
+  export const snapshot: Snapshot = {
+    capture: () => formData,
+    restore: (value) => formData,
+  };
+  $: console.log("🚀 ~ file: +page.svelte:58 ~ formData", formData);
   //set hidden input values//refactor later
   let categoryHidden = "";
   let subcategoryHidden = "";
@@ -73,6 +84,7 @@
   let categories = myneMasterBrandsAndBreeds.map((object) => {
     return object.name;
   });
+  categories = categories.sort();
   //this allows the select boxes to set values, do not delete until proper refactor  $: brandInput = brand;
   let selectedCategory = myneMasterBrandsAndBreeds.find(
     (object) => object.name === category.toLowerCase()
@@ -82,33 +94,28 @@
   );
   //pull subCats
   let subcategories: [] | string[] | undefined | null;
-  $: subcategories = selectedCategory?.subcategories;
+  $: subcategories = selectedCategory?.subcategories.sort();
   let breeds: [] | string[] | undefined | null;
   $: breeds = selectedCategory?.breeds;
   let brands: [] | string[] | undefined | null;
   $: brands = selectedCategory?.brands;
 
-  let searchBrands: [];
-  $: console.log(
-    "🚀 ~ file: +page.svelte:27 ~ selectedCategory",
-    selectedCategory
-  ); //reset values on category change
   function resetValues() {
     breed = "";
     subcategory = "";
     flipped = false;
   }
   //log stores
-  $: console.log("🚀 ~ file: +page.svelte:14 ~ category", category);
-  $: console.log("🚀 ~ file: +page.svelte:14 ~ subcategory", subcategory);
-  $: console.log("🚀 ~ file: +page.svelte:15 ~ breed", breed);
+  // $: console.log("🚀 ~ file: +page.svelte:14 ~ category", category);
+  // $: console.log("🚀 ~ file: +page.svelte:14 ~ subcategory", subcategory);
+  // $: console.log("🚀 ~ file: +page.svelte:15 ~ breed", breed);
 
   let backgroundColor: string;
   $: backgroundColor = category;
-  $: console.log(
-    "🚀 ~ file: +page.svelte:88 ~ backgroundColor",
-    backgroundColor
-  );
+  // $: console.log(
+  //   "🚀 ~ file: +page.svelte:88 ~ backgroundColor",
+  //   backgroundColor
+  // );
 
   //initialize the brands array
 
@@ -141,7 +148,7 @@
       action="/add_card"
       class="h-[23rem] w-full p-4 pt-40 bg-white text-black flex flex-col justify-between  rounded-lg md:w-[30rem] lg:w-[40rem]"
       use:enhance={({ data, cancel }) => {
-        form = {message: ''};
+        form = { message: "" };
         const category = data.get("category")?.toString() || "";
         $: console.log("🚀 ~ file: AddCard.svelte:154 ~ category", category);
         const subcategory = data.get("subcategory")?.toString() || "";
@@ -156,7 +163,7 @@
           !!category ||
           !!subcategory ||
           !!purchasedFrom ||
-          !!purchasedValue 
+          !!purchasedValue
         ) {
           form.message = "Invalid input";
           cancel();
@@ -167,13 +174,13 @@
         <div class="w-full h-full relative">
           <div class="first-selects w-full h-full absolute flex flex-col">
             <!-- <div class="select-group "> -->
-            <input hidden bind:value={categoryHidden} />
             <Select
               placeholder="Category"
               class="select text-black w-full mt-2 "
               items={categories.map((categories) => firstCapital(categories))}
               on:change={() => {
                 category = justValue;
+                subcategory = ''
               }}
               bind:justValue
             />

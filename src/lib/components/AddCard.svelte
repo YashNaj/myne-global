@@ -13,10 +13,12 @@
   import { firstCapital } from "$lib/caps";
   import ComboBox from "$lib/components/ComboBox.svelte";
   import {sizes} from '$lib/size'
+  import type { Snapshot } from "../../routes/$types";
   export let data: PageData;
   export let form: { message?: string };
   export let flipped = false;
   export let brandFilterOpen = false;
+
   let duration = 300;
 
   let pageCount = 0;
@@ -61,6 +63,19 @@
   export let justPurchasedValue: any = "";
   export let justDescription: any = "";
 
+  export let formData = {
+      category, 
+      subcategory,
+      brand, 
+      breed, 
+      purchasedFrom,
+      purchasedValue, 
+      description
+  }
+  export const snapshot: Snapshot = {
+    capture: ()=> formData,
+     restore: (value)  => formData,
+  }
   $:category = justCategory
   $: console.log("🚀 ~ file: AddCard.svelte:66 ~ category", category)
   $:subcategory  = justSubcategory;
@@ -166,7 +181,6 @@
       use:enhance={({ data, cancel }) => {
         form = {};
         const category = data.get("category")?.toString() || "";
-        $: console.log("🚀 ~ file: AddCard.svelte:154 ~ category", category);
         const subcategory = data.get("subcategory")?.toString() || "";
         const brand = data.get("brand")?.toString() || "";
         const size = data.get("size")?.toString() || "";
@@ -247,6 +261,7 @@
               />
             {/if}
             {#if brands?.length > 0}
+            
               <!-- <ComboBox formName="brand" options={brands} id="brand" /> -->
               <Select
                 name="brand"
@@ -270,7 +285,7 @@
           <div class="purchased h-full w-full flex flex-col absolute">
             <input
               type="text"
-              name="purchasedFrom"
+              name={"purchasedFrom"}
               id="purchasedFrom"
               placeholder="Purchased From"
               class="input input-md mt-2 "

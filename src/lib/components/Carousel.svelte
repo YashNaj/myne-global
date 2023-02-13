@@ -1,34 +1,27 @@
-<script land='ts'>
-
+<script lang="ts">
+  import UploadWidget from "./UploadWidget.svelte";
+  let size: any | undefined | null ; 
+  let url: string | null; 
 </script>
+
 <div class="h-full carousel rounded-box z-3">
-    <div class="carousel-item w-full">
-      <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-    </div> 
-    <div class="carousel-item w-full">
-        <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-      </div> 
-      <div class="carousel-item w-full">
-        <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-      </div> 
-      <div class="carousel-item w-full">
-        <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-      </div> 
-      <div class="carousel-item w-full">
-        <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-      </div> 
-      <div class="carousel-item w-full">
-        <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-      </div> 
-      <div class="carousel-item w-full">
-        <img src="https://picsum.photos/100" class="w-full" alt="Tailwind CSS Carousel component" />
-      </div> 
+  <div class="carousel-item w-full">
+    <!-- <img
+      src="https://picsum.photos/100"
+      class="w-full"
+      alt="Tailwind CSS Carousel component"
+    /> -->
+    <UploadWidget url = {url} size ={size }/>
   </div>
-<style lang='postcss'>
- img{
+
+</div>
+
+<style lang="postcss">
+  img {
     max-width: 100;
- }
- .carousel{
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
- }
-</style>  
+  }
+  .carousel {
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+      rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  }
+</style>

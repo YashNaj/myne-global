@@ -14,7 +14,8 @@
   export let purchasedValue = " ";
   export let description = "";
   export let brands:[] | string[] | null | undefined;
-  export let breeds:[] | string[] | null | undefined; 
+  export let breeds:[] | string[] | null | undefined;   
+  let pictureArray; 
   
 
 
@@ -33,10 +34,10 @@
     sneakers: "#B3F5F7",
     firearms: "#3A5130",
     technology: "#080631",
-    trading: "#FCF7DE",
+    "trading cards": "#FCF7DE",
     collectibles: "#61E1A3",
-    coin: "#B6B1B1",
-    token: "#7C1EB6",
+    crypto: "#B6B1B1",
+    nft: "#7C1EB6",
     vintage: "#FF5F09",
     automobile: "#E10909",
     motorcycle: "#E10909",
@@ -48,19 +49,14 @@
   };
   let pickedColor: string;
   $: pickedColor = colors[colorKey];
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:41 ~ pickedColor",
-    pickedColor
-  );
-  let currency: number;
+  let currency: string;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
-  $: console.log(999, brands, breeds)
-  //   import Currency from 'svelte-currency-formatter'
+ //   import Currency from 'svelte-currency-formatter'
   // ;<Currency
   //   quantity={45685} // Required
   //   currency="USD" // Optional (USD by default)
@@ -78,11 +74,10 @@
   on:keydown={() => (flipped = !flipped)}
 >
   <div class="flip-card w-[80%]  rounded-2xl  aspect-[5/7]  ">
-    <div class="flip-card-inner rounded-2xl whole-card ">
-      <div class="flip-card-front rounded-2xl aspect-[5/7]  ">
+    <div class="flip-card-inner rounded-2xl">
+      <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
         <div
-          style="background: {pickedColor};"
-          class="card-item rounded-2xl shadow-2xl aspect-[5/7]  z-2 bg-white"
+          class="card-item w-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-2 bg-white"
         >
           <div
             class="w-full h-[50%] rounded-t-2xl"
@@ -178,20 +173,20 @@
               <div class="flex w-full justify-between flex-1">
                 <div class="flex w-full justify-between">
                   <div class="flex w-full justify-between ">
-                    <div class=" flex flex-col flex-1 w-full h-full">
+                    <div class="dynamic-field h-fit flex flex-col flex-1 w-full h-full">
                       <div class="flex w-full justify-start">
                         <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
+                          class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold"
                           >Dynamic Field</span
                         >
                       </div>
                       <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
                       </div>
                     </div>
-                    <div class=" flex flex-col flex-1 w-full h-full">
+                    <div class="dynamic-field h-fit flex flex-col flex-1 w-full h-full">
                       <div class="flex w-full justify-end">
                         <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold text-"
+                          class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold text-"
                           >Dynamic Field</span
                         >
                       </div>
@@ -215,10 +210,9 @@
           </div>
         </div>
       </div>
-      <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
+      <div class="flip-card-back   rounded-2xl text-black aspect-[5/7] ">
         <div
-          class="card-item  bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
-          style="background: {pickedColor};"
+          class="card-item   bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
         >
           <div class="flex flex-col rounded-2xl w-full h-full justify-between whole-card ">
             <div class=" flex flex-col flex-1 w-full h-full">
@@ -269,25 +263,25 @@
                   <div class="flex w-full justify-between flex-1">
                     <div class="flex w-full justify-between">
                       <div class="flex w-full justify-between ">
-                        <div class=" flex flex-col flex-1 w-full h-full">
+                        <div class="dynamic-field h-fit flex flex-col flex-1 w-full ">
                           <div class="flex w-full justify-start">
                             <span
-                              class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
+                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold"
                               >Dynamic Field</span
                             >
                           </div>
-                          <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
+                          <div class="text-sm lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
                           </div>
                         </div>
-                        <div class=" flex flex-col flex-1 w-full h-full">
+                        <div class=" dynamic-field h-fit flex flex-col flex-1 w-full ">
                           <div class="flex w-full justify-end">
                             <span
-                              class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold text-"
+                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold text-"
                               >Dynamic Field</span
                             >
                           </div>
                           <div
-                            class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
+                            class="text-sm lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
                           >
                           </div>
                         </div>
@@ -297,20 +291,20 @@
                   <div class="flex w-full justify-between flex-1">
                     <div class="flex w-full justify-between">
                       <div class="flex w-full justify-between ">
-                        <div class=" flex flex-col flex-1 w-full h-full">
+                        <div class=" dynamic-field h-fit flex flex-col flex-1 w-full ">
                           <div class="flex w-full justify-start">
                             <span
-                              class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
+                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold"
                               >Dynamic Field</span
                             >
                           </div>
                           <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
                           </div>
                         </div>
-                        <div class=" flex flex-col flex-1 w-full h-full">
+                        <div class="dynamic-field h-fit flex flex-col flex-1 w-full ">
                           <div class="flex w-full justify-end">
                             <span
-                              class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold text-"
+                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold text-"
                               >Dynamic Field</span
                             >
                           </div>
@@ -332,7 +326,7 @@
                       </button>
                     </div>
                     <label class = 'flex text-xs w-full justify-center' for = 'button'>
-                      Report Stolen
+                      Stolen
                     </label>
                   </div>
                   <div class = 'flex flex-col justify-center content-center flex-1'>
@@ -435,5 +429,17 @@
   }
   .whole-card{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  .gradient{
+    /* background: rgb(38,82,29);
+background: -moz-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(40, 68, 42) 100%);
+background: -webkit-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(41, 78, 44) 100%);
+background: linear-gradient(90deg, rgb(115, 134, 111) 0%, rgb(25, 49, 26) 100%); */
+/* background: rgb(180,79,66);
+background: -moz-linear-gradient(90deg, rgb(92, 40, 33) 0%, rgba(55,9,3,1) 100%);
+background: -webkit-linear-gradient(90deg, rgb(82, 32, 25) 0%, rgb(121, 0, 0) 100%);
+background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
+
+
   }
 </style>

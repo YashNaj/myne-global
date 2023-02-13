@@ -524,8 +524,7 @@ export const myneMasterBrandsAndBreeds = [
         "charm",
         "cufflinks",
         "earrings",
-        "engagement ",
-        "ring",
+        "engagement ring",
         "high jewelry",
         "necklace",
         "pendant",
@@ -1063,7 +1062,6 @@ export const myneMasterBrandsAndBreeds = [
       "subcategories": [
         "bowl",
         "table ",
-        "art",
         "painting",
         "sculpture",
         "vase",
@@ -3903,12 +3901,11 @@ export const myneMasterBrandsAndBreeds = [
         "earphone",
         "tablet",
         "watch",
-        "other",
-        "technology"
+        "other technology"
       ]
     },
     {
-      "name": "token",
+      "name": "nft",
       "brands": [
         "0x - ZRX",
         "1inch Network - 1INCH",
@@ -4521,7 +4518,7 @@ export const myneMasterBrandsAndBreeds = [
       ]
     },
     {
-      "name": "coin",
+      "name": "crypto",
       "brands": [
         "0x - ZRX",
         "1inch Network - 1INCH",
@@ -5125,7 +5122,8 @@ export const myneMasterBrandsAndBreeds = [
         "ZEON - ZEON",
         "Zilliqa - ZIL"
       ],
-      "subcategories": []
+      "subcategories": ["coin",	"token", "other crypto"
+      ]
     },
     {
       "name": "clothing",
@@ -5139,6 +5137,22 @@ export const myneMasterBrandsAndBreeds = [
     },
     {
       "name": "trading cards",
+      "brands": [],
+      "subcategories": ["baseball", 	"basketball", 	"football",	"hockey",	"soccer",	"other trading card"
+      ]
+    }, 
+    {
+      "name": "vintage",
+      "brands": [],
+      "subcategories": []
+    },
+    {
+      "name": "other",
+      "brands": [],
+      "subcategories": []
+    },
+    {
+      "name": "collectibles",
       "brands": [],
       "subcategories": []
     }
