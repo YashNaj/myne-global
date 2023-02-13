@@ -68,11 +68,11 @@ model MyneCard {
   subcategory              String?
   brand                    String?
   breed                    String?
-  size                     String
-  purchasedFrom            String
-  purchasedValue           String
+  size                     String?
+  purchasedFrom            String?
+  purchasedValue           String?
   reportedStolenDate       DateTime?
-  description              String
+  description              String?
   crypto_token_address     String?
   unique_features          String?
   artist                   String?
