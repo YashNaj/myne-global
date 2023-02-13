@@ -1,11 +1,45 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+  import { page } from "$app/stores";
   import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
   import Nav from "$lib/components/Nav.svelte";
+  import type { Snapshot } from "./$types";
   export let form: { message?: string };
-  export let url = $page.url.origin; 
-  console.log(url)
+  export let url = $page.url.origin;
+  let firstName: string     = ''
+  let lastName: string = ''
+  let birthday: string = ''
+  let country: string = ''
+  let postalZip: string = ''
+  let email: string = ''
+  let password: string = ''
+  let phone: string = ''
+
+  export let formData = {
+    firstName,
+    lastName,
+    birthday,
+    country,
+    postalZip,
+    email,
+    password,
+    phone,
+  };
+  $: formData = formData = {
+    firstName,
+    lastName,
+    birthday,
+    country,
+    postalZip,
+    email,
+    password,
+    phone,
+  };
+  export const snapshot: Snapshot = {
+    capture: () => formData,
+    restore: (value) => formData,
+  };
+  console.log(url);
 </script>
 
 <div class="w-full h-full flex justify-center my-2 content-center flex-wrap ">
@@ -32,6 +66,7 @@
               id="firstName"
               name="firstName"
               placeholder="First Name"
+              bind:value={firstName}
             />
           </div>
           <div class="flex justify-between">
@@ -44,29 +79,30 @@
               id="lastName"
               name="lastName"
               placeholder="Last Name "
+              bind:value={lastName}
             />
           </div>
         </div>
-        <div class  = "flex justify-center">
+        <div class="flex justify-center">
           <div class="flex my-2">
             <label
               class="  rouned-lg flex-1  mx-1 text-primary font-bold mr-1"
-            
               placeholder="Date of Birth"
-              for ='birthday'
+              for="birthday"
             >
-            Date of Birth
-          </label>
+              Date of Birth
+            </label>
             <input
               class="input input-md flex-1 rouned-lg mx-1"
               type="date"
               id="birthday"
               name="birthday"
               placeholder="Date of Birth"
+              bind:value={birthday}
+
             />
+          </div>
         </div>
-        </div>
-        
 
         <div class="flex justify-center my-2">
           <div class="flex  justify-between">
@@ -78,6 +114,8 @@
               id="country"
               name="country"
               placeholder="Country"
+              bind:value={country}
+
             />
           </div>
           <div class="flex  justify-between">
@@ -89,6 +127,8 @@
               id="postalZip"
               name="postalZip"
               placeholder="ZIP/Postal Code"
+              bind:value={postalZip}
+
             />
           </div>
         </div>
@@ -103,6 +143,8 @@
               id="email"
               name="email"
               placeholder="Email "
+              bind:value={email}
+
             />
           </div>
 
@@ -116,6 +158,8 @@
               id="password"
               name="password"
               placeholder="Password"
+              bind:value={password}
+
             />
           </div>
         </div>
@@ -130,15 +174,14 @@
             id="phone"
             name="phone"
             placeholder="+(1) (999)-999-9999"
-            type="tel"          />
-        </div>
-    </div>
+            type="tel"
+            bind:value={phone}
 
-      <input
-        class="btn btn-primary rouned-lg"
-        type="submit"
-        value="Register"
-      />
+          />
+        </div>
+      </div>
+
+      <input class="btn btn-primary rouned-lg" type="submit" value="Register" />
     </form>
     <div class="flex  flex-col content-center flex-wrap justify-center">
       <h1 class="text-center my-2">Have An Account?</h1>

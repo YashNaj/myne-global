@@ -6,13 +6,13 @@ import { PrismaClient } from "@prisma/client";
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { page } from "$app/stores";
-import * as prisma from '$lib/server/db'
+import * as prisma from "$lib/server/db";
 const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (
   user: string,
   origin: string,
   email: string,
-  url: string 
+  url: string
 ) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
   const request = await prisma.user.update({
@@ -24,7 +24,7 @@ const sendEmailVerificationLink = async (
         create: {
           id: user.userId,
           email,
-          expiresAt: new Date(Date.now() +( 1 * 60 * 60 * 1000)),
+          expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
         },
       },
     },
@@ -34,14 +34,13 @@ const sendEmailVerificationLink = async (
       id: user.userId,
     },
     select: {
-  
-          token: true,
+      token: true,
     },
   });
-  const token = verificationRequest?.token 
-  console.log("token", verificationRequest );
+  const token = verificationRequest?.token;
+  console.log("token", verificationRequest);
   const href = `${origin}/api/verify-email?token=${token}`;
-  console.log(href)
+  console.log(href);
   const buttonSlug = `<a href= "${href}"> Verify Here </a>`;
   const data = {
     to: email, // Change to your recipient
@@ -117,10 +116,10 @@ export const actions: Actions = {
         },
       });
       console.log(profileUpsert);
-      await sendEmailVerificationLink(user, origin, email);
-      console.log("success");
       const session = await auth.createSession(user?.userId);
       locals.setSession(session);
+      await sendEmailVerificationLink(user, origin, email);
+      console.log("success");
     } catch (error) {
       if (error instanceof LuciaError) {
         return fail(400), { message: error.message };

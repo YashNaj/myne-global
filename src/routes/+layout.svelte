@@ -99,8 +99,7 @@
     <main class=" h-[96vh] w-full lg:relative bg-primary">
       <slot />
     </main> 
-    <Footer2 />
-
+    <Footer2/>
   </div>
   
 
