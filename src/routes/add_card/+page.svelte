@@ -75,7 +75,8 @@
     capture: () => formData,
     restore: (value) => formData,
   };
-  $: console.log("🚀 ~ file: +page.svelte:58 ~ formData", formData);
+
+
   //set hidden input values//refactor later
   let categoryHidden = "";
   let subcategoryHidden = "";

@@ -60,22 +60,84 @@ model Key {
 }
 
 model MyneCard {
-  id                 String    @id @unique @default(uuid())
-  user_id            String
-  subCategory        String
-  brand              String?
-  breed              String?
-  size               String
-  purchasedFrom      String
-  purchasedValue     String
-  createdOn          DateTime  @default(now())
-  isStolen           Boolean   @default(false)
-  reportedStolenDate DateTime?
-  isHeriloom         Boolean   @default(false)
-  pictures           String[]  @default([])
-  category           String
-  description        String
-  Profile            Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  id                       String    @id @unique @default(uuid())
+  user_id                  String
+  createdOn                DateTime  @default(now())
+  isStolen                 Boolean   @default(false)
+  isHeirloom               Boolean   @default(false)
+  pictures                 String[]  @default([])
+  category                 String
+  subcategory              String?
+  brand                    String?
+  breed                    String?
+  size                     String
+  purchasedFrom            String
+  purchasedValue           String
+  reportedStolenDate       DateTime?
+  description              String
+  crypto_token_address     String?
+  unique_features          String?
+  artist                   String?
+  author                   String?
+  dob                      String?
+  body_length              String?
+  brand_reference          String?
+  caliber                  String?
+  carat_weight             String?
+  case_material            String?
+  cOfAuth                  String?
+  clarity                  String?
+  color                    String?
+  cut                      String?
+  date                     String?
+  dial                     String?
+  distinguishing_features  String?
+  document                 String?
+  drivetrain               String?
+  engine                   String?
+  engraving                String?
+  exchange_address         String?
+  exterior_color           String?
+  fuel_type                String?
+  grading                  String?
+  grading_reports          String?
+  height                   String?
+  hotstamping              String?
+  interior_color           String?
+  invoice                  String?
+  laser_inscription        String?
+  manufacturer             String?
+  material                 String?
+  microchip                String?
+  mileage                  String?
+  model                    String?
+  model_yr                 String?
+  movement_caliber         String?
+  other                    String?
+  pedigree                 String?
+  product                  String?
+  registration_certificate String?
+  release_date             String?
+  serial                   String?
+  serie                    String?
+  series                   String?
+  shape                    String?
+  smart_contract_address   String?
+  smart_contract_id        String?
+  stock_number             String?
+  stone                    String?
+  strap_bracelet           String?
+  tattoo                   String?
+  trademarks               String?
+  transaction              String?
+  transmission             String?
+  url                      String?
+  valuation_report         String?
+  vin                      String?
+  wallet                   String?
+  weight                   String?
+  year                     String?
+  Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@map("myneCard")
 }

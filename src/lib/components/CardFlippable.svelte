@@ -69,12 +69,12 @@
 
 <div
   class:flipped
-  class=" flex flex-col flex-wrap justify-center content-center relative  rounded-2xl lg:w-80 w-full"
+  class=" flex flex-col flex-wrap justify-center content-center relative  aspect-[5/7] rounded-2xl lg:w-80 w-full"
   on:click={() => (flipped = !flipped)}
   on:keydown={() => (flipped = !flipped)}
 >
-  <div class="flip-card w-[80%]  rounded-2xl  aspect-[5/7]  ">
-    <div class="flip-card-inner rounded-2xl">
+  <div class="flip-card  w-[80%] h-full rounded-2xl  aspect-[5/7]  ">
+    <div class="flip-card-inner aspect-[5/7] rounded-2xl">
       <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
         <div
           class="card-item w-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-2 bg-white"
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div
-              class="w-full h-full rounded-b-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start"
+              class="w-full rounded-b-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start"
             >
               <div class="flex w-full justify-between flex-1">
                 <div class="flex w-full justify-between">
@@ -198,14 +198,6 @@
                   </div>
                 </div>
               </div>
-              <div class="flex w-full justify-between my-3 flex-1 lg:hidden" />
-              <div class="flex w-full justify-between my-3 flex-1">
-                <div class="flex w-full justify-between">
-                  <div class="flex w-full justify-between ">
-                    <div class=" flex flex-col flex-1 w-full h-full" />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -259,8 +251,8 @@
                     >
                   </div>
                 </div>
-                <div class = 'flex flex-col w-full h-full pt-1 pb-1 '>
-                  <div class="flex w-full justify-between flex-1">
+                <div class = 'flex flex-col w-full h-fit pt-1 pb-1 '>
+                  <div class="flex w-full justify-between">
                     <div class="flex w-full justify-between">
                       <div class="flex w-full justify-between ">
                         <div class="dynamic-field h-fit flex flex-col flex-1 w-full ">
@@ -288,7 +280,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="flex w-full justify-between flex-1">
+                  <div class="flex w-full justify-between">
                     <div class="flex w-full justify-between">
                       <div class="flex w-full justify-between ">
                         <div class=" dynamic-field h-fit flex flex-col flex-1 w-full ">
