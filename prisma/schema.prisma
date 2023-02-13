@@ -21,22 +21,6 @@ model User {
 
   @@map("user")
 }
-
-model Profile {
-  id        String     @id @default(uuid())
-  user_id   String     @unique
-  postalZip String
-  firstName String
-  lastName  String
-  country   String
-  birthday  String
-  phone     String
-  myneCard  MyneCard[]
-  user      User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@map("profile")
-}
-
 model Session {
   id             String @id @unique
   user_id        String
@@ -57,6 +41,20 @@ model Key {
 
   @@index([user_id])
   @@map("key")
+}
+model Profile {
+  id        String     @id @default(uuid())
+  user_id   String     @unique
+  postalZip String
+  firstName String
+  lastName  String
+  country   String
+  birthday  String
+  phone     String
+  myneCard  MyneCard[]
+  user      User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("profile")
 }
 
 model MyneCard {
