@@ -15,12 +15,13 @@ model User {
   valid                       Boolean
   passwordVerificationRequest PasswordVerificationRequest[]
   emailVerificationRequest    EmailVerificationRequest[]
-  Key                         Key[]
-  Profile                     Profile?
+  key                         Key[]
+  profile                     Profile?
   session                     Session[]
 
   @@map("user")
 }
+
 model Session {
   id             String @id @unique
   user_id        String
@@ -42,6 +43,7 @@ model Key {
   @@index([user_id])
   @@map("key")
 }
+
 model Profile {
   id        String     @id @default(uuid())
   user_id   String     @unique

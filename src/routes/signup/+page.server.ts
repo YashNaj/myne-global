@@ -21,10 +21,17 @@ const sendEmailVerificationLink = async (
     },
     data: {
       emailVerificationRequest: {
-        create: {
-          id: user.userId,
-          email,
-          expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
+        upsert: {
+          create: {
+            id: user.userId,
+            email,
+            expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
+          },
+          update: {
+            id: user.userId,
+            email,
+            expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
+          },
         },
       },
     },
@@ -98,19 +105,29 @@ export const actions: Actions = {
           valid,
         },
       });
-      const profileUpsert = await prisma.user.update({
+      const profileUpsert = await prisma.user.upsert({
         where: {
           id: user.userId,
         },
         data: {
           Profile: {
-            create: {
-              firstName,
-              lastName,
-              country,
-              phone,
-              postalZip,
-              birthday,
+            upsert: {
+              create: {
+                firstName,
+                lastName,
+                country,
+                phone,
+                postalZip,
+                birthday,
+              },
+              update: {
+                firstName,
+                lastName,
+                country,
+                phone,
+                postalZip,
+                birthday,
+              },
             },
           },
         },
@@ -118,7 +135,6 @@ export const actions: Actions = {
       console.log(profileUpsert);
       const session = await auth.createSession(user?.userId);
       locals.setSession(session);
-      await sendEmailVerificationLink(user, origin, email);
       console.log("success");
     } catch (error) {
       if (error instanceof LuciaError) {
