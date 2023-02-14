@@ -1,8 +1,7 @@
 import { dev } from "$app/environment";
 import lucia, { generateRandomString } from "lucia-auth";
 import prisma from "@lucia-auth/adapter-prisma";
-import { PrismaClient } from "@prisma/client";
-
+import { Prisma, PrismaClient } from "@prisma/client";
 
   
 export const auth = lucia({
