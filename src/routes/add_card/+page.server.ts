@@ -11,7 +11,7 @@ export const actions: Actions = {
 
     const form = await request.formData();
     const category = form.get("category");
-    const subCategory = form.get("subCategory");
+    const subcategory = form.get("subcategory");
     const brand = form.get("brand");
     const size = form.get("size");
     const purchasedFrom = form.get("purchasedFrom");
