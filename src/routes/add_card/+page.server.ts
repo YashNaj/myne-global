@@ -10,21 +10,21 @@ export const actions: Actions = {
     console.log("\u001b[1;31m user", user);
 
     const form = await request.formData();
+  
+    $: console.log("🚀 ~ file: +page.server.ts:13 ~ default: ~ form.category", form)
     const category = form.get("category");
-    const subcategory = form.get("subcategory");
-    const brand = form.get("brand");
-    const size = form.get("size");
+    const subcategory = form.get("subcategory")
+    const brand = form.get("brand"); 
+    const size = form.get("size"); 
     const purchasedFrom = form.get("purchasedFrom");
     const purchasedValue = form.get("purchasedValue");
     const description = form.get("description");
-    console.log(form);
     const profile = await prisma.profile.findUnique({
       where:{
         user_id: user.userId,
       }
     })
-    console.log(2, profile);
-    const card = await prisma.profile.update({
+    const newCard = await prisma.profile.update({
       where: {
         user_id: user.userId,
       },
@@ -43,6 +43,10 @@ export const actions: Actions = {
       },
     
     });
+    $: console.log("🚀 ~ file: +page.server.ts:46 ~ default: ~ newCard", newCard)
+    return {message: "ok"}
     prisma.$disconnect();
   },
-};
+
+  }
+    

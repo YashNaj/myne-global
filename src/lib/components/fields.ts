@@ -36,7 +36,7 @@ manufacturer
 material
 microchip
 mileage
-model
+modell
 model_yr
 movement_caliber
 other

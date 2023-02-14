@@ -13,9 +13,10 @@
   import { fly, slide } from "svelte/transition";
   import { firstCapital } from "$lib/caps";
   import { sizes } from "$lib/size";
+  import GeneralModal from "$lib/components/GeneralModal.svelte";
 
   export let data: PageData;
-  export let form: { message?: string };
+
   export let flipped = false;
   export let brandFilterOpen = false;
   let duration = 300;
@@ -43,6 +44,15 @@
     brand: string;
     searchTerms: string;
   };
+  async function onSubmit() {
+    await fetch("http://localhost:5174/api/addCard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  }
   //initialize the category and subcategory fields
   export let category: string = "";
   export let subcategory: string = "";
@@ -52,30 +62,44 @@
   export let purchasedFrom: string = "";
   export let purchasedValue: string = "";
   export let description: string = "";
-
+  export let message:string = ''
   export let formData = {
     category,
     subcategory,
     brand,
     breed,
+    size,
     purchasedFrom,
     purchasedValue,
     description,
+    message,
   };
-  $: formData  = formData = {
+  $: formData = formData = {
     category,
     subcategory,
     brand,
     breed,
+    size,
     purchasedFrom,
     purchasedValue,
     description,
+    message
+  };
+  export let form: {
+    category?: string;
+    subcategory?: string;
+    brand?: string;
+    breed?: string;
+    purchasedFrom?: string;
+    purchasedValue?: string;
+    description?: string;
+    size?: string;
+    message?:string  ;
   };
   export const snapshot: Snapshot = {
     capture: () => formData,
     restore: (value) => formData,
   };
-
 
   //set hidden input values//refactor later
   let categoryHidden = "";
@@ -122,6 +146,8 @@
 
   // initialize fuzzy brand search
   let justValue: string;
+  $: console.log("🚀 ~ file: +page.svelte:188 ~ category", category)
+
 </script>
 
 <div class=" w-full px-2 h-[80vh] relative rounded-lg">
@@ -146,31 +172,10 @@
   <div class="flex w-full justify-center">
     <form
       method="POST"
-      action="/add_card"
       class="h-[23rem] w-full p-4 pt-40 bg-white text-black flex flex-col justify-between  rounded-lg md:w-[30rem] lg:w-[40rem]"
-      use:enhance={({ data, cancel }) => {
-        form = { message: "" };
-        const category = data.get("category")?.toString() || "";
-        $: console.log("🚀 ~ file: AddCard.svelte:154 ~ category", category);
-        const subcategory = data.get("subcategory")?.toString() || "";
-        const brand = data.get("brand")?.toString() || "";
-        const size = data.get("size")?.toString() || "";
-        const breed = data.get("breed")?.toString() || "";
-        const purchasedFrom = data.get("purchasedFrom")?.toString() || "";
-        const purchasedValue = data.get("purchasedValue")?.toString() || "";
-        const description = data.get("description")?.toString() || "";
-        console.log(form);
-        if (
-          !!category ||
-          !!subcategory ||
-          !!purchasedFrom ||
-          !!purchasedValue
-        ) {
-          form.message = "Invalid input";
-          cancel();
-        }
-      }}
+      use:enhance
     >
+    <input hidden name ='category' id='category' placeholder= 'Test' bind:value={category}/>
       {#if pageCount === 0}
         <div class="w-full h-full relative">
           <div class="first-selects w-full h-full absolute flex flex-col">
@@ -181,7 +186,7 @@
               items={categories.map((categories) => firstCapital(categories))}
               on:change={() => {
                 category = justValue;
-                subcategory = ''
+                subcategory = "";
               }}
               bind:justValue
             />
@@ -357,6 +362,16 @@
     </form>
   </div>
 </div>
+
+{#if form?.message ===  "ok"}
+  <GeneralModal/>
+
+{/if}
+
+
+
+
+
 
 <style lang="postcss">
   .upload-pictures {
