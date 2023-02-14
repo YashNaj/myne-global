@@ -176,6 +176,12 @@
       use:enhance
     >
     <input hidden name ='category' id='category' placeholder= 'Test' bind:value={category}/>
+    <input hidden name ='subcategory' id='subcategory' placeholder= 'Test' bind:value={subcategory}/>
+    <input hidden name ='catbreedegory' id='breed' placeholder= 'breed' bind:value={breed}/>
+    <input hidden name ='size' id='size' placeholder= 'Test' bind:value={size}/>
+    <input hidden name ='purchasedValue' id='purchasedValue' placeholder= 'purchasedValue' bind:value={category}/>
+    <input hidden name ='description' id='description' placeholder= 'Test' bind:value={category}/>
+
       {#if pageCount === 0}
         <div class="w-full h-full relative">
           <div class="first-selects w-full h-full absolute flex flex-col">

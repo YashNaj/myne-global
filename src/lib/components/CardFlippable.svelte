@@ -140,21 +140,21 @@
                     {/if}
 
                     {#if brands?.length > 0}
-                    <div class=" flex flex-col flex-1 w-full h-full">
+                    <div class=" flex flex-col  w-fit h-full">
                       <div class="flex w-full justify-start">
                         <span
                           class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
                           >Brand</span
                         >
                       </div>
-                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
+                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] w-full">
                         {brand}
                       </div>
                     </div>
                     {/if}
 
                    
-                    <div class=" flex flex-col flex-1 w-full h-full">
+                    <div class=" flex flex-col  w-fit h-full">
                       <div class="flex w-full justify-end">
                         <span
                           class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
