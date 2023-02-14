@@ -14,7 +14,6 @@
   let email: string = ''
   let password: string = ''
   let phone: string = ''
-
   export let formData = {
     firstName,
     lastName,
