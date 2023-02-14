@@ -27,8 +27,9 @@
     "Request Item Certificate",
     "Download Inventory",
   ];
-
-
+  export let myneCards:[{}] | undefined | null; 
+  console.log("🚀 ~ file: HomeTabs.svelte:31 ~ myneCards", myneCards)
+  
 </script>
 
   <!-- <button class = 'btn btn-primary absolute top-o' on:click={()=> open = !open}>
@@ -59,7 +60,7 @@
                 <DesktopWidget title={content} />
               {:else}
 
-                <CardVault />
+                <CardVault myneCards = {myneCards} />
                 {/if}
             </TabPanel>
         {/each}

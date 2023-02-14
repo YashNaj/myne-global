@@ -4,6 +4,8 @@ import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 import { getSessionUser } from '$lib/server/lucia';
 import { auth } from '$lib/server/lucia';
+import {Prisma, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient();
 const anyoneAllowed = [
   "/signup",
   "/signout",
@@ -16,7 +18,7 @@ const anyoneAllowed = [
   "/api/addCard"
 ]; 
 export const load = handleServerSession((async ({ url, locals}) => {
-
+  
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
@@ -25,7 +27,6 @@ export const load = handleServerSession((async ({ url, locals}) => {
   if (!session) {
     throw redirect(303, "/signin");
   }
-  console.log(user);
   if (user.valid) return { isUser:true};
   else throw redirect(302, "/unverified-email");
 

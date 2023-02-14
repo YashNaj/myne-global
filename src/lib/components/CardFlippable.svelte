@@ -18,6 +18,7 @@
   export let breeds:[] | string[] | null | undefined;   
   export let subcategories:[] | string[] | null | undefined;    
   export let success: boolean | null | undefined = null;
+  export let myneCard: {}; 
   let pictureArray; 
   
 

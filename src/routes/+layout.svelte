@@ -10,7 +10,7 @@
 
   export let data: LayoutData;
   const isUser = data?.isUser;
-
+  
   console.log(1, isUser);
   const authRoutes = ["/signup", "signin"];
 

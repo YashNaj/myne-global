@@ -105,7 +105,7 @@
     message,
     success: null,
   };
-  $: sentCard = sentCard
+  $: sentCard = sentCard;
   export let form: {
     category?: string;
     subcategory?: string;
@@ -116,7 +116,7 @@
     description?: string;
     size?: string;
     message?: string;
-    success?: boolean | null | undefined ; 
+    success?: boolean | null | undefined;
   };
   export const snapshot: Snapshot = {
     capture: () => formData,
@@ -143,23 +143,25 @@
   $: brands = selectedCategory?.brands;
 
   function resetValues() {
-   return { category:" ",
-    subcategory : " ",
-    breed : " ",
-    brand :" ",
-    size : " ",
-    purchasedFrom : " ",
-    purchasedValue : " ",
-    description : " ",
-  }}
+    return {
+      category: " ",
+      subcategory: " ",
+      breed: " ",
+      brand: " ",
+      size: " ",
+      purchasedFrom: " ",
+      purchasedValue: " ",
+      description: " ",
+    };
+  }
 
   let backgroundColor: string;
   $: backgroundColor = category;
   let justValue: string;
-  success = false ; 
+  success = false;
   $: success = form?.success;
   $: console.log(form);
-  if (success === true){
+  if (success === true) {
     resetValues();
   }
 </script>
@@ -191,7 +193,7 @@
       method="POST"
       class="h-[23rem] w-full p-4 pt-40 bg-white text-black flex flex-col justify-between  rounded-lg md:w-[30rem] lg:w-[40rem]"
       use:enhance
-      class:exitForm={sentCard === true }
+      class:exitForm={sentCard === true}
       class:comeBack={success === true}
     >
       <input
@@ -207,6 +209,13 @@
         id="subcategory"
         placeholder="Test"
         bind:value={subcategory}
+      />
+      <input
+        hidden
+        name="brand"
+        id="brand"
+        placeholder="brand"
+        bind:value={brand}
       />
       <input
         hidden
@@ -433,7 +442,7 @@
 </div>
 
 {#if success === true}
-  <GeneralModal {success} on:click={resetValues}/>
+  <GeneralModal {success} on:click={resetValues} />
 {/if}
 
 <style lang="postcss">

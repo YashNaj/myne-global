@@ -1,7 +1,7 @@
 <script lang='ts'> 
   import  logo  from "$lib/images/blue_icon.png";
 </script> 
-<footer class="footer p-10 bg-base-200 text-base-content order-last relative">
+  <footer class="footer p-10 bg-base-200 text-base-content order-last">
     <div>
       <span class="footer-title">Services</span> 
       <a class="link link-hover">Branding</a> 

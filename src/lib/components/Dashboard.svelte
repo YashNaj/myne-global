@@ -5,6 +5,7 @@
   import { quintOut } from "svelte/easing";
   import Listbox from "../../lib/components/Listbox.svelte";
   import { blur, slide } from "svelte/transition";
+  export let myneCards:[{}] | null|  undefined; 
   let isOpen = false;
   let heightScale = 20;
   let drawerHeight = spring(heightScale, {
@@ -53,48 +54,10 @@
           />
           <div
             transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg  "
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg"
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg  "
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg"
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg  "
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg"
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg  "
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg"
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg  "
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg"
-          />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-            class=" square rounded-lg  "
-          />
+          >
+          
+        
+          </div>
         </div>
         <button
           in:slide|local={{ delay: duration, duration }}
