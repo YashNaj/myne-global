@@ -154,7 +154,7 @@
   let justValue: string;
 </script>
 <!-- a -->
-<div class=" w-full px-2 h-[80vh] relative rounded-lg">
+<div class=" w-full px-2 h-auto relative rounded-lg">
   <h1 class="flex text-white font-bold">Add A Card | Enter Card Info</h1>
   <div
     class="card-list w-full flex justify-center pt-10 content-center relative h-80 "

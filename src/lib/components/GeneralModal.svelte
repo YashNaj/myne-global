@@ -1,29 +1,20 @@
-<script lang='ts'>
-    import {
-      Dialog,
-      DialogOverlay,
-      DialogTitle,
-      DialogDescription,
-    } from "@rgossiaux/svelte-headlessui";
-    import logo from "$lib/images/blue_icon.png"
-    let isOpen = true;
-  </script>
-  
-  <!-- Pass `isOpen` to the `open` prop and use the `on:close` handler to set it back to false when the user clicks outside of the dialog or presses the escape key. -->
-  <Dialog class = {'w-[200px] h-[100px] bg-secondary text-primary card absolute top-[50%]'} open={isOpen} on:close={() => (isOpen = false)}>
+<script lang="ts">
+  import {
+    Dialog,
+    DialogOverlay,
+    DialogTitle,
+    DialogDescription,
+  } from "@rgossiaux/svelte-headlessui";
+  import logo from "$lib/images/blue_icon.png";
+  export let yes = true; 
+</script>
 
-    <DialogOverlay/>
-  
-    <DialogTitle><img alt = 'myne-logo' class = 'inline-block max-w-3' src = {logo} /> Myne Global</DialogTitle>
-    <DialogDescription>
-      Add Card 
-    </DialogDescription>
-  
-    <p>
-        You've succesfully added a card! 
-    </p>
-  
-    <!-- You can render additional buttons to dismiss your dialog by setting `isOpen` to `false`. -->
-    <button class = {'btn btn-success'} on:click={() => (isOpen = false)}>Got it! </button>
-  </Dialog>
-  
+
+<!-- Put this part before </body> tag -->
+<input bind:checked={yes} type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label on:click={()=> {message: 'stable'}} for="my-modal-4" class="modal cursor-pointer text-primary">
+  <label class="modal-box relative" for="">
+    <h3 class="text-lg font-bold">Success!</h3>
+    <p class="py-4">Your card has been added to your profile! </p>
+  </label>
+</label>

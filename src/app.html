@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html data-theme="myne" class = 'bg-primary text-secondary' lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
-		<meta name="viewport" content="initial-scale=1, viewport-fit=cover" />	
-		%sveltekit.head%
-	</head>
-	<body class = 'gradient-background h-screen w-screen bg-primary'>
-		<div>%sveltekit.body%</div>
-	</body>
+<html data-theme="myne" class='bg-primary text-secondary' lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
+	<meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
+	%sveltekit.head%
+</head>
+
+<body class='gradient-background h-auto w-screen bg-primary'>
+	<div>%sveltekit.body%</div>
+	<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+	<label for="my-modal-4" class="modal cursor-pointer">
+		<label class="modal-box relative" for="">
+			<h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
+			<p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!
+			</p>
+		</label>
+	</label>
+
+</body>
+
 </html>
 <script async defer type="text/javascript" src="<https://secure.helcim.app/helcim-pay/services/start.js>"></script>
