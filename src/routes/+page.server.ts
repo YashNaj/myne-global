@@ -9,9 +9,12 @@ const prisma = new PrismaClient();
 
 export async function load({ locals }) {
   const { session, user } = await locals.validateUser();
+  console.log(user);
+  const user_id = user.userId
+  console.log(1, user_id)
   const myneCards = await prisma.myneCard.findMany({
     where: {
-      user_id: user?.user_id,
+      user_id
     },
     select: {
       category: true,
