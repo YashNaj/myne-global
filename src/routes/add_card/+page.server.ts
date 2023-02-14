@@ -32,7 +32,7 @@ export const actions: Actions = {
         myneCard: {
           create: {
                category,
-               subCategory, 
+               subcategory, 
                brand, 
                size, 
                purchasedFrom, 
