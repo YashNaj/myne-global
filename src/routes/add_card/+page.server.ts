@@ -10,20 +10,23 @@ export const actions: Actions = {
     console.log("\u001b[1;31m user", user);
 
     const form = await request.formData();
-  
-    $: console.log("🚀 ~ file: +page.server.ts:13 ~ default: ~ form.category", form)
+
+    $: console.log(
+      "🚀 ~ file: +page.server.ts:13 ~ default: ~ form.category",
+      form
+    );
     const category = form.get("category");
-    const subcategory = form.get("subcategory")
-    const brand = form.get("brand"); 
-    const size = form.get("size"); 
+    const subcategory = form.get("subcategory");
+    const brand = form.get("brand");
+    const size = form.get("size");
     const purchasedFrom = form.get("purchasedFrom");
     const purchasedValue = form.get("purchasedValue");
     const description = form.get("description");
     const profile = await prisma.profile.findUnique({
-      where:{
+      where: {
         user_id: user.userId,
-      }
-    })
+      },
+    });
     const newCard = await prisma.profile.update({
       where: {
         user_id: user.userId,
@@ -31,22 +34,29 @@ export const actions: Actions = {
       data: {
         myneCard: {
           create: {
-               category,
-               subcategory, 
-               brand, 
-               size, 
-               purchasedFrom, 
-               purchasedValue, 
-               description
+            category,
+            subcategory,
+            brand,
+            size,
+            purchasedFrom,
+            purchasedValue,
+            description,
           },
         },
       },
-    
     });
-    $: console.log("🚀 ~ file: +page.server.ts:46 ~ default: ~ newCard", newCard)
-    return {message: "Card Added Successfully!"}
+    let success = true;
     prisma.$disconnect();
+    return {
+      message: "Card Added Successfully!",
+      success,
+      category : " ",
+      subcategory: "",
+      brand : " ",
+      size : " ",
+      purchasedFrom : " ",
+      purchasedValue :" ",
+      description : " ",
+    };
   },
-
-  }
-    
+};
