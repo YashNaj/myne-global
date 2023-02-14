@@ -44,7 +44,7 @@ export const actions: Actions = {
     
     });
     $: console.log("🚀 ~ file: +page.server.ts:46 ~ default: ~ newCard", newCard)
-    return {message: "ok"}
+    return {message: "Card Added Successfully!"}
     prisma.$disconnect();
   },
 
