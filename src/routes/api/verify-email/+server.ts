@@ -2,9 +2,11 @@
 import { auth } from "$lib/server/lucia";
 import { error, redirect, type RequestHandler } from "@sveltejs/kit";
 import { z } from "zod";
-import * as prisma from '$lib/server/db';
+import { Parsers } from '$lib/schemas/pasrser';
+import {Prisma , PrismaClient } from "@prisma/client"
+const prisma = new PrismaClient();
 export const GET: RequestHandler = async ({ url, user }) => {
-  console.log(token);
+  const { token } = Parsers.params(url, z.object({ token: z.string() }));
   try {
     const request = await prisma.emailVerificationRequest.findUnique({
       where: {

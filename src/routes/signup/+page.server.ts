@@ -2,12 +2,14 @@ import { fail, redirect } from "@sveltejs/kit";
 import { auth } from "$lib/server/lucia";
 import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
-import { PrismaClient } from "@prisma/client";
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { page } from "$app/stores";
-import * as prisma from "$lib/server/db";
+import { PrismaClient, Prisma } from "@prisma/client";
+const prisma = new PrismaClient();
+
 const origin = "https://myneglobal.com" || "http://localhost:5173";
+
 const sendEmailVerificationLink = async (
   user: string,
   origin: string,
@@ -21,22 +23,15 @@ const sendEmailVerificationLink = async (
     },
     data: {
       emailVerificationRequest: {
-        upsert: {
-          create: {
-            id: user.userId,
-            email,
-            expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
-          },
-          update: {
-            id: user.userId,
-            email,
-            expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
-          },
+        create: {
+          id: user.userId,
+          email,
+          expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
         },
       },
     },
   });
-  const verificationRequest = await prisma.EmailVerificationRequest.findUnique({
+  const verificationRequest = await prisma.emailVerificationRequest.findUnique({
     where: {
       id: user.userId,
     },
@@ -45,9 +40,7 @@ const sendEmailVerificationLink = async (
     },
   });
   const token = verificationRequest?.token;
-  console.log("token", verificationRequest);
   const href = `${origin}/api/verify-email?token=${token}`;
-  console.log(href);
   const buttonSlug = `<a href= "${href}"> Verify Here </a>`;
   const data = {
     to: email, // Change to your recipient
@@ -56,7 +49,6 @@ const sendEmailVerificationLink = async (
     text: "Click the link to verify",
     html: buttonSlug,
   };
-  console.log(2, origin, request);
   try {
     await sgMail.send(data);
     console.log("Sent message");
@@ -83,7 +75,6 @@ export const actions: Actions = {
     const phone = form.get("phone");
     const birthday = form.get("birthday");
     const valid = false;
-    console.log(form);
     if (
       !email ||
       !password ||
@@ -105,37 +96,32 @@ export const actions: Actions = {
           valid,
         },
       });
-      const profileUpsert = await prisma.user.upsert({
+
+      console.log("🚀 ~ file: +page.server.ts:102 ~ default: ~ user", user);
+      const session = await auth.createSession(user?.userId);
+      locals.setSession(session);
+
+      const profileUpsert = await prisma.user.update({
         where: {
           id: user.userId,
         },
         data: {
-          Profile: {
-            upsert: {
-              create: {
-                firstName,
-                lastName,
-                country,
-                phone,
-                postalZip,
-                birthday,
-              },
-              update: {
-                firstName,
-                lastName,
-                country,
-                phone,
-                postalZip,
-                birthday,
-              },
+          profile: {
+            create: {
+              firstName,
+              lastName,
+              country,
+              phone,
+              postalZip,
+              birthday,
             },
           },
         },
       });
       console.log(profileUpsert);
-      const session = await auth.createSession(user?.userId);
-      locals.setSession(session);
+      await sendEmailVerificationLink(user, origin, email);
       console.log("success");
+      locals.setSession(session);
     } catch (error) {
       if (error instanceof LuciaError) {
         return fail(400), { message: error.message };
