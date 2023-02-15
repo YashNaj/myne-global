@@ -1,38 +1,33 @@
 <script lang="ts">
-	import springPress, { horizontalSlide } from '$lib/animationActions';
-	import postcss from 'postcss';
-	import { Icon } from 'svelte-hero-icons';
-	import { slide } from 'svelte/transition';
-	export let title = '';
-	export let link = '';
-	export let icon = '';
-	export let background = '';
+  import springPress, { horizontalSlide } from "$lib/animationActions";
+  import postcss from "postcss";
+  import { Icon } from "svelte-hero-icons";
+  import { slide } from "svelte/transition";
+  export let title = "";
+  export let link = "";
+  export let icon = "";
+  export let background = "";
 </script>
 
-<a
-	href="/{link}"
-	class="w-auto h-40 relative {background}  btn normal-case  rounded-lg  shadow-lg p-2"
->
-	<h1 class="h-full text-secondary w-full  leading-10">
-		{title}
-	</h1>
-	<div class="h-auto w-auto z-[0] flex justify-center content-ce">
-		<Icon
-			src={icon}
-			color="white"
-			size="90px"
-			class={'opacity-20 absolute  bottom-[1rem] right-[1rem] z-0'}
-		/>
-	</div>
-</a>
+<div class="wave btn  normal-case t h-[100px] w-[175px] relative shadow-xlg">
+  <a href="/${link}">
+    <Icon
+      src={icon}
+      color="#002d72"
+      size="30px"
+      class={"opacity-10 absolute  bottom-[.25rem] right-[.5rem] z-0"}
+    />
+
+    <p class="flex w-full justify-start text-left text-2xl pt-7 z-1">
+      {title}
+    </p>
+  </a>
+</div>
 
 <style lang="postcss">
-	.square {
-		width: 100%;
-		aspect-ratio: 1/1;
-		box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;	}
-	h1 {
-		font-size: 40px;
-		font-weight: 600;
-	}
+  .wave {
+    background-image: url("/src/lib/images/button-wave.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 </style>

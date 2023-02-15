@@ -2,10 +2,10 @@
   import { invalidateAll } from "$app/navigation";
   import springPress, { horizontalSlide } from "$lib/animationActions";
   import { spring } from "svelte/motion";
-  import { quintOut } from "svelte/easing";
+  import { backInOut } from "svelte/easing";
   import Listbox from "../../lib/components/Listbox.svelte";
-  import { blur, slide } from "svelte/transition";
-  export let myneCards:[{}] | null|  undefined; 
+  import { blur, fade, fly, scale, slide } from "svelte/transition";
+  export let myneCards: [{}] | null | undefined;
   let isOpen = false;
   let heightScale = 20;
   let drawerHeight = spring(heightScale, {
@@ -23,25 +23,28 @@
     console.log(isOpen);
     console.log($drawerHeight);
   }
-  let duration = 200;
+  let duration = 100;
 </script>
 
 <div
-  in:slide={{ delay: duration, duration, easing: quintOut }}
-  out:slide={{ delay: duration }}
+  in:slide={{ duration, easing: backInOut }}
+  out:slide
+  class="text-primary"
 >
   <div
-    in:blur={{ delay: duration, duration }}
-    out:blur={{ delay: duration }}
-    class="dashboard  card rounded-lg  text-white shadow-lg flex-col p-2   content-center  relative"
+    out:blur
+    class="dashboard   card rounded-2xl  background-color text-primary shadow-lg flex-col p-2   content-center  relative"
     style="height: {$drawerHeight}vh"
   >
     {#if isOpen}
-      <div transition:slide={{duration:200, delay: 200}} class=" flex-col h-full w-full">
+      <div
+        transition:slide
+        class=" flex-col h-full w-full"
+      >
         <div
-          in:slide={{ duration }}
-          out:slide={{ delay: duration }}
-          class="relative px-4 fixed  h-20 w-full flex align-center justify center z-1"
+          in:slide={{ duration, delay: duration }}
+          out:slide= {{delay: duration}}
+          class="relative px-4  h-20 w-full flex align-center justify center z-1"
         >
           <Listbox />
         </div>
@@ -49,22 +52,17 @@
           class="card-container place-items-center grid gap-2 grid-cols-2 grid-rows-auto w-full h-auto"
         >
           <div
-            transition:blur={{ delay: 300, duration: 350 }}
+            transition:scale={{ delay: 200, easing: backInOut }}
             class=" square rounded-lg"
           />
-          <div
-            transition:blur={{ delay: 300, duration: 350 }}
-          >
-          
-        
-          </div>
+          <div transition:scale={{ delay: 200, easing: backInOut }} />
         </div>
         <button
-          in:slide|local={{ delay: duration, duration }}
-          out:slide|local={{ delay: duration }}
+          in:fly|local
+          out:fly|local
           on:click={() => {
-			setOpen()
-		} }
+            setOpen();
+          }}
           on:keypress={() => setOpen()}
           class="rounded-lg bg-none p-2 m-1 text-black text-xl z-50 absolute right-0 top-0 drawer-button"
         >
@@ -147,11 +145,11 @@
           class=" w-full drawer-header justify-center align-center
 		 text-center flex font-semibold text-[60px]  leading-11"
         >
-        Card Vault
+          Card Vault
         </h1>
         <button
-          in:slide={{ delay: duration, duration }}
-          out:slide={{ delay: duration }}
+          in:fly={{ delay: duration, duration }}
+          out:fly={{ delay: duration }}
           use:springPress
           on:click={() => setOpen()}
           on:keypress={() => setOpen()}
@@ -236,9 +234,6 @@
     aspect-ratio: 1/1;
     background-color: white;
   }
-  .dashboard{
-	background-color: #5d6169;
-  }
   .drawer-button {
     text-decoration: none;
     background: none;
@@ -248,5 +243,28 @@
   }
   .card-container {
     overflow: scroll !important;
+  }
+  .background-color {
+    background: hsla(216, 46%, 19%, 1);
+
+    background: linear-gradient(
+      0deg,
+      hsla(216, 46%, 19%, 1) 0%,
+      hsla(221, 100%, 21%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+      0deg,
+      hsla(216, 46%, 19%, 1) 0%,
+      hsla(221, 100%, 21%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+      0deg,
+      hsla(216, 46%, 19%, 1) 0%,
+      hsla(221, 100%, 21%, 1) 100%
+    );  
+    color: 	hsl(216, 100%, 98%);
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   }
 </style>

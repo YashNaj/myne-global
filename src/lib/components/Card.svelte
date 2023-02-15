@@ -18,7 +18,7 @@
 
 
 
-  <div class="card-item bg-white rounded-2xl shadow-2xl w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem]    z-2 ">
+  <div class="card-item bg-white rounded-2xl shadow-2xl w-72 2xl:[12rem] xl:w-[10rem] lg:w-[8.2rem] md:w-[9rem] h-[20rem] lg:h-[14rem] z-2 ">
     <div class="w-full h-[50%] bg-error rounded-t-2xl  ">
       <div class="w-full h-full  p-3">
         <div class="upload-pictures w-full h-full rounded-md shadow-md">

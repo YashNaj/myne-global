@@ -7,6 +7,9 @@
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
+  import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+  register();
 
   export let data: LayoutData;
   const isUser = data?.isUser;
@@ -41,9 +44,9 @@
         </a>
       </div>
       <div class="flex-none lg:hidden">
-        <label for="my-drawer-3" class="btn btn-square btn-ghost">
+        <label for="my-drawer-3" class="btn btn-square btn-ghost text-white">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/200`0/svg"
             color="white"
             fill="white"
             viewBox="0 0 24 24"
@@ -59,7 +62,7 @@
       </div>
       <div class="flex-none hidden lg:block">
         <ul
-          class="menu menu-horizontal w-full  flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white"
+          class="menu menu-horizontal w-full  bg-primary flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white"
         >
           <!-- Navbar menu content here -->
           <div class="flex">
@@ -95,10 +98,9 @@
         </ul>
       </div>
     </div>
-    <main class=" h-[96vh] w-full lg:relative bg-primary">
+    <main class=" h-[96vh] w-full lg:relative text-primary">
       <slot />
     </main> 
-    <Footer2/>
   </div>
   
 
@@ -115,6 +117,7 @@
     </ul>
   </div>
 </div>
+<Footer2/>
 
 <style lang="postcss">
   :global(.gradient-background) {
@@ -124,5 +127,8 @@
       rgba(0, 45, 114, 1) 10%,
       rgba(255, 255, 255, 1) 10%
     );
+  }
+  :global(main){
+    background-color: 	hsl(216, 100%, 98%);
   }
 </style>

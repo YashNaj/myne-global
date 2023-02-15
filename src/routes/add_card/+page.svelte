@@ -31,6 +31,7 @@
   function pageDown() {
     pageCount--;
   }
+
   $: console.log(pageCount);
   //testing button
 
@@ -166,8 +167,8 @@
   }
 </script>
 
-<div class=" w-full px-2 pb-4 h-auto relative rounded-lg">
-  <h1 class="flex text-white font-bold">Add A Card | Enter Card Info</h1>
+<div class=" w-full px-2 pb-4 h-auto relative rounded-lg scale-90">
+  <h1 class="flex text-primary font-bold">Add A Card | Enter Card Info</h1>
   <div
     class="card-list w-full flex justify-center pt-10 content-center relative h-80 "
   >
@@ -191,7 +192,7 @@
   <div class="flex w-full justify-center">
     <form
       method="POST"
-      class="h-[23rem] w-full p-4 pt-40 bg-white text-black flex flex-col justify-between  rounded-lg md:w-[30rem] lg:w-[40rem]"
+      class="h-[23rem] form-gradient w-full p-4 pt-40 form-g text-white flex flex-col justify-between  rounded-lg md:w-[30rem] lg:w-[40rem]"
       use:enhance
       class:exitForm={sentCard === true}
       class:comeBack={success === true}
@@ -410,7 +411,7 @@
             <button
               type="button"
               on:click={pageDown}
-              class="btn btn-secondary normal-case shadow-sm flex-1 "
+              class="btn btn-secondary normal-case shadow-lg flex-1 "
             >
               Back</button
             >
@@ -419,7 +420,7 @@
             <button
               type="button"
               on:click={pageUp}
-              class="btn btn-primary normal-case shadow-sm flex-1 "
+              class="btn btn-primary normal-case shadow-lg flex-1 "
             >
               Next
             </button>
@@ -552,5 +553,30 @@
       transform: translateY(0);
       opacity: 1;
     }
+  }
+  .form-gradient {
+    background: hsla(216, 74%, 79%, 1);
+
+    background: linear-gradient(
+      225deg,
+      hsla(216, 74%, 79%, 1) 0%,
+      hsla(206, 100%, 91%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+      225deg,
+      hsla(216, 74%, 79%, 1) 0%,
+      hsla(206, 100%, 91%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+      225deg,
+      hsla(216, 74%, 79%, 1) 0%,
+      hsla(206, 100%, 91%, 1) 100%
+    );
+
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
 </style>

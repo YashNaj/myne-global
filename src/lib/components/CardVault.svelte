@@ -5,11 +5,9 @@
   } from "$lib/animationActions";
   import { quintOut } from "svelte/easing";
   import { fly } from "svelte/transition";
-
   import CardFlippable from "./CardFlippable.svelte";
   export let myneCards:[{}] | null|  undefined; 
 </script>
-  $: myneCards = myneCards
 <div
   in:fly={{ x: -1000, duration: 100, delay: 150 }}
   out:fly={{ x: 1000, duration: 150 }}
@@ -52,7 +50,7 @@
             grid grid-cols-4 grid-rows-auto 2xl:gap-1 xl:gap-2 lg:gap-[1rem] 2xl:grid-cols-7 xl:grid-cols-7 lg:grid=cols-7 md:grid-cols-7 place-items-center rounded-xl p-3 glass overflow-y-auto"
         >
         {#each myneCards as myneCard}
-          <CardFlippable {...myneCard} />
+          <CardFlippable {...myneCard}  />
       {/each}
           <!--         <Card/>
               <Card/>
@@ -77,11 +75,9 @@
 </div>
 
 <style lang="postcss">
-  .vault,
-  .vault-content {
-    background-color: rgb(87, 87, 87);
-  }
-  .vault-cards-scroll-content {
-    background-color: gray;
+
+  .background-color{
+    background-color: 	hsl(216, 100%, 98%);
+
   }
 </style>
