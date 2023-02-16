@@ -10,7 +10,7 @@
 </script>
 
 <div class="wave btn  normal-case t h-[100px] w-[175px] relative shadow-xlg">
-  <a href="/${link}">
+  <a href="/{link}">
     <Icon
       src={icon}
       color="#002d72"

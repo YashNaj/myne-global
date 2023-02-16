@@ -18,16 +18,28 @@ const anyoneAllowed = [
   "/api/addCard"
 ]; 
 export const load = handleServerSession((async ({ url, locals}) => {
-  
+  const { session, user } = await locals.validateUser();
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
+  const  profile  = await prisma.profile.findUnique({
+    where:{
+      user_id : user.userId
+    },
+    select: {
+      firstName: true,
+      lastName: true,
+    }
+  })
+  console.log(profile)
+
+
+
   if (onUnauthedRoute) return {};
-  const { session, user } = await locals.validateUser();
   if (!session) {
     throw redirect(303, "/signin");
   }
-  if (user.valid) return { isUser:true};
+  if (user.valid) return { isUser:true, profile};
   else throw redirect(302, "/unverified-email");
 
 }) satisfies LayoutServerLoad)

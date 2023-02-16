@@ -7,13 +7,13 @@
   import type { PageData, PageServerData } from "../$types";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   export let data: PageData;
+  console.log("🚀 ~ file: +page.svelte:10 ~ data", data)
   handleSession(page);
   export let myneCards = data?.myneCards;
-  console.log("🚀 ~ file: +page.svelte:12 ~ myneCards", myneCards)
-  
+ 
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2">
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 ">
   <Dashboard myneCards = {myneCards} />
   <div class = 'quick-cards w-full flex flex-col justify-center content-center bg-secondary rounded-2xl h-[300px] mt-2'>
     <h1 class = 'pt-5 pl-6 text-3xl w-full flex justify start font-semibold '> 
@@ -42,14 +42,13 @@
           <swiper-slide>
             <CardFlippable/>
           </swiper-slide>
-      
         </swiper-container>
       </div>
     </div>
   </div>
   <DashboardFunctions/>
 </div>
-<div class = 'hidden md:flex w-full h-full justify-center px-2'>
+<div class = 'hidden md:flex w-full h-full p-9 flex flex-col'>
   <HomeTabs myneCards = {myneCards}/>
 </div>
 <!--  -->

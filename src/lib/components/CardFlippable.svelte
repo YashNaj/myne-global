@@ -76,14 +76,14 @@
 
 <div
   class:flipped
-  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-80 w-full h-ful"
+  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] w-[15rem] "
   on:click={() => (flipped = !flipped)}
   on:keydown={() => (flipped = !flipped)}
   class:sendCard="{sentCard === true && success  === null }"
   class:comeBack = "{success === true}"
 
 >
-  <div class="flip-card p-2  w-full h-full rounded-2xl  aspect-[5/7]   " 
+  <div class="flip-card  w-full rounded-2xl  aspect-[5/7]   " 
   style = 'background-color = white '>
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
       <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
@@ -240,9 +240,9 @@
           </div>
         </div>
       </div>
-      <div class="flip-card-back   rounded-2xl text-black aspect-[5/7] ">
+      <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
         <div
-          class="card-item   bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
+          class="card-item  bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
         >
           <div class="flex flex-col rounded-2xl w-full h-full justify-between whole-card ">
             <div class=" flex flex-col flex-1 w-full h-full">
