@@ -20,7 +20,7 @@
 </div>
 
 <div
-  class="auth-container bg-white bg-none desktop-background w-screen h-screen flex-col flex-wrap justify-start content-center overflow-hidden pt-4 hidden lg:flex"
+  class="auth-container bg-none desktop-background w-screen h-screen flex-col flex-wrap justify-start content-center overflow-hidden pt-4 hidden lg:flex"
 >
 <div class = 'absolute bottom-[20rem] font-bold text-3xl text-black'>
   SOMETHING COOL CAN GO IN THIS WHITESPACE 
@@ -51,6 +51,10 @@
 {/if}
 
 <style lang="postcss">
+  .auth-container{
+    background-color: 	hsl(216, 100%, 90%);
+
+  }
   .auth-box {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
       rgba(0, 0, 0, 0.22) 0px 15px 12px;
