@@ -36,7 +36,7 @@ export const load = handleServerSession((async ({ url, locals}) => {
   if (!session) {
     throw redirect(303, "/signin");
   }
-  if (user.valid) return { isUser:true, profile};
+  if (user?.valid) return { isUser:true, profile};
   else throw redirect(302, "/unverified-email");
 
 }) satisfies LayoutServerLoad)
