@@ -33,9 +33,6 @@
   
 </script>
 
-  <!-- <button class = 'btn btn-primary absolute top-o' on:click={()=> open = !open}>
-        {open ? "close" : "open"}
-</button> -->
     <TabGroup defaultIndex={0} class="flex flex-col w-full h-full justify-center rounded-lg ">
       <TabList
         class={"flex font-bold justify-center text-primary rounded-lg p-1"}
