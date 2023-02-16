@@ -41,7 +41,7 @@ export const load = handleServerSession((async ({ url, locals}) => {
       }
     })  
     return { isUser:true, profile}
-  };
+  }
   else throw redirect(302, "/unverified-email");
 
 }) satisfies LayoutServerLoad)
