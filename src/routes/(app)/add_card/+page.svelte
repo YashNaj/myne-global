@@ -1,14 +1,14 @@
 <script lang="ts">
   import Select from "svelte-select";
 
-  import Transition from "./../../lib/components/Transition.svelte";
+  
   import { page } from "$app/stores";
   import type { LayoutServerData } from "../$types";
   import { onDestroy } from "svelte";
   import { createSearchStore, searchHandler } from "$lib/search";
+  import { myneMasterBrandsAndBreeds } from './../../../index';
   import { enhance } from "$app/forms";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
-  import { myneMasterBrandsAndBreeds } from "../../index";
   import type { PageData, Snapshot } from "./$types";
   import { fly, slide } from "svelte/transition";
   import { firstCapital } from "$lib/caps";

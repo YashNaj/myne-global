@@ -4,7 +4,7 @@
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
   import HomeTabs from "$lib/components/HomeTabs.svelte";
-  import type { PageData, PageServerData } from "./$types";
+  import type { PageData, PageServerData } from "../$types";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   export let data: PageData;
   handleSession(page);
