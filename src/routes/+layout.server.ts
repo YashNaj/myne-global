@@ -22,19 +22,16 @@ export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
+  console.log(user);
   const  profile  = await prisma.profile.findUnique({
     where:{
-      user_id : user.userId
+      user_id : user?.userId
     },
     select: {
       firstName: true,
       lastName: true,
     }
   })
-  console.log(profile)
-
-
-
   if (onUnauthedRoute) return {};
   if (!session) {
     throw redirect(303, "/signin");
