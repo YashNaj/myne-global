@@ -1,7 +1,6 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { enhance } from "$app/forms";
-    import Carousel from "./../../lib/components/Carousel.svelte";
     import { page } from "$app/stores";
     import { handleSession } from "@lucia-auth/sveltekit/client";
     import type { LayoutData } from "../$types";
