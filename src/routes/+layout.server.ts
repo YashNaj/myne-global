@@ -24,17 +24,7 @@ export const load = handleServerSession((async ({ url, locals}) => {
   );
   if (onUnauthedRoute) return {};
   const { session, user } = await locals.validateUser();
-  const user_id: string | null | undefined = user.userId
-  console.log(user);
-  const profile = await prisma.profile.findUnique({
-    where:{
-      user_id
-    },
-    select: {
-      firstName: true,
-      lastName: true,
-    }
-  })
+
   if (!session) {
     throw redirect(303, "/signin");
   }
