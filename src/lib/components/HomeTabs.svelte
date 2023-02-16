@@ -33,7 +33,7 @@
   
 </script>
 
-    <TabGroup defaultIndex={0} class="flex flex-col w-full h-full justify-center rounded-lg ">
+    <TabGroup defaultIndex={0} class="flex flex-col h-full justify-center rounded-lg ">
       <TabList
         class={"flex font-bold justify-center text-primary rounded-lg p-1"}
       >

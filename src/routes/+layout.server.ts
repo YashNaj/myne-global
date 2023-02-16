@@ -23,7 +23,7 @@ export const load = handleServerSession((async ({ url, locals}) => {
     url.pathname.startsWith(route)
   );
   console.log(user);
-  const  profile  = await prisma.profile.findUnique({
+  const profile = await prisma.profile.findUnique({
     where:{
       user_id : user?.userId
     },

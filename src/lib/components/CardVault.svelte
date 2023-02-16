@@ -10,11 +10,11 @@
 </script>
 <div
 
-  class="vault h-full w-full rounded-3xl k p-4 relative"
+  class="vault h-full w-full rounded-3xl k px-4 py-2 overflow-y-hidden"
 >
-  <div class="vault-content absolute h-[100%] flex flex-col w-full rounded-2xl text-primary "
+  <div class="vault-content h-[100%] flex flex-col w-full rounded-2xl text-primary "
   transition:fly={{x: -1000}}>
-    <div class="vault-title h-auto  min-w-full flex px-4  justify-between top-0">
+    <div class="vault-title max-h-full min-w-full flex px-4  justify-between top-0">
       <h1
         class="font-bold flex justify-start  text-[5rem] md:text-[3rem] "
       >
@@ -41,12 +41,10 @@
         </ul>
       </div>
     </div>
-    <div class = 'w-full h-full relative '>
-      <div class = 'flex flex-wrap gap-4 overflow-y-auto h-[90%] justify-center p-2 '>
+          <div class = 'flex flex-wrap justify-center overflow-y-auto h-[85%] gap-2 py-2 top-0'>
         {#each myneCards as myneCard}
         <CardFlippable {...myneCard}  />
     {/each}
-  </div>
 
     </div>
 

@@ -37,7 +37,7 @@
 
 <div class="drawer drawer-end ">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col  w-full  lg:w-auto overflow-hidden">
+  <div class="drawer-content  w-full  h-auto lg:w-auto overflow-hidden">
     <div class="navbar bg-primary">
       <div class="px-2 mx-2 font-bold text-white w-full">
         <a href="/">
@@ -68,10 +68,14 @@
           <!-- Navbar menu content here -->
           <div class="flex">
             {#each menuItems as menuItem}
-              <li class="hidden"><a href="/addCard">{menuItem}</a></li>
+              <li class="hidden"><a href="/`addCard">{menuItem}</a></li>
             {/each}
-            <a href = '/add_card' alt = 'Add a Card' class = 'btn btn-success flex normal-case text-white mr-5'>
-              <Icon src = {Plus} color = 'white' size= '12px' class = 'mr-1'/>
+            <a
+              href="/add_card"
+              alt="Add a Card"
+              class="btn btn-success flex normal-case text-white mr-5"
+            >
+              <Icon src={Plus} color="white" size="12px" class="mr-1" />
               Add a Card
             </a>
             {#if data?.isUser}
@@ -103,9 +107,12 @@
         </ul>
       </div>
     </div>
-    <main class=" h-[96vh] w-full lg:relative text-primary">
+    <main class=" h-[96vh] w-full flex justify-center flex-col overflow-y-hidden text-primary">
       <slot />
+      
     </main>
+    <Footer2 />
+
   </div>
 
   <div class="drawer-side flex flex-col ">
@@ -121,9 +128,20 @@
     </ul>
   </div>
 </div>
-<Footer2 />
 
 <style lang="postcss">
+  :global(html) {
+    overflow: scroll;
+  }
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+    background: #0062ff;
+  }
+
   :global(body) {
     font-family: futura-pt;
     background: linear-gradient(
@@ -132,7 +150,7 @@
       rgba(255, 255, 255, 1) 10%
     );
   }
-  :global(ma  in) {
+  :global(main) {
     background-color: hsl(216, 100%, 98%);
   }
 </style>
