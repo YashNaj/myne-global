@@ -36,7 +36,7 @@
     </div>
     <div class = 'w-full flex justify-center content-center flex-wrap relative'>
       <div
-        class="auth-box rounded-xl shadow-lg w-[40%] h-[50%] card bg-primary p-4 absolute bottom-[20rem] right-[5rem] "
+        class="auth-box rounded-xl shadow-lg w-[40%] lg:h-[80%] h-[50%] card bg-primary p-4 absolute lg:bottom-[5rem] bottom-[20rem] right-[5rem] "
       >
         <slot />
       </div>
