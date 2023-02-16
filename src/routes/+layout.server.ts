@@ -28,7 +28,20 @@ export const load = handleServerSession((async ({ url, locals}) => {
   if (!session) {
     throw redirect(303, "/signin");
   }
-  if (user.valid) return { isUser:true, profile};
+  if (user.valid){
+    const user_id = user.userId
+    console.log(user);
+    const profile = await prisma.profile.findUnique({
+      where:{
+        user_id
+      },
+      select: {
+        firstName: true,
+        lastName: true,
+      }
+    })  
+    return { isUser:true, profile}
+  };
   else throw redirect(302, "/unverified-email");
 
 }) satisfies LayoutServerLoad)
