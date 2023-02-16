@@ -19,13 +19,14 @@ const anyoneAllowed = [
 ]; 
 export const load = handleServerSession((async ({ url, locals}) => {
   const { session, user } = await locals.validateUser();
+  const user_id = user.userId
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
   console.log(user);
   const profile = await prisma.profile.findUnique({
     where:{
-      user_id : user.userId
+      user_id
     },
     select: {
       firstName: true,
