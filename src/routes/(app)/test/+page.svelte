@@ -1,4 +1,4 @@
-<script lang='ts'>
+<!-- <script lang='ts'>
   import CardFlippable from "$lib/components/CardFlippable.svelte";
 import DesktopWidget from "$lib/components/DesktopWidget.svelte";
 
@@ -59,4 +59,4 @@ import DesktopWidget from "$lib/components/DesktopWidget.svelte";
     width: 300px;
     aspect-ratio: 5/7;
   }
-</style>
+</style> -->
