@@ -22,6 +22,7 @@ export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
+  if (onUnauthedRoute) return {};
   const { session, user } = await locals.validateUser();
   const user_id: string | null | undefined = user.userId
   console.log(user);
@@ -34,7 +35,6 @@ export const load = handleServerSession((async ({ url, locals}) => {
       lastName: true,
     }
   })
-  if (onUnauthedRoute) return {};
   if (!session) {
     throw redirect(303, "/signin");
   }
