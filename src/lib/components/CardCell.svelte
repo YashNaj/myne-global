@@ -12,7 +12,7 @@
 >
   <div class=" w-full h-full">
     <div
-      class="card-field-label label py-0 font-bold text-lg w-full flex {justifyCell}"
+      class="card-field-label label py-0 font-bold text-lg   w-full flex {justifyCell}"
     >
       {label}
     </div>

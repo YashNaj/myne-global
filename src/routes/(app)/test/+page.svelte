@@ -234,7 +234,15 @@
       justify: 'justify-start'
 
     },
+    {
+      label: "Pictures",
+      location: "general_3",
+      value: marketPrice,
+      justify: 'justify-start'
+      
+    },
     ]
+
   
   export let backgroundColor: keyof typeof colors;
   $: backgroundColor = category.toLowerCase();
@@ -275,6 +283,10 @@
   });
   export let sentCard = false;
   console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success);
+
+  $: cardSide = 'front'
+  $: console.log("🚀 ~ file: +page.svelte:287 ~ cardSide", cardSide)
+
 </script>
 
 <a href="/test2" class="btn btn-error normal-case"> test 2</a>
@@ -295,9 +307,11 @@
             class="front-parent card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1 bg-white"
           >
             <div
+            class:no-display='{cardSide === 'back'}'
               class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
             >
               <button
+                
                 class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case"
               >
                 <Icon
@@ -311,6 +325,8 @@
               <button
                 class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
                 on:click={() => (flipped = !flipped)}
+                on:click={()=> cardSide = 'back'}
+
               >
                 <Icon
                   size="12px"
@@ -365,6 +381,7 @@
               <button
                 class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
                 on:click={() => (flipped = !flipped)}
+                on:click={()=> cardSide = 'front'}
               >
                 <Icon
                   size="12px"
@@ -439,6 +456,9 @@
 </div>
 
 <style lang="postcss">
+  .no-display{
+    display:none
+  }
   swiper-container {
     width: 100%;
   }
