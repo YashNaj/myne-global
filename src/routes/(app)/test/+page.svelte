@@ -461,6 +461,7 @@
   }
   swiper-container {
     width: 100%;
+    touch-action: none;
   }
   swiper-slide {
     background-position: center;
