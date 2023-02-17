@@ -15,6 +15,7 @@ const anyoneAllowed = [
   "/verify-email",
   "/unverified-email",
   "/test",
+  "/test2",
   "/api/addCard"
 ]; 
 export const load = handleServerSession((async ({ url, locals}) => {

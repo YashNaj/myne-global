@@ -10,7 +10,7 @@
 </script>
 <div
 
-  class="vault h-full w-full rounded-3xl k px-4 py-2 overflow-y-hidden"
+  class="vault h-full w-full rounded-3xl k px-4 py-2"
 >
   <div class="vault-content h-[100%] flex flex-col w-full rounded-2xl text-primary "
   transition:fly={{x: -1000}}>

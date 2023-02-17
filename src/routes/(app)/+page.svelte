@@ -13,7 +13,7 @@
  
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex ">
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex flex-col ">
   <Dashboard myneCards = {myneCards} />
   <div class = 'quick-cards w-full flex flex-col justify-center content-center bg-secondary rounded-2xl h-[300px] mt-2'>
     <h1 class = 'pt-5 pl-6 text-3xl w-full flex justify start font-semibold '> 

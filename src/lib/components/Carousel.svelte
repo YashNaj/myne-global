@@ -1,19 +1,17 @@
 <script lang="ts">
   import UploadWidget from "./UploadWidget.svelte";
-  let size: any | undefined | null ; 
-  let url: string | null; 
+  let size: any | undefined | null;
+  let url: string | null;
 </script>
 
-<div class="h-full carousel rounded-box z-3">
-  <div class="carousel-item w-full">
-    <!-- <img
-      src="https://picsum.photos/100"
-      class="w-full"
-      alt="Tailwind CSS Carousel component"
-    /> -->
-    <UploadWidget url = {url} size ={size }/>
+<div
+  class="h-full opacity-95 w-full carousel rounded-box z-3 flex justify-center"
+>
+  <div
+    class="carousel-item w-full h-full flex justify-center content-center flex-wrap bg-black opacity-95"
+  >
+    <UploadWidget {url} {size} />
   </div>
-
 </div>
 
 <style lang="postcss">

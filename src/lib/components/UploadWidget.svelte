@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { supabase } from "$lib/supabaseClient";
   import Spinner from "./Spinner.svelte";
-
+  import { Icon, PlusCircle } from "svelte-hero-icons";
   export let size: number;
   export let url: string;
   const loading = Spinner;
@@ -76,14 +76,14 @@
   {:else}
     <div class="avatar no-image" style="height: {size}px, width: {size}px" />
   {/if}
-  <div style="width: {size}px">
-    <label class="btn btn-secondary block normal-case" for="single">
+  <div class = 'text-white' style="width: {size}px">
+    <label class="btn btn-ghost normal-case flex flex-col justify-center cursor-pointer" for="single">
       Upload Files
+      <Icon src = {PlusCircle} size = '23px' color= 'white'/>
       {#if uploading}
         <Spinner />
       {/if}
     </label>
-
     <span style="display:none">
       <input
         type="file"
