@@ -6,17 +6,15 @@
   import Carousel from "$lib/components/Carousel.svelte";
   import DesktopWidget from "$lib/components/DesktopWidget.svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
+  import { generalFields, watchFields, jewelryFields } from "../../forms";
+  
   let expand = false;
-  //card field box variabes
-  export let padding = "";
-  export let justifyCell = "justify-start";
-  export let label = "This is a test";
-  export let value = "Testing Value";
-   //card variables
+
+  //card variables
   export let isStolen = "";
   export let isHeirloom = "";
   export let pictures = "";
-  export let category = "";
+  export let category = "jewele";
   export let subcategory = "";
   export let brand = "";
   export let breed = "";
@@ -88,162 +86,41 @@
   export let weight = "";
   export let year = "";
   export let success: boolean | null = null;
-  export let marketPrice = ''
-  export let jewelryFieldsFront = [
-    {
-      label: "Category",
-      location: "top_left",
-      value: category,
-      justify: 'justify-start'
-    },
-    {
-      label: "Subcategory",
-      location: "top_right",
-      value: subcategory,
-      justify: 'justify-end'
+  export let marketPrice = "";
 
-    },
-    {
-      label: "Brand",
-      location: "middle_left",
-      value: brand,
-      justify: 'justify-start'
+ let formFields:[{}] = [{}];
+  if (category === "jewelry") {
+    formFields = jewelryFields;
+  }
+  else if (category === "watch") {
+    formFields = watchFields;
+  }
+    $: category = category;
 
-    },
-    {
-      label: "Reference",
-      location: "middle_right",
-      value: brand_reference,
-      justify: 'justify-end'
-
-    },
-    {
-      label: "Model",
-      location: "bottom_left",
-      value: model,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Serial",
-      location: "bottom_right",
-      value: serial,
-      justify: 'justify-end'
-
-    }
-  ]
-  let jewelryFieldsBackOne = [
-    {
-      label: "Material",
-      location: "back_1",
-      value: material,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Size",
-      location: "back_2",
-      value: size,
-      justify: 'justify-end'
-
-    },
-    {
-      label: "Carat/Weight",
-      location: "back_3",
-      value: carat_weight,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Cut/Shape",
-      location: "back_4",
-      value: cut,
-      justify: 'justify-end'
-
-    },
-    {
-      label: "Color",
-      location: "back_5",
-      value: color,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Clarity",
-      location: "back_6",
-      value: clarity,
-      justify: 'justify-end'
-
-    }
-  ] 
-  let jewelryFieldsBackTwo = [
-    {
-      label: "Stone",
-      location: "back_7",
-      value: stone,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Laser Marking",
-      location: "back_8",
-      value: laser_inscription,
-      justify: 'justify-end'
-
-    },
-    {
-      label: "Engraving",
-      location: "back_9",
-      value: engraving,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Trademarks",
-      location: "back_10",
-      value: trademarks,
-      justify: 'justify-end'
-
-    },
-    {
-      label: "Grading Report",
-      location: "DOCUMENT",
-      value: grading_reports,
-    },
-  ]
-  let generalFields  = [ 
-    {
-      label: "Purchased From",
-      location: "general_1",
-      value: purchasedFrom,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Purchase Value",
-      location: "general_2",
-      value: purchasedValue,
-      justify: 'justify-end'
-
-    },
-    {
-      label: "Market Price",
-      location: "general_3",
-      value: marketPrice,
-      justify: 'justify-start'
-
-    },
-    {
-      label: "Pictures",
-      location: "general_3",
-      value: marketPrice,
-      justify: 'justify-end'
-      
-    },
-    ]
-
-
-  
+  $: formFields = formFields;
+  $: console.log(formFields[0]);
+  let fieldsFront;
+  $: fieldsFront = formFields[0];
+  $: console.log(
+    "🚀 ~ file: CardFlippable.svelte:248 ~ fieldsFront",
+    fieldsFront
+  );
+  let fieldsBackOne = formFields[1];
+  $: fieldsBackOne = formFields[1];
+  $: console.log(
+    "🚀 ~ file: CardFlippable.svelte:250 ~ fieldsBackOne",
+    fieldsBackOne
+  )
+  let fieldsBackTwo = formFields[2];
+  $: fieldsBackTwo = formFields[2];
+  $: console.log(
+    "🚀 ~ file: CardFlippable.svelte:252 ~ fieldsBackTwo",
+    fieldsBackTwo
+  );
+  $: console.log(
+    "🚀 ~ file: CardFlippable.svelte:242 ~ formFields",
+    formFields
+  );
   export let backgroundColor: keyof typeof colors;
   $: backgroundColor = category.toLowerCase();
   let colorKey: keyof typeof colors;
@@ -284,10 +161,10 @@
   export let sentCard = false;
   console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success);
 
-  $: cardSide = 'front'
-  $: console.log("🚀 ~ file: +page.svelte:287 ~ cardSide", cardSide)
-  $:category = category;
+  $: cardSide = "front";
+  $: console.log("🚀 ~ file: +page.svelte:287 ~ cardSide", cardSide);
 </script>
+
 <div class="full w-full h-full flex justify-center">
   <div
     class:flipped
@@ -296,7 +173,7 @@
     class:comeBack={success === true}
   >
     <div
-      class="flip-card  w-full rounded-2xl  aspect-[5/7]   "
+      class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]   "
       style="background-color = {pickedColor} "
     >
       <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
@@ -305,11 +182,10 @@
             class="front-parent card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1 bg-white"
           >
             <div
-            class:no-display='{cardSide === 'back'}'
+              class:no-display={cardSide === "back"}
               class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
             >
               <button
-                
                 class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case"
               >
                 <Icon
@@ -323,8 +199,7 @@
               <button
                 class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
                 on:click={() => (flipped = !flipped)}
-                on:click={()=> cardSide = 'back'}
-
+                on:click={() => (cardSide = "back")}
               >
                 <Icon
                   size="12px"
@@ -346,14 +221,22 @@
 
             <div class="front-bottom rounded-b-2xl">
               <div class="front-fields-grid h-full w-full px-2 py-1">
-                {#each jewelryFieldsFront as jewelryFieldFront }
-                <CardCell
-                gridClass= {jewelryFieldFront.location}
-                label={jewelryFieldFront.label}
-                value={jewelryFieldFront.value}
-                justifyCell={jewelryFieldFront.justify}
-              />
+                {#each fieldsFront?.fieldsFront as fieldFront}
+                  <CardCell
+                    gridClass={fieldFront.location}
+                    label={fieldFront.label}
+                    value={fieldFront.value}
+                    justifyCell={fieldFront.justify}
+                  />
                 {/each}
+                <!-- {#each jewelryFieldsFront as jewelryFieldFront}
+                  <CardCell
+                    gridClass={jewelryFieldFront.location}
+                    label={jewelryFieldFront.label}
+                    value={jewelryFieldFront.value}
+                    justifyCell={jewelryFieldFront.justify}
+                  />
+                {/each} -->
               </div>
             </div>
           </div>
@@ -379,7 +262,7 @@
               <button
                 class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
                 on:click={() => (flipped = !flipped)}
-                on:click={()=> cardSide = 'front'}
+                on:click={() => (cardSide = "front")}
               >
                 <Icon
                   size="12px"
@@ -391,56 +274,72 @@
             </div>
 
             <div
-              class="flex flex-col rounded-2xl w-full h-full justify-between whole-card back-card_general-grid px-2 py-3 "
+              class="flex flex-col rounded-2xl w-full h-full justify-between whole-card [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
+              rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
+              rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;]back-card_general-grid px-2 py-3 "
             >
               <div class="description back-card_general-1">
                 <CardCellDescription {description} />
               </div>
               <swiper-container
-                class="mySwiper back-card_card-general-2 h-full"
+                class="mySwiper back-card_card-general-2 h-full w-full touch-none"
                 scrollbar-hide="false"
                 grab-cursor="true"
               >
-              <swiper-slide>
-                <div class="w-full h-full back-card_card-fields-1 px-2">
-                  {#each jewelryFieldsBackOne as jewelryField }
-                  <CardCell
-                  gridClass= {jewelryField.location}
-                  label={jewelryField.label}
-                  value={jewelryField.value}
-                  justifyCell={jewelryField.justify}
-                />
-                  {/each}
-                </div>
-              </swiper-slide>
-                <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields-1 px-2">
-
-                  {#each jewelryFieldsBackTwo as jewelryField }
-                  <CardCell
-                  gridClass= {jewelryField.location}
-                  label={jewelryField.label}
-                  value={jewelryField.value}
-                  justifyCell={jewelryField.justify}
-                />
-                  {/each}
+                <swiper-slide
+                  class="text-center bg-white flex justify-center content-center"
+                >
+                  <div class="w-full h-full back-card_card-fields px-2">
+                    {#each fieldsBackOne?.fieldsBackOne as fieldBackOne}
+                      <CardCell
+                        gridClass={fieldBackOne.location}
+                        label={fieldBackOne.label}
+                        value={fieldBackOne.value}
+                        justifyCell={fieldBackOne.justify}
+                      />
+                    {/each}
+                    <!-- {#each jewelryFieldsBackOne as jewelryField}
+                      <CardCell
+                        gridClass={jewelryField.location}
+                        label={jewelryField.label}
+                        value={jewelryField.value}
+                        justifyCell={jewelryField.justify}
+                      />
+                    {/each} -->
                   </div>
                 </swiper-slide>
                 <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields-1 px-2">
-
-                  {#each generalFields as generalField }
-                  <CardCell
-                  gridClass= {generalField.location}
-                  label={generalField.label}
-                  value={generalField.value}
-                  justifyCell={generalField.justify}
-                />
-                  {/each}
+                  <div class="w-full h-full back-card_card-fields px-2">
+                    {#each fieldsBackTwo?.fieldsBackTwo as fieldBackTwo}
+                      <CardCell
+                        gridClass={fieldBackTwo.location}
+                        label={fieldBackTwo.label}
+                        value={fieldBackTwo.value}
+                        justifyCell={fieldBackTwo.justify}
+                      />
+                    {/each}
+                    <!-- {#each jewelryFieldsBackTwo as jewelryField}
+                      <CardCell
+                        gridClass={jewelryField.location}
+                        label={jewelryField.label}
+                        value={jewelryField.value}
+                        justifyCell={jewelryField.justify}
+                      />
+                    {/each} -->
                   </div>
                 </swiper-slide>
-
-    
+                <swiper-slide>
+                  <div class="w-full h-full back-card_card-fields px-2">
+                    {#each generalFields as generalField}
+                      <CardCell
+                        gridClass={generalField.location}
+                        label={generalField.label}
+                        value={generalField.value}
+                        justifyCell={generalField.justify}
+                      />
+                    {/each}
+                  </div>
+                </swiper-slide>
               </swiper-container>
               <div class="card-buttons_back back-card_general-3">
                 <CardButtonWidget />
@@ -454,25 +353,8 @@
 </div>
 
 <style lang="postcss">
-  .no-display{
-    display:none
-  }
-  swiper-container {
-    width: 100%;
-    touch-action: none;
-  }
-  swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .flip-card {
-    background-color: transparent;
-    perspective: 2000px;
-    cursor: pointer;
-    user-select: none;
+  .no-display {
+    display: none;
   }
 
   .flip-card-inner {
@@ -681,7 +563,7 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
   .back-card_general-3 {
     grid-area: 3 / 1 / 4 / 2;
   }
-  .back-card_card-fields-1 {
+  .back-card_card-fields {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -695,16 +577,16 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
   .back_2 {
     grid-area: 1 / 2 / 2 / 3;
   }
-  .back_3{
+  .back_3 {
     grid-area: 2 / 1 / 3 / 2;
   }
-  .back_4{
+  .back_4 {
     grid-area: 2 / 2 / 3 / 3;
   }
-  .back_5{
+  .back_5 {
     grid-area: 3 / 1 / 4 / 2;
   }
-  .back_6{
+  .back_6 {
     grid-area: 3 / 2 / 4 / 3;
   }
   .back_7 {
@@ -713,55 +595,35 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
   .back_8 {
     grid-area: 1 / 2 / 2 / 3;
   }
-  .back_9{
+  .back_9 {
     grid-area: 2 / 1 / 3 / 2;
   }
   .back_10 {
     grid-area: 2 / 2 / 3 / 3;
   }
-  .back_11{
+  .back_11 {
     grid-area: 3 / 1 / 4 / 2;
   }
-  .back_12{
+  .back_12 {
     grid-area: 3 / 2 / 4 / 3;
   }
 
   .general_1 {
     grid-area: 1 / 1 / 2 / 2;
   }
-  .general_2{
+  .general_2 {
     grid-area: 1 / 2 / 2 / 3;
   }
-  .general_3{
+  .general_3 {
     grid-area: 2 / 1 / 3 / 2;
   }
-  .general_4{
+  .general_4 {
     grid-area: 2 / 2 / 3 / 3;
   }
-  .general_5{
+  .general_5 {
     grid-area: 3 / 1 / 4 / 2;
   }
-  .general_6{
+  .general_6 {
     grid-area: 3 / 2 / 4 / 3;
-  }
-  swiper-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 </style>

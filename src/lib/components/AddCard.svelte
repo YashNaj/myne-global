@@ -143,10 +143,7 @@
     "🚀 ~ file: +page.svelte:88 ~ backgroundColor",
     backgroundColor
   );
-  function brandSelect() {
-    brand = options;
-    setFilterOpen();
-  }
+
 
   //initialize the brands array
 

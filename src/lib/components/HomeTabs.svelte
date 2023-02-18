@@ -28,9 +28,7 @@
     "Download Inventory",
     
   ];
-  export let myneCards:[{}] | undefined | null; 
-  console.log("🚀 ~ file: HomeTabs.svelte:31 ~ myneCards", myneCards)
-  
+  export let myneCards:[{}] | undefined | null;   
 </script>
 
     <TabGroup defaultIndex={0} class="flex flex-col h-full justify-center rounded-lg ">
