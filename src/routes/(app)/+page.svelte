@@ -19,30 +19,43 @@
     <h1 class = 'pt-5 pl-6 text-3xl w-full flex justify start font-semibold '> 
       Quick Cards
     </h1>
-    <div class = 'container h-[90%] flex justify-center content-center flex-wrap '>
+    <div class = 'container h-[90%] flex justify-center content-center flex-wrap  [box-shadow:rgba(0, 0, 0, 0.06)_0px_2px_4px_0px_inset] '>
       <div class = ' w-[90%] h-[90%]'>
-        <swiper-container class="mySwiper" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
-        slides-per-view="auto" coverflow-effect-rotate="50" coverflow-effect-stretch="0" coverflow-effect-depth="100"
+        <swiper-container class="mySwiper touch-none aspect-[5/7] bg-none rounded-[10%] w-full h-full" pagination="true"  grab-cursor="true" centered-slides="true"
+
         coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true">
-          <swiper-slide class= 'w-full'>
+          
+        <swiper-slide class= 'w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
+          '>
+          
             <CardFlippable/>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class= 'w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
+          '>
+          
             <CardFlippable/>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class= 'w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
+          '>
+          
             <CardFlippable/>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class= 'w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
+          '>
+          
             <CardFlippable/>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class= 'w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
+          '>
+          
             <CardFlippable/>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class= 'w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
+          '>
+          
             <CardFlippable/>
           </swiper-slide>
-        </swiper-container>
+
       </div>
     </div>
   </div>
@@ -51,27 +64,3 @@
 <div class = 'hidden md:flex w-full h-[95%] full py-3 px-5 flex-col overflow-y-hidden '>
   <HomeTabs myneCards = {myneCards}/>
 </div>
-<!--  -->
-<style lang='postcss'>
-  
-  swiper-container {
-    aspect-ratio: 5/7;
-    background: none;
-    border-radius: 10%;
-    width: 100%;
-    height: 100%;
-  }
-
-  swiper-slide {
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    aspect-ratio: 5/7;
-    scale: 60%;
-  }
-  .quick-cards{
-    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  }
-</style>

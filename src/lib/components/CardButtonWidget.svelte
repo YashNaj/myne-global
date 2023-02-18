@@ -52,6 +52,3 @@
     </label>
   </div>
 </div>
-
-<style lang="postcss">
-</style>

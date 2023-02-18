@@ -264,7 +264,7 @@
             <div class="w-full h-full relative">
               <div
                 class="first-selects w-full h-full absolute flex flex-col"
-                transition:fly={{ x: -1000 }}
+                transition:fly={{ x: -100 }}
               >
                 <!-- <div class="select-group "> -->
                 <Select
@@ -280,18 +280,6 @@
                   bind:justValue
                 />
 
-                <!-- <Select
-                  on:focus={resetValues}
-                  name="category"
-                  placeholder="Category"
-                  itemId="category"
-                  items={categories.map((category) => firstCapital(category))}
-                  class="select text-black w-full mt-2 "
-                  bind:justValue
-                  on:change={() => {
-                    category = justValue;
-                  }}
-                /> -->
                 {#if subcategories?.length > 0}
                   <div in:fly|local={{ duration: duration }} out:fly|local>
                     <div class="select-group">
@@ -307,14 +295,6 @@
                         bind:justValue
                       />
 
-                      <!-- <Select
-                        items={subcategories}
-                        on:focus={() => (breed = "")}
-                        name="subcategory"
-                        placeholder="Subcategory"
-                        id="subcategory"
-                        class="select text-black w-full mt-2 "
-                      /> -->
                     </div>
                   </div>
                 {/if}
@@ -324,7 +304,7 @@
             <div class="w-full h-full relative flex flex-col ">
               <div
                 class="brand-breed h-full w-full flex flex-col  absolute"
-                transition:fly={{ x: -1000 }}
+                transition:fly={{ x: -100 }}
               >
                 {#if breeds?.length > 0}
                   <Select
@@ -366,7 +346,7 @@
             <div class="w-full h-full relative">
               <div
                 class="purchased h-[100px] w-full flex flex-col absolute"
-                transition:fly={{ x: -1000 }}
+                transition:fly={{ x: -100 }}
               >
                 <input
                   type="text"
@@ -394,7 +374,7 @@
             <div class="w-full h-full relative">
               <div
                 class="description absolute  h-full w-full flex flex-col  "
-                transition:fly={{ x: -1000 }}
+                transition:fly={{ x: -100 }}
               >
                 <input
                   type="text"
@@ -414,7 +394,7 @@
             >
               <div
                 class="document-upload absolute"
-                transition:fly={{ x: -1000 }}
+                transition:fly={{ x: -100 }}
               >
                 <input
                   type="file"

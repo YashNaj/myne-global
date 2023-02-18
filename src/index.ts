@@ -531,7 +531,7 @@ export const myneMasterBrandsAndBreeds = [
         "ring",
         "wedding band",
         "other jewelry"
-      ]
+      ],
     },
     {
       "name": "watch",

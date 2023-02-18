@@ -1,28 +1,249 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
-
-  import { Icon, Photograph } from "svelte-hero-icons";
-  import Carousel from "./Carousel.svelte";
-  import type { string } from "zod";
-  import Currency from "svelte-currency-formatter";
+  import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
+  import CardCell from "$lib/components/CardCell.svelte";
+  import CardCellDescription from "$lib/components/CardCellDescription.svelte";
+  import CardFlippable from "$lib/components/CardFlippable.svelte";
+  import Carousel from "$lib/components/Carousel.svelte";
+  import DesktopWidget from "$lib/components/DesktopWidget.svelte";
+  import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
+  let expand = false;
+  //card field box variabes
+  export let padding = "";
+  export let justifyCell = "justify-start";
+  export let label = "This is a test";
+  export let value = "Testing Value";
+   //card variables
+  export let isStolen = "";
+  export let isHeirloom = "";
+  export let pictures = "";
   export let category = "";
   export let subcategory = "";
   export let brand = "";
-  export let breed: string ;
+  export let breed = "";
   export let size = "";
   export let purchasedFrom = "";
-  export let purchasedValue = " ";
+  export let purchasedValue = "";
+  export let reportedStolenDate = "";
   export let description = "";
-  export let artist = '';
-  export let brands:[] | string[] | null | undefined;
-  export let breeds:[] | string[] | null | undefined;   
-  export let subcategories:[] | string[] | null | undefined;    
-  export let success: boolean | null | undefined = null;
-  export let myneCard: {}; 
-  let pictureArray; 
+  export let crypto_token_address = "";
+  export let unique_features = "";
+  export let artist = "";
+  export let author = "";
+  export let dob = "";
+  export let body_length = "";
+  export let brand_reference = "";
+  export let caliber = "";
+  export let carat_weight = "";
+  export let case_material = "";
+  export let cOfAuth = "";
+  export let clarity = "";
+  export let color = "";
+  export let cut = "";
+  export let date = "";
+  export let dial = "";
+  export let distinguishing_features = "";
+  export let document = "";
+  export let drivetrain = "";
+  export let engine = "";
+  export let engraving = "";
+  export let exchange_address = "";
+  export let exterior_color = "";
+  export let fuel_type = "";
+  export let grading = "";
+  export let grading_reports = "";
+  export let height = "";
+  export let hotstamping = "";
+  export let interior_color = "";
+  export let invoice = "";
+  export let laser_inscription = "";
+  export let manufacturer = "";
+  export let material = "";
+  export let microchip = "";
+  export let mileage = "";
+  export let model = "";
+  export let model_yr = "";
+  export let movement_caliber = "";
+  export let other = "";
+  export let pedigree = "";
+  export let product = "";
+  export let registration_certificate = "";
+  export let release_date = "";
+  export let serial = "";
+  export let serie = "";
+  export let series = "";
+  export let shape = "";
+  export let smart_contract_address = "";
+  export let smart_contract_id = "";
+  export let stock_number = "";
+  export let stone = "";
+  export let strap_bracelet = "";
+  export let tattoo = "";
+  export let trademarks = "";
+  export let transaction = "";
+  export let transmission = "";
+  export let url = "";
+  export let valuation_report = "";
+  export let vin = "";
+  export let wallet = "";
+  export let weight = "";
+  export let year = "";
+  export let success: boolean | null = null;
+  export let marketPrice = ''
+  export let jewelryFieldsFront = [
+    {
+      label: "Category",
+      location: "top_left",
+      value: category,
+      justify: 'justify-start'
+    },
+    {
+      label: "Subcategory",
+      location: "top_right",
+      value: subcategory,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Brand",
+      location: "middle_left",
+      value: brand,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Reference",
+      location: "middle_right",
+      value: brand_reference,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Model",
+      location: "bottom_left",
+      value: model,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Serial",
+      location: "bottom_right",
+      value: serial,
+      justify: 'justify-end'
+
+    }
+  ]
+  let jewelryFieldsBackOne = [
+    {
+      label: "Material",
+      location: "back_1",
+      value: material,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Size",
+      location: "back_2",
+      value: size,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Carat/Weight",
+      location: "back_3",
+      value: carat_weight,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Cut/Shape",
+      location: "back_4",
+      value: cut,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Color",
+      location: "back_5",
+      value: color,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Clarity",
+      location: "back_6",
+      value: clarity,
+      justify: 'justify-end'
+
+    }
+  ] 
+  let jewelryFieldsBackTwo = [
+    {
+      label: "Stone",
+      location: "back_7",
+      value: stone,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Laser Marking",
+      location: "back_8",
+      value: laser_inscription,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Engraving",
+      location: "back_9",
+      value: engraving,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Trademarks",
+      location: "back_10",
+      value: trademarks,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Grading Report",
+      location: "DOCUMENT",
+      value: grading_reports,
+    },
+  ]
+  let generalFields  = [ 
+    {
+      label: "Purchased From",
+      location: "general_1",
+      value: purchasedFrom,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Purchase Value",
+      location: "general_2",
+      value: purchasedValue,
+      justify: 'justify-end'
+
+    },
+    {
+      label: "Market Price",
+      location: "general_3",
+      value: marketPrice,
+      justify: 'justify-start'
+
+    },
+    {
+      label: "Pictures",
+      location: "general_3",
+      value: marketPrice,
+      justify: 'justify-end'
+      
+    },
+    ]
+
+
   
-
-
   export let backgroundColor: keyof typeof colors;
   $: backgroundColor = category.toLowerCase();
   let colorKey: keyof typeof colors;
@@ -60,338 +281,169 @@
     style: "currency",
     currency: "USD",
   });
- //   import Currency from 'svelte-currency-formatter'
-  // ;<Currency
-  //   quantity={45685} // Required
-  //   currency="USD" // Optional (USD by default)
-  //   locale="en_EN" // Optional
-  //   pattern="##,### !" // Optional
-  //   decimal="," // Optional
-  //   group="." // Optional
-  // />
-  export let sentCard = false 
-  console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success)
-  
+  export let sentCard = false;
+  console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success);
+
+  $: cardSide = 'front'
+  $: console.log("🚀 ~ file: +page.svelte:287 ~ cardSide", cardSide)
+  $:category = category;
 </script>
-
-<div
-  class:flipped
-  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] w-[15rem] "
-  on:click={() => (flipped = !flipped)}
-  on:keydown={() => (flipped = !flipped)}
-  class:sendCard="{sentCard === true && success  === null }"
-  class:comeBack = "{success === true}"
-
->
-  <div class="flip-card  w-full rounded-2xl  aspect-[5/7]   " 
-  style = 'background-color = white '>
-    <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
-      <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
-        <div
-          class="card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-2 bg-white"
-        >
+<div class="full w-full h-full flex justify-center">
+  <div
+    class:flipped
+    class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] sm:w-[15rem] w-[20rem] "
+    class:sendCard={sentCard === true && success === null}
+    class:comeBack={success === true}
+  >
+    <div
+      class="flip-card  w-full rounded-2xl  aspect-[5/7]   "
+      style="background-color = {pickedColor} "
+    >
+      <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
+        <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
           <div
-            class="w-full h-[50%] rounded-t-2xl"
-            style="background: {pickedColor};"
+            class="front-parent card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1 bg-white"
           >
-            <div class="w-full h-full  p-3">
-              <div class="upload-pictures w-full h-full rounded-md shadow-md">
+            <div
+            class:no-display='{cardSide === 'back'}'
+              class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
+            >
+              <button
+                
+                class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case"
+              >
+                <Icon
+                  size="12px"
+                  class="opacity-60 cursor-pointer  text-white ml-[1rem]"
+                  src={ArrowsExpand}
+                  on:click={() => (expand = !expand)}
+                />
+                <p>Expand</p>
+              </button>
+              <button
+                class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
+                on:click={() => (flipped = !flipped)}
+                on:click={()=> cardSide = 'back'}
+
+              >
+                <Icon
+                  size="12px"
+                  class="opacity-60 cursor-pointer  text-white"
+                  src={ArrowCircleLeft}
+                />
+                <p>Flip</p>
+              </button>
+            </div>
+
+            <div
+              class="front-top rounded-t-2xl"
+              style="background: {pickedColor};"
+            >
+              <div class="w-full h-full px-2 py-3">
                 <Carousel />
               </div>
             </div>
-            <div
-              class="w-full rounded-b-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start"
-            >
-              <div class="flex w-full justify-between flex-1">
-                <div class="flex w-full justify-between">
-                  <div class="flex w-full justify-between ">
-                    <div class=" flex flex-col flex-1 w-full h-full">
-                      <div class="flex w-full justify-start">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Category</span
-                        >
-                      </div>
-                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
-                        {category}
-                      </div>
-                    </div>
-                    {#if subcategories?.length > 0}
-                    <div class=" flex flex-col flex-1 w-full h-full">
-                      <div class="flex w-full justify-end">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Subcategory</span
-                        >
-                      </div>
-                      <div
-                        class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
-                      >
-                        {subcategory}
-                      </div>
-                    </div>
-                    {:else if  category === 'Clothing' || category === 'clothing'}
-                    <div class=" flex flex-col flex-1 w-full h-full">
-                      <div class="flex w-full justify-end">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Brand</span
-                        >
-                      </div>
-                      <div
-                        class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
-                      >
-                        {brand}
-                      </div>
-                    </div>
-                    {/if}
-                  </div>
-                </div>
-              </div>
-              <div class="flex w-full justify-between my-3 flex-1 ">
-                <div class="flex w-full justify-between">
-                  
-                  <div class="flex w-full justify-between ">
-                    {#if breeds?.length > 0}
-                    <div class=" flex flex-col flex-1 w-full h-full">
-                      <div class="flex w-full justify-start">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Breed</span
-                        >
-                      </div>
-                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
-                        {breed}
-                      </div>
-                    </div>
-                    {/if}
 
-                    {#if brands?.length > 0}
-                    <div class=" flex flex-col  w-fit h-full">
-                      <div class="flex w-full justify-start">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Brand</span
-                        >
-                      </div>
-                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] w-full">
-                        {brand}
-                      </div>
-                    </div>
-                    {:else if artist}
-                    <div class=" flex flex-col  w-fit h-full">
-                      <div class="flex w-full justify-start">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Artist</span
-                        >
-                      </div>
-                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] w-full">
-                        {artist}
-                      </div>
-                    </div>
-                    {/if}
-                   
-                    <div class=" flex flex-col  w-fit h-full">
-                      <div class="flex w-full justify-end">
-                        <span
-                          class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Dynamic</span
-                        >
-                      </div>
-                      <div
-                        class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
-                      >
-                        {size}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex w-full justify-between flex-1">
-                <div class="flex w-full justify-between">
-                  <div class="flex w-full justify-between ">
-                    <div class="dynamic-field h-fit flex flex-col flex-1 w-full h-full">
-                      <div class="flex w-full justify-start">
-                        <span
-                          class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold"
-                          >Dynamic Field</span
-                        >
-                      </div>
-                      <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
-                      </div>
-                    </div>
-                    <div class="dynamic-field h-fit flex flex-col flex-1 w-full h-full">
-                      <div class="flex w-full justify-end">
-                        <span
-                          class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold text-"
-                          >Dynamic Field</span
-                        >
-                      </div>
-                      <div
-                        class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
-                      >
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="front-bottom rounded-b-2xl">
+              <div class="front-fields-grid h-full w-full px-2 py-1">
+                {#each jewelryFieldsFront as jewelryFieldFront }
+                <CardCell
+                gridClass= {jewelryFieldFront.location}
+                label={jewelryFieldFront.label}
+                value={jewelryFieldFront.value}
+                justifyCell={jewelryFieldFront.justify}
+              />
+                {/each}
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
-        <div
-          class="card-item  bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
-        >
-          <div class="flex flex-col rounded-2xl w-full h-full justify-between whole-card ">
-            <div class=" flex flex-col flex-1 w-full h-full">
-              <div
-                class="w-full aspect-[5/7] rounded-2xl p-3 px-5 flex flex-col xl:p-3 lg:p-2.5 md:p-2 justify-start content-start "
+        <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
+          <div
+            class="card-item  bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
+          >
+            <div
+              class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
+            >
+              <button
+                class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
+                on:click={() => (expand = !expand)}
               >
-                <div class="flex w-full justify-start">
-                  <span
-                    class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                    >Purchased From</span
-                  >
-                </div>
-                <div
-                  class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] h-[24px]"
-                >
-                  {purchasedFrom}
-                </div>
-                <div class=" flex flex-col w-full ">
-                  <div class="flex w-full">
-                    <span
-                      class="label-tex text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                      >Purchased Value</span
-                    >
-                  </div>
-                  <div
-                    class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] h-[24px]"
-                  >
-                    {purchasedValue}
-                  </div>
-                </div>
+                <Icon
+                  size="12px"
+                  class="opacity-60 cursor-pointer  text-black"
+                  src={ArrowsExpand}
+                />
+                <p>Expand</p>
+              </button>
+              <button
+                class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
+                on:click={() => (flipped = !flipped)}
+                on:click={()=> cardSide = 'front'}
+              >
+                <Icon
+                  size="12px"
+                  class="opacity-60 cursor-pointer  text-black"
+                  src={ArrowCircleLeft}
+                />
+                <p>Flip</p>
+              </button>
+            </div>
 
-                <div
-                  class="text-lg lg:text-[1rem] md:text-[.6rem]  "
-                >
-                  <div class="flex flex-col w-full ">
-                    <span
-                      class="w-full flex justify-start text-lg lg:text-[1rem] md:text-[.6rem] font-bold"
-                      >Description</span
-                    >
-                    <textarea
-                      disabled
-                      class="textarea flex flex-wrap   text-box z-1 w-[100%] text-left p-1"
-                      placeholder="Description">{description}</textarea
-                    >
-                  </div>
+            <div
+              class="flex flex-col rounded-2xl w-full h-full justify-between whole-card back-card_general-grid px-2 py-3 "
+            >
+              <div class="description back-card_general-1">
+                <CardCellDescription {description} />
+              </div>
+              <swiper-container
+                class="mySwiper back-card_card-general-2 h-full"
+                scrollbar-hide="false"
+                grab-cursor="true"
+              >
+              <swiper-slide>
+                <div class="w-full h-full back-card_card-fields-1 px-2">
+                  {#each jewelryFieldsBackOne as jewelryField }
+                  <CardCell
+                  gridClass= {jewelryField.location}
+                  label={jewelryField.label}
+                  value={jewelryField.value}
+                  justifyCell={jewelryField.justify}
+                />
+                  {/each}
                 </div>
-                <div class = 'flex flex-col w-full h-fit pt-1 pb-1 '>
-                  <div class="flex w-full justify-between">
-                    <div class="flex w-full justify-between">
-                      <div class="flex w-full justify-between ">
-                        <div class="dynamic-field h-fit flex flex-col flex-1 w-full ">
-                          <div class="flex w-full justify-start">
-                            <span
-                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold"
-                              >Dynamic Field</span
-                            >
-                          </div>
-                          <div class="text-sm lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
-                          </div>
-                        </div>
-                        <div class=" dynamic-field h-fit flex flex-col flex-1 w-full ">
-                          <div class="flex w-full justify-end">
-                            <span
-                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold text-"
-                              >Dynamic Field</span
-                            >
-                          </div>
-                          <div
-                            class="text-sm lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+              </swiper-slide>
+                <swiper-slide>
+                  <div class="w-full h-full back-card_card-fields-1 px-2">
+
+                  {#each jewelryFieldsBackTwo as jewelryField }
+                  <CardCell
+                  gridClass= {jewelryField.location}
+                  label={jewelryField.label}
+                  value={jewelryField.value}
+                  justifyCell={jewelryField.justify}
+                />
+                  {/each}
                   </div>
-                  <div class="flex w-full justify-between">
-                    <div class="flex w-full justify-between">
-                      <div class="flex w-full justify-between ">
-                        <div class=" dynamic-field h-fit flex flex-col flex-1 w-full ">
-                          <div class="flex w-full justify-start">
-                            <span
-                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold"
-                              >Dynamic Field</span
-                            >
-                          </div>
-                          <div class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px]">
-                          </div>
-                        </div>
-                        <div class="dynamic-field h-fit flex flex-col flex-1 w-full ">
-                          <div class="flex w-full justify-end">
-                            <span
-                              class="label-tex text-sm lg:text-[1rem] md:text-[.6rem] font-bold text-"
-                              >Dynamic Field</span
-                            >
-                          </div>
-                          <div
-                            class="text-lg lg:text-[1rem] md:text-[.6rem] flex h-[24px] justify-end"
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="w-full h-full back-card_card-fields-1 px-2">
+
+                  {#each generalFields as generalField }
+                  <CardCell
+                  gridClass= {generalField.location}
+                  label={generalField.label}
+                  value={generalField.value}
+                  justifyCell={generalField.justify}
+                />
+                  {/each}
                   </div>
-                  
-                </div>
-                <div class = 'button-container w-full flex justify-around'>
-                  <div class = 'flex flex-col justify-center content-center flex-1'>
-                    <div class = 'flex w-full justify-center'>
-                      <button class="btn btn-square z-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
-                    </div>
-                    <label class = 'flex text-xs w-full justify-center' for = 'button'>
-                      Stolen
-                    </label>
-                  </div>
-                  <div class = 'flex flex-col justify-center content-center flex-1'>
-                    <div class = 'flex w-full justify-center'>
-                      <button class="btn btn-square z-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
-                    </div>
-                    <label class = 'flex text-xs w-full justify-center' for = 'button'>
-                      Transfer
-                    </label>
-                  </div>
-                  <div class = 'flex flex-col justify-center content-center flex-1'>
-                    <div class = 'flex w-full justify-center'>
-                      <button class="btn btn-square z-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
-                    </div>
-                    <label class = 'flex text-xs w-full justify-center' for = 'button'>
-                      Certificate
-                    </label>
-                  </div>
-                  <div class = 'flex flex-col justify-center content-center flex-1'>
-                    <div class = 'flex w-full justify-center'>
-                      <button class="btn btn-square z-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
-                    </div>
-                    <label class = 'flex text-xs w-full justify-center' for = 'button'>
-                      Transfer
-                    </label>
-                  </div>
-                  
-            
-                </div>
+                </swiper-slide>
+
+    
+              </swiper-container>
+              <div class="card-buttons_back back-card_general-3">
+                <CardButtonWidget />
               </div>
             </div>
           </div>
@@ -402,10 +454,23 @@
 </div>
 
 <style lang="postcss">
-  /* Flip card toggle */
+  .no-display{
+    display:none
+  }
+  swiper-container {
+    width: 100%;
+    touch-action: none;
+  }
+  swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
+
   .flip-card {
     background-color: transparent;
-    perspective: 1000px;
+    perspective: 2000px;
     cursor: pointer;
     user-select: none;
   }
@@ -457,104 +522,246 @@
     word-wrap: break-word;
     display: box;
   }
-  .whole-card{
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  .whole-card {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
-  .gradient{
+  .gradient {
     /* background: rgb(38,82,29);
 background: -moz-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(40, 68, 42) 100%);
 background: -webkit-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(41, 78, 44) 100%);
 background: linear-gradient(90deg, rgb(115, 134, 111) 0%, rgb(25, 49, 26) 100%); */
-/* background: rgb(180,79,66);
+    /* background: rgb(180,79,66);
 background: -moz-linear-gradient(90deg, rgb(92, 40, 33) 0%, rgba(55,9,3,1) 100%);
 background: -webkit-linear-gradient(90deg, rgb(82, 32, 25) 0%, rgb(121, 0, 0) 100%);
 background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
-
-
   }
-  .sendCard{
-	-webkit-animation: slide-out-top 0.3s cubic-bezier(0.600, -0.280, 0.735, 0.045) forwards;
-	        animation: slide-out-top 0.3s cubic-bezier(0.600, -0.280, 0.735, 0.045) forwards;
-}
-/* ----------------------------------------------
+  .sendCard {
+    -webkit-animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045)
+      forwards;
+    animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045)
+      forwards;
+  }
+  /* ----------------------------------------------
  * Generated by Animista on 2023-2-13 23:12:6
  * Licensed under FreeBSD License.
  * See http://animista.net/license for more info. 
  * w: http://animista.net, t: @cssanimista
  * ---------------------------------------------- */
 
-/**
+  /**
  * ----------------------------------------
  * animation slide-out-top
  * ----------------------------------------
  */
- @-webkit-keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
+  @-webkit-keyframes slide-out-top {
+    0% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateY(-1000px);
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
   }
-  100% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
-    opacity: 0;
+  @keyframes slide-out-top {
+    0% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateY(-1000px);
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
   }
-}
-@keyframes slide-out-top {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
+
+  .comeBack {
+    -webkit-animation: slide-in-top 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)
+      100ms both;
+    animation: slide-in-top 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) 100ms both;
   }
-  100% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
-    opacity: 0;
-  }
-}
 
-
-.comeBack {
-	-webkit-animation: slide-in-top 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 100ms both;
-	        animation: slide-in-top 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 100ms both;
-}
-
-
-/* ----------------------------------------------
+  /* ----------------------------------------------
  * Generated by Animista on 2023-2-13 23:49:40
  * Licensed under FreeBSD License.
  * See http://animista.net/license for more info. 
  * w: http://animista.net, t: @cssanimista
  * ---------------------------------------------- */
 
-/**
+  /**
  * ----------------------------------------
  * animation slide-in-top
  * ----------------------------------------
  */
- @-webkit-keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
-    opacity: 0;
+  @-webkit-keyframes slide-in-top {
+    0% {
+      -webkit-transform: translateY(-1000px);
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
+  @keyframes slide-in-top {
+    0% {
+      -webkit-transform: translateY(-1000px);
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
-}
-@keyframes slide-in-top {
-  0% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
-    opacity: 0;
+  .front-parent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
   }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
-  }
-}
 
+  .front-top {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .front-bottom {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+
+  .front-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  .top_left {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .top_right {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .middle_left {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .middle_right {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .bottom_left {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .bottom_right {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+
+  .back-card_general-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  .back-card_general-1 {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .back-card_general-2 {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .back-card_general-3 {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .back-card_card-fields-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  .back_1 {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .back_2 {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .back_3{
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .back_4{
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .back_5{
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .back_6{
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  .back_7 {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .back_8 {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .back_9{
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .back_10 {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .back_11{
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .back_12{
+    grid-area: 3 / 2 / 4 / 3;
+  }
+
+  .general_1 {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .general_2{
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .general_3{
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .general_4{
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .general_5{
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .general_6{
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 </style>
