@@ -2,8 +2,7 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import { invalidateAll } from "$app/navigation";
-  import type { LayoutData } from "./routes/$types";
+  import type { LayoutData } from "../$types";
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
@@ -15,8 +14,6 @@
   export let data: LayoutData;
   const isUser = data?.isUser;
   const profile = data?.profile;
-
-  const authRoutes = ["/signup", "signin"];
 
   let menuItems = [
     "Import",
@@ -67,9 +64,6 @@
         >
           <!-- Navbar menu content here -->
           <div class="flex">
-            {#each menuItems as menuItem}
-              <li class="hidden"><a href="/`addCard">{menuItem}</a></li>
-            {/each}
             <a
               href="/add_card"
               alt="Add a Card"
@@ -107,12 +101,12 @@
         </ul>
       </div>
     </div>
-    <main class=" h-[96vh] w-full flex justify-center flex-col overflow-y-hidden text-primary">
+    <main
+      class=" h-[96vh] w-full flex justify-center flex-col overflow-y-hidden text-primary"
+    >
       <slot />
-      
     </main>
     <Footer2 />
-
   </div>
 
   <div class="drawer-side flex flex-col ">

@@ -1,12 +1,8 @@
 <script lang="ts">  
- import {
-    horizontalSlide,
-    logicalPropertiesHorizontalSlide,
-  } from "$lib/animationActions";
-  import { quintOut } from "svelte/easing";
   import { fade, fly, scale } from "svelte/transition";
   import CardFlippable from "./CardFlippable.svelte";
-  export let myneCards:[{}] | null|  undefined; 
+  export let myneCards: [{}];
+  $: console.log("🚀 ~ file: CardVault.svelte:5 ~ myneCards", myneCards)
 </script>
 <div
 
@@ -43,6 +39,7 @@
     </div>
           <div class = 'flex flex-wrap justify-center overflow-y-auto h-[85%] gap-2 py-2 top-0'>
         {#each myneCards as myneCard}
+        console.log("🚀 ~ file: CardVault.svelte:42 ~ myneCards", myneCards)
         <CardFlippable {...myneCard}  />
     {/each}
 

@@ -2,19 +2,24 @@
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
-  import CardFlippable from "$lib/components/CardFlippable.svelte";
   import Carousel from "$lib/components/Carousel.svelte";
-  import DesktopWidget from "$lib/components/DesktopWidget.svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
-  import { generalFields, watchFields, jewelryFields } from "../../forms";
-  
-  let expand = false;
+  import { generalFields, watchFields, jewelryFields, generalFieldsBack } from "../../forms";
+  // card external control values
+  export let expand = false;
+  export let flipped = false;
+  export let sentCard = false;
+  export let success: boolean | null = null;
 
+  // formFields init
+  let formFieldsObject = {
+    'jewelry' : jewelryFields,
+    'watch': watchFields,
+  }
   //card variables
-  export let isStolen = "";
-  export let isHeirloom = "";
+
   export let pictures = "";
-  export let category = "jewele";
+  export let category: keyof typeof formFieldsObject | null = 'watch';
   export let subcategory = "";
   export let brand = "";
   export let breed = "";
@@ -85,48 +90,39 @@
   export let wallet = "";
   export let weight = "";
   export let year = "";
-  export let success: boolean | null = null;
   export let marketPrice = "";
-
- let formFields:[{}] = [{}];
-  if (category === "jewelry") {
-    formFields = jewelryFields;
-  }
-  else if (category === "watch") {
-    formFields = watchFields;
-  }
-    $: category = category;
-
-  $: formFields = formFields;
-  $: console.log(formFields[0]);
-  let fieldsFront;
-  $: fieldsFront = formFields[0];
+  export let isStolen = "";
+  export let isHeirloom = "";
+ 
+  $: category = category; 
+  let pickedCategory: string | keyof typeof formFieldsObject | null   = category; 
+  $: pickedCategory = category
+ 
+  type values = typeof formFields[keyof typeof formFields]; 
+  let formFields: typeof generalFields = generalFields;
+  let fieldsFrontValues: values;
+  let fieldsBackOneValues: values;
+  let fieldsBackTwoValues: values;
+  $: if (category === null){ formFields = generalFields}
+  $: if (category !== null){formFields = formFieldsObject[category]};
+  $:fieldsFrontValues = formFields.fieldsFront;
+  $:fieldsBackOneValues = formFields.fieldsBackOne;
+  $:fieldsBackTwoValues = formFields.fieldsBackTwo;
+  //add general fields config here 
+  
   $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:248 ~ fieldsFront",
-    fieldsFront
-  );
-  let fieldsBackOne = formFields[1];
-  $: fieldsBackOne = formFields[1];
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:250 ~ fieldsBackOne",
-    fieldsBackOne
-  )
-  let fieldsBackTwo = formFields[2];
-  $: fieldsBackTwo = formFields[2];
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:252 ~ fieldsBackTwo",
-    fieldsBackTwo
-  );
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:242 ~ formFields",
+    "🚀 ~ file: CardFlippable.svelte:94 ~ formFields ~ formFields",
     formFields
   );
+
+  $: formFields = formFields;
+  $: console.log(formFields);
+
   export let backgroundColor: keyof typeof colors;
-  $: backgroundColor = category.toLowerCase();
+  $: backgroundColor = category?.toLowerCase();
   let colorKey: keyof typeof colors;
   $: colorKey = backgroundColor;
   $: console.log("🚀 ~ file: CardFlippable.svelte:17 ~ colorKey", colorKey);
-  export let flipped = false;
   const colors = {
     jewelry: "#F192E8",
     watch: "#2B2C31",
@@ -151,6 +147,7 @@
   };
   let pickedColor: string;
   $: pickedColor = colors[colorKey];
+
   let currency: string;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
@@ -158,7 +155,6 @@
     style: "currency",
     currency: "USD",
   });
-  export let sentCard = false;
   console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success);
 
   $: cardSide = "front";
@@ -179,7 +175,7 @@
       <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
         <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
           <div
-            class="front-parent card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1 bg-white"
+            class="front-parent card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
           >
             <div
               class:no-display={cardSide === "back"}
@@ -220,8 +216,8 @@
             </div>
 
             <div class="front-bottom rounded-b-2xl">
-              <div class="front-fields-grid h-full w-full px-2 py-1">
-                {#each fieldsFront?.fieldsFront as fieldFront}
+              <div class="front-fields-grid h-full w-full p-2">
+                {#each fieldsFrontValues as fieldFront}
                   <CardCell
                     gridClass={fieldFront.location}
                     label={fieldFront.label}
@@ -229,6 +225,7 @@
                     justifyCell={fieldFront.justify}
                   />
                 {/each}
+                
                 <!-- {#each jewelryFieldsFront as jewelryFieldFront}
                   <CardCell
                     gridClass={jewelryFieldFront.location}
@@ -243,7 +240,7 @@
         </div>
         <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
           <div
-            class="card-item  bg-white rounded-2xl shadow-2xl z-2 aspect-[5/7]"
+            class="card-item  bg-none rounded-2xl shadow-2xl z-2 aspect-[5/7]"
           >
             <div
               class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
@@ -287,17 +284,18 @@
                 grab-cursor="true"
               >
                 <swiper-slide
-                  class="text-center bg-white flex justify-center content-center"
+                  class="text-center bg-none flex justify-center content-center "
                 >
-                  <div class="w-full h-full back-card_card-fields px-2">
-                    {#each fieldsBackOne?.fieldsBackOne as fieldBackOne}
-                      <CardCell
-                        gridClass={fieldBackOne.location}
-                        label={fieldBackOne.label}
-                        value={fieldBackOne.value}
-                        justifyCell={fieldBackOne.justify}
-                      />
-                    {/each}
+                  <div class="w-full h-full back-card_card-fields p-2">
+                      {#each fieldsBackOneValues  as fieldBackOne}
+                        <CardCell
+                          gridClass={fieldBackOne.location}
+                          label={fieldBackOne.label}
+                          value={fieldBackOne.value}
+                          justifyCell={fieldBackOne.justify}
+                        />
+                        {/each}     
+
                     <!-- {#each jewelryFieldsBackOne as jewelryField}
                       <CardCell
                         gridClass={jewelryField.location}
@@ -309,8 +307,8 @@
                   </div>
                 </swiper-slide>
                 <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields px-2">
-                    {#each fieldsBackTwo?.fieldsBackTwo as fieldBackTwo}
+                  <div class="w-full h-full back-card_card-fields p-2">
+                    {#each fieldsBackTwoValues as fieldBackTwo}
                       <CardCell
                         gridClass={fieldBackTwo.location}
                         label={fieldBackTwo.label}
@@ -329,8 +327,8 @@
                   </div>
                 </swiper-slide>
                 <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields px-2">
-                    {#each generalFields as generalField}
+                  <div class="w-full h-full back-card_card-fields p-2">
+                    {#each generalFieldsBack as generalField}
                       <CardCell
                         gridClass={generalField.location}
                         label={generalField.label}
@@ -341,7 +339,7 @@
                   </div>
                 </swiper-slide>
               </swiper-container>
-              <div class="card-buttons_back back-card_general-3">
+              <div class="card-buttons_back back-card_general-3 mt-2">
                 <CardButtonWidget />
               </div>
             </div>
@@ -408,6 +406,9 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      /* background-image: url('src/lib/images/white-paper-texture.jpg');
+      background-size: cover; 
+      background-repeat: no-repeat; */
   }
   .gradient {
     /* background: rgb(38,82,29);
@@ -565,7 +566,7 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
   }
   .back-card_card-fields {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -627,3 +628,8 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
     grid-area: 3 / 2 / 4 / 3;
   }
 </style>
+
+
+//class="w-full h-full flex flex-col flex-wrap content-start justify-start back_3"
+//class="card-field-label label py-0 font-bold text-[] w-full flex justify-start"
+//class="card-field-label label py-0 font-bold text-[] w-full flex justify-start"

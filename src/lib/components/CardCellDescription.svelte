@@ -4,7 +4,7 @@
 
 <div class="full w-full h-full flex justify-center">
     <div
-  class="w-full h-full  bg-white flex flex-col flex-wrap content-start justify-start"
+  class="w-full h-full flex flex-col flex-wrap content-start justify-start"
 >
   <div class=" w-full h-full">
     <div

@@ -5,7 +5,7 @@
   import { backInOut } from "svelte/easing";
   import Listbox from "../../lib/components/Listbox.svelte";
   import { blur, fade, fly, scale, slide } from "svelte/transition";
-  export let myneCards: [{}] | null | undefined;
+  export let myneCards;
   let isOpen = false;
   let heightScale = 20;
   let drawerHeight = spring(heightScale, {

@@ -23,9 +23,8 @@ export const load = handleServerSession((async ({ url, locals}) => {
   const onUnauthedRoute = anyoneAllowed.some((route) =>
     url.pathname.startsWith(route)
   );
-  if (onUnauthedRoute) return {};
   const { session, user } = await locals.validateUser();
-
+  if (onUnauthedRoute) return {};
   if (!session) {
     throw redirect(303, "/signin");
   }

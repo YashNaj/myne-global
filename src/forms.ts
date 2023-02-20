@@ -1,7 +1,29 @@
-let padding = "";
-let justifyCell = "justify-start";
-let label = "This is a test";
-let value = "Testing Value";
+let template = {
+  fieldsFront: [
+    {
+      label: "",
+      location: "",
+      value: "",
+      justify: "",
+    },
+  ],
+  fieldsBackOne: [
+    {
+      label: "",
+      location: "",
+      value: "",
+      justify: "",
+    },
+  ],
+  fieldsBackTwo: [
+    {
+      label: "",
+      location: "",
+      value: "",
+      justify: "",
+    },
+  ],
+};
 //card variables
 let isStolen = "";
 let isHeirloom = "";
@@ -78,8 +100,123 @@ let wallet = "";
 let weight = "";
 let year = "";
 let marketPrice = "";
-
-export let generalFields = [
+export let generalFields = {
+  fieldsFront: [
+    {
+      label: "Category",
+      location: "top_left",
+      value: "category",
+      justify: "justify-start",
+    },
+    {
+      label: "Subcategory",
+      location: "top_right",
+      value: "",
+      justify: "justify-end",
+    },
+    {
+      label: "Brand",
+      location: "middle_left",
+      value: brand,
+      justify: "justify-start",
+    },
+    {
+      label: "Reference",
+      location: "middle_right",
+      value: brand_reference,
+      justify: "justify-end",
+    },
+    {
+      label: "Model",
+      location: "bottom_left",
+      value: model,
+      justify: "justify-start",
+    },
+    {
+      label: "Serial",
+      location: "bottom_right",
+      value: serial,
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackOne: [
+    {
+      label: "",
+      location: "back_1",
+      value: case_material,
+      justify: "justify-start",
+    },
+    {
+      label: "",
+      location: "back_2",
+      value: "",
+      justify: "justify-end",
+    },
+    {
+      label: "",
+      location: "back_3",
+      value: "",
+      justify: "justify-start",
+    },
+    {
+      label: "",
+      location: "back_4",
+      value: "",
+      justify: "justify-end",
+    },
+    {
+      label: "",
+      location: "back_5",
+      value: "",
+      justify: "justify-start",
+    },
+    {
+      label: "",
+      location: "back_6",
+      value: "",
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackTwo: [
+    {
+      label: " ",
+      location: "DOCUMENT",
+      value: "",
+      justify: "justify-start",
+    },
+    {
+      label: " ",
+      location: "DOCUMENT",
+      value: "",
+      justify: "justify-end",
+    },
+    {
+      label: " ",
+      location: "DOCUMENT",
+      value: "",
+      justify: "justify-start",
+    },
+    {
+      label: " ",
+      location: "DOCUMENT",
+      value: "",
+      justify: "justify-end",
+    },
+    {
+      label: " ",
+      location: "DOCUMENT",
+      value: "",
+      justify: "justify-start",
+    },
+    {
+      label: " ",
+      location: "DOCUMENT",
+      value: "",
+      justify: "justify-end",
+    },
+  ],
+};
+export let generalFieldsBack = [
   {
     label: "Purchased From",
     location: "general_1",
@@ -102,259 +239,218 @@ export let generalFields = [
     label: "Pictures",
     location: "general_3",
     value: marketPrice,
-    justify: "justify-start",
+    justify: "justify-end",
   },
 ];
 
-export let jewelryFields = [
-  {
-    name: "fieldsFront",
-    fieldsFront: [
-      {
-        label: "Category",
-        location: "top_left",
-        value: category,
-        justify: "justify-start",
-      },
-      {
-        label: "Subcategory",
-        location: "top_right",
-        value: subcategory,
-        justify: "justify-end",
-      },
-      {
-        label: "Brand",
-        location: "middle_left",
-        value: brand,
-        justify: "justify-start",
-      },
-      {
-        label: "Brand Reference",
-        location: "middle_right",
-        value: brand_reference,
-        justify: "justify-end",
-      },
-      {
-        label: "Model",
-        location: "bottom_left",
-        value: model,
-        justify: "justify-start",
-      },
-      {
-        label: "Serial",
-        location: "bottom_right",
-        value: serial,
-        justify: "justify-end",
-      },
-    ],
-  },
-  {
-    name: "fieldsbackOne",
+export let jewelryFields = {
+  fieldsFront: [
+    {
+      label: "Category",
+      location: "top_left",
+      value: category,
+      justify: "justify-start",
+    },
+    {
+      label: "Subcategory",
+      location: "top_right",
+      value: subcategory,
+      justify: "justify-end",
+    },
+    {
+      label: "Brand",
+      location: "middle_left",
+      value: brand,
+      justify: "justify-start",
+    },
+    {
+      label: "Brand Reference",
+      location: "middle_right",
+      value: brand_reference,
+      justify: "justify-end",
+    },
+    {
+      label: "Model",
+      location: "bottom_left",
+      value: model,
+      justify: "justify-start",
+    },
+    {
+      label: "Serial",
+      location: "bottom_right",
+      value: serial,
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackOne: [
+    {
+      label: "Material",
+      location: "back_1",
+      value: material,
+      justify: "justify-start",
+    },
+    {
+      label: "Stone",
+      location: "back_2",
+      value: stone,
+      justify: "justify-end",
+    },
+    {
+      label: "Carat/Weight",
+      location: "back_3",
+      value: carat_weight,
+      justify: "justify-start",
+    },
+    {
+      label: "Cut/Shape",
+      location: "back_4",
+      value: cut,
+      justify: "justify-end",
+    },
+    {
+      label: "Color",
+      location: "back_5",
+      value: color,
+      justify: "justify-start",
+    },
+    {
+      label: "Clarity",
+      location: "back_6",
+      value: clarity,
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackTwo: [
+    {
+      label: "Size",
+      location: "back_7",
+      value: size,
+      justify: "justify-start",
+    },
+    {
+      label: "Laser Marking",
+      location: "back_8",
+      value: laser_inscription,
+      justify: "justify-end",
+    },
+    {
+      label: "Engraving",
+      location: "back_9",
+      value: engraving,
+      justify: "justify-start",
+    },
+    {
+      label: "Trademarks",
+      location: "back_10",
+      value: trademarks,
+      justify: "justify-end",
+    },
+    {
+      label: "Grading Report",
+      location: "DOCUMENT",
+      value: grading_reports,
+      justify: "hidden",
+    },
+  ],
+};
 
-    fieldsbackOne: [
-      {
-        label: "Material",
-        location: "back_1",
-        value: material,
-        justify: "justify-start",
-      },
-      {
-        label: "Size",
-        location: "back_2",
-        value: size,
-        justify: "justify-end",
-      },
-      {
-        label: "Carat/Weight",
-        location: "back_3",
-        value: carat_weight,
-        justify: "justify-start",
-      },
-      {
-        label: "Cut/Shape",
-        location: "back_4",
-        value: cut,
-        justify: "justify-end",
-      },
-      {
-        label: "Color",
-        location: "back_5",
-        value: color,
-        justify: "justify-start",
-      },
-    ],
-  },
-  {
-    name: "fieldsbackTwo",
+export let watchFields = {
+  fieldsFront: [
+    {
+      label: "Category",
+      location: "top_left",
+      value: "",
+      justify: "justify-start",
+    },
+    {
+      label: "",
+      location: "top_right",
+      value: "",
+      justify: "justify-end",
+    },
+    {
+      label: "Brand",
+      location: "middle_left",
+      value: brand,
+      justify: "justify-start",
+    },
+    {
+      label: "Reference",
+      location: "middle_right",
+      value: brand_reference,
+      justify: "justify-end",
+    },
+    {
+      label: "Model",
+      location: "bottom_left",
+      value: model,
+      justify: "justify-start",
+    },
+    {
+      label: "Serial",
+      location: "bottom_right",
+      value: serial,
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackOne: [
+    {
+      label: "Case Material",
+      location: "back_1",
+      value: case_material,
+      justify: "justify-start",
+    },
+    {
+      label: "Size",
+      location: "back_2",
+      value: size,
+      justify: "justify-end",
+    },
+    {
+      label: "Movement/Caliber",
+      location: "back_3",
+      value: movement_caliber,
+      justify: "justify-start",
+    },
+    {
+      label: "Dial",
+      location: "back_4",
+      value: dial,
+      justify: "justify-end",
+    },
+    {
+      label: "Strap/Bracelet",
+      location: "back_5",
+      value: strap_bracelet,
+      justify: "justify-start",
+    },
+    {
+      label: "Engraving",
+      location: "back_6",
+      value: engraving,
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackTwo: [
 
-    fieldsbackTwo: [
-      {
-        label: "Clarity",
-        location: "back_6",
-        value: clarity,
-        justify: "justify-end",
-      },
-      {
-        label: "Stone",
-        location: "back_7",
-        value: stone,
-        justify: "justify-start",
-      },
-      {
-        label: "Laser Marking",
-        location: "back_8",
-        value: laser_inscription,
-        justify: "justify-end",
-      },
-      {
-        label: "Engraving",
-        location: "back_9",
-        value: engraving,
-        justify: "justify-start",
-      },
-      {
-        label: "Trademarks",
-        location: "back_10",
-        value: trademarks,
-        justify: "justify-end",
-      },
-      {
-        label: "Grading Report",
-        location: "DOCUMENT",
-        value: grading_reports,
-      },
-      {
-        label: "Purchased From",
-        location: "general_1",
-        value: purchasedFrom,
-        justify: "justify-start",
-      },
-      {
-        label: "Purchase Value",
-        location: "general_2",
-        value: purchasedValue,
-        justify: "justify-end",
-      },
-      {
-        label: "Market Price",
-        location: "general_3",
-        value: marketPrice,
-        justify: "justify-start",
-      },
-      {
-        label: "Pictures",
-        location: "general_3",
-        value: marketPrice,
-        justify: "justify-start",
-      },
-    ],
-  },
-];
-export let watchFields = [
-  {
-    name: "fieldsFront",
+    {
+      label: "Other Unique Features",
+      location: "back_1",
+      value: other,
+      justify: "justify-start",
+    },
+    {
+      label: "Grading ",
+      location: "back_2",
+      value: grading_reports,
+      justify: "justify-end",
+    },
+    {
+      label: "Valuation Report",
+      location: "back_3",
+      value: valuation_report,
+      justify: "justify-start",
+    },
 
-    fieldsFront: [
-      {
-        label: "Category",
-        location: "top_left",
-        value: "",
-        justify: "justify-start",
-      },
-      {
-        label: '',
-        location: "top_right",
-        value: '',
-        justify: "justify-end",
-      },
-      {
-        label: "Brand",
-        location: "middle_left",
-        value: brand,
-        justify: "justify-start",
-      },
-      {
-        label: "Reference",
-        location: "middle_right",
-        value: brand_reference,
-        justify: "justify-end",
-      },
-      {
-        label: "Model",
-        location: "bottom_left",
-        value: model,
-        justify: "justify-start",
-      },
-      {
-        label: "Serial",
-        location: "bottom_right",
-        value: serial,
-        justify: "justify-end",
-      },
-    ],
-  },
-  {
-    name: "fieldsBackOne",
-
-    fieldsBackOne: [
-      {
-        label: "Case Material",
-        location: "back_1",
-        value: case_material,
-        justify: "justify-start",
-      },
-      {
-        label: "Size",
-        location: "back_2",
-        value: size,
-        justify: "justify-end",
-      },
-      {
-        label: "Movement/Caliber",
-        location: "back_3",
-        value: movement_caliber,
-        justify: "justify-start",
-      },
-      {
-        label: "Dial",
-        location: "back_4",
-        value: dial,
-        justify: "justify-end",
-      },
-      {
-        label: "Strap/Bracelet",
-        location: "back_5",
-        value: strap_bracelet,
-        justify: "justify-start",
-      },
-      {
-        label: "Engraving",
-        location: "back_6",
-        value: engraving,
-        justify: "justify-end",
-      },
-      {
-        label: "Other unique features",
-        location: "back_7",
-        value: other,
-        justify: "justify-start",
-      },
-    ],
-  },
-  {
-    name: "fieldsBackTwo",
-
-    fieldsBackTwo: [
-      {
-        label: "Grading ",
-        location: "DOCUMENT",
-        value: grading_reports,
-      },
-      {
-        label: "Valutation Report ",
-        location: "DOCUMENT",
-        value: valuation_report,
-      },
-    ],
-  },
-];
+  ],
+};
