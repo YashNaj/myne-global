@@ -91,7 +91,7 @@
 
   //card variables
 
-  export let category: keyof typeof formFieldsObject | null | string = "childid";
+  export let category: keyof typeof formFieldsObject | null | string = null;
   export let subcategory = "";
   export let brand = "";
   export let breed = "";
@@ -182,10 +182,10 @@
   $: if (category !== null) {
     formFields = formFieldsObject[category];
   }
-  $: fieldsFrontValues = formFields.fieldsFront;
-  $: fieldsBackOneValues = formFields.fieldsBackOne;
-  $: fieldsBackTwoValues = formFields.fieldsBackTwo;
-  $: fieldsBackThreeValues = formFields.fieldsBackThree;
+  $: fieldsFrontValues = formFields?.fieldsFront;
+  $: fieldsBackOneValues = formFields?.fieldsBackOne;
+  $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
+  $: fieldsBackThreeValues = formFields?.fieldsBackThree;
   //add general fields config here
 
   $: console.log(
@@ -224,7 +224,7 @@
       <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
         <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
           <div
-            class="front-parent card-item w-full h-full gradient whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
+            class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
           >
             <div
               class:no-display={cardSide === "back"}
@@ -268,10 +268,10 @@
               <div class="front-fields-grid h-full w-full p-2">
                 {#each fieldsFrontValues as fieldFront}
                   <CardCell
-                    gridClass={fieldFront.location}
-                    label={fieldFront.label}
-                    value={fieldFront.value}
-                    justifyCell={fieldFront.justify}
+                    gridClass={fieldFront?.location}
+                    label={fieldFront?.label}
+                    value={fieldFront?.value}
+                    justifyCell={fieldFront?.justify}
                   />
                 {/each}
               </div>
@@ -310,7 +310,7 @@
               </button>
             </div>
             <div
-              class="flex flex-col rounded-2xl w-full h-full justify-between whole-card [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
+              class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-white [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
               rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
               rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;]back-card_general-grid px-2 py-3 "
             >
@@ -562,7 +562,7 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
 
   .front-fields-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;

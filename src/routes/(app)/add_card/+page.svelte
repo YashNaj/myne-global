@@ -129,10 +129,10 @@
   categories = categories.sort();
   //this allows the select boxes to set values, do not delete until proper refactor  $: brandInput = brand;
   let selectedCategory = myneMasterBrandsAndBreeds.find(
-    (object) => object.name === category.toLowerCase()
+    (object) => object.name === category?.toLowerCase()
   );
   $: selectedCategory = myneMasterBrandsAndBreeds.find(
-    (object) => object.name === category.toLowerCase()
+    (object) => object.name === category?.toLowerCase()
   );
   //pull subCats
   let subcategories: [] | string[] | undefined | null;
