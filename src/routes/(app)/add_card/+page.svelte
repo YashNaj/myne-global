@@ -13,7 +13,7 @@
   import { firstCapital } from "$lib/caps";
   import { sizes } from "$lib/size";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
-
+  import { generalFields, watchFields, jewelryFields, generalFieldsBack } from '../../../forms'
   export let data: PageData;
   export let flipped = false;
   export let brandFilterOpen = false;
@@ -57,7 +57,7 @@
     });
   }
   //initialize the category and subcategory fields
-  export let category: string = "";
+  export let category: string | null | undefined  = null;
   export let subcategory: string = "";
   export let breed: string = "";
   export let brand: string = "";
@@ -187,9 +187,6 @@
             {purchasedFrom}
             {purchasedValue}
             {description}
-            {brands}
-            {breeds}
-            {subcategories}
             {flipped}
             {sentCard}
             {success}
@@ -280,7 +277,6 @@
                   bind:justValue
                 />
 
-                {#if subcategories?.length > 0}
                   <div in:fly|local={{ duration: duration }} out:fly|local>
                     <div class="select-group">
                       <Select
@@ -297,7 +293,6 @@
 
                     </div>
                   </div>
-                {/if}
               </div>
             </div>
           {:else if pageCount === 1}
@@ -306,7 +301,6 @@
                 class="brand-breed h-full w-full flex flex-col  absolute"
                 transition:fly={{ x: -100 }}
               >
-                {#if breeds?.length > 0}
                   <Select
                     placeholder="Breed"
                     class="select text-black w-full mt-2 "
@@ -316,8 +310,6 @@
                     }}
                     bind:justValue
                   />
-                {/if}
-                {#if brands?.length > 0}
                   <!-- <ComboBox formName="brand" options={brands} id="brand" /> -->
                   <Select
                     placeholder="Brand"
@@ -328,8 +320,6 @@
                     }}
                     bind:justValue
                   />
-                {/if}
-                <Select
                   placeholder="Size"
                   class="select text-black w-full mt-2 "
                   items={sizes?.map((size) => firstCapital(size))}

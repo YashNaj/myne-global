@@ -16,15 +16,6 @@ export async function load({ locals }) {
     where: {
       user_id
     },
-    select: {
-      category: true,
-      subcategory: true,
-      breed: true,
-      brand: true,
-      purchasedFrom: true,
-      purchasedValue: true,
-      description: true,
-    },
   });
   return {myneCards}
 }

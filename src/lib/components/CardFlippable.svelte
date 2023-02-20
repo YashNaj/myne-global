@@ -4,28 +4,100 @@
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
   import Carousel from "$lib/components/Carousel.svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
-  import { generalFields, watchFields, jewelryFields, generalFieldsBack } from "../../forms";
+  import {
+    generalFields,
+    generalFieldsBack,
+    jewelryFields,
+    watchFields,
+    artFields,
+    leatherFields,
+    clothingFields,
+    sneakerFields,
+    gunsFields,
+    technologyFields,
+    tradingCardFields,
+    colectibleFields,
+    cryptoFields,
+    nftFields,
+    vintageFields,
+    autoFields,
+    motoFields,
+    catFields,
+    dogFields,
+    birdFields,
+    otherFields,
+    childIdFields,
+  } from "../../forms";
+
+  // formFields init
+  let formFieldsObject = {
+    jewelry: jewelryFields,
+    watch: watchFields,
+    art: artFields,
+    leather: leatherFields,
+    clothing: clothingFields,
+    sneakers: sneakerFields,
+    guns: gunsFields,
+    technology: technologyFields,
+    "trading cards": tradingCardFields,
+    collectibles: colectibleFields,
+    crypto: cryptoFields,
+    nft: nftFields,
+    vintage: vintageFields,
+    automobile: autoFields,
+    motorcycle: motoFields,
+    cat: catFields,
+    dog: dogFields,
+    bird: birdFields,
+    other: otherFields,
+    childid: childIdFields,
+  };
+
+  export let backgroundColor: keyof typeof colors;
+  $: backgroundColor = category?.toLowerCase();
+  let colorKey: keyof typeof colors;
+  $: colorKey = backgroundColor;
+  $: console.log("🚀 ~ file: CardFlippable.svelte:17 ~ colorKey", colorKey);
+  const colors = {
+    jewelry: "#F192E8",
+    watch: "#2B2C31",
+    art: "#FFE609",
+    leather: "#984E1D",
+    clothing: "#59898A",
+    sneakers: "#B3F5F7",
+    guns: "#3A5130",
+    technology: "#080631",
+    "trading cards": "#FCF7DE",
+    collectibles: "#61E1A3",
+    crypto: "#B6B1B1",
+    nft: "#7C1EB6",
+    vintage: "#FF5F09",
+    automobile: "#E10909",
+    motorcycle: "#E10909",
+    dog: "#278001",
+    cat: "#278001",
+    bird: "#278001",
+    childid: "#00BFFF",
+    other: "#ffffff",
+  };
+  let pickedColor: string;
+  $: pickedColor = colors[colorKey];
+
   // card external control values
   export let expand = false;
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
 
-  // formFields init
-  let formFieldsObject = {
-    'jewelry' : jewelryFields,
-    'watch': watchFields,
-  }
   //card variables
 
-  export let pictures = "";
-  export let category: keyof typeof formFieldsObject | null = 'watch';
+  export let category: keyof typeof formFieldsObject | null | string = "childid";
   export let subcategory = "";
   export let brand = "";
   export let breed = "";
   export let size = "";
   export let purchasedFrom = "";
-  export let purchasedValue = "";
+  export let purchasedValue : string | number | null | undefined | bigint = '' 
   export let reportedStolenDate = "";
   export let description = "";
   export let crypto_token_address = "";
@@ -90,26 +162,32 @@
   export let wallet = "";
   export let weight = "";
   export let year = "";
+  export let pictures = "";
   export let marketPrice = "";
   export let isStolen = "";
   export let isHeirloom = "";
- 
-  $: category = category; 
-  let pickedCategory: string | keyof typeof formFieldsObject | null   = category; 
-  $: pickedCategory = category
- 
-  type values = typeof formFields[keyof typeof formFields]; 
+
+  $: category = category;
+  let pickedCategory: string | keyof typeof formFieldsObject | null = category;
+  $: pickedCategory = category;
+
+  type values = (typeof formFields)[keyof typeof formFields];
   let formFields: typeof generalFields = generalFields;
   let fieldsFrontValues: values;
   let fieldsBackOneValues: values;
   let fieldsBackTwoValues: values;
-  $: if (category === null){ formFields = generalFields}
-  $: if (category !== null){formFields = formFieldsObject[category]};
-  $:fieldsFrontValues = formFields.fieldsFront;
-  $:fieldsBackOneValues = formFields.fieldsBackOne;
-  $:fieldsBackTwoValues = formFields.fieldsBackTwo;
-  //add general fields config here 
-  
+  $: if (category === null) {
+    formFields = generalFields;
+  }
+  $: if (category !== null) {
+    formFields = formFieldsObject[category];
+  }
+  $: fieldsFrontValues = formFields.fieldsFront;
+  $: fieldsBackOneValues = formFields.fieldsBackOne;
+  $: fieldsBackTwoValues = formFields.fieldsBackTwo;
+  $: fieldsBackThreeValues = formFields.fieldsBackThree;
+  //add general fields config here
+
   $: console.log(
     "🚀 ~ file: CardFlippable.svelte:94 ~ formFields ~ formFields",
     formFields
@@ -118,37 +196,8 @@
   $: formFields = formFields;
   $: console.log(formFields);
 
-  export let backgroundColor: keyof typeof colors;
-  $: backgroundColor = category?.toLowerCase();
-  let colorKey: keyof typeof colors;
-  $: colorKey = backgroundColor;
-  $: console.log("🚀 ~ file: CardFlippable.svelte:17 ~ colorKey", colorKey);
-  const colors = {
-    jewelry: "#F192E8",
-    watch: "#2B2C31",
-    art: "#FFE609",
-    leather: "#984E1D",
-    clothing: "#59898A",
-    sneakers: "#B3F5F7",
-    firearms: "#3A5130",
-    technology: "#080631",
-    "trading cards": "#FCF7DE",
-    collectibles: "#61E1A3",
-    crypto: "#B6B1B1",
-    nft: "#7C1EB6",
-    vintage: "#FF5F09",
-    automobile: "#E10909",
-    motorcycle: "#E10909",
-    dog: "#278001",
-    cat: "#278001",
-    bird: "#278001",
-    childId: "#00BFFF",
-    other: "#ffffff",
-  };
-  let pickedColor: string;
-  $: pickedColor = colors[colorKey];
-
-  let currency: string;
+ 
+  let currency;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
   const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -225,15 +274,6 @@
                     justifyCell={fieldFront.justify}
                   />
                 {/each}
-                
-                <!-- {#each jewelryFieldsFront as jewelryFieldFront}
-                  <CardCell
-                    gridClass={jewelryFieldFront.location}
-                    label={jewelryFieldFront.label}
-                    value={jewelryFieldFront.value}
-                    justifyCell={jewelryFieldFront.justify}
-                  />
-                {/each} -->
               </div>
             </div>
           </div>
@@ -269,7 +309,6 @@
                 <p>Flip</p>
               </button>
             </div>
-
             <div
               class="flex flex-col rounded-2xl w-full h-full justify-between whole-card [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
               rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
@@ -287,57 +326,58 @@
                   class="text-center bg-none flex justify-center content-center "
                 >
                   <div class="w-full h-full back-card_card-fields p-2">
-                      {#each fieldsBackOneValues  as fieldBackOne}
+                    {#each fieldsBackOneValues as fieldBackOne}
+                      <CardCell
+                        gridClass={fieldBackOne.location}
+                        label={fieldBackOne.label}
+                        value={fieldBackOne.value}
+                        justifyCell={fieldBackOne.justify}
+                      />
+                    {/each}
+                  </div>
+                </swiper-slide>
+                {#if fieldsBackTwoValues?.length > 0}
+                  <swiper-slide>
+                    <div class="w-full h-full back-card_card-fields p-2">
+                      {#each fieldsBackTwoValues as fieldBackTwo}
                         <CardCell
-                          gridClass={fieldBackOne.location}
-                          label={fieldBackOne.label}
-                          value={fieldBackOne.value}
-                          justifyCell={fieldBackOne.justify}
+                          gridClass={fieldBackTwo.location}
+                          label={fieldBackTwo.label}
+                          value={fieldBackTwo.value}
+                          justifyCell={fieldBackTwo.justify}
                         />
-                        {/each}     
-
-                    <!-- {#each jewelryFieldsBackOne as jewelryField}
-                      <CardCell
-                        gridClass={jewelryField.location}
-                        label={jewelryField.label}
-                        value={jewelryField.value}
-                        justifyCell={jewelryField.justify}
-                      />
-                    {/each} -->
-                  </div>
-                </swiper-slide>
-                <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each fieldsBackTwoValues as fieldBackTwo}
-                      <CardCell
-                        gridClass={fieldBackTwo.location}
-                        label={fieldBackTwo.label}
-                        value={fieldBackTwo.value}
-                        justifyCell={fieldBackTwo.justify}
-                      />
-                    {/each}
-                    <!-- {#each jewelryFieldsBackTwo as jewelryField}
-                      <CardCell
-                        gridClass={jewelryField.location}
-                        label={jewelryField.label}
-                        value={jewelryField.value}
-                        justifyCell={jewelryField.justify}
-                      />
-                    {/each} -->
-                  </div>
-                </swiper-slide>
-                <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each generalFieldsBack as generalField}
-                      <CardCell
-                        gridClass={generalField.location}
-                        label={generalField.label}
-                        value={generalField.value}
-                        justifyCell={generalField.justify}
-                      />
-                    {/each}
-                  </div>
-                </swiper-slide>
+                      {/each}
+                    </div>
+                  </swiper-slide>
+                {/if}
+                {#if fieldsBackThreeValues?.length > 0}
+                  <swiper-slide>
+                    <div class="w-full h-full back-card_card-fields p-2">
+                      {#each fieldsBackThreeValues as fieldBackTwo}
+                        <CardCell
+                          gridClass={fieldBackTwo.location}
+                          label={fieldBackTwo.label}
+                          value={fieldBackTwo.value}
+                          justifyCell={fieldBackTwo.justify}
+                        />
+                      {/each}
+                    </div>
+                  </swiper-slide>
+                {/if}
+                {#if category !== "childid"}
+                  <swiper-slide>
+                    <div class="w-full h-full back-card_card-fields p-2">
+                      {#each generalFieldsBack as generalField}
+                        <CardCell
+                          gridClass={generalField.location}
+                          label={generalField.label}
+                          value={generalField.value}
+                          justifyCell={generalField.justify}
+                        />
+                      {/each}
+                    </div>
+                  </swiper-slide>
+                {/if}
               </swiper-container>
               <div class="card-buttons_back back-card_general-3 mt-2">
                 <CardButtonWidget />
@@ -406,7 +446,7 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-      /* background-image: url('src/lib/images/white-paper-texture.jpg');
+    /* background-image: url('src/lib/images/white-paper-texture.jpg');
       background-size: cover; 
       background-repeat: no-repeat; */
   }
@@ -628,8 +668,3 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
     grid-area: 3 / 2 / 4 / 3;
   }
 </style>
-
-
-//class="w-full h-full flex flex-col flex-wrap content-start justify-start back_3"
-//class="card-field-label label py-0 font-bold text-[] w-full flex justify-start"
-//class="card-field-label label py-0 font-bold text-[] w-full flex justify-start"
