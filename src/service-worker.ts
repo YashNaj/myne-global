@@ -1,6 +1,10 @@
+/// <reference types="@sveltejs/kit" />
+/// <reference no-default-lib="true"/>
+/// <reference lib="esnext" />
+/// <reference lib="webworker" />
 import { build, files, version } from "$service-worker";
 
-const worker = self as unknown as ServiceWorkerGlobalScope;
+const worker = /** @type {ServiceWorkerGlobalScope} */ (/** @type {unknown} */ (self));
 const STATIC_CACHE_NAME = `cache${version}`;
 const APP_CACHE_NAME = `offline${version}`;
 
