@@ -13,10 +13,13 @@
   import { firstCapital } from "$lib/caps";
   import { sizes } from "$lib/size";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
-  import { generalFields, watchFields, jewelryFields, generalFieldsBack } from '../../../forms'
   export let data: PageData;
   export let flipped = false;
   export let brandFilterOpen = false;
+  export let message: string = " ";
+  let backgroundColor: string;
+  $: backgroundColor = category;
+  let justValue: string;
 
   let sentCard = false;
 
@@ -56,16 +59,206 @@
       body: JSON.stringify(formData),
     });
   }
+
   //initialize the category and subcategory fields
-  export let category: string | null | undefined  = null;
-  export let subcategory: string = "";
-  export let breed: string = "";
-  export let brand: string = "";
-  export let size: string = "";
-  export let purchasedFrom: string = "";
-  export let purchasedValue: string = "";
-  export let description: string = "";
-  export let message: string = "";
+  export let isStolen = "";
+  export let isHeirloom = "";
+  export let pictures = "";
+  export let category = "";
+  export let subcategory = "";
+  export let brand = "";
+  export let breed = "";
+  export let size = "";
+  export let purchasedFrom = "";
+  export let purchasedValue = "";
+  export let reportedStolenDate = "";
+  export let description = "";
+  export let crypto_token_address = "";
+  export let unique_features = "";
+  export let artist = "";
+  export let author = "";
+  export let dob = "";
+  export let body_length = "";
+  export let brand_reference = "";
+  export let caliber = "";
+  export let carat_weight = "";
+  export let case_material = "";
+  export let cOfAuth = "";
+  export let clarity = "";
+  export let color = "";
+  export let cut = "";
+  export let date = "";
+  export let dial = "";
+  export let distinguishing_features = "";
+  export let document = "";
+  export let drivetrain = "";
+  export let engine = "";
+  export let engraving = "";
+  export let exchange_address = "";
+  export let exterior_color = "";
+  export let fuel_type = "";
+  export let grading = "";
+  export let grading_reports = "";
+  export let height = "";
+  export let hotstamping = "";
+  export let interior_color = "";
+  export let invoice = "";
+  export let laser_inscription = "";
+  export let manufacturer = "";
+  export let material = "";
+  export let microchip = "";
+  export let mileage = "";
+  export let model = "";
+  export let model_yr = "";
+  export let movement_caliber = "";
+  export let other = "";
+  export let pedigree = "";
+  export let product = "";
+  export let registration_certificate = "";
+  export let release_date = "";
+  export let serial = "";
+  export let serie = "";
+  export let series = "";
+  export let shape = "";
+  export let smart_contract_address = "";
+  export let smart_contract_id = "";
+  export let stock_number = "";
+  export let stone = "";
+  export let strap_bracelet = "";
+  export let tattoo = "";
+  export let trademarks = "";
+  export let transaction = "";
+  export let transmission = "";
+  export let url = "";
+  export let valuation_report = "";
+  export let vin = "";
+  export let wallet_address = "";
+  export let weight = "";
+  export let year = "";
+  export let marketPrice = "";
+  export let childIdFirstName = "";
+  export let childIdMiddleName = "";
+  export let childIdLastName = "";
+  export let eye_color = "";
+  export let hair_color = "";
+  export let parentOneName = "";
+  export let parentTwoName = "";
+  export let contactNumberOne = "";
+  export let contactNumberTwo = "";
+  export let homeAddress = "";
+  export let homeCity = " ";
+  export let homeState = "";
+  export let homeCountry = "";
+  export let homeZIP = "";
+  export let age = "";
+  export let gender = "";
+  export let race = "";
+  export let physicalTraits = "";
+  export let allergies = "";
+  export let medicalConditions = "";
+  export let prescription = "";
+  let cardProps = {
+    isStolen,
+    isHeirloom,
+    pictures,
+    category,
+    subcategory,
+    brand,
+    breed,
+    size,
+    purchasedFrom,
+    purchasedValue,
+    reportedStolenDate,
+    description,
+    crypto_token_address,
+    unique_features,
+    artist,
+    author,
+    dob,
+    body_length,
+    brand_reference,
+    caliber,
+    carat_weight,
+    case_material,
+    cOfAuth,
+    clarity,
+    color,
+    cut,
+    date,
+    dial,
+    distinguishing_features,
+    document,
+    drivetrain,
+    engine,
+    engraving,
+    exchange_address,
+    exterior_color,
+    fuel_type,
+    grading,
+    grading_reports,
+    height,
+    hotstamping,
+    interior_color,
+    invoice,
+    laser_inscription,
+    manufacturer,
+    material,
+    microchip,
+    mileage,
+    model,
+    model_yr,
+    movement_caliber,
+    other,
+    pedigree,
+    product,
+    registration_certificate,
+    release_date,
+    serial,
+    serie,
+    series,
+    shape,
+    smart_contract_address,
+    smart_contract_id,
+    stock_number,
+    stone,
+    strap_bracelet,
+    tattoo,
+    trademarks,
+    transaction,
+    transmission,
+    url,
+    valuation_report,
+    vin,
+    wallet_address,
+    weight,
+    year,
+    marketPrice,
+    childIdFirstName,
+    childIdMiddleName,
+    childIdLastName,
+    eye_color,
+    hair_color,
+    parentOneName,
+    parentTwoName,
+    contactNumberOne,
+    contactNumberTwo,
+    homeAddress,
+    homeCity,
+    homeState,
+    homeCountry,
+    homeZIP,
+    age,
+    gender,
+    race,
+    physicalTraits,
+    allergies,
+    medicalConditions,
+    prescription,
+    backgroundColor,
+  };
+  $: cardProps = {...cardProps} ;
+  $: console.log("🚀 ~ file: +page.svelte:260 ~ cardProps", cardProps)
+
   export let success: boolean | null | undefined = false;
   interface FormData {
     category: string | never;
@@ -154,10 +347,6 @@
       description: " ",
     };
   }
-
-  let backgroundColor: string;
-  $: backgroundColor = category;
-  let justValue: string;
   success = false;
   $: success = form?.success;
   $: console.log(form);
@@ -178,19 +367,7 @@
         class="flex justify-center w-full pt-10 content-center relative h-80 "
       >
         <div class="card-sizer w-[80%] flex absolute top-[4rem] justify-center">
-          <CardFlippable
-            {category}
-            {subcategory}
-            {breed}
-            {brand}
-            {size}
-            {purchasedFrom}
-            {purchasedValue}
-            {description}
-            {flipped}
-            {sentCard}
-            {success}
-          />
+          <CardFlippable {...cardProps} />
         </div>
       </div>
       <div class="flex w-full justify-center">
@@ -277,22 +454,21 @@
                   bind:justValue
                 />
 
-                  <div in:fly|local={{ duration: duration }} out:fly|local>
-                    <div class="select-group">
-                      <Select
-                        placeholder="Subcategory"
-                        class="select text-black w-full mt-2 "
-                        items={subcategories?.map((subcategories) =>
-                          firstCapital(subcategories)
-                        )}
-                        on:change={() => {
-                          subcategory = justValue;
-                        }}
-                        bind:justValue
-                      />
-
-                    </div>
+                <div in:fly|local={{ duration: duration }} out:fly|local>
+                  <div class="select-group">
+                    <Select
+                      placeholder="Subcategory"
+                      class="select text-black w-full mt-2 "
+                      items={subcategories?.map((subcategories) =>
+                        firstCapital(subcategories)
+                      )}
+                      on:change={() => {
+                        subcategory = justValue;
+                      }}
+                      bind:justValue
+                    />
                   </div>
+                </div>
               </div>
             </div>
           {:else if pageCount === 1}
@@ -301,34 +477,33 @@
                 class="brand-breed h-full w-full flex flex-col  absolute"
                 transition:fly={{ x: -100 }}
               >
-                  <Select
-                    placeholder="Breed"
-                    class="select text-black w-full mt-2 "
-                    items={breeds?.map((breed) => firstCapital(breed))}
-                    on:change={() => {
-                      breed = justValue;
-                    }}
-                    bind:justValue
-                  />
-                  <!-- <ComboBox formName="brand" options={brands} id="brand" /> -->
-                  <Select
-                    placeholder="Brand"
-                    class="select text-black w-full mt-2 "
-                    items={brands?.map((brand) => firstCapital(brand))}
-                    on:change={() => {
-                      brand = justValue;
-                    }}
-                    bind:justValue
-                  />
-                  placeholder="Size"
+                <Select
+                  placeholder="Breed"
                   class="select text-black w-full mt-2 "
-                  items={sizes?.map((size) => firstCapital(size))}
+                  items={breeds?.map((breed) => firstCapital(breed))}
                   on:change={() => {
-                    size = justValue;
+                    breed = justValue;
                   }}
                   bind:justValue
-                  on:focus={() => (flipped = false)}
-                  on:focus={() => (brandFilterOpen = false)}
+                />
+                <!-- <ComboBox formName="brand" options={brands} id="brand" /> -->
+                <Select
+                  placeholder="Brand"
+                  class="select text-black w-full mt-2 "
+                  items={brands?.map((brand) => firstCapital(brand))}
+                  on:change={() => {
+                    brand = justValue;
+                  }}
+                  bind:justValue
+                />
+                placeholder="Size" class="select text-black w-full mt-2 " items={sizes?.map(
+                  (size) => firstCapital(size)
+                )}
+                on:change={() => {
+                  size = justValue;
+                }}
+                bind:justValue on:focus={() => (flipped = false)}
+                on:focus={() => (brandFilterOpen = false)}
                 />
               </div>
             </div>

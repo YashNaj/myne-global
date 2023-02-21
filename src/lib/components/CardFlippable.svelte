@@ -88,16 +88,18 @@
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
+  export let cardProps: {};
+  $: console.log("🚀 ~ file: CardFlippable.svelte:92 ~ cardProps", cardProps);
+  $: cardProps = { ...cardProps };
+  //card variablesd
 
-  //card variables
-
-  export let category: keyof typeof formFieldsObject | null | string = null;
+  export let category: keyof typeof formFieldsObject | string = "";
   export let subcategory = "";
   export let brand = "";
   export let breed = "";
   export let size = "";
   export let purchasedFrom = "";
-  export let purchasedValue : string | number | null | undefined | bigint = '' 
+  export let purchasedValue: string | number | null | undefined | bigint = "";
   export let reportedStolenDate = "";
   export let description = "";
   export let crypto_token_address = "";
@@ -166,9 +168,29 @@
   export let marketPrice = "";
   export let isStolen = "";
   export let isHeirloom = "";
+  export let childIdFirstName = "";
+  export let childIdMiddleName = "";
+  export let childIdLastName = "";
+  export let eye_color = "";
+  export let hair_color = "";
+  export let parentOneName = "";
+  export let parentTwoName = "";
+  export let contactNumberOne = "";
+  export let contactNumberTwo = "";
+  export let homeAddress = "";
+  export let homeCity = " ";
+  export let homeState = "";
+  export let homeCountry = "";
+  export let homeZIP = "";
+  export let age = "";
+  export let gender = "";
+  export let race = "";
+  export let physicalTraits = "";
+  export let allergies = "";
+  export let medicalConditions = "";
+  export let prescription = "";
 
-  $: category = category;
-  let pickedCategory: string | keyof typeof formFieldsObject | null = category;
+  let pickedCategory: string | keyof typeof formFieldsObject = category;
   $: pickedCategory = category;
 
   type values = (typeof formFields)[keyof typeof formFields];
@@ -179,9 +201,9 @@
   $: if (category === null) {
     formFields = generalFields;
   }
-  $: if (category !== null) {
-    formFields = formFieldsObject[category];
-  }
+
+  $: formFields = formFieldsObject[pickedCategory];
+  $:  console.log("🚀 ~ file: CardFlippable.svelte:206 ~ formFields", formFields)
   $: fieldsFrontValues = formFields?.fieldsFront;
   $: fieldsBackOneValues = formFields?.fieldsBackOne;
   $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
@@ -196,7 +218,6 @@
   $: formFields = formFields;
   $: console.log(formFields);
 
- 
   let currency;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
@@ -208,6 +229,7 @@
 
   $: cardSide = "front";
   $: console.log("🚀 ~ file: +page.svelte:287 ~ cardSide", cardSide);
+  $: category = category;
 </script>
 
 <div class="full w-full h-full flex justify-center">
@@ -266,14 +288,16 @@
 
             <div class="front-bottom rounded-b-2xl">
               <div class="front-fields-grid h-full w-full p-2">
-                {#each fieldsFrontValues as fieldFront}
-                  <CardCell
-                    gridClass={fieldFront?.location}
-                    label={fieldFront?.label}
-                    value={fieldFront?.value}
-                    justifyCell={fieldFront?.justify}
-                  />
-                {/each}
+                {#if fieldsFrontValues?.length > 0}
+                  {#each fieldsFrontValues as fieldFront}
+                    <CardCell
+                      gridClass={fieldFront?.location}
+                      label={fieldFront?.label}
+                      value={fieldFront?.value}
+                      justifyCell={fieldFront?.justify}
+                    />
+                  {/each}
+                {/if}
               </div>
             </div>
           </div>
@@ -322,20 +346,23 @@
                 scrollbar-hide="false"
                 grab-cursor="true"
               >
-                <swiper-slide
-                  class="text-center bg-none flex justify-center content-center "
-                >
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each fieldsBackOneValues as fieldBackOne}
-                      <CardCell
-                        gridClass={fieldBackOne.location}
-                        label={fieldBackOne.label}
-                        value={fieldBackOne.value}
-                        justifyCell={fieldBackOne.justify}
-                      />
-                    {/each}
-                  </div>
-                </swiper-slide>
+                {#if fieldsBackOneValues?.length > 0}
+                  <swiper-slide
+                    class="text-center bg-none flex justify-center content-center "
+                  >
+                    <div class="w-full h-full back-card_card-fields p-2">
+                      {#each fieldsBackOneValues as fieldBackOne}
+                        <CardCell
+                          gridClass={fieldBackOne.location}
+                          label={fieldBackOne.label}
+                          value={fieldBackOne.value}
+                          justifyCell={fieldBackOne.justify}
+                        />
+                      {/each}
+                    </div>
+                  </swiper-slide>
+                {/if}
+
                 {#if fieldsBackTwoValues?.length > 0}
                   <swiper-slide>
                     <div class="w-full h-full back-card_card-fields p-2">
