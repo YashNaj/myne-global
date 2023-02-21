@@ -540,6 +540,7 @@ export let jewelryFields = {
       justify: "hidden",
     },
   ],
+  fieldsBackThree : [],
 };
 
 export let watchFields = {
@@ -639,6 +640,8 @@ export let watchFields = {
       justify: "justify-start",
     },
   ],
+  fieldsBackThree : [],
+
 };
 export let artFields = {
   fieldsFront: [
@@ -725,6 +728,8 @@ export let artFields = {
       justify: "justify-start",
     },
   ],
+  fieldsBackThree : [],
+
 };
 export let leatherFields = {
   fieldsFront: [
@@ -791,6 +796,8 @@ export let leatherFields = {
       justify: "justify-end",
     },
   ],
+  fieldsBackThree : [],
+
 };
 export let clothingFields = {
   fieldsFront: [
@@ -852,6 +859,8 @@ export let clothingFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let sneakerFields = {
   fieldsFront: [
@@ -926,6 +935,7 @@ export let sneakerFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
 };
 export let gunsFields = {
   fieldsFront: [
@@ -1303,6 +1313,8 @@ export let colectibleFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let cryptoFields = {
   fieldsFront: [
@@ -1370,6 +1382,8 @@ export let cryptoFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let nftFields = {
   fieldsFront: [
@@ -1438,6 +1452,8 @@ export let nftFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let vintageFields = {
   fieldsFront: [
@@ -1517,6 +1533,8 @@ export let vintageFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let autoFields = {
   fieldsFront: [
@@ -1627,6 +1645,8 @@ export let autoFields = {
       justify: "justify-start",
     },
   ],
+  fieldsBackThree : [],
+
 };
 export let motoFields = {
   fieldsFront: [
@@ -1737,6 +1757,8 @@ export let motoFields = {
       justify: "justify-start",
     },
   ],
+  fieldsBackThree : [],
+
 };
 export let otherFields = {
   fieldsFront: [
@@ -1804,6 +1826,8 @@ export let otherFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let dogFields = {
   fieldsFront: [
@@ -1883,6 +1907,8 @@ export let dogFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let catFields = {
   fieldsFront: [
@@ -1962,6 +1988,8 @@ export let catFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let birdFields = {
   fieldsFront: [
@@ -2041,6 +2069,8 @@ export let birdFields = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree : [],
+
 };
 export let childIdFields = {
   fieldsFront: [

@@ -157,7 +157,106 @@
   export let allergies = "";
   export let medicalConditions = "";
   export let prescription = "";
-  let cardProps = {
+  interface cardProps {
+    isStolen?:string
+    isHeirloom?:string
+    pictures?:string
+    category?:string
+    subcategory?:string
+    brand?:string
+    breed?:string
+    size?:string
+    purchasedFrom?:string
+    purchasedValue?:string
+    reportedStolenDate?:string
+    description?:string
+    crypto_token_address?:string
+    unique_features?:string
+    artist?:string
+    author?:string
+    dob?:string
+    body_length?:string
+    brand_reference?:string
+    caliber?:string
+    carat_weight?:string
+    case_material?:string
+    cOfAuth?:string
+    clarity?:string
+    color?:string
+    cut?:string
+    date?:string
+    dial?:string
+    distinguishing_features?:string
+    document?:string
+    drivetrain?:string
+    engine?:string
+    engraving?:string
+    exchange_address?:string
+    exterior_color?:string
+    fuel_type?:string
+    grading?:string
+    grading_reports?:string
+    height?:string
+    hotstamping?:string
+    interior_color?:string
+    invoice?:string
+    laser_inscription?:string
+    manufacturer?:string
+    material?:string
+    microchip?:string
+    mileage?:string
+    model?:string
+    model_yr?:string
+    movement_caliber?:string
+    other?:string
+    pedigree?:string
+    product?:string
+    registration_certificate?:string,
+    release_date?:string
+    serial?:string
+    serie?:string
+    series?:string
+    shape?:string
+    smart_contract_address?:string
+    smart_contract_id?:string
+    stock_number?:string
+    stone?:string
+    strap_bracelet?:string
+    tattoo?:string
+    trademarks?:string
+    transaction?:string
+    transmission?:string
+    url?:string
+    valuation_report?:string
+    vin?:string
+    wallet_address?:string
+    weight?:string
+    year?:string
+    marketPrice?:string
+    childIdFirstName?:string
+    childIdMiddleName?:string
+    childIdLastName?:string
+    eye_color?:string
+    hair_color?:string
+    parentOneName?:string
+    parentTwoName?:string
+    contactNumberOne?:string
+    contactNumberTwo?:string
+    homeAddress?:string
+    homeCity?:string
+    homeState?:string
+    homeCountry?:string
+    homeZIP?:string
+    age?:string
+    gender?:string
+    race?:string
+    physicalTraits?:string
+    allergies?:string
+    medicalConditions?:string
+    prescription?:string
+    backgroundColor?:string
+  }
+    let cardProps:cardProps = {
     isStolen,
     isHeirloom,
     pictures,
@@ -256,58 +355,29 @@
     prescription,
     backgroundColor,
   };
+  $: cardProps.category = category;
   $: cardProps = {...cardProps} ;
+
   $: console.log("🚀 ~ file: +page.svelte:260 ~ cardProps", cardProps)
 
   export let success: boolean | null | undefined = false;
-  interface FormData {
-    category: string | never;
-    subcategory: string | never;
-    brand: string | never;
-    breed: string | never;
-    size: string | never;
-    purchasedFrom: string | never;
-    purchasedValue: string | never;
-    description: string | never;
-    message: string | never;
-    success: boolean | null | undefined;
-  }
 
   export let formData = {
-    category: "",
-    subcategory: "",
-    brand: "",
-    breed: "",
-    size: "",
-    purchasedFrom: "",
-    purchasedValue: "",
-    description: "",
+    ...cardProps, 
     message: "",
     success: null,
   };
 
   $: formData = formData = {
-    category,
-    subcategory,
-    brand,
-    breed,
-    size,
-    purchasedFrom,
-    purchasedValue,
-    description,
+  ...cardProps, 
     message,
     success: null,
   };
+    console.log("🚀 ~ file: +page.svelte:373 ~ formData", formData)
+
   $: sentCard = sentCard;
   export let form: {
-    category?: string;
-    subcategory?: string;
-    brand?: string;
-    breed?: string;
-    purchasedFrom?: string;
-    purchasedValue?: string;
-    description?: string;
-    size?: string;
+//
     message?: string;
     success?: boolean | null | undefined;
   };
@@ -367,7 +437,7 @@
         class="flex justify-center w-full pt-10 content-center relative h-80 "
       >
         <div class="card-sizer w-[80%] flex absolute top-[4rem] justify-center">
-          <CardFlippable {...cardProps} />
+          <CardFlippable cardProps = {cardProps}/>
         </div>
       </div>
       <div class="flex w-full justify-center">
@@ -496,6 +566,7 @@
                   }}
                   bind:justValue
                 />
+                <Select
                 placeholder="Size" class="select text-black w-full mt-2 " items={sizes?.map(
                   (size) => firstCapital(size)
                 )}

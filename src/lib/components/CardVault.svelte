@@ -39,8 +39,7 @@
     </div>
           <div class = 'flex flex-wrap justify-center overflow-y-auto h-[85%] gap-2 py-2 top-0'>
         {#each myneCards as myneCard}
-        console.log("🚀 ~ file: CardVault.svelte:42 ~ myneCards", myneCards)
-        <CardFlippable {...myneCard}  />
+        <CardFlippable cardProps={myneCard}  />
     {/each}
 
     </div>

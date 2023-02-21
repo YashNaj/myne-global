@@ -53,7 +53,7 @@
     childid: childIdFields,
   };
 
-  export let backgroundColor: keyof typeof colors;
+  export let backgroundColor;
   $: backgroundColor = category?.toLowerCase();
   let colorKey: keyof typeof colors;
   $: colorKey = backgroundColor;
@@ -89,8 +89,6 @@
   export let sentCard = false;
   export let success: boolean | null = null;
   export let cardProps: {};
-  $: console.log("🚀 ~ file: CardFlippable.svelte:92 ~ cardProps", cardProps);
-  $: cardProps = { ...cardProps };
   //card variablesd
 
   export let category: keyof typeof formFieldsObject | string = "";
@@ -189,21 +187,16 @@
   export let allergies = "";
   export let medicalConditions = "";
   export let prescription = "";
+  export let wallet_address = ""
 
-  let pickedCategory: string | keyof typeof formFieldsObject = category;
+  let pickedCategory: keyof typeof formFieldsObject | string = category;
   $: pickedCategory = category;
 
   type values = (typeof formFields)[keyof typeof formFields];
-  let formFields: typeof generalFields = generalFields;
+  let formFields = generalFields;
   let fieldsFrontValues: values;
   let fieldsBackOneValues: values;
   let fieldsBackTwoValues: values;
-  $: if (category === null) {
-    formFields = generalFields;
-  }
-
-  $: formFields = formFieldsObject[pickedCategory];
-  $:  console.log("🚀 ~ file: CardFlippable.svelte:206 ~ formFields", formFields)
   $: fieldsFrontValues = formFields?.fieldsFront;
   $: fieldsBackOneValues = formFields?.fieldsBackOne;
   $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
@@ -228,8 +221,9 @@
   console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success);
 
   $: cardSide = "front";
-  $: console.log("🚀 ~ file: +page.svelte:287 ~ cardSide", cardSide);
-  $: category = category;
+  $: category = cardProps.category;
+  $: cardProps = { ...cardProps };
+  $:console.log("🚀 ~ file: CardFlippable.svelte:233 ~ cardProps", cardProps)
 </script>
 
 <div class="full w-full h-full flex justify-center">
