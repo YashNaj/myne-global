@@ -2,16 +2,16 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import type { LayoutData } from "../$types";
+  import type {  LayoutServerLoad } from "../$types";
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
   import { Icon, Plus } from "svelte-hero-icons";
   // register Swiper custom elements
   import { register } from "swiper/element/bundle";
-  register();
-
-  export let data: LayoutData;
+  import type { PageServerLoad } from "./$types";
+  import type { PageData } from "@lucia-auth/sveltekit/types";
+  register();  export let data: LayoutServerLoad;
   const isUser = data?.isUser;
   const profile = data?.profile;
 

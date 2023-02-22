@@ -5,7 +5,7 @@ import { LuciaError } from "lucia-auth";
 
 export const load: PageServerLoad = async ({ locals }) => {
   const session = await locals.validate();
-  if (session) throw redirect(302, "/");
+  if (session) throw redirect(302, '/');
 };
 
 export const actions: Actions = {
@@ -20,8 +20,9 @@ export const actions: Actions = {
       typeof email !== "string" ||
       typeof password !== "string"
     )
-      return fail(400);
-
+      return fail(400, {
+        message: "Email or Password cannot be empty"
+      });
     try {
 			const key = await auth.validateKeyPassword("email", email, password);
 

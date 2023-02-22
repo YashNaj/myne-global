@@ -16,7 +16,6 @@ const anyoneAllowed = [
   "/unverified-email",
   "/test",
   "/test2",
-  "/api/addCard"
 ]; 
 export const load = handleServerSession((async ({ url, locals}) => {
 
@@ -25,10 +24,10 @@ export const load = handleServerSession((async ({ url, locals}) => {
   );
   const { session, user } = await locals.validateUser();
   if (onUnauthedRoute) return {};
-  if (!session) {
+  else if (!session) {
     throw redirect(303, "/signin");
   }
-  if (user.valid){
+  else if (user?.valid){
     const user_id = user.userId
     console.log(user);
     const profile = await prisma.profile.findUnique({
