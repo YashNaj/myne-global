@@ -14,6 +14,15 @@ export const actions: Actions = {
     const email = form.get("email");
     const password = form.get("password");
     console.log(form);
+    if (
+      !email ||
+      !password ||
+      typeof email !== "string" ||
+      typeof password !== "string"
+    )
+      return fail(400, {
+        message: "Email or Password cannot be empty"
+      });
     try {
 			const key = await auth.validateKeyPassword("email", email, password);
 

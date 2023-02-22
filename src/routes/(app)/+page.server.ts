@@ -9,17 +9,13 @@ const prisma = new PrismaClient();
 
 export async function load({ locals }) {
   const { session, user } = await locals.validateUser();
-  const user_id = user?.userId
-  if(!user_id === null){
-    return {}
-  }
-  else {
+  const user_id = user.userId;
+  if(user_id !== null){
     const myneCards = await prisma.myneCard.findMany({
       where: {
         user_id
       },
     });
     console.log(myneCards)
-    return {myneCards}
-  }
+    return {myneCards}  }
 }
