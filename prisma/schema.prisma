@@ -55,6 +55,7 @@ model Profile {
   phone     String
   myneCard  MyneCard[]
   user      User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  ChildId   ChildId[]
 
   @@map("profile")
 }
@@ -140,6 +141,37 @@ model MyneCard {
   Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@map("myneCard")
+}
+
+model ChildId {
+  id                String  @id @unique @default(uuid())
+  user_id           String
+  childIdFirstName  String
+  childIdMiddleName String?
+  childIdLastName   String
+  eye_color         String
+  hair_color        String
+  height            String
+  parentOneName     String
+  parentTwoName     String
+  contactNumberOne  String
+  contactNumberTwo  String
+  age               String
+  dob               String
+  weight            String
+  blood_type        String
+  prescription      String[]
+  allergies         String
+  physicalTraits    String[]
+  medicalConditions String[]
+  gender            String
+  race              String
+  homeAddress       String
+  homeCity          String
+  homeState         String
+  homeZIP           String
+  homeCountry       String
+  Profile           Profile  @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
 
 model EmailVerificationRequest {

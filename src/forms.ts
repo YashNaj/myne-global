@@ -249,6 +249,7 @@ let physicalTraits = "";
 let allergies = "";
 let medicalConditions = "";
 let prescription = "";
+let blood_type = "";
 
 export let generalFields = {
   fieldsFront: [
@@ -540,7 +541,7 @@ export let jewelryFields = {
       justify: "hidden",
     },
   ],
-  fieldsBackThree : [],
+  fieldsBackThree: [],
 };
 
 export let watchFields = {
@@ -640,8 +641,7 @@ export let watchFields = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let artFields = {
   fieldsFront: [
@@ -728,8 +728,7 @@ export let artFields = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let leatherFields = {
   fieldsFront: [
@@ -796,8 +795,7 @@ export let leatherFields = {
       justify: "justify-end",
     },
   ],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let clothingFields = {
   fieldsFront: [
@@ -859,8 +857,7 @@ export let clothingFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let sneakerFields = {
   fieldsFront: [
@@ -935,7 +932,7 @@ export let sneakerFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
+  fieldsBackThree: [],
 };
 export let gunsFields = {
   fieldsFront: [
@@ -1313,8 +1310,7 @@ export let colectibleFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let cryptoFields = {
   fieldsFront: [
@@ -1382,8 +1378,7 @@ export let cryptoFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let nftFields = {
   fieldsFront: [
@@ -1452,8 +1447,7 @@ export let nftFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let vintageFields = {
   fieldsFront: [
@@ -1533,8 +1527,7 @@ export let vintageFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let autoFields = {
   fieldsFront: [
@@ -1645,8 +1638,7 @@ export let autoFields = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let motoFields = {
   fieldsFront: [
@@ -1757,8 +1749,7 @@ export let motoFields = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let otherFields = {
   fieldsFront: [
@@ -1826,8 +1817,7 @@ export let otherFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let dogFields = {
   fieldsFront: [
@@ -1907,8 +1897,7 @@ export let dogFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let catFields = {
   fieldsFront: [
@@ -1988,8 +1977,7 @@ export let catFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let birdFields = {
   fieldsFront: [
@@ -2069,8 +2057,7 @@ export let birdFields = {
     },
   ],
   fieldsBackTwo: [],
-  fieldsBackThree : [],
-
+  fieldsBackThree: [],
 };
 export let childIdFields = {
   fieldsFront: [
@@ -2137,15 +2124,15 @@ export let childIdFields = {
       justify: "justify-end",
     },
     {
-      label: "Age",
-      location: "back_5",
-      value: age,
-      justify: "justify-start",
-    },
-    {
       label: "Date of Birth",
       location: "back_6",
       value: dob,
+      justify: "justify-start",
+    },
+    {
+      label: "Blood Type",
+      location: "back_1",
+      value: blood_type,
       justify: "justify-end",
     },
   ],

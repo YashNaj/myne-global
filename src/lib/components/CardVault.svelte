@@ -2,8 +2,6 @@
   import { fade, fly, scale } from "svelte/transition";
   import CardFlippable from "./CardFlippable.svelte";
   export let myneCards: [{}];
-  $: console.log("🚀 ~ file: CardVault.svelte:5 ~ myneCards", myneCards)
-
 </script>
 <div
 
@@ -29,7 +27,7 @@
         >
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <ul
-          name="categoriesSelect"
+          
           tabindex="0"
           class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
         >
@@ -40,7 +38,7 @@
     </div>
           <div class = 'flex flex-wrap justify-center overflow-y-auto h-[85%] gap-2 py-2 top-0'>
         {#each myneCards as myneCard}
-        <CardFlippable cardProps={myneCard}  />
+        <CardFlippable cardProps={{...myneCard}}  />
     {/each}
 
     </div>
