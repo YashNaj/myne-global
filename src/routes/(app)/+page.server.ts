@@ -15,5 +15,9 @@ export async function load({ locals }) {
       user_id
     },
   });
+  if(!user_id){
+    return {}
+  }
+  console.log(myneCards)
   return {myneCards}
 }
