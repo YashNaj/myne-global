@@ -161,7 +161,7 @@
     isStolen?:string
     isHeirloom?:string
     pictures?:string
-    category?:string
+    category?:string | keyof typeof formFieldsObject
     subcategory?:string
     brand?:string
     breed?:string

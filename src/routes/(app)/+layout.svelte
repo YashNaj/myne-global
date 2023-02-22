@@ -6,9 +6,9 @@
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
-  import { register } from "swiper/element/bundle";
   import { Icon, Plus } from "svelte-hero-icons";
   // register Swiper custom elements
+  import { register } from "swiper/element/bundle";
   register();
 
   export let data: LayoutData;

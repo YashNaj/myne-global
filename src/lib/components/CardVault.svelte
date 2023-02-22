@@ -3,6 +3,7 @@
   import CardFlippable from "./CardFlippable.svelte";
   export let myneCards: [{}];
   $: console.log("🚀 ~ file: CardVault.svelte:5 ~ myneCards", myneCards)
+
 </script>
 <div
 
