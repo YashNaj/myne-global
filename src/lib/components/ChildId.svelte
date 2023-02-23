@@ -148,9 +148,7 @@
           </div>
 
           <div
-            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-slate-50 [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
-          rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
-          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;] px-3 py-3 "
+            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-slate-50  px-3 py-3 "
           >
             <div class="spacer w-full h-16" />
             <swiper-container
