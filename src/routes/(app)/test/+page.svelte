@@ -1,12 +1,14 @@
-<script lang='ts'>
-	import PageContainer from "$lib/components/PageContainer.svelte";
+<script lang="ts">
+  import PageContainer from "$lib/components/PageContainer.svelte";
 
-  import ChildId from "$lib/components/ChildId.svelte"
+  import ChildId from "$lib/components/ChildId.svelte";
+  import CardFlippable from "$lib/components/CardFlippable.svelte";
 </script>
 
-
-<div>
   <PageContainer>
-    <ChildId/>
+    <ChildId />
   </PageContainer>
-</div>
+
+  <PageContainer>
+    <CardFlippable />
+  </PageContainer>

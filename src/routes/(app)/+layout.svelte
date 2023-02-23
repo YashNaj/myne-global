@@ -101,14 +101,8 @@
         </ul>
       </div>
     </div>
-    <main
-      class=" h-[96vh] w-full flex justify-center flex-col overflow-y-hidden text-primary"
-    >
-      <slot />
-    </main>
-    <Footer2 />
+  <slot/>
   </div>
-
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />
     <ul class="menu p-4 w-80 bg-base-100 text-primary">

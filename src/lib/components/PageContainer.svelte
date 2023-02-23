@@ -1,3 +1,3 @@
-<div class = 'w-full h-full flex flex-col justify-center content-center flex-wrap'>
+<div class = 'w-full h-[96vh] flex flex-col justify-center content-center '>
   <slot/>
 </div>
