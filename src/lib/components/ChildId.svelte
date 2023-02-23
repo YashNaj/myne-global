@@ -146,19 +146,19 @@
           </div>
 
           <div
-            class="back-card_general-grid rounded-2xl w-full h-full justify-between whole-card bg-slate-50  p-3 "
+            class="back-card_general-grid rounded-2xl w-full h-full justify-between whole-card bg-slate-50 p-3"
           >
             <div class="spacer w-full h-16" />
             <swiper-container
-              class="mySwiper back-card_card-general h-full w-full touch-none bg-opacity-20 bg-slate-400 rounded-xl"
+              class="mySwiper h-full w-full touch-none bg-opacity-20 bg-slate-400 rounded-xl  "
               grab-cursor="true"
               pagination="true"
             >
               {#if fieldsBackOneValues?.length > 0}
                 <swiper-slide
-                  class="text-center bg-none flex justify-center content-center "
+                  class="text-center bg-none flex justify-center content-center  "
                 >
-                  <div class="w-full h-full back-card_card-fields p-2">
+                  <div class="w-full h-full back-card_card-fields p-1">
                     {#each fieldsBackOneValues as fieldBackOne}
                       <CardCell
                         gridClass={fieldBackOne.location}
@@ -173,7 +173,7 @@
 
               {#if fieldsBackTwoValues?.length > 0}
                 <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields p-2">
+                  <div class="w-full h-full back-card_card-fields p-1">
                     {#each fieldsBackTwoValues as fieldBackTwo}
                       <CardCell
                         gridClass={fieldBackTwo.location}
@@ -187,7 +187,7 @@
               {/if}
               {#if fieldsBackThreeValues?.length > 0}
                 <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields p-2">
+                  <div class="w-full h-full back-card_card-fields p-1">
                     {#each fieldsBackThreeValues as fieldBackTwo}
                       <CardCell
                         gridClass={fieldBackTwo.location}
@@ -225,7 +225,7 @@
                 /></button
               >
             </div>
-            <div class="card-buttons_back back-card_general-3 mt-2">
+            <div class="card-buttons_back mt-2">
               <ChildIdButtonWidget />
             </div>
           </div>
@@ -423,7 +423,7 @@
   .back-card_general-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr auto;
+    grid-template-rows: .5fr 3fr .5fr auto;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
