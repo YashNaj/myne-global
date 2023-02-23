@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
 
   import { childIdFields } from "../../forms";
   import CardButtonWidget from "./CardButtonWidget.svelte";
   import CardCell from "./CardCell.svelte";
   import Carousel from "./Carousel.svelte";
+  import ChildIdButtonWidget from "./ChildIdButtonWidget.svelte";
   //external card controls
   export let expand = false;
   export let flipped = false;
@@ -20,10 +22,26 @@
   let fieldsBackTwoValues = formFields.fieldsBackTwo;
   let fieldsBackThreeValues = formFields.fieldsBackThree;
 
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:94 ~ formFields ~ formFields",
-    formFields
-  );
+  //swiper button config
+  onMount(() => {
+    const swiperEl = document.querySelector("swiper-container");
+    const nextEl = document.querySelector(".next");
+    const previousEl = document.querySelector(".previous");
+
+    console.log(
+      "🚀 ~ file: +page.svelte:14 ~ onMount ~ previousEl:",
+      previousEl
+    );
+    console.log("🚀 ~ file: +page.svelte:11 ~ onMount ~ nextEl:", nextEl);
+    console.log(swiperEl);
+
+    nextEl?.addEventListener("click", () => {
+      swiperEl?.swiper.slideNext();
+    });
+    previousEl?.addEventListener("click", () => {
+      swiperEl?.swiper.slidePrev();
+    });
+  });
 </script>
 
 <div
@@ -45,7 +63,7 @@
             class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
           >
             <button
-              class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case"
+              class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case h-full"
             >
               <Icon
                 size="12px"
@@ -56,7 +74,7 @@
               <p>Expand</p>
             </button>
             <button
-              class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
+              class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case  h-full"
               on:click={() => (flipped = !flipped)}
               on:click={() => (cardSide = "back")}
             >
@@ -96,10 +114,10 @@
       <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
         <div class="card-item  bg-none rounded-2xl shadow-2xl z-2 aspect-[5/7]">
           <div
-            class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
+            class="flex  top-[.5rem] right-[1rem] z-10 absolute w-full justify-end"
           >
             <button
-              class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
+              class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case  h-full"
               on:click={() => (expand = !expand)}
             >
               <Icon
@@ -110,7 +128,7 @@
               <p>Expand</p>
             </button>
             <button
-              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
+              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case  h-full"
               on:click={() => (flipped = !flipped)}
               on:click={() => (cardSide = "front")}
             >
@@ -122,13 +140,13 @@
               <p>Flip</p>
             </button>
           </div>
+
           <div
             class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-white [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
           rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
           rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;]back-card_general-grid px-2 py-3 "
-          > <div class = 'spacer w-full h-16'>
-            
-          </div>
+          >
+            <div class="spacer w-full h-16" />
             <swiper-container
               class="mySwiper back-card_card-general h-full w-full touch-none"
               scrollbar-hide="false"
@@ -180,8 +198,18 @@
                 </swiper-slide>
               {/if}
             </swiper-container>
+            <div class="swiper-button-container grid grid-cols-2 place-items-center z-15">
+              <button
+                class="previous btn btn-secondary normal-case w-[90%] h-full relative  p-2 touch-none "
+                >Previous</button
+              >
+              <button
+                class="next btn btn-primary normal-case w-[90%] h-full relative  p-2 touch-none"
+                >Next</button
+              >
+            </div>
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget />
+              <ChildIdButtonWidget />
             </div>
           </div>
         </div>
@@ -411,5 +439,4 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-
 </style>
