@@ -7,7 +7,7 @@
 type="button"
 id="next"
 on:click={()=> pageCount = ++pageCount}
-class="next btn btn-primary normal-case shadow-lg flex-1"
+class="next btn btn-[primary] normal-case shadow-lg w-[90%]"
 >
 Next
 </button>

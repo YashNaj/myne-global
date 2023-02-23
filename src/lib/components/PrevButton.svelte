@@ -9,7 +9,7 @@
 type="button"
 id = 'previous'
 on:click={()=> pageCount = --pageCount}
-class="previous btn btn-secondary normal-case shadow-lg flex-1"
+class="previous btn btn-secondary normal-case shadow-lg w-[90%]"
 >
 Back</button
 >

@@ -13,6 +13,10 @@
   import { firstCapital } from "$lib/caps";
   import { sizes } from "$lib/size";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
+  import PrevButton from "$lib/components/PrevButton.svelte";
+  import NextButton from "$lib/components/NextButton.svelte";
+  import { onMount } from "svelte";
+  import SwiperStandard from "$lib/components/SwiperStandard.svelte";
   export let data: PageData;
   export let flipped = false;
   export let brandFilterOpen = false;
@@ -50,15 +54,6 @@
     brand: string;
     searchTerms: string;
   };
-  async function onSubmit() {
-    await fetch("http://localhost:5174/api/addCard", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-  }
 
   //initialize the category and subcategory fields
   export let isStolen = "";
@@ -90,7 +85,7 @@
   export let date = "";
   export let dial = "";
   export let distinguishing_features = "";
-  export let document = "";
+  export let document_array = "";
   export let drivetrain = "";
   export let engine = "";
   export let engraving = "";
@@ -161,7 +156,7 @@
     isStolen?:string
     isHeirloom?:string
     pictures?:string
-    category?:string | keyof typeof formFieldsObject
+    category?:string 
     subcategory?:string
     brand?:string
     breed?:string
@@ -187,7 +182,7 @@
     date?:string
     dial?:string
     distinguishing_features?:string
-    document?:string
+    documentArray?:string
     drivetrain?:string
     engine?:string
     engraving?:string
@@ -286,7 +281,7 @@
     date,
     dial,
     distinguishing_features,
-    document,
+    document_array,
     drivetrain,
     engine,
     engraving,
@@ -426,7 +421,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col pt-4 justify-start  relative">
-  <h1 class="flex text-primary font-bold text-3xl pl-3 ">
+  <h1 class="flex text-primary font-bold text-3xl pl-3">
     Add A Card | Enter Card Info
   </h1>
   <div class="w-full h-full absolute " transition:slide>
@@ -443,7 +438,9 @@
       <div class="flex w-full justify-center">
         <form
           method="POST"
-          class="h-[23rem] form-gradient w-full p-4 pt-40 form-g text-white flex flex-col justify-between  rounded-lg md:w-[30rem] lg:w-[40rem]"
+          class="h-fit form-gradient w-full p-4 pt-40 flex  justify-between  md:w-[30rem] lg:w-[40rem] form-container text-white bg-gradient-to-b from-[#002d72] to-[#a3c7fa] rounded-2xl 
+          [box-shadow:rgba(0,_0,_0,_0.09)_0px_2px_1px,_rgba(0,_0,_0,_0.09)_0px_4px_2px,_rgba(0,_0,_0,_0.09)_0px_8px_4px,_rgba(0,_0,_0,_0.09)_0px_16px_8px,_rgba(0,_0,_0,_0.09)_0px_32px_16px;]"
+        
           use:enhance
           class:exitForm={sentCard === true}
           class:comeBack={success === true}
@@ -504,183 +501,7 @@
             placeholder="Test"
             bind:value={description}
           />
-          {#if pageCount === 0}
-            <div class="w-full h-full relative">
-              <div
-                class="first-selects w-full h-full absolute flex flex-col"
-                transition:fly={{ x: -100 }}
-              >
-                <!-- <div class="select-group "> -->
-                <Select
-                  placeholder="Category"
-                  class="select text-black w-full mt-2 "
-                  items={categories.map((categories) =>
-                    firstCapital(categories)
-                  )}
-                  on:change={() => {
-                    category = justValue;
-                    subcategory = "";
-                  }}
-                  bind:justValue
-                />
-
-                <div in:fly|local={{ duration: duration }} out:fly|local>
-                  <div class="select-group">
-                    <Select
-                      placeholder="Subcategory"
-                      class="select text-black w-full mt-2 "
-                      items={subcategories?.map((subcategories) =>
-                        firstCapital(subcategories)
-                      )}
-                      on:change={() => {
-                        subcategory = justValue;
-                      }}
-                      bind:justValue
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          {:else if pageCount === 1}
-            <div class="w-full h-full relative flex flex-col ">
-              <div
-                class="brand-breed h-full w-full flex flex-col  absolute"
-                transition:fly={{ x: -100 }}
-              >
-                <Select
-                  placeholder="Breed"
-                  class="select text-black w-full mt-2 "
-                  items={breeds?.map((breed) => firstCapital(breed))}
-                  on:change={() => {
-                    breed = justValue;
-                  }}
-                  bind:justValue
-                />
-                <!-- <ComboBox formName="brand" options={brands} id="brand" /> -->
-                <Select
-                  placeholder="Brand"
-                  class="select text-black w-full mt-2 "
-                  items={brands?.map((brand) => firstCapital(brand))}
-                  on:change={() => {
-                    brand = justValue;
-                  }}
-                  bind:justValue
-                />
-                <Select
-                placeholder="Size" class="select text-black w-full mt-2 " items={sizes?.map(
-                  (size) => firstCapital(size)
-                )}
-                on:change={() => {
-                  size = justValue;
-                }}
-                bind:justValue on:focus={() => (flipped = false)}
-                on:focus={() => (brandFilterOpen = false)}
-                />
-              </div>
-            </div>
-          {:else if pageCount === 2}
-            <div class="w-full h-full relative">
-              <div
-                class="purchased h-[100px] w-full flex flex-col absolute"
-                transition:fly={{ x: -100 }}
-              >
-                <input
-                  type="text"
-                  name="purchasedFrom"
-                  id="purchasedFrom"
-                  placeholder="Purchased From"
-                  class="input input-md mt-2 "
-                  bind:value={purchasedFrom}
-                  on:focus={() => (flipped = true)}
-                  on:abort={() => (flipped = false)}
-                />
-                <input
-                  type="string"
-                  name="purchasedValue"
-                  id="purchasedValue"
-                  placeholder="Purchased Value"
-                  class="input input-md mt-2 "
-                  bind:value={purchasedValue}
-                  on:focus={() => (flipped = true)}
-                  on:abort={() => (flipped = false)}
-                />
-              </div>
-            </div>
-          {:else if pageCount === 3}
-            <div class="w-full h-full relative">
-              <div
-                class="description absolute  h-full w-full flex flex-col  "
-                transition:fly={{ x: -100 }}
-              >
-                <input
-                  type="text"
-                  name="description"
-                  id="description"
-                  placeholder="Description"
-                  class="input input-md mt-2 "
-                  bind:value={description}
-                  on:focus={() => (flipped = true)}
-                  on:abort={() => (flipped = false)}
-                />
-              </div>
-            </div>
-          {:else if pageCount === 4}
-            <div
-              class="w-full h-full relative flex justify-center flex-wrap content-center"
-            >
-              <div
-                class="document-upload absolute"
-                transition:fly={{ x: -100 }}
-              >
-                <input
-                  type="file"
-                  class="file-input w-full flex justify-center"
-                />
-              </div>
-            </div>
-          {:else if pageCount === 5}
-            <div class="w-full h-full relative flex justify-center">
-              <div
-                class="submit absolute  h-full w-full flex flex-col font-bold  text-primary text-center"
-              >
-                Please review your data before submitting, Myne takes no
-                responsibility for incorrect or fraudulent values submitted
-              </div>
-            </div>
-          {/if}
-          <div class="pagination-buttons mt-2 w-full flex self-end">
-            <div class="pagination-btns flex w-full self-end">
-              {#if pageCount > 0}
-                <button
-                  type="button"
-                  on:click={pageDown}
-                  class="btn btn-secondary normal-case shadow-lg flex-1 "
-                >
-                  Back</button
-                >
-              {/if}
-              {#if pageCount === 0 || pageCount < 5}
-                <button
-                  type="button"
-                  on:click={pageUp}
-                  class="btn btn-primary normal-case shadow-lg flex-1 "
-                >
-                  Next
-                </button>
-              {/if}
-
-              {#if pageCount === 5}
-                <input
-                  type="submit"
-                  class="btn btn-success normal-case shadow-sm flex-1"
-                  value="Submit"
-                  on:click={() => {
-                    sentCard = !sentCard;
-                  }}
-                />
-              {/if}
-            </div>
-          </div>
+          <SwiperStandard/>
         </form>
       </div>
     </div>
@@ -800,25 +621,6 @@
     }
   }
   .form-gradient {
-    background: hsla(216, 74%, 79%, 1);
-
-    background: linear-gradient(
-      225deg,
-      hsla(216, 74%, 79%, 1) 0%,
-      hsla(206, 100%, 91%, 1) 100%
-    );
-
-    background: -moz-linear-gradient(
-      225deg,
-      hsla(216, 74%, 79%, 1) 0%,
-      hsla(206, 100%, 91%, 1) 100%
-    );
-
-    background: -webkit-linear-gradient(
-      225deg,
-      hsla(216, 74%, 79%, 1) 0%,
-      hsla(206, 100%, 91%, 1) 100%
-    );
 
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
