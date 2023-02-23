@@ -120,7 +120,7 @@
       <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
         <div class="card-item  bg-none rounded-2xl shadow-2xl z-2 aspect-[5/7]">
           <div
-            class="flex  top-[.5rem] right-[1rem] z-10 absolute w-full justify-end"
+            class="flex  top-[.5rem] right-[1rem] z-10 absolute  justify-end"
           >
             <button
               class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case  h-full"
@@ -216,11 +216,11 @@
                   src={ArrowLeft}
                   on:click={() => (expand = !expand)}
                 />
-                <p class = 'w-full flex-3'>Previous</p>
+                <p class="w-full flex-3">Previous</p>
               </button>
               <button
                 class="next btn btn-ghost normal-case w-[90%] h-full relative p-2 touch-none flex-nowrap"
-                ><p class = 'w-full flex-3' >Next</p>
+                ><p class="w-full flex-3">Next</p>
                 <Icon
                   size="24px"
                   class="opacity-60 cursor-pointer  text-black ml-[1rem]"
@@ -295,20 +295,8 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    /* background-image: url('src/lib/images/white-paper-texture.jpg');
-  background-size: cover; 
-  background-repeat: no-repeat; */
   }
-  .gradient {
-    /* background: rgb(38,82,29);
-background: -moz-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(40, 68, 42) 100%);
-background: -webkit-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(41, 78, 44) 100%);
-background: linear-gradient(90deg, rgb(115, 134, 111) 0%, rgb(25, 49, 26) 100%); */
-    /* background: rgb(180,79,66);
-background: -moz-linear-gradient(90deg, rgb(92, 40, 33) 0%, rgba(55,9,3,1) 100%);
-background: -webkit-linear-gradient(90deg, rgb(82, 32, 25) 0%, rgb(121, 0, 0) 100%);
-background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
-  }
+
   .sendCard {
     -webkit-animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045)
       forwards;
