@@ -1,6 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
+  import {
+    Icon,
+    ArrowCircleLeft,
+    ArrowsExpand,
+    ArrowLeft,
+    ArrowRight,
+  } from "svelte-hero-icons";
 
   import { childIdFields } from "../../forms";
   import CardButtonWidget from "./CardButtonWidget.svelte";
@@ -51,10 +57,10 @@
   class:comeBack={success === true}
 >
   <div
-    class="flip-card bg-gradient-to-r [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]"
+    class="flip-card bg-slate-50 [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]"
   >
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
-      <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
+      <div class="flip-card-front bg-slate-50 rounded-2xl aspect-[5/7]  h-full">
         <div
           class="front-parent card-item w-full h-full  whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
         >
@@ -142,15 +148,15 @@
           </div>
 
           <div
-            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-white [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
+            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-slate-50 [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
           rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
-          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;]back-card_general-grid px-2 py-3 "
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;] px-3 py-3 "
           >
             <div class="spacer w-full h-16" />
             <swiper-container
-              class="mySwiper back-card_card-general h-full w-full touch-none"
-              scrollbar-hide="false"
+              class="mySwiper back-card_card-general h-full w-full touch-none bg-opacity-20 bg-slate-400 rounded-xl"
               grab-cursor="true"
+              pagination="true"
             >
               {#if fieldsBackOneValues?.length > 0}
                 <swiper-slide
@@ -198,14 +204,29 @@
                 </swiper-slide>
               {/if}
             </swiper-container>
-            <div class="swiper-button-container grid grid-cols-2 place-items-center z-15">
+            <div
+              class="swiper-button-container grid grid-cols-2 place-items-center z-15"
+            >
               <button
-                class="previous btn btn-secondary normal-case w-[90%] h-full relative  p-2 touch-none "
-                >Previous</button
+                class="previous btn btn-ghost normal-case w-[90%] h-full relative  p-2 touch-none  flex-nowrap"
               >
+                <Icon
+                  size="24px"
+                  class="opacity-60 cursor-pointer  text-black ml-[1rem]"
+                  src={ArrowLeft}
+                  on:click={() => (expand = !expand)}
+                />
+                <p class = 'w-full flex-3'>Previous</p>
+              </button>
               <button
-                class="next btn btn-primary normal-case w-[90%] h-full relative  p-2 touch-none"
-                >Next</button
+                class="next btn btn-ghost normal-case w-[90%] h-full relative p-2 touch-none flex-nowrap"
+                ><p class = 'w-full flex-3' >Next</p>
+                <Icon
+                  size="24px"
+                  class="opacity-60 cursor-pointer  text-black ml-[1rem]"
+                  src={ArrowRight}
+                  on:click={() => (expand = !expand)}
+                /></button
               >
             </div>
             <div class="card-buttons_back back-card_general-3 mt-2">
