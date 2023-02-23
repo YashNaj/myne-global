@@ -54,10 +54,11 @@
   };
   interface IcardProps {
     [key: string]: string | boolean | null | bigint;
-    category: keyof typeof colors
-    | keyof typeof formFieldsObject
-    | string
-    | null ;
+    category:
+      | keyof typeof colors
+      | keyof typeof formFieldsObject
+      | string
+      | null;
   }
 
   // card external control values
@@ -70,7 +71,7 @@
     | keyof typeof colors
     | keyof typeof formFieldsObject
     | string
-    | null ;
+    | null;
   export let subcategory: string | boolean | null | bigint;
   export let brand: string | boolean | null | bigint;
   export let breed: string | boolean | null | bigint;
@@ -147,7 +148,13 @@
   export let isHeirloom: string | boolean | null | bigint;
   export let wallet_address: string | boolean | null | bigint;
   export let backgroundColor: string | null | undefined = "";
+  export let id;
+  export let user_id;
+  export let createOn;
   export let cardProps: IcardProps = {
+    id,
+    user_id,
+    createOn,
     isStolen,
     isHeirloom,
     pictures,
@@ -466,7 +473,7 @@
             </button>
           </div>
           <div
-            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-white  p-3 "
+            class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
             <div class="description back-card_general-1">
               <CardCellDescription {description} />
@@ -525,7 +532,7 @@
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each generalFieldsBack as generalFields}
                       <CardCell
-                      bind:value={cardProps[generalFields.value]}
+                        bind:value={cardProps[generalFields.value]}
                         gridClass={generalFields.location}
                         label={generalFields.label}
                         justifyCell={generalFields.justify}

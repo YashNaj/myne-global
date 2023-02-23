@@ -146,7 +146,7 @@
           </div>
 
           <div
-            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-slate-50  p-3 "
+            class="back-card_general-grid rounded-2xl w-full h-full justify-between whole-card bg-slate-50  p-3 "
           >
             <div class="spacer w-full h-16" />
             <swiper-container
