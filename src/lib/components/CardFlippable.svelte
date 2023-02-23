@@ -5,7 +5,7 @@
   import Carousel from "$lib/components/Carousel.svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
   import {
-    generalFields,
+    template,
     generalFieldsBack,
     jewelryFields,
     watchFields,
@@ -185,8 +185,7 @@
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
-  //card variablesd
-
+  //card variables
   export let category: keyof typeof formFieldsObject | string = "";
   export let subcategory = "";
   export let brand = "";
@@ -388,7 +387,7 @@
    $:console.log("🚀 ~ file: CardFlippable.svelte:388 ~ pickedCategory:", pickedCategory)
 
   type values = (typeof formFields)[keyof typeof formFields];
-  let formFields = generalFields
+  let formFields: template = template; 
   $: formFields = formFieldsObject[cardProps.category as keyof typeof formFieldsObject]
   let fieldsFrontValues: values;
   let fieldsBackOneValues: values;

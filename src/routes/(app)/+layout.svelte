@@ -2,17 +2,14 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import type {  LayoutServerLoad } from "../$types";
+  import type {  LayoutData, LayoutServerLoad } from "../$types";
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
   import { Icon, Plus } from "svelte-hero-icons";
-  // register Swiper custom elements
-  import { register } from "swiper/element/bundle";
   import type { PageServerLoad } from "./$types";
   import type { PageData } from "@lucia-auth/sveltekit/types";
-  register();  export let data: LayoutServerLoad;
-  const isUser = data?.isUser;
+  export let data: LayoutData;
   const profile = data?.profile;
 
   let menuItems = [
@@ -35,7 +32,7 @@
 <div class="drawer drawer-end ">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content  w-full  h-auto lg:w-auto overflow-hidden">
-    <div class="navbar bg-primary">
+    <div class="navbar bg-primary sticky top-0 z-50">
       <div class="px-2 mx-2 font-bold text-white w-full">
         <a href="/">
           <img class="max-w-s w-20 lg:max-w-md " alt="logo" src={logo} />
@@ -66,7 +63,6 @@
           <div class="flex">
             <a
               href="/add_card"
-              alt="Add a Card"
               class="btn btn-success flex normal-case text-white mr-5"
             >
               <Icon src={Plus} color="white" size="12px" class="mr-1" />
@@ -101,7 +97,7 @@
         </ul>
       </div>
     </div>
-  <slot/>
+    <slot/>
   </div>
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />

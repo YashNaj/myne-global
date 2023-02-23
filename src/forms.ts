@@ -1,4 +1,4 @@
-let template = {
+export let template = {
   fieldsFront: [
     {
       label: "Category",
@@ -251,7 +251,7 @@ let medicalConditions = "";
 let prescription = "";
 let blood_type = "";
 
-export let generalFields = {
+export let generalFields: typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -432,7 +432,7 @@ export let generalFieldsBack = [
   },
 ];
 
-export let jewelryFields = {
+export let jewelryFields: typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -544,7 +544,7 @@ export let jewelryFields = {
   fieldsBackThree: [],
 };
 
-export let watchFields = {
+export let watchFields: typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -643,7 +643,7 @@ export let watchFields = {
   ],
   fieldsBackThree: [],
 };
-export let artFields = {
+export let artFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -730,7 +730,7 @@ export let artFields = {
   ],
   fieldsBackThree: [],
 };
-export let leatherFields = {
+export let leatherFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -797,7 +797,7 @@ export let leatherFields = {
   ],
   fieldsBackThree: [],
 };
-export let clothingFields = {
+export let clothingFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -859,7 +859,7 @@ export let clothingFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let sneakerFields = {
+export let sneakerFields:typeof template= {
   fieldsFront: [
     {
       label: "Category",
@@ -934,7 +934,7 @@ export let sneakerFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let gunsFields = {
+export let gunsFields:typeof template= {
   fieldsFront: [
     {
       label: "Category",
@@ -1007,7 +1007,7 @@ export let gunsFields = {
   ],
   fieldsBackTwo: [],
 };
-export let technologyFields = {
+export let technologyFields :typeof template= {
   fieldsFront: [
     {
       label: "Category",
@@ -1080,7 +1080,7 @@ export let technologyFields = {
   ],
   fieldsBackTwo: [],
 };
-export let tradingCardFields = {
+export let tradingCardFields :typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1238,7 +1238,7 @@ export let tradingCardFields = {
 //   ],
 //   fieldsBackTwo: [],
 // };
-export let colectibleFields = {
+export let colectibleFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1312,7 +1312,7 @@ export let colectibleFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let cryptoFields = {
+export let cryptoFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1380,7 +1380,7 @@ export let cryptoFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let nftFields = {
+export let nftFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1449,7 +1449,7 @@ export let nftFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let vintageFields = {
+export let vintageFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1529,7 +1529,7 @@ export let vintageFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let autoFields = {
+export let autoFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1640,7 +1640,7 @@ export let autoFields = {
   ],
   fieldsBackThree: [],
 };
-export let motoFields = {
+export let motoFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1751,7 +1751,7 @@ export let motoFields = {
   ],
   fieldsBackThree: [],
 };
-export let otherFields = {
+export let otherFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1819,7 +1819,7 @@ export let otherFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let dogFields = {
+export let dogFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",
@@ -1899,7 +1899,7 @@ export let dogFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let catFields = {
+export let catFields:typeof templates = {
   fieldsFront: [
     {
       label: "Category",
@@ -1979,7 +1979,7 @@ export let catFields = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-export let birdFields = {
+export let birdFields:typeof template = {
   fieldsFront: [
     {
       label: "Category",

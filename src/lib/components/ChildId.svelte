@@ -9,7 +9,6 @@
   } from "svelte-hero-icons";
 
   import { childIdFields } from "../../forms";
-  import CardButtonWidget from "./CardButtonWidget.svelte";
   import CardCell from "./CardCell.svelte";
   import Carousel from "./Carousel.svelte";
   import ChildIdButtonWidget from "./ChildIdButtonWidget.svelte";
@@ -21,7 +20,6 @@
   $: cardSide = "front";
 
   //formField init
-  type values = (typeof formFields)[keyof typeof formFields];
   let formFields: typeof childIdFields = childIdFields;
   let fieldsFrontValues = formFields.fieldsFront;
   let fieldsBackOneValues = formFields.fieldsBackOne;
@@ -148,7 +146,7 @@
           </div>
 
           <div
-            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-slate-50  px-3 py-3 "
+            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-slate-50  p-3 "
           >
             <div class="spacer w-full h-16" />
             <swiper-container
