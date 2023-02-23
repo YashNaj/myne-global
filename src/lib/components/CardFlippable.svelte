@@ -52,133 +52,13 @@
     other: otherFields,
     childid: childIdFields,
   };
-  interface cardProps {
-    isStolen?:string
-    isHeirloom?:string
-    pictures?:string
-    category?:string | keyof typeof formFieldsObject
-    subcategory?:string
-    brand?:string
-    breed?:string
-    size?:string
-    purchasedFrom?:string
-    purchasedValue: string | number | null | undefined | bigint ;
-    reportedStolenDate?:string
-    description?:string
-    crypto_token_address?:string
-    unique_features?:string
-    artist?:string
-    author?:string
-    dob?:string
-    body_length?:string
-    brand_reference?:string
-    caliber?:string
-    carat_weight?:string
-    case_material?:string
-    cOfAuth?:string
-    clarity?:string
-    color?:string
-    cut?:string
-    date?:string
-    dial?:string
-    distinguishing_features?:string
-    document?:string
-    drivetrain?:string
-    engine?:string
-    engraving?:string
-    exchange_address?:string
-    exterior_color?:string
-    fuel_type?:string
-    grading?:string
-    grading_reports?:string
-    height?:string
-    hotstamping?:string
-    interior_color?:string
-    invoice?:string
-    laser_inscription?:string
-    manufacturer?:string
-    material?:string
-    microchip?:string
-    mileage?:string
-    model?:string
-    model_yr?:string
-    movement_caliber?:string
-    other?:string
-    pedigree?:string
-    product?:string
-    registration_certificate?:string,
-    release_date?:string
-    serial?:string
-    serie?:string
-    series?:string
-    shape?:string
-    smart_contract_address?:string
-    smart_contract_id?:string
-    stock_number?:string
-    stone?:string
-    strap_bracelet?:string
-    tattoo?:string
-    trademarks?:string
-    transaction?:string
-    transmission?:string
-    url?:string
-    valuation_report?:string
-    vin?:string
-    wallet_address?:string
-    weight?:string
-    year?:string
-    marketPrice?:string
-    childIdFirstName?:string
-    childIdMiddleName?:string
-    childIdLastName?:string
-    eye_color?:string
-    hair_color?:string
-    parentOneName?:string
-    parentTwoName?:string
-    contactNumberOne?:string
-    contactNumberTwo?:string
-    homeAddress?:string
-    homeCity?:string
-    homeState?:string
-    homeCountry?:string
-    homeZIP?:string
-    age?:string
-    gender?:string
-    race?:string
-    physicalTraits?:string
-    allergies?:string
-    medicalConditions?:string
-    prescription?:string
-    backgroundColor?:string
+  interface IcardProps {
+    [key: string]: string | boolean | null | bigint;
+    category: keyof typeof colors
+    | keyof typeof formFieldsObject
+    | string
+    | null ;
   }
-  $: backgroundColor = category?.toLowerCase();
-  let colorKey: keyof typeof colors;
-  $: colorKey = backgroundColor;
-  $: console.log("🚀 ~ file: CardFlippable.svelte:17 ~ colorKey", colorKey);
-  const colors = {
-    jewelry: "#F192E8",
-    watch: "#2B2C31",
-    art: "#FFE609",
-    leather: "#984E1D",
-    clothing: "#59898A",
-    sneakers: "#B3F5F7",
-    guns: "#3A5130",
-    technology: "#080631",
-    "trading cards": "#FCF7DE",
-    collectibles: "#61E1A3",
-    crypto: "#B6B1B1",
-    nft: "#7C1EB6",
-    vintage: "#FF5F09",
-    automobile: "#E10909",
-    motorcycle: "#E10909",
-    dog: "#278001",
-    cat: "#278001",
-    bird: "#278001",
-    childid: "#00BFFF",
-    other: "#ffffff",
-  };
-  let pickedColor: string;
-  $: pickedColor = colors[colorKey];
 
   // card external control values
   export let expand = false;
@@ -186,104 +66,88 @@
   export let sentCard = false;
   export let success: boolean | null = null;
   //card variables
-  export let category: keyof typeof formFieldsObject | string = "";
-  export let subcategory = "";
-  export let brand = "";
-  export let breed = "";
-  export let size = "";
-  export let purchasedFrom = "";
-  export let purchasedValue: string | number | null | undefined | bigint = "";
-  export let reportedStolenDate = "";
-  export let description = "";
-  export let crypto_token_address = "";
-  export let unique_features = "";
-  export let artist = "";
-  export let author = "";
-  export let dob = "";
-  export let body_length = "";
-  export let brand_reference = "";
-  export let caliber = "";
-  export let carat_weight = "";
-  export let case_material = "";
-  export let cOfAuth = "";
-  export let clarity = "";
-  export let color = "";
-  export let cut = "";
-  export let date = "";
-  export let dial = "";
-  export let distinguishing_features = "";
-  export let document = "";
-  export let drivetrain = "";
-  export let engine = "";
-  export let engraving = "";
-  export let exchange_address = "";
-  export let exterior_color = "";
-  export let fuel_type = "";
-  export let grading = "";
-  export let grading_reports = "";
-  export let height = "";
-  export let hotstamping = "";
-  export let interior_color = "";
-  export let invoice = "";
-  export let laser_inscription = "";
-  export let manufacturer = "";
-  export let material = "";
-  export let microchip = "";
-  export let mileage = "";
-  export let model = "";
-  export let model_yr = "";
-  export let movement_caliber = "";
-  export let other = "";
-  export let pedigree = "";
-  export let product = "";
-  export let registration_certificate = "";
-  export let release_date = "";
-  export let serial = "";
-  export let serie = "";
-  export let series = "";
-  export let shape = "";
-  export let smart_contract_address = "";
-  export let smart_contract_id = "";
-  export let stock_number = "";
-  export let stone = "";
-  export let strap_bracelet = "";
-  export let tattoo = "";
-  export let trademarks = "";
-  export let transaction = "";
-  export let transmission = "";
-  export let url = "";
-  export let valuation_report = "";
-  export let vin = "";
-  export let wallet = "";
-  export let weight = "";
-  export let year = "";
-  export let pictures = "";
-  export let marketPrice = "";
-  export let isStolen = "";
-  export let isHeirloom = "";
-  export let childIdFirstName = "";
-  export let childIdMiddleName = "";
-  export let childIdLastName = "";
-  export let eye_color = "";
-  export let hair_color = "";
-  export let parentOneName = "";
-  export let parentTwoName = "";
-  export let contactNumberOne = "";
-  export let contactNumberTwo = "";
-  export let homeAddress = "";
-  export let homeCity = " ";
-  export let homeState = "";
-  export let homeCountry = "";
-  export let homeZIP = "";
-  export let age = "";
-  export let gender = "";
-  export let race = "";
-  export let physicalTraits = "";
-  export let allergies = "";
-  export let medicalConditions = "";
-  export let prescription = "";
-  export let wallet_address = ""
-  export let cardProps:cardProps = {
+  export let category:
+    | keyof typeof colors
+    | keyof typeof formFieldsObject
+    | string
+    | null ;
+  export let subcategory: string | boolean | null | bigint;
+  export let brand: string | boolean | null | bigint;
+  export let breed: string | boolean | null | bigint;
+  export let size: string | boolean | null | bigint;
+  export let purchasedFrom: string | boolean | null | bigint;
+  export let purchasedValue: string | null | bigint | boolean = "";
+  export let reportedStolenDate: string | boolean | null | bigint;
+  export let description: string | boolean | null | bigint;
+  export let crypto_token_address: string | boolean | null | bigint;
+  export let unique_features: string | boolean | null | bigint;
+  export let artist: string | boolean | null | bigint;
+  export let author: string | boolean | null | bigint;
+  export let dob: string | boolean | null | bigint;
+  export let body_length: string | boolean | null | bigint;
+  export let brand_reference: string | boolean | null | bigint;
+  export let caliber: string | boolean | null | bigint;
+  export let carat_weight: string | boolean | null | bigint;
+  export let case_material: string | boolean | null | bigint;
+  export let cOfAuth: string | boolean | null | bigint;
+  export let clarity: string | boolean | null | bigint;
+  export let color: string | boolean | null | bigint;
+  export let cut: string | boolean | null | bigint;
+  export let date: string | boolean | null | bigint;
+  export let dial: string | boolean | null | bigint;
+  export let distinguishing_features: string | boolean | null | bigint;
+  export let document: string | boolean | null | bigint;
+  export let drivetrain: string | boolean | null | bigint;
+  export let engine: string | boolean | null | bigint;
+  export let engraving: string | boolean | null | bigint;
+  export let exchange_address: string | boolean | null | bigint;
+  export let exterior_color: string | boolean | null | bigint;
+  export let fuel_type: string | boolean | null | bigint;
+  export let grading: string | boolean | null | bigint;
+  export let grading_reports: string | boolean | null | bigint;
+  export let height: string | boolean | null | bigint;
+  export let hotstamping: string | boolean | null | bigint;
+  export let interior_color: string | boolean | null | bigint;
+  export let invoice: string | boolean | null | bigint;
+  export let laser_inscription: string | boolean | null | bigint;
+  export let manufacturer: string | boolean | null | bigint;
+  export let material: string | boolean | null | bigint;
+  export let microchip: string | boolean | null | bigint;
+  export let mileage: string | boolean | null | bigint;
+  export let model: string | boolean | null | bigint;
+  export let model_yr: string | boolean | null | bigint;
+  export let movement_caliber: string | boolean | null | bigint;
+  export let other: string | boolean | null | bigint;
+  export let pedigree: string | boolean | null | bigint;
+  export let product: string | boolean | null | bigint;
+  export let registration_certificate: string | boolean | null | bigint;
+  export let release_date: string | boolean | null | bigint;
+  export let serial: string | boolean | null | bigint;
+  export let serie: string | boolean | null | bigint;
+  export let series: string | boolean | null | bigint;
+  export let shape: string | boolean | null | bigint;
+  export let smart_contract_address: string | boolean | null | bigint;
+  export let smart_contract_id: string | boolean | null | bigint;
+  export let stock_number: string | boolean | null | bigint;
+  export let stone: string | boolean | null | bigint;
+  export let strap_bracelet: string | boolean | null | bigint;
+  export let tattoo: string | boolean | null | bigint;
+  export let trademarks: string | boolean | null | bigint;
+  export let transaction: string | boolean | null | bigint;
+  export let transmission: string | boolean | null | bigint;
+  export let url: string | boolean | null | bigint;
+  export let valuation_report: string | boolean | null | bigint;
+  export let vin: string | boolean | null | bigint;
+  export let wallet: string | boolean | null | bigint;
+  export let weight: string | boolean | null | bigint;
+  export let year: string | boolean | null | bigint;
+  export let pictures: string | boolean | null | bigint;
+  export let marketPrice: string | boolean | null | bigint;
+  export let isStolen: string | boolean | null | bigint;
+  export let isHeirloom: string | boolean | null | bigint;
+  export let wallet_address: string | boolean | null | bigint;
+  export let backgroundColor: string | null | undefined = "";
+  export let cardProps: IcardProps = {
     isStolen,
     isHeirloom,
     pictures,
@@ -359,52 +223,8 @@
     weight,
     year,
     marketPrice,
-    childIdFirstName,
-    childIdMiddleName,
-    childIdLastName,
-    eye_color,
-    hair_color,
-    parentOneName,
-    parentTwoName,
-    contactNumberOne,
-    contactNumberTwo,
-    homeAddress,
-    homeCity,
-    homeState,
-    homeCountry,
-    homeZIP,
-    age,
-    gender,
-    race,
-    physicalTraits,
-    allergies,
-    medicalConditions,
-    prescription,
-    backgroundColor,
+    wallet,
   };
-
-   $: pickedCategory = category;
-   $:console.log("🚀 ~ file: CardFlippable.svelte:388 ~ pickedCategory:", pickedCategory)
-
-  type values = (typeof formFields)[keyof typeof formFields];
-  let formFields: template = template; 
-  $: formFields = formFieldsObject[cardProps.category as keyof typeof formFieldsObject]
-  let fieldsFrontValues: values;
-  let fieldsBackOneValues: values;
-  let fieldsBackTwoValues: values;
-  $: fieldsFrontValues = formFields?.fieldsFront;
-  $: fieldsBackOneValues = formFields?.fieldsBackOne;
-  $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
-  $: fieldsBackThreeValues = formFields?.fieldsBackThree;
-  //add general fields config here
-
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:94 ~ formFields ~ formFields",
-    formFields
-  );
-
-  $: formFields = formFields;
-  $: console.log(formFields);
 
   let currency;
   $: currency = purchasedValue;
@@ -413,192 +233,310 @@
     style: "currency",
     currency: "USD",
   });
-  console.log("🚀 ~ file: CardFlippable.svelte:72 ~ loading", success);
 
   $: cardSide = "front";
+  $: isStolen = cardProps.isStolen;
+  $: isHeirloom = cardProps.isHeirloom;
+  $: pictures = cardProps.pictures;
   $: category = cardProps.category;
-  $: cardProps = { ...cardProps };
-  $:console.log("🚀 ~ file: CardFlippable.svelte:233 ~ cardProps", cardProps)
+  $: subcategory = cardProps.subcategory;
+  $: brand = cardProps.brand;
+  $: breed = cardProps.breed;
+  $: size = cardProps.size;
+  $: purchasedFrom = cardProps.purchasedFrom;
+  $: purchasedValue = cardProps.purchasedValue;
+  $: reportedStolenDate = cardProps.reportedStolenDate;
+  $: description = cardProps.description;
+  $: crypto_token_address = cardProps.crypto_token_address;
+  $: unique_features = cardProps.unique_features;
+  $: artist = cardProps.artist;
+  $: author = cardProps.author;
+  $: dob = cardProps.dob;
+  $: body_length = cardProps.body_length;
+  $: brand_reference = cardProps.brand_reference;
+  $: caliber = cardProps.caliber;
+  $: carat_weight = cardProps.carat_weight;
+  $: case_material = cardProps.case_material;
+  $: cOfAuth = cardProps.cOfAuth;
+  $: clarity = cardProps.clarity;
+  $: color = cardProps.color;
+  $: cut = cardProps.cut;
+  $: date = cardProps.date;
+  $: dial = cardProps.dial;
+  $: distinguishing_features = cardProps.distinguishing_features;
+  $: document = cardProps.document;
+  $: drivetrain = cardProps.drivetrain;
+  $: engine = cardProps.engine;
+  $: engraving = cardProps.engraving;
+  $: exchange_address = cardProps.exchange_address;
+  $: exterior_color = cardProps.exterior_color;
+  $: fuel_type = cardProps.fuel_type;
+  $: grading = cardProps.grading;
+  $: grading_reports = cardProps.grading_reports;
+  $: height = cardProps.height;
+  $: hotstamping = cardProps.hotstamping;
+  $: interior_color = cardProps.interior_color;
+  $: invoice = cardProps.invoice;
+  $: laser_inscription = cardProps.laser_inscription;
+  $: manufacturer = cardProps.manufacturer;
+  $: material = cardProps.material;
+  $: microchip = cardProps.microchip;
+  $: mileage = cardProps.mileage;
+  $: model = cardProps.model;
+  $: model_yr = cardProps.model_yr;
+  $: movement_caliber = cardProps.movement_caliber;
+  $: other = cardProps.other;
+  $: pedigree = cardProps.pedigree;
+  $: product = cardProps.product;
+  $: registration_certificate = cardProps.registration_certificate;
+  $: release_date = cardProps.release_date;
+  $: serial = cardProps.serial;
+  $: serie = cardProps.serie;
+  $: series = cardProps.series;
+  $: shape = cardProps.shape;
+  $: smart_contract_address = cardProps.smart_contract_address;
+  $: smart_contract_id = cardProps.smart_contract_id;
+  $: stock_number = cardProps.stock_number;
+  $: stone = cardProps.stone;
+  $: strap_bracelet = cardProps.strap_bracelet;
+  $: tattoo = cardProps.tattoo;
+  $: trademarks = cardProps.trademarks;
+  $: transaction = cardProps.transaction;
+  $: transmission = cardProps.transmission;
+  $: url = cardProps.url;
+  $: valuation_report = cardProps.valuation_report;
+  $: vin = cardProps.vin;
+  $: wallet_address = cardProps.wallet_address;
+  $: weight = cardProps.weight;
+  $: year = cardProps.year;
+  $: marketPrice = cardProps.marketPrice;
+  $: pickedCategory = cardProps.category;
+
+  //add general fields config here
+
+  $: backgroundColor = category?.toLowerCase();
+  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
+  $: categoryKey = category?.toLowerCase() as
+    | keyof typeof colors
+    | keyof typeof formFieldsObject;
+  const colors = {
+    jewelry: "#F192E8",
+    watch: "#2B2C31",
+    art: "#FFE609",
+    leather: "#984E1D",
+    clothing: "#59898A",
+    sneakers: "#B3F5F7",
+    guns: "#3A5130",
+    technology: "#080631",
+    "trading cards": "#FCF7DE",
+    collectibles: "#61E1A3",
+    crypto: "#B6B1B1",
+    nft: "#7C1EB6",
+    vintage: "#FF5F09",
+    automobile: "#E10909",
+    motorcycle: "#E10909",
+    dog: "#278001",
+    cat: "#278001",
+    bird: "#278001",
+    childid: "#00BFFF",
+    other: "#ffffff",
+  };
+  let pickedColor: string;
+  $: pickedColor = colors[categoryKey as keyof typeof colors];
+
+  type formValues = (typeof formFields)[keyof typeof formFields];
+  type cardValues = (typeof cardProps)[keyof typeof cardProps];
+  let formFields = template;
+  $: formFields = formFieldsObject[categoryKey];
+  let fieldsFrontValues: formValues;
+  let fieldsBackOneValues: formValues;
+  let fieldsBackTwoValues: formValues;
+  $: fieldsFrontValues = formFields?.fieldsFront;
+  $: fieldsBackOneValues = formFields?.fieldsBackOne;
+
+  $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
+
+  $: fieldsBackThreeValues = formFields?.fieldsBackThree;
+
+  // $: console.log("🚀 ~ file: CardFlippable.svelte:426 ~ cardProps.category:", cardProps.category)
+  // $: console.log("🚀 ~ file: CardFlippable.svelte:17 ~ colorKey", colorKey);
+  // $: console.log("🚀 ~ file: CardFlippable.svelte:453 ~ pickedColor:", pickedColor)
+  $: console.log(
+    "🚀 ~ file: CardFlippable.svelte:407 ~ fieldFrontValues:",
+    fieldsFrontValues
+  );
 </script>
 
-<div class="full w-full h-full flex justify-center">
+<div
+  class:flipped
+  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] sm:w-[15rem] w-[20rem] "
+  class:sendCard={sentCard === true && success === null}
+  class:comeBack={success === true}
+>
   <div
-    class:flipped
-    class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] sm:w-[15rem] w-[20rem] "
-    class:sendCard={sentCard === true && success === null}
-    class:comeBack={success === true}
+    class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]   "
+    style="background-color = {pickedColor} "
   >
-    <div
-      class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]   "
-      style="background-color = {pickedColor} "
-    >
-      <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
-        <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
+    <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
+      <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
+        <div
+          class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
+        >
           <div
-            class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
+            class:no-display={cardSide === "back"}
+            class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
           >
-            <div
-              class:no-display={cardSide === "back"}
-              class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
+            <button
+              class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case"
             >
-              <button
-                class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case"
-              >
-                <Icon
-                  size="12px"
-                  class="opacity-60 cursor-pointer  text-white ml-[1rem]"
-                  src={ArrowsExpand}
-                  on:click={() => (expand = !expand)}
-                />
-                <p>Expand</p>
-              </button>
-              <button
-                class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
-                on:click={() => (flipped = !flipped)}
-                on:click={() => (cardSide = "back")}
-              >
-                <Icon
-                  size="12px"
-                  class="opacity-60 cursor-pointer  text-white"
-                  src={ArrowCircleLeft}
-                />
-                <p>Flip</p>
-              </button>
-            </div>
-
-            <div
-              class="front-top rounded-t-2xl"
-              style="background: {pickedColor};"
+              <Icon
+                size="12px"
+                class="opacity-60 cursor-pointer  text-white ml-[1rem]"
+                src={ArrowsExpand}
+                on:click={() => (expand = !expand)}
+              />
+              <p>Expand</p>
+            </button>
+            <button
+              class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
+              on:click={() => (flipped = !flipped)}
+              on:click={() => (cardSide = "back")}
             >
-              <div class="w-full h-full px-2 py-3">
-                <Carousel />
-              </div>
-            </div>
+              <Icon
+                size="12px"
+                class="opacity-60 cursor-pointer  text-white"
+                src={ArrowCircleLeft}
+              />
+              <p>Flip</p>
+            </button>
+          </div>
 
-            <div class="front-bottom rounded-b-2xl">
-              <div class="front-fields-grid h-full w-full p-2">
-                {#if fieldsFrontValues?.length > 0}
-                  {#each fieldsFrontValues as fieldFront}
-                    <CardCell
-                      gridClass={fieldFront?.location}
-                      label={fieldFront?.label}
-                      value={fieldFront?.value}
-                      justifyCell={fieldFront?.justify}
-                    />
-                  {/each}
-                {/if}
-              </div>
+          <div
+            class="front-top rounded-t-2xl"
+            style="background: {pickedColor};"
+          >
+            <div class="w-full h-full px-2 py-3">
+              <Carousel />
+            </div>
+          </div>
+
+          <div class="front-bottom rounded-b-2xl">
+            <div class="front-fields-grid h-full w-full p-2">
+              {#if fieldsFrontValues?.length > 0}
+                {#each fieldsFrontValues as fieldFront}
+                  <CardCell
+                    bind:value={cardProps[fieldFront.value]}
+                    gridClass={fieldFront?.location}
+                    label={fieldFront?.label}
+                    justifyCell={fieldFront?.justify}
+                  />
+                {/each}
+              {/if}
             </div>
           </div>
         </div>
-        <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
+      </div>
+      <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
+        <div class="card-item  bg-none rounded-2xl shadow-2xl z-2 aspect-[5/7]">
           <div
-            class="card-item  bg-none rounded-2xl shadow-2xl z-2 aspect-[5/7]"
+            class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
           >
-            <div
-              class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
+            <button
+              class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
+              on:click={() => (expand = !expand)}
             >
-              <button
-                class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
-                on:click={() => (expand = !expand)}
-              >
-                <Icon
-                  size="12px"
-                  class="opacity-60 cursor-pointer  text-black"
-                  src={ArrowsExpand}
-                />
-                <p>Expand</p>
-              </button>
-              <button
-                class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
-                on:click={() => (flipped = !flipped)}
-                on:click={() => (cardSide = "front")}
-              >
-                <Icon
-                  size="12px"
-                  class="opacity-60 cursor-pointer  text-black"
-                  src={ArrowCircleLeft}
-                />
-                <p>Flip</p>
-              </button>
+              <Icon
+                size="12px"
+                class="opacity-60 cursor-pointer  text-black"
+                src={ArrowsExpand}
+              />
+              <p>Expand</p>
+            </button>
+            <button
+              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
+              on:click={() => (flipped = !flipped)}
+              on:click={() => (cardSide = "front")}
+            >
+              <Icon
+                size="12px"
+                class="opacity-60 cursor-pointer  text-black"
+                src={ArrowCircleLeft}
+              />
+              <p>Flip</p>
+            </button>
+          </div>
+          <div
+            class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-white  p-3 "
+          >
+            <div class="description back-card_general-1">
+              <CardCellDescription {description} />
             </div>
-            <div
-              class="flex flex-col rounded-2xl w-full h-full justify-between whole-card bg-white [box-shadow: rgba(0, 0, 0, 0.25)_0px_54px_55px,
-              rgba(0, 0, 0, 0.12)_0px_-12px_30px, rgba(0, 0, 0, 0.12)_0px_4px_6px,
-              rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px-3px_5px;]back-card_general-grid px-2 py-3 "
+            <swiper-container
+              class="mySwiper back-card_card-general-2 h-full w-full touch-none"
+              scrollbar-hide="false"
+              grab-cursor="true"
             >
-              <div class="description back-card_general-1">
-                <CardCellDescription {description} />
-              </div>
-              <swiper-container
-                class="mySwiper back-card_card-general-2 h-full w-full touch-none"
-                scrollbar-hide="false"
-                grab-cursor="true"
-              >
-                {#if fieldsBackOneValues?.length > 0}
-                  <swiper-slide
-                    class="text-center bg-none flex justify-center content-center "
-                  >
-                    <div class="w-full h-full back-card_card-fields p-2">
-                      {#each fieldsBackOneValues as fieldBackOne}
-                        <CardCell
-                          gridClass={fieldBackOne.location}
-                          label={fieldBackOne.label}
-                          value={fieldBackOne.value}
-                          justifyCell={fieldBackOne.justify}
-
-                        />
-                      {/each}
-                    </div>
-                  </swiper-slide>
-                {/if}
-
-                {#if fieldsBackTwoValues?.length > 0}
-                  <swiper-slide>
-                    <div class="w-full h-full back-card_card-fields p-2">
-                      {#each fieldsBackTwoValues as fieldBackTwo}
-                        <CardCell
-                          gridClass={fieldBackTwo.location}
-                          label={fieldBackTwo.label}
-                          value={fieldBackTwo.value}
-                          justifyCell={fieldBackTwo.justify}
-                        />
-                      {/each}
-                    </div>
-                  </swiper-slide>
-                {/if}
-                {#if fieldsBackThreeValues?.length > 0}
-                  <swiper-slide>
-                    <div class="w-full h-full back-card_card-fields p-2">
-                      {#each fieldsBackThreeValues as fieldBackTwo}
-                        <CardCell
-                          gridClass={fieldBackTwo.location}
-                          label={fieldBackTwo.label}
-                          value={fieldBackTwo.value}
-                          justifyCell={fieldBackTwo.justify}
-                        />
-                      {/each}
-                    </div>
-                  </swiper-slide>
-                {/if}
-                {#if category !== "childid"}
-                  <swiper-slide>
-                    <div class="w-full h-full back-card_card-fields p-2">
-                      {#each generalFieldsBack as generalField}
-                        <CardCell
-                          gridClass={generalField.location}
-                          label={generalField.label}
-                          value={generalField.value}
-                          justifyCell={generalField.justify}
-                        />
-                      {/each}
-                    </div>
-                  </swiper-slide>
-                {/if}
-              </swiper-container>
-              <div class="card-buttons_back back-card_general-3 mt-2">
-                <CardButtonWidget />
-              </div>
+              {#if fieldsBackOneValues?.length > 0}
+                <swiper-slide
+                  class="text-center bg-none flex justify-center content-center "
+                >
+                  <div class="w-full h-full back-card_card-fields p-2">
+                    {#each fieldsBackOneValues as fieldBackOne}
+                      <CardCell
+                        bind:value={cardProps[fieldBackOne.value]}
+                        gridClass={fieldBackOne.location}
+                        label={fieldBackOne.label}
+                        justifyCell={fieldBackOne.justify}
+                      />
+                    {/each}
+                  </div>
+                </swiper-slide>
+              {/if}
+              {#if fieldsBackTwoValues?.length > 0}
+                <swiper-slide>
+                  <div class="w-full h-full back-card_card-fields p-2">
+                    {#each fieldsBackTwoValues as fieldBackTwo}
+                      <CardCell
+                        bind:value={cardProps[fieldBackTwo.value]}
+                        gridClass={fieldBackTwo.location}
+                        label={fieldBackTwo.label}
+                        justifyCell={fieldBackTwo.justify}
+                      />
+                    {/each}
+                  </div>
+                </swiper-slide>
+              {/if}
+              {#if fieldsBackThreeValues?.length > 0}
+                <swiper-slide>
+                  <div class="w-full h-full back-card_card-fields p-2">
+                    {#each fieldsBackThreeValues as fieldBackThree}
+                      <CardCell
+                        bind:value={fieldBackThree.value}
+                        gridClass={fieldBackThree.location}
+                        label={fieldBackThree.label}
+                        justifyCell={fieldBackThree.justify}
+                      />
+                    {/each}
+                  </div>
+                </swiper-slide>
+              {/if}
+              {#if generalFieldsBack.length > 0}
+                <swiper-slide>
+                  <div class="w-full h-full back-card_card-fields p-2">
+                    {#each generalFieldsBack as generalFields}
+                      <CardCell
+                      bind:value={cardProps[generalFields.value]}
+                        gridClass={generalFields.location}
+                        label={generalFields.label}
+                        justifyCell={generalFields.justify}
+                      />
+                    {/each}
+                  </div>
+                </swiper-slide>
+              {/if}
+            </swiper-container>
+            <div class="card-buttons_back back-card_general-3 mt-2">
+              <CardButtonWidget />
             </div>
           </div>
         </div>
@@ -643,9 +581,6 @@
   .flip-card-back {
     transform: rotateY(180deg);
   }
-  .background-class {
-    background-color: #00bfff;
-  }
   .upload-picures {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
       rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
@@ -663,19 +598,6 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    /* background-image: url('src/lib/images/white-paper-texture.jpg');
-      background-size: cover; 
-      background-repeat: no-repeat; */
-  }
-  .gradient {
-    /* background: rgb(38,82,29);
-background: -moz-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(40, 68, 42) 100%);
-background: -webkit-linear-gradient(90deg, rgba(38,82,29,1) 0%, rgb(41, 78, 44) 100%);
-background: linear-gradient(90deg, rgb(115, 134, 111) 0%, rgb(25, 49, 26) 100%); */
-    /* background: rgb(180,79,66);
-background: -moz-linear-gradient(90deg, rgb(92, 40, 33) 0%, rgba(55,9,3,1) 100%);
-background: -webkit-linear-gradient(90deg, rgb(82, 32, 25) 0%, rgb(121, 0, 0) 100%);
-background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
   }
   .sendCard {
     -webkit-animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045)
@@ -784,26 +706,6 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-
-  .top_left {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  .top_right {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  .middle_left {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .middle_right {
-    grid-area: 2 / 2 / 3 / 3;
-  }
-  .bottom_left {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .bottom_right {
-    grid-area: 3 / 2 / 4 / 3;
-  }
-
   .back-card_general-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -811,7 +713,6 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-
   .back-card_general-1 {
     grid-area: 1 / 1 / 2 / 2;
   }
@@ -827,61 +728,5 @@ background: linear-gradient(90deg, rgb(230, 23, 0) 0%, rgb(54, 13, 13) 100%); */
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-  }
-
-  .back_1 {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  .back_2 {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  .back_3 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .back_4 {
-    grid-area: 2 / 2 / 3 / 3;
-  }
-  .back_5 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .back_6 {
-    grid-area: 3 / 2 / 4 / 3;
-  }
-  .back_7 {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  .back_8 {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  .back_9 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .back_10 {
-    grid-area: 2 / 2 / 3 / 3;
-  }
-  .back_11 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .back_12 {
-    grid-area: 3 / 2 / 4 / 3;
-  }
-
-  .general_1 {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  .general_2 {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  .general_3 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .general_4 {
-    grid-area: 2 / 2 / 3 / 3;
-  }
-  .general_5 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .general_6 {
-    grid-area: 3 / 2 / 4 / 3;
   }
 </style>

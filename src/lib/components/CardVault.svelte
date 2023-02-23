@@ -1,8 +1,7 @@
 <script lang="ts">  
   import { fade, fly, scale } from "svelte/transition";
   import CardFlippable from "./CardFlippable.svelte";
-  export let myneCards: [{}];
-  export let carProps;
+  export let myneCards;
 </script>
 <div
 
@@ -39,7 +38,7 @@
     </div>
           <div class = 'flex flex-wrap justify-center overflow-y-auto h-[85%] gap-2 py-2 top-0'>
         {#each myneCards as myneCard}
-        <CardFlippable cardProps={{...myneCards}}  />
+        <CardFlippable {...myneCard} />
     {/each}
 
     </div>
@@ -47,11 +46,3 @@
 
   </div>
 </div>
-
-<style lang="postcss">
-
-  .background-color{
-    background-color: 	hsl(216, 100%, 98%);
-
-  }
-</style>

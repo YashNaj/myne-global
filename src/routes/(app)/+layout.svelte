@@ -85,7 +85,7 @@
                   <h1
                     class="ml-2 font-bold text-white w-full flex h-full justify-start content-center flex-wrap"
                   >
-                    {profile.firstName}
+                    {profile?.firstName}
                   </h1>
                 </div>
               </div>
