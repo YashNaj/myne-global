@@ -502,23 +502,23 @@
                         />
                         </div>
                       {/if}
-                      {#if breeds?.length > 0}
-                      <div transition:slide>
-  
-                        <Select
-                        {floatingConfig}
-  
-                          placeholder="Breed"
-                          class="select text-black w-full my-4"
-                          items={breeds?.map((breed) => firstCapital(breed))}
-                          on:change={() => {
-                            breed = justValue;
-                          }}
-                          bind:justValue={cardProps['breed']}
-                        />
-                      </div>
-                      {/if}
-  
+                                          {#if breeds?.length > 0}
+                    <div transition:slide>
+
+                      <Select
+                      {floatingConfig}
+
+                        placeholder="Breed"
+                        class="select text-black w-full my-4"
+                        items={breeds?.map((breed) => firstCapital(breed))}
+                        on:change={() => {
+                          breed = justValue;
+                        }}
+                        bind:justValue={cardProps['breed']}
+                      />
+                    </div>
+                    {/if}
+
                     </div>
                   </swiper-slide>
                   <swiper-slide
