@@ -4,7 +4,6 @@
     import { page } from "$app/stores";
     import { handleSession } from "@lucia-auth/sveltekit/client";
     import type { LayoutData } from "../$types";
-    import AddCard from "$lib/components/AddCard.svelte";
     import type { PageData } from "./$types";
     import Stat from "$lib/components/Stat.svelte";
     import { trpc } from "$lib/trpc/client";

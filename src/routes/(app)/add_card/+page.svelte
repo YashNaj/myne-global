@@ -454,9 +454,7 @@
           <div
             class="form-box w-full h-full grid grid-rows-[3fr_1fr] place-items-center"
           >
-            <div
-              class="form-input-button-wrapper  w-full h-full "
-            >
+            <div class="form-input-button-wrapper  w-full h-full ">
               <div
                 class="form-slider w-full h-full grid grid-cols-1 grid-rows-[3fr_1fr"
               >
@@ -465,29 +463,26 @@
                   no-sliding={true}
                   class="w-full h-full swiper-container touch-none"
                 >
-                  <swiper-slide
-                    class="w-full h-full    p-3"
-                  >
-                    <div class = 'w-full h-full place-items-center'>
-                      
+                  <swiper-slide class="w-full h-full    p-3">
+                    <div class="w-full h-full place-items-center">
                       <div>
                         <Select
-                        {floatingConfig}
-                        placeholder="Category"
-                        class="select text-black w-full my-4 "
-                        items={categories?.map((categories) =>
-                          firstCapital(categories)
-                        )}
-                        on:change={() => {
-                          category = justValue;
-                          subcategory = "";
-                        }}
-                        bind:justValue
-                      />
+                          {floatingConfig}
+                          placeholder="Category"
+                          class="select text-black w-full my-4 "
+                          items={categories?.map((categories) =>
+                            firstCapital(categories)
+                          )}
+                          on:change={() => {
+                            category = justValue;
+                            subcategory = "";
+                          }}
+                          bind:justValue
+                        />
                       </div>
-                        {#if subcategories?.length > 0}
+                      {#if subcategories?.length > 0}
                         <div transition:slide>
-                          <Select  
+                          <Select
                             placeholder="Subcategory"
                             class="select text-black w-full my-4 "
                             items={subcategories?.map((subcategories) =>
@@ -496,31 +491,28 @@
                             on:change={() => {
                               subcategory = justValue;
                             }}
-                          bind:justValue={cardProps['subcategory']}
-                        />
+                            bind:justValue={cardProps["subcategory"]}
+                          />
                         </div>
                       {/if}
-                                          {#if breeds?.length > 0}
-                    <div transition:slide>
-
-                      <Select
-                      {floatingConfig}
-
-                        placeholder="Breed"
-                        class="select text-black w-full my-4"
-                        items={breeds?.map((breed) => firstCapital(breed))}
-                        on:change={() => {
-                          breed = justValue;
-                        }}
-                        bind:justValue={cardProps['breed']}
-                      />
-                    </div>
-                    {/if}
-
+                      {#if breeds?.length > 0}
+                        <div transition:slide>
+                          <Select
+                            {floatingConfig}
+                            placeholder="Breed"
+                            class="select text-black w-full my-4"
+                            items={breeds?.map((breed) => firstCapital(breed))}
+                            on:change={() => {
+                              breed = justValue;
+                            }}
+                            bind:justValue={cardProps["breed"]}
+                          />
+                        </div>
+                      {/if}
                     </div>
                   </swiper-slide>
                   <swiper-slide
-                  class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
                     <Select
                       placeholder="Size"
@@ -529,14 +521,16 @@
                       on:change={() => {
                         size = justValue;
                       }}
-                        bind:justValue={cardProps['size']}
-                        on:focus={() => (flipped = false)}
+                      bind:justValue={cardProps["size"]}
+                      on:focus={() => (flipped = false)}
                     />
                   </swiper-slide>
                 </swiper-container>
               </div>
             </div>
-            <div class="pagination-btns w-full h-ful grid grid-cols-2 place-items-center">
+            <div
+              class="pagination-btns w-full h-ful grid grid-cols-2 place-items-center"
+            >
               <PrevButton
                 bind:pageCount
                 on:click={() => (pageCount = --pageCount)}
@@ -557,7 +551,6 @@
                 />
               {/if}
             </div>
-
           </div>
         </form>
       </div>
