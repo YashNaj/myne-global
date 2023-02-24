@@ -184,7 +184,7 @@ let case_material = "";
 let cOfAuth = "";
 let clarity = "";
 let color = "";
-let cut = "";
+let cut_shape = "";
 let date = "";
 let dial = "";
 let distinguishing_features = "";
@@ -499,7 +499,7 @@ export let jewelryFields: typeof template = {
     {
       label: "Cut/Shape",
       location: "back_4",
-      value: "cut",
+      value: "cut_shape",
       justify: "justify-end",
     },
     {
@@ -547,7 +547,7 @@ export let jewelryFields: typeof template = {
       justify: "hidden",
     },
   ],
-  fieldsBackThree: [],
+  fieldsBackThree: [''],
 };
 
 export let watchFields: typeof template = {
@@ -647,7 +647,7 @@ export let watchFields: typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree: [],
+  fieldsBackThree: [''],
 };
 export let artFields:typeof template = {
   fieldsFront: [
@@ -660,7 +660,7 @@ export let artFields:typeof template = {
     {
       label: "Subcategory",
       location: "top_right",
-      value: "",
+      value: "subcategory",
       justify: "justify-end",
     },
     {
@@ -801,7 +801,7 @@ export let leatherFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackThree: [],
+  fieldsBackThree: [''],
 };
 export let clothingFields:typeof template = {
   fieldsFront: [
@@ -862,8 +862,8 @@ export let clothingFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let sneakerFields:typeof template= {
   fieldsFront: [
@@ -937,8 +937,8 @@ export let sneakerFields:typeof template= {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let gunsFields:typeof template= {
   fieldsFront: [
@@ -1164,6 +1164,7 @@ export let tradingCardFields :typeof template = {
     },
   ],
   fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 // export let  = {
 //   fieldsFront: [
@@ -1315,8 +1316,8 @@ export let colectibleFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let cryptoFields:typeof template = {
   fieldsFront: [
@@ -1383,8 +1384,8 @@ export let cryptoFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let nftFields:typeof template = {
   fieldsFront: [
@@ -1452,8 +1453,8 @@ export let nftFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let vintageFields:typeof template = {
   fieldsFront: [
@@ -1532,8 +1533,8 @@ export let vintageFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let autoFields:typeof template = {
   fieldsFront: [
@@ -1644,7 +1645,7 @@ export let autoFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree: [],
+  fieldsBackThree: [''],
 };
 export let motoFields:typeof template = {
   fieldsFront: [
@@ -1755,7 +1756,7 @@ export let motoFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree: [],
+  fieldsBackThree: [''],
 };
 export let otherFields:typeof template = {
   fieldsFront: [
@@ -1822,8 +1823,8 @@ export let otherFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let dogFields:typeof template = {
   fieldsFront: [
@@ -1902,8 +1903,8 @@ export let dogFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let catFields:typeof templates = {
   fieldsFront: [
@@ -1982,8 +1983,8 @@ export let catFields:typeof templates = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let birdFields:typeof template = {
   fieldsFront: [
@@ -2062,8 +2063,8 @@ export let birdFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [],
-  fieldsBackThree: [],
+  fieldsBackTwo: [''],
+  fieldsBackThree: [''],
 };
 export let childIdFields = {
   fieldsFront: [

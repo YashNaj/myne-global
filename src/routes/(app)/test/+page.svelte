@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import PageContainer from "$lib/components/PageContainer.svelte";
   import { register } from "swiper/element/bundle";
   register();
@@ -20,4 +20,4 @@
       ><div class="w-full h-full justify-center bg-green-600" /></swiper-slide
     >
   </swiper-container>
-</PageContainer>
+</PageContainer> -->

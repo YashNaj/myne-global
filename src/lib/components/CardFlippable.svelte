@@ -33,7 +33,7 @@
   let formFieldsObject = {
     jewelry: jewelryFields,
     watch: watchFields,
-    firearms : gunsFields,
+    firearms: gunsFields,
     art: artFields,
     leather: leatherFields,
     clothing: clothingFields,
@@ -325,7 +325,7 @@
     | keyof typeof colors
     | keyof typeof formFieldsObject;
   const colors = {
-    jewelry: 'bg-gradient-to-r from-[#F192E8] to-[#edd7eb]',
+    jewelry: "bg-gradient-to-r from-[#F192E8] to-[#edd7eb]",
     watch: "bg-gradient-to-r from-[#1b1c1d] to-[#999ba0]",
     art: "bg-gradient-to-r from-[#ffe609] to-[#fffbd7]",
     leather: "bg-gradient-to-r from-[#984E1D] to-[#dbbfad]",
@@ -333,7 +333,8 @@
     sneakers: "bg-gradient-to-r from-[#86e8ec] to-[#bbd5d5]",
     firearms: "bg-gradient-to-r to-[#edd49e] via-[#638256] from-[#1d410e]",
     technology: "bg-gradient-to-r from-[#132076]  to-[#c8c5f1]",
-    "trading cards": "bg-gradient-to-r from-[#ddcd7c] via-[#ddcd7c]  to-[#e8e5d7]",
+    "trading cards":
+      "bg-gradient-to-r from-[#ddcd7c] via-[#ddcd7c]  to-[#e8e5d7]",
     collectibles: "bg-gradient-to-r from-[#6bf7b3]  to-[#c9e8d9]",
     crypto: "bg-gradient-to-r from-[#8d8b8b]  to-[#efefef]",
     nft: "bg-gradient-to-r from-[#582577]  to-[#e3d1ee",
@@ -351,34 +352,31 @@
   type formValues = (typeof formFields)[keyof typeof formFields];
   type cardValues = (typeof cardProps)[keyof typeof cardProps];
   let formFields = template;
-  let fieldsFrontValues: formValues;
-  let fieldsBackOneValues: formValues;
-  let fieldsBackTwoValues: formValues;
-  $: formFields = formFieldsObject[categoryKey];
-  $: fieldsFrontValues = formFields?.fieldsFront;
-  $: fieldsBackOneValues = formFields?.fieldsBackOne;
-  $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
-  $: fieldsBackThreeValues = formFields?.fieldsBackThree;
+  let fieldsFrontValues: formValues = template.fieldsFront;
+  let fieldsBackOneValues: formValues = template.fieldsBackOne;
+  let fieldsBackTwoValues: formValues = template.fieldsBackTwo;
+  let fieldsBackThreeValues: formValues = template.fieldsBackThree;
 
-  // $: console.log("🚀 ~ file: CardFlippable.svelte:426 ~ cardProps.category:", cardProps.category)
-  // $: console.log("🚀 ~ file: CardFlippable.svelte:17 ~ colorKey", colorKey);
-  // $: console.log("🚀 ~ file: CardFlippable.svelte:453 ~ pickedColor:", pickedColor)
-  $: console.log(
-    "🚀 ~ file: CardFlippable.svelte:407 ~ fieldFrontValues:",
-    fieldsFrontValues
-  );
+  $: formFields = formFieldsObject[categoryKey];
+  $: if (formFields != undefined) {
+    (fieldsFrontValues = formFields?.fieldsFront),
+      (fieldsBackOneValues = formFields?.fieldsBackOne),
+      (fieldsBackTwoValues = formFields?.fieldsBackTwo),
+      (fieldsBackThreeValues = formFields?.fieldsBackThree);
+  }
+  $:flipped = flipped 
 </script>
 
 <div
   class:flipped
-  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] sm:w-[15rem] w-[20rem] "
+  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] sm:w-[15rem] w-[18rem] "
   class:sendCard={sentCard === true && success === null}
   class:comeBack={success === true}
 >
   <div
     class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl 
     aspect-[5/7]"
-    >
+  >
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
       <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
         <div
@@ -413,10 +411,7 @@
             </button>
           </div>
 
-          <div
-            class="front-top rounded-t-2xl {pickedColor} "
-
-          >
+          <div class="front-top rounded-t-2xl {pickedColor} ">
             <div class="w-full h-full px-2 py-3">
               <Carousel />
             </div>
@@ -495,7 +490,9 @@
                 </swiper-slide>
               {/if}
               {#if fieldsBackTwoValues?.length > 0}
-                <swiper-slide>
+                <swiper-slide
+                  class="text-center bg-none flex justify-center content-center "
+                >
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each fieldsBackTwoValues as fieldBackTwo}
                       <CardCell
@@ -508,8 +505,10 @@
                   </div>
                 </swiper-slide>
               {/if}
-              {#if fieldsBackThreeValues?.length > 0}
-                <swiper-slide>
+              {#if fieldsBackThreeValues?.length > 1}
+                <swiper-slide
+                  class="text-center bg-none flex justify-center content-center "
+                >
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each fieldsBackThreeValues as fieldBackThree}
                       <CardCell
@@ -522,18 +521,20 @@
                   </div>
                 </swiper-slide>
               {/if}
-                <swiper-slide>
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each generalFieldsBack as generalFields}
-                      <CardCell
-                        bind:value={cardProps[generalFields.value]}
-                        gridClass={generalFields.location}
-                        label={generalFields.label}
-                        justifyCell={generalFields.justify}
-                      />
-                    {/each}
-                  </div>
-                </swiper-slide>
+              <swiper-slide
+                class="text-center bg-none flex justify-center content-center "
+              >
+                <div class="w-full h-full back-card_card-fields p-2">
+                  {#each generalFieldsBack as generalFields}
+                    <CardCell
+                      bind:value={cardProps[generalFields.value]}
+                      gridClass={generalFields.location}
+                      label={generalFields.label}
+                      justifyCell={generalFields.justify}
+                    />
+                  {/each}
+                </div>
+              </swiper-slide>
             </swiper-container>
             <div class="card-buttons_back back-card_general-3 mt-2">
               <CardButtonWidget />
