@@ -319,14 +319,13 @@
   $: pickedCategory = cardProps.category;
 
   //add general fields config here
-
   $: backgroundColor = category?.toLowerCase();
   let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
   $: categoryKey = category?.toLowerCase() as
     | keyof typeof colors
     | keyof typeof formFieldsObject;
   const colors = {
-    jewelry: "#F192E8",
+    jewelry: 'bg-gradient-to-r from-[#F192E8] to-[#edd7eb]',
     watch: "#2B2C31",
     art: "#FFE609",
     leather: "#984E1D",
@@ -353,15 +352,13 @@
   type formValues = (typeof formFields)[keyof typeof formFields];
   type cardValues = (typeof cardProps)[keyof typeof cardProps];
   let formFields = template;
-  $: formFields = formFieldsObject[categoryKey];
   let fieldsFrontValues: formValues;
   let fieldsBackOneValues: formValues;
   let fieldsBackTwoValues: formValues;
+  $: formFields = formFieldsObject[categoryKey];
   $: fieldsFrontValues = formFields?.fieldsFront;
   $: fieldsBackOneValues = formFields?.fieldsBackOne;
-
   $: fieldsBackTwoValues = formFields?.fieldsBackTwo;
-
   $: fieldsBackThreeValues = formFields?.fieldsBackThree;
 
   // $: console.log("🚀 ~ file: CardFlippable.svelte:426 ~ cardProps.category:", cardProps.category)
@@ -380,8 +377,8 @@
   class:comeBack={success === true}
 >
   <div
-    class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]    "
-    style="background-color = {pickedColor} "
+    class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl 
+    aspect-[5/7]"
   >
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
       <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
@@ -418,8 +415,8 @@
           </div>
 
           <div
-            class="front-top rounded-t-2xl"
-            style="background: {pickedColor};"
+            class="front-top rounded-t-2xl bg-gradient-to-r from-[#f0a5e9] to-[#ffd1fd]"
+
           >
             <div class="w-full h-full px-2 py-3">
               <Carousel />

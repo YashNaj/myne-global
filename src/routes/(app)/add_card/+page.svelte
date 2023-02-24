@@ -468,7 +468,7 @@
                   <swiper-slide
                     class="w-full h-full    p-3"
                   >
-                    <div class = 'w-full h-full place-items-center gird grid-rows-2'>
+                    <div class = 'w-full h-full place-items-center'>
                       
                       <div>
                         <Select
@@ -487,9 +487,7 @@
                       </div>
                         {#if subcategories?.length > 0}
                         <div transition:slide>
-                          <Select
-                          {floatingConfig}
-  
+                          <Select  
                             placeholder="Subcategory"
                             class="select text-black w-full my-4 "
                             items={subcategories?.map((subcategories) =>
