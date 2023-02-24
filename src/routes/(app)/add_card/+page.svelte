@@ -1,26 +1,99 @@
 <script lang="ts">
-  import Select from "svelte-select";
-
+  import { Transition } from "@rgossiaux/svelte-headlessui";
+  import { createSearchStore, searchHandler } from "$lib/search";
   import { page } from "$app/stores";
   import type { LayoutServerData } from "../$types";
-  import { onDestroy } from "svelte";
-  import { createSearchStore, searchHandler } from "$lib/search";
+  import Select from "svelte-select";
+  import { onDestroy, onMount } from "svelte";
+  import type { IcardProps } from "./../../../cardProps";
   import { myneMasterBrandsAndBreeds } from "./../../../index";
   import { enhance } from "$app/forms";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import type { PageData, Snapshot } from "./$types";
-  import { fly, slide } from "svelte/transition";
-  import { firstCapital } from "$lib/caps";
-  import { sizes } from "$lib/size";
+  import { slide } from "svelte/transition";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
+  import { sizes } from "../../../size";
+  import SwiperStandard from "$lib/components/SwiperStandard.svelte";
+
+  //initialize fieldProps
+
+  // function handleFilter(e) {
+  //       if (e.detail.length === 0 && filterText.length > 0) {
+  //           const prev = items.filter((i) => !i.created);
+  //           items = [...prev, { value: filterText, label: filterText, created: true }];
+  //       }
+  //   }
+
+  //   function handleChange(e) {
+  //       items = items.map((i) => {
+  //           delete i.created;
+  //           return i;
+  //       });
+  //   }
+
+  import {
+    jewelryProps,
+    watchProps,
+    artProps,
+    leatherProps,
+    clothingProps,
+    sneakerProps,
+    firearmsProps,
+    technologyProps,
+    tradingCardsProps,
+    collectiblesProps,
+    cryptoProps,
+    nftProps,
+    animalProps,
+    vintageProps,
+    autoProps,
+    motoProps,
+    otherProps,
+  } from "../../fieldProps";
   import PrevButton from "$lib/components/PrevButton.svelte";
   import NextButton from "$lib/components/NextButton.svelte";
-  import { onMount } from "svelte";
-  import SwiperStandard from "$lib/components/SwiperStandard.svelte";
-  export let data: PageData;
+  import { firstCapital } from "$lib/caps";
+  let floatingConfig = {
+    strategy: "bottom",
+  };
+  onMount(() => {
+    const swiperEl = document.querySelector(".swiper-container");
+    const nextEl = document.querySelector(".next");
+    const previousEl = document.querySelector(".previous");
+    nextEl?.addEventListener("click", () => {
+      swiperEl?.swiper.slideNext();
+    });
+    previousEl?.addEventListener("click", () => {
+      swiperEl?.swiper.slidePrev();
+    });
+  });
+  interface IfieldsPropsObject {
+    [key: string]: string[];
+  }
+  const fieldPropsObject: IfieldsPropsObject = {
+    jewelry: jewelryProps,
+    watch: watchProps,
+    art: artProps,
+    leather: leatherProps,
+    clothing: clothingProps,
+    sneaker: sneakerProps,
+    firearms: firearmsProps,
+    technology: technologyProps,
+    "trading cards": tradingCardsProps,
+    collectibles: collectiblesProps,
+    crypto: cryptoProps,
+    nft: nftProps,
+    animal: animalProps,
+    vintage: vintageProps,
+    auto: autoProps,
+    moto: motoProps,
+    other: otherProps,
+  };
+  let data: PageData;
   export let flipped = false;
   export let brandFilterOpen = false;
   export let message: string = " ";
+
   let backgroundColor: string;
   $: backgroundColor = category;
   let justValue: string;
@@ -54,7 +127,6 @@
     brand: string;
     searchTerms: string;
   };
-
   //initialize the category and subcategory fields
   export let isStolen = "";
   export let isHeirloom = "";
@@ -79,9 +151,8 @@
   export let carat_weight = "";
   export let case_material = "";
   export let cOfAuth = "";
-  export let clarity = "";
   export let color = "";
-  export let cut = "";
+  export let cut_shape = "";
   export let date = "";
   export let dial = "";
   export let distinguishing_features = "";
@@ -114,7 +185,6 @@
   export let serial = "";
   export let serie = "";
   export let series = "";
-  export let shape = "";
   export let smart_contract_address = "";
   export let smart_contract_id = "";
   export let stock_number = "";
@@ -152,106 +222,8 @@
   export let allergies = "";
   export let medicalConditions = "";
   export let prescription = "";
-  interface cardProps {
-    isStolen?:string
-    isHeirloom?:string
-    pictures?:string
-    category?:string 
-    subcategory?:string
-    brand?:string
-    breed?:string
-    size?:string
-    purchasedFrom?:string
-    purchasedValue?:string
-    reportedStolenDate?:string
-    description?:string
-    crypto_token_address?:string
-    unique_features?:string
-    artist?:string
-    author?:string
-    dob?:string
-    body_length?:string
-    brand_reference?:string
-    caliber?:string
-    carat_weight?:string
-    case_material?:string
-    cOfAuth?:string
-    clarity?:string
-    color?:string
-    cut?:string
-    date?:string
-    dial?:string
-    distinguishing_features?:string
-    documentArray?:string
-    drivetrain?:string
-    engine?:string
-    engraving?:string
-    exchange_address?:string
-    exterior_color?:string
-    fuel_type?:string
-    grading?:string
-    grading_reports?:string
-    height?:string
-    hotstamping?:string
-    interior_color?:string
-    invoice?:string
-    laser_inscription?:string
-    manufacturer?:string
-    material?:string
-    microchip?:string
-    mileage?:string
-    model?:string
-    model_yr?:string
-    movement_caliber?:string
-    other?:string
-    pedigree?:string
-    product?:string
-    registration_certificate?:string,
-    release_date?:string
-    serial?:string
-    serie?:string
-    series?:string
-    shape?:string
-    smart_contract_address?:string
-    smart_contract_id?:string
-    stock_number?:string
-    stone?:string
-    strap_bracelet?:string
-    tattoo?:string
-    trademarks?:string
-    transaction?:string
-    transmission?:string
-    url?:string
-    valuation_report?:string
-    vin?:string
-    wallet_address?:string
-    weight?:string
-    year?:string
-    marketPrice?:string
-    childIdFirstName?:string
-    childIdMiddleName?:string
-    childIdLastName?:string
-    eye_color?:string
-    hair_color?:string
-    parentOneName?:string
-    parentTwoName?:string
-    contactNumberOne?:string
-    contactNumberTwo?:string
-    homeAddress?:string
-    homeCity?:string
-    homeState?:string
-    homeCountry?:string
-    homeZIP?:string
-    age?:string
-    gender?:string
-    race?:string
-    physicalTraits?:string
-    allergies?:string
-    medicalConditions?:string
-    prescription?:string
-    backgroundColor?:string
-  }
-    let cardProps:cardProps = {
+  export let clarity = "";
+  let cardProps: IcardProps = {
     isStolen,
     isHeirloom,
     pictures,
@@ -277,7 +249,7 @@
     cOfAuth,
     clarity,
     color,
-    cut,
+    cut_shape,
     date,
     dial,
     distinguishing_features,
@@ -310,7 +282,6 @@
     serial,
     serie,
     series,
-    shape,
     smart_contract_address,
     smart_contract_id,
     stock_number,
@@ -350,29 +321,33 @@
     prescription,
     backgroundColor,
   };
+  let addCardInputs: string[] = [];
+  $: addCardInputs =
+    fieldPropsObject[selectedCategory?.name as unknown as string];
+  $: console.log("🚀 ~ file: +page.svelte:312 ~ addCardInputs:", addCardInputs);
   $: cardProps.category = category;
-  $: cardProps = {...cardProps} ;
+  $: cardProps = { ...cardProps };
 
-  $: console.log("🚀 ~ file: +page.svelte:260 ~ cardProps", cardProps)
+  $: console.log("🚀 ~ file: +page.svelte:260 ~ cardProps", cardProps);
 
   export let success: boolean | null | undefined = false;
 
   export let formData = {
-    ...cardProps, 
+    ...cardProps,
     message: "",
     success: null,
   };
 
   $: formData = formData = {
-  ...cardProps, 
+    ...cardProps,
     message,
     success: null,
   };
-    console.log("🚀 ~ file: +page.svelte:373 ~ formData", formData)
+  console.log("🚀 ~ file: +page.svelte:373 ~ formData", formData);
 
   $: sentCard = sentCard;
   export let form: {
-//
+    //
     message?: string;
     success?: boolean | null | undefined;
   };
@@ -392,14 +367,23 @@
   $: selectedCategory = myneMasterBrandsAndBreeds.find(
     (object) => object.name === category?.toLowerCase()
   );
-  //pull subCats
+  //pull various cats arrays
   let subcategories: [] | string[] | undefined | null;
   $: subcategories = selectedCategory?.subcategories.sort();
+  let stones: [] | string[] | undefined | null;
+  $: stones = selectedCategory?.stone?.sort();
+  let colors: [] | string[] | undefined | null;
+  $: colors = selectedCategory?.color?.sort();
+  let cut_shapes: [] | string[] | undefined | null;
+  $: cut_shapes = selectedCategory?.cut_shape?.sort();
+  let clarities: [] | string[] | undefined | null;
+  $: clarities = selectedCategory?.clarity?.sort();
   let breeds: [] | string[] | undefined | null;
   $: breeds = selectedCategory?.breeds;
   let brands: [] | string[] | undefined | null;
   $: brands = selectedCategory?.brands;
 
+  $: cardProps = cardProps;
   function resetValues() {
     return {
       category: " ",
@@ -420,88 +404,163 @@
   }
 </script>
 
-<div class="w-full h-full flex flex-col pt-4 justify-start  relative">
+<div
+  class="w-full mg:h-[90%] h-full flex flex-col pt-4 justify-start  relative  "
+>
   <h1 class="flex text-primary font-bold text-3xl pl-3">
     Add A Card | Enter Card Info
   </h1>
   <div class="w-full h-full absolute " transition:slide>
     <div
-      class=" w-full flex flex-col justify-center px-2 pb-4 h-[90%] content-center  relative rounded-lg "
+      class=" w-full flex flex-col justify-center px-2 pb-4 h-[90%] content-center  relative rounded-lg scale-[90%] md:scale-[100%] "
     >
       <div
         class="flex justify-center w-full pt-10 content-center relative h-80 "
       >
         <div class="card-sizer w-[80%] flex absolute top-[4rem] justify-center">
-          <CardFlippable cardProps = {cardProps}/>
+          <CardFlippable {cardProps} />
         </div>
       </div>
       <div class="flex w-full justify-center">
         <form
           method="POST"
-          class="h-fit form-gradient w-full p-4 pt-40 flex  justify-between  md:w-[30rem] lg:w-[40rem] form-container text-white bg-gradient-to-b from-[#002d72] to-[#a3c7fa] rounded-2xl 
+          class="h-[30rem] form-gradient w-full p-4 pt-[15rem] flex  justify-between  md:w-[30rem] lg:w-[40rem] form-container text-white bg-gradient-to-b from-[#002d72] to-[#a3c7fa] rounded-2xl 
           [box-shadow:rgba(0,_0,_0,_0.09)_0px_2px_1px,_rgba(0,_0,_0,_0.09)_0px_4px_2px,_rgba(0,_0,_0,_0.09)_0px_8px_4px,_rgba(0,_0,_0,_0.09)_0px_16px_8px,_rgba(0,_0,_0,_0.09)_0px_32px_16px;]"
-        
           use:enhance
           class:exitForm={sentCard === true}
           class:comeBack={success === true}
         >
-          <input
-            hidden
-            name="category"
-            id="category"
-            placeholder="Test"
-            bind:value={category}
-          />
-          <input
-            hidden
-            name="subcategory"
-            id="subcategory"
-            placeholder="Test"
-            bind:value={subcategory}
-          />
-          <input
-            hidden
-            name="brand"
-            id="brand"
-            placeholder="brand"
-            bind:value={brand}
-          />
-          <input
-            hidden
-            name="breed"
-            id="breed"
-            placeholder="breed"
-            bind:value={breed}
-          />
-          <input
-            hidden
-            name="size"
-            id="size"
-            placeholder="Test"
-            bind:value={size}
-          />
-          <input
-            hidden
-            name="purchasedFrom"
-            id="purchasedFrom"
-            placeholder="purchasedFrom"
-            bind:value={purchasedFrom}
-          />
-          <input
-            hidden
-            name="purchasedValue"
-            id="purchasedValue"
-            placeholder="purchasedValue"
-            bind:value={purchasedValue}
-          />
-          <input
-            hidden
-            name="description"
-            id="description"
-            placeholder="Test"
-            bind:value={description}
-          />
-          <SwiperStandard/>
+          {#if addCardInputs?.length > 0}
+            {#each addCardInputs as hiddenInput}
+              <input
+                hidden
+                name={hiddenInput}
+                id={hiddenInput}
+                placeholder={hiddenInput}
+                bind:value={cardProps[hiddenInput]}
+              />
+            {/each}
+          {/if}
+          <!-- <SwiperStandard
+            {selectedCategory}
+            {subcategories}
+            {brands}
+            {breeds}
+            {colors}
+            {cut_shapes}
+            {clarities}
+            {stones}
+            {addCardInputs} -->
+          <div
+            class="form-box w-full h-full grid grid-rows-[3fr_1fr] place-items-center"
+          >
+            <div
+              class="form-input-button-wrapper  w-full h-full "
+            >
+              <div
+                class="form-slider w-full h-full grid grid-cols-1 grid-rows-[3fr_1fr"
+              >
+                <swiper-container
+                  allow-touch-move="false"
+                  no-sliding={true}
+                  class="w-full h-full swiper-container touch-none"
+                >
+                  <swiper-slide
+                    class="w-full h-full    p-3"
+                  >
+                    <div class = 'w-full h-full place-items-center gird grid-rows-2'>
+                      
+                      <div>
+                        <Select
+                        {floatingConfig}
+                        placeholder="Category"
+                        class="select text-black w-full my-4 "
+                        items={categories?.map((categories) =>
+                          firstCapital(categories)
+                        )}
+                        on:change={() => {
+                          category = justValue;
+                          subcategory = "";
+                        }}
+                        bind:justValue
+                      />
+                      </div>
+                        {#if subcategories?.length > 0}
+                        <div transition:slide>
+                          <Select
+                          {floatingConfig}
+  
+                            placeholder="Subcategory"
+                            class="select text-black w-full my-4 "
+                            items={subcategories?.map((subcategories) =>
+                              firstCapital(subcategories)
+                            )}
+                            on:change={() => {
+                              subcategory = justValue;
+                            }}
+                          bind:justValue={cardProps['subcategory']}
+                        />
+                        </div>
+                      {/if}
+                      {#if breeds?.length > 0}
+                      <div transition:slide>
+  
+                        <Select
+                        {floatingConfig}
+  
+                          placeholder="Breed"
+                          class="select text-black w-full my-4"
+                          items={breeds?.map((breed) => firstCapital(breed))}
+                          on:change={() => {
+                            breed = justValue;
+                          }}
+                          bind:justValue={cardProps['breed']}
+                        />
+                      </div>
+                      {/if}
+  
+                    </div>
+                  </swiper-slide>
+                  <swiper-slide
+                  class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                  >
+                    <Select
+                      placeholder="Size"
+                      class="select text-black w-full mt-2 "
+                      items={sizes?.map((size) => firstCapital(size))}
+                      on:change={() => {
+                        size = justValue;
+                      }}
+                        bind:justValue={cardProps['size']}
+                        on:focus={() => (flipped = false)}
+                    />
+                  </swiper-slide>
+                </swiper-container>
+              </div>
+            </div>
+            <div class="pagination-btns w-full h-ful grid grid-cols-2 place-items-center">
+              <PrevButton
+                bind:pageCount
+                on:click={() => (pageCount = --pageCount)}
+              />
+              {#if pageCount === 0 || pageCount < 5}
+                <NextButton
+                  bind:pageCount
+                  on:click={() => (pageCount = ++pageCount)}
+                />
+              {/if}
+
+              {#if pageCount === 5}
+                <input
+                  type="submit"
+                  class="previous btn btn-success normal-case shadow-lg w-[90%]"
+                  value="Submit"
+                  on:click={() => {}}
+                />
+              {/if}
+            </div>
+
+          </div>
         </form>
       </div>
     </div>
@@ -621,7 +680,6 @@
     }
   }
   .form-gradient {
-
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;

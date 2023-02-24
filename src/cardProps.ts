@@ -30,11 +30,11 @@ export let case_material: string | undefined = "";
 export let cOfAuth: string | undefined = "";
 export let clarity: string | undefined = "";
 export let color: string | undefined = "";
-export let cut: string | undefined = "";
+export let cut_shape: string | undefined = "";
 export let date: string | undefined = "";
 export let dial: string | undefined = "";
 export let distinguishing_features: string | undefined = "";
-export let document: string | undefined = "";
+export let document_array: string | undefined |string[] = "";
 export let drivetrain: string | undefined = "";
 export let engine: string | undefined = "";
 export let engraving: string | undefined = "";
@@ -63,7 +63,6 @@ export let release_date: string | undefined = "";
 export let serial: string | undefined = "";
 export let serie: string | undefined = "";
 export let series: string | undefined = "";
-export let shape: string | undefined = "";
 export let smart_contract_address: string | undefined = "";
 export let smart_contract_id: string | undefined = "";
 export let stock_number: string | undefined = "";
@@ -111,11 +110,11 @@ export let cardProps:cardProps = {
   cOfAuth,
   clarity,
   color,
-  cut,
+  cut_shape,
   date,
   dial,
   distinguishing_features,
-  document,
+  document_array,
   drivetrain,
   engine,
   engraving,
@@ -144,7 +143,6 @@ export let cardProps:cardProps = {
   serial,
   serie,
   series,
-  shape,
   smart_contract_address,
   smart_contract_id,
   stock_number,

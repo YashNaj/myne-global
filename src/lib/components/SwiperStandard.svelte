@@ -3,7 +3,7 @@
   import NextButton from "$lib/components/NextButton.svelte";
   import PaginationButtons from "$lib/components/PaginationButtons.svelte";
   import PrevButton from "$lib/components/PrevButton.svelte";
-  export let pageCount = 0;
+   let pageCount = 0;
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
 
@@ -50,7 +50,15 @@
       value: "value",
     },
   ];
-  export let inputFields;
+  export let selectedCategory
+  export let addCardInputs;
+  export let subcategories;
+  export let brands; 
+  export let breeds;
+  export let stones;
+  export let clarities; 
+  export let cut_shapes;
+  export let colors;
 </script>
 
 

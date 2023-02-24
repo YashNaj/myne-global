@@ -33,11 +33,12 @@
   let formFieldsObject = {
     jewelry: jewelryFields,
     watch: watchFields,
+    firearms : gunsFields,
     art: artFields,
     leather: leatherFields,
     clothing: clothingFields,
     sneakers: sneakerFields,
-    guns: gunsFields,
+    fir: gunsFields,
     technology: technologyFields,
     "trading cards": tradingCardFields,
     collectibles: colectibleFields,
@@ -93,7 +94,7 @@
   export let cOfAuth: string | boolean | null | bigint;
   export let clarity: string | boolean | null | bigint;
   export let color: string | boolean | null | bigint;
-  export let cut: string | boolean | null | bigint;
+  export let cut_shape: string | boolean | null | bigint;
   export let date: string | boolean | null | bigint;
   export let dial: string | boolean | null | bigint;
   export let distinguishing_features: string | boolean | null | bigint;
@@ -126,7 +127,6 @@
   export let serial: string | boolean | null | bigint;
   export let serie: string | boolean | null | bigint;
   export let series: string | boolean | null | bigint;
-  export let shape: string | boolean | null | bigint;
   export let smart_contract_address: string | boolean | null | bigint;
   export let smart_contract_id: string | boolean | null | bigint;
   export let stock_number: string | boolean | null | bigint;
@@ -150,11 +150,11 @@
   export let backgroundColor: string | null | undefined = "";
   export let id;
   export let user_id;
-  export let createOn;
+  export let createdOn;
   export let cardProps: IcardProps = {
     id,
     user_id,
-    createOn,
+    createdOn,
     isStolen,
     isHeirloom,
     pictures,
@@ -180,7 +180,7 @@
     cOfAuth,
     clarity,
     color,
-    cut,
+    cut_shape,
     date,
     dial,
     distinguishing_features,
@@ -213,7 +213,6 @@
     serial,
     serie,
     series,
-    shape,
     smart_contract_address,
     smart_contract_id,
     stock_number,
@@ -267,7 +266,7 @@
   $: cOfAuth = cardProps.cOfAuth;
   $: clarity = cardProps.clarity;
   $: color = cardProps.color;
-  $: cut = cardProps.cut;
+  $: cut_shape = cardProps.cut;
   $: date = cardProps.date;
   $: dial = cardProps.dial;
   $: distinguishing_features = cardProps.distinguishing_features;
@@ -333,7 +332,7 @@
     leather: "#984E1D",
     clothing: "#59898A",
     sneakers: "#B3F5F7",
-    guns: "#3A5130",
+    firearms: "#3A5130",
     technology: "#080631",
     "trading cards": "#FCF7DE",
     collectibles: "#61E1A3",
@@ -381,7 +380,7 @@
   class:comeBack={success === true}
 >
   <div
-    class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]   "
+    class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl  aspect-[5/7]    "
     style="background-color = {pickedColor} "
   >
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
@@ -527,7 +526,6 @@
                   </div>
                 </swiper-slide>
               {/if}
-              {#if generalFieldsBack.length > 0}
                 <swiper-slide>
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each generalFieldsBack as generalFields}
@@ -540,7 +538,6 @@
                     {/each}
                   </div>
                 </swiper-slide>
-              {/if}
             </swiper-container>
             <div class="card-buttons_back back-card_general-3 mt-2">
               <CardButtonWidget />

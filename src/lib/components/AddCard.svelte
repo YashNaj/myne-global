@@ -12,7 +12,7 @@
   import { fly, slide } from "svelte/transition";
   import { firstCapital } from "$lib/caps";
   import ComboBox from "$lib/components/ComboBox.svelte";
-  import {sizes} from '$lib/size'
+  import {sizes} from '../../size'
   import type { Snapshot } from "../../routes/$types";
   export let data: PageData;
   export let form: { message?: string };
@@ -151,7 +151,6 @@
   let justValue: string;
 </script>
 <!-- a -->
-<div class=" w-full px-2 h-auto relative rounded-lg">
   <h1 class="flex text-white font-bold">Add A Card | Enter Card Info</h1>
   <div
     class="card-list w-full flex justify-center pt-10 content-center relative h-80 "
