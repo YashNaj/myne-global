@@ -11,6 +11,7 @@
   } from "@rgossiaux/svelte-headlessui";
   import { quintOut } from "svelte/easing";
   import { fade, fly } from "svelte/transition";
+  import PageContainer from "./PageContainer.svelte";
   let open = false;
   let tabs = [
     "Card Vault",
@@ -30,39 +31,40 @@
   ];
   export let myneCards;
 </script>
-
-    <TabGroup defaultIndex={0} class="flex flex-col h-full justify-center rounded-lg ">
-      <TabList
-        class={"flex font-bold justify-center text-primary rounded-lg p-1"}
-      >
-        <div class="flex justify-center content-center w-full shadow-sm">
-          {#each tabs as tab}
-            <Tab
-              class={({ selected }) =>
-                selected
-                  ? "flex flex-col flex-wrap content-center justify-center rounded-lg flex-1 bg-primary text-secondary p-1 slide-in-left"
-                  : "flex flex-col flex-wrap flex-1  content-center justify-center rounded-lg p-1"}
-            >
-              {tab}
-            </Tab>
-          {/each}
-        </div>
-      </TabList>
-
-      <TabPanels class="w-full h-full relative rounded-lg p-2">
-        {#each contents as content}
-            <TabPanel class = 'w-full h-full absolute'>
-              {#if content != "Card Vault"}
-                <DesktopWidget title={content} />
-              {:else}
-
-                <CardVault myneCards = {myneCards} />
-                {/if}
-            </TabPanel>
+<PageContainer>
+  <TabGroup defaultIndex={0} class="flex flex-col w-full h-[94vh] justify-center rounded-lg ">
+    <TabList
+      class={"flex font-bold justify-center text-primary rounded-lg p-1"}
+    >
+      <div class="flex justify-center content-center w-full shadow-sm">
+        {#each tabs as tab}
+          <Tab
+            class={({ selected }) =>
+              selected
+                ? "flex flex-col flex-wrap content-center justify-center rounded-lg flex-1 bg-primary text-secondary p-1 slide-in-left"
+                : "flex flex-col flex-wrap flex-1  content-center justify-center rounded-lg p-1"}
+          >
+            {tab}
+          </Tab>
         {/each}
-      </TabPanels>
-    </TabGroup>
+      </div>
+    </TabList>
 
+    <TabPanels class="w-full h-full relative rounded-lg p-2">
+      {#each contents as content}
+          <TabPanel class = 'w-full h-full absolute'>
+            {#if content != "Card Vault"}
+              <DesktopWidget title={content} />
+            {:else}
+
+              <CardVault myneCards = {myneCards} />
+              {/if}
+          </TabPanel>
+      {/each}
+    </TabPanels>
+  </TabGroup>
+</PageContainer>
+  
 <!-- <AddCard/> -->
 
 <style lang="postcss">

@@ -60,6 +60,6 @@
   </div>
   <DashboardFunctions/>
 </div>
-<div class = 'hidden md:flex w-full full py-3 px-5 flex-col overflow-y-hidden '>
+<div class = 'hidden md:flex w-full h-[94vh] py-3 px-5 flex-col overflow-y-hidden '>
   <HomeTabs myneCards = {myneCards}/>
 </div>

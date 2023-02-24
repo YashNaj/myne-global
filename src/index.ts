@@ -2611,7 +2611,7 @@ export const myneMasterBrandsAndBreeds = [
       "Shadow Systems",
       "Sig Sauer",
       "Smith & Wesson",
-      "Springfield Armory ",
+      "Springfield Armory",
       "Stag Arms",
       "Standard Manufacturing Co",
       "Stevens",

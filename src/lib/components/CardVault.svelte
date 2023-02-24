@@ -36,7 +36,7 @@
         </ul>
       </div>
     </div>
-          <div class = 'flex flex-wrap justify-center overflow-y-auto h-[85%] gap-2 py-2 top-0'>
+          <div class = 'flex flex-wrap justify-start content-start  overflow-y-auto h-[85%] gap-2 px-2 py-3 top-0'>
         {#each myneCards as myneCard}
         <CardFlippable {...myneCard} />
     {/each}

@@ -53,9 +53,14 @@
   import PrevButton from "$lib/components/PrevButton.svelte";
   import NextButton from "$lib/components/NextButton.svelte";
   import { firstCapital } from "$lib/caps";
+
+
   let floatingConfig = {
     strategy: "bottom",
+  
   };
+  
+  
   onMount(() => {
     const swiperEl = document.querySelector(".swiper-container");
     const nextEl = document.querySelector(".next");
@@ -76,17 +81,19 @@
     art: artProps,
     leather: leatherProps,
     clothing: clothingProps,
-    sneaker: sneakerProps,
+    sneakers: sneakerProps,
     firearms: firearmsProps,
     technology: technologyProps,
     "trading cards": tradingCardsProps,
     collectibles: collectiblesProps,
     crypto: cryptoProps,
     nft: nftProps,
-    animal: animalProps,
+    dog: animalProps,
+    cat: animalProps,
+    bird: animalProps,
     vintage: vintageProps,
-    auto: autoProps,
-    moto: motoProps,
+    automobile: autoProps,
+    motorcycle: motoProps,
     other: otherProps,
   };
   let data: PageData;
@@ -201,27 +208,6 @@
   export let weight = "";
   export let year = "";
   export let marketPrice = "";
-  export let childIdFirstName = "";
-  export let childIdMiddleName = "";
-  export let childIdLastName = "";
-  export let eye_color = "";
-  export let hair_color = "";
-  export let parentOneName = "";
-  export let parentTwoName = "";
-  export let contactNumberOne = "";
-  export let contactNumberTwo = "";
-  export let homeAddress = "";
-  export let homeCity = " ";
-  export let homeState = "";
-  export let homeCountry = "";
-  export let homeZIP = "";
-  export let age = "";
-  export let gender = "";
-  export let race = "";
-  export let physicalTraits = "";
-  export let allergies = "";
-  export let medicalConditions = "";
-  export let prescription = "";
   export let clarity = "";
   let cardProps: IcardProps = {
     isStolen,
@@ -298,27 +284,6 @@
     weight,
     year,
     marketPrice,
-    childIdFirstName,
-    childIdMiddleName,
-    childIdLastName,
-    eye_color,
-    hair_color,
-    parentOneName,
-    parentTwoName,
-    contactNumberOne,
-    contactNumberTwo,
-    homeAddress,
-    homeCity,
-    homeState,
-    homeCountry,
-    homeZIP,
-    age,
-    gender,
-    race,
-    physicalTraits,
-    allergies,
-    medicalConditions,
-    prescription,
     backgroundColor,
   };
   let addCardInputs: string[] = [];
@@ -327,8 +292,6 @@
   $: console.log("🚀 ~ file: +page.svelte:312 ~ addCardInputs:", addCardInputs);
   $: cardProps.category = category;
   $: cardProps = { ...cardProps };
-
-  $: console.log("🚀 ~ file: +page.svelte:260 ~ cardProps", cardProps);
 
   export let success: boolean | null | undefined = false;
 
@@ -343,8 +306,6 @@
     message,
     success: null,
   };
-  console.log("🚀 ~ file: +page.svelte:373 ~ formData", formData);
-
   $: sentCard = sentCard;
   export let form: {
     //
@@ -432,17 +393,25 @@
           class:exitForm={sentCard === true}
           class:comeBack={success === true}
         >
+        <div class = 'absolute top-0 w-80 h-80 flex flex-col bg-error'>
           {#if addCardInputs?.length > 0}
-            {#each addCardInputs as hiddenInput}
-              <input
-                hidden
-                name={hiddenInput}
-                id={hiddenInput}
-                placeholder={hiddenInput}
-                bind:value={cardProps[hiddenInput]}
-              />
-            {/each}
-          {/if}
+          <input
+          name="category"
+          id='categroy'
+          placeholder='categroy'
+          bind:value={cardProps['category']}
+        />
+          {#each addCardInputs as hiddenInput}
+            <input
+              name={hiddenInput}
+              id={hiddenInput}
+              placeholder={hiddenInput}
+              bind:value={cardProps[`${hiddenInput}`]}
+            />
+          {/each}
+        {/if}
+        </div>
+      
           <!-- <SwiperStandard
             {selectedCategory}
             {subcategories}
@@ -613,7 +582,7 @@
                       bind:justValue={cardProps["clarity"]}
                     />
                   </swiper-slide>
-
+                  
                   <swiper-slide
                     class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >

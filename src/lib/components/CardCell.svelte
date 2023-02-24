@@ -1,10 +1,27 @@
 <script lang="ts">
+  import { firstCapital } from "$lib/caps";
   import type { IcardProps } from "../../cardProps";
   export let justifyCell = "";
   export let label = "";
-  export let value: string | symbol | null | undefined | bigint | boolean;
+  export let value: string | symbol | null |  bigint = ''
   export let id = "";
   export let gridClass = "";
+  function capitalizeFirstLetters(value) {
+  // Check if input is a string
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  // Split input into words and capitalize first letter of each
+  const words = value.split(' ');
+  const capitalizedWords = words.map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  });
+
+  // Join capitalized words back into a string and return
+  return capitalizedWords.join(' ');
+}
+$: value = capitalizeFirstLetters(value)
 </script>
 
 <div
@@ -22,7 +39,7 @@
       for="cell-value"
       class="card-field-value label py-0 flex text-md {justifyCell}"
     >
-      {#if value !== undefined}
+      {#if value !== null}
         {value}
       {/if}
     </label>

@@ -708,16 +708,10 @@ export let artFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "",
-      location: "back_4",
-      value: "",
-      justify: "justify-end",
-    },
-    {
       label: "Size",
       location: "back_5",
       value: "size",
-      justify: "justify-start",
+      justify: "justify-end",
     },
     {
       label: "Engraving",
@@ -725,6 +719,13 @@ export let artFields:typeof template = {
       value: "engraving",
       justify: "justify-end",
     },
+    {
+      label: "Trademark",
+      location: "back_4",
+      value: "trademark",
+      justify: "justify-end",
+    },
+
   ],
   fieldsBackTwo: [
     {
@@ -1166,85 +1167,6 @@ export let tradingCardFields :typeof template = {
   fieldsBackTwo: [],
   fieldsBackThree: [],
 };
-// export let  = {
-//   fieldsFront: [
-//     {
-//       label: "Category",
-//       location: "top_left",
-//       value: "category",
-//       justify: "justify-start",
-//     },
-//     {
-//       label: "Subcategory",
-//       location: "top_right",
-//       value: "subcategory",
-//       justify: "justify-end",
-//     },
-//     {
-//       label: "Brand",
-//       location: "middle_left",
-//       value: "brand",
-//       justify: "justify-start",
-//     },
-//     {
-//       label: "Brand Reference",
-//       location: "middle_right",
-//       value: "brand_reference",
-//       justify: "justify-end",
-//     },
-//     {
-//       label: "Model",
-//       location: "bottom_left",
-//       value: "model",
-//       justify: "justify-start",
-//     },
-//     {
-//       label: "Grading",
-//       location: "bottom_right",
-//       value: "grading",
-//       justify: "justify-end",
-//     },
-//   ],
-//   fieldsBackOne: [
-//     {
-//       label: "Serial",
-//       location: "back_1",
-//       value: "serial",
-//       justify: "justify-start",
-//     },
-//     {
-//       label: "Manufacturer",
-//       location: "back_2",
-//       value: "manufacturer",
-//       justify: "justify-end",
-//     },
-//     {
-//       label: "Product",
-//       location: "back_3",
-//       value: "product",
-//       justify: "justify-start",
-//     },
-//     {
-//       label: "Series",
-//       location: "back_4",
-//       value: "series",
-//       justify: "justify-end",
-//     },
-//     {
-//       label: "Release Date",
-//       location: "back_5",
-//       value: "release_date",
-//       justify: "justify-start",
-//     },
-//     {
-//       label: "Unique Feautres",
-//       location: "back_6",
-//       value: "other",
-//       justify: "justify-end",
-//     },
-//   ],
-//   fieldsBackTwo: [],
-// };
 export let colectibleFields:typeof template = {
   fieldsFront: [
     {
@@ -2039,15 +1961,15 @@ export let birdFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Gender",
-      location: "back_3",
-      value: "gender",
-      justify: "justify-start",
-    },
-    {
       label: "Height",
       location: "back_5",
       value: "height",
+      justify: "justify-start",
+    },
+    {
+      label: "Gender",
+      location: "back_3",
+      value: "gender",
       justify: "justify-end",
     },
     {
