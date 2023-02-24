@@ -2,6 +2,10 @@
   import PageContainer from "$lib/components/PageContainer.svelte";
   import { register } from "swiper/element/bundle";
   register();
+
+  
+
+
 </script>
 
 <PageContainer>
