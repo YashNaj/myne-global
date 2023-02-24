@@ -326,25 +326,24 @@
     | keyof typeof formFieldsObject;
   const colors = {
     jewelry: 'bg-gradient-to-r from-[#F192E8] to-[#edd7eb]',
-    watch: "#2B2C31",
-    art: "#FFE609",
-    leather: "#984E1D",
-    clothing: "#59898A",
-    sneakers: "#B3F5F7",
-    firearms: "#3A5130",
-    technology: "#080631",
-    "trading cards": "#FCF7DE",
-    collectibles: "#61E1A3",
-    crypto: "#B6B1B1",
-    nft: "#7C1EB6",
-    vintage: "#FF5F09",
-    automobile: "#E10909",
-    motorcycle: "#E10909",
-    dog: "#278001",
-    cat: "#278001",
-    bird: "#278001",
-    childid: "#00BFFF",
-    other: "#ffffff",
+    watch: "bg-gradient-to-r from-[#1b1c1d] to-[#999ba0]",
+    art: "bg-gradient-to-r from-[#ffe609] to-[#fffbd7]",
+    leather: "bg-gradient-to-r from-[#984E1D] to-[#dbbfad]",
+    clothing: "bg-gradient-to-r from-[#456896] to-[#d6e7e8]",
+    sneakers: "bg-gradient-to-r from-[#86e8ec] to-[#bbd5d5]",
+    firearms: "bg-gradient-to-r to-[#edd49e] via-[#638256] from-[#1d410e]",
+    technology: "bg-gradient-to-r from-[#132076]  to-[#c8c5f1]",
+    "trading cards": "bg-gradient-to-r from-[#ddcd7c] via-[#ddcd7c]  to-[#e8e5d7]",
+    collectibles: "bg-gradient-to-r from-[#6bf7b3]  to-[#c9e8d9]",
+    crypto: "bg-gradient-to-r from-[#8d8b8b]  to-[#efefef]",
+    nft: "bg-gradient-to-r from-[#582577]  to-[#e3d1ee",
+    vintage: "bg-gradient-to-r from-[#FF5F09]  to-[#f8e6de]",
+    automobile: "bg-gradient-to-r from-[#ff2800]  to-[#601204]",
+    motorcycle: "bg-gradient-to-r from-[#ff2800]  to-[#601204]",
+    dog: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
+    cat: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
+    bird: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
+    other: "bg-gradient-to-r from-[#f3efef]  to-[#767976]",
   };
   let pickedColor: string;
   $: pickedColor = colors[categoryKey as keyof typeof colors];
@@ -379,7 +378,7 @@
   <div
     class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl 
     aspect-[5/7]"
-  >
+    >
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
       <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
         <div
@@ -415,7 +414,7 @@
           </div>
 
           <div
-            class="front-top rounded-t-2xl bg-gradient-to-r from-[#f0a5e9] to-[#ffd1fd]"
+            class="front-top rounded-t-2xl {pickedColor} "
 
           >
             <div class="w-full h-full px-2 py-3">
