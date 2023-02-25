@@ -2469,6 +2469,12 @@ export const myneMasterBrandsAndBreeds = [
     subcategories: [],
   },
   {
+    name: "other animal",
+    breeds: [
+    ],
+    subcategories: [],
+  },
+  {
     name: "firearms",
     brands: [
       "Accutek",

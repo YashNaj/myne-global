@@ -717,7 +717,7 @@ export let artFields:typeof template = {
       label: "Engraving",
       location: "back_6",
       value: "engraving",
-      justify: "justify-end",
+      justify: "justify-start",
     },
     {
       label: "Trademark",

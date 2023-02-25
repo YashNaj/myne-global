@@ -344,6 +344,7 @@
     dog: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
     cat: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
     bird: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
+    "other animal": "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
     other: "bg-gradient-to-r from-[#f3efef]  to-[#767976]",
   };
   let pickedColor: string;

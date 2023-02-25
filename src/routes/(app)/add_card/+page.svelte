@@ -54,17 +54,18 @@
   import NextButton from "$lib/components/NextButton.svelte";
   import { firstCapital } from "$lib/caps";
 
-
   let floatingConfig = {
     strategy: "bottom",
-  
   };
-  
-  
+
   onMount(() => {
     const swiperEl = document.querySelector(".swiper-container");
     const nextEl = document.querySelector(".next");
     const previousEl = document.querySelector(".previous");
+    console.log(
+      "🚀 ~ file: +page.svelte:65 ~ onMount ~ previousEl:",
+      previousEl
+    );
     nextEl?.addEventListener("click", () => {
       swiperEl?.swiper.slideNext();
     });
@@ -393,25 +394,25 @@
           class:exitForm={sentCard === true}
           class:comeBack={success === true}
         >
-        <div class = 'absolute top-0 w-80 h-80 flex flex-col bg-error'>
           {#if addCardInputs?.length > 0}
-          <input
-          name="category"
-          id='categroy'
-          placeholder='categroy'
-          bind:value={cardProps['category']}
-        />
-          {#each addCardInputs as hiddenInput}
             <input
-              name={hiddenInput}
-              id={hiddenInput}
-              placeholder={hiddenInput}
-              bind:value={cardProps[`${hiddenInput}`]}
+              hidden
+              name="category"
+              id="categroy"
+              placeholder="categroy"
+              bind:value={cardProps["category"]}
             />
-          {/each}
-        {/if}
-        </div>
-      
+            {#each addCardInputs as hiddenInput}
+              <input
+                hidden
+                name={hiddenInput}
+                id={hiddenInput}
+                placeholder={hiddenInput}
+                bind:value={cardProps[`${hiddenInput}`]}
+              />
+            {/each}
+          {/if}
+
           <!-- <SwiperStandard
             {selectedCategory}
             {subcategories}
@@ -434,7 +435,7 @@
                   no-sliding={true}
                   class="w-full h-full swiper-container touch-none"
                 >
-                  <swiper-slide class="w-full h-full    p-3">
+                  <swiper-slide class="slide-0 w-full h-full    p-3">
                     <div class="w-full h-full place-items-center">
                       <div>
                         <Select
@@ -482,178 +483,368 @@
                       {/if}
                     </div>
                   </swiper-slide>
+
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-1 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
-                    <Select
-                      placeholder="Brand"
-                      class="select text-black w-full mt-2 "
-                      items={brands?.map((brand) => firstCapital(brand))}
-                      on:change={() => {
-                        brand = justValue;
-                      }}
-                      bind:justValue={cardProps["brand"]}
-                    />
-                    <input
-                      placeholder="Brand Reference"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["brand_reference"]}
-                    />
+                    {#if cardProps.category?.toLowerCase() === "art"}
+                      <input
+                        placeholder="Artist"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["artist"]}
+                      />
+                      <input
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "jewelry" || "automobile" || "motorcycle"}
+                      <Select
+                        placeholder="Brand"
+                        class="select text-black w-full mt-2 "
+                        items={brands?.map((brand) => firstCapital(brand))}
+                        on:change={() => {
+                          brand = justValue;
+                        }}
+                        bind:justValue={cardProps["brand"]}
+                      />
+                      <input
+                        placeholder="Brand Reference"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["brand_reference"]}
+                      />
+                    {/if}
                   </swiper-slide>
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-2 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
-                    <input
-                      placeholder="Model"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["model"]}
-                    />
-                    <input
-                      placeholder="Serial"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["serial"]}
-                    />
+                    {#if cardProps.category?.toLowerCase() === "art"}
+                      <input
+                        placeholder="Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["material"]}
+                      />
+                      <input
+                        type="month"
+                        placeholder="Year"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["year"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "jewelry"}
+                      <input
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                      <input
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                      <input
+                        type="month"
+                        placeholder="Year"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["year"]}
+                      />
+                    {/if}
                   </swiper-slide>
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-3 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
-                    <input
-                      placeholder="Material"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["material"]}
-                      on:focus={()=> setFlip()}
-                    />
-                    <Select
-                      placeholder="Stone"
-                      items={stones?.map((stone) => firstCapital(stone))}
-                      on:change={() => {
-                        stone = justValue;
-                      }}
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
-                      bind:justValue={cardProps["stone"]}
-                    />
+                    {#if cardProps.category?.toLowerCase() === "art"}
+                      <input
+                        placeholder="Brand"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["brand"]}
+                        on:focus={() => setFlip()}
+                      />
+                      <input
+                        placeholder="Brand Reference"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["brand_reference"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "jewelry"}
+                      <input
+                        placeholder="Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["material"]}
+                        on:focus={() => setFlip()}
+                      />
+                      <Select
+                        placeholder="Stone"
+                        items={stones?.map((stone) => firstCapital(stone))}
+                        on:change={() => {
+                          stone = justValue;
+                        }}
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
+                        bind:justValue={cardProps["stone"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                      <input
+                        placeholder="VIN"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["vin"]}
+                        on:focus={() => setFlip()}
+                      />
+                      <input
+                        placeholder="Mileage"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["mileage"]}
+                      />
+                    {/if}
                   </swiper-slide>
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-4 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
-                    <Select
-                      placeholder="Carat/Weight"
-                      items={carat_weights?.map((carat_weight) =>
-                        firstCapital(carat_weight)
-                      )}
-                      on:change={() => {
-                        carat_weight = justValue;
-                      }}
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
-                      bind:justValue={cardProps["carat_weight"]}
-                    />
-                    <Select
-                      placeholder="Cut/Shape"
-                      items={cut_shapes?.map((cut_shape) =>
-                        firstCapital(cut_shape)
-                      )}
-                      on:change={() => {
-                        cut_shape = justValue;
-                      }}
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
-                      bind:justValue={cardProps["cut_shape"]}
-                    />
+                    {#if cardProps.category?.toLowerCase() === "art"}
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                      <Select
+                        placeholder="Size"
+                        class="select text-black w-full mt-2 "
+                        items={sizes?.map((size) => firstCapital(size))}
+                        on:change={() => {
+                          cut_shape = justValue;
+                        }}
+                        bind:justValue={cardProps["size"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "jewelry"}
+                      <Select
+                        placeholder="Carat/Weight"
+                        items={carat_weights?.map((carat_weight) =>
+                          firstCapital(carat_weight)
+                        )}
+                        on:change={() => {
+                          carat_weight = justValue;
+                        }}
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
+                        bind:justValue={cardProps["carat_weight"]}
+                      />
+                      <Select
+                        placeholder="Cut/Shape"
+                        items={cut_shapes?.map((cut_shape) =>
+                          firstCapital(cut_shape)
+                        )}
+                        on:change={() => {
+                          cut_shape = justValue;
+                        }}
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
+                        bind:justValue={cardProps["cut_shape"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                      <input
+                        placeholder="Drivetrain"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["drivetrain"]}
+                      />
+                      <input
+                        placeholder="Fuel Type"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["fuel_type"]}
+                      />
+                    {/if}
                   </swiper-slide>
 
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
-                    <Select
-                      placeholder="Color"
-                      items={colors?.map((color) => firstCapital(color))}
-                      on:change={() => {
-                        color = justValue;
-                      }}
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
-                      bind:justValue={cardProps["color"]}
-                    />
-                    <Select
-                      placeholder="Clarity"
-                      items={clarities?.map((clarity) => firstCapital(clarity))}
-                      on:change={() => {
-                        clarity = justValue;
-                      }}
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
-                      bind:justValue={cardProps["clarity"]}
-                    />
+                    {#if cardProps.category?.toLowerCase() === "art"}
+                      <input
+                        placeholder="Engraving"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["engraving"]}
+                      />
+                      <input
+                        placeholder="Trademarks"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["trademark"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "jewelry"}
+                      <Select
+                        placeholder="Color"
+                        items={colors?.map((color) => firstCapital(color))}
+                        on:change={() => {
+                          color = justValue;
+                        }}
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
+                        bind:justValue={cardProps["color"]}
+                      />
+                      <Select
+                        placeholder="Clarity"
+                        items={clarities?.map((clarity) =>
+                          firstCapital(clarity)
+                        )}
+                        on:change={() => {
+                          clarity = justValue;
+                        }}
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
+                        bind:justValue={cardProps["clarity"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                      <input
+                        placeholder="Transmission"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["transmission"]}
+                      />
+                      <input
+                        placeholder="Engine"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["engine"]}
+                      />
+                    {/if}
                   </swiper-slide>
-                  
+
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-6 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
-                    <Select
-                      placeholder="Size"
-                      class="select text-black w-full mt-2 "
-                      items={sizes?.map((size) => firstCapital(size))}
-                      on:change={() => {
-                        cut_shape = justValue;
-                      }}
-                      bind:justValue={cardProps["size"]}
+                    {#if cardProps.category?.toLowerCase() === "art"}
+                      <input
+                        placeholder="Unique Features"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["other"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "jewelry"}
+                      <Select
+                        placeholder="Size"
+                        class="select text-black w-full mt-2 "
+                        items={sizes?.map((size) => firstCapital(size))}
+                        on:change={() => {
+                          cut_shape = justValue;
+                        }}
+                        bind:justValue={cardProps["size"]}
+                      />
+                      <input
+                        placeholder="Laser Markings"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["laser_inscription"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                      <input
+                        placeholder="Exterior Color"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["exterior_color"]}
+                      />
+                      {#if cardProps.category?.toLowerCase() === "automobile"}
+                        <input
+                          placeholder="Interior Color"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["interior_color"]}
+                        />
+                      {/if}
+                      {#if cardProps.category?.toLowerCase() === "motorcycle"}
+                        <input
+                          placeholder="Size"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["size"]}
+                        />
+                      {/if}
+                    {/if}
+                  </swiper-slide>
+                  {#if cardProps.category?.toLowerCase() === "jewelry" || "automobile" || "motorcycle"}
+                    <swiper-slide
+                      class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    >
+                      {#if cardProps.category?.toLowerCase() === "jewelry"}
+                        <input
+                          placeholder="Engraving"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["engraving"]}
+                        />
+                        <input
+                          placeholder="Trademarks"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["trademarks"]}
+                        />
+                      {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                        <input
+                          placeholder="Stock Number "
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["stock_number"]}
+                        />
+                        {#if cardProps.category?.toLowerCase() === "automobile"}
+                          <input
+                            placeholder="Size"
+                            class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                            bind:value={cardProps["size"]}
+                          />
+                        {/if}
+                          <input
+                            placeholder="Unique Features"
+                            class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                            bind:value={cardProps["other"]}
+                          />
+                      {/if}
+                    </swiper-slide>
+                  {/if}
+                  <swiper-slide
+                    class="slide-8 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                  >
+                    <input
+                      placeholder="Purchased From"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["purchasedFrom"]}
                     />
                     <input
-                      placeholder="Laser Markings"
+                      placeholder="Purchase Value"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["laser_inscription"]}
+                      bind:value={cardProps["purchasedValue"]}
                     />
                   </swiper-slide>
                   <swiper-slide
-                    class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class="slide-9 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   >
+                    This slide is for document upload
+                  </swiper-slide>
+                  <swiper-slide
+                    class="slide-10 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                  >
+                    <p>Enter a description.</p>
                     <input
-                      placeholder="Engraving"
+                      placeholder="Description"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["engraving"]}
-                    />
-                    <input
-                      placeholder="Trademarks"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["trademarks"]}
+                      bind:value={cardProps["description"]}
                     />
                   </swiper-slide>
                   <swiper-slide
-                  class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                >
-                  <input
-                    placeholder="Purchased From"
-                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                    bind:value={cardProps["purchasedFrom"]}
-                  />
-                  <input
-                    placeholder="Purchase Value"
-                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                    bind:value={cardProps["purchasedValue"]}
-                  />
-                </swiper-slide>
+                    class="slide-1 w-full h-full flex flex-col justify-center content-center   p-3"
+                  >
+                    <p class ='w-full h-full flex justify-center p-2 '>
+                      Myne Global takes no responsibility for incorrect
+                      information inputted, and will not vet your entries.
+                      Please ensure that everything on this card is accurate.
+                      Reporting inaccurate ownership information is a violation
+                      of the usage policy.
+                    </p>
+                    <div class = "flex justify-center">
+                    
+                      <input
+                      type="submit"
+                      class="btn btn-success normal-case shadow-lg w-[90%]"
+                      value="Submit"
+                      on:click={() => {}}
+                    />
+                    
+                    </div>
+
+                  </swiper-slide>
                 </swiper-container>
               </div>
             </div>
             <div
               class="pagination-btns w-full h-ful grid grid-cols-2 place-items-center"
             >
-              <PrevButton
-                bind:pageCount
-                on:click={() => (pageCount = --pageCount)}
-              />
-              {#if pageCount === 0 || pageCount < 8}
-                <NextButton
-                  bind:pageCount
-                  on:click={() => (pageCount = ++pageCount)}
-                />
-              {/if}
-
-              {#if pageCount === 8}
-                <input
-                  type="submit"
-                  class="previous btn btn-success normal-case shadow-lg w-[90%]"
-                  value="Submit"
-                  on:click={() => {}}
-                />
-              {/if}
+              <PrevButton />
+              <NextButton />
             </div>
           </div>
         </form>
