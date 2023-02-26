@@ -1775,7 +1775,7 @@ export let dogFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Body Lenght",
+      label: "Body Length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
@@ -1825,8 +1825,8 @@ export let dogFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let catFields:typeof templates = {
   fieldsFront: [
@@ -1855,7 +1855,7 @@ export let catFields:typeof templates = {
       justify: "justify-end",
     },
     {
-      label: "Body Lenght",
+      label: "Body Length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
@@ -1905,8 +1905,8 @@ export let catFields:typeof templates = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let birdFields:typeof template = {
   fieldsFront: [
@@ -1935,7 +1935,7 @@ export let birdFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Body Lenght",
+      label: "Body Length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
@@ -1985,8 +1985,8 @@ export let birdFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let childIdFields = {
   fieldsFront: [
