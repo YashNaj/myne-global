@@ -928,7 +928,7 @@ export let sneakerFields:typeof template= {
     {
       label: "Release Date",
       location: "back_4",
-      value: "release_date",
+      value: "year",
       justify: "justify-end",
     },
     {
@@ -938,8 +938,8 @@ export let sneakerFields:typeof template= {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let gunsFields:typeof template= {
   fieldsFront: [
