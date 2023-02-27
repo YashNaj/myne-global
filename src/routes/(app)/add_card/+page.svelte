@@ -498,7 +498,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["model"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing"}
+                    {:else if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles"}
                       <Select
                         placeholder="Brand"
                         class="select text-black w-full mt-2 "
@@ -593,6 +593,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["size"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "collectibles"}
+                      <input
+                      placeholder="Model"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["model"]}
+                    />
+                    <input
+                      placeholder="Year"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["year"]}
+                    />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -661,6 +672,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["material"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "collectibles"}
+                      <input
+                      placeholder="Serial"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["serial"]}
+                    />
+                    <input
+                      placeholder="Grading"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["grading"]}
+                    />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -730,6 +752,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["other"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "collectibles"}
+                      <input
+                      placeholder="Manufacture"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["manufacture"]}
+                    />
+                    <input
+                      placeholder="Series"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["series"]}
+                    />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -748,6 +781,8 @@
 
                   <swiper-slide
                     class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                    class:hidden={cardProps.category.toLowerCase() === "clothing"}
+
                   >
                     {#if cardProps.category?.toLowerCase() === "art"}
                       <input
@@ -792,7 +827,12 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["engine"]}
                       />
-                    {/if}
+                      {:else if cardProps.category?.toLowerCase() === "collectibles"}
+                      <input
+                      placeholder="Unique Features"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["serial"]}
+                    />                    {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
                         placeholder="Pedigree "
@@ -814,7 +854,9 @@
                         "bird" ||
                         cardProps.category?.toLowerCase() === "cat" ||
                         cardProps.category?.toLowerCase() === "dog" ||
-                        cardProps.category?.toLowerCase() === "other animal"}
+                        cardProps.category?.toLowerCase() === "other animal" || 
+                        cardProps.category?.toLowerCase() === "clothing" || 
+                        cardProps.category?.toLowerCase() === "collectibles"  }
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
@@ -863,7 +905,7 @@
                   {#if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                     <swiper-slide
                       class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                      class:hidden={cardProps.category.toLowerCase() === ""}
+                      class:hidden={cardProps.category.toLowerCase() === "clothing"}
                     >
                       {#if cardProps.category?.toLowerCase() === "jewelry"}
                         <input
