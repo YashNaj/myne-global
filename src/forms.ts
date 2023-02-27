@@ -1678,7 +1678,7 @@ export let motoFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree: [''],
+  fieldsBackThree: [],
 };
 export let otherFields:typeof template = {
   fieldsFront: [
@@ -1745,8 +1745,8 @@ export let otherFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let dogFields:typeof template = {
   fieldsFront: [

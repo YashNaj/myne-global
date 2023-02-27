@@ -133,7 +133,7 @@ model MyneCard {
   url                      String?
   valuation_report         String?
   vin                      String?
-  wallet                   String?
+  wallet_address                   String?
   weight                   String?
   year                     String?
   cut_shape                String?
