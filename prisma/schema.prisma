@@ -139,7 +139,6 @@ model MyneCard {
   cut_shape                String?
   carat_weight             String?
   gender                   String?
-
   marketPrice String? @default("No market data yet")
   Profile     Profile @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 

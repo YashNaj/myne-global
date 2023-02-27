@@ -25,7 +25,7 @@ export let template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "",
       justify: "justify-end",
@@ -278,7 +278,7 @@ export let generalFields: typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -413,19 +413,19 @@ export let generalFields: typeof template = {
 };
 export let generalFieldsBack = [
   {
-    label: "Purchased From",
+    label: "Purchased from",
     location: "general_1",
     value: "purchasedFrom",
     justify: "justify-start",
   },
   {
-    label: "Purchase Value",
+    label: "Purchase value",
     location: "general_2",
     value: "purchasedValue",
     justify: "justify-end",
   },
   {
-    label: "Market Price",
+    label: "Market price",
     location: "general_3",
     value: "marketPrice",
     justify: "justify-start",
@@ -459,7 +459,7 @@ export let jewelryFields: typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -523,7 +523,7 @@ export let jewelryFields: typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Laser Marking",
+      label: "Laser marking",
       location: "back_8",
       value: "laser_inscription",
       justify: "justify-end",
@@ -535,7 +535,7 @@ export let jewelryFields: typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Trademarks",
+      label: "Marks",
       location: "back_10",
       value: "trademarks",
       justify: "justify-end",
@@ -571,7 +571,7 @@ export let watchFields: typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -591,7 +591,7 @@ export let watchFields: typeof template = {
   ],
   fieldsBackOne: [
     {
-      label: "Case Material",
+      label: "Case material",
       location: "back_1",
       value: "case_material",
       justify: "justify-start",
@@ -641,7 +641,7 @@ export let watchFields: typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Valuation Report",
+      label: "Valuation report",
       location: "back_3",
       value: "valuation_report",
       justify: "justify-start",
@@ -696,7 +696,7 @@ export let artFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "back_2",
       value: "brand_reference",
       justify: "justify-end",
@@ -720,7 +720,7 @@ export let artFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Trademark",
+      label: "Marks",
       location: "back_4",
       value: "trademarks",
       justify: "justify-end",
@@ -758,7 +758,7 @@ export let leatherFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -790,7 +790,7 @@ export let leatherFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Hotstamping",
+      label: "Hot stamping",
       location: "back_3",
       value: "hotstamping",
       justify: "justify-start",
@@ -825,7 +825,7 @@ export let clothingFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -887,7 +887,7 @@ export let sneakerFields:typeof template= {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -926,7 +926,7 @@ export let sneakerFields:typeof template= {
       justify: "justify-start",
     },
     {
-      label: "Release Date",
+      label: "Year",
       location: "back_4",
       value: "year",
       justify: "justify-end",
@@ -962,7 +962,7 @@ export let gunsFields:typeof template= {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -988,7 +988,7 @@ export let gunsFields:typeof template= {
       justify: "justify-start",
     },
     {
-      label: "Case Material",
+      label: "Case material",
       location: "back_2",
       value: "case_material",
       justify: "justify-end",
@@ -1035,7 +1035,7 @@ export let technologyFields :typeof template= {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1061,7 +1061,7 @@ export let technologyFields :typeof template= {
       justify: "justify-start",
     },
     {
-      label: "Case Material",
+      label: "Case material",
       location: "back_2",
       value: "case_material",
       justify: "justify-end",
@@ -1108,7 +1108,7 @@ export let tradingCardFields :typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1134,7 +1134,7 @@ export let tradingCardFields :typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Manufacturer",
+      label: "Condition",
       location: "back_2",
       value: "manufacturer",
       justify: "justify-end",
@@ -1146,13 +1146,13 @@ export let tradingCardFields :typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Series",
+      label: "Serie",
       location: "back_4",
       value: "series",
       justify: "justify-end",
     },
     {
-      label: "Release Date",
+      label: "Year",
       location: "back_5",
       value: "year",
       justify: "justify-start",
@@ -1188,7 +1188,7 @@ export let colectibleFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1200,7 +1200,7 @@ export let colectibleFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Release Year",
+      label: "Year",
       location: "bottom_right",
       value: "year",
       justify: "justify-end",
@@ -1220,7 +1220,7 @@ export let colectibleFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Manufacturer",
+      label: "Condition",
       location: "back_3",
       value: "manufacturer",
       justify: "justify-start",
@@ -1262,7 +1262,7 @@ export let cryptoFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1276,7 +1276,7 @@ export let cryptoFields:typeof template = {
   ],
   fieldsBackOne: [
     {
-      label: "Exchange Address",
+      label: "Exchange address",
       location: "back_4",
       value: "exchange_address",
       justify: "justify-start",
@@ -1300,7 +1300,7 @@ export let cryptoFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Wallet Address",
+      label: "Wallet address",
       location: "back_5",
       value: "wallet_address",
       justify: "justify-start",
@@ -1344,7 +1344,7 @@ export let nftFields:typeof template = {
   ],
   fieldsBackOne: [
     {
-      label: "Smart Contract Address",
+      label: "Smart contract address",
       location: "back_1",
       value: "smart_contract_address",
       justify: "justify-start",
@@ -1356,7 +1356,7 @@ export let nftFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Smart Contract ID",
+      label: "Smart contract ID",
       location: "back_2",
       value: "smart_contract_id",
       justify: "justify-start",
@@ -1399,7 +1399,7 @@ export let vintageFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1449,7 +1449,7 @@ export let vintageFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Trademarks",
+      label: "Marks",
       location: "back_6",
       value: "trademarks",
       justify: "justify-end",
@@ -1479,7 +1479,7 @@ export let autoFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1517,7 +1517,7 @@ export let autoFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Fuel Type",
+      label: "Fuel type",
       location: "back_4",
       value: "fuel_type",
       justify: "justify-end",
@@ -1537,19 +1537,19 @@ export let autoFields:typeof template = {
   ],
   fieldsBackTwo: [
     {
-      label: "Exterior Color",
+      label: "Exterior color",
       location: "back_1",
       value: "exterior_color",
       justify: "justify-start",
     },
     {
-      label: "Interior Color",
+      label: "Interior color",
       location: "back_2",
       value: "interior_color",
       justify: "justify-end",
     },
     {
-      label: "Stock Number",
+      label: "Stock number",
       location: "back_3",
       value: "stock_number",
       justify: "justify-start",
@@ -1590,7 +1590,7 @@ export let motoFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1628,7 +1628,7 @@ export let motoFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Fuel Type",
+      label: "Fuel type",
       location: "back_4",
       value: "fuel_type",
       justify: "justify-end",
@@ -1660,7 +1660,7 @@ export let motoFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Stock Number",
+      label: "Stock number",
       location: "back_3",
       value: "stock_number",
       justify: "justify-start",
@@ -1701,7 +1701,7 @@ export let otherFields:typeof template = {
       justify: "justify-start",
     },
     {
-      label: "Brand Reference",
+      label: "Brand reference",
       location: "middle_right",
       value: "brand_reference",
       justify: "justify-end",
@@ -1775,7 +1775,7 @@ export let dogFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Body Length",
+      label: "Body length length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
@@ -1855,7 +1855,7 @@ export let catFields:typeof templates = {
       justify: "justify-end",
     },
     {
-      label: "Body Length",
+      label: "Body length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
@@ -1935,7 +1935,7 @@ export let birdFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Body Length",
+      label: "Body length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
@@ -2162,7 +2162,7 @@ export let otherAnimalFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Body Length",
+      label: "Body length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",

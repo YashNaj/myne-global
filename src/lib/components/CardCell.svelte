@@ -21,10 +21,9 @@
   // Join capitalized words back into a string and return
   return capitalizedWords.join(' ');
 }
+// need to format nft 
 $: value = capitalizeFirstWord(value)
-$: console.log("🚀 ~ file: CardCell.svelte:25 ~ value:", value)
 // $: value = capitalizeFirstLetters(value)
-
 </script>
 
 <div
