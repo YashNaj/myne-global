@@ -223,6 +223,7 @@ export let collectiblesProps = [
   'cOfAuth',
   'valuation_report',
   'marketPrice',
+  'year'
 ];
 export let cryptoProps = [
 'subcategory',
