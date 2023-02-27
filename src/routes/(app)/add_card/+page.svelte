@@ -620,6 +620,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["Model"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "firearms"}
+                      <input
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                      <input
+                        placeholder="Caliber"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["caliber"]}
+                      />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -681,7 +692,7 @@
                       <input
                         placeholder="Serial"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["body_length"]}
+                        bind:value={cardProps["serial"]}
                       />
                       <input
                         placeholder="Material"
@@ -710,17 +721,18 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["serial"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "firearms"}
+                      {:else if cardProps.category?.toLowerCase() === "firearms"}
                       <input
-                        placeholder="Model"
+                        placeholder="Serial"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["model"]}
+                        bind:value={cardProps["serial"]}
                       />
                       <input
-                        placeholder="Caliber"
+                        placeholder="Case Material"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["caliber"]}
+                        bind:value={cardProps["case_material"]}
                       />
+                 
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -812,6 +824,18 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["crypto_token_address"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "firearms"}
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                      <input
+                        placeholder="Case Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["case_material"]}
+                      />
+                 
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
