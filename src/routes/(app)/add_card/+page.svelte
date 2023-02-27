@@ -595,7 +595,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["serial"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                       <input
                         placeholder="Model"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -702,7 +702,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
                         bind:justValue={cardProps["stone"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                       <input
                         placeholder="VIN"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -832,7 +832,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
                         bind:justValue={cardProps["cut_shape"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                       <input
                         placeholder="Drivetrain"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -958,7 +958,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
                         bind:justValue={cardProps["clarity"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                    {:else if  cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                       <input
                         placeholder="Transmission"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -981,7 +981,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["wallet_address"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "firearms" || "nft"}
+                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() ===   "nft"}
                       <input
                         placeholder="Unique Features"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -1079,7 +1079,7 @@
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                           bind:value={cardProps["trademarks"]}
                         />
-                      {:else if cardProps.category?.toLowerCase() === "automobile" || "motorcycle"}
+                      {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                         <input
                           placeholder="Stock Number "
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
