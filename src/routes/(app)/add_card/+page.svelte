@@ -868,7 +868,7 @@
                       />
                       <input
                       type = 'date'
-                      placeholder="Releaste Date"
+                      placeholder="Release Date"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["year"]}
                     />
@@ -960,8 +960,6 @@
                     class:hidden={cardProps?.category?.toLowerCase() ===
                       "clothing" ||
                       cardProps?.category?.toLowerCase() === "leather"  ||
-                      cardProps?.category?.toLowerCase() === "sneakers"  ||
-
                       cardProps?.category?.toLowerCase() === "other"}
                   >
                     {#if cardProps.category?.toLowerCase() === "art"}
@@ -1019,7 +1017,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["wallet_address"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "nft"}
+                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === 'sneakers' }
                       <input
                         placeholder="Unique Features"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
