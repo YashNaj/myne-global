@@ -1741,7 +1741,7 @@ export let otherFields:typeof template = {
     {
       label: "Unique features",
       location: "back_4",
-      value: "other",
+      value: "unique_features",
       justify: "justify-end",
     },
   ],
