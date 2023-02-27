@@ -815,9 +815,9 @@
                       />
                     {:else if cardProps.category?.toLowerCase() === "collectibles"}
                       <input
-                        placeholder="Manufacture"
+                        placeholder="Manufacturer"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["manufacture"]}
+                        bind:value={cardProps["manufacturer"]}
                       />
                       <input
                         placeholder="Series"
