@@ -94,6 +94,7 @@ export const actions: Actions = {
     const weight = form.get("weight")?.toLowerCase();
     const year = form.get("year")?.toLowerCase();
     const marketPrice = form.get("marketPrice")?.toLowerCase();
+    const gender = form.get("gender").toLowerCase(); 
     const profile = await prisma.profile.findUnique({
       where: {
         user_id: user.userId,

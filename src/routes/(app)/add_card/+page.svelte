@@ -211,6 +211,7 @@
   export let year = "";
   export let marketPrice = "";
   export let clarity = "";
+  export let gender = "";
   let cardProps: IcardProps = {
     isStolen,
     isHeirloom,
@@ -287,6 +288,7 @@
     year,
     marketPrice,
     backgroundColor,
+    gender
   };
   let addCardInputs: string[] = [];
   $: addCardInputs =
@@ -796,9 +798,9 @@
                     bind:value={cardProps["transaction"]}
                   />
                     <input
-                    placeholder="Serial"
+                    placeholder="Address"
                     class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                    bind:value={cardProps["serial"]}
+                    bind:value={cardProps["crypto_token_address"]}
                   />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}

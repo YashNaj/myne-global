@@ -369,4 +369,5 @@ export let animalProps = [
   'other',
   'registration_certificate',
   'marketPrice',
+  'gender',
 ];
