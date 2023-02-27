@@ -26,6 +26,7 @@
     dogFields,
     birdFields,
     otherFields,
+    otherAnimalFields,
     childIdFields,
   } from "../../forms";
 
@@ -50,6 +51,7 @@
     cat: catFields,
     dog: dogFields,
     bird: birdFields,
+    "other animal": otherAnimalFields,
     other: otherFields,
     childid: childIdFields,
   };

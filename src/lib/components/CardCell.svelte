@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { firstCapital } from "$lib/caps";
+  import { capitalizeFirstWord, firstCapital } from "$lib/caps";
   import type { IcardProps } from "../../cardProps";
   export let justifyCell = "";
   export let label = "";
@@ -21,7 +21,10 @@
   // Join capitalized words back into a string and return
   return capitalizedWords.join(' ');
 }
-$: value = capitalizeFirstLetters(value)
+$: value = capitalizeFirstWord(value)
+$: console.log("🚀 ~ file: CardCell.svelte:25 ~ value:", value)
+// $: value = capitalizeFirstLetters(value)
+
 </script>
 
 <div

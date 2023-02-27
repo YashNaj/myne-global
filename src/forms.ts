@@ -1821,7 +1821,7 @@ export let dogFields:typeof template = {
     {
       label: "Unique features",
       location: "back_6",
-      value: "distinguishing_features",
+      value: "other",
       justify: "justify-end",
     },
   ],
@@ -1901,7 +1901,7 @@ export let catFields:typeof templates = {
     {
       label: "Unique features",
       location: "back_6",
-      value: "distinguishing_features",
+      value: "other",
       justify: "justify-end",
     },
   ],
@@ -1981,7 +1981,7 @@ export let birdFields:typeof template = {
     {
       label: "Unique features",
       location: "back_6",
-      value: "distinguishing_features",
+      value: "other",
       justify: "justify-end",
     },
   ],
@@ -2126,7 +2126,6 @@ export let childIdFields = {
       label: "Home ZIP",
       location: "back_4",
       value: "homeZIP",
-      justify: "justify-end",
     },
     {
       label: "Home Country",
@@ -2135,4 +2134,84 @@ export let childIdFields = {
       justify: "justify-start",
     },
   ],
+};
+export let otherAnimalFields:typeof template = {
+  fieldsFront: [
+    {
+      label: "Category",
+      location: "top_left",
+      value: "category",
+      justify: "justify-start",
+    },
+    {
+      label: "Date of Birth",
+      location: "top_right",
+      value: "dob",
+      justify: "justify-end",
+    },
+    {
+      label: "Breed",
+      location: "middle_left",
+      value: "breed",
+      justify: "justify-start",
+    },
+    {
+      label: "Color",
+      location: "middle_right",
+      value: "color",
+      justify: "justify-end",
+    },
+    {
+      label: "Body Length",
+      location: "bottom_left",
+      value: "body_length",
+      justify: "justify-start",
+    },
+    {
+      label: "Weight",
+      location: "bottom_right",
+      value: "weight",
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackOne: [
+    {
+      label: "Microchip",
+      location: "back_1",
+      value: "microchip",
+      justify: "justify-start",
+    },
+    {
+      label: "Tattoo",
+      location: "back_2",
+      value: "tattoo",
+      justify: "justify-end",
+    },
+    {
+      label: "Height",
+      location: "back_3",
+      value: "height",
+      justify: "justify-start",
+    },
+    {
+      label: "Gender",
+      location: "back_4",
+      value: "gender",
+      justify: "justify-end",
+    },
+    {
+      label: "Pedigree",
+      location: "back_5",
+      value: "pedigree",
+      justify: "justify-start",
+    },
+    {
+      label: "Unique features",
+      location: "back_6",
+      value: "other",
+      justify: "justify-end",
+    },
+  ],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
