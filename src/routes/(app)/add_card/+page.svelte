@@ -407,15 +407,18 @@
               placeholder="categroy"
               bind:value={cardProps["category"]}
             />
+            <div class = 'flex flex-col w-40 h-80'>
+
             {#each addCardInputs as hiddenInput}
               <input
-                hidden
                 name={hiddenInput}
                 id={hiddenInput}
                 placeholder={hiddenInput}
                 bind:value={cardProps[`${hiddenInput}`]}
               />
             {/each}
+          </div>
+
           {/if}
 
           <!-- <SwiperStandard
@@ -496,7 +499,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["model"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
+                    {:else if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing"}
                       <Select
                         placeholder="Brand"
                         class="select text-black w-full mt-2 "
@@ -580,6 +583,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["year"]}
                       />
+                    {:else if cardProps.category?.toLowerCase() === "clothing"}
+                      <input
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                      <input
+                        placeholder="Size"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["size"]}
+                      />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -636,6 +650,17 @@
                         placeholder="Mileage"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["mileage"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "clothing"}
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["body_length"]}
+                      />
+                      <input
+                        placeholder="Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["material"]}
                       />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
@@ -699,6 +724,12 @@
                         placeholder="Fuel Type"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["fuel_type"]}
+                      />
+                      {:else if cardProps.category?.toLowerCase() === "clothing"}
+                      <input
+                        placeholder="Unique Features"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["other"]}
                       />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
@@ -780,7 +811,11 @@
                   {#if cardProps.category?.toLowerCase() !== "bird" || cardProps.category?.toLowerCase() !== "cat" || cardProps.category?.toLowerCase() !== "dog" || cardProps.category?.toLowerCase() !== "other animal"}
                     <swiper-slide
                       class="slide-6 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                      class:hidden={cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
+                      class:hidden={cardProps.category?.toLowerCase() ===
+                        "bird" ||
+                        cardProps.category?.toLowerCase() === "cat" ||
+                        cardProps.category?.toLowerCase() === "dog" ||
+                        cardProps.category?.toLowerCase() === "other animal"}
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
@@ -824,11 +859,12 @@
                           />
                         {/if}
                       {/if}
-                    </swiper-slide>         
+                    </swiper-slide>
                   {/if}
                   {#if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                     <swiper-slide
                       class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                      class:hidden={cardProps.category.toLowerCase() === ""}
                     >
                       {#if cardProps.category?.toLowerCase() === "jewelry"}
                         <input
@@ -863,15 +899,15 @@
                     </swiper-slide>
                   {/if}
                   <swiper-slide
-                  class="slide-10 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                >
-                  <p>Enter a description.</p>
-                  <input
-                    placeholder="Description"
-                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                    bind:value={cardProps["description"]}
-                  />
-                </swiper-slide>
+                    class="slide-10 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                  >
+                    <p>Enter a description.</p>
+                    <input
+                      placeholder="Description"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["description"]}
+                    />
+                  </swiper-slide>
 
                   <swiper-slide
                     class="slide-8 w-full h-full gird grid-row-[1fr_1fr]  p-3"
@@ -893,7 +929,7 @@
                     This slide is for document upload
                   </swiper-slide>
                   <swiper-slide
-                    class="slide-1 w-full h-full flex flex-col justify-center content-center   p-3"
+                    class="slide-11 w-full h-full flex flex-col justify-center content-center   p-3"
                   >
                     <p class="w-full h-full flex justify-center p-2 ">
                       Myne Global takes no responsibility for incorrect

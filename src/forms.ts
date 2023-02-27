@@ -863,8 +863,8 @@ export let clothingFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let sneakerFields:typeof template= {
   fieldsFront: [
