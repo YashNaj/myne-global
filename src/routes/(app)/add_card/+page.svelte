@@ -474,17 +474,14 @@
                             bind:justValue={cardProps["subcategory"]}
                           />
                         </div>
-                      {:else if cardProps.category?.toLowerCase() == "collectibles" }
-                      <div transition:slide>
-
-                      <input
-                      
-                      placeholder="Product"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["product"]}
-                    />
-                  </div>
-
+                      {:else if cardProps.category?.toLowerCase() == "collectibles"}
+                        <div transition:slide>
+                          <input
+                            placeholder="Product"
+                            class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                            bind:value={cardProps["product"]}
+                          />
+                        </div>
                       {:else if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                         <input
                           type="date"
@@ -511,37 +508,36 @@
                         bind:value={cardProps["model"]}
                       />
                     {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "crypto" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === "leather"}
-                      {#if cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles"  }
+                      {#if cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles"}
                         <input
                           placeholder="Brand "
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                           bind:value={cardProps["brand"]}
                         />
                       {:else}
-                      <Select
-                        placeholder="Brand"
-                        class="select text-black w-full mt-2 "
-                        items={brands?.map((brand) => firstCapital(brand))}
-                        on:change={() => {
-                          brand = justValue;
-                        }}
-                        bind:justValue={cardProps["brand"]}
-                      />
+                        <Select
+                          placeholder="Brand"
+                          class="select text-black w-full mt-2 "
+                          items={brands?.map((brand) => firstCapital(brand))}
+                          on:change={() => {
+                            brand = justValue;
+                          }}
+                          bind:justValue={cardProps["brand"]}
+                        />
                       {/if}
-                        {#if cardProps.category?.toLowerCase() === 'nft'}
+                      {#if cardProps.category?.toLowerCase() === "nft"}
                         <input
-                        placeholder="Author"
-                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["author"]}
-                      />
-                        {:else}
+                          placeholder="Author"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["author"]}
+                        />
+                      {:else}
                         <input
-                        placeholder="Brand Reference"
-                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["brand_reference"]}
-                      />
-                        {/if}
-                      
+                          placeholder="Brand Reference"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["brand_reference"]}
+                        />
+                      {/if}
                     {:else if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       {#if cardProps.category?.toLowerCase() === "other animal"}
                         <input
@@ -632,14 +628,14 @@
                         placeholder="Year"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["year"]}
-                      />  
-                    {:else if cardProps.category?.toLowerCase() === "crypto" || "nft"}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "crypto" || cardProps.category?.toLowerCase() === "nft"}
                       <input
                         placeholder="Model"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["model"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "firearms"}
+                    {:else if cardProps.category?.toLowerCase() === "firearms"}
                       <input
                         placeholder="Model"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -650,18 +646,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["caliber"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "leather"}
+                    {:else if cardProps.category?.toLowerCase() === "leather"}
                       <input
-                      placeholder="Model"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["model"]}
-                    />
-                    <input
-                      placeholder="Material"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["material"]}
-                    />
-
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                      <input
+                        placeholder="Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["material"]}
+                      />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -752,7 +747,18 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["serial"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "firearms"}
+                    {:else if cardProps.category?.toLowerCase() === "nft"}
+                      <input
+                        placeholder="Smart Contract Address "
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["smart_contract_address"]}
+                      />
+                      <input
+                        placeholder="URL"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["url"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "firearms"}
                       <input
                         placeholder="Serial"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -763,18 +769,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["case_material"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "leather"}
+                    {:else if cardProps.category?.toLowerCase() === "leather"}
                       <input
-                      placeholder="Serial"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["serial"]}
-                    />
-                    <input
-                      placeholder="Size"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["size"]}
-                    />
-                 
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                      <input
+                        placeholder="Size"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["size"]}
+                      />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -866,7 +871,18 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["crypto_token_address"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "firearms"}
+                    {:else if cardProps.category?.toLowerCase() === "nft"}
+                      <input
+                        placeholder="Smart Contract ID "
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["smart_contract_id"]}
+                      />
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "firearms"}
                       <input
                         placeholder="Size"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -877,19 +893,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["engraving"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "leather"}
+                    {:else if cardProps.category?.toLowerCase() === "leather"}
                       <input
-                      placeholder="Hotstamping"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["hotstamping"]}
-                    />
-                    <input
-                      placeholder="Unique Features"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["other"]}
-                    />
-                 
-                 
+                        placeholder="Hotstamping"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["hotstamping"]}
+                      />
+                      <input
+                        placeholder="Unique Features"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["other"]}
+                      />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -909,8 +923,8 @@
                   <swiper-slide
                     class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                     class:hidden={cardProps?.category?.toLowerCase() ===
-                      "clothing" || cardProps?.category?.toLowerCase() ===
-                      "leather"}
+                      "clothing" ||
+                      cardProps?.category?.toLowerCase() === "leather"}
                   >
                     {#if cardProps.category?.toLowerCase() === "art"}
                       <input
@@ -967,13 +981,12 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["wallet_address"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "firearms"}
+                    {:else if cardProps.category?.toLowerCase() === "firearms" || "nft"}
                       <input
                         placeholder="Unique Features"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["other"]}
                       />
- 
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -999,10 +1012,10 @@
                         cardProps.category?.toLowerCase() === "other animal" ||
                         cardProps.category?.toLowerCase() === "clothing" ||
                         cardProps.category?.toLowerCase() === "collectibles" ||
-                        cardProps.category?.toLowerCase() === "crypto"||
-                        cardProps.category?.toLowerCase() === "NFT"||
-                        cardProps.category?.toLowerCase() === "firearms" || 
-                        cardProps.category?.toLowerCase() === "leather" }
+                        cardProps.category?.toLowerCase() === "crypto" ||
+                        cardProps.category?.toLowerCase() === "nft" ||
+                        cardProps.category?.toLowerCase() === "firearms" ||
+                        cardProps.category?.toLowerCase() === "leather"}
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
@@ -1052,7 +1065,8 @@
                     <swiper-slide
                       class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                       class:hidden={cardProps.category.toLowerCase() ===
-                        "clothing" || cardProps.category.toLowerCase() === "leather" }
+                        "clothing" ||
+                        cardProps.category.toLowerCase() === "leather"}
                     >
                       {#if cardProps.category?.toLowerCase() === "jewelry"}
                         <input
