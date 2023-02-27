@@ -407,17 +407,16 @@
               placeholder="categroy"
               bind:value={cardProps["category"]}
             />
-            <div class = 'flex flex-col w-40 h-80'>
 
             {#each addCardInputs as hiddenInput}
               <input
+              hidden
                 name={hiddenInput}
                 id={hiddenInput}
                 placeholder={hiddenInput}
                 bind:value={cardProps[`${hiddenInput}`]}
               />
             {/each}
-          </div>
 
           {/if}
 
