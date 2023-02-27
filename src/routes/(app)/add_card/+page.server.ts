@@ -178,6 +178,7 @@ export const actions: Actions = {
             weight,
             year,
             marketPrice,
+            gender, 
           },
         },
       },

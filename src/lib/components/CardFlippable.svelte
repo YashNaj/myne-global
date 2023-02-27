@@ -142,6 +142,8 @@
   export let valuation_report: string | boolean | null | bigint;
   export let vin: string | boolean | null | bigint;
   export let wallet: string | boolean | null | bigint;
+  export let gender: string | boolean | null | bigint;
+
   export let weight: string | boolean | null | bigint;
   export let year: string | boolean | null | bigint;
   export let pictures: string | boolean | null | bigint;
@@ -232,6 +234,7 @@
     year,
     marketPrice,
     wallet,
+    gender, 
   };
 
   let currency;
