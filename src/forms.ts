@@ -722,7 +722,7 @@ export let artFields:typeof template = {
     {
       label: "Trademark",
       location: "back_4",
-      value: "trademark",
+      value: "trademarks",
       justify: "justify-end",
     },
 

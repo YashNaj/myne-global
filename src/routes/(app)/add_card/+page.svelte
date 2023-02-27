@@ -498,7 +498,15 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["model"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles"}
+                    {:else if cardProps.category?.toLowerCase() === "jewelry" || 
+                    cardProps.category?.toLowerCase() === "automobile" 
+                    || cardProps.category?.toLowerCase() === "motorcycle" 
+                    || cardProps.category?.toLowerCase() === "clothing" 
+                    || cardProps.category?.toLowerCase() === "collectibles" 
+                    || cardProps.category?.toLowerCase() === "crypto" 
+                    ||  cardProps.category?.toLowerCase() === "clothing" 
+                    || cardProps.category?.toLowerCase() === "collectibles" 
+                    || cardProps.category?.toLowerCase()  === "nft"}
                       <Select
                         placeholder="Brand"
                         class="select text-black w-full mt-2 "
@@ -604,6 +612,12 @@
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["year"]}
                     />
+                    {:else if cardProps.category?.toLowerCase() === "crypto"}
+                    <input
+                    placeholder="Model"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["Model"]}
+                  />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -683,6 +697,18 @@
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["grading"]}
                     />
+                    {:else if cardProps.category?.toLowerCase() === "crypto"}
+                    <input
+                    placeholder="Exchange Address"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["exchange_address"]}
+                  />
+                    <input
+                    placeholder="Serial"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["serial"]}
+                  />
+             
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -763,6 +789,17 @@
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["series"]}
                     />
+                    {:else if cardProps.category?.toLowerCase() === "crypto"}
+                    <input
+                    placeholder="Transaction ID "
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["transaction"]}
+                  />
+                    <input
+                    placeholder="Serial"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["serial"]}
+                  />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -781,7 +818,7 @@
 
                   <swiper-slide
                     class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                    class:hidden={cardProps.category.toLowerCase() === "clothing"}
+                    class:hidden={cardProps?.category?.toLowerCase() === "clothing"}
 
                   >
                     {#if cardProps.category?.toLowerCase() === "art"}
