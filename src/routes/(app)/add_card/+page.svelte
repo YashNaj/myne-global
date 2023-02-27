@@ -510,8 +510,8 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["model"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "crypto" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "nft"}
-                      {#if cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "leather goods" }
+                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "crypto" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === "leather"}
+                      {#if cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles"  }
                         <input
                           placeholder="Brand "
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -642,6 +642,18 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["caliber"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "leather"}
+                      <input
+                      placeholder="Model"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["model"]}
+                    />
+                    <input
+                      placeholder="Material"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["material"]}
+                    />
+
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -743,6 +755,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["case_material"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "leather"}
+                      <input
+                      placeholder="Serial"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["serial"]}
+                    />
+                    <input
+                      placeholder="Size"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["size"]}
+                    />
                  
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
@@ -846,6 +869,18 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["engraving"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "leather"}
+                      <input
+                      placeholder="Hotstamping"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["hotstamping"]}
+                    />
+                    <input
+                      placeholder="Unique Features"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["other"]}
+                    />
+                 
                  
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
@@ -1018,7 +1053,7 @@
                         <input
                           placeholder="Trademarks"
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                          bind:value={cardProps["trademarkss"]}
+                          bind:value={cardProps["trademarks"]}
                         />
                       {:else if cardProps.category?.toLowerCase() === ("automobile" || "motorcycle")}
                         <input
