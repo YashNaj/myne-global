@@ -1238,8 +1238,8 @@ export let colectibleFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let cryptoFields:typeof template = {
   fieldsFront: [
