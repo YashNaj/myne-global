@@ -313,7 +313,7 @@ export let motoProps = [
   'model',
   'year',
   'mileage',
-  'color',
+  'exterior_color',
   'drivetrain',
   'fuel_type',
   'transmission',

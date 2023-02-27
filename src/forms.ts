@@ -1650,7 +1650,7 @@ export let motoFields:typeof template = {
     {
       label: "Color",
       location: "back_1",
-      value: "color",
+      value: "exterior_color",
       justify: "justify-start",
     },
     {
