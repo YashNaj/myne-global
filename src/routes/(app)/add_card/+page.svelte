@@ -200,7 +200,7 @@
   export let stone = "";
   export let strap_bracelet = "";
   export let tattoo = "";
-  export let trademarks = "";
+  export let trademarkss = "";
   export let transaction = "";
   export let transmission = "";
   export let url = "";
@@ -277,7 +277,7 @@
     stone,
     strap_bracelet,
     tattoo,
-    trademarks,
+    trademarkss,
     transaction,
     transmission,
     url,
@@ -832,7 +832,7 @@
                       <input
                         placeholder="Trademarks"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["trademark"]}
+                        bind:value={cardProps["trademarks"]}
                       />
                     {:else if cardProps.category?.toLowerCase() === "jewelry"}
                       <Select
@@ -955,7 +955,7 @@
                         <input
                           placeholder="Trademarks"
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                          bind:value={cardProps["trademarks"]}
+                          bind:value={cardProps["trademarkss"]}
                         />
                       {:else if cardProps.category?.toLowerCase() === ("automobile" || "motorcycle")}
                         <input
