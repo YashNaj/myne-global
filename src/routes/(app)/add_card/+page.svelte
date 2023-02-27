@@ -1075,8 +1075,8 @@
                         cardProps.category?.toLowerCase() === "firearms" ||
                         cardProps.category?.toLowerCase() === "leather" ||
                         cardProps.category?.toLowerCase() === "sneakers" ||
-
-                      cardProps?.category?.toLowerCase() === "other"}
+                        cardProps.category?.toLowerCase() === "technology"||
+                        cardProps?.category?.toLowerCase() === "other"}
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
