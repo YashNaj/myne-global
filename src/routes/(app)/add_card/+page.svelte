@@ -528,12 +528,20 @@
                         bind:justValue={cardProps["brand"]}
                       />
                       {/if}
-
-                      <input
+                        {#if cardProps.category?.toLowerCase() === 'nft'}
+                        <input
+                        placeholder="Author"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["author"]}
+                      />
+                        {:else}
+                        <input
                         placeholder="Brand Reference"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["brand_reference"]}
                       />
+                        {/if}
+                      
                     {:else if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       {#if cardProps.category?.toLowerCase() === "other animal"}
                         <input
@@ -624,8 +632,8 @@
                         placeholder="Year"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["year"]}
-                      />
-                    {:else if cardProps.category?.toLowerCase() === "crypto"}
+                      />  
+                    {:else if cardProps.category?.toLowerCase() === "crypto" || "nft"}
                       <input
                         placeholder="Model"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -901,7 +909,8 @@
                   <swiper-slide
                     class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                     class:hidden={cardProps?.category?.toLowerCase() ===
-                      "clothing"}
+                      "clothing" || cardProps?.category?.toLowerCase() ===
+                      "leather"}
                   >
                     {#if cardProps.category?.toLowerCase() === "art"}
                       <input
@@ -992,7 +1001,8 @@
                         cardProps.category?.toLowerCase() === "collectibles" ||
                         cardProps.category?.toLowerCase() === "crypto"||
                         cardProps.category?.toLowerCase() === "NFT"||
-                        cardProps.category?.toLowerCase() === "firearms" }
+                        cardProps.category?.toLowerCase() === "firearms" || 
+                        cardProps.category?.toLowerCase() === "leather" }
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
@@ -1042,7 +1052,7 @@
                     <swiper-slide
                       class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                       class:hidden={cardProps.category.toLowerCase() ===
-                        "clothing"}
+                        "clothing" || cardProps.category.toLowerCase() === "leather" }
                     >
                       {#if cardProps.category?.toLowerCase() === "jewelry"}
                         <input
