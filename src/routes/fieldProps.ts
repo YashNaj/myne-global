@@ -134,6 +134,7 @@ export let sneakerProps = [
   'cOfAuth',
   'valuation_report',
   'marketPrice',
+  'year'
 ];
 export let firearmsProps = [
   'subcategory',
