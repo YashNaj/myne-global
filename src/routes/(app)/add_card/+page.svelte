@@ -915,7 +915,7 @@
                       <input
                         placeholder="Unique Features"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["serial"]}
+                        bind:value={cardProps["other"]}
                       />
                     {:else if cardProps.category?.toLowerCase() === "crypto"}
                       <input
