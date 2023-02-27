@@ -313,7 +313,7 @@ export let motoProps = [
   'model',
   'year',
   'mileage',
-  'exterior_color',
+  'color',
   'drivetrain',
   'fuel_type',
   'transmission',
@@ -348,6 +348,7 @@ export let otherProps = [
   'cOfAuth',
   'valuation_report',
   'marketPrice',
+  'unique_features',
 ];
 export let animalProps = [
   'breed',
