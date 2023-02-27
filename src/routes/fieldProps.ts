@@ -202,6 +202,7 @@ export let tradingCardsProps = [
   'cOfAuth',
   'marketPrice',
   'valuation_report',
+  'year',
 ];
 export let collectiblesProps = [
   'brand',
@@ -282,6 +283,7 @@ export let vintageProps = [
   'cOfAuth',
   'valuation_report',
   'marketPrice',
+  'year'
 ];
 export let autoProps = [
   'brand',

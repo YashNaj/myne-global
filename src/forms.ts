@@ -555,7 +555,7 @@ export let watchFields: typeof template = {
     {
       label: "Category",
       location: "top_left",
-      value: "",
+      value: "category",
       justify: "justify-start",
     },
     {
@@ -637,7 +637,7 @@ export let watchFields: typeof template = {
     {
       label: "Grading ",
       location: "back_2",
-      value: "grading_reports",
+      value: "grading",
       justify: "justify-end",
     },
     {
@@ -1154,7 +1154,7 @@ export let tradingCardFields :typeof template = {
     {
       label: "Release Date",
       location: "back_5",
-      value: "release_date",
+      value: "year",
       justify: "justify-start",
     },
     {
@@ -1455,8 +1455,8 @@ export let vintageFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let autoFields:typeof template = {
   fieldsFront: [

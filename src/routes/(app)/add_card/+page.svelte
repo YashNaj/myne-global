@@ -507,8 +507,8 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["model"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "technology" || cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "crypto" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === "leather" || cardProps.category?.toLowerCase() === "other" ||  cardProps.category?.toLowerCase() === "sneakers"}
-                      {#if  cardProps.category?.toLowerCase() === "sneakers" ||  cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "other"}
+                    {:else if cardProps.category?.toLowerCase() === "watch" ||cardProps.category?.toLowerCase() === "vintage" || cardProps.category?.toLowerCase() === "trading cards" || cardProps.category?.toLowerCase() === "technology" || cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "crypto" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === "leather" || cardProps.category?.toLowerCase() === "other" || cardProps.category?.toLowerCase() === "sneakers"}
+                      {#if cardProps.category?.toLowerCase() === "vintage" || cardProps.category?.toLowerCase() === "trading cards" || cardProps.category?.toLowerCase() === "sneakers" || cardProps.category?.toLowerCase() === "clothing" || cardProps.category?.toLowerCase() === "collectibles" || cardProps.category?.toLowerCase() === "other"}
                         <input
                           placeholder="Brand "
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -584,7 +584,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["year"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "other"}
+                    {:else if cardProps.category?.toLowerCase() === "watch" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "other"}
                       <input
                         placeholder="Model"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -595,7 +595,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["serial"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "technology"}
+                    {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle" || cardProps.category?.toLowerCase() === "technology" || cardProps.category?.toLowerCase() === "vintage"}
                       <input
                         placeholder="Model"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -656,6 +656,17 @@
                         placeholder="Material"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["material"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "trading cards"}
+                      <input
+                        placeholder="Model"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["model"]}
+                      />
+                      <input
+                        placeholder="Grading"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["grading"]}
                       />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
@@ -736,6 +747,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["grading"]}
                       />
+                    {:else if cardProps.category?.toLowerCase() === "trading cards"}
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                      <input
+                        placeholder="Manufacturer"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["manufacturer"]}
+                      />
                     {:else if cardProps.category?.toLowerCase() === "crypto"}
                       <input
                         placeholder="Exchange Address"
@@ -780,7 +802,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["size"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "technology"}
+                    {:else if cardProps.category?.toLowerCase() === "technology"}
                       <input
                         placeholder="Serial"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -796,6 +818,28 @@
                         placeholder="Material"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["material"]}
+                      />
+                      <input
+                        placeholder="Size"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["size"]}
+                      />
+                      {:else if cardProps.category?.toLowerCase() === "vintage"}
+                      <input
+                        placeholder="Artist"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["artist"]}
+                      />
+                      <input
+                        placeholder="Serial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["serial"]}
+                      />
+                      {:else if cardProps.category?.toLowerCase() === "watch"}
+                      <input
+                        placeholder="Case Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["case_material"]}
                       />
                       <input
                         placeholder="Size"
@@ -825,6 +869,28 @@
                         placeholder="Serial"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["serial"]}
+                      />
+                      <input
+                        placeholder="Size"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["size"]}
+                      />
+                    {:else if cardProps.category?.toLowerCase() === "trading cards"}
+                      <input
+                        placeholder="Product"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["product"]}
+                      />
+                      <input
+                        placeholder="Series"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["series"]}
+                      />
+                      {:else if cardProps.category?.toLowerCase() === "vintage"}
+                      <input
+                        placeholder="Material"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["material"]}
                       />
                       <input
                         placeholder="Size"
@@ -865,25 +931,35 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["fuel_type"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "watch"}
+                      <input
+                        placeholder="Movement/Caliber"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["movement_caliber"]}
+                      />
+                      <input
+                        placeholder="Dial"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["dial"]}
+                      />
                     {:else if cardProps.category?.toLowerCase() === "clothing"}
                       <input
                         placeholder="Unique Features"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["other"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "sneakers"}
+                    {:else if cardProps.category?.toLowerCase() === "sneakers"}
                       <input
                         placeholder="Serie"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["serie"]}
                       />
                       <input
-                      type = 'date'
-                      placeholder="Release Date"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["year"]}
-                    />
-
+                        type="date"
+                        placeholder="Release Date"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["year"]}
+                      />
                     {:else if cardProps.category?.toLowerCase() === "collectibles"}
                       <input
                         placeholder="Manufacturer"
@@ -939,7 +1015,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["other"]}
                       />
-                      {:else if cardProps.category?.toLowerCase() === "technology"}
+                    {:else if cardProps.category?.toLowerCase() === "technology"}
                       <input
                         placeholder="Size"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -961,6 +1037,7 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["unique_features"]}
                       />
+
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "bird" || cardProps.category?.toLowerCase() === "cat" || cardProps.category?.toLowerCase() === "dog" || cardProps.category?.toLowerCase() === "other animal"}
                       <input
@@ -981,7 +1058,7 @@
                     class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                     class:hidden={cardProps?.category?.toLowerCase() ===
                       "clothing" ||
-                      cardProps?.category?.toLowerCase() === "leather"  ||
+                      cardProps?.category?.toLowerCase() === "leather" ||
                       cardProps?.category?.toLowerCase() === "other"}
                   >
                     {#if cardProps.category?.toLowerCase() === "art"}
@@ -1016,6 +1093,17 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md select"
                         bind:justValue={cardProps["clarity"]}
                       />
+                      {:else if cardProps.category?.toLowerCase() === "vintage"}
+                      <input
+                        placeholder="Engraving"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["engraving"]}
+                      />
+                      <input
+                        placeholder="Trademarks"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["trademarks"]}
+                      />
                     {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                       <input
                         placeholder="Transmission"
@@ -1026,6 +1114,17 @@
                         placeholder="Engine"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["engine"]}
+                      />
+                      {:else if cardProps.category?.toLowerCase() === "watch"}
+                      <input
+                        placeholder="Strap/Bracelet"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["strap_bracelet"]}
+                      />
+                      <input
+                        placeholder="Engraving"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["engraving"]}
                       />
                     {:else if cardProps.category?.toLowerCase() === "collectibles"}
                       <input
@@ -1039,7 +1138,19 @@
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["wallet_address"]}
                       />
-                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === 'sneakers' || cardProps.category?.toLowerCase() === "technology" }
+                    {:else if cardProps.category?.toLowerCase() === "firearms" || cardProps.category?.toLowerCase() === "nft" || cardProps.category?.toLowerCase() === "sneakers" || cardProps.category?.toLowerCase() === "technology"}
+                      <input
+                        placeholder="Unique Features"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["other"]}
+                      />
+                      {:else if cardProps.category?.toLowerCase() === "trading cards"}
+                      <input
+                        type="date"
+                        placeholder="Release Date"
+                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                        bind:value={cardProps["year"]}
+                      />
                       <input
                         placeholder="Unique Features"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
@@ -1075,8 +1186,9 @@
                         cardProps.category?.toLowerCase() === "firearms" ||
                         cardProps.category?.toLowerCase() === "leather" ||
                         cardProps.category?.toLowerCase() === "sneakers" ||
-                        cardProps.category?.toLowerCase() === "technology"||
-                        cardProps?.category?.toLowerCase() === "other"}
+                        cardProps.category?.toLowerCase() === "technology" ||
+                        cardProps?.category?.toLowerCase() === "other" || 
+                        cardProps?.category?.toLowerCase() === "vintage"}
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
@@ -1099,6 +1211,18 @@
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                           bind:value={cardProps["laser_inscription"]}
                         />
+                        {:else if cardProps.category?.toLowerCase() === "watch"}
+                        <input
+                          placeholder="Unique features"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["other"]}
+                        />
+                        <input
+                          placeholder="Grading"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["grading"]}
+                        />
+
                       {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                         <input
                           placeholder="Exterior Color"
@@ -1122,12 +1246,14 @@
                       {/if}
                     </swiper-slide>
                   {/if}
-                  {#if cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
+                  {#if cardProps.category?.toLowerCase() === "watch" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                     <swiper-slide
                       class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                       class:hidden={cardProps.category.toLowerCase() ===
                         "clothing" ||
-                        cardProps.category.toLowerCase() === "leather"}
+                        cardProps.category.toLowerCase() === "leather"
+                        ||
+                        cardProps.category.toLowerCase() === "trading cards"}
                     >
                       {#if cardProps.category?.toLowerCase() === "jewelry"}
                         <input
@@ -1158,7 +1284,15 @@
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                           bind:value={cardProps["other"]}
                         />
+                        {:else if cardProps.category?.toLowerCase() === "watch"}
+                        <input
+                          placeholder="Valuation Report"
+                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          bind:value={cardProps["valuation_report"]}
+                        />
+                
                       {/if}
+                      
                     </swiper-slide>
                   {/if}
                   <swiper-slide
