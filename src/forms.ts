@@ -1306,8 +1306,8 @@ export let cryptoFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let nftFields:typeof template = {
   fieldsFront: [
@@ -1375,8 +1375,8 @@ export let nftFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackTwo: [''],
-  fieldsBackThree: [''],
+  fieldsBackTwo: [],
+  fieldsBackThree: [],
 };
 export let vintageFields:typeof template = {
   fieldsFront: [
