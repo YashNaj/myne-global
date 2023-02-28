@@ -85,7 +85,6 @@
               </div>
               <div class="card-field-value label py-0 flex ">
                 <textarea
-                  use:focusSlide
                   disabled
                   class="textarea bg-none w-full h-full"
                   placeholder="Description">{description}</textarea

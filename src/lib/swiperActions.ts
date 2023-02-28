@@ -12,7 +12,7 @@ export default function  focusSlide(node) {
    
     return {
 		destroy() {
-			inputEl.removeEventListener('focus', cardSwiperEl,  true);
+			inputEl.removeEventListener('focus');
 		}
 	};
 }
