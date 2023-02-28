@@ -3,6 +3,7 @@
   import CardCell from "$lib/components/CardCell.svelte";
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
   import Carousel from "$lib/components/Carousel.svelte";
+  import { onDestroy, onMount } from "svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
   import {
     template,
@@ -475,7 +476,7 @@
               <CardCellDescription {description} />
             </div>
             <swiper-container
-              class="mySwiper back-card_card-general-2 h-full w-full touch-none"
+              class="flippable-card-swiper back-card_card-general-2 h-full w-full touch-none"
               scrollbar-hide="false"
               grab-cursor="true"
             >
