@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CardSlider from './../CardSlider.svelte';
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
@@ -378,7 +379,6 @@
       (fieldsBackThreeValues = formFields?.fieldsBackThree);
   }
   $: flipped = flipped;
-
 </script>
 
 <div
@@ -480,104 +480,8 @@
             class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
             <div class="spacer w-full h-[50%]" />
-            <swiper-container
-              class="flippable-card-swiper back-card_card-general-2 h-[130%] w-full touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col"
-              pagination={true}
-              navigation={true}
-              
-            >
-              {#if fieldsBackOneValues?.length > 0}
-                <swiper-slide
-                  class="text-center bg-none flex justify-center content-center h-[90%] "
-                >
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each fieldsBackOneValues as fieldBackOne}
-                      <CardCell
-                        bind:value={cardProps[fieldBackOne.value]}
-                        gridClass={fieldBackOne.location}
-                        label={fieldBackOne.label}
-                        justifyCell={fieldBackOne.justify}
-                      />
-                    {/each}
-                  </div>
-                </swiper-slide>
-              {/if}
-              {#if fieldsBackTwoValues?.length > 0}
-                <swiper-slide
-                  class="text-center bg-none flex justify-center content-center h-[90%] "
-                >
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each fieldsBackTwoValues as fieldBackTwo}
-                      <CardCell
-                        bind:value={cardProps[fieldBackTwo.value]}
-                        gridClass={fieldBackTwo.location}
-                        label={fieldBackTwo.label}
-                        justifyCell={fieldBackTwo.justify}
-                      />
-                    {/each}
-                  </div>
-                </swiper-slide>
-              {/if}
-              {#if fieldsBackThreeValues?.length > 0}
-                <swiper-slide
-                  class="text-center bg-none flex justify-center content-center h-[90%] "
-                >
-                  <div class="w-full h-full back-card_card-fields p-2">
-                    {#each fieldsBackThreeValues as fieldBackThree}
-                      <CardCell
-                        bind:value={cardProps[fieldBackThree.value]}
-                        gridClass={fieldBackThree.location}
-                        label={fieldBackThree.label}
-                        justifyCell={fieldBackThree.justify}
-                      />
-                    {/each}
-                  </div>
-                </swiper-slide>
-              {/if}
-              <swiper-slide
-              class="text-center bg-none flex justify-center content-center h-[90%] "
-            >
-              <CardCellDescription {description} />
-            </swiper-slide>
-              <swiper-slide
-                class="text-center bg-none flex justify-center content-center h-[90%] "
-              >
-                <div class="w-full h-full back-card_card-fields p-2">
-                  {#each generalFieldsBack as generalFields}
-                    <CardCell
-                      bind:value={cardProps[generalFields.value]}
-                      gridClass={generalFields.location}
-                      label={generalFields.label}
-                      justifyCell={generalFields.justify}
-                    />
-                  {/each}
-                </div>
-              </swiper-slide>
-              <button
-              class="flippable-previous btn btn-ghost normal-case w-[90%] h-full p-2 touch-none  flex-nowrap"
-            >
-              <Icon
-                size="24px"
-                class="opacity-60 cursor-pointer  text-black ml-[1rem]"
-                src={ArrowLeft}
-                on:click={() => (expand = !expand)}
-              />
-              <p class="w-full flex-3">Previous</p>
-            </button>
-            <button
-              class="flippable-next btn btn-ghost  normal-case w-[90%] h-full p-2 touch-none flex-nowrap"
-              ><p class="w-full flex-3">Next</p>
-              <Icon
-                size="24px"
-                class="opacity-60 cursor-pointer  text-black ml-[1rem]"
-                src={ArrowRight}
-                on:click={() => (expand = !expand)}
-              /></button
-            >
-            </swiper-container>
-
+            <CardSlider {cardProps} {fieldsBackOneValues} {description} {generalFieldsBack} />
             <div class="card-buttons_back back-card_general-3 mt-2">
-       
               <CardButtonWidget expand />
             </div>
           </div>
@@ -591,7 +495,7 @@
   .no-display {
     display: none;
   }
-  .swiper-pagination{ 
+  .swiper-pagination {
     top: 40px;
   }
   .flip-card-inner {

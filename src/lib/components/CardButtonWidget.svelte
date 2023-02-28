@@ -32,30 +32,8 @@
 </script>
 
 <div
-  class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-3 gap-[4px] place-items-center"
+  class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center"
 >
-  <button
-    class="flippable-previous btn btn-ghost normal-case w-[90%] h-full p-2 touch-none  flex-nowrap"
-  >
-    <Icon
-      size="24px"
-      class="opacity-60 cursor-pointer  text-black ml-[1rem]"
-      src={ArrowLeft}
-      on:click={() => (expand = !expand)}
-    />
-    <p class="w-full flex-3">Previous</p>
-  </button>
-  <button
-    class="flippable-next btn btn-ghost  normal-case w-[90%] h-full p-2 touch-none flex-nowrap"
-    ><p class="w-full flex-3">Next</p>
-    <Icon
-      size="24px"
-      class="opacity-60 cursor-pointer  text-black ml-[1rem]"
-      src={ArrowRight}
-      on:click={() => (expand = !expand)}
-    /></button
-  >
-
   <button class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
     <Icon
       src={SwitchHorizontal}
@@ -71,7 +49,6 @@
       Certificate
     </p>
     <Icon src={Star} color="gold" class="opacity-90" size="30px" />
-
   </button>
   <button
     class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
@@ -87,6 +64,5 @@
   <button class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2">
     <p class="flex text-xs w-full justify-center text-green-900">Document</p>
     <Icon src={DocumentText} color="green" class="opacity-90" size="30px" />
-
   </button>
 </div>
