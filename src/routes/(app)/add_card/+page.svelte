@@ -1363,7 +1363,7 @@
                         placeholder="Purchased from"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here"
                         bind:value={cardProps["purchasedFrom"]}
-                        use:focusSlide
+                        use:focusBackTwo
                         on:focus={() => {
                           flipped = true;
                         }}

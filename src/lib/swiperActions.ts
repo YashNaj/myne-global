@@ -9,7 +9,12 @@ export default function  focusSlide(node) {
     inputEl.addEventListener("focus", () => {
         cardSwiperEl?.swiper.slideTo(activeIndex + 1);
       });
+   
     return {
+        update() {
+            const inputEl = node
+            const activeIndex = cardSwiperEl.swiper.activeIndex
+        },
 		destroy() {
 			document.removeEventListener('focus', cardSwiperEl, true);
 		}
