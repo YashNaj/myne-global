@@ -4,7 +4,13 @@
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
   import Carousel from "$lib/components/Carousel.svelte";
   import { onDestroy, onMount } from "svelte";
-  import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
+  import {
+    Icon,
+    ArrowCircleLeft,
+    ArrowsExpand,
+    ArrowLeft,
+    ArrowRight,
+  } from "svelte-hero-icons";
   import {
     template,
     generalFieldsBack,
@@ -101,7 +107,7 @@
   export let date: string | boolean | null | bigint;
   export let dial: string | boolean | null | bigint;
   export let distinguishing_features: string | boolean | null | bigint;
-  export let document: string | boolean | null | bigint;
+  export let document_array: string | boolean | null | bigint;
   export let drivetrain: string | boolean | null | bigint;
   export let engine: string | boolean | null | bigint;
   export let engraving: string | boolean | null | bigint;
@@ -189,7 +195,7 @@
     date,
     dial,
     distinguishing_features,
-    document,
+    document_array,
     drivetrain,
     engine,
     engraving,
@@ -235,7 +241,7 @@
     year,
     marketPrice,
     wallet,
-    gender, 
+    gender,
   };
 
   let currency;
@@ -276,7 +282,7 @@
   $: date = cardProps.date;
   $: dial = cardProps.dial;
   $: distinguishing_features = cardProps.distinguishing_features;
-  $: document = cardProps.document;
+  $: document_array = cardProps.document;
   $: drivetrain = cardProps.drivetrain;
   $: engine = cardProps.engine;
   $: engraving = cardProps.engraving;
@@ -371,7 +377,8 @@
       (fieldsBackTwoValues = formFields?.fieldsBackTwo),
       (fieldsBackThreeValues = formFields?.fieldsBackThree);
   }
-  $:flipped = flipped 
+  $: flipped = flipped;
+
 </script>
 
 <div
@@ -472,17 +479,16 @@
           <div
             class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
-            <div class="description back-card_general-1">
-              <CardCellDescription {description} />
-            </div>
+            <div class="spacer w-full h-[50%]" />
             <swiper-container
-              class="flippable-card-swiper back-card_card-general-2 h-full w-full touch-none"
-              scrollbar-hide="false"
-              grab-cursor="true"
+              class="flippable-card-swiper back-card_card-general-2 h-[130%] w-full touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col"
+              pagination={true}
+              navigation={true}
+              
             >
               {#if fieldsBackOneValues?.length > 0}
                 <swiper-slide
-                  class="text-center bg-none flex justify-center content-center "
+                  class="text-center bg-none flex justify-center content-center h-[90%] "
                 >
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each fieldsBackOneValues as fieldBackOne}
@@ -498,7 +504,7 @@
               {/if}
               {#if fieldsBackTwoValues?.length > 0}
                 <swiper-slide
-                  class="text-center bg-none flex justify-center content-center "
+                  class="text-center bg-none flex justify-center content-center h-[90%] "
                 >
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each fieldsBackTwoValues as fieldBackTwo}
@@ -512,9 +518,9 @@
                   </div>
                 </swiper-slide>
               {/if}
-              {#if fieldsBackThreeValues?.length > 1}
+              {#if fieldsBackThreeValues?.length > 0}
                 <swiper-slide
-                  class="text-center bg-none flex justify-center content-center "
+                  class="text-center bg-none flex justify-center content-center h-[90%] "
                 >
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each fieldsBackThreeValues as fieldBackThree}
@@ -529,7 +535,12 @@
                 </swiper-slide>
               {/if}
               <swiper-slide
-                class="text-center bg-none flex justify-center content-center "
+              class="text-center bg-none flex justify-center content-center h-[90%] "
+            >
+              <CardCellDescription {description} />
+            </swiper-slide>
+              <swiper-slide
+                class="text-center bg-none flex justify-center content-center h-[90%] "
               >
                 <div class="w-full h-full back-card_card-fields p-2">
                   {#each generalFieldsBack as generalFields}
@@ -542,9 +553,32 @@
                   {/each}
                 </div>
               </swiper-slide>
+              <button
+              class="flippable-previous btn btn-ghost normal-case w-[90%] h-full p-2 touch-none  flex-nowrap"
+            >
+              <Icon
+                size="24px"
+                class="opacity-60 cursor-pointer  text-black ml-[1rem]"
+                src={ArrowLeft}
+                on:click={() => (expand = !expand)}
+              />
+              <p class="w-full flex-3">Previous</p>
+            </button>
+            <button
+              class="flippable-next btn btn-ghost  normal-case w-[90%] h-full p-2 touch-none flex-nowrap"
+              ><p class="w-full flex-3">Next</p>
+              <Icon
+                size="24px"
+                class="opacity-60 cursor-pointer  text-black ml-[1rem]"
+                src={ArrowRight}
+                on:click={() => (expand = !expand)}
+              /></button
+            >
             </swiper-container>
+
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget />
+       
+              <CardButtonWidget expand />
             </div>
           </div>
         </div>
@@ -557,7 +591,9 @@
   .no-display {
     display: none;
   }
-
+  .swiper-pagination{ 
+    top: 40px;
+  }
   .flip-card-inner {
     position: relative;
     width: 100%;
@@ -717,7 +753,7 @@
   .back-card_general-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr auto;
+    grid-template-rows: 1fr 5fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }

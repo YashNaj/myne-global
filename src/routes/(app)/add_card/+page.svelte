@@ -61,7 +61,6 @@
   let floatingConfig = {
     strategy: "bottom",
   };
-  export let slideIndex = 1;
   onMount(() => {
     const dateInput = document.getElementById("date");
     console.log("🚀 ~ file: +page.svelte:65 ~ onMount ~ dateInput:", dateInput);
@@ -388,7 +387,7 @@
 
 <PageContainer>
   <div
-    class="w-full mg:h-[90%] h-full flex flex-col pt-4 justify-start  relative  "
+    class=" h-full  relative  "
   >
     <h1 class="flex text-primary font-bold text-3xl pl-3">
       Add A Card | Enter Card Info
@@ -398,7 +397,7 @@
         class=" w-full flex flex-col justify-center px-2 pb-4 h-[90%] content-center  relative rounded-lg "
       >
         <div
-          class="flex justify-center w-full pt-10 content-center relative h-80 "
+          class="flex justify-center w-full content-center relative h-80 "
         >
           <div
             class="card-sizer w-[80%] flex absolute top-[4rem] justify-center"
@@ -424,9 +423,10 @@
                 placeholder="categroy"
                 bind:value={cardProps["category"]}
               />
-              <div class="flex flex-col w-40 h-80">
+              <div class=" hidden w-40 h-80">
                 {#each addCardInputs as hiddenInput}
                   <input
+                  hidden
                     name={hiddenInput}
                     id={hiddenInput}
                     placeholder={hiddenInput}
@@ -454,9 +454,11 @@
                   class="form-slider w-full h-full grid grid-cols-1 grid-rows-[3fr_1fr"
                 >
                   <swiper-container
+                  
                     allow-touch-move="false"
                     no-sliding={true}
-                    class="w-full h-full swiper-container touch-none"
+                    class="w-full h-full swiper-container touch-none mt-2"
+                    pagination = {true}
                   >
                     <swiper-slide class="slide-0 w-full h-full    p-3">
                       <div class="w-full h-full place-items-center">
@@ -531,10 +533,7 @@
                             bind:value={cardProps["brand"]}
                           />
                         {:else}
-                          <div
-                            class="w-full h-full"
-                            use:focusSlide={(slideIndex = 1)}
-                          >
+              
                             <Select
                               placeholder="Brand"
                               class="select text-black w-full mt-2 "
@@ -546,7 +545,6 @@
                               }}
                               bind:justValue={cardProps["brand"]}
                             />
-                          </div>
                         {/if}
                         {#if cardProps.category?.toLowerCase() === "nft"}
                           <input
