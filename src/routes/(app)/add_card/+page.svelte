@@ -1046,7 +1046,7 @@
                         />
                         <input
                           placeholder="Unique features"
-                          class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                          class=" text-black text-[16px] font-semibold w-full mHt-2 input input-md"
                           bind:value={cardProps["other"]}
                         />
                       {:else if cardProps.category?.toLowerCase() === "technology"}
@@ -1077,7 +1077,6 @@
                           placeholder="Height "
                           class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                           bind:value={cardProps["height"]}
-                          on:focus={() => setFlip()}
                         />
                         <input
                           placeholder="Gender"
@@ -1351,6 +1350,7 @@
                         placeholder="Description"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["description"]}
+                        use:focusSlide
                       />
                     </swiper-slide>
 
@@ -1361,7 +1361,7 @@
                         placeholder="Purchased from"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here"
                         bind:value={cardProps["purchasedFrom"]}
-                        use:focusBackTwo
+                        use:focusSlide
                         on:focus={() => {
                           flipped = true;
                         }}

@@ -547,7 +547,7 @@ export let jewelryFields: typeof template = {
       justify: "hidden",
     },
   ],
-  fieldsBackThree: [''],
+  fieldsBackThree: [],
 };
 
 export let watchFields: typeof template = {
@@ -647,7 +647,7 @@ export let watchFields: typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree: [''],
+  fieldsBackThree: [],
 };
 export let artFields:typeof template = {
   fieldsFront: [
@@ -802,7 +802,7 @@ export let leatherFields:typeof template = {
       justify: "justify-end",
     },
   ],
-  fieldsBackThree: [''],
+  fieldsBackThree: [],
 };
 export let clothingFields:typeof template = {
   fieldsFront: [
@@ -1567,7 +1567,7 @@ export let autoFields:typeof template = {
       justify: "justify-start",
     },
   ],
-  fieldsBackThree: [''],
+  fieldsBackThree: [],
 };
 export let motoFields:typeof template = {
   fieldsFront: [

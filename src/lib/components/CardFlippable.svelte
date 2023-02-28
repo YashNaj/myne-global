@@ -525,7 +525,7 @@
                   <div class="w-full h-full back-card_card-fields p-2">
                     {#each fieldsBackThreeValues as fieldBackThree}
                       <CardCell
-                        bind:value={fieldBackThree.value}
+                        bind:value={cardProps[fieldBackThree.value]}
                         gridClass={fieldBackThree.location}
                         label={fieldBackThree.label}
                         justifyCell={fieldBackThree.justify}

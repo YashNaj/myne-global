@@ -12,11 +12,16 @@ export default function  focusSlide(node) {
    
     return {
         update() {
+            inputEl.removeEventListener('focus', true);
             const inputEl = node
             const activeIndex = cardSwiperEl.swiper.activeIndex
+            inputEl.addEventListener("focus", () => {
+                cardSwiperEl?.swiper.slideTo(activeIndex + 1);
+              });
+        
         },
 		destroy() {
-			document.removeEventListener('focus', cardSwiperEl, true);
+			inputEl.removeEventListener('focus', true);
 		}
 	};
 }
