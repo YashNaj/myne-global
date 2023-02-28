@@ -480,7 +480,7 @@
             class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
             <div class="spacer w-full h-[50%]" />
-            <CardSlider {cardProps} {fieldsBackOneValues} {description} {generalFieldsBack} />
+            <CardSlider {cardProps} {fieldsBackOneValues} {fieldsBackTwoValues} {fieldsBackThreeValues} {description} {generalFieldsBack} />
             <div class="card-buttons_back back-card_general-3 mt-2">
               <CardButtonWidget expand />
             </div>

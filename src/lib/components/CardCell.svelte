@@ -28,11 +28,15 @@
   // $: value = capitalizeFirstLetters(value)
   let duration = 150;
   let delay = 150;
+  let textAlign; 
+  $: if (justifyCell === 'justify-start') { textAlign = "text-left"}
+  $: if (justifyCell === 'justify-end') { textAlign = "text-right"}
+
 </script>
 
 <div
   {id}
-  class="w-auto h-full flex flex-col flex-wrap content-start justify-start relative"
+  class=" h-full flex flex-col flex-wrap content-start justify-start relative"
 >
   <div
     class="w-full h-full flex flex-col flex-wrap{justifyCell}"
@@ -51,7 +55,7 @@
       <div in:slide={{ duration, delay }} out:slide={{ duration, delay }}>
         <label
           for="cell-value"
-          class="card-field-value label py-0 flex text-md {justifyCell}"
+          class="card-field-value h-full label w-full py-0 flex text-md overflow-x-clip {textAlign} {justifyCell}"
         >
           {#if value !== null}
             {value}

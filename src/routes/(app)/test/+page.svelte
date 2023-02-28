@@ -26,5 +26,4 @@ import ChildId from "$lib/components/ChildId.svelte";
 </script>
 <div class = 'w-full h-full grid place-items-center relative'>
 
-<CardFlippable/>
 </div>

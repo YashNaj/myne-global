@@ -6,29 +6,7 @@
     ShieldExclamation,
     SwitchHorizontal,
     Star,
-    ArrowLeft,
-    ArrowRight,
   } from "svelte-hero-icons";
-  export let expand = false;
-  onMount(() => {
-    const cardSwiperEl = document?.querySelector(".flippable-card-swiper");
-    const nextEl = document?.querySelector(".flippable-next");
-    const previousEl = document?.querySelector(".flippable-previous");
-
-    console.log(
-      "🚀 ~ file: +page.svelte:14 ~ onMount ~ previousEl:",
-      previousEl
-    );
-    console.log("🚀 ~ file: +page.svelte:11 ~ onMount ~ nextEl:", nextEl);
-    console.log(cardSwiperEl);
-
-    nextEl?.addEventListener("click", () => {
-      cardSwiperEl?.swiper.slideNext();
-    });
-    previousEl?.addEventListener("click", () => {
-      cardSwiperEl?.swiper.slidePrev();
-    });
-  });
 </script>
 
 <div
