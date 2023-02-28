@@ -133,14 +133,14 @@ model MyneCard {
   url                      String?
   valuation_report         String?
   vin                      String?
-  wallet_address                   String?
+  wallet_address           String?
   weight                   String?
   year                     String?
   cut_shape                String?
   carat_weight             String?
   gender                   String?
-  marketPrice String? @default("No market data yet")
-  Profile     Profile @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  marketPrice              String?   @default("No market data yet")
+  Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@map("myneCard")
 }
