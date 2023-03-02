@@ -1,3 +1,3 @@
-<div class = 'w-full h-[96vh] gird grid-cols-1 grid-rows-1 place-items-center flex-wrap '>
+<div class = 'w-full h-auto min-h-[92vh] flex flex-col flex-wrap justify-start content-start md:flex-row '>
   <slot/>
-</div>Slide 1
+</div>

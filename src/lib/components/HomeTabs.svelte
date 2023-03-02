@@ -56,7 +56,6 @@
             {#if content != "Card Vault"}
               <DesktopWidget title={content} />
             {:else}
-
               <CardVault myneCards = {myneCards} />
               {/if}
           </TabPanel>

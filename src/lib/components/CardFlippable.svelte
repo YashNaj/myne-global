@@ -37,6 +37,7 @@
     otherAnimalFields,
     childIdFields,
   } from "../../forms";
+  import UploadWidget from './UploadWidget.svelte';
 
   // formFields init
   let formFieldsObject = {
@@ -71,7 +72,7 @@
       | string
       | null;
   }
-
+  export let pictureUrls; 
   // card external control values
   export let expand = false;
   export let flipped = false;
@@ -154,7 +155,7 @@
 
   export let weight: string | boolean | null | bigint;
   export let year: string | boolean | null | bigint;
-  export let pictures: string | boolean | null | bigint;
+  export let pictures: string [] |string|  boolean | null | bigint;
   export let marketPrice: string | boolean | null | bigint;
   export let isStolen: string | boolean | null | bigint;
   export let isHeirloom: string | boolean | null | bigint;
@@ -427,7 +428,7 @@
 
           <div class="front-top rounded-t-2xl {pickedColor} ">
             <div class="w-full h-full px-2 py-3">
-              <Carousel />
+              <slot/>
             </div>
           </div>
 
@@ -482,7 +483,7 @@
             <div class="spacer w-full h-[50%]" />
             <CardSlider {cardProps} {fieldsBackOneValues} {fieldsBackTwoValues} {fieldsBackThreeValues} {description} {generalFieldsBack} />
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget expand />
+              <CardButtonWidget  />
             </div>
           </div>
         </div>
@@ -544,7 +545,7 @@
   }
   .whole-card {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, 
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
   .sendCard {
@@ -660,15 +661,6 @@
     grid-template-rows: 1fr 5fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-  }
-  .back-card_general-1 {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  .back-card_general-2 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .back-card_general-3 {
-    grid-area: 3 / 1 / 4 / 2;
   }
   .back-card_card-fields {
     display: grid;

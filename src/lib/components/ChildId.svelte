@@ -427,16 +427,6 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-
-  .back-card_general-1 {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  .back-card_general-2 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .back-card_general-3 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
   .back-card_card-fields {
     display: grid;
     grid-template-columns: repeat(2, auto);
