@@ -391,31 +391,33 @@
 </script>
 
 <PageContainer>
-  <div
-    class=" h-full  relative  "
+  <div class = 'w-full h-[95vh] flex-col justify-center content-center flex-wrap'>
+    <div
+    class=" h-full"
   >
-    <h1 class="flex text-primary font-bold text-3xl pl-3">
+    <h1 class="flex text-primary font-bold text-3xl pl-3 pt-3">
       Add A Card | Enter Card Info
     </h1>
     <div class="w-full h-full absolute " transition:slide>
       <div
-        class=" w-full flex flex-col justify-center px-2 pb-4 h-[90%] content-center  relative rounded-lg "
+        class=" w-full flex flex-col md:justify-center justify-start  px-2 pb-4 h-[90%] content-center  relative rounded-lg "
       >
         <div
-          class="flex justify-center w-full content-center relative h-80 "
+          class="flex justify-center w-full content-center h-80 "
         >
           <div
-            class="card-sizer w-[80%] flex absolute top-[4rem] justify-center"
+            class="card-sizer w-[66%] flex  top-[4rem] justify-center"
           >
-            <CardFlippable {flipped} {cardProps} {pictures}>
-              <UploadWidget bind:pictures={pictures}/>
-            </CardFlippable>
+          <CardFlippable {flipped} {cardProps} {pictures}>
+            <UploadWidget bind:pictures={pictures}/>
+          </CardFlippable>
           </div>
+         
         </div>
-        <div class="flex w-full justify-center">
+        <div class = 'w-full flex justify-center'>
           <form
             method="POST"
-            class="h-[30rem] form-gradient w-full p-4 pt-[15rem] flex  justify-between  md:w-[30rem] lg:w-[40rem] form-container text-white 
+            class="md:h-[25rem] h-[20rem] form-gradient w-full p-4 pt-[2rem] flex  justify-between  md:w-[30rem] lg:w-[40rem] form-container text-white 
                         bg-gradient-to-b from-[#002d72] to-[#a3c7fa] rounded-2xl 
                         [box-shadow:rgba(0,_0,_0,_0.09)_0px_2px_1px,_rgba(0,_0,_0,_0.09)_0px_4px_2px,_rgba(0,_0,_0,_0.09)_0px_8px_4px,_rgba(0,_0,_0,_0.09)_0px_16px_8px,_rgba(0,_0,_0,_0.09)_0px_32px_16px;]"
             use:enhance
@@ -464,11 +466,11 @@
                   
                     allow-touch-move="false"
                     no-sliding={true}
-                    class="w-full h-full swiper-container touch-none mt-2"
+                    class="w-full h-30 swiper-container touch-none mt-2"
                     pagination = {true}
                   >
-                    <swiper-slide class="slide-0 w-full h-full    p-3">
-                      <div class="w-full h-full place-items-center">
+                    <swiper-slide class="slide-0 w-full h-8 p-3 grid place-items-center">
+                      <div class="w-full  place-items-center">
                         <div>
                           <Select
                             {floatingConfig}
@@ -519,7 +521,7 @@
                     </swiper-slide>
 
                     <swiper-slide
-                      class="slide-1 w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                      class="slide-1 w-full h-full gird grid-row-[1fr_1fr] p-3"
                     >
                       {#if cardProps.category?.toLowerCase() === "art"}
                         <input
@@ -1279,7 +1281,7 @@
                           {:else}
                             <input
                               placeholder="Exterior color"
-                              class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                            class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                               bind:value={cardProps["exterior_color"]}
                               use:focusSlide
                             />
@@ -1414,10 +1416,13 @@
               </div>
             </div>
           </form>
+
         </div>
       </div>
     </div>
   </div>
+  </div>
+
 </PageContainer>
 
 {#if success === true}

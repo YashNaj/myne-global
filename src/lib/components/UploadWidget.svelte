@@ -78,7 +78,7 @@
     {#each pictures as picture, i}
     <div class = 'carousel-item  w-full h-full ' id ={`item-${i}`}>
       {#if picture}
-        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'object-contain bg-black bg-opacity-40' />
+        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'object-fill bg-black bg-opacity' />
       {:else}
         <div class="no-image" style="width: 100%; height: 100%;" />
       {/if}
