@@ -28,7 +28,6 @@
   import { Icon, Plus, CloudUpload, Minus } from "svelte-hero-icons";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import { firstCapital } from "$lib/caps";
-  import logo from "$lib/images/myne_logo_512.png";
   import { category } from "../../../cardProps";
   import GenerateImportCsv from "$lib/components/GenerateImportCSV.svelte";
   export let data: PageData;

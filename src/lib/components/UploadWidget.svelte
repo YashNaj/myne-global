@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { supabase } from '$lib/supabaseClient';
+  import { CloudUpload, Icon } from 'svelte-hero-icons';
+  import Spinner from './Spinner.svelte';
 
   export let size = 10;
 
@@ -72,7 +74,7 @@
   }
 </script>
 
-  <div class="rounded-2xl w-64 h-64 carousel">
+  <div class="rounded-2xl carousel">
     {#each pictures as picture}
     <div class = 'carousel-item bg-primary w-full'>
       {#if picture}
@@ -82,10 +84,15 @@
       {/if}
     </div>
     {/each}
-  <div class = 'carousel-item'>
+  <div class = 'carousel-item w-full h-full'>
     <div class = 'w-full h-full gird place-items-center'>
-      <label class="button primary block" for="single">
-        {uploading ? 'Uploading ...' : 'Upload'}
+      <label class="w-full h-full  bg-primary opacity-10 btn btn-ghost normal-case flex-nowrap" for="single">
+        {#if uploading}
+        <Spinner/>
+        {:else}
+          <Icon src={CloudUpload} color = 'white' size = '24px'/> 
+          Upload a picture
+        {/if}
       </label>
       <input
         style="visibility: hidden; position:absolute;"
