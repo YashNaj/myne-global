@@ -57,6 +57,8 @@
   import NextButton from "$lib/components/NextButton.svelte";
   import { firstCapital } from "$lib/caps";
   import PageContainer from "$lib/components/PageContainer.svelte";
+  import UploadWidget from "$lib/components/UploadWidget.svelte";
+  import Carousel from "$lib/components/Carousel.svelte";
 
   let floatingConfig = {
     strategy: "bottom",
@@ -148,7 +150,7 @@
   //initialize the category and subcategory fields
   export let isStolen = "";
   export let isHeirloom = "";
-  export let pictures = "";
+  export let pictures =  [];
   export let category = "";
   export let subcategory = "";
   export let brand = "";
@@ -302,7 +304,6 @@
   let addCardInputs: string[] = [];
   $: addCardInputs =
     fieldPropsObject[selectedCategory?.name as unknown as string];
-  $: console.log("🚀 ~ file: +page.svelte:312 ~ addCardInputs:", addCardInputs);
   $: cardProps.category = category;
   $: cardProps = { ...cardProps };
 
@@ -377,12 +378,16 @@
       success: false,
     };
   }
+  
   success = false;
   $: success = form?.success;
   $: console.log(form);
   if (success === true) {
     resetValues();
   }
+  $: pictures = pictures
+  $:console.log("🚀 ~ file: +page.svelte:388 ~ pictures:", pictures)
+  
 </script>
 
 <PageContainer>
@@ -402,7 +407,9 @@
           <div
             class="card-sizer w-[80%] flex absolute top-[4rem] justify-center"
           >
-            <CardFlippable {flipped} {cardProps} />
+            <CardFlippable {flipped} {cardProps} {pictures}>
+              <Carousel {flipped} bind:pictures={pictures}/>
+            </CardFlippable>
           </div>
         </div>
         <div class="flex w-full justify-center">

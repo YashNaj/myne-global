@@ -93,7 +93,6 @@ export let leatherProps = [
   "invoice",
   "cOfAuth",
   "valuation_report",
-
   "other",
 ];
 export let clothingProps = [
@@ -133,7 +132,6 @@ export let sneakerProps = [
   "invoice",
   "cOfAuth",
   "valuation_report",
-
   "year",
 ];
 export let firearmsProps = [

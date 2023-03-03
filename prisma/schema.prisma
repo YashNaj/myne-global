@@ -102,8 +102,8 @@ model MyneCard {
   interior_color           String?
   invoice                  String?
   isHeirloom               Boolean   @default(false)
-  laser_inscription        String?
-  manufacturer             String?
+  laser_inscription        String?//laser_marking
+  manufacturer             String?//condition
   material                 String?
   microchip                String?
   mileage                  String?
@@ -117,7 +117,7 @@ model MyneCard {
   release_date             String?
   serial                   String?
   serie                    String?
-  series                   String?
+  series                   String? //deletion
   shape                    String?
   smart_contract_address   String?
   smart_contract_id        String?
@@ -126,8 +126,8 @@ model MyneCard {
   strap_bracelet           String?
   subcategory              String?
   tattoo                   String?
-  trademarks               String?
-  transaction              String?
+  trademarks               String?//marks
+  transaction              String?//transaction_id
   transmission             String?
   unique_features          String?
   url                      String?

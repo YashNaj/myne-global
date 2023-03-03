@@ -22,16 +22,16 @@
   let nextElClass = "flippable-next";
   let prevElClass = "flippable-prev";
   $: if (cardProps.id !== undefined) {
-   swiperId = ".flippable-card-swiper-" + cardProps.id;
-   swiperPagination = ".swiper-pagination-flip-card" + cardProps.id;
-   nextEl = ".flippable-next-" + cardProps.id;
-   prevEl = ".flippable-prev-" + cardProps.id;
-   swiperIdClass = "flippable-card-swiper-" + cardProps.id;
-   swiperPaginationClass = "swiper-pagination-flipcard-" + cardProps.id;
-   nextElClass = "flippable-next-" + cardProps.id;
-   prevElClass = "flippable-prev-" + cardProps.id;
+    swiperId = ".flippable-card-swiper-" + cardProps.id;
+    swiperPagination = ".swiper-pagination-flip-card" + cardProps.id;
+    nextEl = ".flippable-next-" + cardProps.id;
+    prevEl = ".flippable-prev-" + cardProps.id;
+    swiperIdClass = "flippable-card-swiper-" + cardProps.id;
+    swiperPaginationClass = "swiper-pagination-flipcard-" + cardProps.id;
+    nextElClass = "flippable-next-" + cardProps.id;
+    prevElClass = "flippable-prev-" + cardProps.id;
   }
- 
+
   let mySwiper;
   onMount(() => {
     mySwiper = new Swiper(swiperId, {
@@ -134,7 +134,7 @@
           {/each}
         </div>
       </div>
-      <div class = '{swiperPaginationClass}'/>
+      <div class={swiperPaginationClass} />
     </div>
   </div>
   <button

@@ -1775,7 +1775,7 @@ export let dogFields:typeof template = {
       justify: "justify-end",
     },
     {
-      label: "Body length length",
+      label: "Body Length",
       location: "bottom_left",
       value: "body_length",
       justify: "justify-start",
