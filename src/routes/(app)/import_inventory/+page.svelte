@@ -159,7 +159,7 @@
       >
         {#if !guideOpen}
           <p transition:fade={{ duration: 75 }} class="my-2 text-sm">
-            Select a Category for specific information, or expand the guide for454 nhbbbbbbbbbbbbbbbbbbbbbbbhbnhnbbbbbbbbbbbbbbbbbbgv
+            Select a Category for specific information, or expand the guide for more information.
           </p>
         {/if}
         <div class = 'flex justify-center md:justify-start'>

@@ -408,7 +408,7 @@
             class="card-sizer w-[80%] flex absolute top-[4rem] justify-center"
           >
             <CardFlippable {flipped} {cardProps} {pictures}>
-              <Carousel {flipped} bind:pictures={pictures}/>
+              <UploadWidget bind:pictures={pictures}/>
             </CardFlippable>
           </div>
         </div>

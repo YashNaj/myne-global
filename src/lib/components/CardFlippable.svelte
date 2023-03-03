@@ -428,7 +428,7 @@
 
           <div class="front-top rounded-t-2xl {pickedColor} ">
             <div class="w-full h-full px-2 py-3">
-              <slot/>
+              <UploadWidget/>
             </div>
           </div>
 

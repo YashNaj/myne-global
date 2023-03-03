@@ -74,19 +74,19 @@
   }
 </script>
 
-  <div class="rounded-2xl carousel">
-    {#each pictures as picture}
-    <div class = 'carousel-item bg-primary w-full'>
+  <div class="rounded-box carousel w-full h-full cursor-pointer">
+    {#each pictures as picture, i}
+    <div class = 'carousel-item  w-full h-full ' id ={`item-${i}`}>
       {#if picture}
-        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'max-w-full h-full' />
+        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'object-contain bg-black bg-opacity-40' />
       {:else}
         <div class="no-image" style="width: 100%; height: 100%;" />
       {/if}
     </div>
     {/each}
-  <div class = 'carousel-item w-full h-full'>
+  <div class = 'carousel-item w-full h-full rounded-box'>
     <div class = 'w-full h-full gird place-items-center'>
-      <label class="w-full h-full  bg-primary opacity-10 btn btn-ghost normal-case flex-nowrap" for="single">
+      <label class="w-full h-full text-white bg-black bg-opacity-40 btn btn-ghost bg-200 normal-case flex-nowrap" for="single">
         {#if uploading}
         <Spinner/>
         {:else}
