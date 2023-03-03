@@ -8,6 +8,5 @@ import PageContainer from "$lib/components/PageContainer.svelte";
 </script>
 
 <PageContainer>
-
 <CardFlippable/>
 </PageContainer>

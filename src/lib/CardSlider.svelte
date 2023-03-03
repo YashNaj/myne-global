@@ -161,12 +161,3 @@
   >
 </div>
 
-<style lange="postcss">
-  .grid grid-cols-2 grid-rows-3 gap-0 {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  }
-</style>

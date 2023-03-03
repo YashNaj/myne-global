@@ -78,7 +78,7 @@ export let vin : string | undefined= "";
 export let wallet : string | undefined= "";
 export let weight : string | undefined= "";
 export let year: string | undefined = "";
-export let pictures: string | undefined = "";
+export let pictures: string | string[]|  undefined;
 export let marketPrice : string | undefined= "";
 export let isStolen: string | undefined = "";
 export let isHeirloom : string | undefined= "";
