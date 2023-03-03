@@ -1,114 +1,102 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-  import { supabase } from '$lib/supabaseClient'
+  import { createEventDispatcher } from 'svelte';
+  import { supabase } from '$lib/supabaseClient';
 
-  export let size = 10
-  export let url: string
+  export let size = 10;
 
-  let avatarUrl: string | null = null
-  let uploading = false
-  let files: FileList
+  let pictures: string[] = [];
+  let uploading = false;
+  let files: FileList;
+  let uploadButton: HTMLInputElement;
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 
   const downloadImage = async (path: string) => {
     try {
-      console.log(path)
-      const { data, error } = await supabase.storage.from('avatars').download(path)
-      console.log(data)
+      const { data, error } = await supabase.storage.from('card-images').download(path);
       if (error) {
-        throw error
+        throw error;
       }
 
-      const url = URL.createObjectURL(data)
-      avatarUrl = url
+      const url = URL.createObjectURL(data);
+      return url;
     } catch (error) {
       if (error instanceof Error) {
-        console.log('Error downloading image: ', error.message)
+        console.log('Error downloading image: ', error.message);
       }
     }
-  }
+  };
 
-  const uploadAvatar = async () => {
+  const uploadCardPicture = async () => {
     try {
-      uploading = true
+      uploading = true;
 
       if (!files || files.length === 0) {
-        throw new Error('You must select an image to upload.')
+        throw new Error('You must select an image to upload.');
       }
 
-      const file = files[0]
-      const fileExt = file.name.split('.').pop()
-      const filePath = `${Math.random()}.${fileExt}`
+      if (pictures.length >= 10) {
+        throw new Error('You cannot upload more than 10 pictures.');
+      }
 
-      let { error } = await supabase.storage.from('avatars').upload(filePath, file)
+      const file = files[0];
+      const fileExt = file.name.split('.').pop();
+      const filePath = `${Math.random()}.${fileExt}`;
+
+      let { error } = await supabase.storage.from('card-images').upload(filePath, file);
 
       if (error) {
-        throw error
+        throw error;
       }
 
-      url = filePath
-      dispatch('upload')
+      pictures = [...pictures, filePath];
+      dispatch('picturesuploaded', pictures);
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message)
+        alert(error.message);
       }
     } finally {
-      uploading = false
+      uploading = false;
+      files = null;
+      uploadButton.value = '';
+    }
+  };
+
+  $: {
+    for (const picture of pictures) {
+      downloadImage(picture).then((url) => {
+        const imgElement = document.getElementById(`img-${picture}`);
+        imgElement.setAttribute('src', url);
+      });
     }
   }
-
-  $: if (url) downloadImage(url)
 </script>
 
-<div>
-  {#if avatarUrl} <img src={avatarUrl} alt={avatarUrl ? 'Avatar' : 'No image'} class="avatar image"
-  style="height: {size}em; width: {size}em;" /> {:else}
-  <div class="avatar no-image" style="height: {size}em; width: {size}em;" />
-  {/if}
-
-  <div style="width: {size}em;">
-    <label class="button primary block" for="single">
-      {uploading ? 'Uploading ...' : 'Upload'}
-    </label>
-    <input
-      style="visibility: hidden; position:absolute;"
-      type="file"
-      let pictures = [];
-    
-      const handleFileInput = async (event) => {
-        const files = event.target.files;
-    
-        for (const file of files) {
-          const { data, error } = await supabase.storage.from('your-storage-bucket').upload(`pictures/${file.name}`, file, {
-            cacheControl: '3600',
-            upsert: true,
-          });
-    
-          if (error) {
-            console.error(error);
-          } else {
-            pictures = [...pictures, data.Key];
-          }
-        }
-    
-        // pass the array of links to parent component
-        $: if (pictures.length > 0) {
-          $parent.onPicturesUploaded(pictures);
-        }
-      };
-    </script>
-    
-    <label>
-      Select pictures to upload:
-      <input type="file" accept="image/*" multiple on:change={handleFileInput} />
-    </label>
-    
-      id="single"
-      accept="image/*"
-      bind:files
-      on:change="{uploadAvatar}"
-      disabled="{uploading}"
-    />
+  <div class="rounded-2xl w-64 h-64 carousel">
+    {#each pictures as picture}
+    <div class = 'carousel-item bg-primary w-full'>
+      {#if picture}
+        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'max-w-full h-full' />
+      {:else}
+        <div class="no-image" style="width: 100%; height: 100%;" />
+      {/if}
+    </div>
+    {/each}
+  <div class = 'carousel-item'>
+    <div class = 'w-full h-full gird place-items-center'>
+      <label class="button primary block" for="single">
+        {uploading ? 'Uploading ...' : 'Upload'}
+      </label>
+      <input
+        style="visibility: hidden; position:absolute;"
+        type="file"
+        id="single"
+        accept="image/*"
+        bind:files
+        on:change="{uploadCardPicture}"
+        disabled="{uploading || pictures.length >= 10}"
+        bind:this={uploadButton}
+      />
+    </div>
   </div>
 </div>
