@@ -74,6 +74,36 @@
     <input
       style="visibility: hidden; position:absolute;"
       type="file"
+      let pictures = [];
+    
+      const handleFileInput = async (event) => {
+        const files = event.target.files;
+    
+        for (const file of files) {
+          const { data, error } = await supabase.storage.from('your-storage-bucket').upload(`pictures/${file.name}`, file, {
+            cacheControl: '3600',
+            upsert: true,
+          });
+    
+          if (error) {
+            console.error(error);
+          } else {
+            pictures = [...pictures, data.Key];
+          }
+        }
+    
+        // pass the array of links to parent component
+        $: if (pictures.length > 0) {
+          $parent.onPicturesUploaded(pictures);
+        }
+      };
+    </script>
+    
+    <label>
+      Select pictures to upload:
+      <input type="file" accept="image/*" multiple on:change={handleFileInput} />
+    </label>
+    
       id="single"
       accept="image/*"
       bind:files
