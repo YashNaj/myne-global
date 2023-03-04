@@ -2,11 +2,22 @@
   import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
   import Nav from "$lib/components/Nav.svelte";
+  import PageContainer from "$lib/components/PageContainer.svelte";
+  import Spinner from "$lib/components/Spinner.svelte";
   import { slide } from "svelte/transition";
+  import type { PageData } from "./$types";
+  export let data: PageData
+  let signingIn = false; 
   export let form = { message: "" };
+  console.log("🚀 ~ file: +page.svelte:8 ~ signingIn:", signingIn)
   let email = "";
 </script>
 
+{#if signingIn}
+  <PageContainer>
+    <Spinner />
+  </PageContainer>
+{/if}
 <h1 class="text-primary flex pl-4 font-bold text-2xl">
   Sign into your Myne Account.
 </h1>

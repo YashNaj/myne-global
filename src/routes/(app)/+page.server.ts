@@ -5,17 +5,15 @@ import type { LayoutServerLoad } from "./$types";
 import { getSessionUser } from "$lib/server/lucia";
 import { auth } from "$lib/server/lucia";
 import { Prisma, PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-
-export async function load({ locals }) {
+import { getCards } from "$lib/server/db"
+export const load: PageServerLoad = async ({ locals }) => {
+  
   const { session, user } = await locals.validateUser();
   const user_id = user.userId;
-  if(user_id !== null){
-    const myneCards = await prisma.myneCard.findMany({
-      where: {
-        user_id
-      },
-    });
-    console.log(myneCards)
-    return {myneCards}  }
-}
+  if (user_id !== null) {
+    const myneCards = getCards(5, 0 , user_id)
+    const lazyCards = getCards(50, 5 , user_id)
+    console.log(myneCards);
+    return { myneCards: myneCards, lazyCards :lazyCards};
+  }
+};

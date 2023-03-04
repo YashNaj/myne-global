@@ -7,4 +7,3 @@
 </script>
 
 <slot />
-<Footer2 />

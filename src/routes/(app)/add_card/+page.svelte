@@ -64,30 +64,28 @@
     strategy: "bottom",
   };
   onMount(() => {
-  const parentEl = document.querySelector(".parent"); 
-  console.log(parentEl)
-  if (parentEl) {
-    parentEl.addEventListener("click", (event) => {
-      const targetEl = event.target as HTMLElement;
+    const parentEl = document.querySelector(".parent");
+    console.log(parentEl);
+    if (parentEl) {
+      parentEl.addEventListener("click", (event) => {
+        const targetEl = event.target as HTMLElement;
 
-      if (targetEl.classList.contains("next")) {
-        const swiperEl = parentEl.querySelector(".swiper-container") as any;
-        const swiper = swiperEl.swiper;
-        if (swiper) {
-          swiper.slideNext();
+        if (targetEl.classList.contains("next")) {
+          const swiperEl = parentEl.querySelector(".swiper-container") as any;
+          const swiper = swiperEl.swiper;
+          if (swiper) {
+            swiper.slideNext();
+          }
+        } else if (targetEl.classList.contains("previous")) {
+          const swiperEl = parentEl.querySelector(".swiper-container") as any;
+          const swiper = swiperEl.swiper;
+          if (swiper) {
+            swiper.slidePrev();
+          }
         }
-      } else if (targetEl.classList.contains("previous")) {
-        const swiperEl = parentEl.querySelector(".swiper-container") as any;
-        const swiper = swiperEl.swiper;
-        if (swiper) {
-          swiper.slidePrev();
-        }
-      }
-    });
-  }
-});
-
-
+      });
+    }
+  });
 
   interface IfieldsPropsObject {
     [key: string]: string[];
@@ -156,7 +154,7 @@
   //initialize the category and subcategory fields
   export let isStolen = "";
   export let isHeirloom = "";
-  export let pictures = [];
+  export let pictures: any = [];
   export let category = "";
   export let subcategory = "";
   export let brand = "";
@@ -391,12 +389,14 @@
   if (success === true) {
     resetValues();
   }
-  $: pictures = pictures;
+  $: cardProps.pictures = pictures;
   $: console.log("🚀 ~ file: +page.svelte:388 ~ pictures:", pictures);
 </script>
 
 <PageContainer>
-  <div class="parent w-full h-[95vh] flex-col justify-center content-center flex-wrap">
+  <div
+    class="parent w-full h-[95vh] flex-col justify-center content-center flex-wrap"
+  >
     <div class=" h-full">
       <h1 class="flex text-primary font-bold text-3xl pl-3 pt-3">
         Add A Card | Enter Card Info
@@ -408,7 +408,11 @@
           <div class="flex justify-center w-full content-center h-80 ">
             <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
               <CardFlippable {flipped} {cardProps} {pictures}>
-                <UploadWidget bind:pictures />
+                <UploadWidget
+                  on:picturesuploaded={(event) => {
+                    pictures = event.detail;
+                  }}
+                />
               </CardFlippable>
             </div>
           </div>
@@ -441,6 +445,14 @@
                     />
                   {/each}
                 </div>
+                <input
+                  hidden
+                  type = 'array'
+                  name="pictures"
+                  id="pictures"
+                  placeholder="pictures"
+                  bind:value={cardProps['pictures']}
+                />
               {/if}
 
               <!-- <SwiperStandard
@@ -1407,16 +1419,15 @@
                           />
                         </div>
                       </swiper-slide>
-        
                     </swiper-container>
-                    <div class="pagination-btns w-full h-ful grid grid-cols-2 place-items-center"
-                  >
-                    <PrevButton />
-                    <NextButton />
-                  </div>
+                    <div
+                      class="pagination-btns w-full h-ful grid grid-cols-2 place-items-center"
+                    >
+                      <PrevButton />
+                      <NextButton />
+                    </div>
                   </div>
                 </div>
-                
               </div>
             </form>
           </div>

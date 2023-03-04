@@ -13,7 +13,7 @@ export default function  focusSlide(node) {
    
     return {
 		destroy() {
-			inputEl.removeEventListener('focus',{}, false);
+			inputEl.removeEventListener('focus',{}, true);
 		}
 	};
 }

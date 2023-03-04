@@ -6,6 +6,7 @@
   import Listbox from "../../lib/components/Listbox.svelte";
   import { blur, fade, fly, scale, slide } from "svelte/transition";
   export let myneCards;
+  export let isLoading; 
   let isOpen = false;
   let heightScale = 20;
   let drawerHeight = spring(heightScale, {

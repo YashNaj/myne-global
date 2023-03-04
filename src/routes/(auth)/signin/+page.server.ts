@@ -1,15 +1,23 @@
 import { auth } from "$lib/server/lucia";
-import {  fail, redirect } from "@sveltejs/kit";
-import type {  PageServerLoad, Actions } from "./$types";
+import { fail, redirect } from "@sveltejs/kit";
+import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
-
-export const load: PageServerLoad = async ({ locals }) => {
+import { signin } from '../../../../tests/utils';
+let signingIn = false; 
+export const load: PageServerLoad = async ({ locals, page }) => {
   const session = await locals.validate();
-  if (session) throw redirect(302, '/');
-};
+  if (session) throw redirect(302, "/");
+    return {
+      status: 200,
+      props: {
+        signingIn
+      },
+    };
+  }
+  // Set signingIn to false when redirecting
 
 export const actions: Actions = {
-  default: async ({ request, locals }) => {
+  default: async ({ request, locals, page }) => {
     const form = await request.formData();
     const email = form.get("email");
     const password = form.get("password");
@@ -21,12 +29,11 @@ export const actions: Actions = {
       typeof password !== "string"
     )
       return fail(400, {
-        message: "Email or Password cannot be empty"
+        message: "Email or Password cannot be empty",
       });
     try {
-			const key = await auth.validateKeyPassword("email", email, password);
-
-			const session = await auth.createSession(key.userId);
+      const key = await auth.validateKeyPassword("email", email, password);
+      const session = await auth.createSession(key.userId);
       locals.setSession(session);
     } catch (error) {
       if (
@@ -47,4 +54,5 @@ export const actions: Actions = {
       console.log(error);
       return fail(400);
     }
-  },};
+  },
+};

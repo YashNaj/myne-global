@@ -6,13 +6,13 @@
 
   export let size = 10;
 
-  let pictures: string[] = [];
+  export let pictures: string[] = [];
+  $: pictures = pictures
   let uploading = false;
   let files: FileList;
   let uploadButton: HTMLInputElement;
 
   const dispatch = createEventDispatcher();
-
   const downloadImage = async (path: string) => {
     try {
       const { data, error } = await supabase.storage.from('card-images').download(path);

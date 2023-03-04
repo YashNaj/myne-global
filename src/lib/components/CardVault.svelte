@@ -1,18 +1,21 @@
-<script lang="ts">  
+<script lang="ts">
   import { fade, fly, scale } from "svelte/transition";
   import CardFlippable from "./CardFlippable.svelte";
-  export let myneCards;
+  import Spinner from "./Spinner.svelte";
+  import UploadWidget from "./UploadWidget.svelte";
+  export let myneCards:any
+  export let isLoading;
 </script>
-<div
 
-  class="vault h-full w-full rounded-3xl k px-4 py-2"
->
-  <div class="vault-content h-[100%] flex flex-col w-full rounded-2xl text-primary "
-  transition:fly={{x: -1000}}>
-    <div class="vault-title max-h-full min-w-full flex px-4  justify-between top-0">
-      <h1
-        class="font-bold flex justify-start  text-[5rem] md:text-[3rem] "
-      >
+<div class="vault h-full w-full rounded-3xl k px-4 py-2">
+  <div
+    class="vault-content h-[100%] flex flex-col w-full rounded-2xl text-primary "
+    transition:fly={{ x: -1000 }}
+  >
+    <div
+      class="vault-title max-h-full min-w-full flex px-4  justify-between top-0"
+    >
+      <h1 class="font-bold flex justify-start  text-[5rem] md:text-[3rem] ">
         Card Vault
       </h1>
       <div
@@ -27,7 +30,6 @@
         >
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <ul
-          
           tabindex="0"
           class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
         >
@@ -36,13 +38,18 @@
         </ul>
       </div>
     </div>
-          <div class = 'flex flex-wrap justify-start content-start  overflow-y-auto h-[85%] gap-2 px-2 py-3 top-0'>
-        {#each myneCards as myneCard}
-        <CardFlippable {...myneCard} />
-    {/each}
-
-    </div>
-
-
+    {#if isLoading}
+      <Spinner />
+    {:else}
+      <div
+        class="flex flex-wrap justify-start content-start  overflow-y-auto h-[85%] gap-2 px-2 py-3 top-0"
+      >
+        {#each myneCards as myneCard, i}
+          <CardFlippable cardDisplayId = 'flippable-card-{i}'  {...myneCard}>
+            <UploadWidget pictures={myneCard.pictures} />
+          </CardFlippable>
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>

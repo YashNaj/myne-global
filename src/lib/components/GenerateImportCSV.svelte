@@ -47,7 +47,7 @@
   }
 </script>
 
-<div class="template-download-button mt-2 flex justify-center">
+<div class="template-download-button mt-2 flex justify-center py-4">
   <button
     on:click={handleClick}
     class="btn btn-primary normal-case flex-nowrap "

@@ -29,7 +29,8 @@
     "Download Inventory",
     
   ];
-  export let myneCards;
+  export let myneCards: any
+  export let isLoading: boolean;
 </script>
 <PageContainer>
   <TabGroup defaultIndex={0} class="flex flex-col w-full h-[94vh] justify-center rounded-lg ">
@@ -56,7 +57,7 @@
             {#if content != "Card Vault"}
               <DesktopWidget title={content} />
             {:else}
-              <CardVault myneCards = {myneCards} />
+              <CardVault myneCards = {myneCards} {isLoading}/>
               {/if}
           </TabPanel>
       {/each}
@@ -82,32 +83,4 @@
  * animation slide-in-left
  * ----------------------------------------
  */
-@-webkit-keyframes slide-in-left {
-  0% {
-    -webkit-transform: translateX(-1000px);
-            transform: translateX(-1000px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes slide-in-left {
-  0% {
-    -webkit-transform: translateX(-1000px);
-            transform: translateX(-1000px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    opacity: 1;
-  }
-}.slide-in-left {
-	-webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
 </style>

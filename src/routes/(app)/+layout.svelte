@@ -2,13 +2,14 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import type {  LayoutData, LayoutServerLoad } from "../$types";
+  import type { LayoutData, LayoutServerLoad } from "../$types";
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
   import { Icon, Plus } from "svelte-hero-icons";
   import type { PageServerLoad } from "./$types";
   import type { PageData } from "@lucia-auth/sveltekit/types";
+  import Desktop from "$lib/components/Desktop.svelte";
   export let data: LayoutData;
   const profile = data?.profile;
 
@@ -97,7 +98,12 @@
         </ul>
       </div>
     </div>
-    <slot/>
+    <div class="hidden lg:flex flex-col justify-center content-center flex-wrap">
+      <slot/>
+    </div>
+    <div class=" md:hidden">
+      <slot />
+    </div>
   </div>
   <div class="drawer-side flex flex-col ">
     <label for="my-drawer-3" class="drawer-overlay" />

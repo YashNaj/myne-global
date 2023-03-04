@@ -40,7 +40,7 @@
 >
   <div
     class="w-full h-full flex flex-col flex-wrap{justifyCell}"
-    transition:slide
+    transition:slide|local
   >
     {#key label}
       <div in:slide={{ duration, delay }} out:slide={{ duration, delay }}>

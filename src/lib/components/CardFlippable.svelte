@@ -162,6 +162,9 @@
   export let wallet_address: string | boolean | null | bigint;
   export let backgroundColor: string | null | undefined = "";
   export let id;
+  export let cardDisplayId:string; 
+  $: cardDisplayId = cardDisplayId
+  
   export let user_id;
   export let createdOn;
   export let cardProps: IcardProps = {
@@ -428,7 +431,7 @@
 
           <div class="front-top rounded-t-2xl {pickedColor} ">
             <div class="w-full h-full px-2 py-3">
-              <UploadWidget/>
+              <slot/> 
             </div>
           </div>
 
@@ -465,7 +468,7 @@
               <p>Expand</p>
             </button>
             <button
-              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-10 normal-case"
+              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem`] z-10 normal-case"
               on:click={() => (flipped = !flipped)}
               on:click={() => (cardSide = "front")}
             >
@@ -481,7 +484,7 @@
             class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
             <div class="spacer w-full h-[50%]" />
-            <CardSlider {cardProps} {fieldsBackOneValues} {fieldsBackTwoValues} {fieldsBackThreeValues} {description} {generalFieldsBack} />
+            <CardSlider cardDisplayId={cardDisplayId} {cardProps} {fieldsBackOneValues} {fieldsBackTwoValues} {fieldsBackThreeValues} {description} {generalFieldsBack} />
             <div class="card-buttons_back back-card_general-3 mt-2">
               <CardButtonWidget  />
             </div>
