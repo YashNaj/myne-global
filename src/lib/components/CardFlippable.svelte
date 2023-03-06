@@ -430,7 +430,7 @@
           </div>
           {#key pickedColor}
             <div
-              class="front-top rounded-t-2xl {pickedColor} transition-color ease-linear"
+              class="front-top rounded-t-2xl {pickedColor} transition-colors duration-200 ease-linear"
             >
               <div class="w-full h-full max-h-full max-w-s px-2 py-3">
                 <slot />

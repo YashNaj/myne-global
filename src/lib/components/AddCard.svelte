@@ -1209,7 +1209,6 @@
                 {/if}
               </swiper-slide>
 
-              {#if cardProps.category?.toLowerCase() !== "bird" || cardProps.category?.toLowerCase() !== "cat" || cardProps.category?.toLowerCase() !== "dog" || cardProps.category?.toLowerCase() !== "other animal"}
                 <swiper-slide
                   class="slide-6 w-full h-full gird grid-row-[1fr_1fr]  p-3"
                   class:hidden={cardProps.category?.toLowerCase() === "bird" ||
@@ -1297,7 +1296,6 @@
                     {/if}
                   {/if}
                 </swiper-slide>
-              {/if}
               {#if cardProps.category?.toLowerCase() === "watch" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                 <swiper-slide
                   class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
@@ -1344,8 +1342,9 @@
                   {/if}
                 </swiper-slide>
               {/if}
+              {#if category !== null}
               <swiper-slide
-                class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
+                class="slide-10 w-full h-full gird grid-row-[1fr_1fr]  p-3"
               >
                 <p>Enter a description.</p>
                 <input
@@ -1357,7 +1356,7 @@
               </swiper-slide>
 
               <swiper-slide
-                class="w-full h-full gird grid-row-[1fr_1fr] general-fields p-3"
+                class="slide-8 w-full h-full gird grid-row-[1fr_1fr] general-fields p-3"
               >
                 <input
                   placeholder="Purchased from"
@@ -1379,6 +1378,7 @@
               >
                 This slide is for document upload
               </swiper-slide>
+              {/if}
               <swiper-slide
                 class="slide-11 w-full h-full flex flex-col content-center   p-3"
               >

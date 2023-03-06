@@ -117,8 +117,7 @@
       guideOpenSet(guideOpen);
     }
   </script>
-  
-  <PageContainer >
+  <div class = 'wrapper w-full h-full flex flex-col ' transition:slide={{duration: 200, delay: 200}} >
     <h1
         class="flex justify-start text-primary font-semibold text-4xl text left w-full h-fit md:pl-4 md:pt-4"
       >
@@ -139,7 +138,7 @@
           import their csv to generate a bunch of cards below this dialogue box
    -->
         {#if !guideOpen}
-          <div transition:slide={{ duration: 100, delay: 100 }}>
+          <div transition:slide={{ duration: 200 }}>
             <h1 class="guide-heading font-semibold text-2xl p-2 italic">
               Import Guide
             </h1>
@@ -308,5 +307,4 @@
         
       </label>
     </div>
-  </PageContainer>
-  
+  </div>
