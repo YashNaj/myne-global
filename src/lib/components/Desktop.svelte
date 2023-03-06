@@ -151,7 +151,6 @@
                   <Icon src={Plus} color="white" size="12px" class="mr-1" />
                   Add a Card
                 </button>
-
                 <button class="btn btn-ghost btn-circle">
                   <div class="indicator">
                     <svg
@@ -184,8 +183,7 @@
                 transition:slide={{ duration: 200 }}
                 class="h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden"
               >
-                <div class="h-full" transition:slide={{ duration: 200 }}>
-                  <div transition:scale={{ duration: 200, delay: 200 }}>
+               
                     {#each myneCards as myneCard, i}
                       <CardFlippable
                         cardDisplayId="flippable-card-{i}"
@@ -194,8 +192,6 @@
                         <UploadWidget pictures={myneCard.pictures} />
                       </CardFlippable>
                     {/each}
-                  </div>
-                </div>
               </div>
             {/if}
           </TabPanel>
