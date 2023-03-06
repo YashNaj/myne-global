@@ -26,18 +26,12 @@
   let loading = false;
   let mySwiper;
   let expand = false;
+  let parentEl: HTMLElement;
   onMount(() => {
-    const parentEl = document.querySelector("." + cardSliderClassSlug);
-    console.log(parentEl);
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
         const targetEl = event.target as HTMLElement;
-        console.log(
-          "🚀 ~ file: CardSlider.svelte:32 ~ parentEl.addEventListener ~ targetEl:",
-          targetEl
-        );
-
-        if (targetEl.classList.contains("next")) {
+        if (targetEl.classList.contains("next-card-slider")) {
           const swiperEl = parentEl.querySelector(
             ".swiper-" + cardDisplayId
           ) as any;
@@ -49,7 +43,7 @@
           if (swiper) {
             swiper.slideNext();
           }
-        } else if (targetEl.classList.contains("previous")) {
+        } else if (targetEl.classList.contains("previous-card-slider")) {
           const swiperEl = parentEl.querySelector(
             ".swiper-" + cardDisplayId
           ) as any;
@@ -59,11 +53,17 @@
           }
         }
       });
+      return{
+        onDestroy: ()=>{
+        
+        }
+      }
     }
   });
 </script>
 
 <div
+bind:this={parentEl}
   class=" rounded-3xl w-full h-30 overflow-hidden relative {cardSliderClassSlug}"
 >
   <swiper-container
@@ -150,23 +150,23 @@
     </swiper-slide>
   </swiper-container>
   <button
-    class=" previous previous-swiper-{cardDisplayId}
+    class=" previous-card-slider previous-swiper-{cardDisplayId}
   btn btn-ghost btn-square normal-case touch-none   absolute bottom-[-.5rem] left-[-.3rem] z-10"
   >
     <Icon
       size="32px"
-      class=" opacity-60 cursor-pointer  text-black previous"
+      class=" opacity-60 cursor-pointer  text-black z-0 "
       src={ArrowCircleLeft}
       on:click={() => (expand = !expand)}
     />
   </button>
   <div />
   <button
-    class=" next next-swiper-{cardDisplayId} btn btn-ghost btn-square  normal-case  touch-none  absolute bottom-[-.5rem] right-[-.3rem] z-10"
+    class=" next-card-slider next-swiper-{cardDisplayId} btn btn-ghost btn-square  normal-case  touch-none  absolute bottom-[-.5rem] right-[-.3rem] z-10"
   >
     <Icon
       size="32px"
-      class="opacity-60 cursor-pointer  text-black next "
+      class="opacity-60 cursor-pointer  text-black z-0"
       src={ArrowCircleRight}
       on:click={() => (expand = !expand)}
     /></button

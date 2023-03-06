@@ -11,9 +11,8 @@ export const load: PageServerLoad = async ({ locals }) => {
   const { session, user } = await locals.validateUser();
   const user_id = user.userId;
   if (user_id !== null) {
-    const myneCards = getCards(5, 0 , user_id)
-    const lazyCards = getCards(50, 5 , user_id)
+    const myneCards = getCards(50, 0 , user_id)
     console.log(myneCards);
-    return { myneCards: myneCards, lazyCards :lazyCards};
+    return { myneCards: myneCards};
   }
 };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CardSlider from './../CardSlider.svelte';
+  import CardSlider from "./../CardSlider.svelte";
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
@@ -37,7 +37,7 @@
     otherAnimalFields,
     childIdFields,
   } from "../../forms";
-  import UploadWidget from './UploadWidget.svelte';
+  import UploadWidget from "./UploadWidget.svelte";
 
   // formFields init
   let formFieldsObject = {
@@ -72,7 +72,7 @@
       | string
       | null;
   }
-  export let pictureUrls; 
+  export let pictureUrls;
   // card external control values
   export let expand = false;
   export let flipped = false;
@@ -155,16 +155,16 @@
 
   export let weight: string | boolean | null | bigint;
   export let year: string | boolean | null | bigint;
-  export let pictures: string [] |string|  boolean | null | bigint;
+  export let pictures: string[] | string | boolean | null | bigint;
   export let marketPrice: string | boolean | null | bigint;
   export let isStolen: string | boolean | null | bigint;
   export let isHeirloom: string | boolean | null | bigint;
   export let wallet_address: string | boolean | null | bigint;
   export let backgroundColor: string | null | undefined = "";
   export let id;
-  export let cardDisplayId:string; 
-  $: cardDisplayId = cardDisplayId
-  
+  export let cardDisplayId: string;
+  $: cardDisplayId = cardDisplayId;
+
   export let user_id;
   export let createdOn;
   export let cardProps: IcardProps = {
@@ -428,13 +428,15 @@
               <p>Flip</p>
             </button>
           </div>
-
-          <div class="front-top rounded-t-2xl {pickedColor} ">
-            <div class="w-full h-full px-2 py-3">
-              <slot/> 
+          {#key pickedColor}
+            <div
+              class="front-top rounded-t-2xl {pickedColor} transition-color ease-linear"
+            >
+              <div class="w-full h-full max-h-full max-w-s px-2 py-3">
+                <slot />
+              </div>
             </div>
-          </div>
-
+          {/key}
           <div class="front-bottom rounded-b-2xl">
             <div class="front-fields-grid h-full w-full p-2">
               {#if fieldsFrontValues?.length > 0}
@@ -484,9 +486,17 @@
             class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
             <div class="spacer w-full h-[50%]" />
-            <CardSlider cardDisplayId={cardDisplayId} {cardProps} {fieldsBackOneValues} {fieldsBackTwoValues} {fieldsBackThreeValues} {description} {generalFieldsBack} />
+            <CardSlider
+              {cardDisplayId}
+              {cardProps}
+              {fieldsBackOneValues}
+              {fieldsBackTwoValues}
+              {fieldsBackThreeValues}
+              {description}
+              {generalFieldsBack}
+            />
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget  />
+              <CardButtonWidget />
             </div>
           </div>
         </div>
@@ -548,7 +558,7 @@
   }
   .whole-card {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
   .sendCard {

@@ -445,14 +445,16 @@
                     />
                   {/each}
                 </div>
+                {#each pictures as picture, i}
                 <input
                   hidden
                   type = 'array'
-                  name="pictures"
-                  id="pictures"
+                  name="pictures[{i}]"
+                  id={picture}
                   placeholder="pictures"
                   bind:value={cardProps['pictures']}
                 />
+                {/each}
               {/if}
 
               <!-- <SwiperStandard

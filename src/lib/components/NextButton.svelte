@@ -4,7 +4,7 @@
 <button
 type="button"
 id="next"
-class="next btn btn-[primary] normal-case shadow-lg w-[90%]"
+class="next btn btn-[primary] normal-case shadow-lg w-full"
 >
 Next
 </button>

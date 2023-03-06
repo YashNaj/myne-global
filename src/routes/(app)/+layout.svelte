@@ -10,6 +10,7 @@
   import type { PageServerLoad } from "./$types";
   import type { PageData } from "@lucia-auth/sveltekit/types";
   import Desktop from "$lib/components/Desktop.svelte";
+  export let addCardOpen = false; 
   export let data: LayoutData;
   const profile = data?.profile;
 
@@ -62,13 +63,7 @@
         >
           <!-- Navbar menu content here -->
           <div class="flex">
-            <a
-              href="/add_card"
-              class="btn btn-success flex normal-case text-white mr-5"
-            >
-              <Icon src={Plus} color="white" size="12px" class="mr-1" />
-              Add a Card
-            </a>
+
             {#if data?.isUser}
               <div class=" w-[120px] flex h-[100%] rounded-lg p-1">
                 <div

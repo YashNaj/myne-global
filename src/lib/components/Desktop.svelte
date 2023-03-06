@@ -1,5 +1,5 @@
-<script lang='ts'>  
-    
+<script lang="ts">
+	import AddCard  from '$lib/components/AddCard.svelte';
   import CardFlippable from "./CardFlippable.svelte";
   import { firstCapital } from "$lib/caps";
   import {
@@ -13,7 +13,8 @@
   import UploadWidget from "./UploadWidget.svelte";
   import Import from "./Import.svelte";
   import type { PageData } from "../../routes/(app)/$types";
-
+  import { slide } from "svelte/transition";
+  import { Icon, Plus } from 'svelte-hero-icons';
   const tabList = [
     "Card Vault",
     "Import",
@@ -43,15 +44,17 @@
     "motorcycle",
     "other",
   ];
-  export let data:PageData
-  let myneCards = data.myneCards
-  console.log(data)
+  export let data: PageData;
+  export let addCardOpen = false; 
+  let myneCards = data.myneCards;
+  console.log(data);
 
   $: categories = categories.sort();
 </script>
 
 <PageContainer>
-  <TabGroup class="w-full h-full">
+
+  <TabGroup class="w-full h-full overflow-x-hidden">
     <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
       {#each tabList as tab}
         <Tab
@@ -111,6 +114,15 @@
               </select>
             </div>
             <div class="navbar-end">
+              <button
+              on:click={() =>{ 
+                addCardOpen = !addCardOpen
+              }}
+              class="btn btn-success flex normal-case text-white mr-5"
+            >
+              <Icon src={Plus} color="white" size="12px" class="mr-1" />
+              Add a Card
+          </button>
               <button class="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -146,19 +158,29 @@
               </button>
             </div>
           </div>
-          <div class = 'w-full h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1'>
-            {#each myneCards as myneCard, i}
-            <CardFlippable cardDisplayId = 'flippable-card-{i}'  {...myneCard}>
-              <UploadWidget pictures={myneCard.pictures} />
-            </CardFlippable>
-            {/each}
+          {#if addCardOpen}
+            <div
+              transition:slide
+              class="flex flex-row w-full h-[89%] justify-center items-center flex-wrap relative"
+            >
+            
+          <AddCard/>
           </div>
+          {:else}
+            <div
+              class="h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1"
+            >
+              {#each myneCards as myneCard, i}
+                <CardFlippable cardDisplayId="flippable-card-{i}" {...myneCard}>
+                  <UploadWidget pictures={myneCard.pictures} />
+                </CardFlippable>
+              {/each}
+            </div>
+          {/if}
         </TabPanel>
-        <TabPanel
-        class="w-full h-full flex flex-col px-2 rounded-2xl"
-      >
-        <Import data = {data}/>
-      </TabPanel>
+        <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+          <Import {data} />
+        </TabPanel>
       </div>
     </TabPanels>
   </TabGroup>

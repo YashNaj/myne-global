@@ -95,6 +95,9 @@ export const actions: Actions = {
     const year = form.get("year")?.toLowerCase();
     const marketPrice = form.get("marketPrice")?.toLowerCase();
     const gender = form.get("gender")?.toLowerCase(); 
+    const picturesRawURL = form.get("pictures");
+    const pictures = picturesRawURL.split(',')
+    console.log(pictures);
     const profile = await prisma.profile.findUnique({
       where: {
         user_id: user.userId,
@@ -179,6 +182,7 @@ export const actions: Actions = {
             year,
             marketPrice,
             gender, 
+            pictures
           },
         },
       },

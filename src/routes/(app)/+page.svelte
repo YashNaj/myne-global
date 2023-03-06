@@ -13,7 +13,7 @@
   handleSession(page);
   export let myneCards = data?.myneCards;
   export let isLoading = true;
-
+  export let addCardOpen = false; 
   onMount(async () => {
     // Load data here
     isLoading = false;
@@ -87,5 +87,6 @@
 <div
   class="hidden md:flex w-full h-[94vh] py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent "
 >
-<Desktop {data}/>
+<Desktop {data} {addCardOpen}/>
 </div>
+x

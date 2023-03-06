@@ -74,15 +74,15 @@
   }
 </script>
 
-  <div class="rounded-box carousel w-full h-full cursor-pointer">
+  <div class="rounded-box carousel w-full h-full object-cover cursor-pointer aspect-[3/2]">
     {#each pictures as picture, i}
-    <div class = 'carousel-item  w-full h-full ' id ={`item-${i}`}>
+    <div class = 'carousel-item  w-full h-full object-cover rounded-2xl flex justify-center  bg-black bg-opacity-30' id ={`item-${i}`}>
       {#if picture}
-        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'object-fill bg-black bg-opacity' />
+        <img id={`img-${picture}`} src="" alt="Uploaded picture" class = 'object-cover  bg-black bg-opacity' />
       {:else}
         <div class="no-image" style="width: 100%; height: 100%;" />
       {/if}
-    </div>
+      </div>
     {/each}
   <div class = 'carousel-item w-full h-full rounded-box'>
     <div class = 'w-full h-full gird place-items-center'>
