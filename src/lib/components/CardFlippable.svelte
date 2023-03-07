@@ -541,6 +541,7 @@
   }
 
   .flip-card-back {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
   }
   .upload-picures {
