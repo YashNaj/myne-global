@@ -157,7 +157,7 @@ bind:this={parentEl}
   >
     <Icon
       size="32px"
-      class=" opacity-60 cursor-pointer  text-black z-0 "
+      class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 "
       src={ArrowCircleLeft}
       on:click={() => (expand = !expand)}
     />
@@ -168,7 +168,7 @@ bind:this={parentEl}
   >
     <Icon
       size="32px"
-      class="opacity-60 cursor-pointer  text-black z-0"
+      class="next-card-slider opacity-60 cursor-pointer  text-black z-0"
       src={ArrowCircleRight}
       on:click={() => (expand = !expand)}
     /></button

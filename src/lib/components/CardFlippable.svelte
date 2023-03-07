@@ -533,6 +533,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
