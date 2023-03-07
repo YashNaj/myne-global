@@ -521,6 +521,7 @@
   }
 
   .flipped .flip-card .flip-card-inner {
+    -webkit-transform: translateZ(0);
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     width: 100%;
