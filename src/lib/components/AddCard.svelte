@@ -58,6 +58,7 @@
   import Carousel from "$lib/components/Carousel.svelte";
   import Swiper from "swiper";
   import { slide } from "svelte/transition";
+  import SwiperPictures from "./SwiperPictures.svelte";
   let floatingConfig = {
     strategy: "bottom",
   };
@@ -396,7 +397,7 @@
   <div class="flex justify-center w-full h-full content-center order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
       <CardFlippable {flipped} {cardProps} {pictures}>
-        <UploadWidget
+        <SwiperPictures
           on:picturesuploaded={(event) => {
             pictures = event.detail;
           }}

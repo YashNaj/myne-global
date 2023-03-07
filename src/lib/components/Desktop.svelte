@@ -16,6 +16,7 @@
   import { scale, slide } from "svelte/transition";
   import { Icon, Plus, Search } from "svelte-hero-icons";
   import Transition from "./Transition.svelte";
+  import SwiperPictures from "./SwiperPictures.svelte";
   const tabList = [
     "Card Vault",
     "Import",
@@ -189,7 +190,7 @@
                         cardDisplayId="flippable-card-{i}"
                         {...myneCard}
                       >
-                        <UploadWidget pictures={myneCard.pictures} />
+                        <SwiperPictures pictures={myneCard.pictures} />
                       </CardFlippable>
                     {/each}
               </div>

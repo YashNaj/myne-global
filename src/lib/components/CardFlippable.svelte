@@ -389,13 +389,13 @@
   class:comeBack={success === true}
 >
   <div
-    class="flip-card bg-none [perspective: 1000px] [user-select: none] cursor-pointer w-full rounded-2xl 
+    class="flip-card bg-none [perspective: 500px] [user-select: none] cursor-pointer w-full rounded-2xl 
     aspect-[5/7]"
   >
     <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
       <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
         <div
-          class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl aspect-[5/7]  z-1  bg-cover"
+          class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl aspect-[5/7] flex flex-col  z-1  bg-cover"
         >
           <div
             class:no-display={cardSide === "back"}
@@ -426,15 +426,15 @@
             </button>
           </div>
           {#key pickedColor}
-            <div
-              class="front-top rounded-t-2xl {pickedColor} transition-colors duration-200 ease-linear"
+            <div 
+              class="front-top rounded-t-2xl {pickedColor} transition-colors duration-200 ease-linear "
             >
-              <div class="w-full h-full max-h-full max-w-s px-2 py-3">
+              <div class="w-full h-full aspect-[3/2] object-cover flex justify-center content-center flex-nowrap py-2">
                 <slot />
               </div>
             </div>
           {/key}
-          <div class="front-bottom rounded-b-2xl">
+          <div class="front-bottom rounded-b-2xl h-[100%]">
             <div class="front-fields-grid h-full w-full p-2">
               {#if fieldsFrontValues?.length > 0}
                 {#each fieldsFrontValues as fieldFront}
