@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CardSlider from "./../CardSlider.svelte";
+  import CardSlider from "./CardSlider.svelte";
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
   import CardCellDescription from "$lib/components/CardCellDescription.svelte";
@@ -152,7 +152,6 @@
   export let vin: string | boolean | null | bigint;
   export let wallet: string | boolean | null | bigint;
   export let gender: string | boolean | null | bigint;
-
   export let weight: string | boolean | null | bigint;
   export let year: string | boolean | null | bigint;
   export let pictures: string[] | string | boolean | null | bigint;
@@ -335,9 +334,7 @@
   $: marketPrice = cardProps.marketPrice;
   $: pickedCategory = cardProps.category;
 
-  //add general fields config here
-  $: backgroundColor = category?.toLowerCase();
-  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
+  //add general fields config here  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
   $: categoryKey = category?.toLowerCase() as
     | keyof typeof colors
     | keyof typeof formFieldsObject;
@@ -518,10 +515,13 @@
     height: 100%;
     text-align: center;
     transition: transform 0.6s;
+    -webkit-transition: transform 0.6s;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
   }
 
   .flipped .flip-card .flip-card-inner {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     width: 100%;
     height: 100%;

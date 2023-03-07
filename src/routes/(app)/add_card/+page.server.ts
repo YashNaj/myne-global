@@ -3,6 +3,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
 import { PrismaClient, Prisma } from "@prisma/client";
+import { formResult } from '$lib/stores';
 const prisma = new PrismaClient();
 export const actions: Actions = {
   default: async ({ request, locals }) => {
@@ -96,7 +97,7 @@ export const actions: Actions = {
     const marketPrice = form.get("marketPrice")?.toLowerCase();
     const gender = form.get("gender")?.toLowerCase(); 
     const picturesRawURL = form.get("pictures");
-    const pictures = picturesRawURL.split(',')
+    const pictures = picturesRawURL?.split(',')
     console.log(pictures);
     const profile = await prisma.profile.findUnique({
       where: {
@@ -187,11 +188,13 @@ export const actions: Actions = {
         },
       },
     });
-    let success = true;
+    formResult.set(true)
+    console.log(formResult)
+
     prisma.$disconnect();
     return {
       message: "Card Added Successfully!",
-      success,
+      success: true
     };
   },
 };

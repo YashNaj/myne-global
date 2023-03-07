@@ -9,6 +9,8 @@
   import { onMount } from "svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import Desktop from "$lib/components/Desktop.svelte";
+  import { formResult } from "$lib/stores";
+  console.log("🚀 ~ file: +page.svelte:13 ~ formResult:", formResult)
   export let data: PageData;
   handleSession(page);
   export let myneCards = data?.myneCards;
@@ -18,6 +20,7 @@
     // Load data here
     isLoading = false;
   });
+  $: console.log("🚀 ~ file: +page.svelte:24 ~ $page.form:", $page.form)
 </script>
 
 <div

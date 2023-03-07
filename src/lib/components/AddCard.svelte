@@ -10,11 +10,12 @@
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
-  import focusSlide from "$lib/swiperActions";
+  import addCardSwiperAction from "$lib/utils/addCardSwiperActions";
   import focusBackTwo from "$lib/swiperCardBackOne";
   import SwiperStandard from "$lib/components/SwiperStandard.svelte";
-
-  //initialize fieldProps
+  import {formResult} from "$lib/stores"
+  export let success = false
+  $:console.log("🚀 ~ file: AddCard.svelte:18 ~ success:", success)
 
   // function handleFilter(e) {
   //       if (e.detail.length === 0 && filterText.length > 0) {
@@ -307,18 +308,17 @@
   $: cardProps.category = category;
   $: cardProps = { ...cardProps };
 
-  export let success: boolean | null | undefined = false;
 
   export let formData = {
     ...cardProps,
     message: "",
-    success: null,
+    success: false,
   };
 
   $: formData = formData = {
     ...cardProps,
     message,
-    success: null,
+    success: false,
   };
   $: sentCard = sentCard;
   export let form: {
@@ -387,6 +387,7 @@
   }
   $: cardProps.pictures = pictures;
   $: console.log("🚀 ~ file: +page.svelte:388 ~ pictures:", pictures);
+  $: console.log(formData)
 </script>
 
 <div
@@ -409,7 +410,11 @@
       action="/add_card"
       class="h-full w-full form-gradient p-4 flex flex-col justify-between form-container text-white 
                         rounded-2xl"
-      use:enhance
+      use:enhance={()=> {
+         if(formData.success = true){
+          success = true 
+         }
+      }}
       class:exitForm={sentCard === true}
       class:comeBack={success === true}
     >
@@ -468,6 +473,8 @@
               no-sliding={true}
               class="w-full h-[90%] swiper-container touch-none mt-2 flex-2 rounded-xl bg-black bg-opacity-20 "
               pagination={true}
+              observer={true}
+              observe-parents={true}
             >
               <swiper-slide
                 class="slide-0 w-full h-8 p-3 grid place-items-center"
@@ -1233,7 +1240,7 @@
                       placeholder="Unique features"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["other"]}
-                      use:focusSlide
+                      use:addCardSwiperAction
                     />
                   {:else if cardProps.category?.toLowerCase() === "jewelry"}
                     <Select
@@ -1256,7 +1263,7 @@
                       placeholder="Unique features"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["other"]}
-                      use:focusSlide
+                      use:addCardSwiperAction
                     />
                     <input
                       placeholder="Grading"
@@ -1269,14 +1276,14 @@
                         placeholder="Color"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["exterior_color"]}
-                        use:focusSlide
+                        use:addCardSwiperAction
                       />
                     {:else}
                       <input
                         placeholder="Exterior color"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["exterior_color"]}
-                        use:focusSlide
+                        use:addCardSwiperAction
                       />
                     {/if}
 
@@ -1285,7 +1292,7 @@
                         placeholder="Interior color"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["interior_color"]}
-                        use:focusSlide
+                        use:addCardSwiperAction
                       />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "motorcycle"}
@@ -1352,7 +1359,7 @@
                   placeholder="Description"
                   class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                   bind:value={cardProps["description"]}
-                  use:focusSlide
+                  use:addCardSwiperAction
                 />
               </swiper-slide>
 
@@ -1363,7 +1370,7 @@
                   placeholder="Purchased from"
                   class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here"
                   bind:value={cardProps["purchasedFrom"]}
-                  use:focusSlide
+                  use:addCardSwiperAction
                   on:focus={() => {
                     flipped = true;
                   }}
@@ -1415,7 +1422,7 @@
 </div>
 
 {#if success === true}
-  <GeneralModal {success} on:click={resetValues} />
+  <GeneralModal bind:success on:click={resetValues} />
 {/if}
 
 <style lang="postcss">

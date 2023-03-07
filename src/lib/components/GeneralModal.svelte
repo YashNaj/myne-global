@@ -8,7 +8,7 @@
   import logo from "$lib/images/blue_icon.png";
   import { redirect } from "@sveltejs/kit";
   export let yes = true;
-  export let success: boolean | null | undefined;
+  export let success: boolean;
 </script>
 
 <!-- Put this part before </body> tag -->
@@ -21,9 +21,11 @@
 <label
   on:click={() => {
     yes = !yes;
+    success  = !success; 
   }}
   on:keydown={() => {
     yes = !yes;
+    success = !success; 
   }}
   for="my-modal-4"
   class="modal cursor-pointer text-primary"

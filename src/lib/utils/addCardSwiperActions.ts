@@ -1,7 +1,7 @@
-export default function  focusSlide(node) {
+export default function addCardSwiperAction(node) {
     console.log("🚀 ~ file: swiperActions.ts:2 ~ focusSlide ~ node:", node)
     const inputEl = node
-    const swiper = document?.querySelector('.swiper-container-addCard').swiper
+    const swiper = document.querySelector('.swiper-container').swiper
 
     const activeIndex = swiper?.activeIndex
     console.log("🚀 ~ file: swiperActions.ts:7 ~ focusSlide ~ activeIndex:", activeIndex)

@@ -6,7 +6,7 @@
   import { ArrowCircleLeft, ArrowCircleRight, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
   import "swiper/swiper-bundle.css";
-  import CardCell from "./components/CardCell.svelte";
+  import CardCell from "./CardCell.svelte";
   export let cardDisplayId: string;
   console.log(
     "🚀 ~ file: CardSlider.svelte:11 ~ cardDisplayId:",
@@ -67,6 +67,8 @@ bind:this={parentEl}
   class=" rounded-3xl w-full h-30 overflow-hidden relative {cardSliderClassSlug}"
 >
   <swiper-container
+    observer={true }
+    observer-parents={true}
     no-swiping={true}
     id={cardDisplayId}
     class="h-full swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1"

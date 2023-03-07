@@ -378,20 +378,49 @@
       allowTouchMove: false,
       observer: true,
       observeParents: true,
-      parallax: true,
     });
     const swiper: Swiper = document.querySelector(".swiper-container-addCard").swiper;
     console.log(1, swiper.activeIndex);
   });
+  let slideHTML:HTMLElement[];
+  $: slideHTML  = addCardInputs?.map((value) => {
+    if ( value.toLowerCase() === "brand" ||
+    value.toLowerCase() === "color" ||
+    value.toLowerCase() === "size" ||
+    value.toLowerCase() === "clarity" ||
+    value.toLowerCase() === "carat_weight" ||
+    value.toLowerCase() === "cut_shape") {
+      if (value.toLowerCase() === "clarity") {
+        `  <Select ${floatingConfig} placeholder="Category" class="select bg-primary text-black" items=${clarities}?.map((clarity) => firstCapital(clarity))} on:change=${() => {clarity = justValue; subcategory = "";}} bind:justValue
+            />`;
+      } else
+        return `<Select ${floatingConfig} placeholder=${firstCapital(value)} class="select bg-primary text-black" items=${value + "s"}?.map((categories) => firstCapital(categories))} on:change=${() => {value = justValue}} bind:justValue />`;
+    } else
+      return ` <input placeholder=${firstCapital(value)} class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here" bind:value={cardProps[${value}] use:focusSlide />`;
+  });
+
+ $:    console.log("🚀 ~ file: AddCardTest.svelte:386 ~ slideHTML:", slideHTML)
+
   afterUpdate(() => {
     const swiper: Swiper = document.querySelector(".swiper-container-addCard").swiper;
-    const slideContent = ["Slide 1", "Slide 2", "Slide 3"];
+    const slideContent = slideHTML 
+    console.log(slideContent)
+    const numSlidesToRemove = Math.max(swiper.slides.length - 4, 0);
+    const startIndexToRemove = 1;
+    const endIndexToRemove = numSlidesToRemove + 1;
+    swiper.removeSlide([...Array(numSlidesToRemove).keys()].map((i) => i + startIndexToRemove));
 
-    addCardInputs?.forEach((value) => {
+    // swiper.removeSlide([1, addCardInputs?.length]);
+    swiper.update();
+    addCardInputs?.reverse().forEach((value) => {
       const slide = document.createElement("div");
-      slide.className = "swiper-slide";
-      slide.textContent = value;
-      swiper.addSlide(1, slide);
+      let i = 1;
+      i = i++;
+      slide.className = "swiper-slide w-full h-full flex p-3 justify-center ";
+      slide.innerHTML = `<input class = 'input input-md bg-white text-primary w-full font-semilbold' bind:value={${value}} placeholder=${firstCapital(
+        value
+      )} />`;
+      swiper.addSlide(i, slide);
       swiper.slideTo(0);
       swiper.update();
     });
