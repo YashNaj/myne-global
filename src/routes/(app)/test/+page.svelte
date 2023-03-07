@@ -1,7 +1,7 @@
 <script lang="ts">
-  import AddCard from "$lib/components/AddCard.svelte";
+  import AddCardTest from "$lib/components/AddCardTest.svelte";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
-import PageContainer from "$lib/components/PageContainer.svelte";
+  import PageContainer from "$lib/components/PageContainer.svelte";
   import UploadWidget from "$lib/components/UploadWidget.svelte";
 
 
@@ -9,5 +9,8 @@ import PageContainer from "$lib/components/PageContainer.svelte";
 </script>
 
 <PageContainer>
-<AddCard/>
+  <div class = 'w-full h-full flex flex-wrap content-center justify-center '>
+  <AddCardTest/>
+    
+  </div>
 </PageContainer>

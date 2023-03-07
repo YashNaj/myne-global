@@ -491,6 +491,7 @@
                   {#if subcategories?.length > 0}
                     <div transition:slide>
                       <Select
+                      {floatingConfig}
                         placeholder="Subcategory"
                         class="select text-black w-full my-4 "
                         items={subcategories?.map((subcategories) =>

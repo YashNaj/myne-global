@@ -459,7 +459,7 @@
             class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
           >
             <button
-              class="btn  btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
+              class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
               on:click={() => (expand = !expand)}
             >
               <Icon
