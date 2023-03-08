@@ -1,5 +1,4 @@
 <script lang="ts">
-  import springPress, { horizontalSlide } from "$lib/animationActions";
   import postcss from "postcss";
   import { Icon } from "svelte-hero-icons";
   import { slide } from "svelte/transition";

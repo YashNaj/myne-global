@@ -41,8 +41,8 @@
           class="mySwiper touch-none aspect-[5/7] bg-none rounded-[10%] w-full h-full"
           pagination="true"
           grab-cursor="true"
-          centered-slides="true"
-          coverflow-effect-modifier="1"
+        centered-slides="true"
+        coverflow-effect-modifier="1"
           coverflow-effect-slide-shadows="true"
         >
           <swiper-slide
@@ -92,4 +92,3 @@
 >
 <Desktop {data} {addCardOpen}/>
 </div>
-x

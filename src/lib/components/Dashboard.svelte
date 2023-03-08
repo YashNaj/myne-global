@@ -1,6 +1,5 @@
 <script lang="ts">
   import { invalidateAll } from "$app/navigation";
-  import springPress, { horizontalSlide } from "$lib/animationActions";
   import { spring } from "svelte/motion";
   import { backInOut } from "svelte/easing";
   import Listbox from "../../lib/components/Listbox.svelte";
@@ -151,10 +150,9 @@
         <button
           in:fly={{ delay: duration, duration }}
           out:fly={{ delay: duration }}
-          use:springPress
           on:click={() => setOpen()}
           on:keypress={() => setOpen()}
-          class="btn btn-ghost p-2 m-1 text-black absolute right-0 text-xl z-50 drawer-button"
+          class="btn btn-ghost p-2 m-1 text-black absolute right-0 text-xl z-50 drawer-button "
         >
           <svg
             width="32"

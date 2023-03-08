@@ -1,12 +1,7 @@
 <script>
-  import {
-    horizontalSlide,
-    logicalPropertiesHorizontalSlide,
-  } from "$lib/animationActions";
   import { quintOut } from "svelte/easing";
   import { fade, fly } from "svelte/transition";
   export let title = " ";
-
   import CardFlippable from "./CardFlippable.svelte";
   let duration = 100;
 </script>

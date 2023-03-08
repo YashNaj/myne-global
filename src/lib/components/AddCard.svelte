@@ -11,9 +11,6 @@
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
   import addCardSwiperAction from "$lib/utils/addCardSwiperActions";
-  import focusBackTwo from "$lib/swiperCardBackOne";
-  import SwiperStandard from "$lib/components/SwiperStandard.svelte";
-  import {formResult} from "$lib/stores"
   export let success = false
   $:console.log("🚀 ~ file: AddCard.svelte:18 ~ success:", success)
 
