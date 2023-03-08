@@ -17,6 +17,9 @@
   import { Icon, Plus, Search } from "svelte-hero-icons";
   import Transition from "./Transition.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
+  import HistoryReports from "./HistoryReports.svelte";
+  import ItemCertificate from "./ItemCertificate.svelte";
+  import RequestInventory from "./RequestInventory.svelte";
   const tabList = [
     "Card Vault",
     "Import",
@@ -72,7 +75,6 @@
     </TabList>
     <TabPanels class="w-full h-[80vh]  mt-2">
       <div class="w-full h-full ">
-        <div class="h-full w-full" transition:slide={{ duration: 200 }}>
           <TabPanel
             class="identify-1 w-full h-full flex flex-col px-2 rounded-2xl bg-gradient-to-b from-slate-300 to-slate-100"
           >
@@ -203,7 +205,27 @@
               </div>
             </div>
           </TabPanel>
-        </div>
+          <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+            <div class="w-full h-full ">
+              <div class="h-full w-full" transition:slide={{ duration: 200, delay:200}}>
+                <HistoryReports {data} />
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+            <div class="w-full h-full ">
+              <div class="h-full w-full" transition:slide={{ duration: 200, delay:200}}>
+                <ItemCertificate {data} />
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+            <div class="w-full h-full ">
+              <div class="h-full w-full" transition:slide={{ duration: 200, delay:200}}>
+                <RequestInventory {data} />
+              </div>
+            </div>
+          </TabPanel>
       </div></TabPanels
     >
   </TabGroup>
