@@ -15,7 +15,6 @@
   import { sizes } from "../../../size";
   import * as dayjs from "dayjs";
   import focusSlide from "$lib/swiperActions";
-  import focusBackTwo from "$lib/swiperCardBackOne";
   import SwiperStandard from "$lib/components/SwiperStandard.svelte";
 
   //initialize fieldProps
