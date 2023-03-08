@@ -96,15 +96,15 @@
   </h1>
   <div class="item-certificate-area flex flex-col w-full h-full  rounded-2xl px-2">
     <div class="item-certificate-slider w-full h-[60%] bg-slate-100 shadow-md rounded-2xl my-2">
-      <swiper-container class="mySwiper w-full h-full" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
+      <swiper-container class="mySwiper w-full h-full" navigation= "true" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
       slides-per-view="auto" coverflow-effect-rotate="10" coverflow-effect-stretch="0" coverflow-effect-depth="100"
       coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true" observer = {true } observerParents = {true} css = {true}>
       {#each myneCards as myneCard}
-      <swiper-slide class = 'w-32 aspect-[5/7] hover:transform-gpu hover:translate-y-4'>
+      <swiper-slide class = 'w-32 aspect-[5/7] hover:transform-gpu hover:translate-y-24'>
         <div class = 'w-32 aspect-[5/7] hover:translate-y-5 '>
           <CardFlippable {...myneCard}>
           
-            <SwiperPictures/> 
+            <SwiperPictures pictures = {myneCard.pictures}/>
           </CardFlippable>        
         </div>
       </swiper-slide>
