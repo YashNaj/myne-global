@@ -62,7 +62,7 @@
   let myneCards:MyneCard[]|undefined = data.myneCards;
   console.log(data);
   let categoryFilter: string = ''
-  let filteredCards = myneCards
+  let filteredCards = [...myneCards]
   let isLoading;
   let filterCards = (categoryFilter) => {
     filteredCards = [...myneCards]?.filter((card) => {
@@ -80,15 +80,7 @@
     console.log(deskTopSwiper);
   }  
   }
-  function handleTabKeyDown(index:number, tab:string) {
-    if (tab === 'Card Vault'){
-      swiperEl.slideTo(1)
-    }
-    swiperEl.slideTo(index + 1);
-  $: if (deskTopSwiper) {
-    console.log(deskTopSwiper);
-  }  
-  }
+
 
 </script>
 
@@ -269,7 +261,7 @@
           <div class = 'swiper-slide w-full h-[80vh]'>
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
               <div class="w-full h-full ">
-                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+                <div class="h-full w-full">
                   <ItemCertificate {data} {myneCards} />
                 </div>
               </div>

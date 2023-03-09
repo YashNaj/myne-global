@@ -86,11 +86,11 @@
   }
 </script>
 
-<div class="wrapper w-full h-full flex flex-col " transition:slide={{ duration: 200, delay: 200 }}>
+<div class="wrapper w-full h-full flex flex-col ">
   <h1 class="flex justify-start text-primary font-semibold text-4xl text left w-full h-fit md:pl-4 md:pt-4">
     History Reports
   </h1>
-  <div transition:slide={{ duration: 200, delay: 200 }} class="w-full h-full flex flex-col rounded-2xl my-1">
+  <div transition:slide|local={{ duration: 200, delay: 200 }} class="w-full h-full flex flex-col rounded-2xl my-1">
     <div class="search-bar-area w-full h-fit flex p-2 justify-center">
       <div class="input-container flex justiy-center content-center bg-slate-100 rounded-2xl w-full shadow-md ">
         <div class="icon-container flex flex-wrap justify-center content-center bg-none text-xs p-2 ">

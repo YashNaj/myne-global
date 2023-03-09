@@ -117,7 +117,7 @@
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ categoryFilter:", categoryFilter);
 </script>
 
-<div class="wrapper w-full h-full flex flex-col " transition:slide={{ duration: 200, delay: 220 }}>
+<div class="wrapper w-full h-full flex flex-col ">
   <h1 class="flex justify-start flex-col text-primary font-semibold text-4xl text-left w-full h-fit pl-4 pt-4">
     Item Certificate
   </h1>

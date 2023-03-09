@@ -117,7 +117,7 @@
       guideOpenSet(guideOpen);
     }
   </script>
-  <div class = 'wrapper w-full h-full flex flex-col ' transition:slide={{duration: 200, delay: 200}} >
+  <div class = 'wrapper w-full h-full flex flex-col ' >
     <h1
         class="flex justify-start text-primary font-semibold text-4xl text left w-full h-fit md:pl-4 md:pt-4"
       >
