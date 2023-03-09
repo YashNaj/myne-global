@@ -94,7 +94,18 @@
   let brands: [] | string[] | undefined | null;
   $: brands = selectedCategory?.brands;
   let filteredCards: [];
+  let isLoading: boolean;
+  let filterCards = (categoryFilter) => {
+    isLoading = true;
+    filteredCards = myneCards.filter((card) => {
+      return card.category === categoryFilter?.toLowerCase();
+    });
+    isLoading = false;
+    return filteredCards;
+  };
   let swiperEl;
+  $: console.log("🚀 ~ file: ItemCertificate.svelte:107 ~ swiperEl:", swiperEl);
+
   $: if (categoryFilter === "") {
     filteredCards = myneCards;
   } else {
