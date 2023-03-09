@@ -96,7 +96,7 @@
         <div class="icon-container flex flex-wrap justify-center content-center bg-none text-xs p-2 ">
           <Icon src={SearchCircle} color="#002d72" size="24px" />
         </div>
-        <input
+        <input 
           class="input input-md text-primary w-full bg-slate-50 outline-none border-none  placeholder-primary"
           placeholder="Search for items"
         />

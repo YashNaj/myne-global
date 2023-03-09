@@ -81,12 +81,13 @@
   }  
   }
 
-
 </script>
 
 <PageContainer>
   
-  <TabGroup class=" w-full h-full overflow-x-hidden">
+<TabGroup  on:change={() => {
+    
+  }} class=" w-full h-full overflow-x-hidden">
     <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
       {#each tabList as tab, i}
         <Tab
