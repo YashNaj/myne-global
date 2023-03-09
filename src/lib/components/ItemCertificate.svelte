@@ -67,7 +67,7 @@
   // $: categories = categories.sort();
 
   let tableProps: string[] = [];
-  $: console.log("🚀 ~ file: ItemCertificate.svelte:71 ~ swiperEl:", swiperEl);
+  $: console.log("🚀 ~ file: ItemCertificate.svelte:71 ~ swiperEl:", itemCertificateSwiperEl);
 
   let categoryFilter: string = "";
   $: categoryFilter = categoryFilter?.toLowerCase();
@@ -103,8 +103,8 @@
     isLoading = false;
     return filteredCards;
   };
-  let swiperEl;
-  $: console.log("🚀 ~ file: ItemCertificate.svelte:107 ~ swiperEl:", swiperEl);
+  let itemCertificateSwiperEl;
+  $: console.log("🚀 ~ file: ItemCertificate.svelte:107 ~ swiperEl:", itemCertificateSwiperEl);
 
   $: if (categoryFilter === "") {
     filteredCards = myneCards;
@@ -113,7 +113,7 @@
   }
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ filteredCards:", filteredCards);
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ filteredCards:", filterCards);
-  $: console.log("🚀 ~ file: ItemCertificate.svelte:109 ~ beforeUpdate ~ swiperEl:", swiperEl);
+  $: console.log("🚀 ~ file: ItemCertificate.svelte:109 ~ beforeUpdate ~ swiperEl:", itemCertificateSwiperEl);
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ categoryFilter:", categoryFilter);
 </script>
 
@@ -127,7 +127,7 @@
   <div class="item-certificate-area flex  w-full h-full  rounded-2xl px-2">
     <div class="item-certificate-slider flex h-full w-[60%] bg-slate-100 shadow-md rounded-2xl my mx-1 relative">
       <swiper-container
-        bind:this={swiperEl}
+        bind:this={itemCertificateSwiperEl}
         transition:fade={{duration:100}}
         class="certificate-swiper w-full h-fit p-4 flex bg-slate-100 shadow-md rounded-2xl my mx-1"
         navigation="true"

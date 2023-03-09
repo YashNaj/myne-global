@@ -5,15 +5,19 @@
   import { handleSession } from "@lucia-auth/sveltekit/client";
   import HomeTabs from "$lib/components/HomeTabs.svelte";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
-  import type { PageData } from "./$types";
+  import type { LayoutData, PageData } from "./$types";
   import { onMount } from "svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import Desktop from "$lib/components/Desktop.svelte";
   import { formResult } from "$lib/stores";
+
   console.log("🚀 ~ file: +page.svelte:13 ~ formResult:", formResult)
-  export let data: PageData;
+  export let data: LayoutData = $page.data
   handleSession(page);
-  export let myneCards = data?.myneCards;
+$: console.log("🚀 ~ file: +page.svelte:18 ~ $page", $page.data)
+  export let myneCards = data?.myneCard;
+  $:console.log("🚀 ~ file: +page.svelte:19 ~ myneCards:", myneCards)
+  
   export let isLoading = true;
   export let addCardOpen = false; 
   onMount(async () => {

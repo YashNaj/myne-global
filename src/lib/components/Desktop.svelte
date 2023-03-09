@@ -15,8 +15,9 @@
   import ItemCertificate from "./ItemCertificate.svelte";
   import RequestInventory from "./RequestInventory.svelte";
   import Swiper from "swiper";
+  import {page} from "$app/stores"
   import { onMount, afterUpdate } from "svelte";
-  import type { MyneCard } from "@prisma/client";
+  import type { LayoutServerData } from "../../routes/$types";
   const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
   let categories = [
     "jewelry",
@@ -54,18 +55,18 @@
   });
     swiperEl = document.getElementById("desktop-swiper").swiper
     console.log("🚀 ~ file: Desktop.svelte:49 ~ onMount ~ swiperEl:", swiperEl)
-        
+    swiperEl.update()
   })
-
-  export let data: PageData;
+  let data = $page.data
+  let myneCards = $page.data.myneCard
   export let addCardOpen = false;
-  let myneCards:MyneCard[]|undefined = data.myneCards;
-  console.log(data);
+  let myneCardsCopy = myneCards
   let categoryFilter: string = ''
-  let filteredCards = [...myneCards]
+  let filteredCards;
   let isLoading;
   let filterCards = (categoryFilter) => {
-    filteredCards = [...myneCards]?.filter((card) => {
+    filteredCards = []
+    filteredCards = myneCardsCopy?.filter((card) => {
       return card.category === categoryFilter?.toLowerCase();
     });
     isLoading = false;
@@ -92,9 +93,10 @@
       {#each tabList as tab, i}
         <Tab
           bind:this={tabEl}
-          on:focus={() => {
+          on:click={() => {
             addCardOpen = false;
             handleTabClick(i);
+            console.log(i)
           }}
           class={({ selected }) =>
             selected
@@ -263,7 +265,7 @@
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
               <div class="w-full h-full ">
                 <div class="h-full w-full">
-                  <ItemCertificate {data} {myneCards} />
+                  <ItemCertificate {data} myneCards={myneCardsCopy} />
                 </div>
               </div>
             </TabPanel>

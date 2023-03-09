@@ -28,7 +28,10 @@
     import PageContainer from "$lib/components/PageContainer.svelte";
     import { firstCapital } from "$lib/caps";
     import GenerateImportCsv from "$lib/components/GenerateImportCSV.svelte";
-    export let data: PageData;
+    import { page } from  '$app/stores'
+    
+    export let data: LayoutData;
+    $: data =$page.data 
     export let csvFile: File;
   
     let dropZone;

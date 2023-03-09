@@ -61,9 +61,8 @@ model Profile {
 }
 
 model MyneCard {
-  id                       String    @id @unique @default(uuid())
+  id                       String    @id @default(uuid())
   user_id                  String
-  brand                    String?
   size                     String?
   purchasedFrom            String?
   purchasedValue           String?
@@ -102,8 +101,8 @@ model MyneCard {
   interior_color           String?
   invoice                  String?
   isHeirloom               Boolean   @default(false)
-  laser_inscription        String?//laser_marking
-  manufacturer             String?//condition
+  laser_inscription        String?
+  manufacturer             String?
   material                 String?
   microchip                String?
   mileage                  String?
@@ -117,7 +116,7 @@ model MyneCard {
   release_date             String?
   serial                   String?
   serie                    String?
-  series                   String? //deletion
+  series                   String?
   shape                    String?
   smart_contract_address   String?
   smart_contract_id        String?
@@ -126,22 +125,23 @@ model MyneCard {
   strap_bracelet           String?
   subcategory              String?
   tattoo                   String?
-  trademarks               String?//marks
-  transaction              String?//transaction_id
+  trademarks               String?
+  transaction              String?
   transmission             String?
   unique_features          String?
   url                      String?
   valuation_report         String?
   vin                      String?
-  wallet_address           String?
   weight                   String?
   year                     String?
   cut_shape                String?
   carat_weight             String?
-  gender                   String?
   marketPrice              String?   @default("No market data yet")
+  gender                   String?
+  wallet_address           String?
   Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
+  @@unique([user_id, id])
   @@map("myneCard")
 }
 

@@ -31,7 +31,7 @@
   export let pictures: string[] = [];
   $: pictures = pictures;
   let uploading = false;
-  let files: FileList;
+  let files: FileList ;
   let uploadButton: HTMLInputElement;
 
   const dispatch = createEventDispatcher();
@@ -42,7 +42,7 @@
         throw error;
       }
 
-      const url = URL.createObjectURL(data);
+      const url = URL.createObjectURL(data) || undefined;
       return url;
     } catch (error) {
       if (error instanceof Error) {
@@ -81,17 +81,19 @@
       }
     } finally {
       uploading = false;
-      files = null;
+      files = null ;
       uploadButton.value = "";
     }
   };
 
   $: {
-    for (const picture of pictures) {
+    if (pictures.length > 0) {
+      for (const picture of pictures) {
       downloadImage(picture).then((url) => {
         const imgElement = document.getElementById(`img-${picture}`);
-        imgElement.setAttribute("src", url);
+        imgElement?.setAttribute("src", url);
       });
+    }
     }
   }
 </script>
@@ -103,6 +105,7 @@
   slides-per-view="1"
   class="picture-swiper  w-[17rem] h-46 rounded-2xl "
 >
+{#if pictures.length > 0}
   {#each pictures as picture, i}
     <swiper-slide class=" object-cover rounded-2xl flex justify-center  bg-black bg-opacity-30" id={`item-${i}`}>
       {#if picture}
@@ -124,6 +127,7 @@
       </div>
     </swiper-slide>
   {/each}
+  {:else}
   <swiper-slide class=" rounded-box  bg-black bg-opacity-10">
     <div class="w-full h-full flex">
       <div class="w-full h-full ">
@@ -169,6 +173,7 @@
       <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
     </div>
   </swiper-slide>
+  {/if}
   <div
     class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
   >
