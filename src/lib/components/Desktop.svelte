@@ -14,6 +14,9 @@
   import HistoryReports from "./HistoryReports.svelte";
   import ItemCertificate from "./ItemCertificate.svelte";
   import RequestInventory from "./RequestInventory.svelte";
+  import Swiper from "swiper";
+  import { onMount, afterUpdate } from "svelte";
+  import type { MyneCard } from "@prisma/client";
   const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
   let categories = [
     "jewelry",
@@ -37,37 +40,68 @@
     "motorcycle",
     "other",
   ];
+  let deskTopSwiper:Swiper
+  let swiperEl
+  let slideToTab;
+  let tabEl
+  afterUpdate(()=>{
+  
+    deskTopSwiper = new Swiper(".desktop-swiper", {
+    slidesPerView: 1,
+    observeParents:true,
+    observer: true,    allowTouchMove: false,
+    
+  });
+    swiperEl = document.getElementById("desktop-swiper").swiper
+    console.log("🚀 ~ file: Desktop.svelte:49 ~ onMount ~ swiperEl:", swiperEl)
+        
+  })
+
   export let data: PageData;
   export let addCardOpen = false;
-  let myneCards = data.myneCards;
+  let myneCards:MyneCard[]|undefined = data.myneCards;
   console.log(data);
-  let categoryFilter:string
-  let filteredCards: [];
-  let swiperEl;
-  let isLoading
+  let categoryFilter: string = ''
+  let filteredCards = myneCards
+  let isLoading;
   let filterCards = (categoryFilter) => {
-    isLoading = true;
-    filteredCards = myneCards.filter((card) => {
+    filteredCards = [...myneCards]?.filter((card) => {
       return card.category === categoryFilter?.toLowerCase();
     });
     isLoading = false;
     return filteredCards;
   };
-  $: if (categoryFilter === "" || categoryFilter?.toLowerCase() === 'all') {
-    filteredCards = myneCards;
-  } else {
-    filteredCards = filterCards(categoryFilter);
-  }
+
+  $: if (categoryFilter === "" || categoryFilter?.toLowerCase() === "all") {filteredCards = myneCards;}else{filteredCards = filterCards(categoryFilter)}
   $: categories = categories.sort();
+  function handleTabClick(index) {
+    swiperEl.slideTo(index);
+  $: if (deskTopSwiper) {
+    console.log(deskTopSwiper);
+  }  
+  }
+  function handleTabKeyDown(index:number, tab:string) {
+    if (tab === 'Card Vault'){
+      swiperEl.slideTo(1)
+    }
+    swiperEl.slideTo(index + 1);
+  $: if (deskTopSwiper) {
+    console.log(deskTopSwiper);
+  }  
+  }
+
 </script>
 
 <PageContainer>
-  <TabGroup class="w-full h-full overflow-x-hidden">
+  
+  <TabGroup class=" w-full h-full overflow-x-hidden">
     <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
-      {#each tabList as tab}
+      {#each tabList as tab, i}
         <Tab
-          on:click={() => {
+          bind:this={tabEl}
+          on:focus={() => {
             addCardOpen = false;
+            handleTabClick(i);
           }}
           class={({ selected }) =>
             selected
@@ -77,57 +111,22 @@
         >
       {/each}
     </TabList>
-    <TabPanels class="w-full h-[80vh]  mt-2">
-      <div class="w-full h-full ">
-        <TabPanel
-          class="identify-1 w-full h-full flex flex-col px-2 rounded-2xl bg-gradient-to-b from-slate-300 to-slate-100"
-        >
-          <div class="navbar bg-none">
-            <div class="navbar-start">
-              <div class="dropdown">
-                <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                <!-- svelte-ignore a11y-label-has-associated-control -->
-                <label tabindex="0" class="btn btn-ghost btn-circle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h7"
-                    /></svg
-                  >
-                </label>
-                <ul
-                  tabindex="0"
-                  class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-                >
-                  <li><a>Add Cards</a></li>
-                  <li><a>Delete Cards</a></li>
-                  <li><a>About</a></li>
-                </ul>
-              </div>
-              <select bind:value={categoryFilter} class="select w-full max-w-xs bg-transparent text-center px-2 flex justify-start text-xl">
-                <option class="bg-transparent" selected>All</option>
-                {#each categories as category}
-                  <option class="bg-transparent" value={category}>
-                    {firstCapital(category)}
-                  </option>
-                {/each}
-              </select>
-            </div>
-            <div class="navbar-center">
-              <div class="form-control">
-                <div class="input-group">
-                  <input type="text" placeholder="Search…" class="input input-md shadow-sm bg-slate-100 border-none" />
-                  <button class="btn btn-ghost bg-slate-100 p-2">
+    <div id='desktop-swiper' class = 'w-full h-[80vh] desktop-swiper'> 
+      <TabPanels class="w-full h-[80vh]  mt-2 swiper-wrapper">
+         
+          <div class = 'swiper-slide w-full h-[80vh]'>
+            <TabPanel
+            class="identify-1 w-full h-full flex flex-col px-2 rounded-2xl bg-gradient-to-b from-slate-300 to-slate-100"
+          >
+            <div class="navbar bg-none">
+              <div class="navbar-start">
+                <div class="dropdown">
+                  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                  <!-- svelte-ignore a11y-label-has-associated-control -->
+                  <label tabindex="0" class="btn btn-ghost btn-circle">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      class="h-5 w-5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -135,111 +134,160 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        d="M4 6h16M4 12h16M4 18h7"
                       /></svg
                     >
-                  </button>
+                  </label>
+                  <ul
+                    tabindex="0"
+                    class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li><a>Add Cards</a></li>
+                    <li><a>Delete Cards</a></li>
+                    <li><a>About</a></li>
+                  </ul>
+                </div>
+                <select
+                  bind:value={categoryFilter}
+                  class="select w-full max-w-xs bg-transparent text-center px-2 flex justify-start text-xl"
+                >
+                  <option class="bg-transparent" selected>All</option>
+                  {#each categories as category}
+                    <option class="bg-transparent" value={category}>
+                      {firstCapital(category)}
+                    </option>
+                  {/each}
+                </select>
+              </div>
+              <div class="navbar-center">
+                <div class="form-control">
+                  <div class="input-group">
+                    <input type="text" placeholder="Search…" class="input input-md shadow-sm bg-slate-100 border-none" />
+                    <button class="btn btn-ghost bg-slate-100 p-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        ><path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        /></svg
+                      >
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="navbar-end">
-              <button
-                on:click={() => {
-                  addCardOpen = !addCardOpen;
-                }}
-                class="btn btn-success flex normal-case text-white mr-5"
-              >
-                <Icon src={Plus} color="white" size="12px" class="mr-1" />
-                Add a Card
-              </button>
-              <button class="btn btn-ghost btn-circle">
-                <div class="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                    /></svg
-                  >
-                  <span class="badge badge-xs badge-primary indicator-item" />
-                </div>
-              </button>
-            </div>
-          </div>
-          {#if addCardOpen}
-            <div
-              transition:slide|local={{ duration: 200, delay: 220 }}
-              class="flex flex-row w-full h-[89%] justify-center items-center flex-wrap relative"
-            >
-              <AddCard />
-            </div>
-          {:else}
-            <div
-              transition:slide={{ duration: 200,delay: 220 }}
-              class="h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
-            >
-              {#if filteredCards?.length > 0}
-                {#each filteredCards as myneCard, i}
-                <div class = 'w-fit h-fit' transition:scale={{duration:50}}>
-                  <CardFlippable cardDisplayId="flippable-card-{i}" {...myneCard}>
-                    <SwiperPictures pictures={myneCard.pictures} />
-                  </CardFlippable>
-                </div>
-                {/each}
-              {:else}
-              <div class = 'w-fit h-fit'>
-
-              <CardFlippable>
-               
-                <div class = 'p-3 w-full h-full'>
-
-                  <div class = 'text-3xl flex flex-col justify-center content-cener flex-wrap h-full w-full text-primary bg-black bg-opacity-10 rounded-2xl '>
-                    <p class = 'text-4xl text-primary font-semibold'> No cards found </p>
+              <div class="navbar-end">
+                <button
+                  on:click={() => {
+                    addCardOpen = !addCardOpen;
+                  }}
+                  class="btn btn-success flex normal-case text-white mr-5"
+                >
+                  <Icon src={Plus} color="white" size="12px" class="mr-1" />
+                  Add a Card
+                </button>
+                <button class="btn btn-ghost btn-circle">
+                  <div class="indicator">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      ><path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                      /></svg
+                    >
+                    <span class="badge badge-xs badge-primary indicator-item" />
                   </div>
-
+                </button>
+              </div>
+            </div>
+            {#if addCardOpen}
+              <div
+                transition:slide|local={{ duration: 200, delay: 220 }}
+                class="flex flex-row w-full h-[89%] justify-center items-center flex-wrap relative"
+              >
+                <AddCard />
+              </div>
+            {:else}
+              <div
+                transition:slide={{ duration: 200, delay: 220 }}
+                class="h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
+              >
+                {#if filteredCards?.length > 0}
+                  {#each filteredCards as myneCard, i}
+                    <div class="w-fit h-fit" transition:scale={{ duration: 50 }}>
+                      <CardFlippable cardDisplayId="flippable-card-{i}" {...myneCard}>
+                        <SwiperPictures pictures={myneCard.pictures} />
+                      </CardFlippable>
+                    </div>
+                  {/each}
+                {:else}
+                  <div class="w-fit h-fit">
+                    <CardFlippable>
+                      <div class="p-3 w-full h-full">
+                        <div
+                          class="text-3xl flex flex-col justify-center content-cener flex-wrap h-full w-full text-primary bg-black bg-opacity-10 rounded-2xl "
+                        >
+                          <p class="text-4xl text-primary font-semibold">No cards found</p>
+                        </div>
+                      </div>
+                    </CardFlippable>
+                  </div>
+                {/if}
+              </div>
+            {/if}
+          </TabPanel>
+          </div>
+          <div class = 'swiper-slide w-full h-[80vh]'>
+            <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+              <div class="w-full h-full ">
+                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+                  <Import {data} />22
                 </div>
-              </CardFlippable>
-            </div>
+              </div>
+            </TabPanel>
+          </div>
+          <div class = 'swiper-slide w-full h-[80vh]'>
+            <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+              <div class="w-full h-full ">
+                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+                  <HistoryReports {data} />
+                </div>
+              </div>
+            </TabPanel>
+          </div>
+          <div class = 'swiper-slide w-full h-[80vh]'>
+            <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+              <div class="w-full h-full ">
+                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+                  <ItemCertificate {data} {myneCards} />
+                </div>
+              </div>
+            </TabPanel>
+          </div>
+          <div class = 'swiper-slide w-full h-[80vh]'>
+            <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+              <div class="w-full h-full ">
+                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+                  <RequestInventory {data} />
+                </div>
+              </div>
+            </TabPanel>
+          </div>
+        </TabPanels
+      >
+    </div>
 
-              {/if}
-            </div>
-          {/if}
-        </TabPanel>
-        <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-          <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
-              <Import {data} />22
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-          <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
-              <HistoryReports {data} />
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-          <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220}}>
-              <ItemCertificate {data} {myneCards} />
-            </div>
-          </div>
-        </TabPanel>
-        <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-          <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay:220 }}>
-              <RequestInventory {data} />
-            </div>
-          </div>
-        </TabPanel>
-      </div></TabPanels
-    >
+
   </TabGroup>
 </PageContainer>
