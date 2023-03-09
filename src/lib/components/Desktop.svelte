@@ -41,7 +41,23 @@
   export let addCardOpen = false;
   let myneCards = data.myneCards;
   console.log(data);
-
+  let categoryFilter:string
+  let filteredCards: [];
+  let swiperEl;
+  let isLoading
+  let filterCards = (categoryFilter) => {
+    isLoading = true;
+    filteredCards = myneCards.filter((card) => {
+      return card.category === categoryFilter?.toLowerCase();
+    });
+    isLoading = false;
+    return filteredCards;
+  };
+  $: if (categoryFilter === "" || categoryFilter?.toLowerCase() === 'all') {
+    filteredCards = myneCards;
+  } else {
+    filteredCards = filterCards(categoryFilter);
+  }
   $: categories = categories.sort();
 </script>
 
@@ -95,7 +111,7 @@
                   <li><a>About</a></li>
                 </ul>
               </div>
-              <select class="select w-full max-w-xs bg-transparent text-center px-2 flex justify-start text-xl">
+              <select bind:value={categoryFilter} class="select w-full max-w-xs bg-transparent text-center px-2 flex justify-start text-xl">
                 <option class="bg-transparent" selected>All</option>
                 {#each categories as category}
                   <option class="bg-transparent" value={category}>
@@ -158,48 +174,67 @@
           </div>
           {#if addCardOpen}
             <div
-              transition:slide|local={{ duration: 200 }}
+              transition:slide|local={{ duration: 200, delay: 220 }}
               class="flex flex-row w-full h-[89%] justify-center items-center flex-wrap relative"
             >
               <AddCard />
             </div>
           {:else}
             <div
-              transition:slide={{ duration: 200 }}
+              transition:slide={{ duration: 200,delay: 220 }}
               class="h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
             >
-              {#each myneCards as myneCard, i}
-                <CardFlippable cardDisplayId="flippable-card-{i}" {...myneCard}>
-                  <SwiperPictures pictures={myneCard.pictures} />
-                </CardFlippable>
-              {/each}
+              {#if filteredCards?.length > 0}
+                {#each filteredCards as myneCard, i}
+                <div class = 'w-fit h-fit' transition:scale={{duration:50}}>
+                  <CardFlippable cardDisplayId="flippable-card-{i}" {...myneCard}>
+                    <SwiperPictures pictures={myneCard.pictures} />
+                  </CardFlippable>
+                </div>
+                {/each}
+              {:else}
+              <div class = 'w-fit h-fit'>
+
+              <CardFlippable>
+               
+                <div class = 'p-3 w-full h-full'>
+
+                  <div class = 'text-3xl flex flex-col justify-center content-cener flex-wrap h-full w-full text-primary bg-black bg-opacity-10 rounded-2xl '>
+                    <p class = 'text-4xl text-primary font-semibold'> No cards found </p>
+                  </div>
+
+                </div>
+              </CardFlippable>
+            </div>
+
+              {/if}
             </div>
           {/if}
         </TabPanel>
         <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
           <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide={{ duration: 200, delay: 200 }}>
-              <Import {data} />
+            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+              <Import {data} />22
             </div>
           </div>
         </TabPanel>
         <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
           <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide={{ duration: 200, delay: 200 }}>
+            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
               <HistoryReports {data} />
             </div>
           </div>
         </TabPanel>
         <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
           <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide={{ duration: 200, delay: 200 }}>
+            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220}}>
               <ItemCertificate {data} {myneCards} />
             </div>
           </div>
         </TabPanel>
         <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
           <div class="w-full h-full ">
-            <div class="h-full w-full" transition:slide={{ duration: 200, delay: 200 }}>
+            <div class="h-full w-full" transition:slide|local={{ duration: 200, delay:220 }}>
               <RequestInventory {data} />
             </div>
           </div>

@@ -92,7 +92,7 @@
   </h1>
   <div class="request-inventory-area flex flex-col w-full h-full  rounded-2xl px-2" >
     <div class="request-inventroy-content w-full h-full bg-slate-100 shadow-md rounded-2xl my-2">
-        <h1 class = 'text-xl'> </h1>
+        <h1 class = 'text-xl'></h1>
 
     </div>
   </div>

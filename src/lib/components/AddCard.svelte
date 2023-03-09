@@ -386,6 +386,14 @@
   $: cardProps.pictures = pictures;
   $: console.log("🚀 ~ file: +page.svelte:388 ~ pictures:", pictures);
   $: console.log(formData)
+  let categoryFilter;
+  let filteredCards: [];
+  let swiperEl;
+  $: if (categoryFilter === "") {
+    filteredCards = myneCards;
+  } else {
+    filteredCards = filterCards(categoryFilter);
+  }
 </script>
 
 <div
