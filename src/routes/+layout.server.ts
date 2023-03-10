@@ -50,89 +50,21 @@ export const load = handleServerSession((async ({ url, locals }) => {
     
     let myneCard = await prisma.myneCard.findMany({
       where: {
-        user_id,
-      },
-      select: {
-      
-          isStolen: true,
-          isHeirloom: true,
-          pictures: true,
-          category: true,
-          subcategory: true,
-          brand: true,
-          breed: true,
-          size: true,
-          purchasedFrom: true,
-          purchasedValue: true,
-          reportedStolenDate: true,
-          description: true,
-          crypto_token_address: true,
-          unique_features: true,
-          artist: true,
-          author: true,
-          dob: true,
-          body_length: true,
-          brand_reference: true,
-          caliber: true,
-          carat_weight: true,
-          case_material: true,
-          cOfAuth: true,
-          clarity: true,
-          color: true,
-          cut_shape: true,
-          date: true,
-          dial: true,
-          distinguishing_features: true,
-          document_array: true,
-          drivetrain: true,
-          engine: true,
-          engraving: true,
-          exchange_address: true,
-          exterior_color: true,
-          fuel_type: true,
-          grading: true,
-          grading_reports: true,
-          height: true,
-          hotstamping: true,
-          interior_color: true,
-          invoice: true,
-          laser_inscription: true,
-          manufacturer: true,
-          material: true,
-          microchip: true,
-          mileage: true,
-          model: true,
-          model_yr: true,
-          movement_caliber: true,
-          other: true,
-          pedigree: true,
-          product: true,
-          registration_certificate: true,
-          release_date: true,
-          serial: true,
-          serie: true,
-          series: true,
-          smart_contract_address: true,
-          smart_contract_id: true,
-          stock_number: true,
-          stone: true,
-          strap_bracelet: true,
-          tattoo: true,
-          trademarks: true,
-          transaction: true,
-          transmission: true,
-          url: true,
-          valuation_report: true,
-          vin: true,
-          wallet_address: true,
-          weight: true,
-          year: true,
-          marketPrice: true
+        user_id
       }
-    })
-    const filteredCards = myneCard.filter(obj => Object.values(obj).some(val => val !== null));
+    }).then((cards) => {
+      return cards.map((card) => {
+        return Object.keys(card).reduce((acc, key) => {
+          if (card[key] != null && card[key] !== undefined) {
+            acc[key] = card[key];
+          }
+          return acc;
+        }, {});
+      });
+    });
     
-    console.log("🚀 ~ file: +layout.server.ts:139 ~ load ~ filteredCards:", filteredCards)
+    
+    console.log("🚀 ~ file: +layout.server.ts:139 ~ load ~ filteredCards:", myneCard)
   
 
     const profile = await prisma.user

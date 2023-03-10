@@ -20,6 +20,7 @@
             swiperEl.slideNext();
           }
         } else if (targetEl.classList.contains("swiper-button-pictures-prev")) {
+          console.log("🚀 ~ file: SwiperPictures.svelte:23 ~ parentEl.addEventListener ~ pictures:", pictures)
           const swiperEl = parentEl.swiper;
           if (swiperEl) {
             swiperEl.slidePrev();
@@ -29,7 +30,10 @@
     }
   });
   export let pictures: string[] = [];
+  console.log("🚀 ~ file: SwiperPictures.svelte:33 ~ pictures:", pictures)
   $: pictures = pictures;
+  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures)
+  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures)
   let uploading = false;
   let files: FileList;
   let uploadButton: HTMLInputElement;
@@ -60,8 +64,10 @@
       }
 
       if (pictures.length >= 10) {
+        console.log("🚀 ~ file: SwiperPictures.svelte:67 ~ uploadCardPicture ~ pictures:", pictures)
         throw new Error("You cannot upload more than 10 pictures.");
       }
+        console.log("🚀 ~ file: SwiperPictures.svelte:70 ~ uploadCardPicture ~ pictures:", pictures)
 
       const file = files[0];
       const fileExt = file.name.split(".").pop();
@@ -74,6 +80,8 @@
       }
 
       pictures = [...pictures, filePath];
+      console.log("🚀 ~ file: SwiperPictures.svelte:77 ~ uploadCardPicture ~ pictures:", pictures)
+      
       dispatch("picturesuploaded", pictures);
     } catch (error) {
       if (error instanceof Error) {
@@ -86,14 +94,15 @@
     }
   };
 
-  $: if (pictures?.length > 0){
-    for (const picture of pictures) {
-      downloadImage(picture).then((url) => {
+  $:  for (let picture of pictures) {
+      if (pictures?.length > 0 && pictures[0] !== ''){
+        downloadImage(picture).then((url) => {
         const imgElement = document.getElementById(`img-${picture}`);
         imgElement?.setAttribute("src", url);
       });
     }
-  }
+      }
+      
  
 </script>
 

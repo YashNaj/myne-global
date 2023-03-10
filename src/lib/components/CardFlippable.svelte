@@ -166,6 +166,7 @@
 
   export let user_id;
   export let createdOn;
+  export let filteredCardProps;
   export let cardProps: IcardProps = {
     id,
     user_id,

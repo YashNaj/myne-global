@@ -37,6 +37,7 @@
   export let data:LayoutServerData;
   export let csvFile: File;
   export let myneCards;
+  export let filteredCards;
   $: myneCardsCopy = myneCards
   let certificateSlider;
   let justValue;
@@ -72,7 +73,7 @@
   let tableProps: string[] = [];
   $: console.log("🚀 ~ file: ItemCertificate.svelte:71 ~ swiperEl:", itemCertificateSwiperEl);
 
-  let categoryFilter: string = "";
+  export let categoryFilter: string = "";
   $: categoryFilter = categoryFilter?.toLowerCase();
   let floatingConfig = {
     strategy: "bottom",
@@ -96,30 +97,13 @@
   $: breeds = selectedCategory?.breeds;
   let brands: [] | string[] | undefined | null;
   $: brands = selectedCategory?.brands;
-  let filteredCards: [];
   let isLoading: boolean;
-  let filterCards = (categoryFilter) => {
-    isLoading = true;
-    filteredCards = myneCardsCopy.filter((card) => {
-      return card.category === categoryFilter?.toLowerCase();
-    });
-    isLoading = false;
-    return filteredCards;
-  };
   let itemCertificateSwiperEl;
   $: console.log("🚀 ~ file: ItemCertificate.svelte:107 ~ swiperEl:", itemCertificateSwiperEl);
-
-  $: if (categoryFilter === "") {
-    filteredCards = myneCards;
-  }
-
-  $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ filteredCards:", filteredCards);
-  $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ filteredCards:", filterCards);
-  $: console.log("🚀 ~ file: ItemCertificate.svelte:109 ~ beforeUpdate ~ swiperEl:", itemCertificateSwiperEl);
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ categoryFilter:", categoryFilter);
 </script>
 
-<div class="wrapper w-full h-full flex flex-col ">
+<div class=" w-full h-[80vh] flex flex-col ">
   <h1 class="flex justify-start flex-col text-primary font-semibold text-4xl text-left w-full h-fit pl-4 pt-4">
     Item Certificate
   </h1>
@@ -160,6 +144,22 @@
               </div>
             </swiper-slide>
           {/each}
+          {:else if myneCard?.length > 0}
+          <swiper-slide class="w-fit h-fit " >
+            {#each myneCard as myneCards}
+            <swiper-slide class="w-fit h-fit " transition:scale|local={{duration:100}}>
+              <div class="wrapper w-fit h-fit flex flex-col ">
+                <div class="w-fit h-fit aspect-[5/7]">
+                  
+                  <CardFlippable {...myneCards}>
+                    <SwiperPictures pictures={myneCards.pictures} />
+                  </CardFlippable>
+                </div>
+              </div>
+            </swiper-slide>
+          {/each}
+          </swiper-slide>
+
           {:else}
           <swiper-slide class="w-fit h-fit " >
             <div class="wrapper w-fit h-fit flex flex-col ">

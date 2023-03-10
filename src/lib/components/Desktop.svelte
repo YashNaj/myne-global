@@ -7,7 +7,8 @@
   import UploadWidget from "./UploadWidget.svelte";
   import Import from "./Import.svelte";
   import type { PageData } from "../../routes/(app)/$types";
-  import { scale, slide } from "svelte/transition";
+  import { fade, scale, slide } from "svelte/transition";
+  import { backOut } from "svelte/easing";
   import { Icon, Plus, Search } from "svelte-hero-icons";
   import Transition from "./Transition.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
@@ -19,6 +20,7 @@
   import { onMount, afterUpdate } from "svelte";
   import type { LayoutData, LayoutServerData } from "../../routes/$types";
   import type { MyneCard } from "@prisma/client";
+  import TabContainer from "./TabContainer.svelte";
   const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
   let categories = [
     "jewelry",
@@ -42,26 +44,11 @@
     "motorcycle",
     "other",
   ];
-  let deskTopSwiper:Swiper
-  let swiperEl
-  let slideToTab;
-  let tabEl
-  afterUpdate(()=>{
-  
-    deskTopSwiper = new Swiper(".desktop-swiper", {
-    slidesPerView: 1,
-    observeParents:true,
-    observer: true,    allowTouchMove: false,
-    
-  });
-    swiperEl = document.getElementById("desktop-swiper").swiper
-    console.log("🚀 ~ file: Desktop.svelte:49 ~ onMount ~ swiperEl:", swiperEl)
-    swiperEl.update()
-  })
+
   export let data: LayoutServerData;
   export let myneCards;
   export let addCardOpen = false;
-  let categoryFilter: string = ''
+  export let categoryFilter: string = ''
   let filteredCards;
   let isLoading;
   let filterCards = (categoryFilter) => {
@@ -73,31 +60,18 @@
     return filteredCards;
   };
 
-  $: if (categoryFilter === "" || categoryFilter?.toLowerCase() === "all") {filteredCards = myneCards;}else{filteredCards = filterCards(categoryFilter)}
+  $: if (categoryFilter === "" || categoryFilter?.toLowerCase() === "all") {filteredCards = myneCards}else{filteredCards = filterCards(categoryFilter)}
   $: categories = categories.sort();
-  function handleTabClick(index) {
-    swiperEl.slideTo(index);
-  $: if (deskTopSwiper) {
-    console.log(deskTopSwiper);
-  }  
-  }
+  
 
 </script>
 
 <PageContainer>
   
-<TabGroup  on:change={() => {
-    
-  }} class=" w-full h-full overflow-x-hidden">
+<TabGroup  class=" w-full h-fit overflow-x-hidden">
     <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
       {#each tabList as tab, i}
         <Tab
-          bind:this={tabEl}
-          on:click={() => {
-            addCardOpen = false;
-            handleTabClick(i);
-            console.log(i)
-          }}
           class={({ selected }) =>
             selected
               ? "flex flex-col flex-wrap content-center justify-center rounded-lg flex-1 bg-primary text-secondary p-1  transform translate-x-2 duration-100 xl:text-lg lg:text-md font-semibold"
@@ -105,15 +79,14 @@
           >{tab}</Tab
         >
       {/each}
-    </TabList>
-    <div id='desktop-swiper' class = 'w-full h-[80vh] desktop-swiper'> 
+    </TabList> 
       <TabPanels class="w-full h-[80vh]  mt-2 swiper-wrapper">
          
-          <div class = 'swiper-slide w-full h-[80vh]'>
             <TabPanel
-            class="identify-1 w-full h-full flex flex-col px-2 rounded-2xl bg-gradient-to-b from-slate-300 to-slate-100"
+            class="identify-1 w-full h-[80vh] flex flex-col px-2 rounded-2xl bg-gradient-to-b from-slate-300 to-slate-100"
           >
-            <div class="navbar bg-none">
+          <div class = 'w-ful h-[80vh]' transition:fade|local={{duration:300}}>
+            <div class="navbar bg-none w-full"  >
               <div class="navbar-start">
                 <div class="dropdown">
                   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -208,19 +181,19 @@
             </div>
             {#if addCardOpen}
               <div
-                transition:slide|local={{ duration: 200, delay: 220 }}
-                class="flex flex-row w-full h-[89%] justify-center items-center flex-wrap relative"
+              class=" flex flex-row w-full h-[89%] justify-center items-center flex-wrap"
               >
                 <AddCard />
               </div>
             {:else}
               <div
-                transition:slide={{ duration: 200, delay: 220 }}
-                class="h-[89%] bg-black bg-opacity-25 rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
+              class:translate-y-full={addCardOpen}
+              class:ease-linear={addCardOpen}
+                class="h-[89%]  bg-black bg-opacity-25  rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
               >
                 {#if filteredCards?.length > 0}
                   {#each filteredCards as myneCard, i}
-                    <div class="w-fit h-fit" transition:scale={{ duration: 50 }}>
+                    <div class="w-fit h-fit">
                       <CardFlippable cardDisplayId="flippable-card-{i}" {...myneCard}>
                         <SwiperPictures pictures={myneCard.pictures} />
                       </CardFlippable>
@@ -241,48 +214,51 @@
                 {/if}
               </div>
             {/if}
+          </div>
+           
           </TabPanel>
-          </div>
-          <div class = 'swiper-slide w-full h-[80vh]'>
+          <div/>
+          <!-- <TabContainer>
+
+            <Import data =  {$page.data} />
+
+          </TabContainer>
+          <TabContainer>
+
+            <HistoryReports data =  {$page.data} />
+
+          </TabContainer>
+          <TabContainer>
+
+            <ItemCertificate {myneCards} {filteredCards} bind:categoryFilter={categoryFilter} />
+
+          </TabContainer>
+          <TabContainer>
+
+            <RequestInventory data =  {$page.data} />
+
+          </TabContainer>
+           -->
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-              <div class="w-full h-full ">
-                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
-                  <Import data =  {$page.data} />22
-                </div>
-              </div>
-            </TabPanel>
-          </div>
-          <div class = 'swiper-slide w-full h-[80vh]'>
-            <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-              <div class="w-full h-full ">
-                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+ 
+                  <Import data =  {$page.data} />
+           
+            </TabPanel>            <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
                   <HistoryReports data =  {$page.data} />
-                </div>
-              </div>
+        
             </TabPanel>
-          </div>
-          <div class = 'swiper-slide w-full h-[80vh]'>
+
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-              <div class="w-full h-full ">
-                <div class="h-full w-full">
-                  <ItemCertificate data =  {$page.data} {myneCards} />
-                </div>
-              </div>
+          
+                  <ItemCertificate {myneCards} {filteredCards} bind:categoryFilter={categoryFilter} />
+              
             </TabPanel>
-          </div>
-          <div class = 'swiper-slide w-full h-[80vh]'>
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-              <div class="w-full h-full ">
-                <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
+
                   <RequestInventory data =  {$page.data} />
-                </div>
-              </div>
+             
             </TabPanel>
-          </div>
         </TabPanels
       >
-    </div>
-
-
   </TabGroup>
 </PageContainer>

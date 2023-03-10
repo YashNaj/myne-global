@@ -86,7 +86,7 @@
     }
   </script>
 
-<div class="wrapper w-full h-full flex flex-col ">
+<div class=" flex flex-col h-[80vh] w-full ">
   <h1 class="flex justify-start text-primary font-semibold text-4xl text left w-full h-fit md:pl-4 md:pt-4">
     Request Inventory Report
   </h1>

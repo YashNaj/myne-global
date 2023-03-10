@@ -56,6 +56,7 @@
   import Swiper from "swiper";
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
+  import { backInOut } from "svelte/easing";
   let floatingConfig = {
     strategy: "bottom",
   };
@@ -390,7 +391,7 @@
 </script>
 
 <div
-  class=" w-full h-full grid grid-cols-2 grid-rows-1 px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative"
+  class=" w-full h-full grid grid-cols-2  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" transition:slide|local={{duration: 200, easing:backInOut}}
 >
   <div class="flex justify-center w-full h-full content-center order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
