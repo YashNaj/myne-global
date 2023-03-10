@@ -32,9 +32,12 @@
   import GenerateImportCsv from "$lib/components/GenerateImportCSV.svelte";
   import CardFlippable from "./CardFlippable.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
-  export let data: PageData;
+  import type { MyneCard } from "@prisma/client";
+  import type { LayoutServerData } from "../../routes/$types";
+  export let data:LayoutServerData;
   export let csvFile: File;
   export let myneCards;
+  $: myneCardsCopy = myneCards
   let certificateSlider;
   let justValue;
   interface IfieldsPropsObject {
@@ -97,7 +100,7 @@
   let isLoading: boolean;
   let filterCards = (categoryFilter) => {
     isLoading = true;
-    filteredCards = myneCards.filter((card) => {
+    filteredCards = myneCardsCopy.filter((card) => {
       return card.category === categoryFilter?.toLowerCase();
     });
     isLoading = false;
@@ -108,9 +111,8 @@
 
   $: if (categoryFilter === "") {
     filteredCards = myneCards;
-  } else {
-    filteredCards = filterCards(categoryFilter);
   }
+
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ filteredCards:", filteredCards);
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ filteredCards:", filterCards);
   $: console.log("🚀 ~ file: ItemCertificate.svelte:109 ~ beforeUpdate ~ swiperEl:", itemCertificateSwiperEl);

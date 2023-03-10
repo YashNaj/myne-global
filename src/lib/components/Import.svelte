@@ -29,9 +29,9 @@
     import { firstCapital } from "$lib/caps";
     import GenerateImportCsv from "$lib/components/GenerateImportCSV.svelte";
     import { page } from  '$app/stores'
+  import type { LayoutServerData } from "../../routes/$types";
     
-    export let data: LayoutData;
-    $: data =$page.data 
+    export let data:LayoutServerData
     export let csvFile: File;
   
     let dropZone;

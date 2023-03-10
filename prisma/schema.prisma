@@ -77,6 +77,7 @@ model MyneCard {
   author                   String?
   body_length              String?
   brand_reference          String?
+  brand                    String?
   cOfAuth                  String?
   caliber                  String?
   case_material            String?
@@ -139,6 +140,7 @@ model MyneCard {
   marketPrice              String?   @default("No market data yet")
   gender                   String?
   wallet_address           String?
+  document_array           String?
   Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@unique([user_id, id])

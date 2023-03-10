@@ -31,23 +31,23 @@
   export let pictures: string[] = [];
   $: pictures = pictures;
   let uploading = false;
-  let files: FileList ;
+  let files: FileList;
   let uploadButton: HTMLInputElement;
 
   const dispatch = createEventDispatcher();
   const downloadImage = async (path: string) => {
-    try {
-      const { data, error } = await supabase.storage.from("card-images").download(path);
-      if (error) {
-        throw error;
-      }
-
-      const url = URL.createObjectURL(data) || undefined;
-      return url;
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log("Error downloading image: ", error.message);
-      }
+      try {
+        const { data, error } = await supabase.storage.from("card-images").download(path);
+        if (error) {
+          throw error;
+        }
+        const url = URL.createObjectURL(data);
+        
+        return url;
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log("Error downloading image: ", error.message);
+        }
     }
   };
 
@@ -81,21 +81,20 @@
       }
     } finally {
       uploading = false;
-      files = null ;
+      files = null;
       uploadButton.value = "";
     }
   };
 
-  $: {
-    if (pictures.length > 0) {
-      for (const picture of pictures) {
+  $: if (pictures?.length > 0){
+    for (const picture of pictures) {
       downloadImage(picture).then((url) => {
         const imgElement = document.getElementById(`img-${picture}`);
         imgElement?.setAttribute("src", url);
       });
     }
-    }
   }
+ 
 </script>
 
 <swiper-container
@@ -116,9 +115,12 @@
           alt="Uploaded picture"
           class="object-cover  bg-black bg-opacity"
         />
-      {:else}
-        <div class="no-image" style="width: 100%; height: 100%;" />
-      {/if}
+        {:else}
+        <div class = 'object-cover bg-black bg-opacity'>
+
+
+        </div>
+        {/if}
       <div
         class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
       >
@@ -127,7 +129,7 @@
       </div>
     </swiper-slide>
   {/each}
-  {:else}
+{/if}
   <swiper-slide class=" rounded-box  bg-black bg-opacity-10">
     <div class="w-full h-full flex">
       <div class="w-full h-full ">
@@ -173,7 +175,7 @@
       <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
     </div>
   </swiper-slide>
-  {/if}
+
   <div
     class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
   >

@@ -99,18 +99,9 @@ export const actions: Actions = {
     const picturesRawURL = form.get("pictures");
     const pictures = picturesRawURL?.split(',')
     console.log(pictures);
-    const profile = await prisma.profile.findUnique({
-      where: {
-        user_id: user.userId,
-      },
-    });
-    const newCard = await prisma.profile.update({
-      where: {
-        user_id: user.userId,
-      },
+    const newCard = await prisma.myneCard.create({
       data: {
-        myneCard: {
-          create: {
+            user_id: user.userId,
             category,
             subcategory,
             brand,
@@ -185,8 +176,7 @@ export const actions: Actions = {
             gender, 
             pictures
           },
-        },
-      },
+      
     });
     formResult.set(true)
     console.log(formResult)

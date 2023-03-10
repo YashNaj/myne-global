@@ -17,7 +17,8 @@
   import Swiper from "swiper";
   import {page} from "$app/stores"
   import { onMount, afterUpdate } from "svelte";
-  import type { LayoutServerData } from "../../routes/$types";
+  import type { LayoutData, LayoutServerData } from "../../routes/$types";
+  import type { MyneCard } from "@prisma/client";
   const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
   let categories = [
     "jewelry",
@@ -57,16 +58,15 @@
     console.log("🚀 ~ file: Desktop.svelte:49 ~ onMount ~ swiperEl:", swiperEl)
     swiperEl.update()
   })
-  let data = $page.data
-  let myneCards = $page.data.myneCard
+  export let data: LayoutServerData;
+  export let myneCards;
   export let addCardOpen = false;
-  let myneCardsCopy = myneCards
   let categoryFilter: string = ''
   let filteredCards;
   let isLoading;
   let filterCards = (categoryFilter) => {
     filteredCards = []
-    filteredCards = myneCardsCopy?.filter((card) => {
+    filteredCards = myneCards?.filter((card) => {
       return card.category === categoryFilter?.toLowerCase();
     });
     isLoading = false;
@@ -247,7 +247,7 @@
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
               <div class="w-full h-full ">
                 <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
-                  <Import {data} />22
+                  <Import data =  {$page.data} />22
                 </div>
               </div>
             </TabPanel>
@@ -256,7 +256,7 @@
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
               <div class="w-full h-full ">
                 <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
-                  <HistoryReports {data} />
+                  <HistoryReports data =  {$page.data} />
                 </div>
               </div>
             </TabPanel>
@@ -265,7 +265,7 @@
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
               <div class="w-full h-full ">
                 <div class="h-full w-full">
-                  <ItemCertificate {data} myneCards={myneCardsCopy} />
+                  <ItemCertificate data =  {$page.data} {myneCards} />
                 </div>
               </div>
             </TabPanel>
@@ -274,7 +274,7 @@
             <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
               <div class="w-full h-full ">
                 <div class="h-full w-full" transition:slide|local={{ duration: 200, delay: 220 }}>
-                  <RequestInventory {data} />
+                  <RequestInventory data =  {$page.data} />
                 </div>
               </div>
             </TabPanel>

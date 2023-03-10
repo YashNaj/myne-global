@@ -159,7 +159,6 @@ export let cardPropsArray  = [
   'weight',
   'year',
   'marketPrice',
-  'backgroundColor',
 ];
 
 export let cardProps:cardProps = {

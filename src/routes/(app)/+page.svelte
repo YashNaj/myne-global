@@ -15,7 +15,8 @@
   export let data: LayoutData = $page.data
   handleSession(page);
 $: console.log("🚀 ~ file: +page.svelte:18 ~ $page", $page.data)
-  export let myneCards = data?.myneCard;
+  let myneCards;
+  $: myneCards = data.myneCard
   $:console.log("🚀 ~ file: +page.svelte:19 ~ myneCards:", myneCards)
   
   export let isLoading = true;
@@ -94,5 +95,5 @@ $: console.log("🚀 ~ file: +page.svelte:18 ~ $page", $page.data)
 <div
   class="hidden md:flex w-full h-[94vh] py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent "
 >
-<Desktop {data} {addCardOpen}/>
+<Desktop {data} {addCardOpen} {myneCards}/>
 </div>
