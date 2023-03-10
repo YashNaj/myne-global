@@ -7,17 +7,12 @@
   import { slide } from "svelte/transition";
   import type { PageData } from "./$types";
   export let data: PageData
-  let signingIn = false; 
-  export let form = { message: "" };
-  console.log("🚀 ~ file: +page.svelte:8 ~ signingIn:", signingIn)
+  
+  export let form = { message: "", signingIn: false };
+  export let signingIn = false;
   let email = "";
 </script>
 
-{#if signingIn}
-  <PageContainer>
-    <Spinner />
-  </PageContainer>
-{/if}
 <h1 class="text-primary flex pl-4 font-bold text-2xl">
   Sign into your Myne Account.
 </h1>
@@ -25,7 +20,7 @@
   method="POST"
   class="flex flex-col justify-center flex-wrap content-center text-primary p-4"
   use:enhance={({ data, cancel }) => {
-    form = { message: "" };
+    form = { message: "", signingIn};
     const email = data.get("email")?.toString() || "";
     const password = data.get("password")?.toString() || "";
     if (!email || !password) {

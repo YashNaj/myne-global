@@ -4,13 +4,13 @@
   import { Transition } from "@rgossiaux/svelte-headlessui";
   import { createSearchStore, searchHandler } from "$lib/search";
   import { page } from "$app/stores";
-  import Select from "svelte-select";
+  import { backOut } from 'svelte/easing'
+  import Select from 'svelte-select'
   import { onDestroy, onMount } from "svelte";
   import { enhance } from "$app/forms";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
-  import addCardSwiperAction from "$lib/utils/addCardSwiperActions";
   export let success = false
   $:console.log("🚀 ~ file: AddCard.svelte:18 ~ success:", success)
 
@@ -56,7 +56,6 @@
   import Swiper from "swiper";
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
-  import { backInOut } from "svelte/easing";
   let floatingConfig = {
     strategy: "bottom",
   };
@@ -391,7 +390,7 @@
 </script>
 
 <div
-  class=" w-full h-full grid grid-cols-2  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" transition:slide|local={{duration: 200, easing:backInOut}}
+  class=" w-full h-full grid grid-cols-2  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" transition:slide={{duration: 200, easing: backOut}}
 >
   <div class="flex justify-center w-full h-full content-center order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
@@ -560,7 +559,7 @@
                         brand = justValue;
                       }}
                       bind:justValue={cardProps["brand"]}
-                    />
+                    />oo
                   {/if}
                   {#if cardProps.category?.toLowerCase() === "nft"}
                     <input
@@ -818,8 +817,7 @@
                     on:focus={() => (flipped = true)}
                   />
                   <input
-                    placeholder="URL"
-                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    placeholder="URL"class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                     bind:value={cardProps["url"]}
                   />
                 {:else if cardProps.category?.toLowerCase() === "firearms"}
@@ -1240,7 +1238,7 @@
                       placeholder="Unique features"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["other"]}
-                      use:addCardSwiperAction
+                      
                     />
                   {:else if cardProps.category?.toLowerCase() === "jewelry"}
                     <Select
@@ -1263,7 +1261,7 @@
                       placeholder="Unique features"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                       bind:value={cardProps["other"]}
-                      use:addCardSwiperAction
+                      
                     />
                     <input
                       placeholder="Grading"
@@ -1276,14 +1274,14 @@
                         placeholder="Color"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["exterior_color"]}
-                        use:addCardSwiperAction
+                        
                       />
                     {:else}
                       <input
                         placeholder="Exterior color"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["exterior_color"]}
-                        use:addCardSwiperAction
+                        
                       />
                     {/if}
 
@@ -1292,7 +1290,7 @@
                         placeholder="Interior color"
                         class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                         bind:value={cardProps["interior_color"]}
-                        use:addCardSwiperAction
+                        
                       />
                     {/if}
                     {#if cardProps.category?.toLowerCase() === "motorcycle"}
@@ -1359,7 +1357,7 @@
                   placeholder="Description"
                   class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                   bind:value={cardProps["description"]}
-                  use:addCardSwiperAction
+                  
                 />
               </swiper-slide>
 
@@ -1370,7 +1368,7 @@
                   placeholder="Purchased from"
                   class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here"
                   bind:value={cardProps["purchasedFrom"]}
-                  use:addCardSwiperAction
+                  
                   on:focus={() => {
                     flipped = true;
                   }}

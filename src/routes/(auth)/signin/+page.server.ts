@@ -7,12 +7,7 @@ let signingIn = false;
 export const load: PageServerLoad = async ({ locals, page }) => {
   const session = await locals.validate();
   if (session) throw redirect(302, "/");
-    return {
-      status: 200,
-      props: {
-        signingIn
-      },
-    };
+
   }
   // Set signingIn to false when redirecting
 
@@ -30,8 +25,10 @@ export const actions: Actions = {
     )
       return fail(400, {
         message: "Email or Password cannot be empty",
+        signingIn : false
       });
     try {
+      let signingIn = true;
       const key = await auth.validateKeyPassword("email", email, password);
       const session = await auth.createSession(key.userId);
       locals.setSession(session);
@@ -52,7 +49,11 @@ export const actions: Actions = {
         });
       }
       console.log(error);
-      return fail(400);
+      return fail(400,  {signingIn : false })
     }
+    finally{
+      signingIn = false; 
+    }
+    return {signingIn}
   },
 };

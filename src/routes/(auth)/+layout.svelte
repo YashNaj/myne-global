@@ -3,11 +3,16 @@
   import logo from "$lib/images/blue_myne_logo.png";
   import whiteLogo from "$lib/images/white_myne_logo.png";
 
-  export let form = { message: "" };
+  export let form = { message: "", signingIn:false };
   import { register } from "swiper/element/bundle";
   // register Swiper custom elements
   register();
+  import { page } from "$app/stores"
 </script>
+
+
+
+
 
 <div
   class="auth-container bg-primary w-screen h-screen flex-col flex flex-wrap justify-start content-center overflow-hidden pt-4 lg:hidden"

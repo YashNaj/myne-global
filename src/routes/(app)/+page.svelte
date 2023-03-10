@@ -11,21 +11,19 @@
   import Desktop from "$lib/components/Desktop.svelte";
   import { formResult } from "$lib/stores";
 
-  console.log("🚀 ~ file: +page.svelte:13 ~ formResult:", formResult)
   export let data: LayoutData = $page.data
   handleSession(page);
-$: console.log("🚀 ~ file: +page.svelte:18 ~ $page", $page.data)
   let myneCards;
   $: myneCards = data.myneCard
-  $:console.log("🚀 ~ file: +page.svelte:19 ~ myneCards:", myneCards)
+  let loading;
+  $: loading = data.loading
   
   export let isLoading = true;
   export let addCardOpen = false; 
   onMount(async () => {
-    // Load data here
+  // Load data here
     isLoading = false;
   });
-  $: console.log("🚀 ~ file: +page.svelte:24 ~ $page.form:", $page.form)
 </script>
 
 <div
@@ -84,7 +82,7 @@ $: console.log("🚀 ~ file: +page.svelte:18 ~ $page", $page.data)
             class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
           "
           >
-            <CardFlippable />
+          <CardFlippable />
           </swiper-slide>
         </swiper-container>
       </div>
@@ -95,5 +93,5 @@ $: console.log("🚀 ~ file: +page.svelte:18 ~ $page", $page.data)
 <div
   class="hidden md:flex w-full h-[94vh] py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent "
 >
-<Desktop {data} {addCardOpen} {myneCards}/>
+<Desktop {loading} {data} {addCardOpen} {myneCards}/>
 </div>

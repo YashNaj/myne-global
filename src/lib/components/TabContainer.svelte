@@ -13,7 +13,7 @@
 </script>
 {#if ready}
 
-    <TabPanel let:selected class="w-full h-full flex flex-col px-2 rounded-2xl">
+    <TabPanel  class="w-full h-full flex flex-col px-2 rounded-2xl">
 
         <div class="w-full h-full relative ">
           <div class="h-full w-full absolute">

@@ -47,7 +47,7 @@ export const load = handleServerSession((async ({ url, locals }) => {
     //       .filter((prop) => acceptable.includes(prop))
     //       .map((prop) => [prop, true])
     //   ),}
-    
+    let loading = true; 
     let myneCard = await prisma.myneCard.findMany({
       where: {
         user_id
@@ -62,11 +62,6 @@ export const load = handleServerSession((async ({ url, locals }) => {
         }, {});
       });
     });
-    
-    
-    console.log("🚀 ~ file: +layout.server.ts:139 ~ load ~ filteredCards:", myneCard)
-  
-
     const profile = await prisma.user
       .findUnique({
         where: {
@@ -74,7 +69,7 @@ export const load = handleServerSession((async ({ url, locals }) => {
         },
       })
       .profile();
-
-    return { isUser: true, myneCard, profile };
+    loading = false
+    return { isUser: true, myneCard, profile, loading };
   } else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);

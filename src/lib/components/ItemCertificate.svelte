@@ -37,8 +37,9 @@
   export let data:LayoutServerData;
   export let csvFile: File;
   export let myneCards;
+  $: myneCards = data.myneCard
+  $:console.log(myneCards)
   export let filteredCards;
-  $: myneCardsCopy = myneCards
   let certificateSlider;
   let justValue;
   interface IfieldsPropsObject {
@@ -53,7 +54,7 @@
     sneakers: sneakerProps,
     firearms: firearmsProps,
     technology: technologyProps,
-    "trading cards": tradingCardsProps,
+    "trading cards": tradingCardsProps, 
     collectibles: collectiblesProps,
     crypto: cryptoProps,
     nft: nftProps,
@@ -131,37 +132,21 @@
         observer="true"
         css='true'
       >
-        {#if filteredCards?.length > 0}
-          {#each filteredCards as myneCard}
+
+          {#each myneCards as myneCard}
             <swiper-slide class="w-fit h-fit " transition:scale|local={{duration:100}}>
               <div class="wrapper w-fit h-fit flex flex-col ">
                 <div class="w-fit h-fit aspect-[5/7]">
                   
-                  <CardFlippable {...myneCard}>
+                  <CardFlippable {myneCard}>
                     <SwiperPictures pictures={myneCard.pictures} />
                   </CardFlippable>
                 </div>
               </div>
             </swiper-slide>
           {/each}
-          {:else if myneCard?.length > 0}
-          <swiper-slide class="w-fit h-fit " >
-            {#each myneCard as myneCards}
-            <swiper-slide class="w-fit h-fit " transition:scale|local={{duration:100}}>
-              <div class="wrapper w-fit h-fit flex flex-col ">
-                <div class="w-fit h-fit aspect-[5/7]">
-                  
-                  <CardFlippable {...myneCards}>
-                    <SwiperPictures pictures={myneCards.pictures} />
-                  </CardFlippable>
-                </div>
-              </div>
-            </swiper-slide>
-          {/each}
-          </swiper-slide>
-
-          {:else}
-          <swiper-slide class="w-fit h-fit " >
+          
+          <!-- <swiper-slide class="w-fit h-fit " >
             <div class="wrapper w-fit h-fit flex flex-col ">
               <div class="w-fit h-fit">
                 <CardFlippable>
@@ -175,8 +160,7 @@
                 </CardFlippable>
               </div>
             </div>
-          </swiper-slide>
-        {/if}
+          </swiper-slide> -->
       </swiper-container>
     </div>
     <div class="item-certificate-controls h-full w-[40%]  bg-slate-200 rounded-2xl  mx-1 shadow-lg flex flex-col">

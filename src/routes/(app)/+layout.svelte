@@ -7,13 +7,16 @@
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
   import { Icon, Plus } from "svelte-hero-icons";
-  import type { PageServerLoad } from "./$types";
+  import type { LayoutServerData, PageServerLoad } from "./$types";
   import type { PageData } from "@lucia-auth/sveltekit/types";
   import Desktop from "$lib/components/Desktop.svelte";
+  import PageContainer from "$lib/components/PageContainer.svelte";
+  import Spinner from "$lib/components/Spinner.svelte";
   export let addCardOpen = false; 
-  export let data: LayoutData;
-  const profile = data?.profile;
-
+  export let data:LayoutServerData = $page.data;
+  const profile = data.profile;
+  export let loading = data.loading;
+  $: console.log(loading)
   let menuItems = [
     "Import",
     "Request History Reports",
@@ -30,7 +33,14 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
   <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
 </svelte:head>
-
+{#if loading}
+<div class = 'w-full h-full relative'>
+  
+  
+  <Spinner/>
+  
+</div>
+{:else}
 <div class="drawer drawer-end ">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content  w-full  h-auto lg:w-auto overflow-hidden">
@@ -93,6 +103,13 @@
         </ul>
       </div>
     </div>
+    {#if loading}
+    
+    <PageContainer>
+      <Spinner/>
+    </PageContainer>
+    {/if}
+
     <div class="hidden lg:flex flex-col justify-center content-center flex-wrap">
       <slot/>
     </div>
@@ -113,7 +130,7 @@
     </ul>
   </div>
 </div>
-
+{/if}
 <style lang="postcss">
   :global(html) {
     overflow: scroll;
