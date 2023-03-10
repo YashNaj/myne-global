@@ -119,16 +119,8 @@
     description: '', 
     ...myneCard,
   };
-  $: cardProps = cardProps; 
-  
-  let propSelector:string | null  = 'all'
-  $: propSelector = cardProps.category
-  $: props = fieldPropsObject['jewelry'].reduce((acc, curr) => {
-    acc[curr] = "";
-    return acc;
-  }, {});
 
-  $: console.log("Card Props", props);
+ $: console.log("Card Props" , cardProps)
 
  
 

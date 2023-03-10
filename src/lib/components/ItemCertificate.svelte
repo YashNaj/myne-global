@@ -34,10 +34,7 @@
   import SwiperPictures from "./SwiperPictures.svelte";
   import type { MyneCard } from "@prisma/client";
   import type { LayoutServerData } from "../../routes/$types";
-  export let data:LayoutServerData;
-  export let csvFile: File;
   export let myneCards;
-  $: myneCards = data.myneCard
   $:console.log(myneCards)
   export let filteredCards;
   let certificateSlider;
