@@ -1,6 +1,6 @@
 <script lang="ts">
   import Spinner from "$lib/components/Spinner.svelte";
-  import { afterUpdate, createEventDispatcher } from "svelte";
+  import { afterUpdate, beforeUpdate, createEventDispatcher } from "svelte";
   import { supabase } from "$lib/supabaseClient";
   import { CloudUpload, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
@@ -9,6 +9,15 @@
   let parentEl;
 
   export let size = 10;
+  beforeUpdate(()=>{
+    for (let picture of pictures) {
+          if (pictures?.length > 0 && pictures[0] !== "")
+            downloadImage(picture).then((url) => {
+              const imgElement = document.getElementById(`img-${picture}`);
+              imgElement?.setAttribute("src", url);
+            });
+        }
+  })
   onMount(() => {
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
@@ -27,16 +36,11 @@
             swiperEl.slidePrev();
           }
         }
-        for (let picture of pictures) {
-          if (pictures?.length > 0 && pictures[0] !== "")
-            downloadImage(picture).then((url) => {
-              const imgElement = document.getElementById(`img-${picture}`);
-              imgElement?.setAttribute("src", url);
-            });
-        }
+        
       });
     }
   });
+
   export let pictures: string[] = [];
   console.log("🚀 ~ file: SwiperPictures.svelte:33 ~ pictures:", pictures);
   $: pictures = pictures;
@@ -101,6 +105,7 @@
       uploadButton.value = "";
     }
   };
+
 </script>
 
 <swiper-container

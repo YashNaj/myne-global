@@ -99,14 +99,12 @@
         <Import data={$page.data} />
       </TabPanel>
       <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-        <HistoryReports data={$page.data} />
+     
       </TabPanel>
 
       <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-        <ItemCertificate {myneCards}/>
       </TabPanel>
       <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
-        <RequestInventory data={$page.data} />
       </TabPanel>
     </TabPanels>
   </TabGroup>

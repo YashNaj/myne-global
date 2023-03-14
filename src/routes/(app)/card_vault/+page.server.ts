@@ -6,6 +6,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const load: PageLoad = async ({locals, url}) => { 
+    let loading = true
     const { user, session } = await locals.validateUser();
     const getMyneCards = async() => await prisma.myneCard.findMany({
         where: {
@@ -21,5 +22,7 @@ export const load: PageLoad = async ({locals, url}) => {
           }, {});
         });
       });
+      loading = false;
+      console.log(loading)
       return { getMyneCards:getMyneCards() }
 };
