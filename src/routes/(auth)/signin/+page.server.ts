@@ -5,9 +5,9 @@ import { LuciaError } from "lucia-auth";
 import { signin } from '../../../../tests/utils';
 let signingIn = false; 
 export const load: PageServerLoad = async ({ locals, page }) => {
+  let loading = true; 
   const session = await locals.validate();
   if (session) throw redirect(302, "/");
-
   }
   // Set signingIn to false when redirecting
 
@@ -54,6 +54,6 @@ export const actions: Actions = {
     finally{
       signingIn = false; 
     }
-    return {signingIn}
+    return { loading }
   },
 };

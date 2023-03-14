@@ -2,7 +2,7 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import type { LayoutData, LayoutServerLoad } from "../$types";
+  import type { LayoutData } from "../$types";
   import logo from "$lib/images/white_myne_logo.png";
   import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
@@ -12,13 +12,15 @@
   import Desktop from "$lib/components/Desktop.svelte";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
+  import { goto } from '$app/navigation';
+  import { TabGroup, TabList, TabPanels, Tab } from "@rgossiaux/svelte-headlessui";
   export let addCardOpen = false; 
-  export let data:LayoutServerData = $page.data;
+  export let data: PageData = $page.data;
   const profile = data.profile;
   export let loading = data.loading;
   $: console.log(loading)
   let menuItems = [
-    "Import",
+    "Import",  
     "Request History Reports",
     "Request Item Certificate",
     "Download Inventory",
@@ -27,6 +29,13 @@
     "Delete A Card",
   ];
   handleSession(page);
+  const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
+  function transformString(str: string): string {
+  return str.toLowerCase().split(' ').join('_');
+  }
+  function goToTab( tab: string){
+    goto(transformString(tab))
+  }
 </script>
 
 <svelte:head>
@@ -38,12 +47,12 @@
   
   
   <Spinner/>
-  
+
 </div>
 {:else}
-<div class="drawer drawer-end ">
+<div class="drawer drawer-end "> 
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content  w-full  h-auto lg:w-auto overflow-hidden">
+  <div class="drawer-content bg-[#f5f9ff]   w-full  h-auto lg:w-auto overflow-hidden">
     <div class="navbar bg-primary sticky top-0 z-50">
       <div class="px-2 mx-2 font-bold text-white w-full">
         <a href="/">
@@ -109,12 +118,29 @@
       <Spinner/>
     </PageContainer>
     {/if}
-
-    <div class="hidden lg:flex flex-col justify-center content-center flex-wrap">
-      <slot/>
+      <div class="hidden lg:flex flex-col justify-center content-center flex-wrap">
+      <PageContainer>
+        <TabGroup class=" w-full h-fit overflow-x-hidden">
+          <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
+            {#each tabList as tab, i}
+              <Tab
+                on:click={()=> {goToTab(tab) }}
+                class={({ selected }) =>
+                  selected
+                    ? "flex flex-col flex-wrap content-center justify-center rounded-lg flex-1 bg-primary text-secondary p-1  transform translate-x-2 duration-100 xl:text-lg lg:text-md font-semibold"
+                    : "flex flex-col flex-wrap flex-1  content-center justify-center rounded-lg p-1 translate-x-[-2] transform duration-100 ease-in-out origin-center  xl:text-lg lg:text-md font-semibold"}
+                >{tab}</Tab
+              >
+            {/each}
+          </TabList>
+          <TabPanels class="w-full h-[80vh]  mt-2 swiper-wrapper">
+            <slot/>
+          </TabPanels>
+        </TabGroup>
+        </PageContainer>
     </div>
     <div class=" md:hidden">
-      <slot />
+      <slot/>
     </div>
   </div>
   <div class="drawer-side flex flex-col ">
@@ -153,6 +179,6 @@
     );
   }
   :global(main) {
-    background-color: hsl(216, 100%, 98%);
+    background-color: #f5f9ff;
   }
 </style>

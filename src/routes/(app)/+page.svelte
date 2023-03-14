@@ -11,10 +11,8 @@
   import Desktop from "$lib/components/Desktop.svelte";
   import { formResult } from "$lib/stores";
 
-  export let data: LayoutData = $page.data
+  export let data: PageData = $page.data
   handleSession(page);
-  let myneCards;
-  $: myneCards = data.myneCard
   let loading;
   $: loading = data.loading
   
@@ -29,7 +27,7 @@
 <div
   class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex flex-col "
 >
-  <Dashboard {myneCards} {isLoading} />
+  <Dashboard  {isLoading} />
   <div
     class="quick-cards w-full flex flex-col justify-center content-center bg-secondary rounded-2xl h-[300px] mt-2"
   >
@@ -90,8 +88,8 @@
   </div>
   <DashboardFunctions />
 </div>
-<div
-  class="hidden md:flex w-full h-[94vh] py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent "
+<div 
+  class="hidden md:flex w-full h-[80vh] py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent "
 >
-<Desktop {loading} {data} {addCardOpen} {myneCards}/>
+<slot/>
 </div>

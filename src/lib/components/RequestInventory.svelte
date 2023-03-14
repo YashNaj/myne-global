@@ -30,7 +30,6 @@
     import PageContainer from "$lib/components/PageContainer.svelte";
     import { firstCapital } from "$lib/caps";
     import GenerateImportCsv from "$lib/components/GenerateImportCSV.svelte";
-    export let data: PageData;
     let justValue;
     interface IfieldsPropsObject {
       [key: string]: string[];

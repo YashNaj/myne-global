@@ -109,7 +109,7 @@
           </CardFlippable>
         </div>
       </div>
-  `;
+  `;      
 });
 
 console.log('itemCertificateSwiperEl',itemCertificateSwiperEl)

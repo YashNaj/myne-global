@@ -21,39 +21,45 @@
             swiperEl.slideNext();
           }
         } else if (targetEl.classList.contains("swiper-button-pictures-prev")) {
-          console.log("🚀 ~ file: SwiperPictures.svelte:23 ~ parentEl.addEventListener ~ pictures:", pictures)
+          console.log("🚀 ~ file: SwiperPictures.svelte:23 ~ parentEl.addEventListener ~ pictures:", pictures);
           const swiperEl = parentEl.swiper;
           if (swiperEl) {
             swiperEl.slidePrev();
           }
         }
-
+        for (let picture of pictures) {
+          if (pictures?.length > 0 && pictures[0] !== "")
+            downloadImage(picture).then((url) => {
+              const imgElement = document.getElementById(`img-${picture}`);
+              imgElement?.setAttribute("src", url);
+            });
+        }
       });
     }
   });
   export let pictures: string[] = [];
-  console.log("🚀 ~ file: SwiperPictures.svelte:33 ~ pictures:", pictures)
+  console.log("🚀 ~ file: SwiperPictures.svelte:33 ~ pictures:", pictures);
   $: pictures = pictures;
-  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures)
-  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures)
+  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures);
+  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures);
   let uploading = false;
   let files: FileList;
   let uploadButton: HTMLInputElement;
 
   const dispatch = createEventDispatcher();
   const downloadImage = async (path: string) => {
-      try {
-        const { data, error } = await supabase.storage.from("card-images").download(path);
-        if (error) {
-          throw error;
-        }
-        const url = URL.createObjectURL(data);
-        
-        return url;
-      } catch (error) {
-        if (error instanceof Error) {
-          console.log("Error downloading image: ", error.message);
-        }
+    try {
+      const { data, error } = await supabase.storage.from("card-images").download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+
+      return url;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log("Error downloading image: ", error.message);
+      }
     }
   };
 
@@ -66,10 +72,10 @@
       }
 
       if (pictures.length >= 10) {
-        console.log("🚀 ~ file: SwiperPictures.svelte:67 ~ uploadCardPicture ~ pictures:", pictures)
+        console.log("🚀 ~ file: SwiperPictures.svelte:67 ~ uploadCardPicture ~ pictures:", pictures);
         throw new Error("You cannot upload more than 10 pictures.");
       }
-        console.log("🚀 ~ file: SwiperPictures.svelte:70 ~ uploadCardPicture ~ pictures:", pictures)
+      console.log("🚀 ~ file: SwiperPictures.svelte:70 ~ uploadCardPicture ~ pictures:", pictures);
 
       const file = files[0];
       const fileExt = file.name.split(".").pop();
@@ -82,8 +88,8 @@
       }
 
       pictures = [...pictures, filePath];
-      console.log("🚀 ~ file: SwiperPictures.svelte:77 ~ uploadCardPicture ~ pictures:", pictures)
-      
+      console.log("🚀 ~ file: SwiperPictures.svelte:77 ~ uploadCardPicture ~ pictures:", pictures);
+
       dispatch("picturesuploaded", pictures);
     } catch (error) {
       if (error instanceof Error) {
@@ -95,17 +101,6 @@
       uploadButton.value = "";
     }
   };
-
-  $:  for (let picture of pictures) {
-      if (pictures?.length > 0 && pictures[0] !== ''){
-        downloadImage(picture).then((url) => {
-        const imgElement = document.getElementById(`img-${picture}`);
-        imgElement?.setAttribute("src", url);
-      });
-    }
-      }
-      
- 
 </script>
 
 <swiper-container
@@ -114,34 +109,31 @@
   observer-parents={true}
   slides-per-view="1"
   class="picture-swiper  w-[17rem] h-46 rounded-2xl "
-  virtual = 'true'
+  virtual="true"
 >
-{#if pictures.length > 0}
-  {#each pictures as picture, i}
-    <swiper-slide class=" object-cover rounded-2xl flex justify-center  bg-black bg-opacity-30" id={`item-${i}`}>
-      {#if picture}
-        <img
-          loading="lazy"
-          id={`img-${picture}`}
-          src=""
-          alt="Uploaded picture"
-          class="object-cover  bg-black bg-opacity"
-        />
+  {#if pictures.length > 0}
+    {#each pictures as picture, i}
+      <swiper-slide class=" object-cover rounded-2xl flex justify-center  bg-black bg-opacity-30" id={`item-${i}`}>
+        {#if picture}
+          <img
+            loading="lazy"
+            id={`img-${picture}`}
+            src=""
+            alt="Uploaded picture"
+            class="object-cover  bg-black bg-opacity"
+          />
         {:else}
-        <div class = 'object-cover bg-black bg-opacity'>
-
-
-        </div>
+          <div class="object-cover bg-black bg-opacity" />
         {/if}
-      <div
-        class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
-      >
-        <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
-        <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
-      </div>
-    </swiper-slide>
-  {/each}
-{/if}
+        <div
+          class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
+        >
+          <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
+          <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
+        </div>
+      </swiper-slide>
+    {/each}
+  {/if}
   <swiper-slide class=" rounded-box  bg-black bg-opacity-10">
     <div class="w-full h-full flex">
       <div class="w-full h-full ">

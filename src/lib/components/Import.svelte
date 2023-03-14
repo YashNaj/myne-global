@@ -120,11 +120,10 @@
       guideOpenSet(guideOpen);
     }
   </script>
-  <div class = 'wrapper w-full h-full flex flex-col ' >
-    <h1
-        class="flex justify-start text-primary font-semibold text-4xl text left w-full h-fit md:pl-4 md:pt-4 " transition:fade|local 
+  <div class = 'wrapper w-full h-full flex flex-col '  transition:fade|local 
       >
-        Import
+    <h1>
+
       </h1>
     <div
       class="flex flex-col md:flex-row md:justify-center w-full h-full px-2 py-6 text-primary 
@@ -159,7 +158,7 @@
           class="category-select flex flex-col relative w-full justify-start py-1 px-4"
         >
           {#if !guideOpen}
-            <p transition:fade={{ duration: 75 }} class="my-2 text-sm">
+            <p transition:fade|local class="my-2 text-sm">
               Select a Category for specific information, or expand the guide for more information.
             </p>
           {/if}

@@ -1,55 +1,160 @@
 <script lang="ts">
-  import { fade, fly, scale } from "svelte/transition";
+  import { firstCapital } from "$lib/caps";
+
+
+  import { TabPanel } from "@rgossiaux/svelte-headlessui";
+  import { Icon, Plus } from "svelte-hero-icons";
+  import { fade } from "svelte/transition";
+  import AddCard from "./AddCard.svelte";
   import CardFlippable from "./CardFlippable.svelte";
   import Spinner from "./Spinner.svelte";
-  import UploadWidget from "./UploadWidget.svelte";
-  export let myneCards:any
-  export let isLoading;
+  import SwiperPictures from "./SwiperPictures.svelte";
+  export let data; 
+  export let categoryFilter;
+  export let filteredCards;
+  export let categories; 
+  export let addCardOpen = false; 
+  export let loading = false; 
+  export let myneCards; 
+
+  $: console.log("🚀 ~ file: Desktop.svelte:54 ~ filteredCards:", filteredCards);
+  let isLoading;
+  $: filteredCards = myneCards.map((card) => {
+    card.category === categoryFilter;
+  });
+$: categories = categories.sort();
+  let cardsFiltered;
+  $: cardsFiltered = filteredCards;
 </script>
 
-<div class="vault h-full w-full rounded-3xl k px-4 py-2">
-  <div
-    class="vault-content h-[100%] flex flex-col w-full rounded-2xl text-primary "
-    transition:fly={{ x: -1000 }}
-  >
-    <div
-      class="vault-title max-h-full min-w-full flex px-4  justify-between top-0"
-    >
-      <h1 class="font-bold flex justify-start  text-[5rem] md:text-[3rem] ">
-        Card Vault
-      </h1>
-      <div
-        class="dropdown dropdown-end dropdown-bottom font-bold justify-start  text-[5rem] md:text-[3rem] p-3"
-      >
+<div class="w-full h-[80vh] p-2 rounded-2xl" transition:fade|local>
+  <div class="navbar bg-white w-full rounded-2xl mb-2">
+    <div class="navbar-start">
+      <div class="dropdown">
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <label
-          tabindex="0"
-          for="categoriesSelect"
-          class="btn normal-case btn-ghost flex flex-col  h-full   text-[5rem] md:text-[3rem] "
-          >All Categories</label
-        >
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+        <!-- svelte-ignore a11y-label-has-associated-control -->
+        <label tabindex="0" class="btn btn-ghost btn-circle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h7"
+            /></svg
+          >
+        </label>
         <ul
           tabindex="0"
-          class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
-          <li><a href="/">Item 1</a></li>
-          <li><a href="/">Item 2</a></li>
+          <li><a>Add Cards</a></li>
+          <li><a>Delete Cards</a></li>
+          <li><a>About</a></li>
         </ul>
       </div>
-    </div>
-    {#if isLoading}
-      <Spinner />
-    {:else}
-      <div
-        class="flex flex-wrap justify-start content-start  overflow-y-auto h-[85%] gap-2 px-2 py-3 top-0"
+      <select
+        bind:value={categoryFilter}
+        class="select w-full max-w-xs bg-transparent text-center px-2 flex justify-start text-xl"
       >
-        {#each myneCards as myneCard, i}
-          <CardFlippable cardDisplayId = 'flippable-card-{i}'  {...myneCard}>
-            <UploadWidget pictures={myneCard.pictures} />
-          </CardFlippable>
+        <option class="bg-transparent" selected>All</option>
+        {#each categories as category}
+          <option class="bg-transparent" value={category}>
+            {firstCapital(category)}
+          </option>
         {/each}
-      </div>
-    {/if}
+      </select>
+    </div>
+    <div class="navbar-center">
+      <div class="form-control">
+        <div class="input-group">
+          <input type="text" placeholder="Search…" class="input input-md shadow-sm bg-slate-100 border-none" />
+          <button class="btn btn-ghost bg-slate-100 p-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              /></svg
+            >
+          </button>
+        </div>
+    </div>
+    </div>
+    <div class="navbar-end">
+      <button
+        on:click={() => {
+          addCardOpen = !addCardOpen;
+        }}
+        class="btn btn-success flex normal-case text-white mr-5"
+      >
+        <Icon src={Plus} color="white" size="12px" class="mr-1" />
+        Add a Card
+      </button>
+      <button class="btn btn-ghost btn-circle">
+        <div class="indicator">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+            /></svg
+          >
+          <span class="badge badge-xs badge-primary indicator-item" />
+        </div>
+      </button>
+    </div>
   </div>
+  {#if addCardOpen}
+    <div class=" flex flex-row w-full h-[89%] justify-center items-center flex-wrap">
+      <AddCard />
+    </div>
+  {:else}
+    <div
+      class:translate-y-full={addCardOpen}
+      class:ease-linear={addCardOpen}
+      class="h-[89%]  bg-black bg-opacity-25  rounded-xl grid grid-rows-auto grid-cols-4 gap-4 justify-center overflow-y-auto p-1 w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
+    >
+
+      {#if loading}
+      <Spinner/>
+      {:else if filteredCards?.length > 0}
+        {#each myneCards as myneCard, i}
+          <div class="w-fit h-fit">
+            <CardFlippable cardDisplayId="flippable-card-{i}" cardProps={{...myneCard}} pictures = {myneCard.pictures}>
+              <SwiperPictures pictures={myneCard.pictures} />
+            </CardFlippable>
+          </div>
+        {/each}
+      {:else}
+        <div class="w-fit h-fit">
+          <CardFlippable>
+            <div class="p-3 w-full h-full">
+              <div
+                class="text-3xl flex flex-col justify-center content-cener flex-wrap h-full w-full text-primary bg-black bg-opacity-10 rounded-2xl "
+              >
+                <p class="text-4xl text-primary font-semibold">No cards found</p>
+              </div>
+            </div>
+          </CardFlippable>
+        </div>
+      {/if}
+    </div>
+  {/if}
 </div>

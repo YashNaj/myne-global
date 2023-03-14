@@ -13,4 +13,10 @@
   $: loading = $page.data.loading;
   $:console.log(loading)
 </script>
-<slot />
+{#if !loading}
+  <slot />
+{:else}
+<div class = 'w-screen h-screen grid place-items-center'>
+  <Spinner/>
+</div>
+{/if}

@@ -285,12 +285,6 @@
 </div>
 
 <style lang="postcss">
-  .no-display {
-    display: none;
-  }
-  .swiper-pagination {
-    top: 40px;
-  }
   .flip-card-inner {
     position: relative;
     width: 100%;
@@ -331,6 +325,10 @@
   .upload-picures {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   }
+  .whole-card {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
   .text-box {
     margin: 0 auto;
     white-space: pre-wrap;
@@ -340,10 +338,7 @@
     word-wrap: break-word;
     display: box;
   }
-  .whole-card {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
+ 
   .sendCard {
     -webkit-animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
     animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
