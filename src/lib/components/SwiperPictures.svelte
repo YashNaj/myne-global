@@ -13,6 +13,7 @@
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
         const targetEl = event.target as HTMLElement;
+        const swiperEl = parentEl.swiper;
         if (targetEl.classList.contains("swiper-button-pictures-next")) {
           const swiperEl = parentEl.swiper;
           console.log("🚀 ~ file: CardSlider.svelte:33 ~ parentEl.addEventListener ~ swiperEl:", swiperEl);
@@ -26,6 +27,7 @@
             swiperEl.slidePrev();
           }
         }
+
       });
     }
   });
@@ -112,6 +114,7 @@
   observer-parents={true}
   slides-per-view="1"
   class="picture-swiper  w-[17rem] h-46 rounded-2xl "
+  virtual = 'true'
 >
 {#if pictures.length > 0}
   {#each pictures as picture, i}

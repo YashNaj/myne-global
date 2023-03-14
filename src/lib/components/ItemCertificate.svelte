@@ -99,6 +99,28 @@
   let itemCertificateSwiperEl;
   $: console.log("🚀 ~ file: ItemCertificate.svelte:107 ~ swiperEl:", itemCertificateSwiperEl);
   $: console.log("🚀 ~ file: ItemCertificate.svelte:100 ~ categoryFilter:", categoryFilter);
+  const cardsHtml = myneCards.map((myneCard) => {
+
+  return `
+      <div class="wrapper w-fit h-fit flex flex-col ">
+        <div class="w-fit h-fit aspect-[5/7]">
+          <CardFlippable ${myneCard}>
+            <SwiperPictures pictures=${myneCard.pictures} />
+          </CardFlippable>
+        </div>
+      </div>
+  `;
+});
+
+console.log('itemCertificateSwiperEl',itemCertificateSwiperEl)
+let swiper;
+onMount(() => {
+  swiper = itemCertificateSwiperEl.swiper
+});
+
+
+
+console.log("🚀 ~ file: ItemCertificate.svelte:139 ~ itemCertificateSwiperEl ~ itemCertificateSwiperEl:", itemCertificateSwiperEl)
 </script>
 
 <div class=" w-full h-[80vh] flex flex-col ">
@@ -111,15 +133,16 @@
   <div class="item-certificate-area flex  w-full h-full  rounded-2xl px-2">
     <div class="item-certificate-slider flex h-full w-[60%] bg-slate-100 shadow-md rounded-2xl my mx-1 relative">
       <swiper-container
+        id = 'item-certificate-slider'
         bind:this={itemCertificateSwiperEl}
         transition:fade={{duration:100}}
-        class="certificate-swiper w-full h-fit p-4 flex bg-slate-100 shadow-md rounded-2xl my mx-1"
+        class="item-certificate-slider w-full h-fit p-4 flex bg-slate-100 shadow-md rounded-2xl my mx-1"
         navigation="true"
         pagination="true"
         effect="coverflow"
         grab-cursor="true"
         centered-slides="true"
-        slides-per-view="auto"
+        slides-per-view="4"
         coverflow-effect-rotate="10"
         coverflow-effect-stretch="10"
         coverflow-effect-depth="100"
@@ -128,6 +151,7 @@
         observer-parents = "true"
         observer="true"
         css='true'
+        virtual = 'true'
       >
 
           {#each myneCards as myneCard}

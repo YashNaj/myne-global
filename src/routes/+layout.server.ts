@@ -1,3 +1,4 @@
+
 import { getUser } from "$lib/server/server";
 import { handleServerSession } from "@lucia-auth/sveltekit";
 import { redirect } from "@sveltejs/kit";
@@ -6,6 +7,9 @@ import { getSessionUser } from "$lib/server/lucia";
 import { auth } from "$lib/server/lucia";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { cardPropsArray, cardProps, isHeirloom } from "../cardProps";
+import { createContext } from '$lib/trpc/context';
+import { router } from '$lib/trpc/router';
+
 const prisma = new PrismaClient();
 const anyoneAllowed = [
   "/signup",
@@ -48,7 +52,7 @@ export const load = handleServerSession((async ({ url, locals }) => {
     //       .map((prop) => [prop, true])
     //   ),}
     let loading = true; 
-    let myneCard = await prisma.myneCard.findMany({
+    let myneCard = async() => await prisma.myneCard.findMany({
       where: {
         user_id
       }
@@ -62,7 +66,7 @@ export const load = handleServerSession((async ({ url, locals }) => {
         }, {});
       });
     });
-    const profile = await prisma.user
+    const profile = async() => await prisma.user
       .findUnique({
         where: {
           id: user_id,
@@ -70,6 +74,6 @@ export const load = handleServerSession((async ({ url, locals }) => {
       })
       .profile();
     loading = false
-    return { isUser: true, myneCard, profile, loading };
+    return { isUser: true, myneCard:myneCard(), profile:profile(), loading };
   } else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);
