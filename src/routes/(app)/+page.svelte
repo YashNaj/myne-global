@@ -88,7 +88,7 @@
   </div>
   <DashboardFunctions />
 </div>
-<div 
+<div data-sveltekit-prefetch
   class="hidden md:flex w-full h-[80vh] py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent "
 >
 <slot/>

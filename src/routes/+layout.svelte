@@ -16,7 +16,7 @@
 {#if !loading}
   <slot />
 {:else}
-<div class = 'w-screen h-screen grid place-items-center'>
+<div data-sveltekit-prefetch="/" class = 'w-screen h-screen grid place-items-center'>
   <Spinner/>
 </div>
 {/if}
