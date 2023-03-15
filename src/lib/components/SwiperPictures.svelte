@@ -4,7 +4,7 @@
   import { supabase } from "$lib/supabaseClient";
   import { CloudUpload, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
-  ``;
+  ;
   import { onMount } from "svelte";
   let parentEl;
 
