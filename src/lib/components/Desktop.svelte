@@ -20,42 +20,6 @@
   export let loading: boolean
   const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
 
-  let categories = [
-    "jewelry",
-    "watch",
-    "art",
-    "leather",
-    "clothing",
-    "sneakers",
-    "firearms",
-    "technology",
-    "trading cards",
-    "collectibles",
-    "crypto",
-    "nft",
-    "dog",
-    "cat",
-    "bird",
-    "other animal",
-    "vintage",
-    "automobile",
-    "motorcycle",
-    "other",
-  ];
-
-  export let data: PageServerLoad;
-  export let myneCards = $page.data.myneCard
-  export let addCardOpen = false;
-  export let categoryFilter: string = "All";
-
-  $: console.log("🚀 ~ file: Desktop.svelte:54 ~ filteredCards:", filteredCards);
-  let isLoading;
-  $: filteredCards = myneCards.map((card) => {
-    card.category === categoryFilter
-  })
-  $: categories = categories.sort();
-  let cardsFiltered;
-  $:cardsFiltered = filteredCards
 </script>
 
 <PageContainer>

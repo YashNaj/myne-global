@@ -30,14 +30,6 @@
     "Add A Card",
     "Delete A Card",
   ];
-  handleSession(page);
-  const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
-  function transformString(str: string): string {
-    return str.toLowerCase().split(" ").join("_");
-  }
-  function transFormTab(tab: string) {
-    return transformString(tab);
-  }
 </script>
 
 <svelte:head>
@@ -102,28 +94,10 @@
           <Spinner />
         </PageContainer>
       {/if}
-      <div class="hidden lg:flex flex-col justify-center content-center flex-wrap">
-        <PageContainer>
-          <TabGroup class=" w-full h-fit overflow-x-hidden">
-            <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
-              {#each tabList as tab, i}
-                <Tab
-                  class={({ selected }) =>
-                    selected
-                      ? "flex flex-col flex-wrap content-center justify-center rounded-lg flex-1 bg-primary text-secondary p-1  transform translate-x-2 duration-100 xl:text-lg lg:text-md font-semibold"
-                      : "flex flex-col flex-wrap flex-1  content-center justify-center rounded-lg p-1 translate-x-[-2] transform duration-100 ease-in-out origin-center  xl:text-lg lg:text-md font-semibold"}
-                >
-                  <a data-sveltekit-preload-data="hover" href="/{transFormTab(tab)}">{(tab)}</a>
-                </Tab>
-              {/each}
-            </TabList>
-            <TabPanels class="w-full h-[80vh]  mt-2 swiper-wrapper">
-              <slot />
-            </TabPanels>
-          </TabGroup>
-        </PageContainer>
+      <div class="hidden w-screen h-[90vh] md:flex flex-col justify-start content-center flex-wrap">
+        <slot/>
       </div>
-      <div class=" md:hidden">
+      <div class=" md:hidden w-screen h-screen">
         <slot />
       </div>
     </div>

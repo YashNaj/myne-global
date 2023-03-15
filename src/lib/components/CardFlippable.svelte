@@ -120,7 +120,6 @@
     ...myneCard,
   };
 
- $: console.log("Card Props" , cardProps)
 
  
 

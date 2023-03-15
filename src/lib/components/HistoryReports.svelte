@@ -29,7 +29,7 @@
   import { firstCapital } from "$lib/caps";
   import GenerateImportCsv from "$lib/components/GenerateImportCSV.svelte";
   export let data: PageData;
-  export let csvFile: File;
+  let csvFile: File;
 
   let justValue;
   interface IfieldsPropsObject {
@@ -67,10 +67,7 @@
   let tableProps: string[] = [];
   $: tableProps = fieldPropsObject[categoryKey as unknown as string];
   $: console.log(tableProps);
-  $: if (selectedCategory === undefined) {
-    guideOpen = false;
-    guideOpenSet(guideOpen);
-  }
+
 </script>
 
 <div class="flex flex-col w-full h-[80vh]" transition:fade|local={{delay:100, duration: 100}}>

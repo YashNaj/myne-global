@@ -31,7 +31,7 @@
     import { page } from  '$app/stores'
   import type { LayoutServerData } from "../../routes/$types";
     
-    export let data:LayoutServerData
+    export let data:PageData
     export let csvFile: File;
   
     let dropZone;
@@ -197,12 +197,12 @@
               </p>
             </div>
             <div
-              transition:slide={{ delay: 100, duration: 100, easing: quintOut }}
+              transition:slide|local={{ delay: 100, duration: 100, easing: quintOut }}
               class="overflow-x-auto scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent scrollbar-rounded rounded-2xl mt-2"
             >
               <table
                 class="table w-full"
-                transition:slide={{ delay: 200, duration: 200, easing: quintOut }}
+                transition:slide|local={{ delay: 200, duration: 200, easing: quintOut }}
               >
                 <!-- head -->
                 <thead>
