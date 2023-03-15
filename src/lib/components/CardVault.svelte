@@ -27,7 +27,7 @@ $: categories = categories.sort();
   $: cardsFiltered = filteredCards;
 </script>
 
-<div class="w-full h-[80vh] p-2 rounded-2xl" transition:fade|local>
+<div class="w-full h-[80vh] p-2 rounded-2xl" >
   <div class="navbar bg-white w-full rounded-2xl mb-2">
     <div class="navbar-start">
       <div class="dropdown">
@@ -136,14 +136,18 @@ $: categories = categories.sort();
       <Spinner/>
       {:else if filteredCards?.length > 0}
       {#await import("$lib/components/CardFlippable.svelte") then Module}
-        {#each myneCards as myneCard, i}
-          <div class="w-fit h-fit">
-            <Module.default cardDisplayId="flippable-card-{i}" cardProps={{...myneCard}} pictures = {myneCard.pictures}>
-              <SwiperPictures pictures={myneCard.pictures} />
-            </Module.default>
-          </div>
-        {/each}
-        {/await}
+      {#each myneCards as myneCard, i}
+        <div class="w-fit h-fit">
+          <Module.default cardDisplayId="flippable-card-{i}" cardProps={{...myneCard}} pictures = {myneCard.pictures}>
+            <SwiperPictures pictures={myneCard.pictures} />
+          </Module.default>
+        </div>
+      {/each}
+    {:catch}
+    <div class = 'w-full h-[80vh] bg-primary grid place-items-center'>
+      <Spinner/>
+    </div>
+    {/await}
       {:else}
         <div class="w-fit h-fit">
           <CardFlippable>

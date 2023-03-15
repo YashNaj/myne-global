@@ -5,24 +5,28 @@ import { json, type RequestHandler } from "@sveltejs/kit";
 import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-export const load: PageLoad = async ({locals, url}) => { 
-    let loading = true
-    const { user, session } = await locals.validateUser();
-    const getMyneCards = async() => await prisma.myneCard.findMany({
+export const load: PageLoad = async ({ locals, url }) => {
+  let loading = true;
+  const { user, session } = await locals.validateUser();
+  const getMyneCards = async () =>
+    await prisma.myneCard
+      .findMany({
         where: {
-          user_id: user.userId
-        }
-      }).then((cards) => {
+          user_id: user.userId,
+        },
+      })
+      .then((cards) => {
         return cards.map((card) => {
-          return Object.keys(card).reduce((acc, key) => {
-            if (card[key] != null && card[key] !== undefined) {
-              acc[key] = card[key];
+          let filteredCard = {};
+          for (const key in card) {
+            if (card[key] != null) {
+              filteredCard[key] = card[key];
             }
-            return acc;
-          }, {});
+          }
+          return filteredCard;
         });
       });
-      loading = false;
-      console.log(loading)
-      return { getMyneCards:getMyneCards() }
+  loading = false;
+  console.log(loading);
+  return { getMyneCards: getMyneCards() };
 };

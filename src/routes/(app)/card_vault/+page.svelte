@@ -32,12 +32,14 @@
   ];
 
   export let data: PageData = $page.data;
-  let loading = false;
+  export let loading = false;
   export let getMyneCards = data.getMyneCards
   export let addCardOpen = false;
   export let categoryFilter: string = "All";
-
   
+  console.log(loading)
 </script>
-
+<div transition:fade|local >
   <CardVault {categories} {data}  myneCards = {getMyneCards} />
+
+</div>

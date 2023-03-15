@@ -68,6 +68,7 @@ bind:this={parentEl}
     no-swiping='true'
     id={cardDisplayId}
     virtual= 'true'
+    css = 'true'
     class="h-full swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1"
   >
     {#if fieldsBackOneValues?.length > 0}
