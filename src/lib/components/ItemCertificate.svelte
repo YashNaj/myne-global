@@ -153,20 +153,21 @@ console.log("🚀 ~ file: ItemCertificate.svelte:139 ~ itemCertificateSwiperEl ~
         css='true'
         virtual = 'true'
       >
+      {#await import("$lib/components/CardFlippable.svelte") then Module}
 
           {#each myneCards as myneCard}
             <swiper-slide class="w-fit h-fit " transition:scale|local={{duration:100}}>
               <div class="wrapper w-fit h-fit flex flex-col ">
                 <div class="w-fit h-fit aspect-[5/7]">
                   
-                  <CardFlippable {myneCard}>
+                  <Module.default {myneCard}>
                     <SwiperPictures pictures={myneCard.pictures} />
-                  </CardFlippable>
+                  </Module.default>
                 </div>
               </div>
             </swiper-slide>
           {/each}
-          
+          {/await}
           <!-- <swiper-slide class="w-fit h-fit " >
             <div class="wrapper w-fit h-fit flex flex-col ">
               <div class="w-fit h-fit">

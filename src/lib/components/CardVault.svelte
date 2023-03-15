@@ -135,13 +135,15 @@ $: categories = categories.sort();
       {#if loading}
       <Spinner/>
       {:else if filteredCards?.length > 0}
+      {#await import("$lib/components/CardFlippable.svelte") then Module}
         {#each myneCards as myneCard, i}
           <div class="w-fit h-fit">
-            <CardFlippable cardDisplayId="flippable-card-{i}" cardProps={{...myneCard}} pictures = {myneCard.pictures}>
+            <Module.default cardDisplayId="flippable-card-{i}" cardProps={{...myneCard}} pictures = {myneCard.pictures}>
               <SwiperPictures pictures={myneCard.pictures} />
-            </CardFlippable>
+            </Module.default>
           </div>
         {/each}
+        {/await}
       {:else}
         <div class="w-fit h-fit">
           <CardFlippable>

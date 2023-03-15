@@ -28,7 +28,9 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("daisyui"),
-    require("tailwind-scrollbar")
+    require('@tailwindcss/aspect-ratio'),
+    require("tailwind-scrollbar"),
+    
   ],
   daisyui: {
     styled: true,
