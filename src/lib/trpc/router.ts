@@ -19,6 +19,13 @@ export const router = t.router({
     console.log(myneCards)
     console.log(Date.now());
     return JSON.stringify({myneCards}); 
+  }),
+  getSingleCard: t.procedure.query(async()=>{
+    const singleCard = await prisma.myneCard.findUnique({
+      where: {
+        id
+      }  
+    })
   })
 });
 
