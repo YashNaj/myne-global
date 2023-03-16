@@ -37,6 +37,7 @@
   "dependencies": {
     "@lucia-auth/adapter-prisma": "^0.4.0",
     "@lucia-auth/sveltekit": "^0.6.2",
+    "@pdfme/generator": "^1.1.9",
     "@prisma/client": "^4.11.0",
     "@sendgrid/helpers": "^7.7.0",
     "@sendgrid/mail": "^7.7.0",
