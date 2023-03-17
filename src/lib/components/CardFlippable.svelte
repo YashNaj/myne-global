@@ -3,6 +3,11 @@
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
   import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
+  import Spinner from "$lib/components/Spinner.svelte";
+  import { trpc } from "$lib/trpc/client";
+  import { spring } from "svelte/motion";
+  import { writable } from "svelte/store";
+  // formFields initv
   import {
     template,
     generalFieldsBack,
@@ -33,7 +38,7 @@
     watchProps,
     artProps,
     leatherProps,
-    clothingProps,
+    clothingProps, 
     sneakerProps,
     firearmsProps,
     technologyProps,
@@ -47,11 +52,7 @@
     motoProps,
     otherProps,
   } from "../../routes/fieldProps";
-  interface IfieldsPropsObject {
-    [key: string]: string[];
-  }
-  
-  // formFields initv
+
   const fieldPropsObject: IfieldsPropsObject = {
     jewelry: jewelryProps,
     watch: watchProps,
@@ -102,26 +103,30 @@
     [key: string]: string | boolean | null | bigint | string[];
     category: keyof typeof colors | keyof typeof formFieldsObject | string | null;
   }
+  interface IfieldsPropsObject {
+    [key: string]: string[];
+  }
+
   export let myneCard: IcardProps;
 
-     // card external control values
-  export let expand = false;
+  // card external control values
+  export let expanded = false;
+  
+
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
-  export let description
+  export let description;
   export let pictures;
+
   //card variables
   export let cardDisplayId: string;
   $: cardDisplayId = cardDisplayId;
   export let cardProps: IcardProps = {
     category: "",
-    description: '', 
+    description: "",
     ...myneCard,
   };
-
-
- 
 
   export let selectedFields = formFieldsObject[cardProps.category];
 
@@ -133,8 +138,50 @@
     currency: "USD",
   });
   $: cardProps = cardProps;
-  $: cardSide = "front";
+  let cardSide = writable("front");
 
+  //expansion logic
+  let expandWidth = 250;
+  let expandHeight = 350;
+  let expandedWidth = spring(expandWidth, {
+    stiffness: 0.15,
+    damping: 0.5,
+  });
+  export let w: number;
+  export let h: number;
+  let expandedHeight = spring(expandHeight, {
+    stiffness: 0.15,
+    damping: 0.5,
+  });
+  let expandedPosition = writable("relative");
+  let zIndex = writable(1); 
+
+  function toggleExpand() {
+    expanded = !expanded;
+    if (!expanded ) {
+      expandedHeight.set(expandHeight);
+      expandedWidth.set(expandWidth);
+      expandedPosition.set("relative");
+      zIndex.set(1);
+    }else {
+
+      expandedHeight.set(h);
+      expandedWidth.set(w);
+      expandedPosition.set("absolute");
+      zIndex.set(99);
+    }
+  }
+  function toggleFlipped() {
+    flipped = !flipped;
+    if (!flipped) {
+      cardSide.set("front");
+    } else {
+      cardSide.set("back");
+    }
+  }
+  $: console.log("flipped", flipped);
+  $: console.log("expanded", expanded);
+$: console.log("cardSide fF")
   //add general fields config here  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
   $: categoryKey = cardProps.category?.toLowerCase() as keyof typeof colors | keyof typeof formFieldsObject;
   const colors = {
@@ -177,50 +224,63 @@
       (fieldsBackTwoValues = formFields?.fieldsBackTwo),
       (fieldsBackThreeValues = formFields?.fieldsBackThree);
   }
-  $: flipped = flipped;
-  $: console.log(myneCard)
+  $: console.log(myneCard);
+  $: console.log("card-side", cardSide);
 </script>
-
 <div
   class:flipped
-  class=" flex flex-col flex-wrap justify-center content-center relative aspect-[5/7] rounded-2xl lg:w-[18rem] sm:w-[15rem] w-[18rem] "
+  class={expanded ? 'absolute' : '"wrapper rounded-2xl h-fit  w-fit relative " '}
   class:sendCard={sentCard === true && success === null}
   class:comeBack={success === true}
 >
   <div
-    class="flip-card bg-none [perspective: 500px] [user-select: none] cursor-pointer w-full rounded-2xl 
-    aspect-[5/7]"
+    class:expanded={expanded ? "absolute" : "relative"}
+    class="flip-card bg-none [perspective:1000px] [user-select:none] cursor-pointer rounded-2xl 
+    "
+    style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
   >
-    <div class="flip-card-inner aspect-[5/7] rounded-2xl w-full">
-      <div class="flip-card-front rounded-2xl aspect-[5/7]  h-full">
-        <div
-          class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl aspect-[5/7] flex flex-col  z-1  bg-cover"
-        >
+    <div class="flip-card-inner rounded-2xl w-fit relative"     style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
+    >
+      <div class="flip-card-front rounded-2xl   h-full">
+        <div class="absolute w-fit top-0 z-10 right-0">
           <div
-            class:no-display={cardSide === "back"}
+            class:no-display={$cardSide === "back"}
             class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
           >
-            <button class="btn  btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-10 normal-case">
+            <button
+            on:click={() => {
+              toggleExpand();
+            }}
+              class="btn relative p-0 pr-3 w-fit btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[99]  normal-case"
+            >
               <Icon
                 size="12px"
-                class="opacity-60 cursor-pointer  text-white ml-[1rem]"
+                class="opacity-60 cursor-pointer  text-white ml-[1rem] "
                 src={ArrowsExpand}
-                on:click={() => (expand = !expand)}
+             
               />
               <p>Expand</p>
             </button>
-            <button
-              class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-10 normal-case"
-              on:click={() => (flipped = !flipped)}
-              on:click={() => (cardSide = "back")}
+            <button 
+              disabled={expanded}
+              class="btn btn-square relative btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] normal-case"
+              on:click={() => {
+                toggleFlipped();
+              }}
             >
               <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowCircleLeft} />
               <p>Flip</p>
             </button>
           </div>
+        </div>
+
+        <div
+          class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl  flex   z-1  bg-cover"
+          
+        >
           {#key pickedColor}
             <div class="front-top rounded-t-2xl {pickedColor} transition-colors duration-200 ease-linear ">
-              <div class="w-full h-full aspect-[3/2] object-cover flex justify-center content-center flex-nowrap py-2">
+              <div class={expanded  ? 'w-full h-full object-cover flex justify-center content-center flex-nowrap py-2 ' : ' w-full h-full aspect-[3/2] object-cover flex justify-center content-center flex-nowrap py-2' } >
                 <slot />
               </div>
             </div>
@@ -241,20 +301,26 @@
           </div>
         </div>
       </div>
-      <div class="flip-card-back rounded-2xl text-black aspect-[5/7] ">
-        <div class="card-item  bg-none rounded-2xl shadow-2xl z-2 aspect-[5/7]">
-          <div class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end">
+      <div class="flip-card-back rounded-2xl text-black  "
+      >
+        <div class="card-item  bg-none rounded-2xl shadow-2xl z-1"
+        style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
+        >
+          <div class="flex  top-[.5rem] right-[1rem] z-[110] absolute w-justify-end">
             <button
-              class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-10 normal-case"
-              on:click={() => (expand = !expand)}
+              class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-[110] normal-case"
+              on:click={() => {
+                toggleExpand();
+              }}
             >
               <Icon size="12px" class="opacity-60 cursor-pointer  text-black" src={ArrowsExpand} />
               <p>Expand</p>
             </button>
             <button
-              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem`] z-10 normal-case"
-              on:click={() => (flipped = !flipped)}
-              on:click={() => (cardSide = "front")}
+              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem`] z-[110] normal-case"
+              on:click={() => {
+                toggleFlipped();
+              }}
             >
               <Icon size="12px" class="opacity-60 cursor-pointer  text-black" src={ArrowCircleLeft} />
               <p>Flip</p>
@@ -263,7 +329,9 @@
           <div
             class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
+          {#if !expanded}
             <div class="spacer w-full h-[50%]" />
+            {/if}
             <CardSlider
               {cardDisplayId}
               {cardProps}

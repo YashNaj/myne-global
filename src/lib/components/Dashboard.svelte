@@ -18,7 +18,7 @@
     if (isOpen) {
       drawerHeight.set(75);
     } else {
-      drawerHeight.set(20);
+      drawerHeight.set(heightScale);
     }
     console.log(isOpen);
     console.log($drawerHeight);
