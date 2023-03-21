@@ -126,7 +126,7 @@
                 loading="eager"
                 id={`img-${picture}`}
                 alt="Uploaded picture"
-                class="bg-black bg-opacity "
+                class="bg-black bg-opacity max-w-md"
               />
             </div>
 

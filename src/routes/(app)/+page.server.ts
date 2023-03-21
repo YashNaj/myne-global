@@ -20,9 +20,10 @@ export const load: PageServerLoad = async ({ locals, event }) => {
     const cachedData = await redis.get(cacheKey);
 
     if (cachedData) {
-      console.log("cache hit")
+      console.log("cache hit", cachedData)
       return JSON.parse(cachedData);
     }
+    
     console.log("cache missed")
     const cards = await prisma.myneCard.findMany({
       where: {

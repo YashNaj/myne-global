@@ -83,9 +83,7 @@
       cardSide.set("back");
     }
   }
-  $: console.log("flipped", flipped);
-  $: console.log("expanded", expanded);
-  $: console.log("cardSide", cardSide);
+
   //add general fields config here  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
   $: categoryKey = cardProps.category?.toLowerCase() as keyof typeof colors | keyof typeof formFieldsObject;
   let pickedColor: string;

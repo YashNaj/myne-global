@@ -20,14 +20,12 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   export let data:PageData = $page.data 
   let size = '9'
-  console.log(data)
  
 
   export let myneCards = $page.data.getMyneCards
   export let addCardOpen = false;
   export let categoryFilter: string = "All";
 
-  $: console.log("🚀 ~ file: Desktop.svelte:54 ~ filteredCards:", filteredCards);
   $: filteredCards = myneCards.map((card) => {
     card.category === categoryFilter
   })
