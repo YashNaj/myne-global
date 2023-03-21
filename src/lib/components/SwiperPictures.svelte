@@ -4,20 +4,19 @@
   import { supabase } from "$lib/supabaseClient";
   import { CloudUpload, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
-  ;
   import { onMount } from "svelte";
   let parentEl;
 
   export let size = 10;
-  beforeUpdate(()=>{
+  beforeUpdate(() => {
     for (let picture of pictures) {
-          if (pictures?.length > 0 && pictures[0] !== "")
-            downloadImage(picture).then((url) => {
-              const imgElement = document.getElementById(`img-${picture}`);
-              imgElement?.setAttribute("src", url);
-            });
-        }
-  })
+      if (pictures?.length > 0 && pictures[0] !== "")
+        downloadImage(picture).then((url) => {
+          const imgElement = document.getElementById(`img-${picture}`);
+          imgElement?.setAttribute("src", url);
+        });
+    }
+  });
   onMount(() => {
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
@@ -36,7 +35,6 @@
             swiperEl.slidePrev();
           }
         }
-        
       });
     }
   });
@@ -106,70 +104,78 @@
     }
   };
 
+  export let expanded;
 </script>
 
-<swiper-container
-  bind:this={parentEl}
-  observer={true}
-  observer-parents={true}
-  slides-per-view="1"
-  class="picture-swiper  w-[17rem] h-46 rounded-2xl "
-  virtual="true"
->
-  {#if pictures.length > 0}
-    {#each pictures as picture, i}
-      <swiper-slide class=" object-cover rounded-2xl flex justify-center  bg-black bg-opacity-30" id={`item-${i}`}>
-        {#if picture}
-          <img
-            loading="lazy"
-            id={`img-${picture}`}
-            src=""
-            alt="Uploaded picture"
-            class="object-cover  bg-black bg-opacity"
-          />
-        {:else}
-          <div class="object-cover bg-black bg-opacity" />
-        {/if}
-        <div
-          class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
-        >
-          <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
-          <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
-        </div>
-      </swiper-slide>
-    {/each}
-  {/if}
-  <swiper-slide class=" rounded-box  bg-black bg-opacity-10">
-    <div class="w-full h-full flex">
-      <div class="w-full h-full ">
-        <label
-          class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40  bg-200 normal-case  flex flex-col justify-center content-center flex-nowrap"
-          for="single"
-        >
-          {#if uploading}
-            <Spinner />
-          {:else}
-            <div class="flex flex-col content-center flex-wrap justify-center">
-              <div class="w-full flex justify-center">
-                <Icon src={CloudUpload} class="w-fit" color="white text-center" size="24px" />
-              </div>
-              Upload a picture
+<div class="card-pictures-wrapper w-56 h-40">
+  <swiper-container
+    bind:this={parentEl}
+    observer={true}
+    observer-parents={true}
+    slides-per-view="1"
+    class="picture-swiper w-full h-full rounded-lg relative "
+    virtual="true"
+  >
+    {#if pictures.length > 0}
+      {#each pictures as picture, i}
+        <swiper-slide class=" w-fit h-fit object-cover rounded-lg flex justify-center  bg-black bg-opacity-30" id={`item-${i}`}>
+          {#if picture}
+            <div class="w-full object-cover h-full ">
+              <!-- svelte-ignore a11y-img-redundant-alt -->
+              <img
+                loading="eager"
+                id={`img-${picture}`}
+                alt="Uploaded picture"
+                class="bg-black bg-opacity "
+              />
             </div>
+
+            <!-- svelte-ignore a11y-img-redundant-alt -->
+          {:else}
+            <div class="object-contain bg-black bg-opacity" />
           {/if}
-        </label>
+          <div
+            class="absolute bottom-0 h-10  w-full  flex  rounded-lg bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
+          >
+            <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">
+              Next
+            </div>
+            <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
+          </div>
+        </swiper-slide>
+      {/each}
+    {/if}
+    <swiper-slide class=" rounded-box  bg-black bg-opacity-10 ">
+      <div class="w-full h-full flex">
+        <div class="w-full h-full ">
+          <label
+            class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40  bg-200 normal-case  flex flex-col justify-center content-center flex-nowrap"
+            for="single"
+          >
+            {#if uploading}
+              <Spinner />
+            {:else}
+              <div class="flex flex-col content-center flex-wrap justify-center">
+                <div class="w-full flex justify-center">
+                  <Icon src={CloudUpload} class="w-fit" color="white text-center" size="24px" />
+                </div>
+                Upload a picture
+              </div>
+            {/if}
+          </label>
+        </div>
+        <input
+          style="visibility: hidden; position:absolute;"
+          type="file"
+          id="single"
+          accept="image/*"
+          bind:files
+          on:change={uploadCardPicture}
+          disabled={uploading || pictures.length >= 10}
+          bind:this={uploadButton}
+        />
       </div>
-      <input
-        style="visibility: hidden; position:absolute;"
-        type="file"
-        id="single"
-        accept="image/*"
-        bind:files
-        on:change={uploadCardPicture}
-        disabled={uploading || pictures.length >= 10}
-        bind:this={uploadButton}
-      />
-    </div>
-    <!-- <div
+      <!-- <div
           class="absolute  bottom-0 h-10  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
         >
           <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white"> Next </div>
@@ -177,18 +183,19 @@
     
         </div>
         </swiper-slide> -->
+      <div
+        class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
+      >
+        <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
+        <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
+      </div>
+    </swiper-slide>
+
     <div
       class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
     >
       <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
       <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
     </div>
-  </swiper-slide>
-
-  <div
-    class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
-  >
-    <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
-    <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
-  </div>
-</swiper-container>
+  </swiper-container>
+</div>

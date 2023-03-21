@@ -69,11 +69,11 @@ bind:this={parentEl}
     id={cardDisplayId}
     virtual= 'true'
     css = 'true'
-    class="h-full swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1"
+    class="h-full swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1 text-black"
   >
     {#if fieldsBackOneValues?.length > 0}
       <swiper-slide class="p-3">
-        <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-full p-1">
+        <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-full p-1 ">
           {#each fieldsBackOneValues as fieldBackOne}
             <CardCell
               bind:value={cardProps[fieldBackOne.value]}

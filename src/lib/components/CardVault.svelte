@@ -58,16 +58,21 @@
       return item.category === categoryFilter;
     } else if (inputText) {
       const inputFilter = filterByTextInput(filteredCards, inputText);
-       return cardsFiltered = inputFilter;
-      };
-    })
+      return (cardsFiltered = inputFilter);
+    }
+  });
   $: console.log(categoryFilter);
-  $: {if (inputText != null && inputText !== "") {
-       cardsFiltered = filterByTextInput(filteredCards, inputText)
-  } else {
-    console.log("The string is null or empty");
-  }}
-
+  $: {
+    if (inputText != null && inputText !== "") {
+      cardsFiltered = filterByTextInput(filteredCards, inputText);
+    } else {
+      console.log("The string is null or empty");
+    }
+  }
+  let scrollContainer;
+  let h ;
+  let w ;
+  let scrollTop; 
 </script>
 
 <div class="w-full h-[80vh] p-2 rounded-2xl bg-blue-50">
@@ -163,6 +168,9 @@
     >
       {#await import("$lib/components/CardFlippable.svelte")}
         <div
+          bind:clientHeight={h}
+          bind:clientWidth={w}
+          
           class="w-full h-full bg-primary p-1 flex justify-center content-center flex-wrap"
           out:fly|local={{ duration: 200 }}
         >
@@ -176,7 +184,6 @@
                   width="200"
                   height="200"
                   viewBox="0 0 981.08368 981.48389"
-                  sodipodi:docname="path199.svg"
                   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
                   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
                   xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +203,6 @@
                   />
                   <g
                     id="g191"
-                    inkscape:groupmode="layer"
                     inkscape:label="Page 1"
                     transform="matrix(1.3333333,0,0,-1.3333333,-750.35516,1188.5708)"
                   >
@@ -221,7 +227,9 @@
           </div>
         </div>
       {:then Module}
-        <div class="w-full flex flex-wrap gap-2 justify-center p-1" in:fade|local={{ duration: 200, delay: 250 }}>
+        <div class="w-full h-[97%] grid  grid-rows-auto grid-cols-4 gap-2 relative  place-items-center overflow-y-auto" in:fade|local={{ duration: 200, delay: 250 }}
+        bind:this={scrollContainer}
+          on:scroll={() => (scrollTop = scrollContainer.scrollTop)}>
           {#if cardsFiltered?.length === 0}
             <div transition:scale|local={{ delay: 10 }}>
               <CardFlippable>
@@ -234,9 +242,12 @@
           {#each cardsFiltered as myneCard, i}
             <div transition:scale|local={{ delay: 10 }}>
               <Module.default
+                {w}
+                {h}
                 cardDisplayId="flippable-card-{i}"
                 cardProps={{ ...myneCard }}
                 pictures={myneCard.pictures}
+                {scrollTop}
               >
                 <SwiperPictures pictures={myneCard.pictures} />
               </Module.default>

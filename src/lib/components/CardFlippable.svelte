@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { template, generalFieldsBack } from "./../../forms";
   import CardSlider from "./CardSlider.svelte";
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
@@ -7,129 +8,30 @@
   import { trpc } from "$lib/trpc/client";
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
-  // formFields initv
-  import {
-    template,
-    generalFieldsBack,
-    jewelryFields,
-    watchFields,
-    artFields,
-    leatherFields,
-    clothingFields,
-    sneakerFields,
-    gunsFields,
-    technologyFields,
-    tradingCardFields,
-    colectibleFields,
-    cryptoFields,
-    nftFields,
-    vintageFields,
-    autoFields,
-    motoFields,
-    catFields,
-    dogFields,
-    birdFields,
-    otherFields,
-    otherAnimalFields,
-    childIdFields,
-  } from "../../forms";
-  import {
-    jewelryProps,
-    watchProps,
-    artProps,
-    leatherProps,
-    clothingProps, 
-    sneakerProps,
-    firearmsProps,
-    technologyProps,
-    tradingCardsProps,
-    collectiblesProps,
-    cryptoProps,
-    nftProps,
-    animalProps,
-    vintageProps,
-    autoProps,
-    motoProps,
-    otherProps,
-  } from "../../routes/fieldProps";
+  import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
 
-  const fieldPropsObject: IfieldsPropsObject = {
-    jewelry: jewelryProps,
-    watch: watchProps,
-    art: artProps,
-    leather: leatherProps,
-    clothing: clothingProps,
-    sneakers: sneakerProps,
-    firearms: firearmsProps,
-    technology: technologyProps,
-    "trading cards": tradingCardsProps,
-    collectibles: collectiblesProps,
-    crypto: cryptoProps,
-    nft: nftProps,
-    dog: animalProps,
-    cat: animalProps,
-    bird: animalProps,
-    "other animal": animalProps,
-    vintage: vintageProps,
-    automobile: autoProps,
-    motorcycle: motoProps,
-    other: otherProps,
-  };
-  let formFieldsObject = {
-    jewelry: jewelryFields,
-    watch: watchFields,
-    firearms: gunsFields,
-    art: artFields,
-    leather: leatherFields,
-    clothing: clothingFields,
-    sneakers: sneakerFields,
-    fir: gunsFields,
-    technology: technologyFields,
-    "trading cards": tradingCardFields,
-    collectibles: colectibleFields,
-    crypto: cryptoFields,
-    nft: nftFields,
-    vintage: vintageFields,
-    automobile: autoFields,
-    motorcycle: motoFields,
-    cat: catFields,
-    dog: dogFields,
-    bird: birdFields,
-    "other animal": otherAnimalFields,
-    other: otherFields,
-    childid: childIdFields,
-  };
-  interface IcardProps {
-    [key: string]: string | boolean | null | bigint | string[];
-    category: keyof typeof colors | keyof typeof formFieldsObject | string | null;
-  }
-  interface IfieldsPropsObject {
-    [key: string]: string[];
-  }
-
-  export let myneCard: IcardProps;
+  export let myneCard;
+  // box height for expanding cards
+  export let w: number;
+  export let h: number;
 
   // card external control values
   export let expanded = false;
-  
-
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
-  export let description;
-  export let pictures;
+  export let scrollTop; 
 
   //card variables
   export let cardDisplayId: string;
   $: cardDisplayId = cardDisplayId;
-  export let cardProps: IcardProps = {
+  export let cardProps = {
     category: "",
     description: "",
     ...myneCard,
   };
-
-  export let selectedFields = formFieldsObject[cardProps.category];
-
+  export let description;
+  export let pictures;
   let currency;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
@@ -140,34 +42,36 @@
   $: cardProps = cardProps;
   let cardSide = writable("front");
 
+  export let selectedFields = formFieldsObject[cardProps.category];
+
   //expansion logic
   let expandWidth = 250;
-  let expandHeight = 350;
+  let expandHeight = (expandWidth * 7) / 5;
   let expandedWidth = spring(expandWidth, {
     stiffness: 0.15,
     damping: 0.5,
   });
-  export let w: number;
-  export let h: number;
+
   let expandedHeight = spring(expandHeight, {
     stiffness: 0.15,
     damping: 0.5,
   });
   let expandedPosition = writable("relative");
-  let zIndex = writable(1); 
-
+  let zIndex = writable(1);
+  let scrollPosition = writable(0)
   function toggleExpand() {
     expanded = !expanded;
-    if (!expanded ) {
+    if (!expanded) {
       expandedHeight.set(expandHeight);
       expandedWidth.set(expandWidth);
       expandedPosition.set("relative");
+      scrollPosition.set(0)
       zIndex.set(1);
-    }else {
-
+    } else {
       expandedHeight.set(h);
       expandedWidth.set(w);
       expandedPosition.set("absolute");
+      scrollPosition.set(scrollTop)
       zIndex.set(99);
     }
   }
@@ -181,31 +85,9 @@
   }
   $: console.log("flipped", flipped);
   $: console.log("expanded", expanded);
-$: console.log("cardSide fF")
+  $: console.log("cardSide", cardSide);
   //add general fields config here  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
   $: categoryKey = cardProps.category?.toLowerCase() as keyof typeof colors | keyof typeof formFieldsObject;
-  const colors = {
-    jewelry: "bg-gradient-to-r from-[#F192E8] to-[#edd7eb]",
-    watch: "bg-gradient-to-r from-[#1b1c1d] to-[#999ba0]",
-    art: "bg-gradient-to-r from-[#ffe609] to-[#fffbd7]",
-    leather: "bg-gradient-to-r from-[#984E1D] to-[#dbbfad]",
-    clothing: "bg-gradient-to-r from-[#456896] to-[#d6e7e8]",
-    sneakers: "bg-gradient-to-r from-[#86e8ec] to-[#bbd5d5]",
-    firearms: "bg-gradient-to-r to-[#edd49e] via-[#638256] from-[#1d410e]",
-    technology: "bg-gradient-to-r from-[#132076]  to-[#c8c5f1]",
-    "trading cards": "bg-gradient-to-r from-[#ddcd7c] via-[#ddcd7c]  to-[#e8e5d7]",
-    collectibles: "bg-gradient-to-r from-[#6bf7b3]  to-[#c9e8d9]",
-    crypto: "bg-gradient-to-r from-[#8d8b8b]  to-[#efefef]",
-    nft: "bg-gradient-to-r from-[#582577]  to-[#e3d1ee",
-    vintage: "bg-gradient-to-r from-[#FF5F09]  to-[#f8e6de]",
-    automobile: "bg-gradient-to-r from-[#ff2800]  to-[#601204]",
-    motorcycle: "bg-gradient-to-r from-[#ff2800]  to-[#601204]",
-    dog: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
-    cat: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
-    bird: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
-    "other animal": "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
-    other: "bg-gradient-to-r from-[#f3efef]  to-[#767976]",
-  };
   let pickedColor: string;
   $: pickedColor = colors[categoryKey as keyof typeof colors];
 
@@ -226,67 +108,36 @@ $: console.log("cardSide fF")
   }
   $: console.log(myneCard);
   $: console.log("card-side", cardSide);
+  $: console.log("scrollPosition", scrollPosition);
 </script>
+
 <div
   class:flipped
-  class={expanded ? 'absolute' : '"wrapper rounded-2xl h-fit  w-fit relative " '}
+  class={expanded ? "absolute expanded-view-cards top: { 0  + `${scrollTop}`" : '"wrapper rounded-xl  relative aspect-[2/3]" '}
   class:sendCard={sentCard === true && success === null}
   class:comeBack={success === true}
+  style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition}; top: {$scrollPosition}px; left:0px"
 >
-  <div
-    class:expanded={expanded ? "absolute" : "relative"}
-    class="flip-card bg-none [perspective:1000px] [user-select:none] cursor-pointer rounded-2xl 
-    "
-    style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
-  >
-    <div class="flip-card-inner rounded-2xl w-fit relative"     style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
-    >
-      <div class="flip-card-front rounded-2xl   h-full">
-        <div class="absolute w-fit top-0 z-10 right-0">
-          <div
-            class:no-display={$cardSide === "back"}
-            class="flex  top-[.5rem] right-[1rem] z-10 absolute w-justify-end"
-          >
-            <button
-            on:click={() => {
-              toggleExpand();
-            }}
-              class="btn relative p-0 pr-3 w-fit btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[99]  normal-case"
-            >
-              <Icon
-                size="12px"
-                class="opacity-60 cursor-pointer  text-white ml-[1rem] "
-                src={ArrowsExpand}
-             
-              />
-              <p>Expand</p>
-            </button>
-            <button 
-              disabled={expanded}
-              class="btn btn-square relative btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] normal-case"
-              on:click={() => {
-                toggleFlipped();
-              }}
-            >
-              <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowCircleLeft} />
-              <p>Flip</p>
-            </button>
-          </div>
-        </div>
-
+  <div class="flip-card bg-none  [perspective:1000px] [user-select:none] cursor-pointer rounded-xl h-full">
+    <div class="flip-card-inner rounded-xl w-full h-full relative">
+      <div class="flip-card-front rounded-xl">
         <div
-          class="front-parent card-item w-full h-full gradient bg-white whole-card rounded-2xl shadow-2xl  flex   z-1  bg-cover"
-          
+          class="front-parent card-item grid grid-rows-2 w-full gradient bg-white whole-card rounded-xl shadow-2xl z-1  bg-cover "
+          style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
         >
           {#key pickedColor}
-            <div class="front-top rounded-t-2xl {pickedColor} transition-colors duration-200 ease-linear ">
-              <div class={expanded  ? 'w-full h-full object-cover flex justify-center content-center flex-nowrap py-2 ' : ' w-full h-full aspect-[3/2] object-cover flex justify-center content-center flex-nowrap py-2' } >
+            <div class="front-top-top rounded-t-xl {pickedColor} transition-colors duration-200 ease-linear ">
+              <div
+                class={expanded
+                  ? "w-full h-full flex justify-center content-center flex-nowrap rounded-xl p-2"
+                  : "flex w-full h-full justify-center content-center flex-nowrap rounded-xl p-2"}
+              >
                 <slot />
               </div>
             </div>
           {/key}
-          <div class="front-bottom rounded-b-2xl h-[100%]">
-            <div class="front-fields-grid h-full w-full p-2">
+          <div class="front-bottom w-full rounded-b-2xl relative">
+            <div class="front-fields-grid w-full h-full p-2">
               {#if fieldsFrontValues?.length > 0}
                 {#each fieldsFrontValues as fieldFront}
                   <CardCell
@@ -300,15 +151,37 @@ $: console.log("cardSide fF")
             </div>
           </div>
         </div>
+        <div class:hidden={flipped} class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
+          <button
+            class="btn btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"
+            on:click={() => {
+              toggleExpand();
+            }}
+          >
+            <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowsExpand} />
+            <p>Expand</p>
+          </button>
+          <button
+          disabled={expanded}
+
+            class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-[101] normal-case"
+            on:click={() => {
+              toggleFlipped();
+            }}
+          >
+            <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowCircleLeft} />
+            <p>Flip</p>
+          </button>
+        </div>
       </div>
-      <div class="flip-card-back rounded-2xl text-black  "
-      >
-        <div class="card-item  bg-none rounded-2xl shadow-2xl z-1"
-        style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
+      <div class="flip-card-back rounded-xl text-white  ">
+        <div
+          class="card-item  bg-none rounded-xl shadow-xl z-1"
+          style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
         >
-          <div class="flex  top-[.5rem] right-[1rem] z-[110] absolute w-justify-end">
+          <div class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
             <button
-              class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-[110] normal-case"
+              class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-[101] normal-case"
               on:click={() => {
                 toggleExpand();
               }}
@@ -317,7 +190,7 @@ $: console.log("cardSide fF")
               <p>Expand</p>
             </button>
             <button
-              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem`] z-[110] normal-case"
+              class="btn btn-square btn-ghost btn-secondary text-black  top-[.5rem] right-[1rem] z-[101] normal-case"
               on:click={() => {
                 toggleFlipped();
               }}
@@ -327,10 +200,10 @@ $: console.log("cardSide fF")
             </button>
           </div>
           <div
-            class=" card-item rounded-2xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
+            class=" card-item rounded-xl w-full h-full justify-between whole-card bg-white  back-card_general-grid p-3 "
           >
-          {#if !expanded}
-            <div class="spacer w-full h-[50%]" />
+            {#if !expanded}
+              <div class="spacer w-full h-[50%]" />
             {/if}
             <CardSlider
               {cardDisplayId}
@@ -395,9 +268,6 @@ $: console.log("cardSide fF")
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
   }
-  .upload-picures {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-  }
   .text-box {
     margin: 0 auto;
     white-space: pre-wrap;
@@ -407,10 +277,7 @@ $: console.log("cardSide fF")
     word-wrap: break-word;
     display: box;
   }
-  .whole-card {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
+
   .sendCard {
     -webkit-animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
     animation: slide-out-top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
