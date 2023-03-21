@@ -50,20 +50,22 @@
 
   const dispatch = createEventDispatcher();
   const downloadImage = async (path: string) => {
-    try {
-      const { data, error } = await supabase.storage.from("card-images").download(path);
-      if (error) {
-        throw error;
-      }
-      const url = URL.createObjectURL(data);
-
-      return url;
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log("Error downloading image: ", error.message);
-      }
+  try {
+    const response = await fetch(`/api/get-pictures?path=${encodeURIComponent(path)}`);
+    if (!response.ok) {
+      throw new Error("Error downloading image.");
     }
-  };
+    const data = await response.json();
+    const url = data.url;
+
+    return url;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log("Error downloading image: ", error.message);
+    }
+  }
+};
+
 
   const uploadCardPicture = async () => {
     try {
