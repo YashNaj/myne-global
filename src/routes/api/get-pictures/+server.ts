@@ -1,4 +1,9 @@
 import type { RequestHandler } from "@sveltejs/kit";
+import { auth } from "$lib/server/lucia";
+import { getUser } from "$lib/server/server";
+import { INTERNAL_SERVER_ERROR } from "$lib/utils/errors";
+import { json, type RequestHandler } from "@sveltejs/kit";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { redis } from "$lib/server/redis";
 import { supabase } from "$lib/supabaseClient";
 
@@ -23,7 +28,7 @@ export const GET: RequestHandler = async (request) => {
           }
 
           const url = URL.createObjectURL(data);
-          redis.setex(`image:${path}`, 60 * 60, url);
+          redis.set(`image:${path}`, 60 * 60, url);
           resolve({ body: { url }, status: 200 });
         }
       });
