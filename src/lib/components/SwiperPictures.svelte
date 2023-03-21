@@ -1,3 +1,5 @@
+
+
 <script lang="ts">
   import Spinner from "$lib/components/Spinner.svelte";
   import { afterUpdate, beforeUpdate, createEventDispatcher } from "svelte";
@@ -6,7 +8,6 @@
   import Swiper from "swiper";
   import { onMount } from "svelte";
   let parentEl;
-
   export let size = 10;
   beforeUpdate(() => {
     for (let picture of pictures) {
@@ -38,7 +39,6 @@
       });
     }
   });
-
   export let pictures: string[] = [];
   console.log("🚀 ~ file: SwiperPictures.svelte:33 ~ pictures:", pictures);
   $: pictures = pictures;
@@ -47,53 +47,41 @@
   let uploading = false;
   let files: FileList;
   let uploadButton: HTMLInputElement;
-
   const dispatch = createEventDispatcher();
   const downloadImage = async (path: string) => {
-  try {
-    const response = await fetch(`/api/get-pictures?path=${encodeURIComponent(path)}`);
-    if (!response.ok) {
-      throw new Error("Error downloading image.");
+    try {
+      const { data, error } = await supabase.storage.from("card-images").download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+      return url;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log("Error downloading image: ", error.message);
+      }
     }
-    const data = await response.json();
-    const url = data.url;
-
-    return url;
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log("Error downloading image: ", error.message);
-    }
-  }
-};
-
-
+  };
   const uploadCardPicture = async () => {
     try {
       uploading = true;
-
       if (!files || files.length === 0) {
         throw new Error("You must select an image to upload.");
       }
-
       if (pictures.length >= 10) {
         console.log("🚀 ~ file: SwiperPictures.svelte:67 ~ uploadCardPicture ~ pictures:", pictures);
         throw new Error("You cannot upload more than 10 pictures.");
       }
       console.log("🚀 ~ file: SwiperPictures.svelte:70 ~ uploadCardPicture ~ pictures:", pictures);
-
       const file = files[0];
       const fileExt = file.name.split(".").pop();
       const filePath = `${Math.random()}.${fileExt}`;
-
       let { error } = await supabase.storage.from("card-images").upload(filePath, file);
-
       if (error) {
         throw error;
       }
-
       pictures = [...pictures, filePath];
       console.log("🚀 ~ file: SwiperPictures.svelte:77 ~ uploadCardPicture ~ pictures:", pictures);
-
       dispatch("picturesuploaded", pictures);
     } catch (error) {
       if (error instanceof Error) {
@@ -105,7 +93,6 @@
       uploadButton.value = "";
     }
   };
-
   export let expanded;
 </script>
 
@@ -128,7 +115,7 @@
                 loading="eager"
                 id={`img-${picture}`}
                 alt="Uploaded picture"
-                class="bg-black bg-opacity max-w-md"
+                class="bg-black bg-opacity "
               />
             </div>
 
