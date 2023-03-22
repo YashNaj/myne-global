@@ -178,5 +178,3 @@
     </div>
   </div>
 
-  <!-- component-container -->
-</div>
