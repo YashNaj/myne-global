@@ -23,12 +23,10 @@
         const swiperEl = parentEl.swiper;
         if (targetEl.classList.contains("swiper-button-pictures-next")) {
           const swiperEl = parentEl.swiper;
-          console.log("🚀 ~ file: CardSlider.svelte:33 ~ parentEl.addEventListener ~ swiperEl:", swiperEl);
           if (swiperEl) {
             swiperEl.slideNext();
           }
         } else if (targetEl.classList.contains("swiper-button-pictures-prev")) {
-          console.log("🚀 ~ file: SwiperPictures.svelte:23 ~ parentEl.addEventListener ~ pictures:", pictures);
           const swiperEl = parentEl.swiper;
           if (swiperEl) {
             swiperEl.slidePrev();
@@ -38,10 +36,7 @@
     }
   });
   export let pictures: string[] = [];
-  console.log("🚀 ~ file: SwiperPictures.svelte:33 ~ pictures:", pictures);
   $: pictures = pictures;
-  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures);
-  console.log("🚀 ~ file: SwiperPictures.svelte:35 ~ pictures:", pictures);
   let uploading = false;
   let files: FileList;
   let uploadButton: HTMLInputElement;
@@ -56,7 +51,6 @@
       return url;
     } catch (error) {
       if (error instanceof Error) {
-        console.log("Error downloading image: ", error.message);
       }
     }
   };
@@ -67,10 +61,8 @@
         throw new Error("You must select an image to upload.");
       }
       if (pictures.length >= 10) {
-        console.log("🚀 ~ file: SwiperPictures.svelte:67 ~ uploadCardPicture ~ pictures:", pictures);
         throw new Error("You cannot upload more than 10 pictures.");
       }
-      console.log("🚀 ~ file: SwiperPictures.svelte:70 ~ uploadCardPicture ~ pictures:", pictures);
       const file = files[0];
       const fileExt = file.name.split(".").pop();
       const filePath = `${Math.random()}.${fileExt}`;
@@ -79,7 +71,6 @@
         throw error;
       }
       pictures = [...pictures, filePath];
-      console.log("🚀 ~ file: SwiperPictures.svelte:77 ~ uploadCardPicture ~ pictures:", pictures);
       dispatch("picturesuploaded", pictures);
     } catch (error) {
       if (error instanceof Error) {

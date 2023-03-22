@@ -2,23 +2,19 @@
   import "../app.css";
   import { page } from "$app/stores";
   import { handleSession } from "@lucia-auth/sveltekit/client";
-  import type { LayoutData } from "../$types";
   import logo from "$lib/images/white_myne_logo.png";
-  import Footer2 from "$lib/components/Footer2.svelte";
   import LogOut from "$lib/components/LogOut.svelte";
-  import { Icon, Plus } from "svelte-hero-icons";
   import type { LayoutServerData, PageServerLoad } from "./$types";
   import type { PageData } from "@lucia-auth/sveltekit/types";
-  import Desktop from "$lib/components/Desktop.svelte";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
-  import { goto } from "$app/navigation";
-  import { TabGroup, TabList, TabPanels, Tab } from "@rgossiaux/svelte-headlessui";
-  import { preloadData } from '$app/navigation';
 
+  import {currentUser } from "../../store"
   export let addCardOpen = false;
   export let data: PageData = $page.data;
   const profile = data.profile;
+  currentUser.set(profile.user_id)
+
   export let loading = data.loading;
   $: console.log(loading);
   let menuItems = [

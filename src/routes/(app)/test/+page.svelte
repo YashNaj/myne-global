@@ -17,9 +17,7 @@
   function selectUser(user) {
     selectedUser = user;
   }
-  $: console.log(selectedUser);
   let expanded = false;
-  $: console.log("🚀 ~ file: +page.svelte:9 ~ expanded:", expanded);
   let scrollContainer;
   let expandWidth = 250;
   let expandHeight = 350;
@@ -58,8 +56,6 @@
     email: "",
   };
   $: users = JSON.stringify(users);
-  $: console.log(users);
-  let userStore = writable([{}]);
   let myneCardTest;
   let emailInput: string;
   let loading = false;
@@ -74,7 +70,7 @@
   };
   const loadCards = async () => {
     cardLoading = true;
-    myneCardTest = await trpc($page).myneCards.list.query();
+    myneCardTest = await trpc($page).cards.list.query();
     cardLoading = false;
   };
   const loadUsers = async () => {
@@ -90,7 +86,6 @@
   let userSlider;
   let inputFocusStore = writable(false);
   let inputFocus = $inputFocusStore;
-  console.log("🚀 ~ file: +page.svelte:11 ~ loadData ~ myneCardTest:", myneCardTest);
 </script>
 
 <div class="w-full h-full flex flex-col p-3 bg-slate-50">
@@ -169,58 +164,7 @@
               loadUsers();
             }}
           />
-          <div class="w-full h-80 shadow-lg card bg-slate-100 relative flex" transition:scale|local>
-            <div class="w-full h-full container-for-badges flex justify-center content-center flex-nowrap">
-              <swiper-container
-                bind:this={userSlider}
-                class="item-certificate-slider w-full h-full flex justify-center content-center bg-slate-100 shadow-md rounded-2xl my"
-                navigation="true"
-                pagination="true"
-                grab-cursor="true"
-                centered-slides="true"
-                slides-per-view="1"
-                coverflow-effect-slide-shadows="false"
-                observer-parents="true"
-                virtual="true"
-              >
-                <div class="w-full h-full swiper-wrapper">
-                  {#if actionLoading}
-                    <swiper-slide class="w-full h-full justify-center content-center flex-wrap p-3">
-                      <Spinner />
-                    </swiper-slide>
-                  {:else if $userStore.length > 0}
-                    {#each $userStore as user, i}
-                      <swiper-slide
-                        id="user-{i}"
-                        class="w-full h-fit flex  content-center flex-wrap` justify-center p-1 "
-                      >
-                        <div
-                          class="lg:w-[300px] lg:h-[300px] flex flex-col bg-black bg-opacity-5 rounded-lg justify-center  conent-center flex-wrap"
-                        >
-                          <UserBadge {user} />
-                          <div class="button-container flex justify-center">
-                            <button on:click={()=>{selectUser(user)}} class="btn btn-ghost border-primary w-fit btn-primary normal-case ">
-                              Select
-                            </button>
-                          </div>
-                        </div>
-                      </swiper-slide>
-                    {/each}
-                  {:else}
-                    <swiper-slide class="w-full h-fit flex flex-col  justify-center content-center flex-wrap p-1">
-                      <div class = 'lg:w-[300px] lg:h-[300px] flex flex-col bg-black bg-opacity-5 rounded-lg justify-center  conent-center flex-wrap'>
-                        <UserBadge user={{ email: "Not found" }} />
-
-                      </div>
-                    </swiper-slide>
-                  {/if}
-                </div>
-
-                <swiper-pagination />
-                <swiper-navigation />
-              </swiper-container>
-             
-            </div>
+         
 
          
           </div>

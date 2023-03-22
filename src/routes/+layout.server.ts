@@ -9,6 +9,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { cardPropsArray, cardProps, isHeirloom } from "../cardProps";
 import { createContext } from '$lib/trpc/context';
 import { router } from '$lib/trpc/router';
+import { currentUser } from '../store'
 
 const prisma = new PrismaClient();
 const anyoneAllowed = [

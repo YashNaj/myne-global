@@ -6,7 +6,6 @@ import { getSessionUser } from "$lib/server/lucia";
 import { auth } from "$lib/server/lucia";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { getCards } from "$lib/server/db"
-import { writable } from 'svelte/store';
 import { redis } from '$lib/server/redis';
 import { router } from '$lib/trpc/router';
 const prisma = new PrismaClient();
@@ -16,13 +15,13 @@ export const load: PageServerLoad = async ({ locals, event }) => {
   let loading = true;
   const { session, user } = await locals.validateUser();
   const getMyneCards = async () => {
-    const cacheKey = `myneCards_${user.userId}`;
-    const cachedData = await redis.get(cacheKey);
+    // const cacheKey = `myneCards_${user.userId}`;
+    // const cachedData = await redis.get(cacheKey);
 
-    if (cachedData) {
-      console.log("cache hit", cachedData)
-      return JSON.parse(cachedData);
-    }
+    // if (cachedData) {
+    //   console.log("cache hit", cachedData)
+    //   return JSON.parse(cachedData);
+    // }
     
     console.log("cache missed")
     const cards = await prisma.myneCard.findMany({
@@ -43,8 +42,8 @@ export const load: PageServerLoad = async ({ locals, event }) => {
 
     const dataToCache = JSON.stringify(filteredCards);
     const cacheExpirationTime = 3600; // 1 hour in seconds, adjust as needed
-    await redis.set(cacheKey, dataToCache, 'EX', cacheExpirationTime);
-    console.log(redis)
+    // await redis.set(cacheKey, dataToCache, 'EX', cacheExpirationTime);
+    // console.log(redis)
     console.timeEnd("loadFunctionTimer")
 
     return filteredCards;

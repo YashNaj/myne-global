@@ -10,7 +10,6 @@
   import { onMount } from "svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import Desktop from "$lib/components/Desktop.svelte";
-  import { formResult } from "$lib/stores";
   import { TabGroup, TabList, TabPanels, Tab, TabPanel } from "@rgossiaux/svelte-headlessui";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import CardVault from "$lib/components/CardVault.svelte";
@@ -20,7 +19,7 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { fade } from "svelte/transition";
-  import { transfer } from "./store";
+  import { transfer } from "../../store";
   export let data: PageData = $page.data;
   let size = "9";
 
@@ -43,6 +42,7 @@
     isLoading = false;
   });
 </script>
+
 <div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex flex-col ">
   <Dashboard {isLoading} />
   <div class="quick-cards w-full flex flex-col justify-center content-center bg-secondary rounded-2xl h-[300px] mt-2">

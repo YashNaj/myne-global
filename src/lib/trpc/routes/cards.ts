@@ -16,9 +16,21 @@ const myneCardsOutput = z.object({
     })
   ),
 });
+const transferInputSchema = z.object({
+  currentUserId: z.string(),
+  newUserId: z.string(),
+  cardId: z.string()
+});
+
+// Validate and pass the input
+const input = transferInputSchema.parse({
+  currentUserId: "current-user-id",
+  newUserId: "new-user-id",
+  cardId: "card-id"
+});
 
 // Define the actual endpoint
-export const myneCards = t.router({
+export const cards = t.router({
   list: t.procedure.input(z.string().optional()).query(({ input }) => prisma.myneCard.findMany()),
 
   load: t.procedure
@@ -52,7 +64,7 @@ export const myneCards = t.router({
   //         data: { ...rest, updatedByUserId: userId }
   //       });
   //     }
-  //   }),
+//   }),
 
   delete: t.procedure
     // 👈 use auth middleware
@@ -61,15 +73,23 @@ export const myneCards = t.router({
       await prisma.myneCard.delete({ where: { id } });
     }),
 
-  transfer: t.procedure.input(z.string()).mutation(
-    async ({ input: currentUserId, newUserId: newUserId }) =>
-      await prisma.myneCard.update({
-        where: {
-          user_id : currentUserId
-        },
-        update:{
-          user_id : newUserId
-        }
+  transfer: t.procedure
+    .input(
+      z.object({
+        currentUserId: z.string(),
+        newUserId: z.string(),
+        cardId: z.string()
       })
-  ),
+    )
+    .mutation(
+      async ({ input: { cardId, currentUserId, newUserId } }) =>
+        await prisma.myneCard.update({
+          where: {
+            id: cardId,
+          },
+          data: {
+            user_id: newUserId,
+          },
+        })
+    ),
 });

@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
-  import { transfer } from "../../routes/(app)/store";
+  import { transfer } from "../../store";
+  export let selected: boolean = false
 </script>
 
 <div class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
@@ -9,6 +10,7 @@
     class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
     on:click={() => {
       let transferSwitch = $transfer;
+      selected = !selected;
       transferSwitch = !transferSwitch;
       transfer.set(transferSwitch);
     }}

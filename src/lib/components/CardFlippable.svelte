@@ -9,6 +9,7 @@
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
+  import { selectedCardId } from "../../store";
 
   export let myneCard;
   // box height for expanding cards
@@ -20,6 +21,9 @@
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
+  export let selected: boolean = false; 
+  $:selected = selected 
+  $: console.log("selected", selected)
   export let scrollTop; 
 
   //card variables
@@ -107,6 +111,10 @@
   $: console.log(myneCard);
   $: console.log("card-side", cardSide);
   $: console.log("scrollPosition", scrollPosition);
+  let cardId: string ;
+  $: if ( cardProps ) { cardId = cardProps.id }
+  $: if ( selected  ) {  selectedCardId.set(cardId) }
+  $: console.log('selectedCardId', $selectedCardId)
 </script>
 
 <div
@@ -213,7 +221,7 @@
               {generalFieldsBack}
             />
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget />
+              <CardButtonWidget bind:selected  />
             </div>
           </div>
         </div>

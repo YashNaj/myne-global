@@ -3,7 +3,6 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
 import { PrismaClient, Prisma } from "@prisma/client";
-import { formResult } from '$lib/stores';
 const prisma = new PrismaClient();
 export const actions: Actions = {
   default: async ({ request, locals }) => {
@@ -178,9 +177,6 @@ export const actions: Actions = {
           },
       
     });
-    formResult.set(true)
-    console.log(formResult)
-
     prisma.$disconnect();
     return {
       message: "Card Added Successfully!",
