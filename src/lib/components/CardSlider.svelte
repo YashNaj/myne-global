@@ -2,7 +2,7 @@
   import focusSlide from "$lib/swiperActions";
   import ChildId from "$lib/components/ChildId.svelte";
   import PageContainer from "$lib/components/PageContainer.svelte";
-  import { onMount } from "svelte";
+  import { beforeUpdate, onMount } from "svelte";
   import { ArrowCircleLeft, ArrowCircleRight, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
   import "swiper/swiper-bundle.css";
@@ -27,7 +27,7 @@
   let mySwiper;
   let expand = false;
   let parentEl: HTMLElement;
-  onMount(() => {
+  beforeUpdate(() => {
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
         const targetEl = event.target as HTMLElement;
@@ -54,7 +54,6 @@
         }
       });
     }
-    
   });
 </script>
 

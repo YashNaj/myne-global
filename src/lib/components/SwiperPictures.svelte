@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
   import Spinner from "$lib/components/Spinner.svelte";
   import { afterUpdate, beforeUpdate, createEventDispatcher } from "svelte";
@@ -103,20 +101,19 @@
     observer-parents={true}
     slides-per-view="1"
     class="picture-swiper w-full h-full rounded-lg relative "
+    css="true"
     virtual="true"
   >
     {#if pictures.length > 0}
       {#each pictures as picture, i}
-        <swiper-slide class=" w-fit h-fit object-cover rounded-lg flex justify-center  bg-black bg-opacity-30" id={`item-${i}`}>
+        <swiper-slide
+          class=" w-fit h-fit object-cover rounded-lg flex justify-center  bg-black bg-opacity-30"
+          id={`item-${i}`}
+        >
           {#if picture}
             <div class="w-full object-cover h-full ">
               <!-- svelte-ignore a11y-img-redundant-alt -->
-              <img
-                loading="eager"
-                id={`img-${picture}`}
-                alt="Uploaded picture"
-                class="bg-black bg-opacity "
-              />
+              <img loading="eager" id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity " />
             </div>
 
             <!-- svelte-ignore a11y-img-redundant-alt -->
