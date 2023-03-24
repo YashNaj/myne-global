@@ -19,7 +19,8 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { fade } from "svelte/transition";
-  import { transfer } from "../../store";
+  import { stolen, transfer } from "../../store";
+  import ReportStolen from "$lib/components/ReportStolen.svelte";
   export let data: PageData = $page.data;
   let size = "9";
 
@@ -35,7 +36,7 @@
   handleSession(page);
   let loading;
   $: loading = data.loading;
-  const tabList = ["Card Vault", "Import", "History Reports", "Item Certificate", "Request Inventory"];
+  const tabList = ["Card Vault", "Import", "History Reports", "Request Inventory"];
   export let isLoading = true;
   onMount(async () => {
     // Load data here
@@ -120,8 +121,25 @@
         {/each}
       </TabList>
       <TabPanels class="w-full h-full flex flex-col  mt-1">
-        <TabPanel class="w-full h-full">
+        <TabPanel class="w-full h-full relative">
           <div class="w-full h-full">
+            {#if $transfer}
+              <div
+                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg"
+                transition:fade|local
+              >
+                <UserSelector />
+              </div>
+            {/if}
+            {#if $stolen}
+              <div
+                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 kleft-9"
+                transition:fade|local
+              >
+                <ReportStolen />
+              </div>
+            {/if}
+
             <CardVault {data} />
           </div>
         </TabPanel>
@@ -142,20 +160,9 @@
           <HistoryReports {data} />
         </TabPanel>
         <TabPanel class="w-full h-full">
-          <ItemCertificate {data} />
-        </TabPanel>
-        <TabPanel class="w-full h-full">
           <RequestInventory {data} />
         </TabPanel>
       </TabPanels>
     </TabGroup>
   </PageContainer>
 </div>
-{#if $transfer}
-  <div
-    class="w-screen h-screen flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg"
-    transition:fade|local
-  >
-    <UserSelector />
-  </div>
-{/if}

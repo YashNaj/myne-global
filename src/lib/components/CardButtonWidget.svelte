@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
-  import { transfer } from "../../store";
+  import { transfer, stolen } from "../../store";
   export let selected: boolean = false
 </script>
 
@@ -23,7 +23,12 @@
     <p class="flex text-xs w-full justify-center text-yellow-700">Certificate</p>
     <Icon src={Star} color="gold" class="opacity-90" size="30px" />
   </button>
-  <button class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
+  <button     on:click={() => {
+    let stolenSwitch = $stolen;
+    selected = !selected;
+    stolenSwitch = !stolenSwitch;
+    stolen.set(stolenSwitch);
+  }} class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
     <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>
   </button>

@@ -7,6 +7,9 @@
   import { onMount } from "svelte";
   let parentEl;
   export let size = 10;
+  
+  
+  
   beforeUpdate(() => {
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
@@ -41,6 +44,7 @@
   let files: FileList;
   let uploadButton: HTMLInputElement;
   const dispatch = createEventDispatcher();
+
   const downloadImage = async (path: string) => {
     try {
       const { data, error } = await supabase.storage.from("card-images").download(path);
@@ -48,13 +52,19 @@
         throw error;
       }
       const url = URL.createObjectURL(data);
+      console.log("url",url)
       return url;
     } catch (error) {
       if (error instanceof Error) {
       }
     }
   };
-  const uploadCardPicture = async () => {
+
+
+
+
+
+  const uploadImage = async () => {
     try {
       uploading = true;
       if (!files || files.length === 0) {
@@ -155,7 +165,7 @@
           id="single"
           accept="image/*"
           bind:files
-          on:change={uploadCardPicture}
+          on:change={uploadImage}
           disabled={uploading || pictures.length >= 10}
           bind:this={uploadButton}
         />

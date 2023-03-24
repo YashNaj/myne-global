@@ -19,14 +19,14 @@ const myneCardsOutput = z.object({
 const transferInputSchema = z.object({
   currentUserId: z.string(),
   newUserId: z.string(),
-  cardId: z.string()
+  cardId: z.string(),
 });
 
 // Validate and pass the input
 const input = transferInputSchema.parse({
   currentUserId: "current-user-id",
   newUserId: "new-user-id",
-  cardId: "card-id"
+  cardId: "card-id",
 });
 
 // Define the actual endpoint
@@ -64,7 +64,7 @@ export const cards = t.router({
   //         data: { ...rest, updatedByUserId: userId }
   //       });
   //     }
-//   }),
+  //   }),
 
   delete: t.procedure
     // 👈 use auth middleware
@@ -78,7 +78,7 @@ export const cards = t.router({
       z.object({
         currentUserId: z.string(),
         newUserId: z.string(),
-        cardId: z.string()
+        cardId: z.string(),
       })
     )
     .mutation(
@@ -92,4 +92,18 @@ export const cards = t.router({
           },
         })
     ),
+  reportStolen: t.procedure.input(z.string()).query(({ input }) => {
+    prisma.stolen.insertOne({
+      where: {
+        id: input,
+      },
+    });
+  }),
+  removeStolen: t.procedure.input(z.string()).query(({ input }) => {
+    prisma.stolen.findOne({
+      where: {
+        id: input,
+      },
+    });
+  }),
 });

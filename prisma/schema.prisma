@@ -142,6 +142,8 @@ model MyneCard {
   wallet_address           String?
   document_array           String?
   Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: Cascade)
+  Stolen                   Stolen?
+  stolenId                 Int?      @unique
 
   @@unique([user_id, id])
   @@map("myneCard")
@@ -298,4 +300,12 @@ enum Role {
   USER
   ADMIN
   DISTR
+}
+
+model Stolen {
+  id         String   @id @default(uuid())
+  myneCardId String   @unique
+  myneCard   MyneCard @relation(fields: [myneCardId], references: [id])
+  createdAt  DateTime @default(now())
+  @@map("stolen")
 }

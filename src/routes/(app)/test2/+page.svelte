@@ -18,7 +18,6 @@
   })
 
 
-  $: console.log('swiperEl', swiperEl)
 </script>
 
 <div
