@@ -79,7 +79,6 @@
       return (users = [{}]);
     } else users = await trpc($page).findUser.load.query(emailInput);
 
-    userStore.set(users);
     actionLoading = false;
   };
   let pictures = [];

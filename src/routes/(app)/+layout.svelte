@@ -5,7 +5,7 @@
   import logo from "$lib/images/white_myne_logo.png";
   import LogOut from "$lib/components/LogOut.svelte";
   import type { LayoutServerData, PageServerLoad } from "./$types";
-  import type { PageData } from "@lucia-auth/sveltekit/types";
+  import type { PageData } from "./$types"; 
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
 
@@ -13,8 +13,8 @@
   export let addCardOpen = false;
   export let data: PageData = $page.data;
   const profile = data.profile;
-  currentUser.set(profile.user_id)
-
+  const userId = profile?.user_id;
+  $: if(currentUser) {currentUser.set(userId)}
   export let loading = data.loading;
   $: console.log(loading);
   let menuItems = [

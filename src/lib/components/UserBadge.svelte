@@ -3,8 +3,10 @@
   import { Icon, User } from "svelte-hero-icons";
   import { scale } from "svelte/transition";
   export let selected = false;
-
-  export let user;
+  export let userName = 'MG'
+  export let user = {
+    id  :' default '
+  }
   $: user = user;
   $: console.log(user);
 </script>
@@ -16,15 +18,15 @@
   <div class="avatar  placeholder flex justify-center  ">
     <div
       class="bg-neutral-focus {selected
-        ? 'border-4 border-green-600 transition-colors'
+        ? 'border-4 border-green-600 transition-colors animate-pulse'
         : ''}  text-neutral-content rounded-full w-24"
     >
-      <span class="text-3xl">MG</span>
+      <span class="text-3xl">{userName}</span>
     </div>
   </div>
   <div class="w-full h-fit flex p-1 justify-center ">
-    <h1 class="w-full h-fit p-1 justify-center flex content-center flex-nowrap">
-      MyneID :{user.id}
+    <h1 class="w-full h-fit p-1 justify-center flex content-center flex-nowrap text-center">
+      MyneID :{user?.id}
     </h1>
   </div>
 </div>

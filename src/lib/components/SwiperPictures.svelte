@@ -83,6 +83,13 @@
     }
   };
   export let expanded;
+  const onProgress = (e) => {
+    const [swiper, progress] = e.detail;
+    console.log(progress)
+  };
+  const onSlideChange = (e) => {
+    console.log('slide changed')
+  }
 </script>
 
 <div class="card-pictures-wrapper w-56 h-40">
@@ -98,6 +105,7 @@
     {#if pictures.length > 0}
       {#each pictures as picture, i}
         <swiper-slide
+        lazy = "true"
           class=" w-fit h-fit object-cover rounded-lg flex justify-center  bg-black bg-opacity-30"
           id={`item-${i}`}
         >

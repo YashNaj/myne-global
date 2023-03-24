@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { selectedCardId } from './../../store';
+  import { selectedCardId } from "./../../store";
   import { page } from "$app/stores";
   import { trpc } from "$lib/trpc/client";
   import type { User } from "lucia-auth";
@@ -8,46 +8,73 @@
   import { transfer, currentUser } from "../../store";
   import Spinner from "./Spinner.svelte";
   import UserBadge from "./UserBadge.svelte";
-  
-  let  currentUserId  = $currentUser;
-  let cardId = $selectedCardId
-  $: cardId = $selectedCardId
+  import Swiper from "swiper";
+  import { afterUpdate, beforeUpdate, onMount } from "svelte";
+  import { ArrowCircleRight, ArrowRight, Home, Icon, SwitchHorizontal } from "svelte-hero-icons";
+  import { goto } from "$app/navigation";
+  import { redirect } from "@sveltejs/kit";
+
+  let currentUserId = $currentUser;
+  let cardId = $selectedCardId;
+  $: cardId = $selectedCardId;
+  let selectedUserSwitch = false;
   let selectedUser;
   let newUserId: string;
-  $: if (selectedUser) {newUserId = selectedUser.id};
-  let users;
+  $: if (selectedUser) {
+    newUserId = selectedUser.id;
+  }
+  let users: {}[] = [];
   let selectedCard;
 
   let userInput: string = "";
   let loadingTransfer: boolean = false;
   let userLoading: boolean = false;
   let userStore = writable([{}]);
+  let getTransferResult = false;
+  let transferSuccess = false;
 
   function selectUser(user: any) {
     selectedUser = user;
   }
   const loadUsers = async () => {
+    userStore.set([]);
     userLoading = true;
-    if (userInput === "") {
-      return (users = [{}]);
-    } else users = await trpc($page).findUser.load.query(userInput);
-    userStore.set(users);
+    if (userInput === "" || userInput === null) {
+      return userStore.set([]);
+    } else {
+      const users = await trpc($page).findUser.load.query(userInput);
+      userStore.set(users);
+    }
     userLoading = false;
   };
   const transferCard = async () => {
     loadingTransfer = true;
     await trpc($page)
-      .cards.transfer.mutate({ cardId ,currentUserId, newUserId })
-      .then((result) => {
+      .cards.transfer.mutate({ cardId, currentUserId, newUserId })
+      .then(async (result) => {
+        transferSuccess = true;
+        loadingTransfer = false;
+
         console.log(result);
       })
       .catch((error) => {
+        loadingTransfer = false;
         console.log(error);
       });
   };
 
-  $: console.log('Transfer Data', {newUserId, cardId, currentUserId})
-
+  let swiperEl;
+  onMount(() => {
+    swiperEl = document.querySelector(".transfer-swiper-select");
+    swiperEl.swiper.update();
+  });
+  $: console.log("selectUser", selectedUser);
+  function goHome() {
+    redirect(302, "/");
+  }
+  function reloadPage() {
+    location.reload();
+  }
 </script>
 
 <div class="w-80 h-[30rem] shadow-lg card  relative flex flex-col p-3 bg-primary" transition:scale|local>
@@ -55,7 +82,7 @@
     on:click={() => {
       let transferSwitch = $transfer;
       transferSwitch = !transferSwitch;
-      selectedCardId.set('')
+      selectedCardId.set("");
       transfer.set(transferSwitch);
     }}
     class="absolute top-1 right-1 btn btn-square bg-primary font-semilbold text-white border-none z-[99] "
@@ -67,92 +94,151 @@
   </h1>
   <div class="w-full h-full container-for-badges flex flex-col justify-center content-center flex-nowrap">
     <swiper-container
-      class="item-certificate-slider w-full h-full flex justify-center content-center  rounded-2xl my"
-      navigation="true"
-      pagination="true"
-      grab-cursor="true"
+      id="user-select-form-slider"
+      class="transfer-swiper-select w-full h-full flex justify-center content-center  rounded-2xl my"
       centered-slides="true"
       slides-per-view="1"
-      coverflow-effect-slide-shadows="false"
+      observer="true"
       observer-parents="true"
       virtual="true"
+      allow-touch-move="false"
     >
-      <div class="w-full h-full swiper-wrapper">
-        {#if !selectedUser}
-          {#if userLoading}
-            <div class="w-full h-full flex justify-center content-center flex-wrap">
-              <Spinner />
+      <swiper-slide class="w-full h-full flex flex-col  text-white p-1">
+        <p class="text-left px-1 text-2x; ">Type below to search for users.</p>
+        <div class="w-auto h-full overflow-x auto snap-x flex flex-col justify-center content-center flex-wrap ">
+          {#await loadUsers()}
+            <div
+              class="w-full h-full flex justify-center content-center flex-wrap text-2xl"
+              in:scale|local={{ delay: 100 }}
+            >
+              No such users found
             </div>
-          {:else if $userStore.length > 0}
-            {#each $userStore as user, i}
-              <swiper-slide
-                id="user-{i}"
-                class="w-full h-full flex flex-col  flex-wrap content-center justify-center p-1 "
-              >
-                <div class="lg:w-[200px] lg:h-[200px] flex flex-col rounded-lg justify-center  conent-center flex-wrap">
+          {:then}
+            {#if $userStore.length > 0}
+              {#each $userStore as user}
+                <div class="badge-wrapper w-fit h-fit snap-center flex justify-center content-center flex-wrap">
                   <UserBadge {user} />
-                  <div class="button-container flex justify-center">
-                    <button
-                      on:click={() => {
-                        selectUser(user);
-                      }}
-                      class="btn btn-ghost border-secondary text-white w-fit btn-primary normal-case "
-                    >
-                      Select
-                    </button>
-                  </div>
                 </div>
-              </swiper-slide>
-            {/each}
-          {:else}
-            <swiper-slide class="w-full h-fit flex flex-col  justify-center content-center flex-wrap p-1">
-              <div class="lg:w-[300px] lg:h-[300px] flex flex-col  rounded-lg justify-center  conent-center flex-wrap">
-                <UserBadge user={{ id: "Not found" }} />
+                <button
+                  on:click={() => {
+                    selectUser(user);
+                    swiperEl.swiper.slideNext();
+                  }}
+                  class="btn btn-ghost text-white normal-case z-99 border-white"
+                >
+                  Select
+                </button>
+              {/each}
+            {:else}
+              <div class="w-full h-full flex justify-center content-center flex-wrap text-white">
+                No users found with that information...
               </div>
-            </swiper-slide>
-          {/if}
-        {:else}
-          <div class="w-full h-full flex-flex-col">
-            <h1 class="text-white font-medium text-xl flex w-full justify-center h-fit p-2 text-left" in:fly|local>
-              You Have Selected the following account
-            </h1>
-            <UserBadge user={selectedUser} selected={true} />
+            {/if}
+          {/await}
+        </div>
+      </swiper-slide>
+      <swiper-slide class="w-full h-full text-white flex-flex-col p-1">
+        <h1 class="text-white font-semibold">You have chosen:</h1>
+        <div class="w-full h-fit flex justify-center content-center flex-wrap relative">
+          <UserBadge selected={true} user={selectedUser} />
+        </div>
+        <h1 class="text-white font-medium p-1 text-center">
+          Are you sure this is who you want to send your card to? This process is not reversible.
+        </h1>
+        <div class="button-container flex justify-around w-full absolute bottom-2 left-0">
+          <button
+            class="btn btn-error normal-case flex-1"
+            on:click={() => {
+              swiperEl.swiper.slidePrev();
+              selectedUser = "";
+            }}
+          >
+            Go Back
+          </button>
 
-            <p class="w-full h-fit text-left text-white font-medium  p-2">
-              Are you sure you want to proceed? Transfers are not reversible;
-            </p>
-            <div class="w-full h-fit justify-center flex p-3">
-              <button
-                on:click={() => {
-                  selectedUser = !selectedUser;
-                }}
-                class="normal-case btn btn-error flex-1"
-              >
-                Go Back
-              </button>
-              <button
-                class="normal-case btn btn-success flex-1"
-                on:click={() => {
-                  transferCard();
-                }}
-              >
-                Confirm Transfer
-              </button>
+          <button class="btn btn-success normal-case flex-1" on:click={() => swiperEl.swiper.slideNext()}>
+            Confirm
+          </button>
+        </div>
+      </swiper-slide>
+      <swiper-slide class="w-full h-full text-white p-1 flex flex-col">
+        <h1 class="text-white font-semibold">Final notice...</h1>
+        <div class="w-full h-fit grid grid-cols-3  justify-center content-center flex-wrap relative">
+          <UserBadge user={{ id: $currentUser }} userName="YOU " />
+          <div class="icon-holder grid place-items-center">
+            <Icon class="animate-pulse" src={ArrowRight} color="white" size="60px" />
+          </div>
+          <UserBadge selected={true} user={selectedUser} />
+        </div>
+        <h1 class="text-white font-medium p-2 text-center text-xs">
+          Clicking the button on this page will confirm this irreversible action, Myne Global is not responsible for
+          accidental information exchanges, review these details and click send.
+        </h1>
+        <div class="button-container flex justify-around w-full absolute bottom-2 left-0">
+          <button
+            class="btn btn-error normal-case flex-5 text-white"
+            on:click={() => {
+              swiperEl.swiper.slidePrev();
+              selectedUser = "";
+            }}
+          >
+            Go Back
+          </button>
+          <button
+            class="btn btn-violet normal-case flex-1 bg-violet-500 border-violet-500 text-white"
+            on:click={async () => {
+              swiperEl.swiper.slideNext();
+
+              transferCard();
+            }}
+          >
+            Transfer
+          </button>
+        </div>
+      </swiper-slide>
+      <swiper-slide class="w-full h-full text-white p-1  flex flex-col">
+        {#if loadingTransfer}
+          <div class="w-full h-full grid place-items-center">
+            <Spinner />
+          </div>
+        {:else if !transferSuccess}
+          <div class="w-full h-fit font-bold flex justify-center content-center flex-wrap text-white">
+            An Unkown error occured
+          </div>
+        {:else}
+          <div class="w-full h-full font-bold  justify-start content-center flex-wrap text-white relative">
+            <h1 in:slide|local class="text-2xl w-full h-fit font-semibold p-2">Success!</h1>
+            <div class="w-full h-fit justify-center flex flex-col flex-wrap content-center font-medium ">
+              <p class="font-medium">You sent your card to</p>
+              <div class="w-fit h-full">
+                <UserBadge user={selectedUser} />
+              </div>
             </div>
+            <p class="font-medium">
+              On : {Date.now().toLocaleString()}
+            </p>
+
+            <button
+              on:click={() => {
+                reloadPage();
+              }}
+              class="btn btn-success text-white border-none flex-no-wrap normal-case absolute bottom-2 left-0 w-full p-1"
+            >
+              <Icon src={Home} size="12px" />
+              Go Home
+            </button>
           </div>
         {/if}
-      </div>
-
-      <swiper-pagination />
-      <swiper-navigation />
+      </swiper-slide>
     </swiper-container>
+
+    <input
+      class="input input-md bg-white bg-opacity-10 backdrop-blur-lg placeholder-white text-white focus:input-bordered"
+      placeholder="Enter MyneID or email"
+      bind:value={userInput}
+      on:input={() => {
+        loadUsers();
+      }}
+    />
   </div>
-  <input
-    class="input input-md bg-white bg-opacity-10 backdrop-blur-lg placeholder-white text-white focus:input-bordered"
-    placeholder="Enter MyneID or email"
-    bind:value={userInput}
-    on:input={() => {
-      loadUsers();
-    }}
-  />
 </div>
