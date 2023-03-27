@@ -15,6 +15,7 @@
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
           const imgElement = document.getElementById(`img-${picture}`);
+          console.log("url, beforeUpdate", url)
           imgElement?.setAttribute("src", url);
         });
     }
@@ -53,6 +54,7 @@
       }
       const url = URL.createObjectURL(data);
       console.log("url",url)
+      console.log("data",data)
       return url;
     } catch (error) {
       if (error instanceof Error) {
@@ -122,7 +124,7 @@
           {#if picture}
             <div class="w-full object-cover h-full ">
               <!-- svelte-ignore a11y-img-redundant-alt -->
-              <img loading="eager" id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity " />
+              <img loading="eager"  id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity " />
             </div>
 
             <!-- svelte-ignore a11y-img-redundant-alt -->

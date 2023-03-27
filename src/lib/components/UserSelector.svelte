@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { selectedCardId } from "./../../store";
+  import { selectedCard } from "./../../store";
   import { page } from "$app/stores";
   import { trpc } from "$lib/trpc/client";
   import type { User } from "lucia-auth";
@@ -13,10 +13,12 @@
   import { ArrowCircleRight, ArrowRight, Home, Icon, SwitchHorizontal } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
   import { redirect } from "@sveltejs/kit";
-
+  let cardId = ''
   let currentUserId = $currentUser;
-  let cardId = $selectedCardId;
-  $: cardId = $selectedCardId;
+  $: if (selectedCard) {
+  cardId = $selectedCard?.id;
+
+  }
   let selectedUserSwitch = false;
   let selectedUser;
   let newUserId: string;
@@ -24,7 +26,7 @@
     newUserId = selectedUser.id;
   }
   let users: {}[] = [];
-  let selectedCard;
+  let asd;
 
   let userInput: string = "";
   let loadingTransfer: boolean = false;
@@ -80,10 +82,8 @@
 <div class="w-80 h-[30rem] shadow-lg card  relative flex flex-col p-3 bg-primary" transition:scale|local>
   <button
     on:click={() => {
-      let transferSwitch = $transfer;
-      transferSwitch = !transferSwitch;
-      selectedCardId.set("");
-      transfer.set(transferSwitch);
+      selectedCard.set(null);
+      transfer.set(false);
     }}
     class="absolute top-1 right-1 btn btn-square bg-primary font-semilbold text-white border-none z-[99] "
   >

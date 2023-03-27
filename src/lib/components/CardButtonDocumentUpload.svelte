@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
     import { scale } from "svelte/transition";
-    import { selectedCardId, document } from "../../store";
+    import { selectedCard, document } from "../../store";
     import { trpc } from "$lib/trpc/client";
     let loading = false; 
     const reportStolen = async()=> {
       loading = true; 
-      await trpc($page).cards.reportStolen.query($selectedCardId)
+      await trpc($page).cards.reportStolen.query($selectedCard.id)
       loading = false;
     }
   </script>
@@ -14,7 +14,7 @@
   <div class="w-80 h-[34rem] shadow-lg card  relative flex flex-col p-3 bg-green-900" transition:scale|local>
     <button
       on:click={() => {
-        selectedCardId.set("");
+        selectedCard.set(null);
         document.set(false);
       }}
       class="absolute top-1 right-1 btn btn-square bg-green-900 font-semilbold text-white border-none z-[99] "

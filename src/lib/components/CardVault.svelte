@@ -244,10 +244,11 @@
               <Module.default
                 {w}
                 {h}
+                {scrollTop}
+
                 cardDisplayId="flippable-card-{i}"
                 cardProps={{ ...myneCard }}
                 pictures={myneCard.pictures}
-                {scrollTop}
               >
                 <SwiperPictures pictures={myneCard.pictures} />
               </Module.default>

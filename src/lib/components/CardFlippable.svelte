@@ -9,7 +9,7 @@
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { selectedCardId } from "../../store";
+  import { selectedCard } from "../../store";
 
   export let myneCard;
   // box height for expanding cards
@@ -21,10 +21,10 @@
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
-  export let selected: boolean = false; 
-  $:selected = selected 
-  $: console.log("selected", selected)
-  export let scrollTop; 
+  export let selected: boolean = false;
+  $: selected = selected;
+  $: console.log("selected", selected);
+  export let scrollTop;
 
   //card variables
   export let cardDisplayId: string;
@@ -62,20 +62,20 @@
   });
   let expandedPosition = writable("relative");
   let zIndex = writable(1);
-  let scrollPosition = writable(0)
+  let scrollPosition = writable(0);
   function toggleExpand() {
     expanded = !expanded;
     if (!expanded) {
       expandedHeight.set(expandHeight);
       expandedWidth.set(expandWidth);
       expandedPosition.set("relative");
-      scrollPosition.set(0)
+      scrollPosition.set(0);
       zIndex.set(1);
     } else {
       expandedHeight.set(h);
       expandedWidth.set(w);
       expandedPosition.set("absolute");
-      scrollPosition.set(scrollTop)
+      scrollPosition.set(scrollTop);
       zIndex.set(99);
     }
   }
@@ -111,15 +111,21 @@
   $: console.log(myneCard);
   $: console.log("card-side", cardSide);
   $: console.log("scrollPosition", scrollPosition);
-  let cardId: string ;
-  $: if ( cardProps ) { cardId = cardProps.id }
-  $: if ( selected  ) {  selectedCardId.set(cardId) }
-  $: console.log('selectedCardId', $selectedCardId)
+  let cardId: string;
+  $: if (selected) {
+    selectedCard.set({ ...cardProps });
+  }
+  $: if (cardProps) {
+    cardId = cardProps.id;
+  }
+  $: console.log(cardProps)
 </script>
 
 <div
   class:flipped
-  class={expanded ? "absolute expanded-view-cards top: { 0  + `${scrollTop}`" : '"wrapper rounded-xl  relative aspect-[2/3]" '}
+  class={expanded
+    ? "absolute expanded-view-cards top: { 0  + `${scrollTop}`"
+    : '"wrapper rounded-xl  relative aspect-[2/3]" '}
   class:sendCard={sentCard === true && success === null}
   class:comeBack={success === true}
   style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition}; top: {$scrollPosition}px; left:0px"
@@ -168,8 +174,7 @@
             <p>Expand</p>
           </button>
           <button
-          disabled={expanded}
-
+            disabled={expanded}
             class="btn btn-square btn-ghost btn-secondary text-white  top-[.5rem] right-[1rem] z-[101] normal-case"
             on:click={() => {
               toggleFlipped();
@@ -221,7 +226,7 @@
               {generalFieldsBack}
             />
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget bind:selected  />
+              <CardButtonWidget bind:selected />
             </div>
           </div>
         </div>
@@ -249,7 +254,6 @@
   }
 
   .flipped .flip-card .flip-card-inner {
-    -webkit-transform: translateZ(0);
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     width: 100%;
@@ -261,7 +265,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }

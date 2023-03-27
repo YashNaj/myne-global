@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { selectedCard } from './../../store.ts';
   import logo from "$lib/images/white_icon.png";
   import Dashboard from "$lib/components/Dashboard.svelte";
   import DashboardFunctions from "$lib/components/DashboardFunctions.svelte";
@@ -44,6 +45,7 @@
     // Load data here
     isLoading = false;
   });
+  $: console.log('selectedCard',$selectedCard)
 </script>
 
 <div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex flex-col ">

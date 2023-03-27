@@ -2,14 +2,14 @@
   import { onMount } from "svelte";
   import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
   import { transfer, stolen, document, certificate } from "../../store";
-  export let selected: boolean = false
+  export let selected: boolean = false;
 </script>
 
 <div class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
   <button
     class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
     on:click={() => {
-      selected = !selected;
+      selected = true;
       transfer.set(true);
     }}
   >
@@ -17,25 +17,33 @@
     <p class="flex text-xs w-full justify-center text-violet-900">Transfer</p>
   </button>
 
-  <button on:click={() => {
-    selected = !selected;
-    certificate.set(true);
-  }} class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
+  <button
+    on:click={() => {
+      selected = true;
+      certificate.set(true);
+    }}
+    class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+  >
     <p class="flex text-xs w-full justify-center text-yellow-700">Certificate</p>
     <Icon src={Star} color="gold" class="opacity-90" size="30px" />
   </button>
-  <button     on:click={() => {
-    selected = !selected;
-    stolen.set(true);
-  }} class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
+  <button
+    on:click={() => {
+      selected = true;
+      stolen.set(true);
+    }}
+    class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+  >
     <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>
   </button>
   <button
-  on:click={() => {
-    selected = !selected;
-    document.set(true);
-  }} class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2">
+    on:click={() => {
+      selected = true;
+      document.set(true);
+    }}
+    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+  >
     <p class="flex text-xs w-full justify-center text-green-900">Document</p>
     <Icon src={DocumentText} color="green" class="opacity-90" size="30px" />
   </button>

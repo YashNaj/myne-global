@@ -7,7 +7,7 @@ export const notifications = writable([]);
 export function addNotification(notification) {
   notifications.update((notifications) => [...notifications, notification]);
 }
-export let selectedCardId = writable("");
+export let selectedCard = writable(); 
 
 //card related stores
 export let addCard = writable(false);
@@ -20,3 +20,6 @@ export let transfer = writable(false);
 export let stolen = writable(false);
 export let certificate = writable(false);
 export let document = writable(false);
+
+
+
