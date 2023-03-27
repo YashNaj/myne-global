@@ -19,4 +19,4 @@ export let sentCard = writable(false);
 export let transfer = writable(false);
 export let stolen = writable(false);
 export let certificate = writable(false);
-export let docuemnt = writable(false);
+export let document = writable(false);

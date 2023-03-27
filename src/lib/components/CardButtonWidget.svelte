@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
-  import { transfer, stolen } from "../../store";
+  import { transfer, stolen, document, certificate } from "../../store";
   export let selected: boolean = false
 </script>
 
@@ -9,30 +9,33 @@
   <button
     class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
     on:click={() => {
-      let transferSwitch = $transfer;
       selected = !selected;
-      transferSwitch = !transferSwitch;
-      transfer.set(transferSwitch);
+      transfer.set(true);
     }}
   >
     <Icon src={SwitchHorizontal} color="purple" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-violet-900">Transfer</p>
   </button>
 
-  <button class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
+  <button on:click={() => {
+    selected = !selected;
+    certificate.set(true);
+  }} class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
     <p class="flex text-xs w-full justify-center text-yellow-700">Certificate</p>
     <Icon src={Star} color="gold" class="opacity-90" size="30px" />
   </button>
   <button     on:click={() => {
-    let stolenSwitch = $stolen;
     selected = !selected;
-    stolenSwitch = !stolenSwitch;
-    stolen.set(stolenSwitch);
+    stolen.set(true);
   }} class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2">
     <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>
   </button>
-  <button class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2">
+  <button
+  on:click={() => {
+    selected = !selected;
+    document.set(true);
+  }} class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2">
     <p class="flex text-xs w-full justify-center text-green-900">Document</p>
     <Icon src={DocumentText} color="green" class="opacity-90" size="30px" />
   </button>

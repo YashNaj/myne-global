@@ -19,8 +19,10 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { fade } from "svelte/transition";
-  import { stolen, transfer } from "../../store";
+  import { certificate, stolen, transfer, document } from "../../store";
   import ReportStolen from "$lib/components/ReportStolen.svelte";
+  import CardButtonDocumentUpload from "$lib/components/CardButtonDocumentUpload.svelte";
+  import MakeCertificate from "$lib/components/MakeCertificate.svelte";
   export let data: PageData = $page.data;
   let size = "9";
 
@@ -125,7 +127,7 @@
           <div class="w-full h-full">
             {#if $transfer}
               <div
-                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg"
+                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
                 transition:fade|local
               >
                 <UserSelector />
@@ -133,10 +135,26 @@
             {/if}
             {#if $stolen}
               <div
-                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 kleft-9"
+                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 rounded-2xl"
                 transition:fade|local
               >
                 <ReportStolen />
+              </div>
+            {/if}
+            {#if $document}
+              <div
+                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
+                transition:fade|local
+              >
+                <CardButtonDocumentUpload />
+              </div>
+            {/if}
+            {#if $certificate}
+              <div
+                class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
+                transition:fade|local
+              >
+                <MakeCertificate />
               </div>
             {/if}
 
