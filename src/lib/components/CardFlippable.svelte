@@ -112,12 +112,13 @@
   $: console.log("card-side", cardSide);
   $: console.log("scrollPosition", scrollPosition);
   let cardId: string;
-  $: if (selected) {
-    selectedCard.set({ ...cardProps });
-  }
   $: if (cardProps) {
     cardId = cardProps.id;
   }
+  $: if (selected) {
+    selectedCard.set({ ...cardProps });
+  }
+   
   $: console.log(cardProps)
 </script>
 
@@ -254,6 +255,7 @@
   }
 
   .flipped .flip-card .flip-card-inner {
+    -webkit-transform: translateZ(0);
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     width: 100%;
@@ -265,6 +267,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
