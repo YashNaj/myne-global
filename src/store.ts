@@ -7,8 +7,8 @@ export const notifications = writable([]);
 export function addNotification(notification) {
   notifications.update((notifications) => [...notifications, notification]);
 }
-export let selectedCard = writable(); 
-
+export let selectedCard:any = writable(); 
+export let userCards = writable();
 //card related stores
 export let addCard = writable(false);
 export let sentCard = writable(false);

@@ -7,6 +7,7 @@
   export let value: string | symbol | null | bigint = "";
   export let id = "";
   export let gridClass = "";
+  export let mobile; 
   function capitalizeFirstLetters(value) {
     // Check if input is a string
     if (typeof value !== "string") {
@@ -46,7 +47,7 @@
       <div in:slide={{ duration, delay }} out:slide={{ duration, delay }}>
         <label
           for="cell-label"
-          class="card-field-label label py-0 font-semibold md:text-md text-sm  w-full flex {justifyCell} {gridClass}"
+          class="card-field-label label py-0 font-semibold md:text-md text-sm {mobile ? 'text-[12px]' : 'text-sm'}  w-full flex {justifyCell} {gridClass}"
         >
           {label}
         </label>
@@ -55,7 +56,7 @@
       <div in:slide={{ duration, delay }} out:slide={{ duration, delay }}>
         <label
           for="cell-value"
-          class="card-field-value h-full label w-full py-0 flex md:text-md text-sm overflow-x-clip {textAlign} {justifyCell}"
+          class="card-field-value h-full label w-full py-0 flex md:text-md text-sm {mobile ? 'text-[12px]' : 'text-sm'} overflow-x-clip {textAlign} {justifyCell}"
         >
           {#if value !== null}
             {value}

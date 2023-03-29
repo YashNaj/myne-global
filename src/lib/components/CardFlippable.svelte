@@ -1,18 +1,30 @@
-<svelte:options immutable={true}/>
+
 <script lang="ts">
   import { template, generalFieldsBack } from "./../../forms";
   import CardSlider from "./CardSlider.svelte";
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
-  import { Icon, ArrowCircleLeft, ArrowsExpand } from "svelte-hero-icons";
   import Spinner from "$lib/components/Spinner.svelte";
   import { trpc } from "$lib/trpc/client";
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
+  import { transfer, stolen, document, certificate } from "../../store";
   import { selectedCard } from "../../store";
+  import StolenBadge from "./StolenBadge.svelte";
+  import {
+    Icon,
+    DocumentText,
+    ShieldExclamation,
+    SwitchHorizontal,
+    Star,
+    ArrowCircleLeft,
+    ArrowsExpand,
+  } from "svelte-hero-icons";
+  import { cloneDeep } from "lodash";
 
   export let myneCard;
+
   // box height for expanding cards
   export let w: number;
   export let h: number;
@@ -22,7 +34,9 @@
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
-  export let selected: boolean = false;
+  export let selected;
+  export let mobile: boolean; 
+  
   $: selected = selected;
   $: console.log("selected", selected);
   export let scrollTop;
@@ -31,12 +45,10 @@
   export let cardDisplayId: string;
   $: cardDisplayId = cardDisplayId;
   export let cardProps = {
-    category: "",
-    description: "",
-    ...myneCard,
+    categoy: "",
+    pictures: [''],
   };
   export let description;
-  export let pictures;
   let currency;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
@@ -44,19 +56,29 @@
     style: "currency",
     currency: "USD",
   });
-  $: cardProps = cardProps;
   let cardSide = writable("front");
 
-  export let selectedFields = formFieldsObject[cardProps.category];
+  export let selectedFields;
+
+  $: if (cardProps) {
+    formFieldsObject[cardProps?.category];
+  }
+  $: cardProps = cardProps;
 
   //expansion logic
   let expandWidth = 250;
   let expandHeight = (expandWidth * 7) / 5;
+
+   if (mobile) {
+    expandWidth = 150;
+    expandHeight= 300; 
+  }
+
   let expandedWidth = spring(expandWidth, {
     stiffness: 0.15,
     damping: 0.5,
   });
-
+  $:console.log("is mobile", mobile)
   let expandedHeight = spring(expandHeight, {
     stiffness: 0.15,
     damping: 0.5,
@@ -88,9 +110,10 @@
       cardSide.set("back");
     }
   }
-
+  export let pictures = cardProps?.pictures
+  console.log("pictures array ",  pictures)
   //add general fields config here  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
-  $: categoryKey = cardProps.category?.toLowerCase() as keyof typeof colors | keyof typeof formFieldsObject;
+  $: categoryKey = cardProps?.category?.toLowerCase() as keyof typeof colors | keyof typeof formFieldsObject;
   let pickedColor: string;
   $: pickedColor = colors[categoryKey as keyof typeof colors];
 
@@ -109,25 +132,16 @@
       (fieldsBackTwoValues = formFields?.fieldsBackTwo),
       (fieldsBackThreeValues = formFields?.fieldsBackThree);
   }
-  $: console.log(myneCard);
-  $: console.log("card-side", cardSide);
-  $: console.log("scrollPosition", scrollPosition);
   let cardId: string;
-  $: if (cardProps) {
-    cardId = cardProps.id;
-  }
-  $: if (selected) {
-    selectedCard.set({ ...cardProps });
-  }
-   
-  $: console.log(cardProps)
+  $: cardProps.pictures = pictures;
+
 </script>
 
 <div
   class:flipped
   class={expanded
     ? "absolute expanded-view-cards top: { 0  + `${scrollTop}`"
-    : '"wrapper rounded-xl  relative aspect-[2/3]" '}
+    : '"wrapper rounded-xl  relative laspect-[2/3]" '}
   class:sendCard={sentCard === true && success === null}
   class:comeBack={success === true}
   style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition}; top: {$scrollPosition}px; left:0px"
@@ -135,6 +149,12 @@
   <div class="flip-card bg-none  [perspective:1000px] [user-select:none] cursor-pointer rounded-xl h-full">
     <div class="flip-card-inner rounded-xl w-full h-full relative">
       <div class="flip-card-front rounded-xl">
+        {#if cardProps?.isStolen}
+        <div class = 'absolute z-[99] animate-pulse '>
+
+          <StolenBadge/>
+        </div>
+        {/if}
         <div
           class="front-parent card-item grid grid-rows-2 w-full gradient bg-white whole-card rounded-xl shadow-2xl z-1  bg-cover "
           style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
@@ -151,10 +171,11 @@
             </div>
           {/key}
           <div class="front-bottom w-full rounded-b-2xl relative">
-            <div class="front-fields-grid w-full h-full p-2">
+            <div class="front-fields-grid w-full h-full p-2 bg-white">
               {#if fieldsFrontValues?.length > 0}
                 {#each fieldsFrontValues as fieldFront}
                   <CardCell
+                    {mobile}
                     bind:value={cardProps[fieldFront.value]}
                     gridClass={fieldFront?.location}
                     label={fieldFront?.label}
@@ -188,12 +209,16 @@
         </div>
       </div>
       <div class="flip-card-back rounded-xl text-white  ">
+        <div class="w-full h-full absolute top-0 right-0">
+          <StolenBadge />
+        </div>
         <div
           class="card-item  bg-none rounded-xl shadow-xl z-1"
           style="height: {$expandedHeight}px; width: {$expandedWidth}px; z-index: {$zIndex}; position: {$expandedPosition};"
         >
           <div class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
             <button
+              disabled={flipped}
               class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-[101] normal-case"
               on:click={() => {
                 toggleExpand();
@@ -228,7 +253,55 @@
               {generalFieldsBack}
             />
             <div class="card-buttons_back back-card_general-3 mt-2">
-              <CardButtonWidget bind:selected />
+              <div class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
+                <button
+                  class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+                  on:click={() => {
+                    selected = true;
+                    transfer.set(true);
+                    selectedCard.set(cloneDeep(cardProps));
+                  }}
+                >
+                  <Icon src={SwitchHorizontal} color="purple" class="opacity-90" size="30px" />
+                  <p class="flex text-xs w-full justify-center text-violet-900">Transfer</p>
+                </button>
+
+                <button
+                  on:click={() => {
+                    selected = true;
+                    certificate.set(true);
+                    selectedCard.set(cloneDeep(cardProps));
+                  }}
+                  class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+                >
+                  <p class="flex text-xs w-full justify-center text-yellow-700">Certificate</p>
+                  <Icon src={Star} color="gold" class="opacity-90" size="30px" />
+                </button>
+                <button
+                  on:click={() => {
+                    selected = true;
+                    stolen.set(true);
+                    console.log(cardProps);
+                    selectedCard.set(cloneDeep(cardProps));
+                    console.log("on button click selectedCard", $selectedCard);
+                  }}
+                  class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+                >
+                  <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
+                  <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>
+                </button>
+                <button
+                  on:click={() => {
+                    selected = true;
+                    document.set(true);
+                    selectedCard.set(cloneDeep(cardProps));
+                  }}
+                  class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+                >
+                  <p class="flex text-xs w-full justify-center text-green-900">Document</p>
+                  <Icon src={DocumentText} color="green" class="opacity-90" size="30px" />
+                </button>
+              </div>
             </div>
           </div>
         </div>

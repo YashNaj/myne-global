@@ -8,6 +8,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { getCards } from "$lib/server/db"
 import { redis } from '$lib/server/redis';
 import { router } from '$lib/trpc/router';
+import { userCards } from '../../store';
 const prisma = new PrismaClient();
 
 export const load: PageServerLoad = async ({ locals, event }) => {
@@ -37,13 +38,16 @@ export const load: PageServerLoad = async ({ locals, event }) => {
           filteredCard[key] = card[key];
         }
       }
-      return filteredCard;
+      return JSON.parse(JSON.stringify(filteredCard));
+
     });
+    userCards.set(filteredCards)
 
     const dataToCache = JSON.stringify(filteredCards);
     const cacheExpirationTime = 3600; // 1 hour in seconds, adjust as needed
     // await redis.set(cacheKey, dataToCache, 'EX', cacheExpirationTime);
     // console.log(redis)
+
     console.timeEnd("loadFunctionTimer")
 
     return filteredCards;

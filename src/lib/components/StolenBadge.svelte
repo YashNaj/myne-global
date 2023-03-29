@@ -2,7 +2,7 @@
   import { Icon, ShieldExclamation } from "svelte-hero-icons";
 </script>
 
-<div class="badge badge-error gap-2">
+<div class="badge badge-error gap-2 z-[999] font-semibold">
   <Icon src={ShieldExclamation} size="12px" color="black" />
 
   STOLEN

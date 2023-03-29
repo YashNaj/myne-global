@@ -13,11 +13,10 @@
   import { ArrowCircleRight, ArrowRight, Home, Icon, SwitchHorizontal } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
   import { redirect } from "@sveltejs/kit";
-  let cardId = ''
+  let cardId = "";
   let currentUserId = $currentUser;
   $: if (selectedCard) {
-  cardId = $selectedCard?.id;
-
+    cardId = $selectedCard?.id;
   }
   let selectedUserSwitch = false;
   let selectedUser;
@@ -77,11 +76,13 @@
   function reloadPage() {
     location.reload();
   }
+  export let selected;
 </script>
 
 <div class="w-80 h-[30rem] shadow-lg card  relative flex flex-col p-3 bg-primary" transition:scale|local>
   <button
     on:click={() => {
+      selected = false;
       selectedCard.set(null);
       transfer.set(false);
     }}

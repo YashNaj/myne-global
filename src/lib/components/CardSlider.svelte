@@ -1,5 +1,4 @@
 <script lang="ts">
-  import focusSlide from "$lib/swiperActions";
   import ChildId from "$lib/components/ChildId.svelte";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import { beforeUpdate, onMount } from "svelte";

@@ -36,36 +36,23 @@ export const cards = t.router({
   load: t.procedure
     // 👈 use auth middleware
     .input(z.string())
-    .query(({ input }) =>
-      prisma.myneCard.findUniqueOrThrow({
-        select: {
-          id: true,
+    .query(async ({ input }) => {
+      const cards = await prisma.myneCard.findMany({
+        where: {
+          user_id: user.userId,
         },
-        where: { id: input },
-      })
-    ),
+      });
 
-  // save: t.procedure
-  //   .use(logger)
-  //   .use(auth) // 👈 use auth middleware
-  //   .input(
-  //     z.object({
-  //       id: z.string().nullable(),
-  //     })
-  //   )
-  //   .mutation(async ({ input: { id, ...rest }, ctx: { userId } }) => {
-  //     if (id) {
-  //       await prisma.myneCard.update({
-  //         data: { ...rest, updatedByUserId: userId },
-  //         where: { id }
-  //       });
-  //     } else {
-  //       await prisma.myneCard.create({
-  //         data: { ...rest, updatedByUserId: userId }
-  //       });
-  //     }
-  //   }),
-
+      const filteredCards = cards.map((card) => {
+        let filteredCard = {};
+        for (const key in card) {
+          if (card[key] != null) {
+            filteredCard[key] = card[key];
+          }
+        }
+        return filteredCard;
+      });
+    }),
   delete: t.procedure
     // 👈 use auth middleware
     .input(z.string())
@@ -92,17 +79,23 @@ export const cards = t.router({
           },
         })
     ),
-  reportStolen: t.procedure.input(z.string()).query(({ input }) => {
-    prisma.stolen.insertOne({
+  reportStolen: t.procedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
       where: {
         id: input,
       },
+      data: {
+        isStolen: true,
+      },
     });
   }),
-  removeStolen: t.procedure.input(z.string()).query(({ input }) => {
-    prisma.stolen.findOne({
+  removeStolen: t.procedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
       where: {
         id: input,
+      },
+      data: {
+        isStolen: false,
       },
     });
   }),

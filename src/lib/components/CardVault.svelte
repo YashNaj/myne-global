@@ -9,10 +9,11 @@
   import CardFlippable from "./CardFlippable.svelte";
   import Spinner from "./Spinner.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
+  import { userCards } from "../../store";
+  $: console.log("cardVault userCards", $userCards);
   export let data;
   let addCardOpen = false;
   let loading = false;
-  let myneCards = data.getMyneCards;
   let categoryFilter: string;
   $: categoryFilter = categoryFilter;
   let filteredCards;
@@ -47,32 +48,37 @@
 
   $: console.log("🚀 ~ file: Desktop.svelte:54 ~ filteredCards:", filteredCards);
   let isLoading;
-  $: filteredCards = myneCards;
+  $: filteredCards = $userCards;
   $: categories = categories.sort();
   let cardsFiltered;
   $: cardsFiltered = filteredCards.filter((item) => {
     if (categoryFilter === "All") {
-      return myneCards;
+      return $userCards;
     }
     if (!inputText) {
       return item.category === categoryFilter;
     } else if (inputText) {
-      const inputFilter = filterByTextInput(filteredCards, inputText);
+      const inputFilter = filterByTextInput($userCards, inputText);
       return (cardsFiltered = inputFilter);
     }
   });
+  $: console.log(
+    "🚀 ~ file: CardVault.svelte:65 ~ $:cardsFiltered=filteredCards.filter ~ cardsFiltered:",
+    cardsFiltered
+  );
   $: console.log(categoryFilter);
   $: {
     if (inputText != null && inputText !== "") {
-      cardsFiltered = filterByTextInput(filteredCards, inputText);
+      cardsFiltered = filterByTextInput($userCards, inputText);
     } else {
       console.log("The string is null or empty");
     }
   }
   let scrollContainer;
-  let h ;
-  let w ;
-  let scrollTop; 
+  let h;
+  let w;
+  let scrollTop;
+  export let mobile: boolean = false; 
 </script>
 
 <div class="w-full h-[80vh] p-2 rounded-2xl bg-blue-50">
@@ -157,20 +163,19 @@
     </div>
   </div>
   {#if addCardOpen}
-    <div class=" flex flex-row w-full h-[89%] justify-center items-center flex-wrap">
+    <div class=" flex flex-row w-full h-full justify-center items-center flex-wrap">
       <AddCard />
     </div>
   {:else}
     <div
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
-      class="h-[89%]  bg-black bg-opacity-25  rounded-xl  justify-center overflow-y-auto  w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
+      class="h-[89%]  bg-black bg-opacity-25 rounded-xl  justify-center overflow-y-auto  w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
     >
       {#await import("$lib/components/CardFlippable.svelte")}
         <div
           bind:clientHeight={h}
           bind:clientWidth={w}
-          
           class="w-full h-full bg-primary p-1 flex justify-center content-center flex-wrap"
           out:fly|local={{ duration: 200 }}
         >
@@ -227,9 +232,12 @@
           </div>
         </div>
       {:then Module}
-        <div class="w-full h-[97%] grid  grid-rows-auto grid-cols-4 gap-2 relative  place-items-center overflow-y-auto" in:fade|local={{ duration: 200, delay: 250 }}
-        bind:this={scrollContainer}
-          on:scroll={() => (scrollTop = scrollContainer.scrollTop)}>
+        <div
+          class="w-full h-full grid grid-rows-auto {mobile ? ' grid-cols-2 gap-1' : 'grid-cols-4 gap-2'} relative  place-items-center will-change-auto overflow-y-auto"
+          in:fade|local={{ duration: 200, delay: 250 }}
+          bind:this={scrollContainer}
+          on:scroll={() => (scrollTop = scrollContainer.scrollTop)}
+        >
           {#if cardsFiltered?.length === 0}
             <div transition:scale|local={{ delay: 10 }}>
               <CardFlippable>
@@ -239,18 +247,17 @@
               </CardFlippable>
             </div>
           {/if}
-          {#each cardsFiltered as myneCard, i}
+          {#each cardsFiltered as cardProps, i}
             <div transition:scale|local={{ delay: 10 }}>
               <Module.default
                 {w}
                 {h}
                 {scrollTop}
-
                 cardDisplayId="flippable-card-{i}"
-                cardProps={{ ...myneCard }}
-                pictures={myneCard.pictures}
+                {cardProps}
+                {mobile}
               >
-                <SwiperPictures pictures={myneCard.pictures} />
+                <SwiperPictures {mobile} pictures={cardProps.pictures} />
               </Module.default>
             </div>
           {/each}

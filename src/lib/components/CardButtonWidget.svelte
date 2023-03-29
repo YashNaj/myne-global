@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
-  import { transfer, stolen, document, certificate } from "../../store";
-  export let selected: boolean = false;
+  export let selected: boolean;
 </script>
 
 <div class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">

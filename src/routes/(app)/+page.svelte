@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { selectedCard } from './../../store.ts';
+  import { selectedCard } from "./../../store.ts";
   import logo from "$lib/images/white_icon.png";
   import Dashboard from "$lib/components/Dashboard.svelte";
   import DashboardFunctions from "$lib/components/DashboardFunctions.svelte";
@@ -20,14 +20,17 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { fade } from "svelte/transition";
-  import { certificate, stolen, transfer, document } from "../../store";
+  import { certificate, stolen, transfer, document, userCards } from "../../store";
   import ReportStolen from "$lib/components/ReportStolen.svelte";
   import CardButtonDocumentUpload from "$lib/components/CardButtonDocumentUpload.svelte";
   import MakeCertificate from "$lib/components/MakeCertificate.svelte";
+  import BottomNav from "$lib/components/BottomNav.svelte";
   export let data: PageData = $page.data;
   let size = "9";
 
   export let myneCards = $page.data.getMyneCards;
+  userCards.set([...myneCards]);
+  console.log("userCards", $userCards);
   export let addCardOpen = false;
   export let categoryFilter: string = "All";
 
@@ -45,66 +48,44 @@
     // Load data here
     isLoading = false;
   });
-  $: console.log('selectedCard',$selectedCard)
+  $: console.log("selectedCard", $selectedCard);
 </script>
 
 <div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex flex-col ">
-  <Dashboard {isLoading} />
-  <div class="quick-cards w-full flex flex-col justify-center content-center bg-secondary rounded-2xl h-[300px] mt-2">
-    <h1 class="pt-5 pl-6 text-3xl w-full flex justify start font-semibold ">Quick Cards</h1>
+  {#if $transfer}
     <div
-      class="container h-[90%] flex justify-center content-center flex-wrap  [box-shadow:rgba(0, 0, 0, 0.06)_0px_2px_4px_0px_inset] "
+      class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
+      transition:fade|local
     >
-      <div class=" w-[90%] h-[90%]">
-        <swiper-container
-          class="mySwiper touch-none aspect-[5/7] bg-none rounded-[10%] w-full h-full"
-          pagination="true"
-          grab-cursor="true"
-          centered-slides="true"
-          coverflow-effect-modifier="1"
-          coverflow-effect-slide-shadows="true"
-        >
-          <swiper-slide
-            class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
-          "
-          >
-            <CardFlippable />
-          </swiper-slide>
-          <swiper-slide
-            class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
-          "
-          >
-            <CardFlippable />
-          </swiper-slide>
-          <swiper-slide
-            class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
-          "
-          >
-            <CardFlippable />
-          </swiper-slide>
-          <swiper-slide
-            class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
-          "
-          >
-            <CardFlippable />
-          </swiper-slide>
-          <swiper-slide
-            class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
-          "
-          >
-            <CardFlippable />
-          </swiper-slide>
-          <swiper-slide
-            class="w-full h-full items-center justify-center text-xl rounded-[18px]  font-bold aspect-[5/7] 
-          "
-          >
-            <CardFlippable />
-          </swiper-slide>
-        </swiper-container>
-      </div>
+      <UserSelector />
     </div>
-  </div>
-  <DashboardFunctions />
+  {/if}
+  {#if $stolen}
+    <div
+      class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 rounded-2xl"
+      transition:fade|local
+    >
+      <ReportStolen />
+    </div>
+  {/if}
+  {#if $document}
+    <div
+      class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
+      transition:fade|local
+    >
+      <CardButtonDocumentUpload />
+    </div>
+  {/if}
+  {#if $certificate}
+    <div
+      class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
+      transition:fade|local
+    >
+      <MakeCertificate />
+    </div>
+  {/if}
+  <CardVault mobile={true} />
+  <BottomNav />
 </div>
 <div
   class="hidden md:flex w-full h-full py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent bg-[rgb(243,250,255)] ;

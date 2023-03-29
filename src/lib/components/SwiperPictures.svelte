@@ -5,17 +5,15 @@
   import { CloudUpload, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
   import { onMount } from "svelte";
+  export let mobile; 
   let parentEl;
   export let size = 10;
-  
-  
-  
+
   beforeUpdate(() => {
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
           const imgElement = document.getElementById(`img-${picture}`);
-          console.log("url, beforeUpdate", url)
           imgElement?.setAttribute("src", url);
         });
     }
@@ -53,18 +51,13 @@
         throw error;
       }
       const url = URL.createObjectURL(data);
-      console.log("url",url)
-      console.log("data",data)
+
       return url;
     } catch (error) {
       if (error instanceof Error) {
       }
     }
   };
-
-
-
-
 
   const uploadImage = async () => {
     try {
@@ -97,18 +90,18 @@
   export let expanded;
   const onProgress = (e) => {
     const [swiper, progress] = e.detail;
-    console.log(progress)
+    console.log(progress);
   };
   const onSlideChange = (e) => {
-    console.log('slide changed')
-  }
+    console.log("slide changed");
+  };
 </script>
 
-<div class="card-pictures-wrapper w-56 h-40">
+<div class="card-pictures-wrapper {mobile ? 'w-40 h-40'  : 'w-56 h-40'}">
   <swiper-container
     bind:this={parentEl}
-    observer={true}
-    observer-parents={true}
+    observer='true'
+    observer-parents='true'
     slides-per-view="1"
     class="picture-swiper w-full h-full rounded-lg relative "
     css="true"
@@ -117,14 +110,14 @@
     {#if pictures.length > 0}
       {#each pictures as picture, i}
         <swiper-slide
-        lazy = "true"
-          class=" w-fit h-fit object-cover rounded-lg flex justify-center  bg-black bg-opacity-30"
+          lazy="true"
+          class=" w-full h-full rounded-lg flex justify-center  bg-black bg-opacity-30"
           id={`item-${i}`}
         >
           {#if picture}
             <div class="w-full object-cover h-full ">
               <!-- svelte-ignore a11y-img-redundant-alt -->
-              <img loading="eager"  id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity " />
+              <img loading="eager" id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity " />
             </div>
 
             <!-- svelte-ignore a11y-img-redundant-alt -->
