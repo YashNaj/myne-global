@@ -12,6 +12,7 @@
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
   export let success = false
+  export let mobile;
   $:console.log("🚀 ~ file: AddCard.svelte:18 ~ success:", success)
 
   // function handleFilter(e) {

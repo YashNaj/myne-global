@@ -14,7 +14,6 @@
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import { sizes } from "../../../size";
   import * as dayjs from "dayjs";
-  import focusSlide from "$lib/swiperActions";
   import SwiperStandard from "$lib/components/SwiperStandard.svelte";
 
   //initialize fieldProps

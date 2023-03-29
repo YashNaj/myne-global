@@ -164,7 +164,7 @@
   </div>
   {#if addCardOpen}
     <div class=" flex flex-row w-full h-full justify-center items-center flex-wrap">
-      <AddCard />
+      <AddCard {mobile} />
     </div>
   {:else}
     <div
