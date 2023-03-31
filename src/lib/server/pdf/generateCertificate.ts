@@ -1,7 +1,6 @@
 import PdfPrinter from "pdfmake";
 import type { TFontDictionary, TDocumentDefinitions } from "pdfmake/interfaces";
 import blobStream, { type IBlobStream } from "blob-stream";
-import { selectedCard } from "../../../store";
 const fonts: TFontDictionary = {
   NotoSans: {
     normal: "src/lib/server/pdf/fonts/NotoSans-Medium.ttf",
@@ -9,8 +8,6 @@ const fonts: TFontDictionary = {
   },
 };
 const printer = new PdfPrinter(fonts);
-const cardID = $selectedCard.id;
-console.log(cardId);
 async function blobToBase64(blob: Blob) {
   const buffer = Buffer.from(await blob.arrayBuffer());
   return `data:${blob.type};base64,${buffer.toString("base64")}`;

@@ -52,7 +52,7 @@
   $: console.log("selectedCard", $selectedCard);
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-full flex flex-col ">
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-screen flex flex-col ">
   {#if $transfer}
     <div
       class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
