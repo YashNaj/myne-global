@@ -3,6 +3,7 @@ import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { getSessionUser } from "$lib/server/lucia";
 import { t } from "$lib/trpc/t";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { protectedProcedure } from "$lib/trpc/middleware/auth";
 const prisma = new PrismaClient();
 // Define the types for the input and output of the endpoint
 const myneCardsInput = z.object({
@@ -31,12 +32,15 @@ const input = transferInputSchema.parse({
 
 // Define the actual endpoint
 export const cards = t.router({
-  list: t.procedure.input(z.string().optional()).query(({ input }) => prisma.myneCard.findMany()),
+  list: protectedProcedure.input(z.string().optional()).query(({ input }) => prisma.myneCard.findMany()),
 
-  load: t.procedure
+  load: protectedProcedure
     // 👈 use auth middleware
     .input(z.string())
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
+      let user = ctx.user;
+      let session = ctx.session;
+
       const cards = await prisma.myneCard.findMany({
         where: {
           user_id: user.userId,
@@ -53,14 +57,14 @@ export const cards = t.router({
         return filteredCard;
       });
     }),
-  delete: t.procedure
+  delete: protectedProcedure
     // 👈 use auth middleware
     .input(z.string())
     .mutation(async ({ input: id }) => {
       await prisma.myneCard.delete({ where: { id } });
     }),
 
-  transfer: t.procedure
+  transfer: protectedProcedure
     .input(
       z.object({
         currentUserId: z.string(),
@@ -79,7 +83,7 @@ export const cards = t.router({
           },
         })
     ),
-  reportStolen: t.procedure.input(z.string()).mutation(async ({ input }) => {
+  reportStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {
         id: input,
@@ -89,7 +93,7 @@ export const cards = t.router({
       },
     });
   }),
-  removeStolen: t.procedure.input(z.string()).mutation(async ({ input }) => {
+  removeStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {
         id: input,

@@ -90,7 +90,7 @@
           <Spinner />
         </PageContainer>
       {/if}
-      <div class="hidden w-screen h-[90vh] md:flex flex-col justify-start content-center flex-wrap">
+      <div class="hidden w-screen h-screen md:flex flex-col justify-start content-center flex-wrap">
         <slot/>
       </div>
       <div class=" md:hidden w-screen h-screen">
