@@ -1,7 +1,7 @@
 import PdfPrinter from "pdfmake";
 import type { TFontDictionary, TDocumentDefinitions } from "pdfmake/interfaces";
 import blobStream, { type IBlobStream } from "blob-stream";
-import logo  from "$lib/images/myne/blue_myne_logo.png"
+import logo  from "$lib/images/blue_myne_logo.png"
 const fonts: TFontDictionary = {
   NotoSans: {
     normal: "src/lib/server/pdf/fonts/NotoSans-Medium.ttf",
