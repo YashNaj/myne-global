@@ -37,7 +37,8 @@
   $: filteredCards = myneCards.map((card) => {
     card.category === categoryFilter;
   });
-  let cardsFiltered;
+  let cardsFiltered;  
+
   $: cardsFiltered = filteredCards;
   handleSession(page);
   let loading;
