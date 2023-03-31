@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { selectedCard } from "./../../store.ts";
   import logo from "$lib/images/white_icon.png";
   import Dashboard from "$lib/components/Dashboard.svelte";
   import DashboardFunctions from "$lib/components/DashboardFunctions.svelte";
@@ -20,7 +19,7 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { fade } from "svelte/transition";
-  import { certificate, stolen, transfer, document, userCards } from "../../store";
+  import { certificate, stolen, transfer, document, userCards,selectedCard } from "$lib/store";
   import ReportStolen from "$lib/components/ReportStolen.svelte";
   import CardButtonDocumentUpload from "$lib/components/CardButtonDocumentUpload.svelte";
   import MakeCertificate from "$lib/components/MakeCertificate.svelte";

@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { selectedCard } from "./../../store";
+  import { selectedCard, transfer, currentUser} from "$lib/store";
   import { page } from "$app/stores";
   import { trpc } from "$lib/trpc/client";
   import type { User } from "lucia-auth";
   import { writable } from "svelte/store";
   import { fly, scale, slide } from "svelte/transition";
-  import { transfer, currentUser } from "../../store";
   import Spinner from "./Spinner.svelte";
   import UserBadge from "./UserBadge.svelte";
   import Swiper from "swiper";

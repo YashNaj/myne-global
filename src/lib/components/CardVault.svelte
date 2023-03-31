@@ -9,12 +9,14 @@
   import CardFlippable from "./CardFlippable.svelte";
   import Spinner from "./Spinner.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
-  import { userCards } from "../../store";
+  import { userCards } from "$lib/store";
   $: console.log("cardVault userCards", $userCards);
   export let data;
   let addCardOpen = false;
   let loading = false;
   let categoryFilter: string;
+  let cardExpanded: boolean = false; 
+  $: cardExpanded = cardExpanded
   $: categoryFilter = categoryFilter;
   let filteredCards;
   let categories = [
@@ -79,6 +81,7 @@
   let w;
   let scrollTop;
   export let mobile: boolean = false; 
+  $: console.log('check if the card is expanded and use that switch to disable the scroll in the cardvault', cardExpanded) 
 </script>
 
 <div class="w-full h-[80vh] p-2 rounded-2xl bg-blue-50">
@@ -233,7 +236,7 @@
         </div>
       {:then Module}
         <div
-          class="w-full h-full grid grid-rows-auto {mobile ? ' grid-cols-2 gap-1' : 'grid-cols-4 gap-2'} relative  place-items-center will-change-auto overflow-y-auto"
+          class="w-full h-full grid grid-rows-auto {mobile ? ' grid-cols-2 gap-1' : 'grid-cols-4 gap-2'} relative  place-items-center will-change-auto {cardExpanded ? "overflow-x-disabled overflow-y-disabled" : "overflow-y-auto"}"
           in:fade|local={{ duration: 200, delay: 250 }}
           bind:this={scrollContainer}
           on:scroll={() => (scrollTop = scrollContainer.scrollTop)}
@@ -254,10 +257,11 @@
                 {h}
                 {scrollTop}
                 cardDisplayId="flippable-card-{i}"
-                {cardProps}
+                cardProps = { structuredClone(cardProps)}
                 {mobile}
+                bind:expanded={cardExpanded}
               >
-                <SwiperPictures {mobile} pictures={cardProps.pictures} />
+                <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />
               </Module.default>
             </div>
           {/each}

@@ -1,6 +1,7 @@
 import PdfPrinter from "pdfmake";
 import type { TFontDictionary, TDocumentDefinitions } from "pdfmake/interfaces";
 import blobStream, { type IBlobStream } from "blob-stream";
+import logo  from "$lib/images/myne/blue_myne_logo.png"
 const fonts: TFontDictionary = {
   NotoSans: {
     normal: "src/lib/server/pdf/fonts/NotoSans-Medium.ttf",
@@ -13,7 +14,7 @@ async function blobToBase64(blob: Blob) {
   return `data:${blob.type};base64,${buffer.toString("base64")}`;
 }
 
-async function generateCertificate(fonts, cardId: string): Promise<Blob> {
+async function generateCertificate( cardId: string): Promise<Blob> {
   const dd: TDocumentDefinitions = {
     content: [{ text: "Testing the PDFMake" }, { text: cardId }],
     defaultStyle: {

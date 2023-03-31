@@ -3,7 +3,7 @@
   import { pictures } from "./../../cardProps.ts";
   import { cloneDeep } from "lodash";
   import { scale } from "svelte/transition";
-  import { stolen, selectedCard } from "../../store";
+  import { stolen, selectedCard } from "$lib/store";
   import CardFlippable from "./CardFlippable.svelte";
   import { trpc } from "$lib/trpc/client";
   import SwiperPictures from "./SwiperPictures.svelte";

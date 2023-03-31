@@ -1,6 +1,6 @@
 <script lang="ts">
     import { scale } from "svelte/transition";
-    import { selectedCard, certificate } from "../../store";
+    import { selectedCard, certificate } from "$lib/store";
     import { trpc } from "$lib/trpc/client";
     let loading = false; 
     export let selected 
@@ -26,7 +26,7 @@
           <div class="button-container flex justify-around w-full absolute bottom-2 left-0">
           </div>
         </div>
-        <a href='/api/mynePdf/{$selectedCard.id}'class = 'btn btn-warning text-white normal-case'>
+        <a href='/api/mynePdf/{$selectedCard?.id}'class = 'btn btn-warning text-white normal-case'>
           Generate Certificate
         </a>
     </div>

@@ -9,7 +9,7 @@
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
 
-  import {currentUser } from "../../store"
+  import {currentUser } from "$lib/store"
   export let addCardOpen = false;
   export let data: PageData = $page.data;
   const profile = data.profile;

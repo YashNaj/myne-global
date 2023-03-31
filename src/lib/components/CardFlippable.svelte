@@ -9,8 +9,7 @@
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { transfer, stolen, document, certificate } from "../../store";
-  import { selectedCard } from "../../store";
+  import { transfer, stolen, document, certificate, selectedCard } from "$lib/store";
   import StolenBadge from "./StolenBadge.svelte";
   import {
     Icon,
@@ -36,7 +35,7 @@
   export let success: boolean | null = null;
   export let selected;
   export let mobile: boolean; 
-  
+  $: console.log("card,expanded", expanded)
   $: selected = selected;
   $: console.log("selected", selected);
   export let scrollTop;

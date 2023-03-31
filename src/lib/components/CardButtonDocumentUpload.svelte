@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { certificate } from "./../../store.ts";
   import { page } from "$app/stores";
   import { scale } from "svelte/transition";
-  import { selectedCard, document } from "../../store";
+  import { selectedCard, document,certificate } from "$lib/store";
   import { trpc } from "$lib/trpc/client";
   let loading = false;
   const reportStolen = async () => {
