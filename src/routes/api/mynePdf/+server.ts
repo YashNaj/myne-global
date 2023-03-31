@@ -12,6 +12,7 @@ export const GET:  RequestHandler = async ({ locals, params, setHeaders }) => {
     'Content-Type': 'application/pdf',
     'Content-length': pdf.size.toString(),
     'Last-Modified' :  Date.now().toString(),
+    'Cache-Control': 'public, max-age=600'
   })
   return new Response(pdf);
 };
