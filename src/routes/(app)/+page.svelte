@@ -19,39 +19,51 @@
   import RequestInventory from "$lib/components/RequestInventory.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { fade } from "svelte/transition";
-  import { certificate, stolen, transfer, document, userCards,selectedCard } from "$lib/store";
+  import { certificate, stolen, transfer, documentUpload, userCards, selectedCard, currentUser } from "$lib/store";
   import ReportStolen from "$lib/components/ReportStolen.svelte";
   import CardButtonDocumentUpload from "$lib/components/CardButtonDocumentUpload.svelte";
   import MakeCertificate from "$lib/components/MakeCertificate.svelte";
   import BottomNav from "$lib/components/BottomNav.svelte";
+  import { trpc } from "$lib/trpc/client";
   export let data: PageData = $page.data;
   let size = "9";
+  let cards;
+  let cardsLoading;
+  let userId = $currentUser;
+  $:userId = $currentUser
+  handleSession(page);
+  async function getMyneCardstRPC() {
+    cardsLoading = true;
+    cards = await trpc($page).cards.load.query(userId);
+    cardsLoading = false;
+  }
 
   export let myneCards = $page.data.getMyneCards;
+  console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
+
   userCards.set([...myneCards]);
-  console.log("userCards", $userCards);
   export let addCardOpen = false;
   export let categoryFilter: string = "All";
 
   $: filteredCards = myneCards.map((card) => {
     card.category === categoryFilter;
   });
-  let cardsFiltered;  
+  let cardsFiltered;
 
   $: cardsFiltered = filteredCards;
-  handleSession(page);
   let loading;
   $: loading = data.loading;
   const tabList = ["Card Vault", "Import", "History Reports", "Request Inventory"];
   export let isLoading = true;
   onMount(async () => {
-    // Load data here
-    isLoading = false;
+    cards = getMyneCardstRPC();
   });
   $: console.log("selectedCard", $selectedCard);
+  $: console.log("trpc cards", cards)
+
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-screen flex flex-col ">
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-screen flex flex-col">
   {#if $transfer}
     <div
       class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
@@ -68,7 +80,7 @@
       <ReportStolen />
     </div>
   {/if}
-  {#if $document}
+  {#if $documentUpload}
     <div
       class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
       transition:fade|local
@@ -88,25 +100,11 @@
   <BottomNav />
 </div>
 <div
-  class="hidden md:flex w-full h-full py-3 px-5 flex-col overflow-y-hidden scrollbar-track-transparent bg-[rgb(243,250,255)] ;
+  class="hidden md:flex w-full h-full py-3 px-2 flex-col overflow-y-hidden scrollbar-track-transparent bg-[rgb(243,250,255)] ;
   "
 >
   <PageContainer>
-    <TabGroup class=" w-full h-full overflow-x-hidden flex flex-col">
-      <TabList class="w-full h-fit my-2 rounded-3xl flex justify-between px-2">
-        {#each tabList as tab, i}
-          <Tab
-            class={({ selected }) =>
-              selected
-                ? "flex flex-col flex-wrap content-center justify-center rounded-lg flex-1 bg-primary text-secondary p-1  transform translate-x-2 duration-100 xl:text-lg lg:text-md font-semibold"
-                : "flex flex-col flex-wrap flex-1  content-center justify-center rounded-lg p-1 translate-x-[-2] transform duration-100 ease-in-out origin-center  xl:text-lg lg:text-md font-semibold"}
-          >
-            {tab}
-          </Tab>
-        {/each}
-      </TabList>
-      <TabPanels class="w-full h-full flex flex-col  mt-1">
-        <TabPanel class="w-full h-full relative">
+
           <div class="w-full h-full">
             {#if $transfer}
               <div
@@ -124,7 +122,7 @@
                 <ReportStolen />
               </div>
             {/if}
-            {#if $document}
+            {#if $documentUpload}
               <div
                 class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl"
                 transition:fade|local
@@ -143,27 +141,5 @@
 
             <CardVault {data} />
           </div>
-        </TabPanel>
-        <TabPanel class="w-full h-full">
-          {#await import("$lib/components/Import.svelte")}
-            <div class="w-full h-full bg-primary p-1 flex justify-center content-center flex-wrap">
-              <div class="spinner container flex justify-center ">
-                <div class="flex flex-col justify-center content-center flex-wrap w-{size} h-{size} rounded-full">
-                  <img alt="myne-logo" src={logo} class="w-full h-full max-w-full animate-spin" />
-                </div>
-              </div>
-            </div>
-          {:then Module}
-            <Module.default {data} />
-          {/await}
-        </TabPanel>
-        <TabPanel class="w-full h-full">
-          <HistoryReports {data} />
-        </TabPanel>
-        <TabPanel class="w-full h-full">
-          <RequestInventory {data} />
-        </TabPanel>
-      </TabPanels>
-    </TabGroup>
   </PageContainer>
 </div>

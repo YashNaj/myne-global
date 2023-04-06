@@ -1,29 +1,23 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+  import type { PageData } from "./$types";
+  import Card from "$lib/components/Card.svelte";
+  import { userCards } from "$lib/store";
   import CardCell from "$lib/components/CardCell.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { draw } from "svelte/transition";
-  import type { PageData } from "./$types";
   import type Swiper from "swiper";
+  import { onMount } from "svelte";
 
-  let description = "";
-  let value = "test";
-  let label = "test";
-  let toggle = false;
   export let data: PageData;
-  let swiperEl
-  onMount(()=>{
-    swiperEl = document.querySelector('.test-swiper')
-    console.log(swiperEl)
-  })
-
-
+  let cards;
+  console.log($userCards);
+  let swiperEl;
+  
 </script>
 
-<div
-  class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 backdrop-blur-lg"
->
-  <swiper-container class="test-swiper w-80 h-80">
+<div class="w-full h-full">
+  <!-- swiper code  -->
+  <!-- <swiper-container class="test-swiper w-80 h-80">
     <swiper-slide class="w-full h-full bg-primary text-white"> SLIDE 1 </swiper-slide>
     <swiper-slide class="w-full h-full bg-primary text-white"> SLIDE 2 </swiper-slide>
     <swiper-slide class="w-full h-full bg-primary text-white"> SLIDE 3 </swiper-slide>
@@ -33,8 +27,8 @@
   }} class = 'btn btn-primary normal-case'>
 
     Slide
-  </button>
+  </button> -->
+  <div class="test-card-container w-full h-full flex flex-wrap gap-3 justify-start p-3 overflow-y-auto">
+    <Card/>
+  </div> 
 </div>
-
-
-

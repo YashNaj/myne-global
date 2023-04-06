@@ -115,6 +115,7 @@ model MyneCard {
   product                  String?
   registration_certificate String?
   release_date             String?
+  reciept                  String?
   serial                   String?
   serie                    String?
   series                   String?
@@ -307,5 +308,6 @@ model Stolen {
   myneCardId String   @unique
   myneCard   MyneCard @relation(fields: [myneCardId], references: [id])
   createdAt  DateTime @default(now())
+
   @@map("stolen")
 }

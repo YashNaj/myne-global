@@ -10,7 +10,6 @@
   import Spinner from "./Spinner.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
   import { userCards } from "$lib/store";
-  $: console.log("cardVault userCards", $userCards);
   export let data;
   let addCardOpen = false;
   let loading = false;
@@ -48,7 +47,6 @@
     });
   }
 
-  $: console.log("🚀 ~ file: Desktop.svelte:54 ~ filteredCards:", filteredCards);
   let isLoading;
   $: filteredCards = $userCards;
   $: categories = categories.sort();
@@ -84,7 +82,7 @@
   $: console.log('check if the card is expanded and use that switch to disable the scroll in the cardvault', cardExpanded) 
 </script>
 
-<div class="w-full h-[80vh] p-2 rounded-2xl bg-blue-50">
+<div class="w-full h-[80vh] p-2 rounded-2xl">
   <div class="navbar w-full rounded-t-2xl mb-2">
     <div class="navbar-start">
       <div class="dropdown">
@@ -173,15 +171,18 @@
     <div
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
-      class="h-[89%]  bg-black bg-opacity-25 rounded-xl  justify-center overflow-y-auto  w-full overflow-x-hidden shadow-lg transition-shadow duration-75"
+      class="h-[89%]  rounded-xl  justify-center overflow-y-auto  w-full overflow-x-hidden transition-shadow duration-75"
     >
-      {#await import("$lib/components/CardFlippable.svelte")}
+      {#await import("$lib/components/Card.svelte")}
         <div
           bind:clientHeight={h}
           bind:clientWidth={w}
           class="w-full h-full bg-primary p-1 flex justify-center content-center flex-wrap"
           out:fly|local={{ duration: 200 }}
         >
+          <h1 class = 'text-8xl w-full justify-center flex text-white font-semibold'>
+            Card Vault
+          </h1>
           <div class="spinner container flex justify-center ">
             <div class="flex flex-col justify-center content-center flex-wrap w-{size} h-{size} rounded-full">
               <div class="rounded-full">
@@ -257,8 +258,9 @@
                 {h}
                 {scrollTop}
                 cardDisplayId="flippable-card-{i}"
-                cardProps = { structuredClone(cardProps)}
+                cardProps = { structuredClone({...cardProps})}
                 {mobile}
+                cardFrontSwiperId = {i}
                 bind:expanded={cardExpanded}
               >
                 <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />

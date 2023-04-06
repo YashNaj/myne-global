@@ -70,7 +70,7 @@
   };
   const loadCards = async () => {
     cardLoading = true;
-    myneCardTest = await trpc($page).cards.list.query();
+    myneCardTest = await trpc($page).cards.load.query();
     cardLoading = false;
   };
   const loadUsers = async () => {

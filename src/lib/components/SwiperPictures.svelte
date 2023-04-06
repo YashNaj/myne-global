@@ -5,20 +5,20 @@
   import { CloudUpload, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
   import { onMount } from "svelte";
-  export let mobile; 
+  export let mobile;
   let parentEl;
   export let size = 10;
 
-  beforeUpdate(() => {
+  beforeUpdate(() => {});
+  onMount(() => {
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
           const imgElement = document.getElementById(`img-${picture}`);
           imgElement?.setAttribute("src", url);
         });
-    }
-  });
-  onMount(() => {
+    };
+
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
         const targetEl = event.target as HTMLElement;
@@ -35,7 +35,7 @@
           }
         }
       });
-    }
+    };
   });
   export let pictures: string[] = [];
   $: pictures = pictures;
@@ -97,13 +97,13 @@
   };
 </script>
 
-<div class="card-pictures-wrapper {mobile ? 'w-40 h-40'  : 'w-56 h-40'}">
+<div class="card-pictures-wrapper {mobile ? 'w-40 h-40' : 'w-56 h-40'}">
   <swiper-container
     bind:this={parentEl}
-    observer='true'
-    observer-parents='true'
+    observer="true"
+    observer-parents="true"
     slides-per-view="1"
-    class="picture-swiper w-full h-full rounded-lg relative "
+    class="test-swiper w-full aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
     css="true"
     virtual="true"
   >
@@ -111,13 +111,13 @@
       {#each pictures as picture, i}
         <swiper-slide
           lazy="true"
-          class=" w-full h-full rounded-lg flex justify-center  bg-black bg-opacity-30"
+          class=" w-full h-full rounded-lg flex justify-center bg-black bg-opacity-30"
           id={`item-${i}`}
         >
           {#if picture}
-            <div class="w-full object-cover h-full ">
+            <div class="w-full object-cover h-full">
               <!-- svelte-ignore a11y-img-redundant-alt -->
-              <img loading="eager" id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity " />
+              <img loading="eager" id={`img-${picture}`} alt="Uploaded picture" class="bg-black bg-opacity" />
             </div>
 
             <!-- svelte-ignore a11y-img-redundant-alt -->
@@ -125,7 +125,7 @@
             <div class="object-contain bg-black bg-opacity" />
           {/if}
           <div
-            class="absolute bottom-0 h-10  w-full  flex  rounded-lg bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
+            class="absolute bottom-0 h-10 w-full flex rounded-lg bg-black bg-opacity-5 picture-swiper-nav-container z-99"
           >
             <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">
               Next
@@ -135,11 +135,11 @@
         </swiper-slide>
       {/each}
     {/if}
-    <swiper-slide class=" rounded-box  bg-black bg-opacity-10 ">
+    <swiper-slide class=" rounded-box bg-black bg-opacity-10">
       <div class="w-full h-full flex">
-        <div class="w-full h-full ">
+        <div class="w-full h-full">
           <label
-            class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40  bg-200 normal-case  flex flex-col justify-center content-center flex-nowrap"
+            class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
             for="single"
           >
             {#if uploading}
@@ -174,7 +174,7 @@
         </div>
         </swiper-slide> -->
       <div
-        class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
+        class="absolute bottom-0 h-10 w-full flex rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99"
       >
         <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
         <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>
@@ -182,7 +182,7 @@
     </swiper-slide>
 
     <div
-      class="absolute bottom-0 h-10  w-full  flex  rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99 "
+      class="absolute bottom-0 h-10 w-full flex rounded--2xl bg-black bg-opacity-5 picture-swiper-nav-container z-99"
     >
       <div class="btn btn-ghost swiper-button-pictures-next flex-1 order-2 h-full normal-case text-white">Next</div>
       <div class="btn btn-ghost swiper-button-pictures-prev flex-1 h-full normal-case text-white">Prev</div>

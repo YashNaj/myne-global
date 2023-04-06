@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import AddCard from "$lib/components/AddCard.svelte";
   import CardFlippable from "./CardFlippable.svelte";
   import { firstCapital } from "$lib/caps";
@@ -59,7 +59,7 @@
 
           </TabContainer>
            -->
-      <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
+      <!-- <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
         <Import data={$page.data} />
       </TabPanel>
       <TabPanel class="w-full h-full flex flex-col px-2 rounded-2xl">
@@ -72,4 +72,4 @@
       </TabPanel>
     </TabPanels>
   </TabGroup>
-</PageContainer>
+</PageContainer> -->

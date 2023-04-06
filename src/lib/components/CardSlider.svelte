@@ -54,6 +54,7 @@
       });
     }
   });
+  
 </script>
 
 <div
@@ -67,7 +68,7 @@ bind:this={parentEl}
     id={cardDisplayId}
     virtual= 'true'
     css = 'true'
-    class="h-full swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1 text-black"
+    class="h-[100%] swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1 text-black"
   >
     {#if fieldsBackOneValues?.length > 0}
       <swiper-slide class="p-3">
@@ -153,7 +154,7 @@ bind:this={parentEl}
   >
     <Icon
       size="32px"
-      class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 "
+      class="  opacity-60 cursor-pointer pointer-events-none text-black z-10 "
       src={ArrowCircleLeft}
       on:click={() => (expand = !expand)}
     />
@@ -164,7 +165,7 @@ bind:this={parentEl}
   >
     <Icon
       size="32px"
-      class="next-card-slider opacity-60 cursor-pointer  text-black z-0"
+      class=" opacity-60 cursor-pointer pointer-events-none text-black z-10"
       src={ArrowCircleRight}
       on:click={() => (expand = !expand)}
     /></button

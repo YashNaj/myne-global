@@ -7,7 +7,7 @@
   export let value: string | symbol | null | bigint = "";
   export let id = "";
   export let gridClass = "";
-  export let mobile; 
+  export let mobile;
   function capitalizeFirstLetters(value) {
     // Check if input is a string
     if (typeof value !== "string") {
@@ -29,39 +29,40 @@
   // $: value = capitalizeFirstLetters(value)
   let duration = 150;
   let delay = 150;
-  let textAlign; 
-  $: if (justifyCell === 'justify-start') { textAlign = "text-left"}
-  $: if (justifyCell === 'justify-end') { textAlign = "text-right"}
-
+  let textAlign;
+  $: if (justifyCell === "justify-start") {
+    textAlign = "text-left";
+  }
+  $: if (justifyCell === "justify-end") {
+    textAlign = "text-right";
+  }
 </script>
 
-<div
-  {id}
-  class=" h-full flex flex-col flex-wrap content-start justify-start relative"
->
-  <div
-    class="w-full h-full flex flex-col flex-wrap{justifyCell}"
-    transition:slide|local
-  >
+<div {id} class=" h-full flex flex-col flex-wrap content-start justify-start relative">
+  <div class="w-full h-full flex flex-col flex-wrap{justifyCell}" transition:slide|local>
     {#key label}
-      <div in:slide={{ duration, delay }} out:slide={{ duration, delay }}>
+      <div in:slide={{ duration }} out:slide={{ duration, delay }}>
         <label
           for="cell-label"
-          class="card-field-label label py-0 font-semibold md:text-md text-sm {mobile ? 'text-[12px]' : 'text-sm'}  w-full flex {justifyCell} {gridClass}"
+          class="card-field-label text-black text-opacity-40  text- label py-0 font-semibold lg:text-[15px] md:text-md text-sm {mobile
+            ? 'text-[12px]'
+            : 'text-sm'}  w-full flex {justifyCell} {textAlign} {gridClass}"
         >
           {label}
         </label>
       </div>
     {/key}
-      <div in:slide={{ duration, delay }} out:slide={{ duration, delay }}>
-        <label
-          for="cell-value"
-          class="card-field-value h-full label w-full py-0 flex md:text-md text-sm {mobile ? 'text-[12px]' : 'text-sm'} overflow-x-clip {textAlign} {justifyCell}"
-        >
-          {#if value !== null}
-            {value}
-          {/if}
-        </label>
-      </div>
+    <div in:slide={{ duration }} out:slide={{ duration, delay }}>
+      <label
+        for="cell-value"
+        class="card-field-value h-full label w-full py-0 flex md:text-md text-sm text-black font-medium {mobile
+          ? 'text-[12px]'
+          : 'text-sm'} overflow-x-clip {textAlign} {justifyCell}"
+      >
+        {#if value !== null}
+          {value}
+        {/if}
+      </label>
+    </div>
   </div>
 </div>

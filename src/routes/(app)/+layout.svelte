@@ -65,7 +65,7 @@
             <!-- Navbar menu content here -->
             <div class="flex">
               {#if data?.isUser}
-                <div class=" w-[120px] flex h-[100%] rounded-lg p-1">
+                <a href = '/settings' class="user-account-link hover:shadow-lg cursor-pointer hover:shadow-stone-100 w-[120px] flex h-[100%] rounded-lg p-1">
                   <div class="flex-[2-2-0%] flex justify-center content-centerw-[30%] h-full">
                     <div class="avatar">
                       <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" />
@@ -76,7 +76,7 @@
                       {profile?.firstName}
                     </h1>
                   </div>
-                </div>
+                </a>
               {/if}
               <li>
                 <LogOut />

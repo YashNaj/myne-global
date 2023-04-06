@@ -29,7 +29,9 @@ const fonts: TFontDictionary = {
 };
 const printer = new PdfPrinter(fonts);
 
-async function generateCertificate(cardId: string): Promise<Blob> {
+async function generateCertificate(cardId: string, reportType: "certificate" | "report"): Promise<Blob> {
+  const title = reportType === "certificate" ? "Item Certificate" : "History Report";
+
   const logo = await loadImageToBase64(myneLogo);
   const dd: TDocumentDefinitions = {
     content: [
@@ -41,14 +43,14 @@ async function generateCertificate(cardId: string): Promise<Blob> {
             allignment: "left",
           },
           {
-            text: "Item History and Detail Report",
+            text: title,
             style: "h1",
             alignment: "left",
           },
         ],
         // Optional space between columns
         columnGap: 10,
-        verticalAllignment: "center",
+        verticalAllignment: "bottom",
       },
       {
         canvas: [
@@ -58,8 +60,9 @@ async function generateCertificate(cardId: string): Promise<Blob> {
             y1: 5,
             x2: 515, // Adjust the length of the line as needed
             y2: 5,
-            lineWidth: 1,
+            lineWidth: 5,
             stroke: "#002d72",
+            dash: { length: 7},
           },
         ],
       },
@@ -73,11 +76,54 @@ async function generateCertificate(cardId: string): Promise<Blob> {
           widths: ["33%", "33%", "34%"],
           body: [
             ["Header 1", "Header 2", "Header 3"],
-            ["", "", ""],
-            ["", "", ""],
+            ["DEFAULT", "DEFAULT", "DEFAULT"],
+            ["DEFAULT", "DEFAULT", "DEFAULT"],
           ],
         },
       },
+
+      {
+        text: "Owners",
+        style: "sectionHeader",
+        alignment: "left",
+      },
+      {
+        table: {
+          widths: ["33%", "33%", "34%"],
+          body: [
+            ["Owner 1", "Owner 2", "Owner 3"],
+            ["DEFAULT", "DEFAULT", "DEFAULT"],
+            ["DEFAULT", "DEFAULT", "DEFAULT"],
+          ],
+        },
+      },
+      {
+        text: "Service / Repair History",
+        style: "sectionHeader",
+        alignment: "left",
+      },
+      {
+        table: {
+          widths: ["*", "*", "*"],
+          body: [
+            ["Repair 1", "Repair 2", "Repair 3"],
+            ["DEFAULT", "DEFAULT", "DEFAULT"],
+            ["DEFAULT", "DEFAULT", "DEFAULT"],
+          ],
+          style: "tableHeader",
+        },
+      },
+      {
+        text: "Status",
+        style: "sectionHeader",
+        alignment: "left",
+      },
+      {
+        text: "Documents",
+        style: "sectionHeader",
+        alignment: "left",
+      },
+
       {
         text: "Photos",
         style: "sectionHeader",
@@ -91,52 +137,12 @@ async function generateCertificate(cardId: string): Promise<Blob> {
         },
         layout: "noBorders",
       },
-      {
-        text: "Owners",
-        style: "sectionHeader",
-        alignment: "left",
-      },
-      {
-        table: {
-          widths: ["33%", "33%", "34%"],
-          body: [
-            ["Owner 1", "Owner 2", "Owner 3"],
-            ["", "", ""],
-            ["", "", ""],
-          ],
-        },
-      },
-      {
-        text: "Repair History",
-        style: "sectionHeader",
-        alignment: "left",
-      },
-      {
-        table: {
-          widths: ["*", "*", "*"],
-          body: [
-            ["Repair 1", "Repair 2", "Repair 3"],
-            ["", "", ""],
-            ["", "", ""],
-          ],
-        },
-      },
-      {
-        text: "Documents",
-        style: "sectionHeader",
-        alignment: "left",
-      },
-      {
-        text: "Status",
-        style: "sectionHeader",
-        alignment: "left",
-      },
     ],
     styles: {
       h1: {
-        fontSize: 18,
+        fontSize: 32,
         bold: true,
-        margin: [0, 0, 0, 16],
+        margin: [62, 18, 0, 16],
         color: "#002d72",
       },
       sectionHeader: {
@@ -153,7 +159,7 @@ async function generateCertificate(cardId: string): Promise<Blob> {
         bold: true,
         fontSize: 13,
         color: "black",
-        fillColor: "#e7e7e7",
+        fillColor: "#002d72",
         margin: [0, 2, 0, 2],
       },
       link: {

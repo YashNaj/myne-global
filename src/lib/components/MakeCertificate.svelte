@@ -9,7 +9,7 @@
     let loading = false; 
     export let selected 
     async function downloadCertificate() {
-      console.log("body certificate", card);
+    console.log("body certificate", card);
 
     const response = await fetch("/api/mynePdf", {
       method: "POST",

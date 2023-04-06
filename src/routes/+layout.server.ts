@@ -31,7 +31,6 @@ export const load = handleServerSession((async ({ url, locals }) => {
     throw redirect(303, "/signin");
   } else if (user?.valid) {
     let user_id = user.userId;
-    console.log(user);
 
     // const query = {
     //   where: {

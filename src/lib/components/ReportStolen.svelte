@@ -9,6 +9,7 @@
   import SwiperPictures from "./SwiperPictures.svelte";
   import Spinner from "./Spinner.svelte";
   import { invalidateAll } from "$app/navigation";
+  import Card from "./Card.svelte";
   let toggleRemoveStolen = false;
   let cardProps = { ...$selectedCard };
   $: if (cardProps.isStolen) {
@@ -62,9 +63,8 @@
         {/if}
 
         <div class="w-full h-fit flex justify-center content-center flex-wrap relative scale-75">
-          <CardFlippable cardProps={$selectedCard}>
-            <SwiperPictures pictures={$selectedCard.pictures} />
-          </CardFlippable>
+          <Card cardProps={$selectedCard}>
+          </Card>
         </div>
         {#if !toggleRemoveStolen}
           <h1 class="text-white font-medium p-1 text-center">

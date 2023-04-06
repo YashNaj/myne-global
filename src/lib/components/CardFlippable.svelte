@@ -9,7 +9,8 @@
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { transfer, stolen, document, certificate, selectedCard } from "$lib/store";
+  import { transfer, stolen, documentUpload, certificate, selectedCard } from "$lib/store";
+  console.log("🚀 ~ file: CardFlippable.svelte:13 ~ documentUpload:", documentUpload)
   import StolenBadge from "./StolenBadge.svelte";
   import {
     Icon,
@@ -292,7 +293,7 @@
                 <button
                   on:click={() => {
                     selected = true;
-                    document.set(true);
+                    documentUpload.set(true);
                     selectedCard.set(cloneDeep(cardProps));
                   }}
                   class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2"
@@ -346,7 +347,6 @@
   }
 
   .flip-card-front {
-    color: black;
   }
 
   .flip-card-back {

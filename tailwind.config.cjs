@@ -1,3 +1,145 @@
+const plugin = require("tailwindcss/plugin");
+const backfaceVisibility = plugin(function ({ addUtilities }) {
+  addUtilities({
+    ".backface-visible": {
+      "backface-visibility": "visible",
+      "-moz-backface-visibility": "visible",
+      "-webkit-backface-visibility": "visible",
+      "-ms-backface-visibility": "visible",
+    },
+    ".backface-hidden": {
+      "backface-visibility": "hidden",
+      "-moz-backface-visibility": "hidden",
+      "-webkit-backface-visibility": "hidden",
+      "-ms-backface-visibility": "hidden",
+    },
+  });
+});
+// const flipCardUtils = plugin(function ({ addUtilities }) {
+//   addUtilities({
+//     ".flip-card-inner": {
+//       'position': "relative",
+//       'width': "100%",
+//       'height': "100%",
+//       "text-align": "center",
+//       'transition': "transform 0.6s",
+//       "-webkit-transition": "transform 0.6s",
+//       "-webkit-transform-style": "preserve-3d",
+//       "transform-style": "preserve-3d",
+//       "-webkit-transform": "translateZ(0)",
+//       "-webkit-transform:": "rotateY(180deg)",
+//       "-moz-transform": "translateZ(0)",
+//       "-moz-transform:": "rotateY(180deg)",
+//       "-ms-transform": "translateZ(0)",
+//       "-ms-transform:": "rotateY(180deg)",
+//       'transform': "rotateY(180deg)",
+//       'width': "100%",
+//       'height': "100%",
+      
+//     },
+//     ".flip-card": {
+//       "-webkit-transform": "translateZ(0)",
+//       "-webkit-transform:": "rotateY(180deg)",
+//       "-moz-transform": "translateZ(0)",
+//       "-moz-transform:": "rotateY(180deg)",
+//       "-ms-transform": "translateZ(0)",
+//       "-ms-transform:": "rotateY(180deg)",
+//       'transform': "rotateY(180deg)",
+//       'width': "100%",
+//       'height': "100%",
+//       'perspective': '1000px'
+//     },
+//     ".flipped": {
+//       "-webkit-transform": "translateZ(0)",
+//       "-webkit-transform": "rotateY(180deg)",
+//       "-moz-transform": "translateZ(0)",
+//       "-moz-transform:": "rotateY(180deg)",
+//       "-ms-transform": "translateZ(0)",
+//       "-ms-transform:": "rotateY(180deg)",
+//       'transform': "rotateY(180deg)",
+//       'width': "100%",
+//       'height': "100%",
+//     },
+//     ".backface-hidden": {
+//       "backface-visibility": "hidden",
+//       "-moz-backface-visibility": "hidden",
+//       "-webkit-backface-visibility": "hidden",
+//       "-ms-backface-visibility": "hidden",
+//     },
+//     '.flip-card-front': {
+//       'position': 'absolute',
+//       'width': '100%',
+//       'height': '100%',
+//       '-webkit-transform': 'translateZ(0)',
+//       "-moz-transform": "translateZ(0)",
+//       '-webkit-backface-visibility': 'hidden',
+//       "backface-visibility": "hidden",
+//       "-moz-backface-visibility": "hidden",
+//       "-webkit-backface-visibility": "hidden",
+//       "-ms-backface-visibility": "hidden",   
+//      },
+//     '.flip-card-back':  {
+//       'position': 'absolute',
+//       'width': '100%',
+//       'height': '100%',
+//       '-webkit-transform': 'translateZ(0)',
+//       "-moz-transform": "translateZ(0)",
+//       '-webkit-backface-visibility': 'hidden',
+//       "backface-visibility": "hidden",
+//       "-moz-backface-visibility": "hidden",
+//       "-webkit-backface-visibility": "hidden",
+//       "-ms-backface-visibility": "hidden",   
+//      }
+//   });
+// });
+const flipCardUtils = plugin(function ({ addUtilities }) {
+  addUtilities({
+    ".flip-card-inner": {
+      'position': "relative",
+      'width': "100%",
+      'height': "100%",
+      "text-align": "center",
+      'transition': "transform 0.6s",
+      "-webkit-transition": "transform 0.6s",
+      "-webkit-transform-style": "preserve-3d",
+      "transform-style": "preserve-3d",
+    },
+    ".flip-card": {
+      'width': "100%",
+      'height': "100%",
+      'perspective': '1000px'
+    },
+    ".flipped .flip-card-inner": {
+      "-webkit-transform": "rotateY(180deg)",
+      "-moz-transform": "rotateY(180deg)",
+      "-ms-transform": "rotateY(180deg)",
+      'transform': "rotateY(180deg)",
+    },
+    ".backface-hidden": {
+      "backface-visibility": "hidden",
+      "-moz-backface-visibility": "hidden",
+      "-webkit-backface-visibility": "hidden",
+      "-ms-backface-visibility": "hidden",
+    },
+    '.flip-card-front': {
+      'position': 'absolute',
+      'width': '100%',
+      'height': '100%',
+      'z-index': 1,
+    },
+    '.flip-card-back':  {
+      'position': 'absolute',
+      'width': '100%',
+      'height': '100%',
+      '-webkit-transform': 'rotateY(180deg)',
+      "-moz-transform": "rotateY(180deg)",
+      '-ms-transform': 'rotateY(180deg)',
+      'transform': 'rotateY(180deg)',
+    },
+  });
+});
+
+
 /** @type {import("tailwindcss").Config} */
 module.exports = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
@@ -28,9 +170,10 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("daisyui"),
-    require('@tailwindcss/aspect-ratio'),
+    require("@tailwindcss/aspect-ratio"),
     require("tailwind-scrollbar"),
-    
+    backfaceVisibility,
+    flipCardUtils
   ],
   daisyui: {
     styled: true,
