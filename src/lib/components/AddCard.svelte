@@ -42,6 +42,7 @@
   import Swiper from "swiper";
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
+  import Card from "./Card.svelte";
   let floatingConfig = {
     strategy: "bottom",
   };

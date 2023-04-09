@@ -5,16 +5,18 @@
   import logo from "$lib/images/white_myne_logo.png";
   import LogOut from "$lib/components/LogOut.svelte";
   import type { LayoutServerData, PageServerLoad } from "./$types";
-  import type { PageData } from "./$types"; 
+  import type { PageData } from "./$types";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
 
-  import {currentUser } from "$lib/store"
+  import { currentUser } from "$lib/store";
   export let addCardOpen = false;
   export let data: PageData = $page.data;
   const profile = data.profile;
   const userId = profile?.user_id;
-  $: if(currentUser) {currentUser.set(userId)}
+  $: if (currentUser) {
+    currentUser.set(userId);
+  }
   export let loading = data.loading;
   $: console.log(loading);
   let menuItems = [
@@ -37,13 +39,13 @@
     <Spinner />
   </div>
 {:else}
-  <div class="drawer drawer-end ">
+  <div class="drawer drawer-end">
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content bg-[f5f9ff]   w-full  h-auto lg:w-auto overflow-hidden">
+    <div class="drawer-content bg-[f5f9ff] w-full h-auto lg:w-auto overflow-hidden">
       <div class="navbar bg-primary sticky top-0 z-50">
         <div class="px-2 mx-2 font-bold text-white w-full">
           <a href="/">
-            <img class="max-w-s w-20 lg:max-w-md " alt="logo" src={logo} />
+            <img class="max-w-s w-20 lg:max-w-md" alt="logo" src={logo} />
           </a>
         </div>
         <div class="flex-none lg:hidden">
@@ -60,12 +62,15 @@
         </div>
         <div class="flex-none hidden lg:block">
           <ul
-            class="menu menu-horizontal w-full  bg-primary flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white"
+            class="menu menu-horizontal w-full bg-primary flex justify-end content-center flex-wrap z-1 relative text-secondary lg:text-white"
           >
             <!-- Navbar menu content here -->
             <div class="flex">
               {#if data?.isUser}
-                <a href = '/settings' class="user-account-link hover:shadow-lg cursor-pointer hover:shadow-stone-100 w-[120px] flex h-[100%] rounded-lg p-1">
+                <a
+                  href="/settings"
+                  class="user-account-link hover:shadow-lg cursor-pointer hover:shadow-stone-100 w-[120px] flex h-[100%] rounded-lg p-1"
+                >
                   <div class="flex-[2-2-0%] flex justify-center content-centerw-[30%] h-full">
                     <div class="avatar">
                       <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" />
@@ -91,13 +96,13 @@
         </PageContainer>
       {/if}
       <div class="hidden w-screen h-[100dvh] md:flex flex-col justify-start content-center flex-wrap">
-        <slot/>
+        <slot />
       </div>
       <div class=" md:hidden w-screen h-[100dvh]">
         <slot />
       </div>
     </div>
-    <div class="drawer-side flex flex-col ">
+    <div class="drawer-side flex flex-col">
       <label for="my-drawer-3" class="drawer-overlay" />
       <ul class="menu p-4 w-80 bg-base-100 text-primary">
         <!-- Sidebar content here -->
