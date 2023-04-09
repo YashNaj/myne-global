@@ -377,7 +377,7 @@
 </script>
 
 <div
-  class=" w-full h-full grid grid-cols-2  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" transition:slide={{duration: 200, easing: backOut}}
+  class=" w-full h-full flex flex-col md:grid-cols-2 md:grid  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" transition:slide={{duration: 200, easing: backOut}}
 >
   <div class="flex justify-center w-full h-full content-center order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
@@ -390,7 +390,7 @@
       </Card>
     </div>
   </div>
-  <div class="w-full flex justify-center h-full">
+  <div class="w-full flex justify-center h-full order-2">
     <form
       method="POST"
       action="/add_card"
@@ -452,7 +452,7 @@
           Add a Card
         </h1>
 
-        <div class="form-input-button-wrapper  w-full h-full ">
+        <div class="form-input-button-wrapper order-2  w-full h-full ">
           <div bind:this={parentEl} class="parent form-slider w-full h-full ">
             <swiper-container
               allow-touch-move={false}

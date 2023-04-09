@@ -2,8 +2,8 @@
   export let h;
   export let w;
 </script>
-<div class="spinner container flex justify-center">
-  <div class="flex flex-col justify-center content-center flex-wrap w-[{w}px] h-[{h}px] rounded-full">
+<div class="spinner container flex flex-col justify-center">
+  <div class="flex flex-col justify-center content-center flex-wrap w-fit h-fit rounded-full">
     <div class="rounded-full">
       <svg
         class="animate-[spin_.8s_ease-in-out_infinite]"

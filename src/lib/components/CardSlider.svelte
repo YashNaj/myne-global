@@ -46,7 +46,7 @@
   >
     {#if fieldsBackOneValues?.length > 0}
       <swiper-slide class="p-3">
-        <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-full p-1">
+        <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-32 p-1">
           {#each fieldsBackOneValues as fieldBackOne, i}
             <CardCell
               bind:value={cardProps[fieldBackOne.value]}
@@ -59,7 +59,7 @@
     {/if}
     {#if fieldsBackTwoValues?.length > 0}
       <swiper-slide class="p-3">
-        <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-full p-1">
+        <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-32 p-1">
           {#each fieldsBackTwoValues as fieldBackTwo, i}
             <CardCell
               bind:value={cardProps[fieldBackTwo.value]}
@@ -72,7 +72,7 @@
     {/if}
     {#if fieldsBackThreeValues?.length > 0}
       <swiper-slide class="p-3">
-        <div class=" grid grid-cols-2 grid-rows-3 gap-0 w-full h-full p-1">
+        <div class=" grid grid-cols-2 grid-rows-3 gap-0 w-full h-32 p-1">
           {#each fieldsBackThreeValues as fieldBackThree, i}
             <CardCell
               bind:value={cardProps[fieldBackThree.value]}
@@ -98,7 +98,7 @@
       </div>
     </swiper-slide>
     <swiper-slide class="p-3">
-      <div class="w-full h-full grid grid-cols-2 grid-rows-3 gap-0">
+      <div class="w-full md:h-full h-32 grid grid-cols-2 grid-rows-3 gap-0">
         {#each generalFieldsBack as generalFields, i}
           <CardCell
             bind:value={cardProps[generalFields.value]}

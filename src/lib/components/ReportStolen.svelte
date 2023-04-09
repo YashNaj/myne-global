@@ -64,6 +64,7 @@
 
         <div class="w-full h-fit flex justify-center content-center flex-wrap relative scale-75">
           <Card cardProps={$selectedCard}>
+            <SwiperPictures/>
           </Card>
         </div>
         {#if !toggleRemoveStolen}

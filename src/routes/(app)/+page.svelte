@@ -58,13 +58,15 @@
   <CardVaultMenu bind:categoryFilter bind:inputText />
   <CardVault {categoryFilter} {inputText} mobile={true} />
 </div>
-<div
-  class="hidden md:flex w-full h-[100dvh] py-3 px-2 flex-col  scrollbar-track-transparent bg-[rgb(243,250,255)] ;
+<divp
+  class="hidden md:flex w-full h-[100dvh] py-3 px-2 flex-col scrollbar-track-transparent bg-[rgb(243,250,255)] ;
   "
 >
   <PageContainer>
     <div class="w-full h-full">
-      <CardVault {data} />
+      <CardFunctionModals />
+      <CardVaultMenu bind:categoryFilter bind:inputText />
+      <CardVault {categoryFilter} {inputText} mobile={false}/>
     </div>
   </PageContainer>
-</div>
+</divp>

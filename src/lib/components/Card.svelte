@@ -190,11 +190,12 @@
         <div class="flip-card-front-bottom flex-3 flex-1">
           <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">
             {#if fieldsFrontValues?.length > 0}
-              {#each fieldsFrontValues.slice(0, mobile ? 2 : undefined) as fieldFront, i}
+              {#each fieldsFrontValues?.slice(0, mobile ? 2 : undefined) as fieldFront, i}
                 <CardCell
                   bind:value={cardProps[fieldFront.value]}
                   label={fieldFront?.label}
                   allignText={i % 2 === 0 ? "left" : "right"}
+                  gridClass={getGridClass(i)}
                 />
               {/each}
             {/if}
@@ -243,7 +244,9 @@
           </div>
 
           <div class="card-buttons_back back-card_general-3 mt-2 flex-1">
-            <div class="button-container w-full md:h-full h-[30%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
+            <div
+              class="button-container w-full md:h-full h-[30%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center"
+            >
               <button
                 class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
                 on:click={() => {

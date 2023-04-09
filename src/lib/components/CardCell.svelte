@@ -8,6 +8,7 @@
   export let label = "";
   export let value: string | symbol | null | bigint = "Default";
   export let id = "";
+  export let gridClass;
   function capitalizeFirstLetters(value) {
     // Check if input is a string
     if (typeof value !== "string") {
@@ -34,9 +35,9 @@
     value = "";
   }
 </script>
+{#key label}
+<div {id} class="w-full h-fit grid grid-rows-2 flex-wrap {textSlug} {gridClass}" transition:slide|local>
 
-<div {id} class="w-full h-full grid grid-rows-2 flex-wrap {textSlug}" transition:slide|local>
-  {#key label}
     <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
       <label
         for="cell-label"
@@ -45,7 +46,6 @@
         {label}
       </label>
     </div>
-  {/key}
   <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
     <label
       for="cell-value"
@@ -57,3 +57,5 @@
     </label>
   </div>
 </div>
+{/key}
+

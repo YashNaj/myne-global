@@ -39,6 +39,6 @@
     {@html webManifest}
 </svelte:head>
 
-<main>
+<main class = 'h-[100dvh]'>
   <slot />
 </main>

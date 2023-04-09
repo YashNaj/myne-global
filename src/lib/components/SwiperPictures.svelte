@@ -93,7 +93,7 @@
 
 <div class="swiper-wrapper relative lg:w-64 md:w-48 w-20 md:aspect-[16/9] aspect-[1/1]">
   <swiper-container
-    class="test-swiper-{cardFrontSwiperId} w-full md:aspect-[16/9] aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
+    class="test-swiper-{cardFrontSwiperId} lg:w-64 md:w-48 w-30 md:aspect-[16/9] aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
     observer={true}
     observer-parents={true}
     css={true}
@@ -128,7 +128,7 @@
               {:else}
                 <div class="flex flex-col content-center flex-wrap justify-center">
                   <div class="w-full flex justify-center">
-                    <Icon src={CloudUpload} class="w-fit" color="white text-center" size="24px" />
+                    <Icon src={CloudUpload} class="w-fit" color="white text-center" size={mobile ? "12px" : "24px"} />
                   </div>
                   Upload a picture
                 </div>
@@ -188,7 +188,7 @@
     }}
     class="btn btn-ghost normal-case absolute z-[3] bottom-0 left-0"
   >
-    <Icon size="32px" class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 " src={ArrowCircleLeft} />
+    <Icon size={mobile ? "12px" : "24px"} class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 " src={ArrowCircleLeft} />
   </button>
   <button
     on:click={() => {
@@ -197,6 +197,6 @@
     }}
     class="btn btn-ghost normal-case absolute z-[3] bottom-0 right-0"
   >
-    <Icon size="32px" class="next-card-slider opacity-60 cursor-pointer  text-black z-0" src={ArrowCircleRight} />
+    <Icon size={mobile ? "12px" : "24px"} class="next-card-slider opacity-60 cursor-pointer  text-black z-0" src={ArrowCircleRight} />
   </button>
 </div>
