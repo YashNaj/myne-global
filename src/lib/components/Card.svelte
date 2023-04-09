@@ -201,9 +201,23 @@
       uploadButton.value = "";
     }
   };
+  const gridClasses = [
+    'row-1 col-1',
+    'row-1 col-2',
+    'row-2 col-1',
+    'row-2 col-2',
+    'row-3 col-1',
+    'row-3 col-2',
+  ];
+
+  // Define a function to determine the grid class for each cell based on its index
+  function getGridClass(index) {
+    return gridClasses[index];
+  }
+
 </script>
 
-<div class:flipped class=" lg:w-64 md:w-48 w-20 lg:h-[25rem] rounded-2xl">
+<div class:flipped class=" lg:w-64 md:w-48 w-44 aspect-[5/7] rounded-2xl">
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
@@ -233,7 +247,7 @@
             <p>Flip</p>
           </button>
         </div>
-        <div class="flip-card-front-top p-3 flex-1 {pickedColor} rounded-t-2xl">
+        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl">
           <div class="swiper-wrapper relative lg:w-64 md:w-48 w-20 aspect-[1/1] ">
             <swiper-container
               class="test-swiper-{cardFrontSwiperId} w-full aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
@@ -365,21 +379,25 @@
             </button>
           </div>
         </div>
-        <div class="flip-card-front-bottom flex-3">
+        <div class="flip-card-front-bottom flex-3 flex-1">
           <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">
             {#if fieldsFrontValues?.length > 0}
-              {#each fieldsFrontValues as fieldFront}
+              {#each fieldsFrontValues.slice(0, mobile ? 2 : undefined) as fieldFront, index}
                 <CardCell
-                  {mobile}
                   bind:value={cardProps[fieldFront.value]}
-                  gridClass={fieldFront?.location}
                   label={fieldFront?.label}
                   justifyCell={fieldFront?.justify}
+                  gridClass={getGridClass(index)}
                 />
               {/each}
             {/if}
           </div>
-        </div>
+        </div>        
+        
+        
+        
+        
+        
       </div>
       <div
         class="flip-card-back rounded-2xl backface-hidden bg-slate-100 z-100 flex flex-col
@@ -410,7 +428,7 @@
           {#if !expanded}
             <div class="spacer w-full h-[20%]" />
           {/if}
-          <div class = 'w-full p-3'>
+          <div class = 'w-full p-3 flex-1'>
             <CardSlider
             {cardDisplayId}
             {cardProps}
@@ -422,8 +440,8 @@
           />
           </div>
          
-          <div class="card-buttons_back back-card_general-3 mt-2">
-            <div class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
+          <div class="card-buttons_back back-card_general-3 mt-2 flex-1">
+            <div class="button-container w-full h-[30%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
               <button
                 class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
                 on:click={() => {

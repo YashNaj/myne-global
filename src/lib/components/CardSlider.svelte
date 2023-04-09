@@ -59,7 +59,7 @@
 
 <div
 bind:this={parentEl}
-  class=" rounded-3xl w-full h-30 overflow-hidden relative {cardSliderClassSlug}"
+  class=" rounded-3xl w-full h-32 overflow-hidden relative {cardSliderClassSlug}"
 >
   <swiper-container
     observer='true'
@@ -68,7 +68,7 @@ bind:this={parentEl}
     id={cardDisplayId}
     virtual= 'true'
     css = 'true'
-    class="h-[100%] swiper-{cardDisplayId}  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1 text-black"
+    class="lg:h-full  swiper-{cardDisplayId} aspect-[1-1]  flippable-card-swiper back-card_card-general-2  touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1 text-black"
   >
     {#if fieldsBackOneValues?.length > 0}
       <swiper-slide class="p-3">

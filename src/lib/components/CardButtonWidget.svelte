@@ -1,10 +1,11 @@
 <script lang="ts">
+  import { certificate, documentUpload, stolen, transfer } from "$lib/store";
   import { onMount } from "svelte";
   import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
   export let selected: boolean;
 </script>
 
-<div class="button-container w-full h-[90%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
+<div class="button-container w-full md:h-[90%] h-10 grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
   <button
     class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
     on:click={() => {
@@ -39,7 +40,7 @@
   <button
     on:click={() => {
       selected = true;
-      document.set(true);
+      documentUpload.set(true);
     }}
     class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2"
   >

@@ -44,9 +44,7 @@
       <div in:slide={{ duration }} out:slide={{ duration, delay }}>
         <label
           for="cell-label"
-          class="card-field-label text-black text-opacity-40  text- label py-0 font-semibold lg:text-[15px] md:text-md text-sm {mobile
-            ? 'text-[12px]'
-            : 'text-sm'}  w-full flex {justifyCell} {textAlign} {gridClass}"
+          class="card-field-label text-black text-opacity-40  text-[12px] label py-0 font-semibold lg:text-[15px] md:text-md"
         >
           {label}
         </label>
@@ -55,9 +53,7 @@
     <div in:slide={{ duration }} out:slide={{ duration, delay }}>
       <label
         for="cell-value"
-        class="card-field-value h-full label w-full py-0 flex md:text-md text-sm text-black font-medium {mobile
-          ? 'text-[12px]'
-          : 'text-sm'} overflow-x-clip {textAlign} {justifyCell}"
+        class="card-field-value h-full label w-full py-0 flex md:text-md text-[12px] text-black font-medium"
       >
         {#if value !== null}
           {value}
