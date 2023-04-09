@@ -50,12 +50,11 @@
   $: console.log("trpc cards", cards);
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-screen flex flex-col">
+<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-[100dvh] flex flex-col">
   <CardVault mobile={true} />
-  <BottomNav />
 </div>
 <div
-  class="hidden md:flex w-full h-full py-3 px-2 flex-col overflow-y-hidden scrollbar-track-transparent bg-[rgb(243,250,255)] ;
+  class="hidden md:flex w-full h-[100dvh] py-3 px-2 flex-col  scrollbar-track-transparent bg-[rgb(243,250,255)] ;
   "
 >
   <PageContainer>

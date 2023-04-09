@@ -7,7 +7,6 @@
       return obj.id === cardId; 
     })
     let loading = false; 
-    export let selected 
     async function downloadCertificate() {
     console.log("body certificate", card);
 
@@ -38,7 +37,6 @@
   <div class="w-80 h-fit shadow-lg card  relative flex flex-col p-3 bg-yellow-700" transition:scale|local>
     <button
       on:click={() => {
-        selected = false; 
         selectedCard.set(null);
         certificate.set(false);
       }}

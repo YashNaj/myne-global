@@ -18,8 +18,8 @@
   let addCardOpen = false;
   let loading = false;
   let categoryFilter: string;
-  let cardExpanded: boolean = false; 
-  $: cardExpanded = cardExpanded
+  let cardExpanded: boolean = false;
+  $: cardExpanded = cardExpanded;
   $: categoryFilter = categoryFilter;
   let filteredCards;
   let categories = [
@@ -82,8 +82,11 @@
   let h;
   let w;
   let scrollTop;
-  export let mobile: boolean = false; 
-  $: console.log('check if the card is expanded and use that switch to disable the scroll in the cardvault', cardExpanded) 
+  export let mobile: boolean = false;
+  $: console.log(
+    "check if the card is expanded and use that switch to disable the scroll in the cardvault",
+    cardExpanded
+  );
 </script>
 
 <div class="lg:w-full h-[99%] p-2 rounded-2xl">
@@ -207,7 +210,7 @@
     <div
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
-      class="h-[89%]  rounded-xl  justify-center overflow-y-auto  w-full overflow-x-hidden transition-shadow duration-75"
+      class="h-[50%] rounded-xl justify-center overflow-y-auto w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
     >
       {#await import("$lib/components/Card.svelte")}
         <div
@@ -216,10 +219,8 @@
           class="w-full h-full bg-primary p-1 flex justify-center content-center flex-wrap"
           out:fly|local={{ duration: 200 }}
         >
-          <h1 class = 'text-8xl w-full justify-center flex text-white font-semibold'>
-            Card Vault
-          </h1>
-          <div class="spinner container flex justify-center ">
+          <h1 class="text-8xl w-full justify-center flex text-white font-semibold">Card Vault</h1>
+          <div class="spinner container flex justify-center">
             <div class="flex flex-col justify-center content-center flex-wrap w-{size} h-{size} rounded-full">
               <div class="rounded-full">
                 <svg
@@ -273,7 +274,10 @@
         </div>
       {:then Module}
         <div
-          class="w-full h-full grid grid-rows-auto {mobile ? ' grid-cols-2 gap-1' : 'grid-cols-4 gap-2'} relative  place-items-center will-change-auto {cardExpanded ? "overflow-x-disabled overflow-y-disabled" : "overflow-y-auto"}"
+          class="w-full h-[99%] grid grid-rows-none grid-flow-row grid-cols-2 gap-1 overflow-y-auto
+            md:grid-cols-4 md:gap-2 relative place-items-center will-change-auto {cardExpanded
+            ? 'overflow-x-disabled overflow-y-disabled'
+            : ''}"
           in:fade|local={{ duration: 200, delay: 250 }}
           bind:this={scrollContainer}
           on:scroll={() => (scrollTop = scrollContainer.scrollTop)}
@@ -294,9 +298,9 @@
                 {h}
                 {scrollTop}
                 cardDisplayId="flippable-card-{i}"
-                cardProps = { structuredClone({...cardProps})}
+                cardProps={structuredClone({ ...cardProps })}
                 {mobile}
-                cardFrontSwiperId = {i}
+                cardFrontSwiperId={i}
                 bind:expanded={cardExpanded}
               >
                 <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />

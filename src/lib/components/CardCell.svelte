@@ -2,12 +2,12 @@
   import { capitalizeFirstWord, firstCapital } from "$lib/caps";
   import { slide } from "svelte/transition";
   import type { IcardProps } from "../../cardProps";
-  export let justifyCell = "";
+  export let allignText = "";
+  let textSlug = "text-" + allignText;
+  console.log(textSlug);
   export let label = "";
-  export let value: string | symbol | null | bigint = "";
+  export let value: string | symbol | null | bigint = "Default";
   export let id = "";
-  export let gridClass = "";
-  export let mobile;
   function capitalizeFirstLetters(value) {
     // Check if input is a string
     if (typeof value !== "string") {
@@ -30,35 +30,30 @@
   let duration = 150;
   let delay = 150;
   let textAlign;
-  $: if (justifyCell === "justify-start") {
-    textAlign = "text-left";
-  }
-  $: if (justifyCell === "justify-end") {
-    textAlign = "text-right";
+  $: if (label === "") {
+    value = "";
   }
 </script>
 
-<div {id} class=" h-full flex flex-col flex-wrap content-start justify-start relative">
-  <div class="w-full h-full flex flex-col flex-wrap{justifyCell}" transition:slide|local>
-    {#key label}
-      <div in:slide={{ duration }} out:slide={{ duration, delay }}>
-        <label
-          for="cell-label"
-          class="card-field-label text-black text-opacity-40  text-[12px] label py-0 font-semibold lg:text-[15px] md:text-md"
-        >
-          {label}
-        </label>
-      </div>
-    {/key}
-    <div in:slide={{ duration }} out:slide={{ duration, delay }}>
+<div {id} class="w-full h-full grid grid-rows-2 flex-wrap {textSlug}" transition:slide|local>
+  {#key label}
+    <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
       <label
-        for="cell-value"
-        class="card-field-value h-full label w-full py-0 flex md:text-md text-[12px] text-black font-medium"
+        for="cell-label"
+        class="card-field-label text-black text-opacity-40 md:text-[15px] text-[12px] py-0 font-semibold {textSlug}"
       >
-        {#if value !== null}
-          {value}
-        {/if}
+        {label}
       </label>
     </div>
+  {/key}
+  <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
+    <label
+      for="cell-value"
+      class="card-field-value h- w-full py-0 md:text-[15px] text-[12px] text-black font-medium {textSlug}"
+    >
+      {#if value !== null}
+        {value}
+      {/if}
+    </label>
   </div>
 </div>

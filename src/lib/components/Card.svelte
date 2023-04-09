@@ -43,7 +43,7 @@
   export let scrollTop;
 
   //card variables
-  export let cardDisplayId: string;
+  export let cardDisplayId: number = 1;
   $: cardDisplayId = cardDisplayId;
   export let cardProps = {
     category: "",
@@ -141,80 +141,17 @@
   export let cardBackSwiperId = 1;
   let pictureSwiper;
   let singleCard;
-  onMount(() => {
-    pictureSwiper = document.querySelector(".test-swiper-" + cardFrontSwiperId);
-
-    for (let picture of pictures) {
-      if (pictures?.length > 0 && pictures[0] !== "")
-        downloadImage(picture).then((url) => {
-          const imgElement = document.getElementById(`img-${picture}`);
-          imgElement?.setAttribute("src", url);
-        });
-    }
-    console.log(pictureSwiper);
-  });
   let uploading = false;
   let files: FileList;
   let uploadButton: HTMLInputElement;
   const dispatch = createEventDispatcher();
 
-  const downloadImage = async (path: string) => {
-    try {
-      const { data, error } = await supabase.storage.from("card-images").download(path);
-      if (error) {
-        throw error;
-      }
-      const url = URL.createObjectURL(data);
-
-      return url;
-    } catch (error) {
-      if (error instanceof Error) {
-      }
-    }
-  };
-
-  const uploadImage = async () => {
-    try {
-      uploading = true;
-      if (!files || files.length === 0) {
-        throw new Error("You must select an image to upload.");
-      }
-      if (pictures.length >= 10) {
-        throw new Error("You cannot upload more than 10 pictures.");
-      }
-      const file = files[0];
-      const fileExt = file.name.split(".").pop();
-      const filePath = `${Math.random()}.${fileExt}`;
-      let { error } = await supabase.storage.from("card-images").upload(filePath, file);
-      if (error) {
-        throw error;
-      }
-      pictures = [...pictures, filePath];
-      dispatch("picturesuploaded", pictures);
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message);
-      }
-    } finally {
-      uploading = false;
-      files = null;
-      uploadButton.value = "";
-    }
-  };
-  const gridClasses = [
-    'row-1 col-1',
-    'row-1 col-2',
-    'row-2 col-1',
-    'row-2 col-2',
-    'row-3 col-1',
-    'row-3 col-2',
-  ];
+  const gridClasses = ["row-1 col-1 ", "row-1 col-2 ", "row-2 col-1 ", "row-2 col-2 ", "row-3 col-1", "row-3 col-2"];
 
   // Define a function to determine the grid class for each cell based on its index
   function getGridClass(index) {
     return gridClasses[index];
   }
-
 </script>
 
 <div class:flipped class=" lg:w-64 md:w-48 w-44 aspect-[5/7] rounded-2xl">
@@ -248,156 +185,21 @@
           </button>
         </div>
         <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl">
-          <div class="swiper-wrapper relative lg:w-64 md:w-48 w-20 aspect-[1/1] ">
-            <swiper-container
-              class="test-swiper-{cardFrontSwiperId} w-full aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
-              observer={true}
-              observer-parents={true}
-              css={true}
-            >
-              <!-- <swiper-slide class="w-full h-full bg-primary text-white object-contain">
-              <img src="https://placekitten.com/2000/2000" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-full bg-primary text-white">
-              <img src="https://placekitten.com/2000/2000" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-full bg-primary text-white">
-              <img src="https://placekitten.com/2000/2000" />
-            </swiper-slide> -->
-              {#if pictures?.length > 0 && pictures[0] !== ""}
-                {#each pictures as picture, i}
-                  <swiper-slide
-                    class=" w-full h-full rounded-lg flex justify-center bg-black bg-opacity-30 object-contain"
-                    id={`item-${i}`}
-                  >
-                    {#if picture}
-                      <div class="w-full object-cover h-full">
-                        <!-- svelte-ignore a11y-img-redundant-alt -->
-                        <img
-                          id={`img-${picture}`}
-                          alt="Uploaded picture"
-                          class="bg-black bg-opacity-40 w-full h-full"
-                        />
-                      </div>
-
-                      <!-- svelte-ignore a11y-img-redundant-alt -->
-                    {:else}
-                      <div class="object-contain bg-black bg-opacity" />
-                    {/if}
-                  </swiper-slide>
-                {/each}
-                <swiper-slide class=" rounded-box bg-black bg-opacity-10">
-                  <div class="w-full h-full flex">
-                    <div class="w-full h-full">
-                      <label
-                        class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
-                        for="single"
-                      >
-                        {#if uploading}
-                          <Spinner />
-                        {:else}
-                          <div class="flex flex-col content-center flex-wrap justify-center">
-                            <div class="w-full flex justify-center">
-                              <Icon src={CloudUpload} class="w-fit" color="white text-center" size="24px" />
-                            </div>
-                            Upload a picture
-                          </div>
-                        {/if}
-                      </label>
-                    </div>
-                    <input
-                      style="visibility: hidden; position:absolute;"
-                      type="file"
-                      id="single"
-                      accept="image/*"
-                      bind:files
-                      on:change={uploadImage}
-                      disabled={uploading || pictures.length >= 10}
-                      bind:this={uploadButton}
-                    />
-                  </div>
-                </swiper-slide>
-              {:else}
-                <swiper-slide class=" rounded-box bg-black bg-opacity-10">
-                  <div class="w-full h-full flex">
-                    <div class="w-full h-full">
-                      <label
-                        class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
-                        for="single"
-                      >
-                        {#if uploading}
-                          <Spinner />
-                        {:else}
-                          <div class="flex flex-col content-center flex-wrap justify-center">
-                            <div class="w-full flex justify-center">
-                              <Icon src={CloudUpload} class="w-fit" color="white text-center" size="24px" />
-                            </div>
-                            Upload a picture
-                          </div>
-                        {/if}
-                      </label>
-                    </div>
-                    <input
-                      style="visibility: hidden; position:absolute;"
-                      type="file"
-                      id="single"
-                      accept="image/*"
-                      bind:files
-                      on:change={uploadImage}
-                      disabled={uploading || pictures.length >= 10}
-                      bind:this={uploadButton}
-                    />
-                  </div>
-                </swiper-slide>
-              {/if}
-            </swiper-container>
-            <button
-              on:click={() => {
-                pictureSwiper.swiper.slidePrev();
-                console.log("clicked");
-              }}
-              class="btn btn-ghost normal-case absolute z-[3] bottom-0 left-0"
-            >
-              <Icon
-                size="32px"
-                class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 "
-                src={ArrowCircleLeft}
-              />
-            </button>
-            <button
-              on:click={() => {
-                pictureSwiper.swiper.slideNext();
-                console.log("clicked");
-              }}
-              class="btn btn-ghost normal-case absolute z-[3] bottom-0 right-0"
-            >
-              <Icon
-                size="32px"
-                class="next-card-slider opacity-60 cursor-pointer  text-black z-0"
-                src={ArrowCircleRight}
-              />
-            </button>
-          </div>
+          <slot />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">
           <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">
             {#if fieldsFrontValues?.length > 0}
-              {#each fieldsFrontValues.slice(0, mobile ? 2 : undefined) as fieldFront, index}
+              {#each fieldsFrontValues.slice(0, mobile ? 2 : undefined) as fieldFront, i}
                 <CardCell
                   bind:value={cardProps[fieldFront.value]}
                   label={fieldFront?.label}
-                  justifyCell={fieldFront?.justify}
-                  gridClass={getGridClass(index)}
+                  allignText={i % 2 === 0 ? "left" : "right"}
                 />
               {/each}
             {/if}
           </div>
-        </div>        
-        
-        
-        
-        
-        
+        </div>
       </div>
       <div
         class="flip-card-back rounded-2xl backface-hidden bg-slate-100 z-100 flex flex-col
@@ -428,20 +230,20 @@
           {#if !expanded}
             <div class="spacer w-full h-[20%]" />
           {/if}
-          <div class = 'w-full p-3 flex-1'>
+          <div class="w-full p-3 flex-1">
             <CardSlider
-            {cardDisplayId}
-            {cardProps}
-            {fieldsBackOneValues}
-            {fieldsBackTwoValues}
-            {fieldsBackThreeValues}
-            {description}
-            {generalFieldsBack}
-          />
+              {cardDisplayId}
+              {cardProps}
+              {fieldsBackOneValues}
+              {fieldsBackTwoValues}
+              {fieldsBackThreeValues}
+              {description}
+              {generalFieldsBack}
+            />
           </div>
-         
+
           <div class="card-buttons_back back-card_general-3 mt-2 flex-1">
-            <div class="button-container w-full h-[30%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
+            <div class="button-container w-full md:h-full h-[30%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
               <button
                 class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
                 on:click={() => {

@@ -14,21 +14,6 @@
   export let success = false
   export let mobile;
   $:console.log("🚀 ~ file: AddCard.svelte:18 ~ success:", success)
-
-  // function handleFilter(e) {
-  //       if (e.detail.length === 0 && filterText.length > 0) {
-  //           const prev = items.filter((i) => !i.created);
-  //           items = [...prev, { value: filterText, label: filterText, created: true }];
-  //       }
-  //   }
-
-  //   function handleChange(e) {
-  //       items = items.map((i) => {
-  //           delete i.created;
-  //           return i;
-  //       });
-  //   }
-
   import {
     jewelryProps,
     watchProps,
@@ -395,13 +380,13 @@
 >
   <div class="flex justify-center w-full h-full content-center order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
-      <CardFlippable {flipped} {cardProps} {pictures}>
+      <Card {flipped} {cardProps} {pictures}>
         <SwiperPictures
           on:picturesuploaded={(event) => {
             pictures = event.detail;
           }}
         />
-      </CardFlippable>
+      </Card>
     </div>
   </div>
   <div class="w-full flex justify-center h-full">
@@ -469,8 +454,7 @@
         <div class="form-input-button-wrapper  w-full h-full ">
           <div bind:this={parentEl} class="parent form-slider w-full h-full ">
             <swiper-container
-              allow-touch-move="false"
-              no-sliding={true}
+              allow-touch-move={false}
               class="w-full h-[90%] swiper-container touch-none mt-2 flex-2 rounded-xl bg-black bg-opacity-20 "
               pagination={true}
               observer={true}
