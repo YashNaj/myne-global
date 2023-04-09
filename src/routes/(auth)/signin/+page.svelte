@@ -37,7 +37,6 @@
       class="text-primary  bg-neutral marker:flex-2 input input-md shadow-lg"
       bind:value={email}
     />
-    {#if email != ""}
       <input
         transition:slide
         type="password"
@@ -46,7 +45,6 @@
         placeholder="Password"
         class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-sm"
       />
-    {/if}
   </div>
 
   <div

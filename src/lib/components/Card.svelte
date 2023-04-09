@@ -234,7 +234,7 @@
           </button>
         </div>
         <div class="flip-card-front-top p-3 flex-1 {pickedColor} rounded-t-2xl">
-          <div class="swiper-wrapper relative">
+          <div class="swiper-wrapper relative lg:w-64 md:w-48 w-20 aspect-[1/1] ">
             <swiper-container
               class="test-swiper-{cardFrontSwiperId} w-full aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
               observer={true}

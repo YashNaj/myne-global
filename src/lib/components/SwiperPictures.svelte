@@ -9,15 +9,15 @@
   let parentEl;
   export let size = 10;
 
-  beforeUpdate(() => {});
-  onMount(() => {
-    for (let picture of pictures) {
+  beforeUpdate(() => {    for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
           const imgElement = document.getElementById(`img-${picture}`);
           imgElement?.setAttribute("src", url);
         });
-    };
+    };});
+  onMount(() => {
+
 
     if (parentEl) {
       parentEl.addEventListener("click", (event) => {
