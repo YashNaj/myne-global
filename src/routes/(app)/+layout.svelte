@@ -120,6 +120,7 @@
 <style lang="postcss">
   :global(html) {
     overflow: scroll;
+    height: 100dvh;
   }
   ::-webkit-scrollbar {
     width: 0; /* Remove scrollbar space */
