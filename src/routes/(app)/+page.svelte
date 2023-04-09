@@ -13,6 +13,8 @@
   import MakeCertificate from "$lib/components/MakeCertificate.svelte";
   import BottomNav from "$lib/components/BottomNav.svelte";
   import { trpc } from "$lib/trpc/client";
+  import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
+  import CardVaultMenu from "$lib/components/CardVaultMenu.svelte";
   export let data: PageData = $page.data;
   let size = "9";
   let cards;
@@ -48,10 +50,13 @@
   });
   $: console.log("selectedCard", $selectedCard);
   $: console.log("trpc cards", cards);
+  let inputText;
 </script>
 
 <div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-[100dvh] flex flex-col">
-  <CardVault mobile={true} />
+  <CardFunctionModals />
+  <CardVaultMenu bind:categoryFilter bind:inputText />
+  <CardVault {categoryFilter} {inputText} mobile={true} />
 </div>
 <div
   class="hidden md:flex w-full h-[100dvh] py-3 px-2 flex-col  scrollbar-track-transparent bg-[rgb(243,250,255)] ;

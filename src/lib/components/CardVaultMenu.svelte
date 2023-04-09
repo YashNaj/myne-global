@@ -29,7 +29,7 @@
   ];
 </script>
 
-<div class="navbar w-full rounded-t-2xl mb-2">
+<div class="navbar w-full rounded-t-2xl mb-2 relative top-0 z-999">
   <div class="navbar-start">
     <div class="dropdown">
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
