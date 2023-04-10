@@ -86,7 +86,7 @@ export const cards = t.router({
   reportStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {
-        id: input,
+        id: cardId,
       },
       data: {
         isStolen: true,
@@ -96,62 +96,61 @@ export const cards = t.router({
   removeStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {
-        id: input,
+        id: cardId,
       },
       data: {
         isStolen: false,
       },
     });
   }),
-  // addReceipt: protectedProcedure.input(z.sting()).mutation(async ({input})=> {
-  //   await prisma.myneCard.update({
-  //     where: {
-  //       id: input,
-  //     },
-  //     data: {
-  //       receipt
-  //     },
-  //   });
-  // }),
-  // addValuationReport: protectedProcedure.input(z.string()).mutation(async ({ input } ) => {
-  //   await prisma.myneCard.update({
-  //     where: {
-  //       id: input,
-  //     },
-  //     data: {
-  //       valuationReport
-  //     },
-  //   });
-  //   addDocumentMiscArray: protectedProcedure.input(z.string()).mutation(async ({ input } ) => {
-  //     await prisma.myneCard.update({
-  //       where: {
-  //         id: input,
-  //       },
-  //       data: {
-  //         documnet_array
-  //       },
-  //     });
-  // })
-  // addRegistrationCert: protectedProcedure.input(z.string()).mutation(async(({input})=>{
-  //   await prisma.myneCard.update({
-  //     where: {
-  //       id: input
-  //     }
-  //     data: {
-  //       registration_certificate
-  //     }
-
-  //   })
-  // })),
-  // addcertOfAuth: protectedProcedure.input(z.string()).mutation(async(({input})=>{
-  //   await prisma.myneCard.update({
-  //     where: {
-  //       id: input
-  //     }
-  //     data: {
-  //       cOfAuth
-  //     }
-
-  //   })
-  // })),
+  addReceipt: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
+      where: {
+        id: input,
+      },
+      data: {
+        receipt,
+      },
+    });
+  }),
+  addValuationReport: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
+      where: {
+        id: input,
+      },
+      data: {
+        valuationReport,
+      },
+    });
+  }),
+  addDocumentMiscArray: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
+      where: {
+        id: cardId,
+      },
+      data: {
+        documnet_array,
+      },
+    });
+  }),
+  addCertOfAuth: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
+      where: {
+        id: cardId,
+      },
+      data: {
+        cofAuth,
+      },
+    });
+  }),
+  addRegistrationCert: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
+    await prisma.myneCard.update({
+      where: {
+        id: cardId,
+      },
+      data: {
+        registration_certificate,
+      },
+    });
+  }),
 });
