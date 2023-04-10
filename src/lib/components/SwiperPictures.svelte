@@ -91,7 +91,7 @@
   };
 </script>
 
-<div class="swiper-wrapper relative lg:w-64 md:w-48 w-20 md:aspect-[16/9] aspect-[1/1]">
+<div class="swiper-wrapper relative w-full h-full">
   <swiper-container
     class="test-swiper-{cardFrontSwiperId} lg:w-64 md:w-48 w-30 md:aspect-[16/9] aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
     observer={true}

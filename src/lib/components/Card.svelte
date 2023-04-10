@@ -155,13 +155,13 @@
   }
 </script>
 
-<div class:flipped class=" lg:w-64 md:w-48 w-44 aspect-[5/7] rounded-2xl">
+<div class:flipped class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl">
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
         class="flip-card-front backface-hidden {flipped
           ? 'opacity-0 transition-opacity ease-out'
-          : ''} aspect-[5/7] bg-slate-100 rounded-2xl flex flex-col will-change-transform absolute max-w-full
+          : ''} bg-slate-100 rounded-2xl flex flex-col will-change-transform absolute max-w-full
     shadow-md max-h-full"
       >
         <div class:hidden={flipped} class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
