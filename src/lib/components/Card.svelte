@@ -38,6 +38,7 @@
   export let sentCard = false;
   export let success: boolean | null = null;
   export let selected;
+  export let inAddCard = false;
   export let mobile: boolean;
   $: selected = selected;
   export let scrollTop;
@@ -195,7 +196,7 @@
                   bind:value={cardProps[fieldFront.value]}
                   label={fieldFront?.label}
                   allignText={i % 2 === 0 ? "left" : "right"}
-                  gridClass={getGridClass(i)}
+                  gridClass={inAddCard ? "" : getGridClass(i)}
                 />
               {/each}
             {/if}
@@ -231,7 +232,7 @@
           {#if !expanded}
             <div class="spacer w-full h-[20%]" />
           {/if}
-          <div class="w-full p-3 flex-1">
+          <div class="w-full md:p-3 p-1 flex-1">
             <CardSlider
               {cardDisplayId}
               {cardProps}
@@ -244,19 +245,17 @@
           </div>
 
           <div class="card-buttons_back back-card_general-3 mt-2 flex-1">
-            <div
-              class="button-container w-full md:h-full h-[30%] grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center"
-            >
+            <div class="button-container w-full md:h-full h-20 grid grid-cols-2 grid-rows-2 gap-[2px] p-2 pt-0  place-items-center">
               <button
-                class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
                 on:click={() => {
                   selected = true;
                   transfer.set(true);
                   selectedCard.set(cloneDeep(cardProps));
                 }}
               >
-                <Icon src={SwitchHorizontal} color="purple" class="opacity-90" size="30px" />
-                <p class="flex text-xs w-full justify-center text-violet-900">Transfer</p>
+                <Icon src={SwitchHorizontal} color="purple" class="opacity-90" size={mobile ? "12px" : "30px"} />
+                <p class="flex md:text-xs text-[9px] w-full justify-center text-violet-900">Transfer</p>
               </button>
 
               <button
@@ -265,10 +264,10 @@
                   certificate.set(true);
                   selectedCard.set(cloneDeep(cardProps));
                 }}
-                class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
               >
-                <p class="flex text-xs w-full justify-center text-yellow-700">Certificate</p>
-                <Icon src={Star} color="gold" class="opacity-90" size="30px" />
+                <p class="flex md:text-xs text-[9px] w-full justify-center text-yellow-700">Certificate</p>
+                <Icon src={Star} color="gold" class="opacity-90" size={mobile ? "12px" : "30px"} />
               </button>
               <button
                 on:click={() => {
@@ -278,10 +277,10 @@
                   selectedCard.set(cloneDeep(cardProps));
                   console.log("on button click selectedCard", $selectedCard);
                 }}
-                class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
               >
-                <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
-                <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>
+                <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size={mobile ? "12px" : "30px"} />
+                <p class="flex md:text-xs text-[9px] w-full justify-center text-red-600">Stolen</p>
               </button>
               <button
                 on:click={() => {
@@ -289,10 +288,10 @@
                   documentUpload.set(true);
                   selectedCard.set(cloneDeep(cardProps));
                 }}
-                class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
               >
-                <p class="flex text-xs w-full justify-center text-green-900">Document</p>
-                <Icon src={DocumentText} color="green" class="opacity-90" size="30px" />
+                <p class="flex md:text-xs text-[9px] w-full justify-center text-green-900">Document</p>
+                <Icon src={DocumentText} color="green" class="opacity-90 h-fit" size={mobile ? "12px" : "30px"} />
               </button>
             </div>
           </div>

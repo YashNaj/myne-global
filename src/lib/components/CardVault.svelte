@@ -17,6 +17,9 @@
   import CardButtonDocumentUpload from "./CardButtonDocumentUpload.svelte";
   import CardFunctionModals from "./CardFunctionModals.svelte";
   import CardVaultMenu from "./CardVaultMenu.svelte";
+  import { backOut } from "svelte/easing";
+  import CardCell from "./CardCell.svelte";
+  import Card from "./Card.svelte";
   export let data;
   export let categoryFilter: string;
 
@@ -91,7 +94,11 @@
 
 <div class="w-full h-full">
   {#if $addCard}
-    <div class="flex flex-row w-full h-full justify-center items-center flex-wrap">
+    <div
+      class="flex flex-row w-full h-fit justify-start items-center flex-wrap"
+      in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
+      out:slide|local={{ duration: 200, easing: backOut }}
+    >
       <AddCard {mobile} />
     </div>
   {:else}
@@ -99,39 +106,29 @@
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
       class="h-[80%] rounded-xl justify-center overflow-y-auto w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
+      in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
+      out:slide|local={{ duration: 200, easing: backOut }}
     >
-      {#await import("$lib/components/Card.svelte")}
-        <div
-          bind:clientHeight={h}
-          bind:clientWidth={w}
-          class="pt-20 w-full h-[100dvh] bg-primary p-1 flex justify-center content-center flex-wrap"
-          out:fly|local={{ duration: 200 }}
-        >
-          <h1 class="text-8xl w-full justify-center flex text-white font-semibold">Card Vault</h1>
-          <LoadingScreen {h} {w} />
-        </div>
-      {:then Module}
         <div
           class="w-full h-[99%] grid grid-rows-none grid-flow-row grid-cols-2 gap-1 overflow-y-auto
         md:grid-cols-4 md:gap-2 relative place-items-center will-change-auto {cardExpanded
             ? 'overflow-x-disabled overflow-y-disabled'
             : ''}"
-          in:fade|local={{ duration: 200, delay: 250 }}
           bind:this={scrollContainer}
           on:scroll={() => (scrollTop = scrollContainer.scrollTop)}
         >
           {#if cardsFiltered?.length === 0}
             <div transition:scale|local={{ delay: 10 }}>
-              <Module.default>
+              <Card>
                 <h1 class="w-full h-full grid place-items-center text-primary font-semibold text-2xl">
                   No cards found
                 </h1>
-              </Module.default>
+              </Card>
             </div>
           {/if}
           {#each cardsFiltered as cardProps, i}
             <div transition:scale|local={{ delay: 10 }}>
-              <Module.default
+              <Card
                 {w}
                 {h}
                 {scrollTop}
@@ -142,11 +139,10 @@
                 bind:expanded={cardExpanded}
               >
                 <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />
-              </Module.default>
+              </Card>
             </div>
           {/each}
         </div>
-      {/await}
     </div>
   {/if}
 </div>

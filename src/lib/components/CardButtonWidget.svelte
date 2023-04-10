@@ -5,7 +5,7 @@
   export let selected: boolean;
 </script>
 
-<div class="button-container w-full md:h-[90%] h-10 grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
+<div class="button-container w-full md:h-[90%] h-full grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center">
   <button
     class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
     on:click={() => {

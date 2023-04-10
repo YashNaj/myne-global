@@ -7,7 +7,7 @@
   import "swiper/swiper-bundle.css";
   import CardCell from "./CardCell.svelte";
   import { construct_svelte_component } from "svelte/internal";
-  export let cardDisplayId: number = 1; 
+  export let cardDisplayId: number = 1;
   console.log("🚀 ~ file: CardSlider.svelte:11 ~ cardDisplayId:", cardDisplayId);
   export let cardProps;
   export let description;
@@ -18,25 +18,24 @@
   let loading = false;
   let mySwiper;
   let expand = false;
-  let backCardSwiper; 
-  console.log(backCardSwiper)
+  let backCardSwiper;
+  console.log(backCardSwiper);
   onMount(() => {
-     backCardSwiper = new Swiper(('.backCardSwiper' + cardDisplayId), {
-      direction: 'horizontal',
+    backCardSwiper = new Swiper(".backCardSwiper" + cardDisplayId, {
+      direction: "horizontal",
       loop: false,
       slidesPerView: 1,
       spaceBetween: 0,
       centeredSlides: true,
       navigation: {
-        nextEl: '.backCardSwiperNext-`{$cardDisplayId}',
-        prevEl: '.backCardSwiperPrevious-`{$cardDisplayId}',
+        nextEl: ".backCardSwiperNext-`{$cardDisplayId}",
+        prevEl: ".backCardSwiperPrevious-`{$cardDisplayId}",
       },
-    })
-
+    });
   });
 </script>
 
-<div class="backCardSwiperContainer rounded-3xl w-full md:h-44 h-32 overflow-hidden relative">
+<div class="backCardSwiperContainer rounded-3xl w-full md:h-44 h-40 overflow-hidden relative">
   <swiper-container
     observer="true"
     observer-parents="true"
@@ -45,7 +44,7 @@
     class="lg:h-full backCardSwiper-{cardDisplayId} aspect-[1-1] flippable-card-swiper back-card_card-general-2 touch-none bg-opacity-20 bg-slate-400 rounded-xl flex flex-col p-1 text-black"
   >
     {#if fieldsBackOneValues?.length > 0}
-      <swiper-slide class="p-3">
+      <swiper-slide class="md:p-3 p-1">
         <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-32 p-1">
           {#each fieldsBackOneValues as fieldBackOne, i}
             <CardCell
@@ -58,7 +57,7 @@
       </swiper-slide>
     {/if}
     {#if fieldsBackTwoValues?.length > 0}
-      <swiper-slide class="p-3">
+      <swiper-slide class="md:p-3 p-1">
         <div class=" grid grid-cols-2 grid-rows-3 grid-gap-0 w-full h-32 p-1">
           {#each fieldsBackTwoValues as fieldBackTwo, i}
             <CardCell
@@ -71,7 +70,7 @@
       </swiper-slide>
     {/if}
     {#if fieldsBackThreeValues?.length > 0}
-      <swiper-slide class="p-3">
+      <swiper-slide class="md:p-3 p-1">
         <div class=" grid grid-cols-2 grid-rows-3 gap-0 w-full h-32 p-1">
           {#each fieldsBackThreeValues as fieldBackThree, i}
             <CardCell
@@ -83,7 +82,7 @@
         </div>
       </swiper-slide>
     {/if}
-    <swiper-slide class="p-3">
+    <swiper-slide class="md:p-3 p-1">
       <div class="full w-full h-full flex justify-center">
         <div class="w-full h-full flex flex-col flex-wrap content-start justify-start">
           <div class=" w-full h-full">
@@ -97,7 +96,7 @@
         </div>
       </div>
     </swiper-slide>
-    <swiper-slide class="p-3">
+    <swiper-slide class="md:p-3 p-1">
       <div class="w-full md:h-full h-32 grid grid-cols-2 grid-rows-3 gap-0">
         {#each generalFieldsBack as generalFields, i}
           <CardCell
@@ -111,10 +110,10 @@
   </swiper-container>
   <button
     class=" previous-card-slider backCardSwiperNext-{cardDisplayId}
-  btn btn-ghost btn-square normal-case touch-none absolute bottom-[-.5rem] left-[-.3rem] z-10"
+btn btn-ghost btn-square normal-case touch-none absolute bottom-[-.5rem] left-[-.3rem] z-10"
   >
     <Icon
-      size="32px"
+      size="10px"
       class="  opacity-60 cursor-pointer pointer-events-none text-black z-10 "
       src={ArrowCircleLeft}
       on:click={() => (expand = !expand)}
@@ -125,7 +124,7 @@
     class=" next-card-slider backCardSwiperPrevious-{cardDisplayId} btn btn-ghost btn-square normal-case touch-none absolute bottom-[-.5rem] right-[-.3rem] z-10"
   >
     <Icon
-      size="32px"
+      size="10px"
       class=" opacity-60 cursor-pointer pointer-events-none text-black z-10"
       src={ArrowCircleRight}
       on:click={() => (expand = !expand)}

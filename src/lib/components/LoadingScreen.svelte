@@ -1,8 +1,15 @@
-<script lang='ts'>
+<script lang="ts">
+  import { backOut } from "svelte/easing";
+  import { slide } from "svelte/transition";
   export let h;
   export let w;
 </script>
-<div class="spinner container flex flex-col justify-center">
+
+<div
+  class="spinner container flex flex-col justify-center"
+  in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
+  out:slide|local={{ duration: 200, easing: backOut }}
+>
   <div class="flex flex-col justify-center content-center flex-wrap w-fit h-fit rounded-full">
     <div class="rounded-full">
       <svg

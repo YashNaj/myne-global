@@ -363,7 +363,7 @@
       success: false,
     };
   }
-
+  export let inAddCard = true; 
   success = false;
   $: success = form?.success;
   $: console.log(form);
@@ -377,11 +377,11 @@
 </script>
 
 <div
-  class=" w-full h-full flex flex-col md:grid-cols-2 md:grid  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" transition:slide={{duration: 200, easing: backOut}}
+  class=" w-full h-[90%] flex flex-col md:grid-cols-2 md:grid  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" 
 >
-  <div class="flex justify-center w-full h-full content-center order-2">
+  <div class="flex justify-center w-full h-full content-start order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
-      <Card {flipped} {cardProps} {pictures}>
+      <Card {inAddCard} {flipped} {cardProps} {pictures}>
         <SwiperPictures
           on:picturesuploaded={(event) => {
             pictures = event.detail;
