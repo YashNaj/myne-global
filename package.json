@@ -79,6 +79,7 @@
     "tailwind-scrollbar": "^2.1.0",
     "theme-change": "^2.2.0",
     "trpc-sveltekit": "^3.2.9",
+    "vanilla-tilt": "^1.8.0",
     "vite-plugin-pwa": "^0.14.4",
     "zlib": "^1.0.5",
     "zod": "^3.19.1"

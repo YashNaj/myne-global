@@ -49,7 +49,7 @@
   <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
     <label
       for="cell-value"
-      class="card-field-value h- w-full py-0 md:text-[15px] text-[9px] text-black font-medium {textSlug}"
+      class="card-field-value h-fit w-full py-0 md:text-[15px] text-[9px] text-black font-medium {textSlug}"
     >
       {#if value !== null}
         {value}

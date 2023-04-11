@@ -10,7 +10,7 @@
   export let size = 10;
   let cardFrontSwiperId;
   let pictureSwiper
-  beforeUpdate(() => {
+  afterUpdate(() => {
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
@@ -96,7 +96,7 @@
     class="test-swiper-{cardFrontSwiperId} lg:w-64 md:w-48 w-30 md:aspect-[16/9] aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
     observer={true}
     observer-parents={true}
-    css={true}
+    virtual={true}
   >
     {#if pictures?.length > 0 && pictures[0] !== ""}
       {#each pictures as picture, i}

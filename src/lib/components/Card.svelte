@@ -1,4 +1,5 @@
 <script lang="ts">
+  import VanillaTilt from "vanilla-tilt";
   import { page } from "$app/stores";
   import { template, generalFieldsBack } from "./../../forms";
   import CardSlider from "./CardSlider.svelte";
@@ -153,9 +154,23 @@
   function getGridClass(index) {
     return gridClasses[index];
   }
+  let tiltElement;
+
+  onMount(() => {
+    VanillaTilt.init(tiltElement, {
+      max: 25,
+      speed: 200,
+      glare: true,
+      "max-glare": 0.5,
+    });
+
+    return () => {
+      tiltElement.vanillaTilt.destroy();
+    };
+  });
 </script>
 
-<div class:flipped class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl">
+<div bind:this={tiltElement} class:flipped class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl">
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
@@ -165,25 +180,17 @@
     shadow-md max-h-full"
       >
         <div class:hidden={flipped} class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
-          <button
+          <a
+            href="/test"
             class="btn btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"
             on:click={() => {
               toggleExpand();
+              selectedCard.set(structuredClone(cardProps));
             }}
           >
             <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowsExpand} />
             <p>Expand</p>
-          </button>
-          <button
-            disabled={expanded}
-            class="btn btn-square btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"
-            on:click={() => {
-              toggleFlipped();
-            }}
-          >
-            <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowCircleLeft} />
-            <p>Flip</p>
-          </button>
+          </a>
         </div>
         <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl">
           <slot />
@@ -200,100 +207,6 @@
                 />
               {/each}
             {/if}
-          </div>
-        </div>
-      </div>
-      <div
-        class="flip-card-back rounded-2xl backface-hidden bg-slate-100 z-100 flex flex-col
-  "
-      >
-        <div class="back-content w-full h-full bg-slate-100 z-99 shadow-md rounded-2xl flex flex-col">
-          <div class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
-            <button
-              class="btn btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-[101] normal-case"
-              on:click={() => {
-                toggleExpand();
-              }}
-            >
-              <Icon size="12px" class="opacity-60 cursor-pointer  text-black" src={ArrowsExpand} />
-              <p>Expand</p>
-            </button>
-            <button
-              disabled={expanded}
-              class="btn btn-square btn-ghost btn-secondary text-black top-[.5rem] right-[1rem] z-[101] normal-case"
-              on:click={() => {
-                toggleFlipped();
-              }}
-            >
-              <Icon size="12px" class="opacity-60 cursor-pointer  text-black" src={ArrowCircleLeft} />
-              <p>Flip</p>
-            </button>
-          </div>
-          {#if !expanded}
-            <div class="spacer w-full h-[20%]" />
-          {/if}
-          <div class="w-full md:p-3 p-1 flex-1">
-            <CardSlider
-              {cardDisplayId}
-              {cardProps}
-              {fieldsBackOneValues}
-              {fieldsBackTwoValues}
-              {fieldsBackThreeValues}
-              {description}
-              {generalFieldsBack}
-            />
-          </div>
-
-          <div class="card-buttons_back back-card_general-3 mt-2 flex-1">
-            <div class="button-container w-full md:h-full h-20 grid grid-cols-2 grid-rows-2 gap-[2px] p-2 pt-0  place-items-center">
-              <button
-                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
-                on:click={() => {
-                  selected = true;
-                  transfer.set(true);
-                  selectedCard.set(cloneDeep(cardProps));
-                }}
-              >
-                <Icon src={SwitchHorizontal} color="purple" class="opacity-90" size={mobile ? "12px" : "30px"} />
-                <p class="flex md:text-xs text-[9px] w-full justify-center text-violet-900">Transfer</p>
-              </button>
-
-              <button
-                on:click={() => {
-                  selected = true;
-                  certificate.set(true);
-                  selectedCard.set(cloneDeep(cardProps));
-                }}
-                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
-              >
-                <p class="flex md:text-xs text-[9px] w-full justify-center text-yellow-700">Certificate</p>
-                <Icon src={Star} color="gold" class="opacity-90" size={mobile ? "12px" : "30px"} />
-              </button>
-              <button
-                on:click={() => {
-                  selected = true;
-                  stolen.set(true);
-                  console.log(cardProps);
-                  selectedCard.set(cloneDeep(cardProps));
-                  console.log("on button click selectedCard", $selectedCard);
-                }}
-                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
-              >
-                <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size={mobile ? "12px" : "30px"} />
-                <p class="flex md:text-xs text-[9px] w-full justify-center text-red-600">Stolen</p>
-              </button>
-              <button
-                on:click={() => {
-                  selected = true;
-                  documentUpload.set(true);
-                  selectedCard.set(cloneDeep(cardProps));
-                }}
-                class="btn btn-ghost w-[90%] h-fit md:h-full flex-nowrap z-2 normal-case p-1 md:p-2"
-              >
-                <p class="flex md:text-xs text-[9px] w-full justify-center text-green-900">Document</p>
-                <Icon src={DocumentText} color="green" class="opacity-90 h-fit" size={mobile ? "12px" : "30px"} />
-              </button>
-            </div>
           </div>
         </div>
       </div>
