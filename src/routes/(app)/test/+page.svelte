@@ -144,7 +144,7 @@
   };
 
   let tiltElement;
-  onMount(() => {
+  beforeUpdate(() => {
     $: for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
@@ -160,8 +160,10 @@
     <div class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden flex-2">
       {#if pictures?.length > 0}
         {#each pictures as picture}
-          <div class="swiperpictures carousel-item rounded-2xl object-cover aspect-[16/9] w-80">
-            <img alt="img" id={`img-${picture}`} class="rounded-box max-w-full" />
+          <div class="swiperpictures carousel-item rounded-2xl object-contain aspect-[16/9] w-80">
+            <div class ='w-full h-full'>
+              <img alt="img" id={`img-${picture}`} class="rounded-box max-w-full" />
+            </div>
           </div>
         {/each}
       {/if}
@@ -174,7 +176,7 @@
 
         <h1 class="mx-3 text-2xl italic">{cardProps.model}</h1>
       </div>
-      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] w-[50%]">
+      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full">
         {#if fieldsFrontValues?.length > 0}
           {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
             <CardCellExpanded
