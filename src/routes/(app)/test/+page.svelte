@@ -26,6 +26,8 @@
   import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
   import { supabase } from "$lib/supabaseClient";
   import CardCellExpanded from "$lib/components/CardCellExpanded.svelte";
+  import { fly } from "svelte/transition";
+  import { cubicIn } from "svelte/easing";
   let isCardPropsInitialized = false;
   $: isCardPropsInitialized = !!cardProps;
   export let myneCard;
@@ -168,8 +170,8 @@
         {/each}
       {/if}
     </div>
-    <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto">
-      <div class="w-80 h-40 absolute right-0">
+    <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative">
+      <div class="hidden md:flex w-80 h-40 absolute right-[1rem] top-[1rem]">
         <CardButtonWidget  />
       </div>
       <h1 class="w-full flex justify-start px-3 py-1 font-semibold text-4xl">{cardProps.category}</h1>
@@ -190,6 +192,9 @@
           {/each}
         {/if}
       </div>
+    </div>
+    <div in:fly|local={{duration: 200, easing: cubicIn}} class="md:hidden w-full h-40 right-[1rem] top-[1rem] p-3 flex justify-center">
+      <CardButtonWidget  />
     </div>
   </div>
 {/if}

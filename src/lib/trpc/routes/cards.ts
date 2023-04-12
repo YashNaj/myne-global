@@ -32,14 +32,12 @@ const transferInput = transferInputSchema.parse({
 export const cards = t.router({
   load: protectedProcedure
     // 👈 use auth middleware
-    .input(z.string())
-    .query(async ({ ctx, input }) => {
-      let user = ctx.user;
-      let session = ctx.session;
-      console.log("trpc calling user and session", { user, session });
+    .query(async ({ ctx }) => {
+      let user_id = ctx.user.userId;
+    
       const cards = await prisma.myneCard.findMany({
         where: {
-          user_id: input,
+          user_id
         },
       });
       const filteredCards = cards.map((card) => {

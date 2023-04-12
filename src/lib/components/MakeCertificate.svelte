@@ -37,7 +37,6 @@
   <div class="w-80 h-fit shadow-lg card  relative flex flex-col p-3 bg-yellow-700" transition:scale|local>
     <button
       on:click={() => {
-        selectedCard.set(null);
         certificate.set(false);
       }}
       class="absolute top-1 right-1 btn btn-square bg-yellow-700 font-semilbold text-white border-none z-[99] "
