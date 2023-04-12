@@ -161,7 +161,7 @@
       {#if pictures?.length > 0}
         {#each pictures as picture}
           <div class="swiperpictures carousel-item rounded-2xl object-contain aspect-[16/9] w-80">
-            <div class ='w-full h-full'>
+            <div class="w-full h-full">
               <img alt="img" id={`img-${picture}`} class="rounded-box max-w-full" />
             </div>
           </div>
@@ -169,6 +169,9 @@
       {/if}
     </div>
     <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto">
+      <div class="w-80 h-40 absolute right-0">
+        <CardButtonWidget  />
+      </div>
       <h1 class="w-full flex justify-start px-3 py-1 font-semibold text-4xl">{cardProps.category}</h1>
       <div class="atribute-container p-3 flex w-full justify-start">
         <h1 class="text-2xl">{cardProps.brand}</h1>
