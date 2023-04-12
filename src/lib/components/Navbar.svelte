@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { firstCapital } from "$lib/caps";
   import { cartItems, currentUser, cartTotal } from "$lib/store";
   import { page } from "$app/stores";
   import { trpc } from "$lib/trpc/client";
@@ -6,6 +7,15 @@
   import { createQuery } from "@tanstack/svelte-query";
   import logo from "$lib/images/white_myne_logo.png";
   import type { Profile } from "@prisma/client";
+  import LogOut from "./LogOut.svelte";
+  import { offset, flip, shift } from "svelte-floating-ui/dom";
+  import { createFloatingActions } from "svelte-floating-ui";
+
+  const [floatingRef, floatingContent] = createFloatingActions({
+    strategy: "absolute",
+    placement: "top",
+    middleware: [offset(6), flip(), shift()],
+  });
 
   const getProfile = async () => {
     const profileFetch = await trpc($page).profile.load.query();
@@ -15,11 +25,7 @@
     queryKey: ["profile"],
     queryFn: () => getProfile(),
   });
-  beforeUpdate(() => {
-    console.log("beforeUpdate");
-  });
-  console.log($profile, $cartItems);
-  console.log("🚀 ~ file: Navbar.svelte:18 ~ profile:", profile)
+  console.log("navbar load", { $profile, $cartItems });
 </script>
 
 <div class="navbar bg-primary absolute top-0 z-[999]">
@@ -32,7 +38,7 @@
   </div>
   <div class="flex-none">
     <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle">
+      <label on:click={() => {}} tabindex="0" class="btn btn-ghost btn-circle">
         <div class="indicator">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="white"
             ><path
@@ -48,7 +54,7 @@
         </div>
       </label>
       <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
-        <div class="card-body">
+        <div class="card-body shadow-md">
           <span class="font-bold text-lg">{$cartItems}</span>
           <span class="text-info">Subtotal: ${$cartTotal}</span>
           <div class="card-actions">
@@ -57,6 +63,16 @@
         </div>
       </div>
     </div>
+    <h1 class="text-left px-1 text-lg text-white font-semibold">
+      {#if $profile}
+        {$profile?.data?.firstName?.toLowerCase()}
+      {:else if $profile?.data.isLoading}
+        Loading...      
+      {:else if $profile?.data.isError}
+        Error
+      {/if}
+  
+    </h1>
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full object-contain">
@@ -66,17 +82,16 @@
           "
           />
         </div>
+        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <a href="/profile" class="justify-between normal-case">
+              Profile
+              <span class="badge">New</span>
+            </a>
+          </li>
+          <li><LogOut /></li>
+        </ul>
       </label>
-      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a class="justify-between">
-            Profile
-            <span class="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
-      </ul>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import VanillaTilt from "vanilla-tilt";
+  import VanillaTilt, { type HTMLVanillaTiltElement } from "vanilla-tilt";
   import { page } from "$app/stores";
   import { template, generalFieldsBack } from "./../../forms";
   import CardSlider from "./CardSlider.svelte";
@@ -113,7 +113,7 @@
     }
   }
   export let pictures = [];
-  $: if (cardProps.pictures.length > 0) {
+  $: if (cardProps?.pictures.length > 0) {
     pictures = cardProps.pictures;
   }
 
@@ -154,19 +154,18 @@
   function getGridClass(index) {
     return gridClasses[index];
   }
-  let tiltElement;
+  let tiltElement: HTMLVanillaTiltElement;
 
   onMount(() => {
-    VanillaTilt.init(tiltElement, {
-      max: 10,
-      speed: 200,
-      glare: true,
-      "max-glare": 0.5,
-    });
-
-    return () => {
-      tiltElement.vanillaTilt.destroy();
-    };
+    if (tiltElement) {
+      VanillaTilt.init(tiltElement, {
+        max: 10,
+        speed: 200,
+        glare: true,
+        "max-glare": 0.5,
+        transition: false,
+      });
+    }
   });
 </script>
 
