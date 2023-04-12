@@ -82,7 +82,6 @@
   <button
     on:click={() => {
       selected = false;
-      selectedCard.set(null);
       transfer.set(false);
     }}
     class="absolute top-1 right-1 btn btn-square bg-primary font-semilbold text-white border-none z-[99] "
