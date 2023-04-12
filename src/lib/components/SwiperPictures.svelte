@@ -9,7 +9,7 @@
   let parentEl;
   export let size = 10;
   let cardFrontSwiperId;
-  let pictureSwiper
+  let pictureSwiper;
   afterUpdate(() => {
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
@@ -22,13 +22,6 @@
   onMount(() => {
     pictureSwiper = document.querySelector(".test-swiper-" + cardFrontSwiperId);
 
-    for (let picture of pictures) {
-      if (pictures?.length > 0 && pictures[0] !== "")
-        downloadImage(picture).then((url) => {
-          const imgElement = document.getElementById(`img-${picture}`);
-          imgElement?.setAttribute("src", url);
-        });
-    }
     console.log(pictureSwiper);
   });
   export let pictures: string[] = [];
@@ -82,23 +75,17 @@
     }
   };
   export let expanded;
-  const onProgress = (e) => {
-    const [swiper, progress] = e.detail;
-    console.log(progress);
-  };
-  const onSlideChange = (e) => {
-    console.log("slide changed");
-  };
+
 </script>
 
 <div class="swiper-wrapper relative w-full h-full">
   <swiper-container
     class="test-swiper-{cardFrontSwiperId} lg:w-64 md:w-48 w-30 md:aspect-[16/9] aspect-[1/1] rounded-xl [box-shadow:_rgba(0,_0,_0,_0.06)_0px_2px_4px_0px_inset;]"
-    observer={true}
-    observer-parents={true}
-    virtual={true}
+    observer="true"
+    observer-parents="true"
+    virtual="true"
   >
-    {#if pictures?.length > 0 && pictures[0] !== ""}
+    {#if pictures?.length > 0 }
       {#each pictures as picture, i}
         <swiper-slide
           class=" w-full h-full rounded-lg flex justify-center bg-black bg-opacity-30 object-contain"
@@ -188,7 +175,11 @@
     }}
     class="btn btn-ghost normal-case absolute z-[3] bottom-0 left-0"
   >
-    <Icon size={mobile ? "12px" : "24px"} class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 " src={ArrowCircleLeft} />
+    <Icon
+      size={mobile ? "12px" : "24px"}
+      class=" previous-card-slider opacity-60 cursor-pointer  text-black z-0 "
+      src={ArrowCircleLeft}
+    />
   </button>
   <button
     on:click={() => {
@@ -197,6 +188,10 @@
     }}
     class="btn btn-ghost normal-case absolute z-[3] bottom-0 right-0"
   >
-    <Icon size={mobile ? "12px" : "24px"} class="next-card-slider opacity-60 cursor-pointer  text-black z-0" src={ArrowCircleRight} />
+    <Icon
+      size={mobile ? "12px" : "24px"}
+      class="next-card-slider opacity-60 cursor-pointer  text-black z-0"
+      src={ArrowCircleRight}
+    />
   </button>
 </div>

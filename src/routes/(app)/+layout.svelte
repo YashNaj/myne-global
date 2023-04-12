@@ -47,16 +47,20 @@
 <div class="hidden w-full h-[100dvh] md:flex flex-col justify-start content-center flex-wrap">
   <Navbar />
   {#key pathname}
-    <div in:fly={transitionIn} out:fly={transitionOut}>
-      <slot />
+    <div class="flex-grow">
+      <div in:fly={transitionIn} out:fly={transitionOut}>
+        <slot />
+      </div>
     </div>
   {/key}
 </div>
 <div class=" md:hidden w-full h-[100dvh]">
   <Navbar />
   {#key pathname}
-    <div in:fly={transitionIn} out:fly={transitionOut}>
-      <slot />
+    <div class="flex-grow">
+      <div in:fly={transitionIn} out:fly={transitionOut}>
+        <slot />
+      </div>
     </div>
   {/key}
 </div>

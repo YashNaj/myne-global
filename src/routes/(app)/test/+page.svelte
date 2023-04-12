@@ -42,7 +42,7 @@
   export let selected;
   export let inAddCard = false;
   export let mobile = false;
-  export let mobileExpanded = true;
+  export let mobileExpanded = false;
   $: selected = selected;
   export let scrollTop;
   //card variables
@@ -128,57 +128,63 @@
   $: if (!mobile) {
     layoutSlides = 3;
   }
+  const downloadImage = async (path: string) => {
+    try {
+      const { data, error } = await supabase.storage.from("card-images").download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+
+      return url;
+    } catch (error) {
+      if (error instanceof Error) {
+      }
+    }
+  };
 
   let tiltElement;
+  onMount(() => {
+    $: for (let picture of pictures) {
+      if (pictures?.length > 0 && pictures[0] !== "")
+        downloadImage(picture).then((url) => {
+          const imgElement = document.getElementById(`img-${picture}`);
+          imgElement?.setAttribute("src", url);
+        });
+    }
+  });
 </script>
 
-<div class="p-2 w-full h-[100dvh] flex flex-col pt-[4.5rem]">
-  {#if isCardPropsInitialized}
-    <div class="h-full w-screen bg-black bg-opacity-10 left grid grid-rows-[1fr_1fr]">
-      <div class="w-full h-full {pickedColor}">
-        <div class="w-full h-full">
-          <div class="carousel carousel-center w-full h-full p-4 space-x-4 rounded-box {pickedColor} relative overflow-x-auto">
-            <div class="swiperpictures carousel-item rounded-2xl object-contain w-[600px] h-[200px]">
-              <img alt="img" src="https://loremflickr.com/2000/2000" class="rounded-box max-w-full" />
-            </div>
-            <div class="swiperpictures carousel-item rounded-2xl object-contain w-[600px] h-[200px]">
-              <img alt="img" src="https://loremflickr.com/2000/2000" class="rounded-box max-w-full" />
-            </div>
-            <div class="swiperpictures carousel-item rounded-2xl object-contain w-[600px] h-[200px]">
-              <img alt="img" src="https://loremflickr.com/2000/2000" class="rounded-box max-w-full" />
-            </div>
-            <div class="swiperpictures carousel-item rounded-2xl object-contain w-[600px] h-[200px]">
-              <img alt="img" src="https://loremflickr.com/2000/2000" class="rounded-box max-w-full" />
-            </div>
-            <div class="swiperpictures carousel-item rounded-2xl object-contain w-[600px] h-[200px]">
-              <img alt="img" src="https://loremflickr.com/2000/2000" class="rounded-box max-w-full" />
-            </div>
+{#if isCardPropsInitialized}
+  <div class="h-screen w-screen bg-black bg-opacity-10 flex flex-col pt-[4rem]">
+    <div class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden flex-2">
+      {#if pictures?.length > 0}
+        {#each pictures as picture}
+          <div class="swiperpictures carousel-item rounded-2xl object-cover aspect-[16/9] w-80">
+            <img alt="img" id={`img-${picture}`} class="rounded-box max-w-full" />
+          </div>
+        {/each}
+      {/if}
+    </div>
+    <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto">
+      <h1 class="w-full flex justify-start px-3 py-1 font-semibold text-4xl">{cardProps.category}</h1>
+      <div class="atribute-container p-3 flex w-full justify-start">
+        <h1 class="text-2xl">{cardProps.brand}</h1>
+        <div class="border-l-2 border-primary w-[5px] h-full" />
 
-          </div>
-        </div>
-        
-        <div class="w-full h-fit overflow-y-auto">
-          <h1 class="w-full flex justify-start px-3 py-1 font-semibold text-4xl">{cardProps.category}</h1>
-          <div class="atribute-container p-3 flex w-full justify-start">
-            <h1 class="text-2xl">{cardProps.brand}</h1>
-            <div class="border-l-2 border-primary w-[5px] h-full" />
-
-            <h1 class="mx-3 text-2xl italic">{cardProps.model}</h1>
-          </div>
-          <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 w-full h-full p-3">
-            {#if fieldsFrontValues?.length > 0}
-              {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
-                <CardCellExpanded
-                  bind:value={cardProps[fieldFront.value]}
-                  label={fieldFront?.label}
-                  allignText={i % 2 === 0 ? "left" : "right"}
-                  gridClass={inAddCard ? "" : getGridClass(i)}
-                />
-              {/each}
-            {/if}
-          </div>
-        </div>
+        <h1 class="mx-3 text-2xl italic">{cardProps.model}</h1>
+      </div>
+      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] w-[50%]">
+        {#if fieldsFrontValues?.length > 0}
+          {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
+            <CardCellExpanded
+              bind:value={cardProps[fieldFront.value]}
+              label={fieldFront?.label}
+              allignText={i % 2 === 0 ? "left" : "right"}
+            />
+          {/each}
+        {/if}
       </div>
     </div>
-  {/if}
-</div>
+  </div>
+{/if}
