@@ -4,17 +4,27 @@
   register();
   import Footer2 from "$lib/components/Footer2.svelte";
   import "./app.css";
-  import { page  } from '$app/stores';
+  import { page } from "$app/stores";
   import type { LayoutServerData } from "./$types";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
 
-  import { onMount } from 'svelte'
-  import { pwaInfo } from 'virtual:pwa-info'
-  
+  import { onMount } from "svelte";
+  import { pwaInfo } from "virtual:pwa-info";
+  import { browser } from "$app/environment";
+  import { QueryClientProvider, QueryClient } from "@tanstack/svelte-query";
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        enabled: browser,
+      },
+    },
+  });
+
   onMount(async () => {
     if (pwaInfo) {
-      const { registerSW } = await import('virtual:pwa-register')
+      const { registerSW } = await import("virtual:pwa-register");
       registerSW({
         immediate: true,
         onRegistered(r) {
@@ -23,22 +33,24 @@
           //    console.log('Checking for sw update')
           //    r.update()
           // }, 20000 /* 20s for testing purposes */)
-          console.log(`SW Registered: ${r}`)
+          console.log(`SW Registered: ${r}`);
         },
         onRegisterError(error) {
-          console.log('SW registration error', error)
-        }
-      })
+          console.log("SW registration error", error);
+        },
+      });
     }
-  })
-  
-  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
+  });
+
+  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
 </script>
 
 <svelte:head>
-    {@html webManifest}
+  {@html webManifest}
 </svelte:head>
 
-<main class = 'h-[100dvh]'>
-  <slot />
-</main>
+<QueryClientProvider client={queryClient}>
+  <main class="h-[100dvh]">
+    <slot />
+  </main>
+</QueryClientProvider>

@@ -82,37 +82,7 @@
     damping: 0.5,
   });
   $: console.log("is mobile", mobile);
-  let expandedHeight = spring(expandHeight, {
-    stiffness: 0.15,
-    damping: 0.5,
-  });
-  let expandedPosition = writable("relative");
-  let zIndex = writable(1);
-  let scrollPosition = writable(0);
-  function toggleExpand() {
-    expanded = !expanded;
-    if (!expanded) {
-      expandedHeight.set(expandHeight);
-      expandedWidth.set(expandWidth);
-      expandedPosition.set("relative");
-      scrollPosition.set(0);
-      zIndex.set(1);
-    } else {
-      expandedHeight.set(h);
-      expandedWidth.set(w);
-      expandedPosition.set("absolute");
-      scrollPosition.set(scrollTop);
-      zIndex.set(99);
-    }
-  }
-  function toggleFlipped() {
-    flipped = !flipped;
-    if (!flipped) {
-      cardSide.set("front");
-    } else {
-      cardSide.set("back");
-    }
-  }
+
   export let pictures = [];
   $: if (cardProps?.pictures?.length > 0) {
     pictures = cardProps.pictures;
@@ -164,7 +134,7 @@
 </script>
 
 {#if isCardPropsInitialized}
-  <div class="w-full h-auto pb-12 bg-black bg-opacity-10 overflow-y-hidden">
+  <div class="w-full h-auto pb-12 bg-black bg-opacity-10 overflow-y-hidden pt-12">
     <div class="w-full h-screen flex flex-col">
       <div class="w-full h-[33%] {pickedColor} relative">
         <swiper-container

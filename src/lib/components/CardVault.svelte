@@ -110,7 +110,7 @@
       out:slide|local={{ duration: 200, easing: backOut }}
     >
         <div
-          class="w-full h-[99%] grid grid-rows-none grid-flow-row grid-cols-2 gap-1 overflow-y-auto
+          class="w-full h-[99%] grid grid-rows-none grid-flow-row grid-cols-none gap-0 overflow-y-auto
         md:grid-cols-4 md:gap-2 relative place-items-center will-change-auto {cardExpanded
             ? 'overflow-x-disabled overflow-y-disabled'
             : ''}"

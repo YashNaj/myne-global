@@ -158,7 +158,7 @@
 
   onMount(() => {
     VanillaTilt.init(tiltElement, {
-      max: 25,
+      max: 10,
       speed: 200,
       glare: true,
       "max-glare": 0.5,
