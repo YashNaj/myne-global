@@ -3,15 +3,8 @@
   import { handleSession } from "@lucia-auth/sveltekit/client";
   import type { PageData } from "./$types";
   import { onMount } from "svelte";
-  import PageContainer from "$lib/components/PageContainer.svelte";
   import CardVault from "$lib/components/CardVault.svelte";
-  import UserSelector from "$lib/components/UserSelector.svelte";
-  import { fade } from "svelte/transition";
-  import { certificate, stolen, transfer, documentUpload, userCards, selectedCard, currentUser } from "$lib/store";
-  import ReportStolen from "$lib/components/ReportStolen.svelte";
-  import CardButtonDocumentUpload from "$lib/components/CardButtonDocumentUpload.svelte";
-  import MakeCertificate from "$lib/components/MakeCertificate.svelte";
-  import BottomNav from "$lib/components/BottomNav.svelte";
+  import {  userCards, selectedCard, currentUser } from "$lib/store";
   import { trpc } from "$lib/trpc/client";
   import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
   import CardVaultMenu from "$lib/components/CardVaultMenu.svelte";
@@ -54,9 +47,13 @@
 </script>
 
 <div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-[100dvh] flex flex-col">
+  <div class="w-full h-[100dvh] pt-20">
+
   <CardFunctionModals />
   <CardVaultMenu bind:categoryFilter bind:inputText />
   <CardVault {categoryFilter} {inputText} mobile={true} />
+</div>
+
 </div>
 
 
