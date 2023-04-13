@@ -4,7 +4,6 @@
   import type { IcardProps } from "../../cardProps";
   export let allignText = "";
   let textSlug = "text-" + allignText;
-  console.log(textSlug);
   export let label = "";
   export let value: string | symbol | null | bigint = "Default";
   export let id = "";
@@ -38,18 +37,18 @@
 
 {#key label}
   <div {id} class="w-full h-fit grid grid-rows-2 flex-wrap {textSlug} {gridClass}">
-    <div class={textSlug} in:slide={{ duration }}>
+    <div in:slide={{ duration }}>
       <label
         for="cell-label"
-        class="card-field-label text-primary text-opacity-40 md:text-[15px] text-xl py-0 font-semibold {textSlug} will-change-auto"
+        class="w-full card-field-label text-primary text-opacity-40 md:text-[15px] text-xl py-0 font-semibold {textSlug} will-change-auto"
       >
         {label}
       </label>
     </div>
-    <div class={textSlug} in:slide={{ duration }}>
+    <div in:slide={{ duration }}>
       <label
         for="cell-value"
-        class="card-field-value h-fit w-fit py-0 md:text-[15px] text-xl text-primary font-medium {textSlug} will-change-auto"
+        class="w-full card-field-value h-fit w-fit py-0 md:text-[15px] text-xl text-primary font-medium {textSlug} will-change-auto"
       >
         {#if value !== null}
           {value}

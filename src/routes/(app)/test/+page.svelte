@@ -174,7 +174,6 @@
       <div class="hidden md:flex w-80 h-40 absolute right-[1rem] top-[1rem]">
         <CardButtonWidget />
       </div>
-      <h1 class="" />
       <div
         class="atribute-container p-3 flex w-full justify-start px-3 py-1 font-semibold text-4xl [text-shadow:0px_1px_1px_#d5deeb] "
       >
@@ -183,7 +182,7 @@
 
         <h1 class="mx-3 text-4xl italic">{cardProps.model}</h1>
       </div>
-      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 md:w-[50%] w-full h-fit">
+      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
         {#if fieldsFrontValues?.length > 0}
           {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
             <CardCellExpanded
@@ -195,7 +194,7 @@
         {/if}
       </div>
       {#if fieldsBackOneValues?.length > 0}
-        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 md:w-[50%] w-full h-fit">
+        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
           {#each fieldsBackOneValues as fieldBackOne, i}
             <CardCellExpanded
               bind:value={cardProps[fieldBackOne.value]}
@@ -206,7 +205,7 @@
         </div>
       {/if}
       {#if fieldsBackTwoValues?.length > 0}
-        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 md:w-[50%] w-full h-fit">
+        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
           {#each fieldsBackTwoValues as fieldBackTwo, i}
             <CardCellExpanded
               bind:value={cardProps[fieldBackTwo.value]}
@@ -217,7 +216,7 @@
         </div>
       {/if}
       {#if fieldsBackThreeValues?.length > 0}
-        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 md:w-[50%] w-full h-fit">
+        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
           {#each fieldsBackThreeValues as fieldBackThree, i}
             <CardCellExpanded
               bind:value={cardProps[fieldBackThree.value]}
@@ -228,14 +227,14 @@
         </div>
       {/if}
 
-      <div class=" front-fields flex flex-col p-3 md:w-[50%] w-full">
+      <div class=" front-fields flex flex-col p-3 w-full">
         <h1 class="card-field-label label py-0 font-bold text-lg w-full flex h-fit mb-2">Description</h1>
         <div class="card-field-value label py-0 flex">
-          <textarea disabled class="textarea bg-none w-full h-full" placeholder="Description">{description}</textarea>
+          <textarea disabled class="textarea bg-none w-[75%] h-full P-0" placeholder="Description">{description}</textarea>
         </div>
       </div>
 
-      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 md:w-[50%] w-full h-fit">
+      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
         {#each generalFieldsBack as generalFields, i}
           <CardCellExpanded
             bind:value={cardProps[generalFields.value]}
