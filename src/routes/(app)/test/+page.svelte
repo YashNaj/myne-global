@@ -159,8 +159,8 @@
 
 {#if isCardPropsInitialized}
   <div class="h-screen w-screen bg-black bg-opacity-10 flex flex-col pt-[4rem]">
-    <div class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden flex-2">
-      {#if pictures?.length > 0}
+    <div class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden h-[400px]">
+      <!-- {#if pictures?.length > 0}
         {#each pictures as picture}
           <div class="swiperpictures carousel-item rounded-2xl object-contain aspect-[16/9] w-80">
             <div class="w-full h-full">
@@ -168,7 +168,7 @@
             </div>
           </div>
         {/each}
-      {/if}
+      {/if} -->
     </div>
     <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative">
       <div class="hidden md:flex w-80 h-40 absolute right-[1rem] top-[1rem]">
@@ -250,6 +250,9 @@
       class="md:hidden w-full h-40 right-[1rem] top-[1rem] p-3 flex justify-center"
     >
       <CardButtonWidget />
+    </div>
+    <div class = 'document-pdf container h-auto w-full p-3'>
+      
     </div>
   </div>
 {/if}
