@@ -158,7 +158,7 @@
 </script>
 
 {#if isCardPropsInitialized}
-  <div class="h-screen w-screen bg-black bg-opacity-10 flex flex-col pt-[4rem]">
+  <div class="h-screen w-screen bg-black bg-opacity-10 flex flex-col pt-[4rem] ">
     <div class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden flex-2">
       {#if pictures?.length > 0}
         {#each pictures as picture}
@@ -172,16 +172,16 @@
     </div>
     <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative">
       <div class="hidden md:flex w-80 h-40 absolute right-[1rem] top-[1rem]">
-        <CardButtonWidget  />
+        <CardButtonWidget />
       </div>
-      <h1 class="w-full flex justify-start px-3 py-1 font-semibold text-4xl">{cardProps.category}</h1>
+      <h1 class="w-full flex justify-start px-3 py-1 font-semibold text-4xl [text-shadow:0px_1px_1px_#d5deeb]">{cardProps.category}</h1>
       <div class="atribute-container p-3 flex w-full justify-start">
         <h1 class="text-2xl">{cardProps.brand}</h1>
         <div class="border-l-2 border-primary w-[5px] h-full" />
 
         <h1 class="mx-3 text-2xl italic">{cardProps.model}</h1>
       </div>
-      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full">
+      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full h-fit">
         {#if fieldsFrontValues?.length > 0}
           {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
             <CardCellExpanded
@@ -192,9 +192,62 @@
           {/each}
         {/if}
       </div>
+      {#if fieldsBackOneValues?.length > 0}
+        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full h-fit">
+          {#each fieldsBackOneValues as fieldBackOne, i}
+            <CardCellExpanded
+              bind:value={cardProps[fieldBackOne.value]}
+              label={fieldBackOne.label}
+              allignText={i % 2 === 0 ? "left" : "right"}
+            />
+          {/each}
+        </div>
+      {/if}
+      {#if fieldsBackTwoValues?.length > 0}
+        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full h-fit">
+          {#each fieldsBackTwoValues as fieldBackTwo, i}
+            <CardCellExpanded
+              bind:value={cardProps[fieldBackTwo.value]}
+              label={fieldBackTwo.label}
+              allignText={i % 2 === 0 ? "left" : "right"}
+            />
+          {/each}
+        </div>
+      {/if}
+      {#if fieldsBackThreeValues?.length > 0}
+        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full h-fit">
+          {#each fieldsBackThreeValues as fieldBackThree, i}
+            <CardCellExpanded
+              bind:value={cardProps[fieldBackThree.value]}
+              label={fieldBackThree.label}
+              allignText={i % 2 === 0 ? "left" : "right"}
+            />
+          {/each}
+        </div>
+      {/if}
+
+      <div class=" front-fields flex flex-col p-3 aspect-[1/1] md:w-[50%] w-full">
+        <h1 class="card-field-label label py-0 font-bold text-lg w-full flex h-fit mb-2">Description</h1>
+        <div class="card-field-value label py-0 flex">
+          <textarea disabled class="textarea bg-none w-full h-full" placeholder="Description">{description}</textarea>
+        </div>
+      </div>
+
+      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 aspect-[1/1] md:w-[50%] w-full h-fit">
+        {#each generalFieldsBack as generalFields, i}
+          <CardCellExpanded
+            bind:value={cardProps[generalFields.value]}
+            label={generalFields.label}
+            allignText={i % 2 === 0 ? "left" : "right"}
+          />
+        {/each}
+      </div>
     </div>
-    <div in:fly|local={{duration: 200, easing: cubicIn}} class="md:hidden w-full h-40 right-[1rem] top-[1rem] p-3 flex justify-center">
-      <CardButtonWidget  />
+    <div
+      in:fly|local={{ duration: 200, easing: cubicIn }}
+      class="md:hidden w-full h-40 right-[1rem] top-[1rem] p-3 flex justify-center"
+    >
+      <CardButtonWidget />
     </div>
   </div>
 {/if}

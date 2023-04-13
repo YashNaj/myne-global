@@ -37,8 +37,8 @@
 </script>
 
 {#key label}
-  <div {id} class="w-full h-fit grid grid-rows-2 flex-wrap {textSlug} {gridClass}" transition:slide|local>
-    <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
+  <div {id} class="w-full h-fit grid grid-rows-2 flex-wrap {textSlug} {gridClass}">
+    <div class={textSlug} in:slide={{ duration }}>
       <label
         for="cell-label"
         class="card-field-label text-primary text-opacity-40 md:text-[15px] text-xl py-0 font-semibold {textSlug} will-change-auto"
@@ -46,7 +46,7 @@
         {label}
       </label>
     </div>
-    <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
+    <div class={textSlug} in:slide={{ duration }}>
       <label
         for="cell-value"
         class="card-field-value h-fit w-fit py-0 md:text-[15px] text-xl text-primary font-medium {textSlug} will-change-auto"

@@ -92,7 +92,7 @@
   );
 </script>
 
-<div class="w-full h-full">
+<div class="w-full h-[100dvh]">
   {#if $addCard}
     <div
       class="flex flex-row w-full h-fit justify-start items-center flex-wrap"

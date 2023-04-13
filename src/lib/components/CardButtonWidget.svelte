@@ -5,9 +5,11 @@
   export let selected: boolean;
 </script>
 
-<div class="button-container w-full md:h-[90%] h-full border-primary border border-spacing-4  grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center shadow-md rounded-2xl">
+<div
+  class="button-container w-full md:h-[90%] h-full  grid grid-cols-2 grid-rows-2 gap-[2px] place-items-center rounded-2xl"
+>
   <button
-    class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2 shadow-md "
     on:click={() => {
       selected = true;
       transfer.set(true);
@@ -22,7 +24,7 @@
       selected = true;
       certificate.set(true);
     }}
-    class="btn btn-ghost w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2 shadow-md "
   >
     <p class="flex text-xs w-full justify-center text-yellow-700">Certificate</p>
     <Icon src={Star} color="gold" class="opacity-90" size="30px" />
@@ -32,7 +34,7 @@
       selected = true;
       stolen.set(true);
     }}
-    class="btn btn-ghost  w-[90%] h-full  flex-nowrap z-2 normal-case p-2"
+    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2 shadow-md "
   >
     <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>
@@ -42,7 +44,7 @@
       selected = true;
       documentUpload.set(true);
     }}
-    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2"
+    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2 shadow-md "
   >
     <p class="flex text-xs w-full justify-center text-green-900">Document</p>
     <Icon src={DocumentText} color="green" class="opacity-90" size="30px" />

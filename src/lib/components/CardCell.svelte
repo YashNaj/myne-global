@@ -35,10 +35,10 @@
     value = "";
   }
 </script>
-{#key label}
-<div {id} class="w-full h-fit grid grid-rows-2 flex-wrap {textSlug} {gridClass}" transition:slide|local>
 
-    <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
+{#key label}
+  <div {id} class="w-full h-auto grid grid-rows-2  {textSlug} {gridClass}" transition:slide|local>
+    <div class={textSlug} in:slide={{ duration }} >
       <label
         for="cell-label"
         class="card-field-label text-black text-opacity-40 md:text-[15px] text-[10px] py-0 font-semibold {textSlug}"
@@ -46,16 +46,15 @@
         {label}
       </label>
     </div>
-  <div class={textSlug} in:slide={{ duration }} out:slide={{ duration, delay }}>
-    <label
-      for="cell-value"
-      class="card-field-value h-fit w-full py-0 md:text-[15px] text-[9px] text-black font-medium {textSlug}"
-    >
-      {#if value !== null}
-        {value}
-      {/if}
-    </label>
+    <div class={textSlug} in:slide={{ duration }}>
+      <label
+        for="cell-value"
+        class="card-field-value h-auto w-full py-0 md:text-[15px] text-[9px] text-black font-medium {textSlug}"
+      >
+        {#if value !== null}
+          {value}
+        {/if}
+      </label>
+    </div>
   </div>
-</div>
 {/key}
-
