@@ -13,14 +13,11 @@
   import { currentUser, selectedCard } from "$lib/store";
   import Navbar from "$lib/components/Navbar.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
+  import { onMount } from "svelte";
   export let addCardOpen = false;
   export let data: LayoutData = $page.data;
   $: pathname = data.pathname;
   const profile = data.profile;
-  const userId = data?.user_id;
-  $: if (currentUser) {
-    currentUser.set(userId);
-  }
   export let loading = data.loading;
   $: console.log(loading);
   let menuItems = [
@@ -40,15 +37,22 @@
   const transitionOut = { easing: cubicIn, y: -y, duration };
   export let card = $selectedCard;
   $: card = card;
+  onMount(() => {
+    /mobile/i.test(navigator.userAgent) &&
+      !location.hash &&
+      setTimeout(function () {
+        window.scrollTo(0, 1);
+      }, 1000);
+  });
 </script>
 
 <svelte:head>
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 
-<div class="hidden w-screen h-[100dvh] md:flex flex-col justify-start content-center">
+<div class="hidden w-screen h-[105dvh] md:flex flex-col justify-start content-center">
   <Navbar />
-  <main class="h-[105dvh]">
+  <main class="h-full">
     {#key pathname}
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
@@ -58,9 +62,9 @@
     {/key}
   </main>
 </div>
-<div class=" md:hidden w-screen h-[100dvh]">
+<div class=" md:hidden w-screen h-[105dvh]">
   <Navbar />
-  <main class="h-[105dvh]">
+  <main class="h-full">
     {#key pathname}
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
@@ -74,10 +78,8 @@
 <style lang="postcss">
   :global(body) {
     font-family: futura-pt;
-    background: rgba(255, 255, 255, 1);
   }
   :global(main) {
-    background-color: #f5f9ff;
   }
   ::-webkit-scrollbar {
     width: 0; /* Remove scrollbar space */

@@ -13,10 +13,11 @@
   import { goto } from "$app/navigation";
   import { redirect } from "@sveltejs/kit";
   let cardId = "";
-  let currentUserId = $currentUser;
-  $: if (selectedCard) {
-    cardId = $selectedCard?.id;
-  }
+  console.log("currentUserId", currentUserId);
+  $: cardId = $selectedCard.id
+  $: user_id = $selectedCard.user_id
+  $: currentUserId = user_id
+
   let selectedUserSwitch = false;
   let selectedUser;
   let newUserId: string;
@@ -163,7 +164,7 @@
       <swiper-slide class="w-full h-full text-white p-1 flex flex-col">
         <h1 class="text-white font-semibold">Final notice...</h1>
         <div class="w-full h-fit grid grid-cols-3  justify-center content-center flex-wrap relative">
-          <UserBadge user={{ id: $currentUser }} userName="YOU " />
+          <UserBadge user={{ id: user_id }} userName="YOU " />
           <div class="icon-holder grid place-items-center">
             <Icon class="animate-pulse" src={ArrowRight} color="white" size="60px" />
           </div>

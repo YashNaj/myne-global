@@ -89,7 +89,10 @@
   );
 </script>
 
-<div class="w-full h-[100dvh]">
+<div
+  class="w-full h-[105dvh] bg-[#f5f9ff] overflow-y-hidden
+"
+>
   {#if $addCard}
     <div
       class="flex flex-row w-full h-fit justify-start items-center flex-wrap"
@@ -102,15 +105,13 @@
     <div
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
-      class="h-[99%] rounded-xl justify-center overflow-y-auto w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
+      class="h-[90vh] rounded-xl justify-center overflow-y-hidden w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
       in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
       out:slide|local={{ duration: 200, easing: backOut }}
     >
       <div
-        class="w-full h-[99%] grid grid-rows-none grid-flow-row md:grid-cols-auto grid-cols-2 gap-0 overflow-y-auto
-        md:grid-cols-4 md:gap-2 relative place-items-center will-change-auto {cardExpanded
-          ? 'overflow-x-disabled overflow-y-disabled'
-          : ''}"
+        class="w-full h-[80%] grid grid-rows-none grid-flow-row md:grid-cols-5 grid-cols-2 gap-2 overflow-y-auto
+         md:gap-2 will-change-auto place-items-center"
       >
         {#if cardsFiltered?.length === 0}
           <div transition:scale|local={{ delay: 10 }}>

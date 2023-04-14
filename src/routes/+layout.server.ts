@@ -26,7 +26,9 @@ const anyoneAllowed = [
 export const load = handleServerSession((async ({ url, locals }) => {
   const onUnauthedRoute = anyoneAllowed.some((route) => url.pathname.startsWith(route));
   const { session, user } = await locals.validateUser();
+  
   if (onUnauthedRoute) return {};
+  
   else if (!session) {
     throw redirect(303, "/signin");
   } else if (user?.valid) {
@@ -60,6 +62,6 @@ export const load = handleServerSession((async ({ url, locals }) => {
       })
       .profile();
     loading = false
-    return { isUser: true, profile:profile(), loading };
+    return { isUser: true, profile:profile(), loading, user_id };
   } else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);

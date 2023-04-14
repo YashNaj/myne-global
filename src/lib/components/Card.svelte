@@ -165,7 +165,7 @@
   });
 </script>
 
-<div bind:this={tiltElement} class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl">
+<div bind:this={tiltElement} class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl z-1">
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div

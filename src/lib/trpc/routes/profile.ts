@@ -14,7 +14,8 @@ export const profile = t.router({
         user_id,
       },
     });
-    console.log("profile load", profile);
+    currentUser.set(user_id)
+    console.log("profile load", {profile});
     return profile;
   }),
 });

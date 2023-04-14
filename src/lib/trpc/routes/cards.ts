@@ -84,7 +84,7 @@ export const cards = t.router({
   reportStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {
-        id: cardId,
+        id: input,
       },
       data: {
         isStolen: true,
@@ -94,7 +94,7 @@ export const cards = t.router({
   removeStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {
-        id: cardId,
+        id: input,
       },
       data: {
         isStolen: false,

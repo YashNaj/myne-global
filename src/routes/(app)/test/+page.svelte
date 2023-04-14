@@ -158,7 +158,7 @@
 </script>
 
 {#if isCardPropsInitialized}
-  <div class="h-full w- bg-black bg-opacity-10 flex flex-col pt-[4rem]">
+  <div class="h-full w-screen bg-black bg-opacity-10 flex flex-col ">
     <div
       class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden h-[400px]"
     >
@@ -176,7 +176,7 @@
       <div
         class="atribute-container p-3 flex md:flex-row flex-col w-full justify-between px-3 py-1 font-semibold text-4xl [text-shadow:0px_1px_1px_#d5deeb]"
       >
-        <div class = 'flex'>
+        <div class="flex">
           <h1 class="text-4xl">{cardProps.brand}</h1>
           <h1 class="mx-3 text-4xl italic">{cardProps.model}</h1>
         </div>
@@ -248,12 +248,8 @@
         {/each}
       </div>
     </div>
-    <div
-      in:fly|local={{ duration: 200, easing: cubicIn }}
-      class="md:hidden w-full h-full right-[1rem] top-[1rem] p-3 flex justify-center"
-    >
-      <CardButtonWidget />
+    <div class="document-pdf container h-[50vh] w-full p-3"> 
+      Document Display incoming ...
     </div>
-    <div class="document-pdf container h-auto w-full p-3" />
   </div>
 {/if}
