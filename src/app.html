@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html data-theme="myne"
-	class='text-secondary bg-primary overflow-x-hidden scrollbar-track-transparent scroll-smooth h-[100dvh] w-full overflow-y-auto '
+	class='text-secondary bg-primary scrollbar-track-transparent scroll-smooth h-[100dvh] w-full overflow-y-auto '
 	lang="en">
 
 <head>
@@ -29,14 +29,14 @@
 	<meta name="twitter:image" content="/myne_og.png">
 
 	<link rel="preload" as='style' href="https://use.typekit.net/kaa7gct.css" async />
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+	<!-- <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"> -->
 	<title>
 		Myne Global: Secure your Valuables
 	</title>
 	%sveltekit.head%
 </head>
 
-<body class='bg-primary text-primary h-[100dvh] w-full'>
+<body class='bg-primary text-primary h-[100dvh] max-h-full overflow-y-auto w-full'>
 	<div>%sveltekit.body%</div>
 	<input type="checkbox" id="my-modal-4" class="modal-toggle" />
 </body>

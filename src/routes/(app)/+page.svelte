@@ -46,8 +46,8 @@
   let inputText;
 </script>
 
-<div class="lg:hidden md:hidden xl:hidden 2xl:hidden p-2 w-full h-[100dvh] flex flex-col">
-  <div class="w-full h-[100dvh] pt-20">
+<div class="md:hidden p-2 w-full h-[100dvh] flex flex-col">
+  <div class="w-full h-full pt-20">
 
   <CardFunctionModals />
   <CardVaultMenu bind:categoryFilter bind:inputText />
@@ -57,8 +57,8 @@
 </div>
 
 
-<div class="hidden md:flex w-full h-[100lvh] flex-col  scrollbar-track-transparent bg-[rgb(243,250,255)]">
-  <div class="w-full h-[100dvh] pt-20">
+<div class="hidden md:flex w-full h-[100dvh] flex-col  scrollbar-track-transparent bg-[rgb(243,250,255)]">
+  <div class="w-full h-full pt-20">
     <CardFunctionModals />
     <CardVaultMenu bind:categoryFilter bind:inputText />
     <CardVault {categoryFilter} {inputText} mobile={false} />

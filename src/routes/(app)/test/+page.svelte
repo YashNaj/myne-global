@@ -146,7 +146,7 @@
   };
 
   let tiltElement;
-  beforeUpdate(() => {
+  onMount(() => {
     $: for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
@@ -158,7 +158,7 @@
 </script>
 
 {#if isCardPropsInitialized}
-  <div class="h-screen w-screen bg-black bg-opacity-10 flex flex-col pt-[4rem]">
+  <div class="h-full w-full bg-black bg-opacity-10 flex flex-col pt-[4rem]">
     <div class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden h-[400px]">
       <!-- {#if pictures?.length > 0}
         {#each pictures as picture}
@@ -230,7 +230,7 @@
       <div class=" front-fields flex flex-col p-3 w-full">
         <h1 class="card-field-label label py-0 font-bold text-lg w-full flex h-fit mb-2">Description</h1>
         <div class="card-field-value label py-0 flex">
-          <textarea disabled class="textarea bg-none w-[75%] h-full P-0" placeholder="Description">{description}</textarea>
+          <textarea disabled class="textarea bg-none md:w-[75%] w-full h-full P-0" placeholder="Description">{description}</textarea>
         </div>
       </div>
 

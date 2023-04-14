@@ -34,7 +34,7 @@
       selected = true;
       stolen.set(true);
     }}
-    class="btn btn-ghost  w-[90%] h-full flex-nowrap z-2 normal-case p-2 shadow-md "
+    class="btn btn-ghost w-[90%] h-full flex-nowrap z-2 normal-case p-2 shadow-md "
   >
     <Icon src={ShieldExclamation} color="#ff0f0f" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-red-600">Stolen</p>

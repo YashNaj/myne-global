@@ -92,7 +92,7 @@
   );
 </script>
 
-<div class="w-full h-[100dvh]">
+<div class="w-full h-auto">
   {#if $addCard}
     <div
       class="flex flex-row w-full h-fit justify-start items-center flex-wrap"
@@ -105,12 +105,12 @@
     <div
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
-      class="h-[80%] rounded-xl justify-center overflow-y-auto w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
+      class="h-[99%] rounded-xl justify-center overflow-y-auto w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
       in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
       out:slide|local={{ duration: 200, easing: backOut }}
     >
         <div
-          class="w-full h-[99%] grid grid-rows-none grid-flow-row md:grid-cols-auto grid-cols-2 gap-0 overflow-y-auto
+          class="w-full h-fit grid grid-rows-none grid-flow-row md:grid-cols-auto grid-cols-2 gap-0 overflow-y-auto
         md:grid-cols-4 md:gap-2 relative place-items-center will-change-auto {cardExpanded
             ? 'overflow-x-disabled overflow-y-disabled'
             : ''}"

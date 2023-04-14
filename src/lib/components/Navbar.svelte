@@ -37,7 +37,7 @@
     </a>
   </div>
   <div class="flex-none">
-    <div class="dropdown dropdown-end">
+    <div class="dropdown dropdown-bottom flex justify-end content-end flex-wrap">
       <label on:click={() => {}} tabindex="0" class="btn btn-ghost btn-circle">
         <div class="indicator">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="white"
@@ -62,17 +62,18 @@
           </div>
         </div>
       </div>
+      <h1 class="text-left px-1 text-lg text-white font-semibold">
+        {#if $profile}
+          {$profile?.data?.firstName?.toLowerCase()}
+        {:else if $profile?.data.isLoading}
+          Loading...      
+        {:else if $profile?.data.isError}
+          Error
+        {/if}
+    
+      </h1>
     </div>
-    <h1 class="text-left px-1 text-lg text-white font-semibold">
-      {#if $profile}
-        {$profile?.data?.firstName?.toLowerCase()}
-      {:else if $profile?.data.isLoading}
-        Loading...      
-      {:else if $profile?.data.isError}
-        Error
-      {/if}
-  
-    </h1>
+
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full object-contain">

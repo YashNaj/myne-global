@@ -64,9 +64,9 @@
           bind:value={inputText}
           type="text"
           placeholder="Search…"
-          class="input input-md shadow-sm bg-slate-100 border-none"
+          class="input md:input-md hidden shadow-sm bg-slate-100 border-none"
         />
-        <button class="btn btn-ghost bg-slate-100 p-2">
+        <button class="btn btn-ghost bg-slate-100 p-2 hidden md:flex">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
             ><path
               stroke-linecap="round"
@@ -82,10 +82,10 @@
   <div class="navbar-end">
     <button
       on:click={() => {
-        let open = $addCard
+        let open = $addCard;
         addCard.set(!open);
       }}
-      class="btn btn-success flex normal-case text-white mr-5"
+      class="btn btn-success flex normal-case text-white text-xs p-1 md:mr-5"
     >
       <Icon src={Plus} color="white" size="12px" class="mr-1" />
       Add a Card
