@@ -146,6 +146,7 @@
   };
 
   let tiltElement;
+  
   onMount(() => {
     $: for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")

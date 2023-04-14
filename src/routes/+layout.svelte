@@ -40,6 +40,7 @@
         },
       });
     }
+    window.scrollTo(1, 0);
   });
 
   $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";

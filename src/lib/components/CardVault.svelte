@@ -81,10 +81,7 @@
       console.log("The string is null or empty");
     }
   }
-  let scrollContainer;
-  let h;
-  let w;
-  let scrollTop;
+
   export let mobile: boolean = false;
   $: console.log(
     "check if the card is expanded and use that switch to disable the scroll in the cardvault",
@@ -92,7 +89,7 @@
   );
 </script>
 
-<div class="w-full h-auto">
+<div class="w-full h-[100dvh]">
   {#if $addCard}
     <div
       class="flex flex-row w-full h-fit justify-start items-center flex-wrap"
@@ -109,40 +106,33 @@
       in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
       out:slide|local={{ duration: 200, easing: backOut }}
     >
-        <div
-          class="w-full h-fit grid grid-rows-none grid-flow-row md:grid-cols-auto grid-cols-2 gap-0 overflow-y-auto
+      <div
+        class="w-full h-[99%] grid grid-rows-none grid-flow-row md:grid-cols-auto grid-cols-2 gap-0 overflow-y-auto
         md:grid-cols-4 md:gap-2 relative place-items-center will-change-auto {cardExpanded
-            ? 'overflow-x-disabled overflow-y-disabled'
-            : ''}"
-          bind:this={scrollContainer}
-          on:scroll={() => (scrollTop = scrollContainer.scrollTop)}
-        >
-          {#if cardsFiltered?.length === 0}
-            <div transition:scale|local={{ delay: 10 }}>
-              <Card>
-                <h1 class="w-full h-full grid place-items-center text-primary font-semibold text-2xl">
-                  No cards found
-                </h1>
-              </Card>
-            </div>
-          {/if}
-          {#each cardsFiltered as cardProps, i}
-            <div transition:scale|local={{ delay: 10 }}>
-              <Card
-                {w}
-                {h}
-                {scrollTop}
-                cardDisplayId={i}
-                cardProps={structuredClone({ ...cardProps })}
-                {mobile}
-                cardFrontSwiperId={i}
-                bind:expanded={cardExpanded}
-              >
-                <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />
-              </Card>
-            </div>
-          {/each}
-        </div>
+          ? 'overflow-x-disabled overflow-y-disabled'
+          : ''}"
+      >
+        {#if cardsFiltered?.length === 0}
+          <div transition:scale|local={{ delay: 10 }}>
+            <Card>
+              <h1 class="w-full h-full grid place-items-center text-primary font-semibold text-2xl">No cards found</h1>
+            </Card>
+          </div>
+        {/if}
+        {#each cardsFiltered as cardProps, i}
+          <div transition:scale|local={{ delay: 10 }}>
+            <Card
+              cardDisplayId={i}
+              cardProps={structuredClone({ ...cardProps })}
+              {mobile}
+              cardFrontSwiperId={i}
+              bind:expanded={cardExpanded}
+            >
+              <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />
+            </Card>
+          </div>
+        {/each}
+      </div>
     </div>
   {/if}
 </div>

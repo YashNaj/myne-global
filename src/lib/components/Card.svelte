@@ -1,4 +1,5 @@
 <script lang="ts">
+  export const csr = true;
   import VanillaTilt, { type HTMLVanillaTiltElement } from "vanilla-tilt";
   import { page } from "$app/stores";
   import { template, generalFieldsBack } from "./../../forms";
@@ -30,20 +31,15 @@
   export let myneCard;
 
   // box height for expanding cards
-  export let w: number;
-  export let h: number;
+
 
   // card external control values
   export let expanded = false;
   export let flipped = false;
   export let sentCard = false;
   export let success: boolean | null = null;
-  export let selected;
   export let inAddCard = false;
   export let mobile: boolean;
-  $: selected = selected;
-  export let scrollTop;
-
   //card variables
   export let cardDisplayId: number = 1;
   $: cardDisplayId = cardDisplayId;
@@ -169,7 +165,7 @@
   });
 </script>
 
-<div bind:this={tiltElement} class:flipped class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl">
+<div bind:this={tiltElement} class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl">
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
@@ -183,7 +179,6 @@
             href="/test"
             class="btn btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"
             on:click={() => {
-              toggleExpand();
               selectedCard.set(structuredClone(cardProps));
             }}
           >

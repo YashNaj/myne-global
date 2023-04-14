@@ -10,7 +10,7 @@
   import Spinner from "$lib/components/Spinner.svelte";
   import { fade, fly } from "svelte/transition";
 
-  import { currentUser } from "$lib/store";
+  import { currentUser, selectedCard } from "$lib/store";
   import Navbar from "$lib/components/Navbar.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
   export let addCardOpen = false;
@@ -38,13 +38,15 @@
 
   const transitionIn = { easing: cubicOut, y, duration, delay };
   const transitionOut = { easing: cubicIn, y: -y, duration };
+  export let card = $selectedCard;
+  $: card = card;
 </script>
 
 <svelte:head>
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 
-<div class="hidden w-full h-[100dvh] md:flex flex-col justify-start content-center flex-wrap">
+<div class="hidden w-full h-[100dvh] md:flex flex-col justify-start content-center">
   <Navbar />
   <main>
     {#key pathname}

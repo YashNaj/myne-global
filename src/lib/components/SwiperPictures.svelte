@@ -10,7 +10,9 @@
   export let size = 10;
   let cardFrontSwiperId;
   let pictureSwiper;
-  afterUpdate(() => {
+  afterUpdate(() => {});
+  onMount(() => {
+    pictureSwiper = document.querySelector(".test-swiper-" + cardFrontSwiperId);
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {
@@ -18,10 +20,6 @@
           imgElement?.setAttribute("src", url);
         });
     }
-  });
-  onMount(() => {
-    pictureSwiper = document.querySelector(".test-swiper-" + cardFrontSwiperId);
-
     console.log(pictureSwiper);
   });
   export let pictures: string[] = [];
@@ -75,7 +73,6 @@
     }
   };
   export let expanded;
-
 </script>
 
 <div class="swiper-wrapper relative w-full h-full">
@@ -85,7 +82,7 @@
     observer-parents="true"
     virtual="true"
   >
-    {#if pictures?.length > 0 }
+    {#if pictures?.length > 0}
       {#each pictures as picture, i}
         <swiper-slide
           class=" w-full h-full rounded-lg flex justify-center bg-black bg-opacity-30 object-contain"

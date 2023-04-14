@@ -27,7 +27,7 @@ import { handleServerSession } from '@lucia-auth/sveltekit';
 //     }
 //     prisma.$disconnect()
 // }
-export const load: PageServerLoad = async (event) => {
+export const load: PageServerLoad = async ({event}) => {
   return {
     stolenWatches,
   };
