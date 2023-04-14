@@ -2,6 +2,7 @@
   import { capitalizeFirstWord, firstCapital } from "$lib/caps";
   import { slide } from "svelte/transition";
   import type { IcardProps } from "../../cardProps";
+  import { text } from "svelte/internal";
   export let allignText = "";
   let textSlug = "text-" + allignText;
   export let label = "";
@@ -40,7 +41,7 @@
     <div in:slide={{ duration }}>
       <label
         for="cell-label"
-        class="w-full card-field-label text-primary text-opacity-40 md:text-[15px] text-xl py-0 font-semibold {textSlug} will-change-auto"
+        class="w-full card-field-label text-primary text-opacity-40 md:text-[15px] text-xl py-0 font-semibold text-{allignText} text-right"
       >
         {label}
       </label>
@@ -48,7 +49,7 @@
     <div in:slide={{ duration }}>
       <label
         for="cell-value"
-        class="w-full card-field-value h-fit py-0 md:text-[15px] text-xl text-primary font-medium {textSlug} will-change-auto"
+        class="w-full card-field-value h-fit py-0 md:text-[15px] text-xl text-primary font-medium text-{allignText} text-right"
       >
         {#if value !== null}
           {value}

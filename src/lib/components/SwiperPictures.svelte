@@ -9,10 +9,8 @@
   let parentEl;
   export let size = 10;
   let cardFrontSwiperId;
-  let pictureSwiper;
-  afterUpdate(() => {});
+  let pictureSwiper: Swiper;
   onMount(() => {
-    pictureSwiper = document.querySelector(".test-swiper-" + cardFrontSwiperId);
     for (let picture of pictures) {
       if (pictures?.length > 0 && pictures[0] !== "")
         downloadImage(picture).then((url) => {

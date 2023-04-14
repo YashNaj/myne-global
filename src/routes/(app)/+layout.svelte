@@ -46,9 +46,9 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 
-<div class="hidden w-full h-[100dvh] md:flex flex-col justify-start content-center">
+<div class="hidden w-screen h-[100dvh] md:flex flex-col justify-start content-center">
   <Navbar />
-  <main>
+  <main class="h-[105dvh]">
     {#key pathname}
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
@@ -58,9 +58,9 @@
     {/key}
   </main>
 </div>
-<div class=" md:hidden w-full h-[100dvh]">
+<div class=" md:hidden w-screen h-[100dvh]">
   <Navbar />
-  <main>
+  <main class="h-[105dvh]">
     {#key pathname}
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
@@ -72,15 +72,9 @@
 </div>
 
 <style lang="postcss">
-  :global(html) {
-    overflow: scroll;
-    height: 100dvh;
-  }
   :global(body) {
-    overflow: auto;
-    height: 100dvh;
     font-family: futura-pt;
-    background: linear-gradient(30deg, rgba(0, 45, 114, 1) 10%, rgba(255, 255, 255, 1) 10%);
+    background: rgba(255, 255, 255, 1);
   }
   :global(main) {
     background-color: #f5f9ff;

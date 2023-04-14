@@ -62,37 +62,38 @@
           </div>
         </div>
       </div>
-      <h1 class="text-left px-1 text-lg text-white font-semibold">
-        {#if $profile}
-          {$profile?.data?.firstName?.toLowerCase()}
-        {:else if $profile?.data.isLoading}
-          Loading...      
-        {:else if $profile?.data.isError}
-          Error
-        {/if}
-    
-      </h1>
     </div>
 
     <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full object-contain">
-          <img
-            alt="avatar"
-            src="https://loremflickr.com/640/360
-          "
-          />
-        </div>
-        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-          <li>
-            <a href="/profile" class="justify-between normal-case">
-              Profile
-              <span class="badge">New</span>
-            </a>
-          </li>
-          <li><LogOut /></li>
-        </ul>
-      </label>
+      <div class="flex">
+        <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full object-contain">
+            <img
+              alt="avatar"
+              src="https://loremflickr.com/640/360
+            "
+            />
+          </div>
+          <h1 class="text-left px-1 text-lg text-white font-semibold">
+            {#if $profile}
+              {$profile?.data?.firstName?.toLowerCase()}
+            {:else if $profile.data.isLoading}
+              Loading...
+            {:else if $profile.data.isError}
+              Error
+            {/if}
+          </h1>
+          <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <a href="/profile" class="justify-between normal-case">
+                Profile
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><LogOut /></li>
+          </ul>
+        </label>
+      </div>
     </div>
   </div>
 </div>

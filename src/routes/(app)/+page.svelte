@@ -48,7 +48,6 @@
 
 <div class="md:hidden p-2 w-full h-[100dvh] flex flex-col">
   <div class="w-full h-full pt-20">
-
   <CardFunctionModals />
   <CardVaultMenu bind:categoryFilter bind:inputText />
   <CardVault {categoryFilter} {inputText} mobile={true} />
