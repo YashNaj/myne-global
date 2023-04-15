@@ -1,7 +1,8 @@
 <script lang="ts">
   import { capitalizeFirstWord, firstCapital } from "$lib/caps";
-  import { slide } from "svelte/transition";
+  import { fly, slide } from "svelte/transition";
   import type { IcardProps } from "../../cardProps";
+  import { cubicIn, cubicOut } from "svelte/easing";
   export let allignText = "";
   let textSlug = "text-" + allignText;
   console.log(textSlug);
@@ -37,8 +38,8 @@
 </script>
 
 {#key label}
-  <div {id} class="w-full h-auto grid grid-rows-2  {textSlug} {gridClass}" transition:slide|local>
-    <div class={textSlug} in:slide={{ duration }} >
+  <div {id} class="w-full h-auto grid grid-rows-2 {textSlug} {gridClass}">
+    <div class={textSlug} in:slide={{ duration }}>
       <label
         for="cell-label"
         class="card-field-label text-black text-opacity-40 md:text-[15px] text-[10px] py-0 font-semibold {textSlug}"
@@ -46,7 +47,7 @@
         {label}
       </label>
     </div>
-    <div class={textSlug} in:slide={{ duration }}>
+    <div class={textSlug}>
       <label
         for="cell-value"
         class="card-field-value h-auto w-full py-0 md:text-[15px] text-[9px] text-black font-medium {textSlug}"

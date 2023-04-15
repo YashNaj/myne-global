@@ -377,12 +377,11 @@
 </script>
 
 <div 
-  class=" w-[90%] h-fit flex flex-col md:grid-cols-2 md:grid bg-primary text-white p-10 content-center rounded-2xl  from-white  relative shadow-lg" >
-<button on:click={()=>addCard.set(false)} class = 'btn btn-ghost w-fit aspect-[1/1] absolute top-[1rem] right-[1rem]'>
-  <Icon color = 'white' src ={X} size = '24px'/>
+  class=" w-full h-screen flex flex-col md:grid-cols-2 md:grid bg-primary text-white pt-20 content-center rounded-2xl  from-white  relative shadow-lg" >
+<button on:click={()=>addCard.set(false)} class = 'btn btn-ghost w-fit aspect-[1/1] absolute md:top-[1rem] md:right-[1rem] top-[5rem] right-[1rem]'>
+  <Icon color = 'white' src ={X} size = "48px"/>
 </button>  
   <div class="flex justify-center w-full h-full content-start order-2">
-    <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
       <Card {inAddCard} {flipped} {cardProps} {pictures}>
         <SwiperPictures
           on:picturesuploaded={(event) => {
@@ -390,7 +389,6 @@
           }}
         />
       </Card>
-    </div>
   </div>
   <div class="w-full flex justify-center h-full order-2">
     <form

@@ -3,7 +3,6 @@
   import { page } from "$app/stores";
   import CardSlider from "$lib/components/CardSlider.svelte";
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
-  import CardCell from "$lib/components/CardCell.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import { trpc } from "$lib/trpc/client";
   import { spring } from "svelte/motion";
@@ -11,23 +10,11 @@
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
   import { transfer, stolen, documentUpload, certificate, selectedCard } from "$lib/store";
   import StolenBadge from "$lib/components/StolenBadge.svelte";
-  import {
-    Icon,
-    DocumentText,
-    ShieldExclamation,
-    SwitchHorizontal,
-    Star,
-    ArrowCircleLeft,
-    ArrowsExpand,
-    ArrowCircleRight,
-    CloudUpload,
-  } from "svelte-hero-icons";
+
   import { cloneDeep } from "lodash";
   import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
   import { supabase } from "$lib/supabaseClient";
   import CardCellExpanded from "$lib/components/CardCellExpanded.svelte";
-  import { fly } from "svelte/transition";
-  import { cubicIn } from "svelte/easing";
   let isCardPropsInitialized = false;
   $: isCardPropsInitialized = !!cardProps;
   export let myneCard;
@@ -146,110 +133,103 @@
   };
 
   let tiltElement;
-  onMount(() => {
-    $: for (let picture of pictures) {
-      if (pictures?.length > 0 && pictures[0] !== "")
-        downloadImage(picture).then((url) => {
-          const imgElement = document.getElementById(`img-${picture}`);
-          imgElement?.setAttribute("src", url);
-        });
-    }
-  });
+
+  import type { LayoutData } from "./$types";
+  import { cubicIn, cubicOut } from "svelte/easing";
+  import SwiperPictures from "$lib/components/SwiperPictures.svelte";
+  export let data: LayoutData;
+  $: pathname = data.pathname;
+  const duration = 300;
+  const delay = duration + 100;
+  const y = 10;
+
+  const transitionIn = { easing: cubicOut, y, duration, delay };
+  const transitionOut = { easing: cubicIn, y: -y, duration };
 </script>
 
-{#if isCardPropsInitialized}
-  <div class="h-full w-screen bg-black bg-opacity-10 flex flex-col ">
-    <div
-      class="carousel carousel-center w-full p-4 space-x-4 {pickedColor}  overflow-x-auto overflow-y-hidden h-[400px]"
-    >
-      <!-- {#if pictures?.length > 0}
-        {#each pictures as picture}
-          <div class="swiperpictures carousel-item rounded-2xl object-contain aspect-[16/9] w-80">
-            <div class="w-full h-full">
-              <img alt="img" id={`img-${picture}`} class="rounded-box max-w-full" />
-            </div>
+{#key pathname}
+  {#if isCardPropsInitialized}
+    <div class="h-full w-screen bg-black bg-opacity-10 flex flex-col">
+      <div class="w-full h-[400px] {pickedColor} pt-20 pb-4 backdrop-blur-lg">
+        <SwiperPictures {pictures} expanded = {true} />
+      </div>
+      <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative">
+        <div
+          class="atribute-container p-3 flex md:flex-row flex-col w-full justify-between px-3 py-1 font-semibold text-4xl [text-shadow:0px_1px_1px_#d5deeb]"
+        >
+          <div class="flex">
+            <h1 class="text-4xl">{cardProps.brand}</h1>
+            <h1 class="mx-3 text-4xl italic">{cardProps.model}</h1>
           </div>
-        {/each}
-      {/if} -->
-    </div>
-    <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative">
-      <div
-        class="atribute-container p-3 flex md:flex-row flex-col w-full justify-between px-3 py-1 font-semibold text-4xl [text-shadow:0px_1px_1px_#d5deeb]"
-      >
-        <div class="flex">
-          <h1 class="text-4xl">{cardProps.brand}</h1>
-          <h1 class="mx-3 text-4xl italic">{cardProps.model}</h1>
+          <div class="flex">
+            <CardButtonWidget />
+          </div>
         </div>
-        <div class="flex">
-          <CardButtonWidget />
+        <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
+          {#if fieldsFrontValues?.length > 0}
+            {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
+              <CardCellExpanded
+                bind:value={cardProps[fieldFront.value]}
+                label={fieldFront?.label}
+                allignText={i % 2 === 0 ? "left" : "right"}
+              />
+            {/each}
+          {/if}
         </div>
-      </div>
-      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
-        {#if fieldsFrontValues?.length > 0}
-          {#each fieldsFrontValues?.slice(0, mobileExpanded ? 2 : undefined) as fieldFront, i}
-            <CardCellExpanded
-              bind:value={cardProps[fieldFront.value]}
-              label={fieldFront?.label}
-              allignText={i % 2 === 0 ? "left" : "right"}
-            />
-          {/each}
+        {#if fieldsBackOneValues?.length > 0}
+          <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
+            {#each fieldsBackOneValues as fieldBackOne, i}
+              <CardCellExpanded
+                bind:value={cardProps[fieldBackOne.value]}
+                label={fieldBackOne.label}
+                allignText={i % 2 === 0 ? "left" : "right"}
+              />
+            {/each}
+          </div>
         {/if}
-      </div>
-      {#if fieldsBackOneValues?.length > 0}
-        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
-          {#each fieldsBackOneValues as fieldBackOne, i}
-            <CardCellExpanded
-              bind:value={cardProps[fieldBackOne.value]}
-              label={fieldBackOne.label}
-              allignText={i % 2 === 0 ? "left" : "right"}
-            />
-          {/each}
-        </div>
-      {/if}
-      {#if fieldsBackTwoValues?.length > 0}
-        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
-          {#each fieldsBackTwoValues as fieldBackTwo, i}
-            <CardCellExpanded
-              bind:value={cardProps[fieldBackTwo.value]}
-              label={fieldBackTwo.label}
-              allignText={i % 2 === 0 ? "left" : "right"}
-            />
-          {/each}
-        </div>
-      {/if}
-      {#if fieldsBackThreeValues?.length > 0}
-        <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
-          {#each fieldsBackThreeValues as fieldBackThree, i}
-            <CardCellExpanded
-              bind:value={cardProps[fieldBackThree.value]}
-              label={fieldBackThree.label}
-              allignText={i % 2 === 0 ? "left" : "right"}
-            />
-          {/each}
-        </div>
-      {/if}
+        {#if fieldsBackTwoValues?.length > 0}
+          <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
+            {#each fieldsBackTwoValues as fieldBackTwo, i}
+              <CardCellExpanded
+                bind:value={cardProps[fieldBackTwo.value]}
+                label={fieldBackTwo.label}
+                allignText={i % 2 === 0 ? "left" : "right"}
+              />
+            {/each}
+          </div>
+        {/if}
+        {#if fieldsBackThreeValues?.length > 0}
+          <div class=" front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
+            {#each fieldsBackThreeValues as fieldBackThree, i}
+              <CardCellExpanded
+                bind:value={cardProps[fieldBackThree.value]}
+                label={fieldBackThree.label}
+                allignText={i % 2 === 0 ? "left" : "right"}
+              />
+            {/each}
+          </div>
+        {/if}
 
-      <div class=" front-fields flex flex-col p-3 w-full">
-        <h1 class="card-field-label label py-0 font-bold text-lg w-full flex h-fit mb-2">Description</h1>
-        <div class="card-field-value label py-0 flex">
-          <textarea disabled class="textarea bg-none md:w-[75%] w-full h-full P-0" placeholder="Description"
-            >{description}</textarea
-          >
+        <div class=" front-fields flex flex-col p-3 w-full">
+          <h1 class="card-field-label label py-0 font-bold text-lg w-full flex h-fit mb-2">Description</h1>
+          <div class="card-field-value label py-0 flex">
+            <textarea disabled class="textarea bg-none md:w-[75%] w-full h-full P-0" placeholder="Description"
+              >{description}</textarea
+            >
+          </div>
+        </div>
+
+        <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
+          {#each generalFieldsBack as generalFields, i}
+            <CardCellExpanded
+              bind:value={cardProps[generalFields.value]}
+              label={generalFields.label}
+              allignText={i % 2 === 0 ? "left" : "right"}
+            />
+          {/each}
         </div>
       </div>
-
-      <div class="front-fields grid grid-rows-none grid-flow-row grid-cols-2 p-3 w-full h-fit">
-        {#each generalFieldsBack as generalFields, i}
-          <CardCellExpanded
-            bind:value={cardProps[generalFields.value]}
-            label={generalFields.label}
-            allignText={i % 2 === 0 ? "left" : "right"}
-          />
-        {/each}
-      </div>
+      <div class="document-pdf container h-[50vh] w-full p-3">Document Display incoming ...</div>
     </div>
-    <div class="document-pdf container h-[50vh] w-full p-3"> 
-      Document Display incoming ...
-    </div>
-  </div>
-{/if}
+  {/if}
+{/key}

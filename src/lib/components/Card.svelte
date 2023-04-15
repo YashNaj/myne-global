@@ -27,11 +27,11 @@
   import { cloneDeep } from "lodash";
   import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
   import { supabase } from "$lib/supabaseClient";
+  import SwiperPictures from "./SwiperPictures.svelte";
 
   export let myneCard;
 
   // box height for expanding cards
-
 
   // card external control values
   export let expanded = false;
@@ -45,6 +45,7 @@
   $: cardDisplayId = cardDisplayId;
   export let cardProps = {
     category: "",
+    pictures: [""],
   };
   export let description;
   let currency;
@@ -165,7 +166,7 @@
   });
 </script>
 
-<div bind:this={tiltElement} class=" lg:w-64 md:w-48 w-44 md:h-96 h-64 rounded-2xl z-1">
+<div bind:this={tiltElement} class=" lg:w-64 md:w-48 {inAddCard ? 'w-48' : 'w-44'} md:h-96 h-64 rounded-2xl z-1">
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
@@ -186,8 +187,8 @@
             <p>Expand</p>
           </a>
         </div>
-        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl">
-          <slot />
+        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-lg">
+          <SwiperPictures {pictures} />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">
           <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">

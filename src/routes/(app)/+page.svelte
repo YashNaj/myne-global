@@ -4,7 +4,7 @@
   import type { PageData } from "./$types";
   import { onMount } from "svelte";
   import CardVault from "$lib/components/CardVault.svelte";
-  import {  userCards, selectedCard, currentUser } from "$lib/store";
+  import { userCards, selectedCard, currentUser } from "$lib/store";
   import { trpc } from "$lib/trpc/client";
   import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
   import CardVaultMenu from "$lib/components/CardVaultMenu.svelte";
@@ -20,7 +20,6 @@
     cards = await trpc($page).cards.load.query(userId);
     cardsLoading = false;
   }
-
   export let myneCards = $page.data.getMyneCards;
   console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
 
@@ -48,18 +47,20 @@
 
 <div class="md:hidden p-2 w-full h-[100dvh] flex flex-col">
   <div class="w-full pt-20 h-full">
-  <CardFunctionModals />
-  <CardVaultMenu bind:categoryFilter bind:inputText />
-  <CardVault {categoryFilter} {inputText} mobile={true} />
-</div>
-
-</div>
-
-
-<div class="hidden md:flex w-full h-[100dvh] flex-col  scrollbar-track-transparent bg-[rgb(243,250,255)]">
-  <div class="w-full h-full pt-20 ">
     <CardFunctionModals />
-    <CardVaultMenu bind:categoryFilter bind:inputText />
+    <div class=" top-0 z-[99] fixed pt-[4rem]">
+      <CardVaultMenu bind:categoryFilter bind:inputText />
+    </div>
+    <CardVault {categoryFilter} {inputText} mobile={true} />
+  </div>
+</div>
+
+<div class="hidden md:flex w-full h-[100dvh] flex-col scrollbar-track-transparent bg-[rgb(243,250,255)] ">
+  <div class="w-full h-full pt-20">
+    <CardFunctionModals />
+    <div class=" top-0 pt-[4rem] z-[99] fixed">
+      <CardVaultMenu bind:categoryFilter bind:inputText />
+    </div>
     <CardVault {categoryFilter} {inputText} mobile={false} />
   </div>
 </div>

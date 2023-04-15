@@ -2,25 +2,13 @@
   import LoadingScreen from "./LoadingScreen.svelte";
   import { firstCapital } from "$lib/caps";
   export let size = "9";
-  import logo from "$lib/images/myne_logo.svg";
-  import { TabPanel } from "@rgossiaux/svelte-headlessui";
-  import { Icon, Plus } from "svelte-hero-icons";
   import { fade, fly, scale, slide } from "svelte/transition";
-  import AddCard from "./AddCard.svelte";
-  import CardFlippable from "./CardFlippable.svelte";
-  import Spinner from "./Spinner.svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
-  import { addCard, certificate, documentUpload, stolen, transfer, userCards } from "$lib/store";
-  import UserSelector from "./UserSelector.svelte";
-  import ReportStolen from "./ReportStolen.svelte";
-  import MakeCertificate from "./MakeCertificate.svelte";
-  import CardButtonDocumentUpload from "./CardButtonDocumentUpload.svelte";
-  import CardFunctionModals from "./CardFunctionModals.svelte";
-  import CardVaultMenu from "./CardVaultMenu.svelte";
-  import { backOut } from "svelte/easing";
-  import CardCell from "./CardCell.svelte";
+  import { userCards } from "$lib/store";
+  import { cubicIn, cubicOut } from "svelte/easing";
   import Card from "./Card.svelte";
-  export let data;
+  import type { PageData } from "../../routes/(app)/$types";
+  export let data: PageData;
   export let categoryFilter: string;
 
   let addCardOpen = false;
@@ -90,40 +78,16 @@
 </script>
 
 <div
-  class="w-full h-[105dvh] bg-[#f5f9ff] overflow-y-hidden
-"
+  class="grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place items-center p-4 w-full h-auto pt-20 z-10 overflow-x-disabled"
 >
-    <div
-      class:translate-y-full={addCardOpen}
-      class:ease-linear={addCardOpen}
-      class="h-[90vh] rounded-xl justify-center overflow-y-hidden w-full overflow-x-hidden transition-shadow duration-75 will-change-transform"
-      in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
-      out:slide|local={{ duration: 200, easing: backOut }}
-    >
+  {#key cardsFiltered}
+    {#each cardsFiltered as card}
       <div
-        class="w-full h-[80%] grid grid-rows-none grid-flow-row md:grid-cols-5 grid-cols-2 gap-2 overflow-y-auto
-         md:gap-2 will-change-auto place-items-center"
+        in:fly={{ x: -10, duration: 300, easing: cubicIn, opacity: 1 }}
+        out:fly={{ x: 10, duration: 300, delay: 350, easing: cubicOut, opacity: 0 }}
       >
-        {#if cardsFiltered?.length === 0}
-          <div transition:scale|local={{ delay: 10 }}>
-            <Card>
-              <h1 class="w-full h-full grid place-items-center text-primary font-semibold text-2xl">No cards found</h1>
-            </Card>
-          </div>
-        {/if}
-        {#each cardsFiltered as cardProps, i}
-          <div transition:scale|local={{ delay: 10 }}>
-            <Card
-              cardDisplayId={i}
-              cardProps={structuredClone({ ...cardProps })}
-              {mobile}
-              cardFrontSwiperId={i}
-              bind:expanded={cardExpanded}
-            >
-              <SwiperPictures {mobile} pictures={structuredClone(cardProps.pictures)} />
-            </Card>
-          </div>
-        {/each}
+        <Card inAddCard = {false} cardProps={structuredClone(card)} />
       </div>
-    </div>
+    {/each}
+  {/key}
 </div>

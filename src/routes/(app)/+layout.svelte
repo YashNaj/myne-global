@@ -50,7 +50,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 
-<div class="hidden w-screen h-[105dvh] md:flex flex-col justify-start content-center">
+<div class="hidden w-full h-[105dvh] md:flex flex-col justify-start content-center">
   <Navbar />
   <main class="h-full">
     {#key pathname}
@@ -62,7 +62,7 @@
     {/key}
   </main>
 </div>
-<div class=" md:hidden w-screen h-[105dvh]">
+<div class=" md:hidden w-full h-[105dvh]">
   <Navbar />
   <main class="h-full">
     {#key pathname}
