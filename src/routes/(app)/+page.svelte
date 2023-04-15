@@ -45,17 +45,17 @@
   let inputText;
 </script>
 
-<div class="md:hidden p-2 w-full h-[100dvh] flex flex-col">
+<div class="md:hidden bg-[rgb(243,250,255)] p-2 w-full h-full flex flex-col">
   <div class="w-full pt-20 h-full">
     <CardFunctionModals />
-    <div class=" top-0 z-[99] fixed pt-[4rem]">
+    <div class=" top-0 left-0 z-[99] fixed pt-[4rem] w-screen">
       <CardVaultMenu bind:categoryFilter bind:inputText />
     </div>
     <CardVault {categoryFilter} {inputText} mobile={true} />
   </div>
 </div>
 
-<div class="hidden md:flex w-full h-[100dvh] flex-col scrollbar-track-transparent bg-[rgb(243,250,255)] ">
+<div class="hidden md:flex w-full h-full flex-col scrollbar-track-transparent bg-[rgb(243,250,255)] ">
   <div class="w-full h-full pt-20">
     <CardFunctionModals />
     <div class=" top-0 pt-[4rem] z-[99] fixed">

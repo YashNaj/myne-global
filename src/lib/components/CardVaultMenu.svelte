@@ -29,7 +29,7 @@
   ];
 </script>
 
-<div class="navbar rounded-t-2xl mb-2 relative top-0 z-99 w-screen bg-[rgb(243,250,255)]">
+<div class="navbar mb-2 p-0 relative top-0 left-0 z-99 w-screen bg-[rgb(243,250,255)]">
   <div class="navbar-start">
     <div class="dropdown">
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->

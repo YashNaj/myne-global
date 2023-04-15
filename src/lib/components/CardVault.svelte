@@ -78,7 +78,7 @@
 </script>
 
 <div
-  class="grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-auto pt-20 z-10 overflow-x-disabled"
+  class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled "
 >
   {#key cardsFiltered}
     {#each cardsFiltered as card}

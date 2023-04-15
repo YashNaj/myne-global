@@ -50,29 +50,29 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 
-<div class="hidden w-full h-[105dvh] md:flex flex-col justify-start content-center">
+<div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-[rgb(243,250,255)]">
   <Navbar />
-  <main class="h-full">
     {#key pathname}
+    <main class = "bg-[rgb(243,250,255)] h-full">
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
           <slot />
         </div>
       </div>
+    </main>
     {/key}
-  </main>
 </div>
-<div class=" md:hidden w-full h-[105dvh]">
+<div class=" md:hidden w-full h-full bg-[rgb(243,250,255)]">
   <Navbar />
-  <main class="h-full">
     {#key pathname}
+    <main class = "bg-[rgb(243,250,255)] h-full">
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
           <slot />
         </div>
       </div>
+    </main>
     {/key}
-  </main>
 </div>
 
 <style lang="postcss">

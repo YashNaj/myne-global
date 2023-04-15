@@ -40,7 +40,6 @@
         },
       });
     }
-    window.scrollTo(1, 0);
   });
 
   $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
@@ -51,7 +50,7 @@
 </svelte:head>
 
 <QueryClientProvider client={queryClient}>
-  <main class="h-[100dvh]">
+  <main class = 'bg-[rgb(243,250,255)]'>
     <slot />
   </main>
 </QueryClientProvider>
