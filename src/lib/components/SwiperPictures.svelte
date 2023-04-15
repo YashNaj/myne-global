@@ -78,7 +78,7 @@
         </swiper-slide>
       {/each}
     {/if}
-    <swiper-slide class="w-[300px] aspect-[1/1] bg-black bg-opacity-50 rounded-2xl">
+    <swiper-slide class="md:w-[300px] md:aspect-[1/1] w-full bg-black bg-opacity-50 rounded-2xl">
       <label
         class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
         for="single"
