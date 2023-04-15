@@ -67,7 +67,7 @@
           <img
             id={i}
             alt="img"
-            class="mx-auto my-auto rounded-2xl object-contain object-center p-2 shadow-sm"
+            class="mx-auto my-auto rounded-2xl object-contain object-center md:p-4 p-2 shadow-sm"
             style="max-width: 100%; max-height: 100%;"
             src={getImageUrl(file)}
           />
