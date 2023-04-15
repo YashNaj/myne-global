@@ -377,7 +377,7 @@
 </script>
 
 <div 
-  class=" w-full h-screen flex flex-col md:grid-cols-2 md:grid bg-primary text-white pt-20 content-center rounded-2xl  from-white  relative shadow-lg" >
+  class=" w-full h-screen flex flex-col md:grid-cols-2 md:grid bg-primary text-white pt-20 content-center   from-white  relative shadow-lg" >
 <button on:click={()=>addCard.set(false)} class = 'btn btn-ghost w-fit aspect-[1/1] absolute md:top-[5rem] md:right-[1rem] top-[5rem] right-[1rem]'>
   <Icon color = 'white' src ={X} size = "48px"/>
 </button>  
@@ -394,8 +394,7 @@
     <form
       method="POST"
       action="/add_card"
-      class="h-full w-full form-gradient p-4 flex flex-col justify-between form-container text-white 
-                        rounded-2xl"
+      class="h-full w-full form-gradient p-4 flex flex-col justify-between form-container text-white"
       use:enhance={()=> {
          if(formData.success = true){
           success = true 

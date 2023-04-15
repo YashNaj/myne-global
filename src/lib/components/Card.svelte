@@ -161,12 +161,19 @@
         glare: true,
         "max-glare": 0.5,
         transition: false,
+        gyroscope: true,
+        
       });
     }
   });
 </script>
 
-<div bind:this={tiltElement} class=" lg:w-64 md:w-48 {inAddCard ? 'w-48' : 'w-44'} md:h-96 h-64 rounded-2xl z-1">
+<div
+  bind:this={tiltElement}
+  class=" lg:w-64 md:w-48 {inAddCard
+    ? 'w-48'
+    : 'w-44'} md:h-96 h-64 rounded-2xl z-1 [transform-style:preserve-3d;] [perspective:1000px;]"
+>
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
@@ -187,7 +194,7 @@
             <p>Expand</p>
           </a>
         </div>
-        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-lg">
+        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-lg [transformZ:20px;]">
           <SwiperPictures {pictures} />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">
