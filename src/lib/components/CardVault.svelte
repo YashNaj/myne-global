@@ -93,15 +93,6 @@
   class="w-full h-[105dvh] bg-[#f5f9ff] overflow-y-hidden
 "
 >
-  {#if $addCard}
-    <div
-      class="flex flex-row w-full h-fit justify-start items-center flex-wrap"
-      in:slide|local={{ duration: 200, delay: 250, easing: backOut }}
-      out:slide|local={{ duration: 200, easing: backOut }}
-    >
-      <AddCard {mobile} />
-    </div>
-  {:else}
     <div
       class:translate-y-full={addCardOpen}
       class:ease-linear={addCardOpen}
@@ -135,5 +126,4 @@
         {/each}
       </div>
     </div>
-  {/if}
 </div>

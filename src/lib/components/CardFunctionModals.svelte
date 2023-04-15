@@ -1,10 +1,11 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
-  import { certificate, documentUpload, stolen, transfer } from "$lib/store";
+  import { addCard, certificate, documentUpload, stolen, transfer } from "$lib/store";
   import CardButtonDocumentUpload from "./CardButtonDocumentUpload.svelte";
   import MakeCertificate from "./MakeCertificate.svelte";
   import ReportStolen from "./ReportStolen.svelte";
   import UserSelector from "./UserSelector.svelte";
+  import AddCard from "./AddCard.svelte";
 </script>
 
 <div>
@@ -38,6 +39,14 @@
       transition:fade|local
     >
       <MakeCertificate />
+    </div>
+  {/if}
+  {#if $addCard}
+    <div
+      class="w-full h-full flex flex-wrap justify-center content-center absolute bg-black bg-opacity-25 z-[998] backdrop-blur-lg rounded-2xl top-0 left-0"
+      transition:fade|local
+    >
+      <AddCard />
     </div>
   {/if}
 </div>

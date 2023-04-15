@@ -13,7 +13,6 @@
   import * as dayjs from "dayjs";
   export let success = false
   export let mobile;
-  $:console.log("🚀 ~ file: AddCard.svelte:18 ~ success:", success)
   import {
     jewelryProps,
     watchProps,
@@ -43,6 +42,9 @@
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
   import Card from "./Card.svelte";
+  import { Icon, X } from "svelte-hero-icons"; 
+  import { addCard } from "$lib/store"
+  
   let floatingConfig = {
     strategy: "bottom",
   };
@@ -125,9 +127,7 @@
   function brandFocus() {
     setFilterOpen();
   }
-  function setFlip() {
-    flipped = !flipped;
-  }
+
   type Brand = {
     brand: string;
     searchTerms: string;
@@ -376,9 +376,11 @@
 
 </script>
 
-<div
-  class=" w-full h-[90%] flex flex-col md:grid-cols-2 md:grid  px-2 pb-4 content-center rounded-lg bg-black bg-opacity-20 from-white  relative" 
->
+<div 
+  class=" w-[90%] h-fit flex flex-col md:grid-cols-2 md:grid bg-primary text-white p-10 content-center rounded-2xl  from-white  relative shadow-lg" >
+<button on:click={()=>addCard.set(false)} class = 'btn btn-ghost w-fit aspect-[1/1] absolute top-[1rem] right-[1rem]'>
+  <Icon color = 'white' src ={X} size = '24px'/>
+</button>  
   <div class="flex justify-center w-full h-full content-start order-2">
     <div class="card-sizer w-[66%] flex  top-[4rem] justify-center">
       <Card {inAddCard} {flipped} {cardProps} {pictures}>
@@ -447,7 +449,7 @@
             {addCardInputs} -->
       <div class="form-box w-full h-full flex flex-col place-items-center">
         <h1
-          class="text-2xl font-semibold w-full justify-start p-2 text-primary"
+          class="text-2xl font-semibold w-full justify-start p-2 text-white"
         >
           Add a Card
         </h1>
@@ -465,7 +467,7 @@
                 class="slide-0 w-full h-8 p-3 grid place-items-center"
               >
                 <div class="w-full  place-items-center">
-                  <div>
+                  <div class = 'z-99'>
                     <Select
                       {floatingConfig}
                       placeholder="Category"
