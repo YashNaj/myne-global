@@ -9,7 +9,8 @@
   import UserBadge from "./UserBadge.svelte";
   import Swiper from "swiper";
   import { afterUpdate, beforeUpdate, onMount } from "svelte";
-  import { ArrowCircleRight, ArrowRight, Home, Icon, SwitchHorizontal } from "svelte-hero-icons";
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import {  ArrowRight, Home, ArrowsRightLeft } from "@steeze-ui/heroicons";
   import { goto } from "$app/navigation";
   import { redirect } from "@sveltejs/kit";
   let cardId = "";

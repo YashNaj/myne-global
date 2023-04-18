@@ -1,6 +1,6 @@
 import { error, type RequestHandler } from '@sveltejs/kit';
 import generateCertificate from '$lib/server/pdf/generateCertificate';
-import { selectedCard } from "$lib/store";
+import { selectedCard } from "$lib/utils/store";
 export const POST:  RequestHandler = (async ({ locals, params, setHeaders, body }) => {
   const { user, session } = await locals.validateUser();
   if (!session) {

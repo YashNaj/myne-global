@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { User } from "lucia-auth";
-  import { Icon, User } from "svelte-hero-icons";
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import { User } from "@steeze-ui/heroicons";
   import { scale } from "svelte/transition";
   export let selected = false;
   export let userName = 'MG'

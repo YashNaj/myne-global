@@ -11,7 +11,8 @@
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
   import { selectedCard } from "$lib/utils/store";
-  import { Icon, ArrowsExpand } from "svelte-hero-icons";
+  import {Icon} from "@steeze-ui/svelte-icon";
+  import { ArrowsPointingOut } from "@steeze-ui/heroicons";
   import { cloneDeep } from "lodash";
   import { onMount } from "svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
@@ -113,7 +114,7 @@
               selectedCard.set(structuredClone(cardProps));
             }}
           >
-            <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowsExpand} />
+            <Icon size="12px" class="opacity-60 cursor-pointer  text-white" src={ArrowsPointingOut} />
             <p>Expand</p>
           </a>
         </div>

@@ -2,7 +2,8 @@
   import Spinner from "$lib/components/Spinner.svelte";
   import { afterUpdate, beforeUpdate, createEventDispatcher } from "svelte";
   import { supabase } from "$lib/utils/supabaseClient";
-  import { ArrowCircleLeft, ArrowCircleRight, CloudUpload, Icon } from "svelte-hero-icons";
+  import  { Icon } from "@steeze-ui/svelte-icon";
+  import {  CloudArrowUp } from "@steeze-ui/heroicons";
   import Swiper from "swiper";
   import { onMount } from "svelte";
   export let mobile = false;
@@ -88,7 +89,7 @@
         {:else}
           <div class="flex flex-col content-center flex-wrap justify-center">
             <div class="w-full flex justify-center">
-              <Icon src={CloudUpload} class="w-fit" color="white text-center" size="24px" />
+              <Icon src={CloudArrowUp} class="w-fit" theme = "solid" color="white text-center" size="24px" />
             </div>
             Upload a picture
           </div>

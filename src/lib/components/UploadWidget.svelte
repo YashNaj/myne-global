@@ -1,7 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { supabase } from '$lib/utils/supabaseClient';
-  import { CloudUpload, Icon } from 'svelte-hero-icons';
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import { CloudArrowUp } from '@steeze-ui/heroicons';
   import Spinner from './Spinner.svelte';
 
   export let size = 10;
@@ -90,7 +91,7 @@
         {#if uploading}
         <Spinner/>
         {:else}
-          <Icon src={CloudUpload} color = 'white' size = '24px'/> 
+          <Icon src={CloudArrowUp} color = 'white' size = '24px'/> 
           Upload a picture
         {/if}
       </label>

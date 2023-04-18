@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { certificate, documentUpload, stolen, transfer } from "$lib/store";
+  import { certificate, documentUpload, stolen, transfer } from "$lib/utils/store";
   import { onMount } from "svelte";
-  import { Icon, DocumentText, ShieldExclamation, SwitchHorizontal, Star } from "svelte-hero-icons";
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import { DocumentText, ShieldExclamation, ArrowsRightLeft, Star } from "@steeze-ui/heroicons";
   export let selected: boolean;
 </script>
 
@@ -15,7 +16,7 @@
       transfer.set(true);
     }}
   >
-    <Icon src={SwitchHorizontal} color="purple" class="opacity-90" size="30px" />
+    <Icon src={ArrowsRightLeft} color="purple" class="opacity-90" size="30px" />
     <p class="flex text-xs w-full justify-center text-violet-900">Transfer</p>
   </button>
 

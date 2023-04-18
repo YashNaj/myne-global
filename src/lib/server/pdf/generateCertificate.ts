@@ -4,7 +4,7 @@ import blobStream, { type IBlobStream } from "blob-stream";
 import myneLogo from "$lib/images/blue_myne_logo.png";
 import { promises as fs } from "fs";
 import fetch from "node-fetch";
-import { selectedCard } from "$lib/store";
+import { selectedCard } from "$lib/utils/store";
 async function loadFont(url: string): Promise<Buffer> {
   const response = await fetch(import.meta.env.VITE_PUBLIC_URL + url);
   const arrayBuffer = await response.arrayBuffer();

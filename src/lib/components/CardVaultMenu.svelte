@@ -1,7 +1,8 @@
 <script lang="ts">
   import { firstCapital } from "$lib/utils/caps";
   import { addCard } from "$lib/utils/store";
-  import { Icon, Plus } from "svelte-hero-icons";
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import { Plus } from "@steeze-ui/heroicons";
 
   export let categoryFilter;
   export let inputText;

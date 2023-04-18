@@ -1,5 +1,4 @@
 <script lang="ts">
-  import LoadingScreen from "./LoadingScreen.svelte";
   import { firstCapital } from "$lib/utils/caps";
   export let size = "9";
   import { fade, fly, scale, slide } from "svelte/transition";

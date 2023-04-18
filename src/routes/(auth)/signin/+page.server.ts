@@ -29,7 +29,7 @@ export const actions: Actions = {
 
       const session = await auth.createSession(key.userId);
       console.log(session);
-      locals.auth.setSession({session});
+      locals.auth.setSession(session);
     } catch (error) {
       if (error instanceof LuciaError && error.message === "AUTH_INVALID_PROVIDER_ID") {
         return fail(400, {

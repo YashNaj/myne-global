@@ -1,19 +1,18 @@
 <script lang="ts">
-	import { template, generalFieldsBack } from './../../../../forms';
+	import { template, generalFieldsBack } from '$lib/utils/forms';
   import { page } from "$app/stores";
-  import CardSlider from "$lib/components/CardSlider.svelte";
   import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import { trpc } from "$lib/trpc/client";
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { transfer, stolen, documentUpload, certificate, selectedCard } from "$lib/store";
+  import { transfer, stolen, documentUpload, certificate, selectedCard } from "$lib/utils/store";
   import StolenBadge from "$lib/components/StolenBadge.svelte";
 
   import { cloneDeep } from "lodash";
   import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
-  import { supabase } from "$lib/supabaseClient";
+  import { supabase } from "$lib/utils/supabaseClient";
   import CardCellExpanded from "$lib/components/CardCellExpanded.svelte";
   let isCardPropsInitialized = false;
   $: isCardPropsInitialized = !!cardProps;

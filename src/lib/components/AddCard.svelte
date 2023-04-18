@@ -40,7 +40,8 @@
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
   import Card from "./Card.svelte";
-  import { Icon, X } from "svelte-hero-icons"; 
+  import { Icon } from "@steeze-ui/svelte-icon"
+  import { XMark } from "@steeze-ui/heroicons"
   import { addCard } from "$lib/utils/store"
   
   let floatingConfig = {

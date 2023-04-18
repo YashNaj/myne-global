@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { capitalizeFirstWord, firstCapital } from "$lib/caps";
+  import { capitalizeFirstWord, firstCapital } from "$lib/utils/caps";
   import { slide } from "svelte/transition";
-  import type { IcardProps } from "../../cardProps";
+  import type { IcardProps } from "$lib/utils/cardProps";
   import { text } from "svelte/internal";
   export let allignText = "";
   let textSlug = "text-" + allignText;
