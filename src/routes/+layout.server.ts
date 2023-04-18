@@ -56,7 +56,7 @@ export const load = ((async ({ url, locals }) => {
       })
       .profile();
     loading = false
-    throw redirect(202, "/home");
+    throw redirect(202, "/app");
     return { isUser: true, profile:profile(), loading, user_id }
   } else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);
