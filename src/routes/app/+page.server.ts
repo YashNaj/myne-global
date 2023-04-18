@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 
 export const load: PageServerLoad = async (event) => {
   console.time("loadFunctionTimer");
-  const { session } = await event.locals.auth.validate();
+  const  session  = await event.locals.auth.validate();
   if (!session) {
     throw redirect(302, "/auth/signin");
   }

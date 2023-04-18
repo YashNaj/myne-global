@@ -27,7 +27,7 @@
   <Navbar>
     <NavbarHome />
   </Navbar>
-  <main class="bg-[rgb(243,250,255)] pt-20">
+  <main class="bg-[rgb(243,250,255)] pt-[4rem] h-full">
     <slot />
   </main>
 </div>
