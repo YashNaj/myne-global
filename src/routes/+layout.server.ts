@@ -1,15 +1,9 @@
 
-import { getUser } from "$lib/server/server";
-import { handleServerSession } from "@lucia-auth/sveltekit";
 import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
-import { getSessionUser } from "$lib/server/lucia";
 import { auth } from "$lib/server/lucia";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { cardPropsArray, cardProps, isHeirloom } from "../cardProps";
-import { createContext } from '$lib/trpc/context';
-import { router } from '$lib/trpc/router';
-import { currentUser } from '$lib/store'
+import { currentUser } from '$lib/utils/store'
 
 const prisma = new PrismaClient();
 const anyoneAllowed = [
@@ -23,15 +17,14 @@ const anyoneAllowed = [
   "/test",
   "/test2",
 ];
-export const load = handleServerSession((async ({ url, locals }) => {
+export const load = ((async ({ url, locals }) => {
   const onUnauthedRoute = anyoneAllowed.some((route) => url.pathname.startsWith(route));
-  const { session, user } = await locals.validateUser();
+  const session = await locals.auth.validate();
   
   if (onUnauthedRoute) return {};
-  
   else if (!session) {
     throw redirect(303, "/signin");
-  } else if (user?.valid) {
+  } else if (user.valid) {
     let user_id = user.userId;
 
     // const query = {
@@ -54,7 +47,7 @@ export const load = handleServerSession((async ({ url, locals }) => {
     //       .map((prop) => [prop, true])
     //   ),}
     let loading = true; 
-    const profile = async() => await prisma.user
+    const profile = async() => await prisma.authUser
       .findUnique({
         where: {
           id: user_id,
@@ -62,6 +55,7 @@ export const load = handleServerSession((async ({ url, locals }) => {
       })
       .profile();
     loading = false
-    return { isUser: true, profile:profile(), loading, user_id };
+    throw redirect(202, "/home");
+    return { isUser: true, profile:profile(), loading, user_id }
   } else throw redirect(302, "/unverified-email");
 }) satisfies LayoutServerLoad);

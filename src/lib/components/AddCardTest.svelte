@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { sizes } from "./../../size";
-  import { myneMasterBrandsAndBreeds } from "./../../index";
-  import { createSearchStore, searchHandler } from "$lib/search";
+  import { sizes } from "$lib/utils/size";
+  import { myneMasterBrandsAndBreeds } from "$lib/utils/myneMasterBrandsAndBreeds";
+  import { createSearchStore, searchHandler } from "$lib/utils/search";
   import { page } from "$app/stores";
   import Select from "svelte-select";
   import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
@@ -9,8 +9,8 @@
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
-  import focusSlide from "$lib/swiperActions";
-  import focusBackTwo from "$lib/swiperCardBackOne";
+  import focusSlide from "$lib/utils/swiperActions";
+  import focusBackTwo from "$lib/utils/swiperCardBackOne";
   import SwiperStandard from "$lib/components/SwiperStandard.svelte";
   import "svelte-select/tailwind.css";
   export let success = false;
@@ -51,7 +51,7 @@
   } from "../../routes/fieldProps";
   import PrevButton from "$lib/components/PrevButton.svelte";
   import NextButton from "$lib/components/NextButton.svelte";
-  import { firstCapital } from "$lib/caps";
+  import { firstCapital } from "$lib/utils/caps";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import UploadWidget from "$lib/components/UploadWidget.svelte";
   import Carousel from "$lib/components/Carousel.svelte";

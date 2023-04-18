@@ -1,10 +1,8 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { pictures } from "./../../cardProps.ts";
   import { cloneDeep } from "lodash";
   import { scale } from "svelte/transition";
-  import { stolen, selectedCard } from "$lib/store";
-  import CardFlippable from "./CardFlippable.svelte";
+  import { stolen, selectedCard } from "$lib/utils/store";
   import { trpc } from "$lib/trpc/client";
   import SwiperPictures from "./SwiperPictures.svelte";
   import Spinner from "./Spinner.svelte";

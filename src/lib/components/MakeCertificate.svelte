@@ -1,6 +1,6 @@
 <script lang="ts">
     import { scale } from "svelte/transition";
-    import { selectedCard, certificate, userCards } from "$lib/store";
+    import { selectedCard, certificate, userCards } from "$lib/utils/store";
     import { trpc } from "$lib/trpc/client";
     let cardId = $selectedCard.id; 
     let card = $userCards.find((obj)=> {

@@ -8,40 +8,41 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model User {
+model AuthUser {
   id                          String                        @id @unique
+  auth_session                AuthSession[]
+  auth_key                    AuthKey[]
   email                       String                        @unique
   role                        Role                          @default(USER)
   valid                       Boolean
   passwordVerificationRequest PasswordVerificationRequest[]
   emailVerificationRequest    EmailVerificationRequest[]
-  key                         Key[]
   profile                     Profile?
-  session                     Session[]
 
-  @@map("user")
+  @@map("auth_user")
 }
 
-model Session {
-  id             String @id @unique
+model AuthSession {
+  id             String   @id @unique
   user_id        String
   active_expires BigInt
   idle_expires   BigInt
-  user           User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  auth_user      AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@index([user_id])
-  @@map("session")
+  @@map("auth_session")
 }
 
-model Key {
-  id              String  @id @unique
+model AuthKey {
+  id              String   @id @unique
   hashed_password String?
   user_id         String
-  primary         Boolean
-  user            User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  primary_key     Boolean
+  expires         BigInt?
+  auth_user       AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@index([user_id])
-  @@map("key")
+  @@map("auth_key")
 }
 
 model Profile {
@@ -55,7 +56,7 @@ model Profile {
   phone     String
   ChildId   ChildId[]
   myneCard  MyneCard[]
-  user      User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  auth_user AuthUser   @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@map("profile")
 }
@@ -187,7 +188,7 @@ model EmailVerificationRequest {
   token     String   @unique @default(uuid())
   user_id   String
   expiresAt DateTime
-  user      User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@map("emailVerificationRequest")
 }
@@ -198,7 +199,7 @@ model PasswordVerificationRequest {
   user_id   String
   expiresAt DateTime @db.Timestamp(1)
   email     String
-  user      User     @relation(fields: [user_id], references: [id])
+  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 }
 
 model stolenWatches {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import { scale } from "svelte/transition";
-  import { selectedCard, documentUpload ,certificate } from "$lib/store";
+  import { selectedCard, documentUpload ,certificate } from "$lib/utils/store";
   import { trpc } from "$lib/trpc/client";
   let loading = false;
 

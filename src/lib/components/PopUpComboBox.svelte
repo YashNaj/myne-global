@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { firstCapital } from "$lib/caps";
+  import { firstCapital } from "$lib/utils/caps";
   import {
     Listbox,
     ListboxButton,
@@ -10,7 +10,7 @@
     PopoverPanel,
   } from "@rgossiaux/svelte-headlessui";
   import { slide } from "svelte/transition";
-  import { myneMasterBrandsAndBreeds } from "../../index";
+  import { myneMasterBrandsAndBreeds } from "$lib/utils/myneMasterBrandsAndBreeds";
   let value = "";
   export let label = "";
   export let name = "";

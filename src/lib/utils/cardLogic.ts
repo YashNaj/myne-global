@@ -22,7 +22,7 @@ import {
   otherFields,
   otherAnimalFields,
   childIdFields,
-} from "../../forms";
+} from "$lib/utils/forms";
 import {
   jewelryProps,
   watchProps,
@@ -41,7 +41,7 @@ import {
   autoProps,
   motoProps,
   otherProps,
-} from "../../routes/fieldProps";
+} from "$lib/utils/fieldProps";
 
 export interface IcardProps {
   [key: string]: string | boolean | null | bigint | string[];

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import Card from "$lib/components/Card.svelte";
-  import { userCards } from "$lib/store";
+  import { userCards } from "$lib/utils/store";
   import CardCell from "$lib/components/CardCell.svelte";
   import UserSelector from "$lib/components/UserSelector.svelte";
   import { draw } from "svelte/transition";

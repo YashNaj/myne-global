@@ -5,11 +5,10 @@ import { LuciaError } from "lucia-auth";
 import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { page } from "$app/stores";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const origin = "https://myneglobal.com" || "http://localhost:5173";
-
 const sendEmailVerificationLink = async (
   user: string,
   origin: string,
@@ -17,7 +16,7 @@ const sendEmailVerificationLink = async (
   url: string
 ) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
-  const request = await prisma.user.update({
+  const request = await prisma.authUser.update({
     where: {
       id: user.userId,
     },
@@ -58,12 +57,12 @@ const sendEmailVerificationLink = async (
   }
 };
 export const load: PageServerLoad = async ({ locals }) => {
-  const session = await locals.validate();
+  const session = await locals.auth.validate();
   console.log(session);
-  if (session) throw redirect(302, "/");
-  return {};
+  if (session) throw redirect(302, "/home");
 };
 export const actions: Actions = {
+  
   default: async ({ request, locals, url }) => {
     const form = await request.formData();
     const email = form.get("email");
@@ -86,7 +85,7 @@ export const actions: Actions = {
     }
     try {
       const user = await auth.createUser({
-        key: {
+        primaryKey: {
           providerId: "email",
           providerUserId: email,
           password,
@@ -98,10 +97,10 @@ export const actions: Actions = {
       });
 
       console.log("🚀 ~ file: +page.server.ts:102 ~ default: ~ user", user);
-      const session = await auth.createSession(user?.userId);
-      locals.setSession(session);
+      const session = await auth.createSession(user.userId);
+      locals.auth.setSession(session);
 
-      const profileUpsert = await prisma.user.update({
+      const profileUpsert = await prisma.authUser.update({
         where: {
           id: user.userId,
         },
@@ -121,7 +120,7 @@ export const actions: Actions = {
       console.log(profileUpsert);
       await sendEmailVerificationLink(user, origin, email);
       console.log("success");
-      locals.setSession(session);
+      locals.auth.setSession(session);
     } catch (error) {
       if (error instanceof LuciaError) {
         return fail(400), { message: error.message };

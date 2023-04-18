@@ -3,8 +3,8 @@
   import { writable } from "svelte/store";
 
   let toggle = false;
-  export let size = "";
-  export let animationStyle = writable("spin");
+  let size = "";
+  let animationStyle = writable("spin");
   import logo from "$lib/images/white_icon.png";
   import { scale } from "svelte/transition";
 </script>
@@ -14,9 +14,3 @@
     <img alt="myne-logo" src={logo} class="w-full h-full max-w-full animate-spin" />
   </div>
 </div>
-
-<style lang="postcss">
-  .estimate {
-    border-radius: 100%;
-  }
-</style>

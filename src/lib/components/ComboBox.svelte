@@ -1,6 +1,6 @@
 <script lang='ts'>
     import Select from 'svelte-select';
-    import { myneMasterBrandsAndBreeds } from '../..';  
+    import { myneMasterBrandsAndBreeds } from '$lib/utils/myneMasterBrandsAndBreeds';  
     let jewlery = myneMasterBrandsAndBreeds[0].brands
     let collection = [
  

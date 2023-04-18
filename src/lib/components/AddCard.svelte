@@ -1,14 +1,13 @@
 <script lang="ts">
-  import { sizes } from "./../../size";
-  import { myneMasterBrandsAndBreeds } from "./../../index";
+  import { sizes } from "$lib/utils/size";
+  import { myneMasterBrandsAndBreeds } from '$lib/utils/myneMasterBrandsAndBreeds';
   import { Transition } from "@rgossiaux/svelte-headlessui";
-  import { createSearchStore, searchHandler } from "$lib/search";
+  import { createSearchStore, searchHandler } from "$lib/utils/search";
   import { page } from "$app/stores";
   import { backOut } from 'svelte/easing'
   import Select from 'svelte-select'
   import { onDestroy, onMount } from "svelte";
   import { enhance } from "$app/forms";
-  import CardFlippable from "$lib/components/CardFlippable.svelte";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
   export let success = false
@@ -19,7 +18,7 @@
     artProps,
     leatherProps,
     clothingProps,
-    sneakerProps,
+  sneakerProps,
     firearmsProps,
     technologyProps,
     tradingCardsProps,
@@ -31,19 +30,18 @@
     autoProps,
     motoProps,
     otherProps,
-  } from "../../routes/fieldProps";
+  } from "$lib/utils/fieldProps";
   import PrevButton from "$lib/components/PrevButton.svelte";
   import NextButton from "$lib/components/NextButton.svelte";
-  import { firstCapital } from "$lib/caps";
+  import { firstCapital } from "$lib/utils/caps";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import UploadWidget from "$lib/components/UploadWidget.svelte";
-  import Carousel from "$lib/components/Carousel.svelte";
   import Swiper from "swiper";
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
   import Card from "./Card.svelte";
   import { Icon, X } from "svelte-hero-icons"; 
-  import { addCard } from "$lib/store"
+  import { addCard } from "$lib/utils/store"
   
   let floatingConfig = {
     strategy: "bottom",

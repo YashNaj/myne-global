@@ -1,16 +1,14 @@
 <script lang="ts">
   import LoadingScreen from "./LoadingScreen.svelte";
-  import { firstCapital } from "$lib/caps";
+  import { firstCapital } from "$lib/utils/caps";
   export let size = "9";
   import { fade, fly, scale, slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
-  import { userCards } from "$lib/store";
+  import { userCards } from "$lib/utils/store";
   import { cubicIn, cubicOut } from "svelte/easing";
   import Card from "./Card.svelte";
-  import type { PageData } from "../../routes/(app)/$types";
-  export let data: PageData;
+  export let data; 
   export let categoryFilter: string;
-
   let addCardOpen = false;
   let loading = false;
   let cardExpanded: boolean = false;
@@ -78,13 +76,13 @@
 </script>
 
 <div
-  class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled "
+  class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled bg-transparent backdrop-blur-xl "
 >
   {#key cardsFiltered}
     {#each cardsFiltered as card}
       <div
-        in:fly={{ x: -10, duration: 300, easing: cubicIn, opacity: 1 }}
-        out:fly={{ x: 10, duration: 300, delay: 350, easing: cubicOut, opacity: 0 }}
+        in:fly={{ y: -10, duration: 300, delay: 400, easing: cubicIn, opacity: 1 }}
+        out:fly={{ y: 10, duration: 300, delay: 400, easing: cubicOut, opacity: 0 }}
       >
         <Card inAddCard = {false} cardProps={structuredClone(card)} />
       </div>

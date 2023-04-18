@@ -1,41 +1,56 @@
 <script lang="ts">
+  import type { LayoutData } from "./$types";
+  import { page } from "$app/stores";
   import Alert from "$lib/components/Alert.svelte";
   import logo from "$lib/images/blue_myne_logo.png";
   import whiteLogo from "$lib/images/white_myne_logo.png";
-
   export let form = { message: "", signingIn: false };
   import { register } from "swiper/element/bundle";
-  // register Swiper custom elements
+  import { cubicIn, cubicOut } from "svelte/easing";
+  import { fly } from "svelte/transition";
+  export let data: LayoutData;
+  $: pathname = data.pathname;
+  console.log(data.pathname);
   register();
-  import { page } from "$app/stores";
+  const duration = 300;
+  const delay = duration + 100;
+  const y = 10;
+
+  const transitionIn = { easing: cubicOut, y, duration, delay };
+  const transitionOut = { easing: cubicIn, y: -y, duration };
 </script>
 
 <div
-  class="auth-container bg-primary w-screen h-screen flex-col flex flex-wrap justify-start content-center overflow-hidden pt-4 lg:hidden"
+  class="auth-container bg-[rgb(231, 240, 255)] w-screen h-screen flex-col flex flex-wrap justify-start content-center overflow-hidden pt-4 lg:hidden overflow-x-hidden overflow-y-hidden"
 >
-  <div class="auth-box rounded-xl shadow-lg w-[80%] h-[90%] card bg-primary ">
-    <img class="max-w-full p-3 w-32" src={logo} alt="myne-logo" />
-    <h1 />
-    <slot />
+  <div class="auth-box rounded-none rounded-t-2xl shadow-xl w-full h-full card bg-primary/80 backdrop-blur-[300px]">
+    <img class="max-w-full p-3 w-32" src={whiteLogo} alt="myne-logo" />
+    {#key pathname}
+      <div in:fly={transitionIn} out:fly={transitionOut}>
+        <slot />
+      </div>
+    {/key}
   </div>
 </div>
 
 <div
-  class="auth-container bg-none desktop-background w-screen h-screen flex-col flex-wrap justify-start content-center overflow-hidden pt-4 hidden lg:flex"
+  class="auth-container bg-[rgb(231, 240, 255)] w-screen h-screen flex-col flex-wrap justify-start content-center overflow-hidden pt-4 hidden lg:flex"
 >
-  <div class="absolute bottom-[20rem] font-bold text-3xl text-black">SOMETHING COOL CAN GO IN THIS WHITESPACE</div>
-  <div
-    class="h-full w-full z-0 absolute top-0 bg-[url('$lib/images/desktopAuthWave.svg')] bg-cover bg-no-repeat"
-    />
+  <div class="absolute bottom-[20rem] font-bold text-3xl text-black" />
+  <div class="h-full w-full z-0 absolute top-0 bg-[url('$lib/images/desktopAuthWave.svg')] bg-cover bg-no-repeat" />
   <div class="flex w-full h-full relative justify-between">
     <div>
       <img class="max-w-full w-[40rem] p-3 top-0 w" src={whiteLogo} alt="myne-logo" />
     </div>
     <div class="w-full flex justify-center content-center flex-wrap relative">
       <div
-        class="auth-box rounded-xl shadow-lg w-[40%] lg:h-[80%] h-[50%] card bg-primary p-4 absolute lg:bottom-[5rem] bottom-[20rem] right-[5rem] "
+        class="auth-box shadow-lg bg-primary/50 backdrop-blur-[300px] w-[40%] lg:h-[80%] h-[50%] card bg-primary p-4 absolute lg:bottom-[5rem] bottom-[20rem] right-[5rem]"
       >
-        <slot />
+        {#key pathname}
+          <div in:fly={transitionIn} out:fly={transitionOut}>
+            <slot />
+          </div>
+        {/key}
       </div>
     </div>
   </div>
@@ -46,13 +61,3 @@
     <Alert message={form.message} />
   </div>
 {/if}
-
-<style lang="postcss">
-  .auth-container {
-    background-color: #cce0ff;
-  }
-  .auth-box {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    background: rgb(231, 240, 255);
-  }
-</style>

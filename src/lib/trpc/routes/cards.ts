@@ -4,8 +4,7 @@ import { getSessionUser } from "$lib/server/lucia";
 import { t } from "$lib/trpc/t";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { protectedProcedure } from "$lib/trpc/middleware/auth";
-import { userCards, currentUser } from "$lib/store";
-import { cOfAuth } from "../../../cardProps";
+import { userCards, currentUser } from "$lib/utils/store";
 const prisma = new PrismaClient();
 // Define the types for the input and output of the endpoint
 const myneCardsOutputSchema = z.object({
@@ -34,10 +33,10 @@ export const cards = t.router({
     // 👈 use auth middleware
     .query(async ({ ctx }) => {
       let user_id = ctx.user.userId;
-    
+
       const cards = await prisma.myneCard.findMany({
         where: {
-          user_id
+          user_id,
         },
       });
       const filteredCards = cards.map((card) => {
@@ -81,6 +80,15 @@ export const cards = t.router({
           },
         })
     ),
+  singleCard: protectedProcedure.input(z.string()).query(async (ctx, { input: id }) => {
+    let user_id = ctx.user.userId;
+    await prisma.myneCard.findUnique({
+      where: {
+        user_id,
+        id: input.id,
+      },
+    });
+  }),
   reportStolen: protectedProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.myneCard.update({
       where: {

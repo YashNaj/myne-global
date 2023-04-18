@@ -1,18 +1,18 @@
 <script lang="ts">
   import { Transition } from "@rgossiaux/svelte-headlessui";
-  import { createSearchStore, searchHandler } from "$lib/search";
+  import { createSearchStore, searchHandler } from "$lib/utils/search";
   import { page } from "$app/stores";
   import type { LayoutServerData } from "../$types";
   import Select from "svelte-select";
   import { onDestroy, onMount } from "svelte";
-  import type { IcardProps } from "./../../../cardProps";
-  import { myneMasterBrandsAndBreeds } from "./../../../index";
+  import type { IcardProps } from "$lib/utils/cardProps";
+  import { myneMasterBrandsAndBreeds } from "$lib/utils/myneMasterBrandsAndBreeds";
   import { enhance } from "$app/forms";
   import CardFlippable from "$lib/components/CardFlippable.svelte";
   import type { PageData, Snapshot } from "./$types";
   import { slide } from "svelte/transition";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
-  import { sizes } from "../../../size";
+  import { sizes } from "$lib/utils/size";
   import * as dayjs from "dayjs";
   import SwiperStandard from "$lib/components/SwiperStandard.svelte";
 

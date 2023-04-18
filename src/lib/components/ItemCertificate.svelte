@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { myneMasterBrandsAndBreeds } from '$lib/utils/myneMasterBrandsAndBreeds';
   import Spinner from "$lib/components/Spinner.svelte";
-  import { myneMasterBrandsAndBreeds } from "./../../index";
   import { beforeUpdate, onMount } from "svelte";
   import { Download, SearchCircle, UserAdd } from "@steeze-ui/heroicons";
   import Select from "svelte-select";

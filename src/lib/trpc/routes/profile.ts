@@ -3,7 +3,7 @@ import { z } from "zod";
 import { t } from "$lib/trpc/t";
 import delay from "delay";
 import { protectedProcedure } from "$lib/trpc/middleware/auth";
-import { currentUser } from "$lib/store";
+import { currentUser } from "$lib/utils/store";
 import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 export const profile = t.router({

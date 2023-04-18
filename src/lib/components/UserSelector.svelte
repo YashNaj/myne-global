@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { selectedCard, transfer, currentUser} from "$lib/store";
+  import { selectedCard, transfer, currentUser} from "$lib/utils/store";
   import { page } from "$app/stores";
   import { trpc } from "$lib/trpc/client";
   import type { User } from "lucia-auth";

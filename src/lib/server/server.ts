@@ -1,5 +1,5 @@
 import { redirect } from "@sveltejs/kit";
-import type { User } from "lucia-auth/types";
+import type { user } from "lucia-auth/types";
 import type { Role } from "./roles";
 
 
@@ -30,7 +30,7 @@ export const getUser = async (
     }
     const { rolesAll, rolesSome, url } = Object.assign(DEFAULT_OPTIONS, options ?? {})
 
-    const { user } = await locals.validateUser()
+    const { user } = await locals.auth.validateUser()
 
     if (
         !user ||

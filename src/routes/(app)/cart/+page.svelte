@@ -4,7 +4,7 @@
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">Cart Under Construction</h1>
         <p class="py-6">
-          What's up handsome ;) 
+          What's up handsome ;
           Stand by for cart functionality. 
         </p>
         <a href = '/' class="btn btn-primary normal-case">Go Home</a>

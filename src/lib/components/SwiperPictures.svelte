@@ -1,7 +1,7 @@
 <script lang="ts">
   import Spinner from "$lib/components/Spinner.svelte";
   import { afterUpdate, beforeUpdate, createEventDispatcher } from "svelte";
-  import { supabase } from "$lib/supabaseClient";
+  import { supabase } from "$lib/utils/supabaseClient";
   import { ArrowCircleLeft, ArrowCircleRight, CloudUpload, Icon } from "svelte-hero-icons";
   import Swiper from "swiper";
   import { onMount } from "svelte";
@@ -46,17 +46,17 @@
 
   const getImageUrl = (file) => {
     let publicUrl = supabase.storage.from("card-images").getPublicUrl(file).data.publicUrl;
-    console.log(publicUrl);
     return publicUrl;
   };
 </script>
 
 <div class="relative w-full h-full md:aspect-[16/9] aspect-[1/1] rounded-2xl bd-opacity {expanded ? 'md:p-4' : ''}">
   <swiper-container
+    class="w-full h-full md:aspect-[16/9] aspect-[1/1] flex justify-center
+    {expanded ? "md:p-4 p-2" : ""}"
     slides-per-view={expanded ? "auto" : 1}
     observer={true}
     observer-parents={true}
-    class="w-full h-full md:aspect-[16/9] aspect-[1/1] f`lex justify-center"
     space-between="100"
   >
     {#if pictures.length > 0 && pictures[0] !== ""}

@@ -1,32 +1,19 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   export const csr = true;
   import VanillaTilt, { type HTMLVanillaTiltElement } from "vanilla-tilt";
-  import { page } from "$app/stores";
-  import { template, generalFieldsBack } from "./../../forms";
-  import CardSlider from "./CardSlider.svelte";
-  import CardButtonWidget from "$lib/components/CardButtonWidget.svelte";
+  import { template, generalFieldsBack } from "$lib/utils/forms";
+  import StolenBadge from "./StolenBadge.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import { trpc } from "$lib/trpc/client";
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { transfer, stolen, documentUpload, certificate, selectedCard } from "$lib/store";
-  import StolenBadge from "./StolenBadge.svelte";
-  import {
-    Icon,
-    DocumentText,
-    ShieldExclamation,
-    SwitchHorizontal,
-    Star,
-    ArrowCircleLeft,
-    ArrowsExpand,
-    ArrowCircleRight,
-    CloudUpload,
-  } from "svelte-hero-icons";
+  import { selectedCard } from "$lib/utils/store";
+  import { Icon, ArrowsExpand } from "svelte-hero-icons";
   import { cloneDeep } from "lodash";
-  import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
-  import { supabase } from "$lib/supabaseClient";
+  import { onMount } from "svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
 
   export let myneCard;
@@ -55,66 +42,17 @@
     style: "currency",
     currency: "USD",
   });
-  let cardSide = writable("front");
-
   export let selectedFields;
-
   $: if (cardProps) {
     formFieldsObject[cardProps?.category];
   }
   $: cardProps = cardProps;
 
-  //expansion logic
-  let expandWidth = 250;
-  let expandHeight = (expandWidth * 7) / 5;
-
-  if (mobile) {
-    expandWidth = 150;
-    expandHeight = 300;
-  }
-
-  let expandedWidth = spring(expandWidth, {
-    stiffness: 0.15,
-    damping: 0.5,
-  });
-  $: console.log("is mobile", mobile);
-  let expandedHeight = spring(expandHeight, {
-    stiffness: 0.15,
-    damping: 0.5,
-  });
-  let expandedPosition = writable("relative");
-  let zIndex = writable(1);
-  let scrollPosition = writable(0);
-  function toggleExpand() {
-    expanded = !expanded;
-    if (!expanded) {
-      expandedHeight.set(expandHeight);
-      expandedWidth.set(expandWidth);
-      expandedPosition.set("relative");
-      scrollPosition.set(0);
-      zIndex.set(1);
-    } else {
-      expandedHeight.set(h);
-      expandedWidth.set(w);
-      expandedPosition.set("absolute");
-      scrollPosition.set(scrollTop);
-      zIndex.set(99);
-    }
-  }
-  function toggleFlipped() {
-    flipped = !flipped;
-    if (!flipped) {
-      cardSide.set("front");
-    } else {
-      cardSide.set("back");
-    }
-  }
   export let pictures = [];
   $: if (cardProps?.pictures.length > 0) {
     pictures = cardProps.pictures;
   }
 
-  $: console.log("pictures array ", pictures);
   //add general fields config here  let categoryKey: keyof typeof colors | keyof typeof formFieldsObject;
   $: categoryKey = cardProps?.category?.toLowerCase() as keyof typeof colors | keyof typeof formFieldsObject;
   let pickedColor: string;
@@ -124,27 +62,13 @@
   type cardValues = (typeof cardProps)[keyof typeof cardProps];
   let formFields = template;
   let fieldsFrontValues: formValues = template.fieldsFront;
-  let fieldsBackOneValues: formValues = template.fieldsBackOne;
-  let fieldsBackTwoValues: formValues = template.fieldsBackTwo;
-  let fieldsBackThreeValues: formValues = template.fieldsBackThree;
 
   $: formFields = formFieldsObject[categoryKey];
   $: if (formFields != undefined) {
-    (fieldsFrontValues = formFields?.fieldsFront),
-      (fieldsBackOneValues = formFields?.fieldsBackOne),
-      (fieldsBackTwoValues = formFields?.fieldsBackTwo),
-      (fieldsBackThreeValues = formFields?.fieldsBackThree);
+    fieldsFrontValues = formFields?.fieldsFront;
   }
   let cardId: string;
   export let cardFrontSwiperId = 1;
-  export let cardBackSwiperId = 1;
-  let pictureSwiper;
-  let singleCard;
-  let uploading = false;
-  let files: FileList;
-  let uploadButton: HTMLInputElement;
-  const dispatch = createEventDispatcher();
-
   const gridClasses = ["row-1 col-1 ", "row-1 col-2 ", "row-2 col-1 ", "row-2 col-2 ", "row-3 col-1", "row-3 col-2"];
 
   // Define a function to determine the grid class for each cell based on its index
@@ -162,7 +86,6 @@
         "max-glare": 0.5,
         transition: false,
         gyroscope: true,
-        
       });
     }
   });
@@ -184,7 +107,7 @@
       >
         <div class:hidden={flipped} class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
           <a
-            href="/test"
+            href="/card/{cardProps?.id}"
             class="btn btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"
             on:click={() => {
               selectedCard.set(structuredClone(cardProps));

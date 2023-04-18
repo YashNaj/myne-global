@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { supabase } from '$lib/supabaseClient';
+  import { supabase } from '$lib/utils/supabaseClient';
   import { CloudUpload, Icon } from 'svelte-hero-icons';
   import Spinner from './Spinner.svelte';
 

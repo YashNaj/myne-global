@@ -1,25 +1,20 @@
 <script lang="ts">
   import "../app.css";
   import { page } from "$app/stores";
-  import { handleSession } from "@lucia-auth/sveltekit/client";
   import logo from "$lib/images/white_myne_logo.png";
   import LogOut from "$lib/components/LogOut.svelte";
-  import type { LayoutServerData, PageServerLoad } from "./$types";
-  import type { PageData, LayoutData } from "./$types";
+  import type { LayoutServerData, PageData,  } from "./$types";
+  import type { LayoutData } from "./$types";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import { fade, fly } from "svelte/transition";
-
-  import { currentUser, selectedCard } from "$lib/store";
+  import { currentUser, selectedCard } from "$lib/utils/store";
   import Navbar from "$lib/components/Navbar.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
   import { onMount } from "svelte";
   export let addCardOpen = false;
-  export let data: LayoutData = $page.data;
+  export let data: LayoutData;
   $: pathname = data.pathname;
-  const profile = data.profile;
-  export let loading = data.loading;
-  $: console.log(loading);
   let menuItems = [
     "Import",
     "Request History Reports",
@@ -78,8 +73,6 @@
 <style lang="postcss">
   :global(body) {
     font-family: futura-pt;
-  }
-  :global(main) {
   }
   ::-webkit-scrollbar {
     width: 0; /* Remove scrollbar space */

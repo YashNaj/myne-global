@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { firstCapital } from "$lib/caps";
-  import { addCard } from "$lib/store";
+  import { firstCapital } from "$lib/utils/caps";
+  import { addCard } from "$lib/utils/store";
   import { Icon, Plus } from "svelte-hero-icons";
 
   export let categoryFilter;

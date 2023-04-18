@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { capitalizeFirstWord, firstCapital } from "$lib/caps";
+  import { capitalizeFirstWord, firstCapital } from "$lib/utils/caps";
   import { fly, slide } from "svelte/transition";
-  import type { IcardProps } from "../../cardProps";
+  import type { IcardProps } from "$lib/utils/cardProps";
   import { cubicIn, cubicOut } from "svelte/easing";
   export let allignText = "";
   let textSlug = "text-" + allignText;
-  console.log(textSlug);
   export let label = "";
   export let value: string | symbol | null | bigint = "Default";
   export let id = "";

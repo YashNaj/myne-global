@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { firstCapital } from "$lib/caps";
-  import { cartItems, currentUser, cartTotal } from "$lib/store";
+  import { firstCapital } from "$lib/utils/caps";
+  import { cartItems, currentUser, cartTotal } from "$lib/utils/store";
   import { page } from "$app/stores";
   import { trpc } from "$lib/trpc/client";
   import { beforeUpdate, onMount } from "svelte";
-  import { createQuery } from "@tanstack/svelte-query";
   import logo from "$lib/images/white_myne_logo.png";
   import type { Profile } from "@prisma/client";
   import LogOut from "./LogOut.svelte";
@@ -17,18 +16,18 @@
     middleware: [offset(6), flip(), shift()],
   });
 
-  const getProfile = async () => {
-    const profileFetch = await trpc($page).profile.load.query();
-    return profileFetch;
-  };
-  const profile = createQuery<Profile, Error>({
-    queryKey: ["profile"],
-    queryFn: () => getProfile(),
-  });
-  console.log("navbar load", { $profile, $cartItems });
+  // // const getProfile = async () => {
+  // //   const profileFetch = await trpc($page).profile.load.query();
+  // //   return profileFetch;
+  // // };
+  // const profile = createQuery<Profile, Error>({
+  //   queryKey: ["profile"],
+  //   queryFn: () => getProfile(),
+  // });
+  // console.log("navbar load", { $profile, $cartItems });
 </script>
 
-<div class="navbar bg-primary fixed top-0 left-0 z-[99] w-screen" >
+<div class="navbar bg-primary fixed top-0 left-0 z-[99] w-screen">
   <div class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">
       <div class="logo-container w-20 grid place-items-center">
@@ -71,13 +70,13 @@
     <div class="dropdown dropdown-end">
       <div class="flex items-center">
         <h1 class="text-left px-1 text-lg text-white font-semibold">
-          {#if $profile}
+          <!-- {#if $profile}
             {$profile?.data?.firstName?.toLowerCase()}
           {:else if $profile?.isLoading}
             Loading...
           {:else if $profile?.data.isError}
             Error
-          {/if}
+          {/if} -->
         </h1>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- svelte-ignore a11y-label-has-associated-control -->
