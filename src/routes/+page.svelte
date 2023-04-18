@@ -1,5 +1,5 @@
 <div class="w-screen h-full flex flex-col">
-  <div class="w-full md:h-[80vh] h-[44vh] bg-white relative md:py-6 md: px-10 p-3">
+  <div class="w-full md:h-[80vh] h-[44vh] bg-white relative md:py-6 md:px-10 p-3">
     <h1 class = 'text-black md:text-7xl text-3xl font-bold'>
         Think <span class = 'text-primary'>            
             Safety.
