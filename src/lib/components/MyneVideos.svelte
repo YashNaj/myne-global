@@ -48,7 +48,7 @@
 >
   <TabList class="overflow-x-auto w-full h-full flex">
     <Tab class="btn btn-ghost normal-case ">Company</Tab>
-    <Tab class="btn btn-ghost normal-case ">Abvantages</Tab>
+    <Tab class="btn btn-ghost normal-case ">Advantages</Tab>
     <Tab class="btn btn-ghost normal-case ">Sale</Tab>
     <Tab class="btn btn-ghost normal-case ">Earthquake & Fire</Tab>
     <Tab class="btn btn-ghost normal-case ">Hurricane & Flood</Tab>
