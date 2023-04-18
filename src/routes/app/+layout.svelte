@@ -3,7 +3,7 @@
   import { page } from "$app/stores";
   import logo from "$lib/images/white_myne_logo.png";
   import LogOut from "$lib/components/LogOut.svelte";
-  import type { LayoutServerData, PageData,  } from "./$types";
+  import type { LayoutServerData, PageData } from "./$types";
   import type { LayoutData } from "./$types";
   import PageContainer from "$lib/components/PageContainer.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
@@ -12,6 +12,7 @@
   import Navbar from "$lib/components/Navbar.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
   import { onMount } from "svelte";
+  import NavbarProfile from "$lib/components/NavbarProfile.svelte";
   export let addCardOpen = false;
   export let data: LayoutData;
   $: pathname = data.pathname;
@@ -46,28 +47,32 @@
 </svelte:head>
 
 <div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-[rgb(243,250,255)]">
-  <Navbar />
-    {#key pathname}
-    <main class = "bg-[rgb(243,250,255)] h-full">
+  <Navbar>
+    <NavbarProfile />
+  </Navbar>
+  {#key pathname}
+    <main class="bg-[rgb(243,250,255)] h-full">
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
           <slot />
         </div>
       </div>
     </main>
-    {/key}
+  {/key}
 </div>
 <div class=" md:hidden w-full h-full bg-[rgb(243,250,255)]">
-  <Navbar />
-    {#key pathname}
-    <main class = "bg-[rgb(243,250,255)] h-full">
+  <Navbar>
+    <NavbarProfile />
+  </Navbar>
+  {#key pathname}
+    <main class="bg-[rgb(243,250,255)] h-full">
       <div class="flex-grow">
         <div in:fly={transitionIn} out:fly={transitionOut}>
           <slot />
         </div>
       </div>
     </main>
-    {/key}
+  {/key}
 </div>
 
 <style lang="postcss">

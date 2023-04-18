@@ -7,15 +7,16 @@ import { currentUser } from '$lib/utils/store'
 
 const prisma = new PrismaClient();
 const anyoneAllowed = [
-  "/signup",
-  "/signout",
-  "/signin",
+  "/auth/signup",
+  "/app/signout",
+  "/app/unverified-email",
+  "/auth/signin",
   "/forgot-password",
   "/reset-password",
   "/verify-email",
-  "/unverified-email",
   "/test",
   "/test2",
+  "/",
 ];
 export const load = ((async ({ url, locals }) => {
   const onUnauthedRoute = anyoneAllowed.some((route) => url.pathname.startsWith(route));
@@ -23,7 +24,7 @@ export const load = ((async ({ url, locals }) => {
   
   if (onUnauthedRoute) return {};
   else if (!session) {
-    throw redirect(303, "/signin");
+    throw redirect(303, "/auth/signin");
   } else if (user.valid) {
     let user_id = user.userId;
 

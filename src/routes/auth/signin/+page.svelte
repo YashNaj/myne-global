@@ -44,7 +44,7 @@
   <div class="w-full flex flex-col justify-center content-center flex-wrap my-2 self-end">
     <input type="submit" value="Sign In" class="btn mt-3 normal-case btn-primary text-secondary flex-1 w-full" />
   </div>
-  <a class="btn normal-case btn-neutral text-primary flex-1 w-full" href="/signup">Register</a>
+  <a class="btn normal-case btn-neutral text-primary flex-1 w-full" href="/auth/signup">Register</a>
 </form>
 
 <div class="flex-col h-20 w-full justify center content-center">

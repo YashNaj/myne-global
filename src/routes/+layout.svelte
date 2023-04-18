@@ -8,6 +8,8 @@
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import { QueryClientProvider, QueryClient } from "@tanstack/svelte-query";
+  import Navbar from "$lib/components/Navbar.svelte";
+  import NavbarHome from "$lib/components/NavbarHome.svelte";
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -21,7 +23,11 @@
 
 <svelte:head>
 </svelte:head>
-
-<main class="bg-[rgb(243,250,255)]">
-  <slot />
-</main>
+<div>
+  <Navbar>
+    <NavbarHome />
+  </Navbar>
+  <main class="bg-[rgb(243,250,255)] pt-20">
+    <slot />
+  </main>
+</div>

@@ -12,7 +12,10 @@ export const load: PageServerLoad = async (event) => {
   console.time("loadFunctionTimer");
   const { session } = await event.locals.auth.validate();
   if (!session) {
-    throw redirect(302, "/signin");
+    throw redirect(302, "/auth/signin");
+  }
+  else{
+    throw redirect(202, '/app')
   }
   return {};
 };
