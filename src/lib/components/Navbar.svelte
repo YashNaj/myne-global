@@ -9,7 +9,9 @@
   import LogOut from "./LogOut.svelte";
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
-
+  import type { LayoutData } from "../../routes/$types";
+  export let data: LayoutData;
+  $: pathname = data.pathname 
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",
     placement: "top",
@@ -27,7 +29,7 @@
   // console.log("navbar load", { $profile, $cartItems });
 </script>
 
-<div class="navbar bg-primary/90 backdrop-brightness-50 backdrop-blur-[200px] fixed top-0 left-0 z-[99] w-screen">
+<div class="navbar bg-primary fixed top-0 left-0 z-[99] w-screen">
   <div class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">
       <div class="logo-container w-20 grid place-items-center">
