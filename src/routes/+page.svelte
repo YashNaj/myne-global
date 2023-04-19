@@ -1,5 +1,6 @@
 <script lang="ts">
   import CardStatic from "$lib/components/CardStatic.svelte";
+  import CardStaticStolen from "$lib/components/CardStaticStolen.svelte";
   import MyneVideos from "$lib/components/MyneVideos.svelte";
   import homeWave from "$lib/images/homeWave.svg";
   import homeWaveDesktop from "$lib/images/homeWaveDesktop.svg";
@@ -93,13 +94,40 @@
       Myne Dashboard <br />
       <span class="text-primary"> Manage, Transfer, Report </span>
     </h1>
-    <div class = 'w-full h-full'>
-        <div class="mockup-phone absolute scale-[40%] z-[4] left-[10rem] bottom-[-90px]">
-          <div class="camera" />
-          <div class="display">
-            <div class="artboard artboard-demo phone-1 'bg-white/20 w-full h-full backdrop-blur-[300px] backdrop-brightness-105">Hi.</div>
+    <div class="w-full h-full">
+      <div class="flex">
+        <div class="flex flex-col">
+          <h1>Features including</h1>
+          <ul>
+            <li>Transfer cards to diffirent owners on sale</li>
+            <li>Report lost or stolen cards</li>
+            <li>Import inventories from recenet purchases</li>
+            <li>+ More</li>
+          </ul>
+        </div>
+        <div class="flex flex-col">
+          <h1>Categories including</h1>
+          <ul>
+            <li>Jewlery</li>
+            <li>Watches</li>
+            <li>Tech</li>
+            <li>Crypto</li>
+            <li>Pets</li>
+            <li>+ Much more</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mockup-phone absolute scale-[40%] z-[4] left-[10rem] bottom-[-90px]">
+        <div class="camera" />
+        <div class="display">
+          <div
+            class="artboard artboard-demo phone-1 'bg-white/20 w-full h-full backdrop-blur-[300px] backdrop-brightness-105"
+          >
+            Hi.
           </div>
         </div>
+      </div>
       <div class="absolute w-[400px] bottom-32 left-[4rem] z-[0]">
         <figure
           class="ml-auto mr-20 relative z-[1] max-w-full w-[50rem] h-auto rounded-b-lg shadow-[0_2.75rem_3.5rem_-2rem_rgb(45_55_75_/_20%),_0_0_5rem_-2rem_rgb(45_55_75_/_15%)] dark:shadow-[0_2.75rem_3.5rem_-2rem_rgb(0_0_0_/_20%),_0_0_5rem_-2rem_rgb(0_0_0_/_15%)]"
@@ -116,21 +144,27 @@
               www.myneglobal.com
             </div>
           </div>
-  
-          <div class="bg-gray-800 rounded-b-lg h-[200px]">
-            <div class = 'bg-white/20 w-full h-full backdrop-blur-[300px] backdrop-brightness-105 rounded-b-md'>
 
-            </div>
+          <div class="bg-gray-800 rounded-b-lg h-[200px]">
+            <div class="bg-white/20 w-full h-full backdrop-blur-[300px] backdrop-brightness-105 rounded-b-md" />
           </div>
         </figure>
       </div>
     </div>
-   
   </div>
   <div class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
       Buy With <span class="text-primary"> Confidence </span> <br />
     </h1>
+    <h1 class = 'font-s'>
+      Myne's database will ping items reported stolen as such, no more guessing when purchasing second hand high value goods.
+    </h1>
+    <div class=" stolen-card-container flex justify-center">
+      <div class="scale-[70%]">
+        <CardStaticStolen />
+      </div>
+    </div>
+ 
   </div>
   <div class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
