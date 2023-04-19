@@ -126,7 +126,7 @@
   <input type="submit" value="Register" class="btn mt-3 normal-case btn-primary text-secondary flex-1 w-full" />
   <h1 class="text-center my-2">Have An Account?</h1>
 
-  <a class="btn normal-case btn-neutral text-primary flex-1 w-full" href="/signin">Sign In</a>
+  <a class="btn normal-case btn-neutral text-primary flex-1 w-full" href="/auth/signin">Sign In</a>
 </form>
 
 <div class="flex flex-col content-center flex-wrap justify-center">

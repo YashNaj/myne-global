@@ -11,7 +11,7 @@
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
   import { selectedCard } from "$lib/utils/store";
-  import {Icon} from "@steeze-ui/svelte-icon";
+  import { Icon } from "@steeze-ui/svelte-icon";
   import { ArrowsPointingOut } from "@steeze-ui/heroicons";
   import { cloneDeep } from "lodash";
   import { onMount } from "svelte";

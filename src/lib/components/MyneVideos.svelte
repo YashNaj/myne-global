@@ -56,10 +56,10 @@
   </TabList>
   {#key selectedTab}
     <div in:fly={transitionIn} out:fly={transitionOut}>
-      <TabPanels class="w-full h-fit mt-2 object-cover block ">
+      <TabPanels class="w-full h-fit mt-2 object-cover flex justify-center ">
         {#each videos as video}
-          <TabPanel class="w-full max-h-full">
-            <div class="object-cover">
+          <TabPanel class="w-full max-h-full md:flex md:justify-center inline-block" >
+            <div class="container md:w-[80%] flex justify-center object-cover">
               <!-- svelte-ignore a11y-media-has-caption -->
               <video class="w-full" id="player-{video.id}" playsinline controls>
                 <source src={video.src} type="video/mp4" />
