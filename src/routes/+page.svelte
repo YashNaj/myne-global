@@ -22,7 +22,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col overflow-x-hidden [user-select:none] z-50">
-  <div class="w-full md:h-[95vh] h-[60vh] bg-transparent relative xl:px-16 md:py-6 md:px-10 p-3 z-1">
+  <div class="w-full md:h-[95vh] h-[80vh] bg-transparent relative xl:px-16 md:py-6 md:px-10 p-3 z-1">
     <div class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:hidden">
       <img src={homeWave} alt="homeWave" class="w-full h-full object-cover" />
     </div>
@@ -156,15 +156,15 @@
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
       Buy With <span class="text-primary"> Confidence </span> <br />
     </h1>
-    <h1 class = 'font-s'>
-      Myne's database will ping items reported stolen as such, no more guessing when purchasing second hand high value goods.
+    <h1 class="font-s">
+      Myne's database will ping items reported stolen as such, no more guessing when purchasing second hand high value
+      goods.
     </h1>
     <div class=" stolen-card-container flex justify-center">
       <div class="scale-[70%]">
         <CardStaticStolen />
       </div>
     </div>
- 
   </div>
   <div class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
