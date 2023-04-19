@@ -49,9 +49,10 @@
     let publicUrl = supabase.storage.from("card-images").getPublicUrl(file).data.publicUrl;
     return publicUrl;
   };
+  export let isStatic:boolean = false; 
 </script>
 
-<div class="relative w-full h-full md:aspect-[16/9] aspect-[1/1] rounded-2xl bd-opacity {expanded ? 'md:p-4' : ''}">
+<div class="relative w-full h-full md:aspect-[16/9] {isStatic ? 'aspect-[16/9]' : 'aspect-[1/1]'} rounded-2xl bd-opacity {expanded ? 'md:p-4' : ''}">
   <swiper-container
     class="w-full h-full md:aspect-[16/9] aspect-[1/1] flex justify-center
     {expanded ? "md:p-4 p-2" : ""}"

@@ -90,11 +90,12 @@
         });
       }
     });
+    let isStatic = true;
   </script>
   
   <div
     bind:this={tiltElement}
-    class=" lg:w-64 md:w-48  md:h-96 h-64 rounded-2xl z-1 [transform-style:preserve-3d;] [perspective:1000px;]"
+    class=" lg:w-64 md:w-48  md:h-96 h-96 rounded-2xl z-1 [transform-style:preserve-3d;] [perspective:1000px;] select-none shadow-2xl"
   >
     <div class="flip-card rounded-2xl aspect-[5/7]">
       <div class="flip-card-inner">
@@ -105,7 +106,7 @@
       shadow-md max-h-full"
         >
           <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-lg [transformZ:20px;]">
-            <SwiperPictures {pictures} />
+            <SwiperPictures {isStatic} {pictures} />
           </div>
           <div class="flip-card-front-bottom flex-3 flex-1">
             <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">
