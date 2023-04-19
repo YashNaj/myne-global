@@ -32,12 +32,13 @@
     <div class="w-full h-full relative">
       <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
         Think <span class="text-primary"> Safety. </span><br />
-        Your valuables secured.
-      </h1>
+        Your valuables 
+        <br/>
+        <span class="text-primary"> secured. </span>      </h1>
     </div>
   </div>
   <div
-    class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-hidden flex flex-col md:flex-row"
+    class="w-full md:h-[95vh] h-[70vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-hidden flex flex-col md:flex-row"
   >
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative z-[2]">
       If it matters <br />
