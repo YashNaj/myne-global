@@ -4,7 +4,7 @@
 </script>
 
 <div
-  class="w-full md:h-[95vh] h-[90vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 flex flex-col overflow-y-hidden"
+  class="w-full md:h-[95vh] h-[100vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 flex flex-col overflow-y-hidden"
 >
   <div class="w-full h-full absolute top-10 left-10 scale-[130%] z-[0] md:hidden">
     <img src={dashboardWave} alt="dashboardWave" class="w-full h-full object-cover" />
@@ -19,7 +19,7 @@
       Myne Dashboard <br />
       <span class="text-primary"> Manage, Transfer, Report </span>
     </h1>
-    <div class="flex p-2 w-full h-full bg-transparent backdrop-blur-[50px] rounded-2xl shadow-lg mt-2">
+    <div class="flex p-2 w-full h-full bg-transparent backdrop-blur-[10px] backdrop-saturate-200 rounded-2xl shadow-lg mt-2">
       <div class="flex justify-between">
         <div class="flex flex-col p-2 w-full h-full">
           <h1 class="font-semibold">Features including</h1>
@@ -65,9 +65,9 @@
       </div>
     </figure>
   </div>
-  <div class="flex p-2 w bg-transparent backdrop-blur-[50px] rounded-2xl shadow-lg mt-2">
+  <div class="flex p-2 w bg-transparent backdrop-blur-[10px] backdrop-saturate-150 rounded-2xl shadow-lg mt-2">
     <div class="flex justify-between">
-      <div class="flex flex-col p-2 w-full h-fit relative bg-transparent backdrop-blur-[50px]">
+      <div class="flex flex-col p-2 w-full h-fit relative ">
         <h1 class="font-semibold">Categories including</h1>
         <ul class="">
           <li class="list-disc list-inside">Jewlery</li>
