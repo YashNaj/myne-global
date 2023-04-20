@@ -28,7 +28,10 @@
       ? ' rotate-[-40deg]'
       : ' rotate-[0deg]'}"
   >
-    <CardStatic />
+    <CardStatic cardProps = {
+      {category: 'watch',
+      pictures: [''],}
+    } />
   </div>
   <div
     class="will-change-auto absolute [transform-origin:_50%_100%;] transition-transform {isInView
