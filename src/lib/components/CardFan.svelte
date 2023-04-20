@@ -15,7 +15,7 @@
     isInView = detail.inView;
     scrollDirection = detail.scrollDirection.vertical;
   };
-  
+  let staticWatch = {};
 </script>
 
 <div
@@ -28,10 +28,7 @@
       ? ' rotate-[-40deg]'
       : ' rotate-[0deg]'}"
   >
-    <CardStatic cardProps = {
-      {category: 'watch',
-      pictures: [''],}
-    } />
+    <CardStatic />
   </div>
   <div
     class="will-change-auto absolute [transform-origin:_50%_100%;] transition-transform {isInView
@@ -56,6 +53,6 @@
   </div>
 
   <div class="absolute transition-transform">
-    <CardStatic />
+    <CardStatic cardProps={{ category: "watch", pictures: [""] }} />
   </div>
 </div>
