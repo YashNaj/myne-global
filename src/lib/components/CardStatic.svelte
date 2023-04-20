@@ -105,7 +105,7 @@
           : ''} bg-slate-100 rounded-2xl flex flex-col will-change-transform absolute max-w-full
       shadow-md max-h-full"
       >
-        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-[30px] backdrop-saturate-200 [transformZ:20px;]">
+        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-[150px] backdrop-saturate-200 [transformZ:20px;] will-change-transform">
           <SwiperPictures {isStatic} {pictures} />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">

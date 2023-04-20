@@ -28,28 +28,28 @@
       ? ' rotate-[-40deg]'
       : ' rotate-[0deg]'}"
   >
-    <CardStatic />
+    <CardStatic cardProps={{ category: "jewelry", pictures: [""] }} />
   </div>
   <div
     class="will-change-auto absolute [transform-origin:_50%_100%;] transition-transform {isInView
       ? 'translate-x-[0] rotate-[40deg] '
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
-    <CardStatic />
+    <CardStatic cardProps={{ category: "art", pictures: [""] }} />
   </div>
   <div
     class="will-change-auto absolute transition-transform {isInView
       ? ' rotate-[-10deg]  [transform-origin:_50%_100%;]'
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
-    <CardStatic />
+    <CardStatic cardProps={{ category: "dog", pictures: [""] }} />
   </div>
   <div
     class="will-change-auto absolute transition-transform {isInView
       ? ' rotate-[10deg] [transform-origin:_50%_100%;] '
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
-    <CardStatic />
+    <CardStatic cardProps={{ category: "automobile", pictures: [""] }} />
   </div>
 
   <div class="absolute transition-transform">
