@@ -65,7 +65,7 @@
       </div>
     </figure>
   </div>
-  <div class="flex p-2 w bg-transparent mt-1">
+  <div class="flex p-2 w bg-transparent">
     <div class="flex justify-between">
       <div class="flex bg-transparent flex-col p-2 w-full h-fit relative ">
         <h1 class="font-semibold">Categories including</h1>
