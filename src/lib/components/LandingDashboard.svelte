@@ -4,9 +4,9 @@
 </script>
 
 <div
-  class="w-full md:h-[95vh] h-[100svh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 flex flex-col overflow-y-hidden"
+  class="w-full md:h-[95vh] h-[100svh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 flex flex-col overflow--hidden"
 >
-  <div class="w-full h-full absolute top-10 left-10 scale-[130%] z-[0] md:hidden">
+  <div class="w-full h-full absolute top-10 left-0 z-[0] md:hidden overflow-hidden">
     <img src={dashWave} alt="dashboardWave" class="w-full h-full object-cover" />
   </div>
   <div class="w-full h-full absolute top-0 left-0 z-[0] md:block hidden">
