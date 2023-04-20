@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-  <div class="absolute w-[400px] bottom-5 left-[4rem] z-[0]">
+  <div class="absolute w-[400px] bottom-3 left-[4rem] z-[0]">
     <figure
       class="ml-auto mr-20 relative z-[1] max-w-full w-[50rem] h-auto rounded-b-lg shadow-[0_2.75rem_3.5rem_-2rem_rgb(45_55_75_/_20%),_0_0_5rem_-2rem_rgb(45_55_75_/_15%)] dark:shadow-[0_2.75rem_3.5rem_-2rem_rgb(0_0_0_/_20%),_0_0_5rem_-2rem_rgb(0_0_0_/_15%)]"
     >
