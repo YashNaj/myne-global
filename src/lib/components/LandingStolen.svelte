@@ -21,7 +21,7 @@
     </h1>
   </div>
 
-  <div class=" stolen-card-container flex justify-center">
+  <div class=" stolen-card-container flex justify-center ">
     <div class="scale-[70%]">
       <CardStaticStolen />
     </div>

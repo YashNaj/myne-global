@@ -54,7 +54,7 @@
 
 <div class="relative w-full h-full md:aspect-[16/9] {isStatic ? 'aspect-[16/9]' : 'aspect-[1/1]'} rounded-2xl bd-opacity {expanded ? 'md:p-4' : ''}">
   <swiper-container
-    class="w-full h-full md:aspect-[16/9] aspect-[1/1] flex justify-center
+    class="w-full h-full md:aspect-[16/9] aspect-[1/1] flex justify-center rounded-2xl
     {expanded ? "md:p-4 p-2" : ""}"
     slides-per-view={expanded ? "auto" : 1}
     observer={true}

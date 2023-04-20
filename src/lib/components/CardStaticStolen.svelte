@@ -98,7 +98,7 @@
   class=" lg:w-64 md:w-48 md:h-96 h-96 rounded-2x aspect-[5/7] z-1 [transform-style:preserve-3d;] [perspective:1000px;] select-none shadow-2xl"
 >
   <div class="flip-card rounded-2xl aspect-[5/7]">
-    <div class="flip-card-inner">
+    <div class="flip-card-inner rounded-">
       <div
         class="flip-card-front backface-hidden {flipped
           ? 'opacity-0 transition-opacity ease-out'
