@@ -5,7 +5,7 @@
 </script>
 
 <div class="w-full md:h-[95vh] h-[80vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
-  <div class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:hidden overflow--hidden">
+  <div class="w-full h-full rotate-80 absolute bottom-0 left-0 z-1 md:hidden overflow-y-hidden">
     <img src={stolenWave} alt="homeWave" class="w-full h-full object-cover" />
   </div>
   <div class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:block hidden">
