@@ -3,11 +3,11 @@
   import homeWaveDesktop from "$lib/images/homeWaveDesktop.svg";
 </script>
 
-<div class="w-full md:h-[95vh] h-[80vh] bg-transparent relative xl:px-16 md:py-6 md:px-10 p-3 z-1">
-  <div class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:hidden">
+<div class="w-full md:h-[95vh] h-[80vh] bg-[#f3faff] relative xl:px-16 md:py-6 md:px-10 p-3 z-1">
+  <div class="w-full h-full  absolute top-0 right-10 rotate-[90deg] z-1 scale-[200%] md:hidden overflow-hidden">
     <img src={homeWave} alt="homeWave" class="w-full h-full object-cover" />
   </div>
-  <div class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:block hidden">
+  <div class="w-full h-full  absolute top-0 left-0 z-1 md:block hidden overflow-y-hidden">
     <img src={homeWaveDesktop} alt="homeWave" class="w-full h-full object-cover" />
   </div>
   <div class="w-full h-full relative">

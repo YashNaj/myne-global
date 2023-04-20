@@ -23,7 +23,7 @@
   <div class="absolute justify-center top-10 left-52">
     <CardFan/>
   </div>
-  <h1 class="absolute bottom-10 w-[200px] font-semibold text-white">
+  <h1 class="absolute bottom-10 w-full font-semibold text-white">
     A robust list of categories and attributes, ever expanding and linked to your favorite merchants.
   </h1>
 </div>
