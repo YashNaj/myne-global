@@ -67,9 +67,9 @@
   </div>
   <div class="flex p-2 w bg-transparent backdrop-blur-[10px] backdrop-saturate-150 rounded-2xl shadow-lg mt-2">
     <div class="flex justify-between">
-      <div class="flex flex-col p-2 w-full h-fit relative ">
+      <div class="flex bg-transparent flex-col p-2 w-full h-fit relative ">
         <h1 class="font-semibold">Categories including</h1>
-        <ul class="">
+        <ul >
           <li class="list-disc list-inside">Jewlery</li>
           <li class="list-disc list-inside">Watches</li>
           <li class="list-disc list-inside">Tech</li>

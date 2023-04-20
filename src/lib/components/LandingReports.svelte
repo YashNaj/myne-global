@@ -3,7 +3,7 @@
   import desktopRegister from "$lib/images/desktopRegister.svg";
 </script>
 
-<div class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
+<div class="w-full md:h-[95vh] h-[70vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
   <div class="w-full h-full overflow-y-hidden absolute top-3 left-10 scale-[130%] z-[0] md:hidden">
     <img src={reportWave} alt="reposrtWave" class="w-full h-full object-cover" />
   </div>
