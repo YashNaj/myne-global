@@ -19,7 +19,7 @@
       Myne Dashboard <br />
       <span class="text-primary"> Manage, Transfer, Report </span>
     </h1>
-    <div class="flex p-2 w-full h-full  mt-2">
+    <div class="flex p-2 w-full h-full">
       <div class="flex justify-between">
         <div class="flex flex-col p-2 w-full h-full">
           <h1 class="font-semibold">Features including</h1>
@@ -30,6 +30,21 @@
             <li class="list-disc list-inside">+ More</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex p-2 w bg-transparent">
+    <div class="flex justify-between">
+      <div class="flex bg-transparent flex-col p-2 w-full h-fit relative">
+        <h1 class="font-semibold">Categories including</h1>
+        <ul>
+          <li class="list-disc list-inside">Jewlery</li>
+          <li class="list-disc list-inside">Watches</li>
+          <li class="list-disc list-inside">Tech</li>
+          <li class="list-disc list-inside">Crypto</li>
+          <li class="list-disc list-inside">Pets</li>
+          <li class="list-disc list-inside">+ Much more</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -64,20 +79,5 @@
         <div class="bg-white/20 w-full h-full backdrop-blur-[300px] backdrop-brightness-105 rounded-b-md" />
       </div>
     </figure>
-  </div>
-  <div class="flex p-2 w bg-transparent">
-    <div class="flex justify-between">
-      <div class="flex bg-transparent flex-col p-2 w-full h-fit relative ">
-        <h1 class="font-semibold">Categories including</h1>
-        <ul >
-          <li class="list-disc list-inside">Jewlery</li>
-          <li class="list-disc list-inside">Watches</li>
-          <li class="list-disc list-inside">Tech</li>
-          <li class="list-disc list-inside">Crypto</li>
-          <li class="list-disc list-inside">Pets</li>
-          <li class="list-disc list-inside">+ Much more</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </div>
