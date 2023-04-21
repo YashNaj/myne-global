@@ -91,6 +91,7 @@
     }
   });
   let isStatic = true;
+  export let staticPicture: string = "";
 </script>
 
 <div
@@ -105,8 +106,10 @@
           : ''} bg-slate-100 rounded-2xl flex flex-col will-change-transform absolute max-w-full
       shadow-md max-h-full"
       >
-        <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-[150px] backdrop-saturate-200 [transformZ:20px;] will-change-transform">
-          <SwiperPictures {isStatic} {pictures} />
+        <div
+          class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-[150px] backdrop-saturate-200 [transformZ:20px;] will-change-transform"
+        >
+          <SwiperPictures {staticPicture} {isStatic} {pictures} />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">
           <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">

@@ -3,19 +3,10 @@
   export const csr = true;
   import VanillaTilt, { type HTMLVanillaTiltElement } from "vanilla-tilt";
   import { template, generalFieldsBack } from "$lib/utils/forms";
-  import StolenBadge from "./StolenBadge.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
-  import Spinner from "$lib/components/Spinner.svelte";
-  import { trpc } from "$lib/trpc/client";
-  import { spring } from "svelte/motion";
-  import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { selectedCard } from "$lib/utils/store";
-  import { Icon } from "@steeze-ui/svelte-icon";
-  import { ArrowsPointingOut } from "@steeze-ui/heroicons";
-  import { cloneDeep } from "lodash";
-  import { onMount } from "svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
+  import { onMount } from "svelte";
 
   export let myneCard;
 
@@ -32,8 +23,9 @@
   export let cardDisplayId: number = 1;
   $: cardDisplayId = cardDisplayId;
   export let cardProps = {
-    category: "",
-    pictures: [""],
+    category: "childid",
+    pictures: [''],
+    staticPicture : '',
   };
   export let description;
   let currency;
@@ -91,6 +83,7 @@
     }
   });
   let isStatic = true;
+  export let staticPicture: string = '';
 </script>
 
 <div
@@ -106,7 +99,7 @@
       shadow-md max-h-full"
       >
         <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-lg [transformZ:20px;]">
-          <SwiperPictures {isStatic} {pictures} />
+          <SwiperPictures {staticPicture} {isStatic} {pictures} />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">
           <div class="front-fields grid grid-rows-3 grid-cols-2 w-full h-fit p-3">

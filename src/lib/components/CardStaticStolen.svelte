@@ -91,6 +91,7 @@
     }
   });
   let isStatic = true;
+  export let staticPicture: string = ''
 </script>
 
 <div
@@ -106,7 +107,7 @@
       shadow-md max-h-full"
       >
         <div class="flip-card-front-top p-3 h-full {pickedColor} rounded-t-2xl backdrop-blur-lg [transformZ:20px;]">
-          <SwiperPictures {isStatic} {pictures} />
+          <SwiperPictures {staticPicture} {isStatic} {pictures} />
         </div>
         <div class="flip-card-front-bottom flex-3 flex-1">
             <div class = 'absolute top-0 animate-pulse'>

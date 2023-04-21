@@ -20,7 +20,7 @@
       <span class="text-primary"> Register it. </span>
     </h1>
   </div>
-  <div class="absolute justify-center top-10 left-52">
+  <div class="absolute justify-center top-28 left-44">
     <CardFan/>
   </div>
   <h1 class="absolute bottom-10 w-full font-semibold text-white">

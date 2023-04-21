@@ -3,6 +3,16 @@
   import homeWaveDesktop from "$lib/images/homeWaveDesktop.svg";
   import CardStaticChild from "./CardStaticChild.svelte";
   import CardStaticStolen from "./CardStaticStolen.svelte";
+  let staticChild = {
+    category: "childid",
+    childIdFirstName: "Melanie",
+    childIdLastName: "Kanata",
+    childIdMiddleName: "Rose",
+    eye_color: "Brown",
+    hair_color: "Black",
+    height: "4ft 2in",
+    pictures: ['']
+  }
 </script>
 
 <div class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
@@ -21,7 +31,8 @@
   </h1>
   <div class=" child-card-container flex justify-center">
     <div class="scale-[70%]">
-      <CardStaticChild />
+      <CardStaticChild staticPicture = 'https://images.pexels.com/photos/1096147/pexels-photo-1096147.jpeg'
+      cardProps={staticChild}/>
     </div>
   </div>
 </div>

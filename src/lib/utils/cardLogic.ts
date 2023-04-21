@@ -119,6 +119,6 @@ export const colors = {
   bird: "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
   "other animal": "bg-gradient-to-r from-[#2e9a00]  to-[#d1ffbb]",
   other: "bg-gradient-to-r from-[#f3efef]  to-[#767976]",
-  sneakers: "bg-gradient-to-r from-[#86e8ec] to-[#bbd5d5]",
+  childid: "bg-gradient-to-r from-[#26aff0] to-[#b4dbed]",
 };
 

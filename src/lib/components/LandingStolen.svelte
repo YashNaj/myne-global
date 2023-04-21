@@ -2,6 +2,15 @@
   import stolenWave from "$lib/images/stolenWave.svg";
   import homeWaveDesktop from "$lib/images/homeWaveDesktop.svg";
   import CardStaticStolen from "./CardStaticStolen.svelte";
+  let staticStolen = {
+    category: "jewelry",
+    pictures:  [''],
+    brand: "Tiffany's",
+    model: 'Diamond Wire',
+    subcategory: "Ring",
+    brand_reference: '33279183',
+    serial: "#1ASDASD8"
+  }
 </script>
 
 <div class="w-full md:h-[95vh] h-[80vh] mt-4 bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3">
@@ -23,7 +32,8 @@
 
   <div class=" stolen-card-container flex justify-center ">
     <div class="scale-[70%]">
-      <CardStaticStolen />
+      <CardStaticStolen staticPicture = 'https://media.tiffany.com/is/image/Tiffany/EcomItemL2/tiffany-tdiamond-wire-ring-33279183_991995_ED.jpg?&op_usm=1.75,1.0,6.0&$cropN=0.1,0.1,0.8,0.8&defaultImage=NoImageAvailableInternal&' cardProps={staticStolen}/>
     </div>
   </div>
 </div>
+,

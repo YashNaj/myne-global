@@ -2,13 +2,13 @@
   import Spinner from "$lib/components/Spinner.svelte";
   import { afterUpdate, beforeUpdate, createEventDispatcher } from "svelte";
   import { supabase } from "$lib/utils/supabaseClient";
-  import  { Icon } from "@steeze-ui/svelte-icon";
-  import {  CloudArrowUp } from "@steeze-ui/heroicons";
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import { CloudArrowUp } from "@steeze-ui/heroicons";
   import Swiper from "swiper";
   import { onMount } from "svelte";
   export let mobile = false;
   export let expanded = false;
-  export let inAddCard = false; 
+  export let inAddCard = false;
   let parentEl;
   export let size = 10;
   let cardFrontSwiperId;
@@ -20,7 +20,6 @@
   let files: FileList;
   let uploadButton: HTMLInputElement;
   const dispatch = createEventDispatcher();
-
 
   const uploadFile = async (event) => {
     uploading = true;
@@ -49,63 +48,85 @@
     let publicUrl = supabase.storage.from("card-images").getPublicUrl(file).data.publicUrl;
     return publicUrl;
   };
-  export let isStatic:boolean = false; 
+  export let isStatic: boolean = false;
+  export let staticPicture: string = ' '
+  $: staticPicture = staticPicture;
+  console.log('staticPicture',staticPicture)
 </script>
 
-<div class="relative w-full h-full md:aspect-[16/9] {isStatic ? 'aspect-[16/9]' : 'aspect-[1/1]'} rounded-2xl bd-opacity {expanded ? 'md:p-4' : ''}">
+<div
+  class="relative w-full h-full md:aspect-[16/9] {isStatic
+    ? 'aspect-[16/9]'
+    : 'aspect-[1/1]'} rounded-2xl bd-opacity {expanded ? 'md:p-4' : ''}"
+>
   <swiper-container
     class="w-full h-full md:aspect-[16/9] aspect-[1/1] flex justify-center rounded-2xl
-    {expanded ? "md:p-4 p-2" : ""}"
+    {expanded ? 'md:p-4 p-2' : ''}"
     slides-per-view={expanded ? "auto" : 1}
     observer={true}
     observer-parents={true}
     space-between="100"
   >
-    {#if pictures.length > 0 && pictures[0] !== ""}
-      {#each pictures as file, i}
-        <swiper-slide
-          class="md:w-auto md:h-auto w-full h-full flex flex-col justify-center rounded-2xl bg-black bg-opacity-50 backdrop-blur-lg shadow-md"
-        >
-          <img
-            id={i}
-            alt="img"
-            class="mx-auto my-auto rounded-2xl object-contain object-center md:p-4 p-2 shadow-sm"
-            style="max-width: 100%; max-height: 100%;"
-            src={getImageUrl(file)}
-          />
-          <button
-            class="hidden md:absolute btn btn-ghost bg-white text-red normal-case"
-            on:click={() => deleteFile(file)}>Delete</button
+    {#if !isStatic}
+      {#if pictures.length > 0 && pictures[0] !== ""}
+        {#each pictures as file, i}
+          <swiper-slide
+            class="md:w-auto md:h-auto w-full h-full flex flex-col justify-center rounded-2xl bg-black bg-opacity-50 backdrop-blur-lg shadow-md"
           >
-        </swiper-slide>
-      {/each}
-    {/if}
-    <swiper-slide class="md:w-[300px] md:aspect-[1/1] w-full bg-black bg-opacity-50 rounded-2xl">
-      <label
-        class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
-        for="single"
-      >
-        {#if uploading}
-          <Spinner />
-        {:else}
-          <div class="flex flex-col content-center flex-wrap justify-center">
-            <div class="w-full flex justify-center">
-              <Icon src={CloudArrowUp} class="w-fit" theme = "solid" color="white text-center" size="24px" />
+            <img
+              id={i}
+              alt="img"
+              class="mx-auto my-auto rounded-2xl object-contain object-center md:p-4 p-2 shadow-sm"
+              style="max-width: 100%; max-height: 100%;"
+              src={getImageUrl(file)}
+            />
+            <button
+              class="hidden md:absolute btn btn-ghost bg-white text-red normal-case"
+              on:click={() => deleteFile(file)}>Delete</button
+            >
+          </swiper-slide>
+        {/each}
+      {/if}
+      <swiper-slide class="md:w-[300px] md:aspect-[1/1] w-full bg-black bg-opacity-50 rounded-2xl">
+        <label
+          class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
+          for="single"
+        >
+          {#if uploading}
+            <Spinner />
+          {:else}
+            <div class="flex flex-col content-center flex-wrap justify-center">
+              <div class="w-full flex justify-center">
+                <Icon src={CloudArrowUp} class="w-fit" theme="solid" color="white text-center" size="24px" />
+              </div>
+              Upload a picture
             </div>
-            Upload a picture
-          </div>
-        {/if}
-        <input
-          style="visibility: hidden; position:absolute;"
-          type="file"
-          id="single"
-          accept="image/*"
-          bind:files
-          on:change={uploadFile}
-          disabled={uploading || pictures.length >= 10}
-          bind:this={uploadButton}
+          {/if}
+          <input
+            style="visibility: hidden; position:absolute;"
+            type="file"
+            id="single"
+            accept="image/*"
+            bind:files
+            on:change={uploadFile}
+            disabled={uploading || pictures.length >= 10}
+            bind:this={uploadButton}
+          />
+        </label>
+      </swiper-slide>
+    {:else}
+      <swiper-slide
+        class="md:w-auto md:h-auto w-full h-full flex flex-col justify-center rounded-2xl bg-black bg-opacity-50 backdrop-blur-lg shadow-md"
+      >
+        <img
+          id="static-child-id-picture"
+          alt="img"
+          class="mx-auto my-auto rounded-2xl object-contain object-center md:p-4 p-2 shadow-sm"
+          style="max-width: 100%; max-height: 100%;"
+          src={staticPicture}
         />
-      </label>
-    </swiper-slide>
+     
+      </swiper-slide>
+    {/if}
   </swiper-container>
 </div>
