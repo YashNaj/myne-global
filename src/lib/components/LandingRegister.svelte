@@ -6,7 +6,7 @@
 </script>
 
 <div
-  class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-x-clip overflow-y-hidden flex flex-col md:flex-row"
+  class="w-full md:h-[95vh] h-[65vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-x-clip overflow-y-hidden flex flex-col md:flex-row"
 >
   <div class="w-full h-full rotate-80 absolute bottom-0 left-10 scale-[130%] z-1 md:hidden">
     <img src={registerWave} alt="homeWave" class="w-full h-full object-cover" />

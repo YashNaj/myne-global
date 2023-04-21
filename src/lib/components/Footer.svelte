@@ -29,7 +29,7 @@
   <div class="items-center grid-flow-col">
     <img alt = 'white icon' src = {whiteIcon} class = 'w-10'/> 
     
-    <p>Myne Global <br />ARNO PLS TELL ME WHAT TO PUT HERE IN YOUR NOTES</p>
+    <p>Myne Global <br /> &copy; 2020-2023 Myne Global Corp. <br/> All rights reserved </p>
   </div>
   <div class="md:place-self-center md:justify-self-end">
     <div class="grid grid-flow-col gap-4">
