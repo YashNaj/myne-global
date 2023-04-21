@@ -51,7 +51,7 @@
   </div>
   <div
     class="will-change-auto absolute [transform-origin:_50%_100%;] transition-transform {isInView
-      ? 'translate-x-[50px] rotate-[40deg] '
+      ? 'translate-x-[75px] transalte-y-[-5px] rotate-[40deg] '
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
     <CardStatic

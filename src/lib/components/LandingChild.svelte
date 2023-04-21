@@ -27,7 +27,7 @@
     <span class="text-primary"> Advanced Piece of Mind. </span>
   </h1>
   <h1 class = 'font-semibold'>
-    Create an encrypted record of your child's pertinent information, share it with family or in case of emergency.
+    Create an encrypted record of your child's pertinent information, share it with family or in case of emergency. <span class = 'font-extrabold'> Free with a Myne Account.</span>
   </h1>
   <div class=" child-card-container flex justify-center">
     <div class="scale-[70%]">
