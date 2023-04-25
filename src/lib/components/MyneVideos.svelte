@@ -47,25 +47,48 @@
   class="w-full h-full mt-2 flex flex-col"
 >
   <TabList class="overflow-x-auto w-full h-full flex">
-    <Tab class="btn btn-ghost normal-case ">Company</Tab>
-    <Tab class="btn btn-ghost normal-case ">Advantages</Tab>
-    <Tab class="btn btn-ghost normal-case ">Sale</Tab>
-    <Tab class="btn btn-ghost normal-case ">Earthquake & Fire</Tab>
-    <Tab class="btn btn-ghost normal-case ">Hurricane & Flood</Tab>
-    <Tab class="btn btn-ghost normal-case ">Theft</Tab>
+    <Tab
+      class={({ selected }) =>
+        selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
+      >Company</Tab
+    >
+    <Tab
+      class={({ selected }) =>
+        selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
+      >Advantages</Tab
+    >
+    <Tab
+      class={({ selected }) =>
+        selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
+      >Sale</Tab
+    >
+    <Tab
+      class={({ selected }) =>
+        selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
+      >Earthquake & Fire</Tab
+    >
+    <Tab
+      class={({ selected }) =>
+        selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
+      >Hurricane & Flood</Tab
+    >
+    <Tab
+      class={({ selected }) =>
+        selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
+      >Theft</Tab
+    >
   </TabList>
   {#key selectedTab}
     <div in:fly={transitionIn} out:fly={transitionOut}>
       <TabPanels class="w-full h-fit mt-2 object-cover flex justify-center ">
         {#each videos as video}
-          <TabPanel class="w-full max-h-full md:flex md:justify-center inline-block" >
+          <TabPanel class="w-full max-h-full md:flex md:justify-center inline-block">
             <div class="container md:w-[80%] flex justify-center object-cover">
               <!-- svelte-ignore a11y-media-has-caption -->
               <video class="w-full" id="player-{video.id}" playsinline controls>
                 <source src={video.src} type="video/mp4" />
 
                 <!-- Captions are optional -->
-             
               </video>
             </div>
           </TabPanel>

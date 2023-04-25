@@ -40,7 +40,7 @@
   class="card-fan group w-fit h-fit xl:left-[400px] xl:scale-[120%] scale-[55%]"
 >
   <div
-    class="will-change-auto absolute top-0 left-0 [transform-origin:_50%_100%;] transition-transform {isInView
+    class="will-change-auto absolute top-0 left-0 [transform-origin:_50%_100%;] transition-transform  ease-in-out duration-300 {isInView
       ? 'translate-x-[-100px]  rotate-[-40deg]'
       : ' rotate-[0deg]'}"
   >
@@ -50,8 +50,8 @@
     />
   </div>
   <div
-    class="will-change-auto absolute [transform-origin:_50%_100%;] transition-transform {isInView
-      ? 'translate-x-[75px] transalte-y-[-5px] rotate-[40deg] '
+    class="will-change-auto absolute [transform-origin:_50%_100%;] transition-transform ease-in-out duration-300 {isInView
+      ? 'translate-x-[100px] transalte-y-[-5px] rotate-[40deg] '
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
     <CardStatic
@@ -60,7 +60,7 @@
     />
   </div>
   <div
-    class="will-change-auto absolute transition-transform {isInView
+    class="will-change-auto absolute transition-transform ease-in-out duration-300 {isInView
       ? ' rotate-[-20deg] translate-y-[-20px]  [transform-origin:_50%_100%;]'
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
@@ -70,7 +70,7 @@
     />
   </div>
   <div
-    class="will-change-auto absolute transition-transform {isInView
+    class="will-change-auto absolute transition-transform ease-in-out duration-300 {isInView
       ? ' rotate-[20deg] translate-y-[-20px] [transform-origin:_50%_100%;] '
       : 'translate-x-[0px] rotate-[0deg]'}"
   >
@@ -80,7 +80,7 @@
     />
   </div>
 
-  <div class="absolute transition-transform">
+  <div class="absolute transition-transform ease-in-out duration-300">
     <CardStatic
       staticPicture="https://content.rolex.com/v7/dam/2023/upright-c/m126519ln-0004.png?impolicy=v7&imwidth=640"
       cardProps={staticWatch}
