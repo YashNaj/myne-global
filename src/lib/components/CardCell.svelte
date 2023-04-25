@@ -37,8 +37,8 @@
 </script>
 
 {#key label}
-  <div {id} class="w-full h-auto grid grid-rows-2 {textSlug} {gridClass}">
-    <div class={textSlug} in:slide={{ duration }}>
+  <div {id} class="w-full h-[50px] flex flex-col overflow-y-hidden {textSlug} {gridClass}">
+    <div class="{textSlug} will-change-auto" in:slide={{ duration }}>
       <label
         for="cell-label"
         class="card-field-label text-black text-opacity-40 md:text-[15px] text-[12px] py-0 font-semibold {textSlug}"
@@ -49,7 +49,7 @@
     <div class={textSlug}>
       <label
         for="cell-value"
-        class="card-field-value h-auto w-full py-0 md:text-[15px] text-[12px] text-black font-medium {textSlug}"
+        class="card-field-value h-fit w-full py-0 md:text-[15px] text-[12px] text-black font-medium overflow-x-auto overflow-y-clip {textSlug}"
       >
         {#if value !== null}
           {value}

@@ -1,17 +1,18 @@
 <script lang="ts">
   import registerWave from "$lib/images/registerWave.svg";
-  import homeWaveDesktop from "$lib/images/homeWaveDesktop.svg";
+  import homeWaveDesktop from "$lib/images/desktopWave_2.svg";
   import CardFan from "./CardFan.svelte";
 </script>
 
+<!-- mobile -->
 <div
-  class="w-full md:h-[95vh] h-[65vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-x-clip overflow-y-hidden flex flex-col md:flex-row"
+  class="w-full md:h-[95vh] h-[65vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-x-clip overflow-y-hidden flex flex-col md:flex-row md:hidden"
 >
   <div class="w-full h-full rotate-80 absolute bottom-0 left-10 scale-[130%] z-1 md:hidden">
-    <img src={registerWave} alt="homeWave" class="w-full h-full object-cover select-none"  />
+    <img src={registerWave} alt="homeWave" class="w-full h-full object-cover select-none" />
   </div>
   <div class="w-full h-full rotate-80 absolute bottom-0 left-0 z-1 md:block hidden">
-    <img src={homeWaveDesktop} alt="homeWave" class="w-full h-full object-cover select-none " />
+    <img src={homeWaveDesktop} alt="homeWave" class="w-full h-full object-cover select-none" />
   </div>
   <div class="relative h-fit w-full">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative z-[2]">
@@ -28,6 +29,31 @@
   </div>
 
   <h1 class="absolute bottom-10 w-full font-semibold text-white pt-2">
+    A robust list of categories and attributes, ever expanding and linked to your favorite merchants.
+  </h1>
+</div>
+<!-- desktop -->
+<div
+  class="w-full md:h-[95vh] h-[65vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 overflow-x-clip overflow-y-hidden flex-col md:flex hidden"
+>
+  <div class="w-full h-full rotate-80 absolute bottom-0 left-0 z-1 select-none">
+    <img src={homeWaveDesktop} alt="homeWave" class="w-full h-full object-cover select-none" />
+  </div>
+  <div class="relative h-fit w-full z-[2]">
+    <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative ">
+      If it matters <br />
+      <span class="text-primary"> Register it. </span>
+    </h1>
+  </div>
+  <div class=" w-full h-full flex justify-center content-center place-items-center flex-wrap">
+    <div class="relative w-[50%] h-full ">
+      <div class=" relative w-fit h-fit justify-center top-0 left-[25%]">
+        <CardFan />
+      </div>
+    </div>
+  </div>
+
+  <h1 class="absolute bottom-20 w-full font-semibold text-white pt-2 text-2xl" >
     A robust list of categories and attributes, ever expanding and linked to your favorite merchants.
   </h1>
 </div>

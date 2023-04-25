@@ -37,7 +37,7 @@
 <div
   use:inview={options}
   on:inview_change={handleChange}
-  class="card-fan group w-fit h-fit xl:left-[400px] xl:scale-[120%] scale-[55%]"
+  class="card-fan group w-fit h-fit xl:left-[400px] xl:scale-[120%] md:scale-[100%] scale-[55%]"
 >
   <div
     class="will-change-auto absolute top-0 left-0 [transform-origin:_50%_100%;] transition-transform  ease-in-out duration-300 {isInView
