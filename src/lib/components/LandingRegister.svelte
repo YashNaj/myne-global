@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <h1 class="absolute bottom-20 w-full font-semibold text-white pt-2 text-2xl" >
+  <h1 class="absolute bottom-20 w-full font-semibold text-white pt-2 text-2xl p-4" >
     A robust list of categories and attributes, ever expanding and linked to your favorite merchants.
   </h1>
 </div>
