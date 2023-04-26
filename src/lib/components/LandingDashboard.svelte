@@ -15,17 +15,19 @@
       class="h-full w-full b-2 text-black xl:text-7x md:text-6xl text-3xl font-bold z-[50] overflow-y-clip flex flex-col"
     >
       Myne Dashboard <br />
-      <span class="text-primary"> Manage, Transfer, Report </span>
+      <span class="text-primary"> Manage, Transfer, Report... </span>
     </h1>
     <div class="flex p-2 w-full h-full">
       <div class="flex justify-between">
         <div class="flex flex-col p-2 w-full h-full">
           <h1 class="font-semibold">Features including</h1>
           <ul>
-            <li class="list-disc list-inside">Transfer cards to diffirent owners on sale</li>
-            <li class="list-disc list-inside">Report lost or stolen cards</li>
-            <li class="list-disc list-inside">Import inventories from recent purchases</li>
-            <li class="list-disc list-inside">+ More</li>
+            <li class="list-disc list-inside">Manage your inventory</li>
+            <li class="list-disc list-inside">Transfer ownsership after a sale</li>
+            <li class="list-disc list-inside">Report lost or stolen</li>
+            <li class="list-disc list-inside">Request a history report</li>
+            <li class="list-disc list-inside">Import a list of valuables or recent purchases</li>
+            <li class="list-disc list-inside">And more</li>
           </ul>
         </div>
       </div>
@@ -36,12 +38,15 @@
       <div class="flex bg-transparent flex-col p-2 w-full h-fit relative">
         <h1 class="font-semibold">Categories including</h1>
         <ul>
-          <li class="list-disc list-inside">Jewlery</li>
-          <li class="list-disc list-inside">Watches</li>
-          <li class="list-disc list-inside">Tech</li>
+          <li class="list-disc list-inside">Jewelry</li>
+          <li class="list-disc list-inside">Watch</li>
+          <li class="list-disc list-inside">Technology</li>
           <li class="list-disc list-inside">Crypto</li>
-          <li class="list-disc list-inside">Pets</li>
-          <li class="list-disc list-inside">+ Much more</li>
+          <li class="list-disc list-inside">Sneakers</li>
+          <li class="list-disc list-inside">Collectible</li>
+          <li class="list-disc list-inside">Animal</li>
+          <li class="list-disc list-inside">Car</li>
+          <li class="list-disc list-inside">And more</li>
         </ul>
       </div>
     </div>
@@ -93,17 +98,19 @@
       class="h-full w-full b-2 text-black xl:text-7x md:text-6xl text-3xl font-bold z-[50] overflow-y-clip flex flex-col"
     >
       Myne Dashboard <br />
-      <span class="text-primary"> Manage, Transfer, Report </span>
+      <span class="text-primary"> Manage, Transfer, Report... </span>
     </h1>
     <div class="flex p-2 w-full h-full">
       <div class="flex justify-between">
         <div class="flex flex-col p-2 w-full h-full">
           <h1 class="font-semibold">Features including</h1>
           <ul>
-            <li class="list-disc list-inside">Transfer cards to diffirent owners on sale</li>
-            <li class="list-disc list-inside">Report lost or stolen cards</li>
-            <li class="list-disc list-inside">Import inventories from recent purchases</li>
-            <li class="list-disc list-inside">+ More</li>
+            <li class="list-disc list-inside">Manage your inventory</li>
+            <li class="list-disc list-inside">Transfer ownsership after a sale</li>
+            <li class="list-disc list-inside">Report lost or stolen</li>
+            <li class="list-disc list-inside">Request a history report</li>
+            <li class="list-disc list-inside">Import a list of valuables or recent purchases</li>
+            <li class="list-disc list-inside">And more</li>
           </ul>
         </div>
       </div>
@@ -113,12 +120,15 @@
         <div class="flex bg-transparent flex-col p-2 w-full h-fit relative">
           <h1 class="font-semibold">Categories including</h1>
           <ul>
-            <li class="list-disc list-inside">Jewlery</li>
-            <li class="list-disc list-inside">Watches</li>
-            <li class="list-disc list-inside">Tech</li>
+            <li class="list-disc list-inside">Jewelry</li>
+            <li class="list-disc list-inside">Watch</li>
+            <li class="list-disc list-inside">Technology</li>
             <li class="list-disc list-inside">Crypto</li>
-            <li class="list-disc list-inside">Pets</li>
-            <li class="list-disc list-inside">+ Much more</li>
+            <li class="list-disc list-inside">Sneakers</li>
+            <li class="list-disc list-inside">Collectible</li>
+            <li class="list-disc list-inside">Animal</li>
+            <li class="list-disc list-inside">Car</li>
+            <li class="list-disc list-inside">And more</li>
           </ul>
         </div>
       </div>

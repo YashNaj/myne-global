@@ -25,7 +25,7 @@ export const load = ((async ({ url, locals }) => {
   if (onUnauthedRoute) return {};
   else if (!session) {
     throw redirect(303, "/auth/signin");
-  } else if (user.valid) {
+  } else if (session) {
     let user_id = user.userId;
 
     // const query = {

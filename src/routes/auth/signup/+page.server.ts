@@ -9,12 +9,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const origin = "https://myneglobal.com" || "http://localhost:5173";
-const sendEmailVerificationLink = async (
-  user: string,
-  origin: string,
-  email: string,
-  url: string
-) => {
+const sendEmailVerificationLink = async (user: string, origin: string, email: string, url: string) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
   const request = await prisma.authUser.update({
     where: {
@@ -62,26 +57,29 @@ export const load: PageServerLoad = async ({ locals }) => {
   if (session) throw redirect(302, "/home");
 };
 export const actions: Actions = {
-  
   default: async ({ request, locals, url }) => {
     const form = await request.formData();
     const email = form.get("email");
     const password = form.get("password");
+    const confirmPassword = form.get("confirmPassword");
     const firstName = form.get("firstName");
     const lastName = form.get("lastName");
+    const address = form.get("address");
+    const addressTwo = form.get("addressTwo");
+    const city = form.get("city");
+    const state = form.get("state");
     const country = form.get("country");
     const postalZip = form.get("postalZip");
     const phone = form.get("phone");
     const birthday = form.get("birthday");
     const valid = false;
-    if (
-      !email ||
-      !password ||
-      typeof email !== "string" ||
-      typeof password !== "string"
-    ) {
+    if (!email || !password || typeof email !== "string" || typeof password !== "string") {
       console.log("Failed to enter email password");
       return fail(400), { message: "Failed to enter email password" };
+    }
+    if (confirmPassword != password) {
+      console.log("Passwords do not match");
+      return fail(400), { message: "Passwords do not match" };
     }
     try {
       const user = await auth.createUser({
@@ -109,6 +107,10 @@ export const actions: Actions = {
             create: {
               firstName,
               lastName,
+              address,
+              addressTwo,
+              city,
+              state,
               country,
               phone,
               postalZip,

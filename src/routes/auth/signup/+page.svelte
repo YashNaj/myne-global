@@ -12,12 +12,22 @@
   let country: string = "";
   let postalZip: string = "";
   let email: string = "";
+  let city: string = "";
+  let state: string = "";
   let password: string = "";
+  let confirmPassword: string = "";
   let phone: string = "";
+  let address: string = "";
+  let addressTwo: string = "";
+
   export let formData = {
     firstName,
     lastName,
     birthday,
+    city,
+    address,
+    addressTwo,
+
     country,
     postalZip,
     email,
@@ -28,6 +38,10 @@
     firstName,
     lastName,
     birthday,
+    address,
+    addressTwo,
+
+    city,
     country,
     postalZip,
     email,
@@ -41,88 +55,117 @@
   console.log(url);
 </script>
 
-<form class="flex flex-col justify-center flex-wrap content-center text-primary p-4" method="POST" use:enhance>
+<form
+  class="flex flex-col justify-center flex-wrap content-center text-primary p-4 overflow-y-auto"
+  method="POST"
+  use:enhance
+>
   <h1 class="text-white flex pl-4 font-semibold text-2xl">Create an account.</h1>
+  <div class="container overflow-y-auto w-full h-80">
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="firstName"
+      name="firstName"
+      placeholder="First Name"
+      required
+      bind:value={firstName}
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="lastName"
+      name="lastName"
+      placeholder="Last Name "
+      required
+      bind:value={lastName}
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      type="date"
+      id="birthday"
+      name="birthday"
+      placeholder="00/00/0000"
+      required
+      bind:value={birthday}
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="phone"
+      name="phone"
+      placeholder="+(1) (999)-999-9999"
+      type="tel"
+      bind:value={phone}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="city"
+      name="city"
+      placeholder="City"
+      bind:value={city}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="address"
+      name="address"
+      placeholder="Address"
+      bind:value={address}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="addressTwo"
+      name="addressTwo"
+      placeholder="Address 2"
+      bind:value={addressTwo}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="country"
+      name="country"
+      placeholder="Country"
+      bind:value={country}
+      required
+    />
 
-  <swiper-container
-    class="mySwiper justify-center flex-wrap content-center text-primary relative lg:hidden"
-    scrollbar="true"
-    slidesPerView="1"
-  >
-    <swiper-slide class="p-2">
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        id="firstName"
-        name="firstName"
-        placeholder="First Name"
-        required
-        bind:value={firstName}
-      />
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        id="lastName"
-        name="lastName"
-        placeholder="Last Name "
-        required
-        bind:value={lastName}
-      />
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        type="date"
-        id="birthday"
-        name="birthday"
-        placeholder="Date of Birth"
-        required
-        bind:value={birthday}
-      />
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        id="country"
-        name="country"
-        placeholder="Country"
-        bind:value={country}
-        required
-      /></swiper-slide
-    >
-    <swiper-slide class="p-2">
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        id="email"
-        name="email"
-        placeholder="Email "
-        bind:value={email}
-        required
-      />
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        bind:value={password}
-        required
-      /></swiper-slide
-    >
-    <swiper-slide class="p-2">
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        id="phone"
-        name="phone"
-        placeholder="+(1) (999)-999-9999"
-        type="tel"
-        bind:value={phone}
-        required
-      />
-      <input
-        class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-        id="postalZip"
-        name="postalZip"
-        placeholder="ZIP/Postal Code"
-        bind:value={postalZip}
-        required
-      />
-    </swiper-slide>
-  </swiper-container>
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="postalZip"
+      name="postalZip"
+      placeholder="ZIP/Postal Code"
+      bind:value={postalZip}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="email"
+      name="email"
+      placeholder="Email "
+      bind:value={email}
+      required
+    />
+
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Password"
+      bind:value={password}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      type="password"
+      id="ConfirmPassword"
+      name="Confirm Password"
+      placeholder="Confirm Password"
+      bind:value={confirmPassword}
+      required
+    />
+  </div>
+
   <input type="submit" value="Register" class="btn mt-3 normal-case btn-primary text-secondary flex-1 w-full" />
   <h1 class="text-center my-2">Have An Account?</h1>
 

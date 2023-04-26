@@ -27,11 +27,10 @@
     Child ID <br />
     <span class="text-primary"> Advanced Piece of Mind. </span>
   </h1>
-  <h1 class="font-semibold">
-    Create an encrypted record of your child's pertinent information, share it with family or in case of emergency. <span
-      class="font-extrabold"
-    >
-      Free with a Myne Account.</span
+  <h1 class="font-semibold text-primary relative text-2xl">
+    The goal of the Child ID is to provide authorities with essential information to help locate and idenBfy a missing
+    child, should the need arise.. <span class="font-extrabold">
+      Enjoy complimentary registration with your Myne Global account. .</span
     >
   </h1>
   <div class=" child-card-container flex justify-center">
@@ -45,7 +44,9 @@
 </div>
 <!--desktop-->
 <div class="w-full md:h-[95vh] h-[60vh] bg-[rgb(243,250,255)] relative xl:px-16 md:py-6 md:px-10 p-3 md:block hidden">
-  <div class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:block hidden overflow-y-hidden">
+  <div
+    class="w-full h-full rotate-80 absolute top-0 left-0 z-1 md:block hidden overflow-y-hidden scale-[150%] rotate-[-12deg]"
+  >
     <img src={homeWaveDesktop} alt="homeWave" class="w-full h-full object-cover" />
   </div>
   <div class="flex flex-col">
@@ -53,12 +54,11 @@
       Child ID <br />
       <span class="text-primary"> Advanced Piece of Mind. </span>
     </h1>
+    <br />
     <h1 class="font-semibold text-primary relative text-2xl">
-      Create an encrypted record of your child's pertinent information, share it with family or in case of emergency. <span
-        class="font-extrabold"
-      >
-        Free with a Myne Account.</span
-      >
+      The goal of the Child ID is to provide authorities with essential information to help locate and idenBfy a missing
+      child, should the need arise.. <br />
+      <span class="font-extrabold"> Enjoy complimentary registration with your Myne Global account. .</span>
     </h1>
   </div>
   <div class="child-card-container flex justify-center relative">

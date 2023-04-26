@@ -19,7 +19,7 @@
     <div class="flex flex-col mt-3">
       <div class="order-2 mt-4">
         <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
-          Think <span class="text-primary"> Safety. </span><br />
+          Think <span class="text-primary"> Safety, </span><br />
           Your valuables
           <br />
           <span class="text-primary"> secured. </span>
@@ -31,7 +31,7 @@
       </div>
     </div>
   </div>
-  <a href="/auth/signup" class="bottom-20 btn bg-white text-primary normal-case absolute z-1"> Get Started Today </a>
+  <a href="/auth/signup" class="bottom-20 btn bg-white text-primary normal-case absolute z-1"> Get started today </a>
 </div>
 
 <!-- desktop -->
@@ -49,7 +49,7 @@
     <div class="flex flex-col mt-3">
       <div class="order-2 mt-4">
         <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold">
-          Think <span class="text-primary"> Safety. </span><br />
+          Think <span class="text-primary"> Safety, </span><br />
           Your valuables <span class="text-primary"> secured. </span>
         </h1>
       </div>
@@ -64,6 +64,6 @@
     class="w-fit h-fit  btn bg-white text-primary normal-case absolute xl:bottom-80 md:bottom-20 z-1 
     xl:text-3xl  xl:p-10 md:p-6 md:text-xl shadow-lg font-bold"
   >
-    Get Started Today
+    Get started today
   </a>
 </div>

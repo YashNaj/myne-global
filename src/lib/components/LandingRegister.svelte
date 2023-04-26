@@ -16,7 +16,7 @@
   </div>
   <div class="relative h-fit w-full">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative z-[2]">
-      If it matters <br />
+      If it matters, <br />
       <span class="text-primary"> Register it. </span>
     </h1>
   </div>
@@ -28,9 +28,9 @@
     </div>
   </div>
 
-  <h1 class="absolute bottom-10 w-full font-semibold text-white pt-2">
-    A robust list of categories and attributes, ever expanding and linked to your favorite merchants.
-  </h1>
+  <h1 class="flex absolute bottom-10 w-96 font-semibold text-white pt-2">
+    Enjoy an extensive and continuously expanding list of categories, all connected to your favorite
+    merchants.  </h1>
 </div>
 <!-- desktop -->
 <div
@@ -41,7 +41,7 @@
   </div>
   <div class="relative h-fit w-full z-[2]">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative ">
-      If it matters <br />
+      If it matters, <br />
       <span class="text-primary"> Register it. </span>
     </h1>
   </div>
@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <h1 class="absolute bottom-20 w-full font-semibold text-white pt-2 text-2xl p-4" >
-    A robust list of categories and attributes, ever expanding and linked to your favorite merchants.
-  </h1>
+  <h1 class="flex absolute bottom-16 w-[40rem] font-semibold text-white pt-2 text-2xl p-4" >
+    Enjoy an extensive and continuously expanding list of categories, all connected to your favorite
+    merchants.  </h1>
 </div>

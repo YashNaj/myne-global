@@ -1,4 +1,4 @@
-<script lang="ts">
+<script script lang="ts">
   import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@rgossiaux/svelte-headlessui";
   import { cubicIn, cubicOut } from "svelte/easing";
   import { writable } from "svelte/store";
@@ -11,12 +11,20 @@
   const transitionOut = { easing: cubicIn, duration, opacity: 0 };
   const videos = [
     {
+      id: "company",
+      src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853488/Myne_Global_Company_nhl580.mp4",
+    },
+    {
       id: "advantages",
       src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853510/Myne_Global_Advantages_rtrbye.mp4",
     },
     {
-      id: "company",
-      src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853488/Myne_Global_Company_nhl580.mp4",
+      id: "theft",
+      src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853503/Myne_Global_Robbery-Burglary_m2djmd.mp4",
+    },
+    {
+      id: "sale",
+      src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853485/Myne_Global_Sale_xuj2ot.mp4",
     },
     {
       id: "earthquake_fire",
@@ -25,14 +33,6 @@
     {
       id: "hurricane_flood",
       src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853495/Myne_Global_Hurricane-Flood_wkvhie.mp4",
-    },
-    {
-      id: "sale",
-      src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853485/Myne_Global_Sale_xuj2ot.mp4",
-    },
-    {
-      id: "theft",
-      src: "https://res.cloudinary.com/di99xndop/video/upload/v1681853503/Myne_Global_Robbery-Burglary_m2djmd.mp4",
     },
   ];
   $: selectedTab = selectedTab;
@@ -50,32 +50,32 @@
     <Tab
       class={({ selected }) =>
         selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
-      >Company</Tab
+      >1. Company</Tab
     >
     <Tab
       class={({ selected }) =>
         selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
-      >Advantages</Tab
+      >2. Advantages</Tab
     >
     <Tab
       class={({ selected }) =>
         selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
-      >Sale</Tab
+      >3. Theft</Tab
     >
     <Tab
       class={({ selected }) =>
         selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
-      >Earthquake & Fire</Tab
+      >4. Sale</Tab
     >
     <Tab
       class={({ selected }) =>
         selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
-      >Hurricane & Flood</Tab
+      >5. Earthquake & fire</Tab
     >
     <Tab
       class={({ selected }) =>
         selected ? "btn btn-primary text-white normal-case transition-all" : "transition-all btn btn-ghost normal-case"}
-      >Theft</Tab
+      >6. Hurricane & flood</Tab
     >
   </TabList>
   {#key selectedTab}
