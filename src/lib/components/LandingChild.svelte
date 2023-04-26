@@ -25,11 +25,11 @@
   </div>
   <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative">
     Child ID <br />
-    <span class="text-primary"> Advanced Piece of Mind. </span>
+    <span class="text-primary"> Enhanced peace of mind. </span>
   </h1>
   <h1 class="font-semibold text-primary relative text-2xl">
     The goal of the Child ID is to provide authorities with essential information to help locate and idenBfy a missing
-    child, should the need arise.. <span class="font-extrabold">
+    child, should the need arise. <span class="font-extrabold">
       Enjoy complimentary registration with your Myne Global account. .</span
     >
   </h1>
@@ -52,12 +52,12 @@
   <div class="flex flex-col">
     <h1 class="text-black xl:text-7x md:text-6xl text-3xl font-bold relative">
       Child ID <br />
-      <span class="text-primary"> Advanced Piece of Mind. </span>
+      <span class="text-primary"> Enhanced peace of mind. </span>
     </h1>
     <br />
     <h1 class="font-semibold text-primary relative text-2xl">
       The goal of the Child ID is to provide authorities with essential information to help locate and idenBfy a missing
-      child, should the need arise.. <br />
+      child, should the need arise. <br />
       <span class="font-extrabold"> Enjoy complimentary registration with your Myne Global account. .</span>
     </h1>
   </div>

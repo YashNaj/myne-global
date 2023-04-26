@@ -6,6 +6,8 @@ import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { page } from "$app/stores";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { render } from 'svelte-email';
+
 const prisma = new PrismaClient();
 
 const origin = "https://myneglobal.com" || "http://localhost:5173";
