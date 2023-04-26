@@ -14,7 +14,7 @@
     <h1
       class="h-full w-full b-2 text-black xl:text-7x md:text-6xl text-3xl font-bold z-[50] overflow-y-clip flex flex-col"
     >
-      Myne Dashboard <br />
+      Myne Global dashboard <br />
       <span class="text-primary"> Manage, Transfer, Report... </span>
     </h1>
     <div class="flex p-2 w-full h-full">
@@ -97,7 +97,7 @@
     <h1
       class="h-full w-full b-2 text-black xl:text-7x md:text-6xl text-3xl font-bold z-[50] overflow-y-clip flex flex-col"
     >
-      Myne Dashboard <br />
+      Myne Global dashboard <br />
       <span class="text-primary"> Manage, Transfer, Report... </span>
     </h1>
     <div class="flex p-2 w-full h-full">
