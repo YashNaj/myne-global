@@ -58,5 +58,5 @@ export const load = ((async ({ url, locals }) => {
     loading = false
     throw redirect(202, "/app");
     return { isUser: true, profile:profile(), loading, user_id }
-  } else throw redirect(302, "/unverified-email");
+  } else throw redirect(302, "/app/unverified-email");
 }) satisfies LayoutServerLoad);

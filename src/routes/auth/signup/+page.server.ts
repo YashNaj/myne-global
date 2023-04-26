@@ -6,44 +6,57 @@ import sgMail from "@sendgrid/mail";
 import { VITE_SENDGRID_API_KEY } from "$env/static/private";
 import { page } from "$app/stores";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { render } from 'svelte-email';
-
+import { render } from "svelte-email";
+import SignUpEmail from "$lib/components/SignUpEmail.svelte";
 const prisma = new PrismaClient();
 
 const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (user: string, origin: string, email: string, url: string) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
-  const request = await prisma.authUser.update({
-    where: {
-      id: user.userId,
-    },
-    data: {
-      emailVerificationRequest: {
-        create: {
-          id: user.userId,
-          email,
-          expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
-        },
-      },
-    },
-  });
+  console.log("sendgrid user", user);
+  // const request = await prisma.authUser.update({
+  //   where: {
+  //     id: user.userId,
+  //   },
+  //   data: {
+  //     emailVerificationRequest: {
+  //       create: {
+  //         email,
+  //         expiresAt: new Date(Date.now() + 1 * 60 * 60 * 1000),
+  //       },
+  //     },
+  //   },
+  // });
   const verificationRequest = await prisma.emailVerificationRequest.findUnique({
     where: {
-      id: user.userId,
+      user_id: user.userId,
     },
     select: {
       token: true,
     },
   });
+  const profile = await prisma.profile.findUnique({
+    where: {
+      user_id: user.userId,
+    },
+  });
   const token = verificationRequest?.token;
   const href = `${origin}/api/verify-email?token=${token}`;
   const buttonSlug = `<a href= "${href}"> Verify Here </a>`;
+  const emailHtml = render({
+    template: SignUpEmail,
+    props: {
+      firstName: profile.firstName,
+      origin,
+      token,
+      href,
+    },
+  });
   const data = {
     to: email, // Change to your recipient
     from: "support@myneglobal.com", // Change to your verified sender
     subject: "Verify your Myne Global Account",
-    text: "Click the link to verify",
-    html: buttonSlug,
+    html: emailHtml,
   };
   try {
     await sgMail.send(data);
@@ -56,7 +69,7 @@ const sendEmailVerificationLink = async (user: string, origin: string, email: st
 export const load: PageServerLoad = async ({ locals }) => {
   const session = await locals.auth.validate();
   console.log(session);
-  if (session) throw redirect(302, "/home");
+  if (session) throw redirect(302, "/app");
 };
 export const actions: Actions = {
   default: async ({ request, locals, url }) => {
@@ -75,11 +88,12 @@ export const actions: Actions = {
     const phone = form.get("phone");
     const birthday = form.get("birthday");
     const valid = false;
+    console.log(form);
     if (!email || !password || typeof email !== "string" || typeof password !== "string") {
       console.log("Failed to enter email password");
       return fail(400), { message: "Failed to enter email password" };
     }
-    if (confirmPassword != password) {
+    if (confirmPassword !== password) {
       console.log("Passwords do not match");
       return fail(400), { message: "Passwords do not match" };
     }
@@ -95,7 +109,6 @@ export const actions: Actions = {
           valid,
         },
       });
-
       console.log("🚀 ~ file: +page.server.ts:102 ~ default: ~ user", user);
       const session = await auth.createSession(user.userId);
       locals.auth.setSession(session);
@@ -121,10 +134,15 @@ export const actions: Actions = {
           },
         },
       });
-      console.log(profileUpsert);
-      await sendEmailVerificationLink(user, origin, email);
-      console.log("success");
-      locals.auth.setSession(session);
+      const emailVerificationRecord = await prisma.emailVerificationRequest.create({
+        data: {
+          email,
+          user_id: user.userId,
+          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // Set expiration to 24 hours from now
+        },
+      });
+      console.log("Created Email Verification Record");
+      await sendEmailVerificationLink( user, origin, email);
     } catch (error) {
       if (error instanceof LuciaError) {
         return fail(400), { message: error.message };

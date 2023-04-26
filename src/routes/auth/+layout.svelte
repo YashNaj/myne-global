@@ -21,7 +21,7 @@
 </script>
 
 <div
-  class="auth-container bg-[rgb(231, 240, 255)] w-screen h-screen flex-col flex flex-wrap justify-start content-center overflow-hidden pt-4 lg:hidden overflow-x-hidden overflow-y-hidden"
+  class="auth-container bg-[rgb(231, 240, 255)] w-full h-screeb flex-col flex flex-wrap justify-start content-center overflow-hidden pt-4 lg:hidden overflow-x-hidden overflow-y-hidden"
 >
   <div class="auth-box rounded-none rounded-t-2xl shadow-xl w-full h-full card bg-primary/80 backdrop-blur-[300px]">
     <img class="max-w-full p-3 w-32" src={whiteLogo} alt="myne-logo" />
@@ -34,7 +34,7 @@
 </div>
 
 <div
-  class="auth-container bg-[rgb(231, 240, 255)] w-screen h-screen flex-col flex-wrap justify-start content-center overflow-hidden pt-4 hidden lg:flex"
+  class="auth-container bg-[rgb(231, 240, 255)] w-full h-screen flex-col flex-wrap justify-start content-center overflow-hidden pt-4 hidden lg:flex"
 >
   <div class="absolute bottom-[20rem] font-bold text-3xl text-black" />
   <div class="h-full w-full z-0 absolute top-0 bg-[url('$lib/images/desktopAuthWave.svg')] bg-cover bg-no-repeat" />

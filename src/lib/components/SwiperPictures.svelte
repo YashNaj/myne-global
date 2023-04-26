@@ -51,7 +51,6 @@
   export let isStatic: boolean = false;
   export let staticPicture: string = ' '
   $: staticPicture = staticPicture;
-  console.log('staticPicture',staticPicture)
 </script>
 
 <div

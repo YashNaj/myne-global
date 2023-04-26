@@ -3,7 +3,6 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
-@import "./svelteSelect.css";
 @layer components {
   .input {
     @apply input-bordered;

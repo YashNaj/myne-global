@@ -1,10 +1,4 @@
 <script lang="ts">
-  import CardStatic from "$lib/components/CardStatic.svelte";
-  import CardStaticStolen from "$lib/components/CardStaticStolen.svelte";
-  import homeWave from "$lib/images/homeWave.svg";
-  import MyneVideos from "$lib/components/MyneVideos.svelte";
-  import stolenWave from "$lib/images/stolenWave.svg";
-  import homeWaveDesktop from "$lib/images/homeWaveDesktop.svg";
   import LandingRegister from "$lib/components/LandingRegister.svelte";
   import LandingDashboard from "$lib/components/LandingDashboard.svelte";
   import LandingChild from "$lib/components/LandingChild.svelte";

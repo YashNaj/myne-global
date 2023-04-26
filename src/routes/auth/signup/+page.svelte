@@ -27,11 +27,11 @@
     city,
     address,
     addressTwo,
-
     country,
     postalZip,
     email,
     password,
+    confirmPassword,
     phone,
   };
   $: formData = formData = {
@@ -40,18 +40,21 @@
     birthday,
     address,
     addressTwo,
-
     city,
     country,
     postalZip,
     email,
     password,
+    confirmPassword,
     phone,
   };
+
   export const snapshot: Snapshot = {
     capture: () => formData,
     restore: (value) => formData,
   };
+
+  snapshot.restore(formData);
   console.log(url);
 </script>
 
@@ -96,14 +99,7 @@
       bind:value={phone}
       required
     />
-    <input
-      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
-      id="city"
-      name="city"
-      placeholder="City"
-      bind:value={city}
-      required
-    />
+
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       id="address"
@@ -112,6 +108,7 @@
       bind:value={address}
       required
     />
+
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       id="addressTwo"
@@ -122,13 +119,29 @@
     />
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="city"
+      name="city"
+      placeholder="City"
+      bind:value={city}
+      required
+    />
+
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
+      id="state"
+      name="state"
+      placeholder="State"
+      bind:value={state}
+      required
+    />
+    <input
+      class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       id="country"
       name="country"
       placeholder="Country"
       bind:value={country}
       required
     />
-
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       id="postalZip"
@@ -158,8 +171,8 @@
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       type="password"
-      id="ConfirmPassword"
-      name="Confirm Password"
+      id="confirmPassword"
+      name="confirmPassword"
       placeholder="Confirm Password"
       bind:value={confirmPassword}
       required

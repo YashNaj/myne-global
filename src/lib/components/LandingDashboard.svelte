@@ -24,7 +24,7 @@
           <ul>
             <li class="list-disc list-inside">Manage your inventory</li>
             <li class="list-disc list-inside">Transfer ownsership after a sale</li>
-            <li class="list-disc list-inside">Report lost or stolen</li>
+            <li class="list-disc list-inside">Report lost or stolen to police or insurance</li>
             <li class="list-disc list-inside">Request a history report</li>
             <li class="list-disc list-inside">Import a list of valuables or recent purchases</li>
             <li class="list-disc list-inside">And more</li>
@@ -93,7 +93,7 @@
   <div class="w-full h-full absolute top-40 scale-[200%] rotate-[135deg] left-[900px] z-[0] overflow-hidden">
     <img src={desktopRegister} alt="dashboardWave" class="w-full h-full object-cover" />
   </div>
-  <div class="relative z-[2] flex flex-col">
+  <div class="relative z-[2] flex flex-col h-full">
     <h1
       class="h-full w-full b-2 text-black xl:text-7x md:text-6xl text-3xl font-bold z-[50] overflow-y-clip flex flex-col"
     >
@@ -107,7 +107,7 @@
           <ul>
             <li class="list-disc list-inside">Manage your inventory</li>
             <li class="list-disc list-inside">Transfer ownsership after a sale</li>
-            <li class="list-disc list-inside">Report lost or stolen</li>
+            <li class="list-disc list-inside">Report lost or stolen to police or insurance</li>
             <li class="list-disc list-inside">Request a history report</li>
             <li class="list-disc list-inside">Import a list of valuables or recent purchases</li>
             <li class="list-disc list-inside">And more</li>

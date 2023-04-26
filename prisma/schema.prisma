@@ -14,7 +14,7 @@ model AuthUser {
   auth_key                    AuthKey[]
   email                       String                        @unique
   role                        Role                          @default(USER)
-  valid                       Boolean
+  valid                       Boolean                       @default(false)
   passwordVerificationRequest PasswordVerificationRequest[]
   emailVerificationRequest    EmailVerificationRequest[]
   profile                     Profile?
@@ -46,21 +46,21 @@ model AuthKey {
 }
 
 model Profile {
-  id        String     @id @default(uuid())
-  user_id   String     @unique
-  postalZip String
-  firstName String
-  lastName  String
-  address   String
+  id         String     @id @default(uuid())
+  user_id    String     @unique
+  postalZip  String
+  firstName  String
+  lastName   String
+  address    String
   addressTwo String
-  city      String
-  state     String
-  country   String
-  birthday  String
-  phone     String
-  ChildId   ChildId[]
-  myneCard  MyneCard[]
-  auth_user AuthUser   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  city       String
+  state      String
+  country    String
+  birthday   String
+  phone      String
+  ChildId    ChildId[]
+  myneCard   MyneCard[]
+  auth_user  AuthUser   @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@map("profile")
 }
@@ -187,10 +187,10 @@ model ChildId {
 }
 
 model EmailVerificationRequest {
-  id        String   @id @unique
+  id        String   @id @unique @default(uuid())
   email     String
   token     String   @unique @default(uuid())
-  user_id   String
+  user_id   String   @unique
   expiresAt DateTime
   auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
