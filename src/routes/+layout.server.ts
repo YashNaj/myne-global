@@ -21,10 +21,11 @@ export const load = (async ({ url, locals }) => {
   const onUnauthedRoute = anyoneAllowed.some((route) => url.pathname.startsWith(route));
   const session = await locals.auth.validate();
   const { user } = await locals.auth.validateUser();
-  const role = user.role;
-  console.log("layout Role", role);
   const { pathname } = url;
-
+  let role; 
+  if (user){
+    role = user.role
+  }
   if (onUnauthedRoute) return {};
   if (!session) {
     throw redirect(303, "/auth/signin");
@@ -42,7 +43,7 @@ export const load = (async ({ url, locals }) => {
         .profile();
     const fetchedProfile = await profile(); 
     loading = false;
-    return { isUser: true, loading, profile: fetchedProfile, pathname };
+    return { isUser: true, loading, profile: fetchedProfile, pathname, role };
     throw redirect(202, "/app");
   } else redirect(302, "/app/unverified-email");
 }) satisfies LayoutServerLoad;
