@@ -55,7 +55,7 @@
   const transitionOut = { duration, y: -y, easing: easeOut, opacity: 0 };
 </script>
 
-<div class="md:hidden bg-[rgb(243,250,255)] p-2 w-full h-full flex flex-col">
+<div class="md:hidden bg-[rgb(243,250,255)] p-2 w-full h-full min-h-screen flex flex-col">
   <div class="w-full pt-20 h-full">
     {#if $addCard}
       <div

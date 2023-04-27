@@ -46,31 +46,27 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 
-<div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-[rgb(243,250,255)]">
+<div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-primary">
   <Navbar>
     <NavbarProfile />
   </Navbar>
   {#key pathname}
-    <main class="bg-[rgb(243,250,255)] h-full">
-      <div class="flex-grow">
+    <main class="bg-primary h-full min-h-screen">
         <div in:fly={transitionIn} out:fly={transitionOut}>
           <slot />
         </div>
-      </div>
     </main>
   {/key}
 </div>
-<div class=" md:hidden w-full h-full bg-[rgb(243,250,255)]">
+<div class=" md:hidden w-full min-h-screen h-full bg-primary">
   <Navbar>
     <NavbarProfile />
   </Navbar>
   {#key pathname}
-    <main class="bg-[rgb(243,250,255)] h-full">
-      <div class="flex-grow">
+    <main class="bg-primary h-full">
         <div in:fly={transitionIn} out:fly={transitionOut}>
           <slot />
         </div>
-      </div>
     </main>
   {/key}
 </div>

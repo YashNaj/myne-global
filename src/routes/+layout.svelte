@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head />
-<div class = 'w-full h-full'>
+<div class="w-full h-full">
   <Navbar {data}>
     <NavbarHome />
   </Navbar>
@@ -40,5 +40,7 @@
       </div>
     {/key}
   </main>
-  <Footer/>
+  {#if !pathname.includes("/app")}
+    <Footer />
+  {/if}
 </div>

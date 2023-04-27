@@ -29,7 +29,7 @@
   // console.log("navbar load", { $profile, $cartItems });
 </script>
 
-<div class="navbar bg-primary fixed top-0 left-0 z-[99] w-screen">
+<div class="navbar bg-primary fixed top-0 left-0 z-[1000] w-screen">
   <div class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">
       <div class="logo-container w-20 grid place-items-center">

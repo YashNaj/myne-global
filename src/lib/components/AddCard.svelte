@@ -378,7 +378,7 @@
 <div 
   class=" w-full h-screen flex flex-col md:grid-cols-2 md:grid bg-primary text-white pt-20 content-center   from-white  relative shadow-lg" >
 <button on:click={()=>addCard.set(false)} class = 'btn btn-ghost w-fit aspect-[1/1] absolute md:top-[5rem] md:right-[1rem] top-[5rem] right-[1rem]'>
-  <Icon color = 'white' src ={X} size = "48px"/>
+  <Icon color = 'white' src ={XMark} size = "48px"/>
 </button>  
   <div class="flex justify-center w-full h-full content-start order-2">
       <Card {inAddCard} {flipped} {cardProps} {pictures}>

@@ -7,7 +7,7 @@
           What's up handsome ;
           Stand by for cart functionality. 
         </p>
-        <a href = '/' class="btn btn-primary normal-case">Go Home</a>
+        <a href = '/app' class="btn btn-primary normal-case">Go Home</a>
       </div>
     </div>
   </div>

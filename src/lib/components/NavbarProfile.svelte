@@ -60,14 +60,14 @@
 
         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
           <li>
-            <a href="/profile" class="justify-between normal-case">
+            <a href="/app/profile" class="justify-between normal-case">
               Profile
               <span class="badge">New</span>
             </a>
           </li>
-          <li><LogOut /></li>
         </ul>
       </label>
+      <LogOut/>
     </div>
   </div>
 </div>

@@ -38,7 +38,7 @@ const sendEmailVerificationLink = async (user: string, origin: string, email: st
   const profile = await prisma.profile.findUnique({
     where: {
       user_id: user.userId,
-    },
+    },  
   });
   const token = verificationRequest?.token;
   const href = `${origin}/api/verify-email?token=${token}`;
