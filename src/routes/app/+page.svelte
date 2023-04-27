@@ -26,12 +26,12 @@
   onMount(async () => {
     cards = getMyneCardstRPC();
   });
-  export let myneCards = getMyneCardstRPC()
+  export let myneCards = $page.data.myneCards;
   console.log(myneCards)
   
   
   console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
-  // userCards.set([...myneCards]);
+  userCards.set([...myneCards]);
   export let categoryFilter: string = "All";
 
   $: filteredCards = myneCards.map((card) => {

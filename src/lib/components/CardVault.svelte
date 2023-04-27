@@ -6,7 +6,7 @@
   import { userCards } from "$lib/utils/store";
   import { cubicIn, cubicOut } from "svelte/easing";
   import Card from "./Card.svelte";
-  export let data; 
+  export let data;
   export let categoryFilter: string;
   let addCardOpen = false;
   let loading = false;
@@ -75,16 +75,18 @@
 </script>
 
 <div
-  class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled bg-transparent backdrop-blur-xl "
+  class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled bg-transparent backdrop-blur-xl"
 >
   {#key cardsFiltered}
-    {#each cardsFiltered as card}
-      <div
-        in:fly={{ y: -10, duration: 300, delay: 400, easing: cubicIn, opacity: 1 }}
-        out:fly={{ y: 10, duration: 300, delay: 400, easing: cubicOut, opacity: 0 }}
-      >
-        <Card inAddCard = {false} cardProps={structuredClone(card)} />
-      </div>
-    {/each}
+    {#if cardsFiltered}
+      {#each cardsFiltered as card}
+        <div
+          in:fly={{ y: -10, duration: 300, delay: 400, easing: cubicIn, opacity: 1 }}
+          out:fly={{ y: 10, duration: 300, delay: 400, easing: cubicOut, opacity: 0 }}
+        >
+          <!-- <Card inAddCard={false} cardProps={structuredClone(card)} /> -->
+        </div>
+      {/each}
+    {/if}
   {/key}
 </div>

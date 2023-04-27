@@ -9,6 +9,7 @@ import { userCards } from "$lib/utils/store";
 const prisma = new PrismaClient();
 
 export const load: PageServerLoad = async (event) => {
+  const myneCards = [''] 
   console.time("loadFunctionTimer");
   const  session  = await event.locals.auth.validate();
   const  {user}  = await event.locals.auth.validateUser();
@@ -20,6 +21,6 @@ export const load: PageServerLoad = async (event) => {
     throw redirect(302, "/app/unverified-email");
   }
   else{
-    return {};
+    return { myneCards }
   }
 };
