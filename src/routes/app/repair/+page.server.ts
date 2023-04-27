@@ -15,6 +15,5 @@ export const load: PageServerLoad = async (event) => {
   }
   if (user.role === "RPAIR" || user.role === "ADMIN" || user.role === "OWNR") {
     return {};
-  }
-  else return {}
+  } else throw redirect(302,'/app')
 };
