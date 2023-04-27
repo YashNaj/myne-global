@@ -63,7 +63,7 @@
   method="POST"
   use:enhance
 >
-  <h1 class="text-white flex pl-4 font-semibold text-2xl">Create an account.</h1>
+  <h1 class="text-white text-center flex font-semibold text-2xl">Create an account.</h1>
   <div class="container overflow-y-auto w-full h-80">
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
@@ -180,7 +180,7 @@
   </div>
 
   <input type="submit" value="Register" class="btn mt-3 normal-case btn-primary text-secondary flex-1 w-full" />
-  <h1 class="text-center my-2">Have An Account?</h1>
+  <h1 class="text-center my-2 text-white">Have An Account?</h1>
 
   <a class="btn normal-case btn-neutral text-primary flex-1 w-full" href="/auth/signin">Sign In</a>
 </form>

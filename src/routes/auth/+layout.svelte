@@ -21,10 +21,10 @@
 </script>
 
 <div
-  class="auth-container bg-[rgb(231, 240, 255)] w-full h-screeb flex-col flex flex-wrap justify-start content-center overflow-hidden pt-4 lg:hidden overflow-x-hidden overflow-y-hidden"
+  class="auth-container bg-[rgb(231, 240, 255)] w-full h-screen flex-col flex flex-wrap justify-start content-center overflow-hidden lg:hidden overflow-x-hidden overflow-y-hidden"
 >
-  <div class="auth-box rounded-none rounded-t-2xl shadow-xl w-full h-full card bg-primary/80 backdrop-blur-[300px]">
-    <img class="max-w-full p-3 w-32" src={whiteLogo} alt="myne-logo" />
+  <div class="auth-box rounded-none shadow-xl w-full h-full card bg-primary">
+    <div class="h-10 w-full" />
     {#key pathname}
       <div in:fly={transitionIn} out:fly={transitionOut}>
         <slot />
