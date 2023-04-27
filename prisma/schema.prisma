@@ -18,6 +18,7 @@ model AuthUser {
   passwordVerificationRequest PasswordVerificationRequest[]
   emailVerificationRequest    EmailVerificationRequest[]
   profile                     Profile?
+  products                    AuthProduct[]
 
   @@map("auth_user")
 }
@@ -266,7 +267,6 @@ model motorcycle_brands {
   motorcycle_brands String?
   id                BigInt  @id @unique @default(autoincrement())
 }
-
 model technology_brands {
   technology_brands String?
   id                BigInt  @id @unique @default(autoincrement())
@@ -320,4 +320,13 @@ enum Role {
   USER
   ADMIN
   DISTR
+}
+model AuthProduct{
+  id String @id @unique @default(uuid())
+  cardCredit Int @default(0)
+  reportCredit Int @default(0)
+  referrals Int @default(0)
+  auth_user AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String
+  @@map("auth_produts")
 }

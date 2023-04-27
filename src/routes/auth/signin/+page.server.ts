@@ -3,11 +3,17 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
 import { signin } from "../../../../tests/utils";
+import { currentUser } from "$lib/utils/store";
 let signingIn = false;
 export const load: PageServerLoad = async ({ locals, page }) => {
   const session = await locals.auth.validate();
+  const { user } = await locals.auth.validateUser();
+  console.log(user)
+  if (user) {
+    currentUser.set(user.userId);
+  }
   console.log("session", session);
-  if (session) throw redirect(302, "/app");  
+  if (session) throw redirect(302, "/app");
 };
 // Set signingIn to false when redirecting
 

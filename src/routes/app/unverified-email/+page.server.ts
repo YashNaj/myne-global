@@ -11,13 +11,13 @@ const prisma = new PrismaClient();
 export const load: PageServerLoad = async (event) => {
   console.time("loadFunctionTimer");
   const  session  = await event.locals.auth.validate();
-  const  {user}  = await event.locals.auth.validateUser();
+  const  { user }  = await event.locals.auth.validateUser();
 
   if (!session) {
     throw redirect(302, "/auth/signin");
   }
-  if(!user.valid){
-    throw redirect(302, "/app/unverified-email");
+  if(user.valid){
+    throw redirect(302, "/app");
   }
   else{
     return {};

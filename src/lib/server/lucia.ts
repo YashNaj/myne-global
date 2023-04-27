@@ -2,6 +2,8 @@ import { dev } from "$app/environment";
 import lucia, { generateRandomString } from "lucia-auth";
 import prisma from "@lucia-auth/adapter-prisma";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { sveltekit } from "lucia-auth/middleware";
+
 const prismaClient = new PrismaClient();
 
 export const auth = lucia({
@@ -16,6 +18,7 @@ export const auth = lucia({
       valid: userData.valid,
     };
   },
+  middleware: sveltekit()
 });
 
 export type Auth = typeof auth;

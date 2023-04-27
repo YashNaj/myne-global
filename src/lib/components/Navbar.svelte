@@ -10,8 +10,8 @@
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
   import type { LayoutData } from "../../routes/$types";
-  export let data: LayoutData;
-  $: pathname = data.pathname 
+  // export let data: LayoutData;
+  // $: pathname = data.pathname 
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",
     placement: "top",

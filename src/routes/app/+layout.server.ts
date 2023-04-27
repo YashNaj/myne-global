@@ -21,11 +21,13 @@ const anyoneAllowed = [
 export const load = ((async ({ url, locals }) => {
   const onUnauthedRoute = anyoneAllowed.some((route) => url.pathname.startsWith(route));
   const session = await locals.auth.validate();
-  
+  const { user } = await locals.auth.validateUser()
+  console.log("layout user", user)
   if (onUnauthedRoute) return {};
-  else if (!session) {
+  if (!session) {
     throw redirect(303, "/auth/signin");
-  } else if (session) {
+  } 
+  if (session && user.valid) {
     let user_id = user.userId;
 
     // const query = {
@@ -56,7 +58,8 @@ export const load = ((async ({ url, locals }) => {
       })
       .profile();
     loading = false
+    const myneCards = [{id:1, name:"test"}, {id:2, name:"test2"}] 
     throw redirect(202, "/app");
     return { isUser: true, profile:profile(), loading, user_id }
-  } else throw redirect(302, "/app/unverified-email");
+  } else redirect(302, "/app/unverified-email");
 }) satisfies LayoutServerLoad);

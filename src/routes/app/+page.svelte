@@ -10,39 +10,37 @@
   import { fly } from "svelte/transition";
   import AddCard from "$lib/components/AddCard.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
-  export let data: PageData = $page.data;
+  export let data: PageData;
   let size = "9";
   let cards;
   let cardsLoading;
-  let userId = $currentUser;
+  let userId = '';
   $: userId = $currentUser;
   async function getMyneCardstRPC() {
     cardsLoading = true;
-    cards = await trpc($page).cards.load.query(userId);
+    if(userId){
+      cards = await trpc($page).cards.load.query(userId)
+    }
     cardsLoading = false;
   }
   onMount(async () => {
     cards = getMyneCardstRPC();
   });
-  export let myneCards = $page.data.getMyneCards;
-  
+  export let myneCards = getMyneCardstRPC()
+  console.log(myneCards)
   
   
   console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
-  userCards.set([...myneCards]);
-  export let addCardOpen = false;
+  // userCards.set([...myneCards]);
   export let categoryFilter: string = "All";
 
   $: filteredCards = myneCards.map((card) => {
     card.category === categoryFilter;
   });
   let cardsFiltered;
-
   $: cardsFiltered = filteredCards;
   let loading;
   $: loading = data.loading;
-  const tabList = ["Card Vault", "Import", "History Reports", "Request Inventory"];
-  export let isLoading = true;
   
   $: console.log("selectedCard", $selectedCard);
   $: console.log("trpc cards", cards);
