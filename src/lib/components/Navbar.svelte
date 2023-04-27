@@ -9,9 +9,11 @@
   import LogOut from "./LogOut.svelte";
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
+  import type { PageData } from "../../routes/$types";
   import type { LayoutData } from "../../routes/$types";
-  // export let data: LayoutData;
-  // $: pathname = data.pathname 
+  export let user;
+  console.log('navbar user ', user)
+    // $: pathname = data.pathname 
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",
     placement: "top",
@@ -36,6 +38,9 @@
         <img alt="logo" class="max-w-full" src={logo} />
       </div>
     </a>
+    <div class = 'w-full h-full text-center flex justify-center pl-1 text-white font-semibold'>
+      Role
+    </div>
   </div>
   <slot/>
 </div>

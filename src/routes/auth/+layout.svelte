@@ -25,9 +25,11 @@
 >
   <div class="auth-box rounded-none shadow-xl w-full h-full card bg-primary">
     <div class="h-10 w-full" />
-    <div >
-      <slot />
-    </div>
+    {#key pathname}
+      <div in:fly={transitionIn} out:fly={transitionOut}>
+        <slot />
+      </div>
+    {/key}
   </div>
 </div>
 
@@ -45,7 +47,11 @@
         class="auth-box shadow-lg bg-primary/50 backdrop-blur-[300px] w-[40%] lg:h-[80%] h-[50%] card bg-primary p-4 absolute lg:bottom-[5rem] bottom-[20rem] right-[5rem]"
       >
         <div>
-          <slot />
+          {#key pathname}
+            <div in:fly={transitionIn} out:fly={transitionOut}>
+              <slot />
+            </div>
+          {/key}
         </div>
       </div>
     </div>

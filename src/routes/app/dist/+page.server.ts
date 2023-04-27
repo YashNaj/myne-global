@@ -14,7 +14,7 @@ export const load: PageServerLoad = async (event) => {
   if (!user.valid) {
     throw redirect(302, "/app/unverified-email");
   }
-  if (user.role === "ADMIN" || user.role === "OWNR") {
+  if (user.role === "DIST" || user.role === "ADMIN" || user.role === "OWNR") {
     return {};
   }
   else {

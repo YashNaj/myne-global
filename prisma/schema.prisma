@@ -45,7 +45,50 @@ model AuthKey {
   @@index([user_id])
   @@map("auth_key")
 }
+model Repairs{
+  id  String @id @unique @default(uuid())
+  category String 
+  repair_shop String
+  address String 
+  
+}
+enum Role {
+  OWNR
+  USER
+  ADMIN
+  DISTR
+  RPAIR
+}
 
+model AuthProduct {
+  id           String   @id @unique @default(uuid())
+  cardCredit   Int      @default(0)
+  reportCredit Int      @default(0)
+  referrals    Int      @default(0)
+  auth_user    AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id      String
+
+  @@map("auth_product")
+}
+model EmailVerificationRequest {
+  id        String   @id @unique @default(uuid())
+  email     String
+  token     String   @unique @default(uuid())
+  user_id   String   @unique
+  expiresAt DateTime
+  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@map("emailVerificationRequest")
+}
+
+model PasswordVerificationRequest {
+  id        String   @id @unique
+  token     String   @default(uuid())
+  user_id   String
+  expiresAt DateTime @db.Timestamp(1)
+  email     String
+  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
+}
 model Profile {
   id         String     @id @default(uuid())
   user_id    String     @unique
@@ -187,25 +230,7 @@ model ChildId {
   Profile           Profile  @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
 
-model EmailVerificationRequest {
-  id        String   @id @unique @default(uuid())
-  email     String
-  token     String   @unique @default(uuid())
-  user_id   String   @unique
-  expiresAt DateTime
-  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
-  @@map("emailVerificationRequest")
-}
-
-model PasswordVerificationRequest {
-  id        String   @id @unique
-  token     String   @default(uuid())
-  user_id   String
-  expiresAt DateTime @db.Timestamp(1)
-  email     String
-  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
-}
 
 model stolenWatches {
   brand              String?
@@ -218,9 +243,9 @@ model stolenWatches {
   strap_bracelet     String?
   engraving          String?
   description        String?
-  city_              String? @map("city ")
-  state_             String? @map("state ")
-  country_           String? @map("country ")
+  city               String? @map("city")
+  state              String? @map("state")
+  country            String? @map("country")
   stolen_date        String?
   police_reference   String?
   interpol_reference String?
@@ -267,6 +292,7 @@ model motorcycle_brands {
   motorcycle_brands String?
   id                BigInt  @id @unique @default(autoincrement())
 }
+
 model technology_brands {
   technology_brands String?
   id                BigInt  @id @unique @default(autoincrement())
@@ -295,16 +321,6 @@ model countries {
   local_name String?
   continent  continents?
 }
-
-model Stolen {
-  id         String   @id @default(uuid())
-  myneCardId String   @unique
-  createdAt  DateTime @default(now())
-  myneCard   MyneCard @relation(fields: [myneCardId], references: [id])
-
-  @@map("stolen")
-}
-
 enum continents {
   Africa
   Antarctica
@@ -314,19 +330,11 @@ enum continents {
   North_America @map("North America")
   South_America @map("South America")
 }
+model Stolen {
+  id         String   @id @default(uuid())
+  myneCardId String   @unique
+  createdAt  DateTime @default(now())
+  myneCard   MyneCard @relation(fields: [myneCardId], references: [id])
 
-enum Role {
-  OWNR
-  USER
-  ADMIN
-  DISTR
-}
-model AuthProduct{
-  id String @id @unique @default(uuid())
-  cardCredit Int @default(0)
-  reportCredit Int @default(0)
-  referrals Int @default(0)
-  auth_user AuthUser @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id String
-  @@map("auth_produts")
+  @@map("stolen")
 }

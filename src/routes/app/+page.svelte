@@ -11,6 +11,7 @@
   import AddCard from "$lib/components/AddCard.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
   export let data: PageData;
+  let user = data.user
   let size = "9";
   let cards;
   let cardsLoading;

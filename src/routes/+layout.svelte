@@ -30,17 +30,13 @@
 
 <svelte:head />
 <div class="w-full h-full">
-  <Navbar {data}>
+  <Navbar>
     <NavbarHome />
   </Navbar>
   <main class="bg-[rgb(243,250,255)] pt-[3.8rem] h-full w-full">
-    {#key pathname}
-      <div in:fly={transitionIn} out:fly={transitionOut}>
         <slot />
-      </div>
-    {/key}
   </main>
-  {#if !pathname.includes("/app")}
+  {#if pathname?.includes("/app")}
     <Footer />
   {/if}
 </div>

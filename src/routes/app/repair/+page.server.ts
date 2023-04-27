@@ -1,6 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import { redirect } from "@sveltejs/kit";
-import type { RequestHandler } from "./$types";
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
   const myneCards = [""];
@@ -14,10 +13,8 @@ export const load: PageServerLoad = async (event) => {
   if (!user.valid) {
     throw redirect(302, "/app/unverified-email");
   }
-  if (user.role === "ADMIN" || user.role === "OWNR") {
+  if (user.role === "RPAIR" || user.role === "ADMIN" || user.role === "OWNR") {
     return {};
   }
-  else {
-	throw redirect(302, "/app");
-  }
+  else return {}
 };

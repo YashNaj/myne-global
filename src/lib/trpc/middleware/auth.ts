@@ -7,5 +7,7 @@ export const protectedProcedure =
         if (!ctx.user || !ctx.session) {
             throw new TRPCError({ code: 'UNAUTHORIZED'});
         }
-        return next({ ctx });
+        const user = ctx.user 
+        console.log(user)
+        return next({ ctx, user  });
     });
