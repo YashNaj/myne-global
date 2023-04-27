@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Parsers } from '$lib/schemas/pasrser';
 import {Prisma , PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient();
-export const GET: RequestHandler = async ({ url, user }) => {
+export const GET: RequestHandler = async ({ url, locals}) => {
   const { token } = Parsers.params(url, z.object({ token: z.string() }));
   try {
     const request = await prisma.emailVerificationRequest.findUnique({
@@ -20,12 +20,11 @@ export const GET: RequestHandler = async ({ url, user }) => {
     console.log(id, expiresAt);
     if (request.expiresAt < new Date()) throw error(400, "Token expired");
 
-    const user = await auth.getUser(id);
+    const {user} = await locals.auth.validateUser();
     if (!user) throw error(400, "Invalid token");
-    await auth.updateUserAttributes(user.userId, {
+    await locals.auth.updateUserAttributes(user.userId, {
       valid: true,
     });
-
   } catch (error) {
     console.log(error);
   }finally{
