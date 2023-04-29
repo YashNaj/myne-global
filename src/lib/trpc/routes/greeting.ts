@@ -6,13 +6,8 @@ import delay from "delay";
 import { protectedProcedure } from '$lib/trpc/middleware/auth';
 
 export const greeting = t.router({
-  greeting: protectedProcedure
-    .input((name: unknown) => {
-      if (typeof name === "string") return name;
-
-      throw new Error(`Invalid input: ${typeof name}`);
-    })
-    .query(async ({ input }) => {
-      return `Hello, ${input} from tRPC v10 @ ${new Date().toLocaleTimeString()}`;
+  load: protectedProcedure
+    .query(async ( ) => {
+      return `Hello, from tRPC v10 @ ${new Date().toLocaleTimeString()}`;
     }),
 });

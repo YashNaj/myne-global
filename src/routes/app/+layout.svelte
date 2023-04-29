@@ -7,21 +7,16 @@
   import { onMount } from "svelte";
   import NavbarProfile from "$lib/components/NavbarProfile.svelte";
   import { browser } from "$app/environment";
-  import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
+  import { QueryClientProvider } from "@tanstack/svelte-query";
   import type { LayoutData } from "./$types";
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        enabled: browser,
-      },
-    },
-  });
 
   export let addCardOpen = false;
   export let data: LayoutData;
-  $: user = data.user
-  console.log("user", user)
-  $: pathname = data.pathname;
+  let pathname = data.pathname;
+  let user = data.user();
+  let profile = data.profile();
+  let role = $user.data.role; 
+  console.log('data check', role , $profile.data)
   let menuItems = [
     "Import",
     "Request History Reports",
@@ -51,43 +46,34 @@
 <svelte:head>
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
-<QueryClientProvider client={queryClient}>
-  <div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-primary">
-    <Navbar {user}>
-      <NavbarProfile />
-    </Navbar>
-    {#key pathname}
-      <main class="bg-primary h-full min-h-screen">
-        <div in:fly={transitionIn} out:fly={transitionOut}>
-          <slot />
-        </div>
-      </main>
-    {/key}
-  </div>
-  <div class=" md:hidden w-full min-h-screen h-full bg-primary">
-    <Navbar {user}>
-      <NavbarProfile />
-    </Navbar>
-    {#key pathname}
-      <main class="bg-primary h-full">
-        <div in:fly={transitionIn} out:fly={transitionOut}>
-          <slot />
-        </div>
-      </main>
-    {/key}
-  </div>
-</QueryClientProvider>
-
-<style lang="postcss">
-  :global(body) {
-    font-family: futura-pt;
-  }
-  ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
-  /* Optional: show position indicator in red */
-  ::-webkit-scrollbar-thumb {
-    background: #0062ff;
-  }
-</style>
+<div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-primary">
+  {#if $user.data}
+  <Navbar role = {$user.data.role}>
+    <NavbarProfile />
+  </Navbar>
+  {:else}
+  <Navbar>
+    <NavbarProfile />
+  </Navbar>
+  {/if}
+ 
+  {#key pathname}
+    <main class="bg-primary h-full min-h-screen">
+      <div in:fly={transitionIn} out:fly={transitionOut}>
+        <slot />
+      </div>
+    </main>
+  {/key}
+</div>
+<div class=" md:hidden w-full min-h-screen h-full bg-primary">
+  <Navbar>
+    <NavbarProfile />
+  </Navbar>
+  {#key pathname}
+    <main class="bg-primary h-full">
+      <div in:fly={transitionIn} out:fly={transitionOut}>
+        <slot />
+      </div>
+    </main>
+  {/key}
+</div>

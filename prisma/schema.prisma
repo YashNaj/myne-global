@@ -19,6 +19,7 @@ model AuthUser {
   emailVerificationRequest    EmailVerificationRequest[]
   profile                     Profile?
   products                    AuthProduct[]
+  AuthRepair                  AuthRepair[]
 
   @@map("auth_user")
 }
@@ -45,13 +46,14 @@ model AuthKey {
   @@index([user_id])
   @@map("auth_key")
 }
-model Repairs{
-  id  String @id @unique @default(uuid())
-  category String 
+
+model Repairs {
+  id          String @id @unique @default(uuid())
+  category    String
   repair_shop String
-  address String 
-  
+  address     String
 }
+
 enum Role {
   OWNR
   USER
@@ -70,6 +72,20 @@ model AuthProduct {
 
   @@map("auth_product")
 }
+
+model AuthRepair {
+  id           String    @id @unique @default(uuid())
+  cardCredit   Int       @default(0)
+  reportCredit Int       @default(0)
+  referrals    Int       @default(0)
+  auth_user    AuthUser  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id      String
+  MyneCard     MyneCard? @relation(fields: [myneCardId], references: [id])
+  myneCardId   String?
+
+  @@map("auth_repair")
+}
+
 model EmailVerificationRequest {
   id        String   @id @unique @default(uuid())
   email     String
@@ -89,6 +105,7 @@ model PasswordVerificationRequest {
   email     String
   auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 }
+
 model Profile {
   id         String     @id @default(uuid())
   user_id    String     @unique
@@ -110,15 +127,15 @@ model Profile {
 }
 
 model MyneCard {
-  id                       String    @id @default(uuid())
+  id                       String       @id @default(uuid())
   user_id                  String
   size                     String?
   purchasedFrom            String?
   purchasedValue           String?
-  createdOn                DateTime  @default(now())
-  isStolen                 Boolean   @default(false)
+  createdOn                DateTime     @default(now())
+  isStolen                 Boolean      @default(false)
   reportedStolenDate       DateTime?
-  pictures                 String[]  @default([])
+  pictures                 String[]     @default([])
   category                 String
   description              String?
   breed                    String?
@@ -149,7 +166,7 @@ model MyneCard {
   hotstamping              String?
   interior_color           String?
   invoice                  String?
-  isHeirloom               Boolean   @default(false)
+  isHeirloom               Boolean      @default(false)
   laser_inscription        String?
   manufacturer             String?
   material                 String?
@@ -185,15 +202,16 @@ model MyneCard {
   year                     String?
   cut_shape                String?
   carat_weight             String?
-  marketPrice              String?   @default("No market data yet")
+  marketPrice              String?      @default("No market data yet")
   gender                   String?
   wallet_address           String?
   brand                    String?
   document_array           String?
-  stolenId                 Int?      @unique
+  stolenId                 Int?         @unique
   reciept                  String?
-  Profile                  Profile   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  Profile                  Profile      @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   Stolen                   Stolen?
+  AuthRepairs              AuthRepair[]
 
   @@unique([user_id, id])
   @@map("myneCard")
@@ -229,8 +247,6 @@ model ChildId {
   homeCountry       String
   Profile           Profile  @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
-
-
 
 model stolenWatches {
   brand              String?
@@ -321,6 +337,7 @@ model countries {
   local_name String?
   continent  continents?
 }
+
 enum continents {
   Africa
   Antarctica
@@ -330,6 +347,7 @@ enum continents {
   North_America @map("North America")
   South_America @map("South America")
 }
+
 model Stolen {
   id         String   @id @default(uuid())
   myneCardId String   @unique

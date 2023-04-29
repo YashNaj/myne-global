@@ -11,7 +11,7 @@
   import type { LayoutData, LayoutServerData } from "./$types";
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
-  import { QueryClientProvider, QueryClient } from "@tanstack/svelte-query";
+  import { QueryClientProvider } from "@tanstack/svelte-query";
   import Navbar from "$lib/components/Navbar.svelte";
   import NavbarHome from "$lib/components/NavbarHome.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
@@ -19,16 +19,12 @@
   import Footer from "$lib/components/Footer.svelte";
   export let data: LayoutData;
   $: pathname = data.pathname;
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        enabled: browser,
-      },
-    },
-  });
+
 </script>
 
 <svelte:head />
+
+<QueryClientProvider client={data.queryClient}>
 <div class="w-full h-full">
   <Navbar>
     <NavbarHome />
@@ -40,3 +36,19 @@
     <Footer />
   {/if}
 </div>
+</QueryClientProvider>
+
+
+<style lang="postcss">
+  :global(html) {
+    font-family: futura-pt;
+  }
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+    background: #0062ff;
+  }
+</style>

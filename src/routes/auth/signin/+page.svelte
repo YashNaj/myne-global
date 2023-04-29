@@ -1,42 +1,45 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
-  import { slide } from "svelte/transition";
   import type { PageData } from "./$types";
+  import { z } from "zod";
+  import { validator } from '@felte/validator-zod';
   export let data: PageData;
-
-  export let form = { message: "", signingIn: false };
   export let signingIn = false;
+  import { superForm } from 'sveltekit-superforms/client';
+  import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+
   let email = "";
+  const { form, errors, constraints , capture, restore } = superForm(data.form);
+  export const snapshot = { capture, restore };
+
 </script>
 
 <h1 class="text-white flex pl-4 font-semibold text-2xl">Sign into your Myne Account.</h1>
+<SuperDebug data={$form} />
+
 <form
   method="POST"
   class="flex flex-col justify-center flex-wrap content-center text-primary p-4"
-  use:enhance={({ data, cancel }) => {
-    form = { message: "", signingIn };
-    const email = data.get("email")?.toString() || "";
-    const password = data.get("password")?.toString() || "";
-    if (!email || !password) {
-      form.message = "Invalid input";
-      cancel();
-    }
-  }}
 >
   <div class="flex flex-col">
     <input
       type="email"
       name="email"
       placeholder="Email"
+      data-invalid={$errors.email}
+      bind:value={$form.email}
+      {...$constraints.email}
       class="text-primary bg-neutral marker:flex-2 input input-md shadow-lg"
-      bind:value={email}
+      
     />
     <input
       type="password"
       id="password"
       name="password"
       placeholder="Password"
+      data-invalid={$errors.password}
+      bind:value={$form.password}
+      {...$constraints.password}
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-sm"
     />
   </div>
@@ -48,11 +51,6 @@
 </form>
 
 <div class="flex-col h-20 w-full justify center content-center">
-  {#if form?.message}
-    <div>
-      <Alert message={form.message} />
-    </div>
-  {/if}
   <p class="my-3 text-secondary flex w-full justify-center">
     <a class="linka text-white" href="/forgot -password">Forgot Password?</a>
   </p>

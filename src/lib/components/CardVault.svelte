@@ -43,29 +43,29 @@
     });
   }
 
-  let isLoading;
-  $: filteredCards = $userCards;
-  $: categories = categories.sort();
-  let cardsFiltered;
-  $: cardsFiltered = filteredCards.filter((item) => {
-    if (categoryFilter === "All") {
-      return $userCards;
-    }
-    if (!inputText) {
-      return item.category === categoryFilter;
-    } else if (inputText) {
-      const inputFilter = filterByTextInput($userCards, inputText);
-      return (cardsFiltered = inputFilter);
-    }
-  });
-  $: console.log(categoryFilter);
-  $: {
-    if (inputText != null && inputText !== "") {
-      cardsFiltered = filterByTextInput($userCards, inputText);
-    } else {
-      console.log("The string is null or empty");
-    }
-  }
+  // let isLoading;
+  // $: filteredCards = $userCards;
+  // $: categories = categories.sort();
+  // let cardsFiltered;
+  // $: cardsFiltered = filteredCards.filter((item) => {
+  //   if (categoryFilter === "All") {
+  //     return $userCards;
+  //   }
+  //   if (!inputText) {
+  //     return item.category === categoryFilter;
+  //   } else if (inputText) {
+  //     const inputFilter = filterByTextInput($userCards, inputText);
+  //     return (cardsFiltered = inputFilter);
+  //   }
+  // });
+  // $: console.log(categoryFilter);
+  // $: {
+  //   if (inputText != null && inputText !== "") {
+  //     cardsFiltered = filterByTextInput($userCards, inputText);
+  //   } else {
+  //     console.log("The string is null or empty");
+  //   }
+  // }
 
   export let mobile: boolean = false;
   $: console.log(
@@ -77,16 +77,10 @@
 <div
   class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled bg-transparent backdrop-blur-xl"
 >
-  {#key cardsFiltered}
-    {#if cardsFiltered}
-      {#each cardsFiltered as card}
         <div
           in:fly={{ y: -10, duration: 300, delay: 400, easing: cubicIn, opacity: 1 }}
           out:fly={{ y: 10, duration: 300, delay: 400, easing: cubicOut, opacity: 0 }}
         >
           <!-- <Card inAddCard={false} cardProps={structuredClone(card)} /> -->
         </div>
-      {/each}
-    {/if}
-  {/key}
 </div>

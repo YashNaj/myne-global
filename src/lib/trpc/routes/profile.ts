@@ -8,14 +8,16 @@ import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 export const profile = t.router({
   load: protectedProcedure.query(async ({ctx}) => {
-    let user_id = ctx.user.userId;
     let profile = await prisma.profile.findUnique({
       where: {
-        user_id,
+        user_id: ctx.user.userId
       },
     });
-    currentUser.set(user_id)
-    console.log("profile load", {profile});
     return profile;
+  }),
+  user: protectedProcedure.query(async ({ctx}) => {
+    let user = ctx.user
+    console.log('user layout load', user)
+    return user ; 
   }),
 });

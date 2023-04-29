@@ -9,11 +9,8 @@
   import LogOut from "./LogOut.svelte";
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
-  import type { PageData } from "../../routes/$types";
-  import type { LayoutData } from "../../routes/$types";
-  export let user;
-  console.log('navbar user ', user)
-    // $: pathname = data.pathname 
+  export let role;
+  // $: pathname = data.pathname
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",
     placement: "top",
@@ -32,15 +29,19 @@
 </script>
 
 <div class="navbar bg-primary fixed top-0 left-0 z-[1000] w-screen">
-  <div class="flex-1">
-    <a href="/" class="btn btn-ghost normal-case text-xl">
-      <div class="logo-container w-20 grid place-items-center">
-        <img alt="logo" class="max-w-full" src={logo} />
-      </div>
-    </a>
-    <div class = 'w-full h-full text-center flex justify-center pl-1 text-white font-semibold'>
-      Role
+  <div class="flex-1 flex justify-start w-fit">
+    <div class="flex">
+      <a href="/" class="btn btn-ghost normal-case text-xl">
+        <div class="logo-container w-20 grid place-items-center">
+          <img alt="logo" class="max-w-full" src={logo} />
+        </div>
+      </a>
+      {#if role}
+        <h1 class=" text-baseline flex justify-center content-center flex-wrap pl-1 text-white font-semibold">
+          {role}
+        </h1>
+      {/if}
     </div>
   </div>
-  <slot/>
+  <slot />
 </div>

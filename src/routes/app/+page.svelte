@@ -1,50 +1,26 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import type { PageData } from "./$types";
-  import { onMount } from "svelte";
   import CardVault from "$lib/components/CardVault.svelte";
-  import { userCards, selectedCard, currentUser, addCard } from "$lib/utils/store";
-  import { trpc } from "$lib/trpc/client";
   import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
   import CardVaultMenu from "$lib/components/CardVaultMenu.svelte";
   import { fly } from "svelte/transition";
   import AddCard from "$lib/components/AddCard.svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
+  import { addCard } from "$lib/utils/store"
   export let data: PageData;
-  let user = data.user
   let size = "9";
-  let cards;
+  $: cards = data.cards;
+  let profile = data.profile;
   let cardsLoading;
-  let userId = '';
-  $: userId = $currentUser;
-  async function getMyneCardstRPC() {
-    cardsLoading = true;
-    if(userId){
-      cards = await trpc($page).cards.load.query(userId)
-    }
-    cardsLoading = false;
-  }
-  onMount(async () => {
-    cards = getMyneCardstRPC();
-  });
-  export let myneCards = $page.data.myneCards;
-  console.log(myneCards)
-  
-  
-  console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
-  userCards.set([...myneCards]);
-  export let categoryFilter: string = "All";
+  let userId = "";
 
-  $: filteredCards = myneCards.map((card) => {
-    card.category === categoryFilter;
-  });
+  console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
+  export let categoryFilter: string = "All";
   let cardsFiltered;
-  $: cardsFiltered = filteredCards;
   let loading;
   $: loading = data.loading;
-  
-  $: console.log("selectedCard", $selectedCard);
-  $: console.log("trpc cards", cards);
+
   let inputText;
 
   const duration = 300;
@@ -75,7 +51,7 @@
   </div>
 </div>
 
-<div class="hidden md:flex w-full h-full flex-col scrollbar-track-transparent bg-[rgb(243,250,255)]">
+<div class="hidden md:flex w-full h-full min-h-screen flex-col scrollbar-track-transparent bg-[rgb(243,250,255)]">
   <div class="w-full h-full pt-20">
     {#if $addCard}
       <div
