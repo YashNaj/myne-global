@@ -9,7 +9,7 @@
   import LogOut from "./LogOut.svelte";
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
-  export let role;
+  export let role = ""; 
   // $: pathname = data.pathname
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",
@@ -36,7 +36,7 @@
           <img alt="logo" class="max-w-full" src={logo} />
         </div>
       </a>
-      {#if role}
+      {#if role !== ""}
         <h1 class=" text-baseline flex justify-center content-center flex-wrap pl-1 text-white font-semibold">
           {role}
         </h1>

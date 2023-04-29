@@ -10,16 +10,9 @@
   import { addCard } from "$lib/utils/store"
   export let data: PageData;
   let size = "9";
-  $: cards = data.cards;
-  let profile = data.profile;
-  let cardsLoading;
-  let userId = "";
-
+  let cards = data.cards();
   console.log("🚀 ~ file: +page.svelte:31 ~ cards:", cards);
   export let categoryFilter: string = "All";
-  let cardsFiltered;
-  let loading;
-  $: loading = data.loading;
 
   let inputText;
 
@@ -47,7 +40,7 @@
     <div class=" top-0 left-0 z-[99] fixed pt-[4rem] w-screen">
       <CardVaultMenu bind:categoryFilter bind:inputText />
     </div>
-    <CardVault {categoryFilter} {inputText} mobile={true} />
+    <CardVault {cards} {categoryFilter} {inputText} mobile={true} />
   </div>
 </div>
 
@@ -66,6 +59,6 @@
     <div class=" top-0 pt-[4rem] z-[99] fixed">
       <CardVaultMenu bind:categoryFilter bind:inputText />
     </div>
-    <CardVault {categoryFilter} {inputText} mobile={false} />
+    <CardVault {cards}  {categoryFilter} {inputText} mobile={false} />
   </div>
 </div>

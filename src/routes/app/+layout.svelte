@@ -28,7 +28,7 @@
   ];
   const duration = 300;
   const delay = duration + 100;
-  const y = 10;
+  const y = 10; 
 
   const transitionIn = { easing: cubicOut, y, duration, delay };
   const transitionOut = { easing: cubicIn, y: -y, duration };
@@ -47,16 +47,9 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 <div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-primary">
-  {#if $user.data}
   <Navbar role = {$user.data.role}>
     <NavbarProfile />
   </Navbar>
-  {:else}
-  <Navbar>
-    <NavbarProfile />
-  </Navbar>
-  {/if}
- 
   {#key pathname}
     <main class="bg-primary h-full min-h-screen">
       <div in:fly={transitionIn} out:fly={transitionOut}>

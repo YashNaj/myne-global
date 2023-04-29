@@ -6,13 +6,8 @@
   import { userCards } from "$lib/utils/store";
   import { cubicIn, cubicOut } from "svelte/easing";
   import Card from "./Card.svelte";
-  export let data;
-  export let categoryFilter: string;
-  let addCardOpen = false;
-  let loading = false;
-  let cardExpanded: boolean = false;
-  $: cardExpanded = cardExpanded;
-  $: categoryFilter = categoryFilter;
+  import Spinner from "./Spinner.svelte";
+  export let cards;
   let filteredCards;
   let categories = [
     "jewelry",
@@ -66,21 +61,27 @@
   //     console.log("The string is null or empty");
   //   }
   // }
-
-  export let mobile: boolean = false;
-  $: console.log(
-    "check if the card is expanded and use that switch to disable the scroll in the cardvault",
-    cardExpanded
-  );
 </script>
 
 <div
   class=" grid md:grid-cols-5 grid-cols-2 gird-rows-none grid-flow-row md:gap-2 gap-5 place-items-center p-4 w-full h-full pt-20 z-10 overflow-x-disabled bg-transparent backdrop-blur-xl"
 >
+  {#if $cards.isLoading}
+    <Spinner />
+  {:else if $cards.isError}
+    {$cards.error}
+  {:else if $cards.data}
+    {#if $cards.data.length > 0}
+      {#each cards as card}
         <div
           in:fly={{ y: -10, duration: 300, delay: 400, easing: cubicIn, opacity: 1 }}
           out:fly={{ y: 10, duration: 300, delay: 400, easing: cubicOut, opacity: 0 }}
         >
-          <!-- <Card inAddCard={false} cardProps={structuredClone(card)} /> -->
+          <Card inAddCard={false} cardProps={structuredClone(card)} />
         </div>
+      {/each}
+    {:else}
+      <div class="w-full h-full flex justify-center content-center flex-wrap">No Cards Found</div>
+    {/if}
+  {/if}
 </div>
