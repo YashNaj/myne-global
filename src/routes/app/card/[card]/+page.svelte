@@ -154,11 +154,11 @@
 {#key pathname}
   {#if isCardPropsInitialized}
   <CardFunctionModals/> 
-    <div class="h-full w-screen bg-black bg-opacity-10 flex flex-col">
-      <div class="w-full h-[400px] {pickedColor} pt-20 pb-4 backdrop-blur-lg">
+    <div class="h-full w-full backdrop-blur-[300px] bg-white/60 flex flex-col">
+      <div class="w-full h-[400px] {pickedColor} bg-opacity-20  pb-4 backdrop-blur-[300px] ">
         <SwiperPictures {pictures} expanded = {true} />
       </div>
-      <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative backdrop-blur-lg backdrop-saturate-50 bg-transparent">
+      <div class="container-content w-full text-primary h-full z-[90] overflow-y-auto relative backdrop-blur-lg backdrop-saturate-50 bg-transparent md:px-10 px-4">
         <div
           class="atribute-container p-3 flex md:flex-row flex-col w-full justify-between px-3 py-1 font-semibold text-4xl [text-shadow:0px_1px_1px_#d5deeb]"
         >
@@ -233,8 +233,9 @@
             />
           {/each}
         </div>
+        <div class="document-pdf container h-[50vh] w-full p-3">Document Display incoming ...</div>
+
       </div>
-      <div class="document-pdf container h-[50vh] w-full p-3">Document Display incoming ...</div>
     </div>
   {/if}
 {/key}

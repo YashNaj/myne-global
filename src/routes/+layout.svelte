@@ -10,25 +10,23 @@
   import Footer from "$lib/components/Footer.svelte";
   export let data: LayoutData;
   $: pathname = data.pathname;
-  
 </script>
 
 <svelte:head />
 
 <QueryClientProvider client={data.queryClient}>
-<div class="w-full h-full">
-  <Navbar>
-    <NavbarHome />
-  </Navbar>
-  <main class="bg-[rgb(243,250,255)] pt-[3.8rem] h-full w-full">
-        <slot />
-  </main>
-  {#if !pathname.includes("app")}
-    <Footer />
+  <div class="w-full h-full">
+    <Navbar>
+      <NavbarHome />
+    </Navbar>
+    <main class="bg-[rgb(243,250,255)] pt-[3.8rem] h-full w-full">
+      <slot />
+    </main>
+    {#if !pathname.includes("app")}
+      <Footer />
     {/if}
-</div>
+  </div>
 </QueryClientProvider>
-
 
 <style lang="postcss">
   :global(html) {

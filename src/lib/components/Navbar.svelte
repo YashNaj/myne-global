@@ -10,7 +10,7 @@
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
   export let role = "";
-  export let isUser = false; 
+  export let loggedIn = false;
   // $: pathname = data.pathname
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",
@@ -32,7 +32,7 @@
 <div class="navbar bg-primary fixed top-0 left-0 z-[1000] w-screen">
   <div class="flex-1 flex justify-start w-fit">
     <div class="flex">
-      <a href="/" class="btn btn-ghost normal-case text-xl">
+      <a href={loggedIn ? "/app" : "/"} class="btn btn-ghost normal-case text-xl">
         <div class="logo-container w-20 grid place-items-center">
           <img alt="logo" class="max-w-full" src={logo} />
         </div>

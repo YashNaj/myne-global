@@ -45,7 +45,7 @@
 </div>
 
 <div class="hidden md:flex w-full h-full min-h-screen flex-col scrollbar-track-transparent bg-[rgb(243,250,255)]">
-  <div class="w-full h-full pt-20">
+  <div class="w-full h-full pt-20 px-10">
     {#if $addCard}
       <div
         class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[99] backdrop-blur-lg top-0 left-0"

@@ -47,7 +47,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/kaa7gct.css" />
 </svelte:head>
 <div class="hidden w-full h-full md:flex flex-col justify-start content-center bg-primary">
-  <Navbar role = {$user.data.role}>
+  <Navbar loggedIn = {true} role = {$user.data.role}>
     <NavbarProfile />
   </Navbar>
   {#key pathname}
@@ -59,7 +59,7 @@
   {/key}
 </div>
 <div class=" md:hidden w-full min-h-screen h-full bg-primary">
-  <Navbar>
+  <Navbar loggedIn = {true} role = {$user.data.role}>
     <NavbarProfile />
   </Navbar>
   {#key pathname}

@@ -22,10 +22,6 @@ export const load = (async ({ url, locals }) => {
   const session = await locals.auth.validate();
   const { user } = await locals.auth.validateUser();
   const { pathname } = url;
-  let role; 
-  if (user){
-    role = user.role
-  }
   if (onUnauthedRoute) return {};
   if (!session) {
     throw redirect(303, "/auth/signin");
@@ -33,5 +29,5 @@ export const load = (async ({ url, locals }) => {
   if (session && user.valid) {
     throw redirect(202, "/app");
   } else redirect(302, "/app/unverified-email");
-  return { pathname }
+  return { pathname, loggedIn: true  }
 }) satisfies LayoutServerLoad;
