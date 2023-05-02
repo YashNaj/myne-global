@@ -1,19 +1,13 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  export const csr = true;
   import VanillaTilt, { type HTMLVanillaTiltElement } from "vanilla-tilt";
   import { template, generalFieldsBack } from "$lib/utils/forms";
   import StolenBadge from "./StolenBadge.svelte";
   import CardCell from "$lib/components/CardCell.svelte";
-  import Spinner from "$lib/components/Spinner.svelte";
-  import { trpc } from "$lib/trpc/client";
-  import { spring } from "svelte/motion";
-  import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
   import { selectedCard } from "$lib/utils/store";
   import { Icon } from "@steeze-ui/svelte-icon";
   import { ArrowsPointingOut } from "@steeze-ui/heroicons";
-  import { cloneDeep } from "lodash";
   import { onMount } from "svelte";
   import SwiperPictures from "./SwiperPictures.svelte";
 
@@ -22,10 +16,6 @@
   // box height for expanding cards
 
   // card external control values
-  export let expanded = false;
-  export let flipped = false;
-  export let sentCard = false;
-  export let success: boolean | null = null;
   export let inAddCard = false;
   export let mobile: boolean;
   //card variables
@@ -101,12 +91,10 @@
   <div class="flip-card rounded-2xl aspect-[5/7]">
     <div class="flip-card-inner">
       <div
-        class="flip-card-front backface-hidden {flipped
-          ? 'opacity-0 transition-opacity ease-out'
-          : ''} bg-slate-100 rounded-2xl flex flex-col will-change-transform absolute max-w-full
+        class="flip-card-front backface-hidden bg-slate-100 rounded-2xl flex flex-col will-change-transform absolute max-w-full
     shadow-md max-h-full"
       >
-        <div class:hidden={flipped} class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
+        <div  class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
           <a
             href="/app/card/{cardProps?.id}"
             class="btn btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"

@@ -26,6 +26,7 @@ const registerSchema = z.object({
   email: z.string().email().nonempty(),
   password: z.string().min(8).nonempty(),
   confirmPassword: z.string().min(8).nonempty(),
+  referral: z.string()
 });
 const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (user: string, origin: string, email: string, url: string) => {

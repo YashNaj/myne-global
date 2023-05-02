@@ -15,8 +15,6 @@
   import { cubicIn, cubicOut } from "svelte/easing";
   import SwiperPictures from "$lib/components/SwiperPictures.svelte";
   import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
-  let isCardPropsInitialized = false;
-  $: isCardPropsInitialized = !!cardProps;
   export let data: PageData; 
 
   let cards = data.cards();
@@ -24,36 +22,23 @@
   export let myneCard;
   $: console.log("is mobile", mobile);
   $: cardId = data.cardId
-  // box height for expanding cards
-  export let w: number;
-  export let h: number;
-
   // card external control values
-  export let expanded = false;
-  export let flipped = false;
-  export let sentCard = false;
-  export let success: boolean | null = null;
-  export let selected;
-  export let inAddCard = false;
   export let mobile = false;
   export let mobileExpanded = false;
-  $: selected = selected;
-  export let scrollTop;
   //card variables
   export let cardDisplayId: number = 1;
   $: cardDisplayId = cardDisplayId;
   let cardProps;
   $: if($cards.data){
-    cardProps = $cards.data.find((card)=> card.id = cardId)
+    cardProps = $cards.data.find((card)=> card.id === cardId)
   }
   $: if (cardProps) {
     formFieldsObject[cardProps?.category];
   }
-  $: cardProps = cardProps;
-  
-  
   export let description;
- 
+  let isCardPropsInitialized = false;
+  $: isCardPropsInitialized = !!cardProps;
+
  
   let currency;
   $: currency = purchasedValue;

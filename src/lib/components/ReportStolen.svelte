@@ -8,6 +8,7 @@
   import Spinner from "./Spinner.svelte";
   import { invalidateAll } from "$app/navigation";
   import Card from "./Card.svelte";
+  export let data; 
   let toggleRemoveStolen = false;
   let cardProps = { ...$selectedCard };
   $: if (cardProps.isStolen) {

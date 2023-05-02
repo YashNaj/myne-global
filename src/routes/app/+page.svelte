@@ -26,10 +26,10 @@
 </script>
 
 <div class="md:hidden bg-[rgb(243,250,255)] p-2 w-full h-full min-h-screen flex flex-col">
-  <div class="w-full pt-20 h-full px-1">
+  <div class="w-full pt-20 after:min-h-screen h-full">
     {#if $addCard}
       <div
-        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[99] backdrop-blur-lg top-0 left-0"
+        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 left-0"
         in:fly={transitionIn}
         out:fly={transitionOut}
       >
@@ -44,11 +44,11 @@
   </div>
 </div>
 
-<div class="hidden md:flex w-full h-full min-h-screen flex-col scrollbar-track-transparent bg-[rgb(243,250,255)]">
-  <div class="w-full h-full pt-20 px-10">
+<div class="hidden md:flex w-full h-full flex-col scrollbar-track-transparent bg-[rgb(243,250,255)]">
+  <div class="w-full h-full pt-20 min-h-screen px-10">
     {#if $addCard}
       <div
-        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[99] backdrop-blur-lg top-0 left-0"
+        class="w-full h-full flex flex-wrap justify-center content-center  backdrop-blur-lg top-0 left-0"
         in:fly={transitionIn}
         out:fly={transitionOut}
       >

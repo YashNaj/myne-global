@@ -1,16 +1,16 @@
 <script lang="ts">
   import { sizes } from "$lib/utils/size";
-  import { myneMasterBrandsAndBreeds } from '$lib/utils/myneMasterBrandsAndBreeds';
+  import { myneMasterBrandsAndBreeds } from "$lib/utils/myneMasterBrandsAndBreeds";
   import { Transition } from "@rgossiaux/svelte-headlessui";
   import { createSearchStore, searchHandler } from "$lib/utils/search";
   import { page } from "$app/stores";
-  import { backOut } from 'svelte/easing'
-  import Select from 'svelte-select'
+  import { backOut } from "svelte/easing";
+  import Select from "svelte-select";
   import { onDestroy, onMount } from "svelte";
   import { enhance } from "$app/forms";
   import GeneralModal from "$lib/components/GeneralModal.svelte";
   import * as dayjs from "dayjs";
-  export let success = false
+  export let success = false;
   export let mobile;
   import {
     jewelryProps,
@@ -18,7 +18,7 @@
     artProps,
     leatherProps,
     clothingProps,
-  sneakerProps,
+    sneakerProps,
     firearmsProps,
     technologyProps,
     tradingCardsProps,
@@ -40,10 +40,10 @@
   import { slide } from "svelte/transition";
   import SwiperPictures from "./SwiperPictures.svelte";
   import Card from "./Card.svelte";
-  import { Icon } from "@steeze-ui/svelte-icon"
-  import { XMark } from "@steeze-ui/heroicons"
-  import { addCard } from "$lib/utils/store"
-  
+  import { Icon } from "@steeze-ui/svelte-icon";
+  import { XMark } from "@steeze-ui/heroicons";
+  import { addCard } from "$lib/utils/store";
+
   let floatingConfig = {
     strategy: "bottom",
   };
@@ -287,11 +287,9 @@
     gender,
   };
   let addCardInputs: string[] = [];
-  $: addCardInputs =
-    fieldPropsObject[selectedCategory?.name as unknown as string];
+  $: addCardInputs = fieldPropsObject[selectedCategory?.name as unknown as string];
   $: cardProps.category = category;
   $: cardProps = { ...cardProps };
-
 
   export let formData = {
     ...cardProps,
@@ -320,12 +318,8 @@
   });
   categories = categories.sort();
   //this allows the select boxes to set values, do not delete until proper refactor  $: brandInput = brand;
-  let selectedCategory = myneMasterBrandsAndBreeds.find(
-    (object) => object.name === category?.toLowerCase()
-  );
-  $: selectedCategory = myneMasterBrandsAndBreeds.find(
-    (object) => object.name === category?.toLowerCase()
-  );
+  let selectedCategory = myneMasterBrandsAndBreeds.find((object) => object.name === category?.toLowerCase());
+  $: selectedCategory = myneMasterBrandsAndBreeds.find((object) => object.name === category?.toLowerCase());
   //pull various cats arrays
   let subcategories: [] | string[] | undefined | null;
   $: subcategories = selectedCategory?.subcategories.sort();
@@ -345,10 +339,7 @@
   $: brands = selectedCategory?.brands;
 
   $: cardProps = cardProps;
-  $: console.log(
-    "🚀 ~ file: +page.svelte:351 ~ cardProps:",
-    cardProps.category
-  );
+  $: console.log("🚀 ~ file: +page.svelte:351 ~ cardProps:", cardProps.category);
   function resetValues() {
     return {
       category: " ",
@@ -362,7 +353,7 @@
       success: false,
     };
   }
-  export let inAddCard = true; 
+  export let inAddCard = true;
   success = false;
   $: success = form?.success;
   $: console.log(form);
@@ -371,45 +362,43 @@
   }
   $: cardProps.pictures = pictures;
   $: console.log("🚀 ~ file: +page.svelte:388 ~ pictures:", pictures);
-  $: console.log(formData)
-
+  $: console.log(formData);
 </script>
 
-<div 
-  class=" w-full h-screen flex flex-col md:grid-cols-2 md:grid bg-primary text-white pt-20 content-center   from-white  relative shadow-lg" >
-<button on:click={()=>addCard.set(false)} class = 'btn btn-ghost w-fit aspect-[1/1] absolute md:top-[5rem] md:right-[1rem] top-[5rem] right-[1rem]'>
-  <Icon color = 'white' src ={XMark} size = "48px"/>
-</button>  
+<div
+  class="md:w-[900px] w-full h-full flex flex-col md:grid-cols-2 md:grid bg-primary/80
+  backdrop-blur-[200px] text-white p-10 content-center from-white shadow-lg rounded-2xl"
+>
+  <button
+    on:click={() => addCard.set(false)}
+    class="btn btn-ghost w-fit aspect-[1/1] absolute md:top-[0rem] md:right-[1rem] top-[5rem] right-[1rem]"
+  >
+    <Icon color="white" src={XMark} />
+  </button>
   <div class="flex justify-center w-full h-full content-start order-2">
-      <Card {inAddCard} {flipped} {cardProps} {pictures}>
-        <SwiperPictures
-          on:picturesuploaded={(event) => {
-            pictures = event.detail;
-          }}
-        />
-      </Card>
+    <Card {inAddCard} {cardProps} {pictures}>
+      <SwiperPictures
+        on:picturesuploaded={(event) => {
+          pictures = event.detail;
+        }}
+      />
+    </Card>
   </div>
   <div class="w-full flex justify-center h-full order-2">
     <form
       method="POST"
       action="/app/add_card"
-      class="h-full w-full form-gradient p-4 flex flex-col justify-between form-container text-white"
-      use:enhance={()=> {
-         if(formData.success = true){
-          success = true 
-         }
+      class="h-full w-full form-gradient p-4 flex flex-col justify-between form-container text-white z-[9999]"
+      use:enhance={() => {
+        if ((formData.success = true)) {
+          success = true;
+        }
       }}
       class:exitForm={sentCard === true}
       class:comeBack={success === true}
     >
       {#if addCardInputs?.length > 0}
-        <input
-          hidden
-          name="category"
-          id="categroy"
-          placeholder="categroy"
-          bind:value={cardProps["category"]}
-        />
+        <input hidden name="category" id="categroy" placeholder="categroy" bind:value={cardProps["category"]} />
         <div class=" hidden w-40 h-80">
           {#each addCardInputs as hiddenInput}
             <input
@@ -444,33 +433,25 @@
             {stones}
             {addCardInputs} -->
       <div class="form-box w-full h-full flex flex-col place-items-center">
-        <h1
-          class="text-2xl font-semibold w-full justify-start p-2 text-white"
-        >
-          Add a Card
-        </h1>
+        <h1 class="text-2xl font-semibold w-full justify-start p-2 text-white">Add a Card</h1>
 
-        <div class="form-input-button-wrapper order-2  w-full h-full ">
-          <div bind:this={parentEl} class="parent form-slider w-full h-full ">
+        <div class="form-input-button-wrapper order-2 w-full h-full">
+          <div bind:this={parentEl} class="parent form-slider w-full h-full">
             <swiper-container
               allow-touch-move={false}
-              class="w-full h-[90%] swiper-container touch-none mt-2 flex-2 rounded-xl bg-black bg-opacity-20 "
+              class="w-full h-[90%] swiper-container mt-2 flex-2 rounded-xl bg-black bg-opacity-20"
               pagination={true}
               observer={true}
               observe-parents={true}
             >
-              <swiper-slide
-                class="slide-0 w-full h-8 p-3 grid place-items-center"
-              >
-                <div class="w-full  place-items-center">
-                  <div class = 'z-[99]'>
+              <swiper-slide class="slide-0 w-full h-8 p-3 grid place-items-center z-[9999]">
+                <div class="w-full place-items-center">
+                  <div >
                     <Select
                       {floatingConfig}
                       placeholder="Category"
-                      class="select text-black w-full my-4 "
-                      items={categories?.map((categories) =>
-                        firstCapital(categories)
-                      )}
+                      class="select text-black w-full my-4 z-[99999] "
+                      items={categories?.map((categories) => firstCapital(categories))}
                       on:change={() => {
                         category = justValue;
                         subcategory = "";
@@ -481,12 +462,10 @@
                   {#if subcategories?.length > 0}
                     <div transition:slide>
                       <Select
-                      {floatingConfig}
+                        {floatingConfig}
                         placeholder="Subcategory"
                         class="select text-black w-full my-4 "
-                        items={subcategories?.map((subcategories) =>
-                          firstCapital(subcategories)
-                        )}
+                        items={subcategories?.map((subcategories) => firstCapital(subcategories))}
                         on:change={() => {
                           subcategory = justValue;
                         }}
@@ -513,9 +492,7 @@
                 </div>
               </swiper-slide>
 
-              <swiper-slide
-                class="slide-1 w-full h-full gird grid-row-[1fr_1fr] p-3"
-              >
+              <swiper-slide class="slide-1 w-full h-full gird grid-row-[1fr_1fr] p-3">
                 {#if cardProps.category?.toLowerCase() === "art"}
                   <input
                     placeholder="Artist"
@@ -589,9 +566,7 @@
                   {/if}
                 {/if}
               </swiper-slide>
-              <swiper-slide
-                class="slide-2 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-              >
+              <swiper-slide class="slide-2 w-full h-full gird grid-row-[1fr_1fr] p-3">
                 {#if cardProps.category?.toLowerCase() === "art"}
                   <input
                     placeholder="Material"
@@ -702,9 +677,7 @@
                   />
                 {/if}
               </swiper-slide>
-              <swiper-slide
-                class="slide-3 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-              >
+              <swiper-slide class="slide-3 w-full h-full gird grid-row-[1fr_1fr] p-3">
                 {#if cardProps.category?.toLowerCase() === "art"}
                   <input
                     placeholder="Brand"
@@ -799,7 +772,8 @@
                     on:focus={() => (flipped = true)}
                   />
                   <input
-                    placeholder="URL"class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    placeholder="URL"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                     bind:value={cardProps["url"]}
                   />
                 {:else if cardProps.category?.toLowerCase() === "firearms"}
@@ -890,9 +864,7 @@
                   />
                 {/if}
               </swiper-slide>
-              <swiper-slide
-                class="slide-4 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-              >
+              <swiper-slide class="slide-4 w-full h-full gird grid-row-[1fr_1fr] p-3">
                 {#if cardProps.category?.toLowerCase() === "art"}
                   <input
                     placeholder="Serial"
@@ -929,9 +901,7 @@
                 {:else if cardProps.category?.toLowerCase() === "jewelry"}
                   <Select
                     placeholder="Carat/Weight"
-                    items={carat_weights?.map((carat_weight) =>
-                      firstCapital(carat_weight)
-                    )}
+                    items={carat_weights?.map((carat_weight) => firstCapital(carat_weight))}
                     on:change={() => {
                       carat_weight = justValue;
                     }}
@@ -940,9 +910,7 @@
                   />
                   <Select
                     placeholder="Cut/Shape"
-                    items={cut_shapes?.map((cut_shape) =>
-                      firstCapital(cut_shape)
-                    )}
+                    items={cut_shapes?.map((cut_shape) => firstCapital(cut_shape))}
                     on:change={() => {
                       cut_shape = justValue;
                     }}
@@ -1082,9 +1050,8 @@
               </swiper-slide>
 
               <swiper-slide
-                class="slide-5 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                class:hidden={cardProps?.category?.toLowerCase() ===
-                  "clothing" ||
+                class="slide-5 w-full h-full gird grid-row-[1fr_1fr] p-3"
+                class:hidden={cardProps?.category?.toLowerCase() === "clothing" ||
                   cardProps?.category?.toLowerCase() === "leather" ||
                   cardProps?.category?.toLowerCase() === "other"}
               >
@@ -1196,98 +1163,92 @@
                 {/if}
               </swiper-slide>
 
-                <swiper-slide
-                  class="slide-6 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                  class:hidden={cardProps.category?.toLowerCase() === "bird" ||
-                    cardProps.category?.toLowerCase() === "cat" ||
-                    cardProps.category?.toLowerCase() === "dog" ||
-                    cardProps.category?.toLowerCase() === "other animal" ||
-                    cardProps.category?.toLowerCase() === "clothing" ||
-                    cardProps.category?.toLowerCase() === "collectibles" ||
-                    cardProps.category?.toLowerCase() === "crypto" ||
-                    cardProps.category?.toLowerCase() === "nft" ||
-                    cardProps.category?.toLowerCase() === "firearms" ||
-                    cardProps.category?.toLowerCase() === "leather" ||
-                    cardProps.category?.toLowerCase() === "sneakers" ||
-                    cardProps.category?.toLowerCase() === "technology" ||
-                    cardProps?.category?.toLowerCase() === "trading cards" ||
-                    cardProps?.category?.toLowerCase() === "other" ||
-                    cardProps?.category?.toLowerCase() === "vintage"}
-                >
-                  {#if cardProps.category?.toLowerCase() === "art"}
-                    <input
-                      placeholder="Unique features"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["other"]}
-                      
-                    />
-                  {:else if cardProps.category?.toLowerCase() === "jewelry"}
-                    <Select
-                      placeholder="Size"
-                      class="select text-black w-full mt-2 "
-                      items={sizes?.map((size) => firstCapital(size))}
-                      on:change={() => {
-                        cut_shape = justValue;
-                      }}
-                      bind:justValue={cardProps["size"]}
-                    />
+              <swiper-slide
+                class="slide-6 w-full h-full gird grid-row-[1fr_1fr] p-3"
+                class:hidden={cardProps.category?.toLowerCase() === "bird" ||
+                  cardProps.category?.toLowerCase() === "cat" ||
+                  cardProps.category?.toLowerCase() === "dog" ||
+                  cardProps.category?.toLowerCase() === "other animal" ||
+                  cardProps.category?.toLowerCase() === "clothing" ||
+                  cardProps.category?.toLowerCase() === "collectibles" ||
+                  cardProps.category?.toLowerCase() === "crypto" ||
+                  cardProps.category?.toLowerCase() === "nft" ||
+                  cardProps.category?.toLowerCase() === "firearms" ||
+                  cardProps.category?.toLowerCase() === "leather" ||
+                  cardProps.category?.toLowerCase() === "sneakers" ||
+                  cardProps.category?.toLowerCase() === "technology" ||
+                  cardProps?.category?.toLowerCase() === "trading cards" ||
+                  cardProps?.category?.toLowerCase() === "other" ||
+                  cardProps?.category?.toLowerCase() === "vintage"}
+              >
+                {#if cardProps.category?.toLowerCase() === "art"}
+                  <input
+                    placeholder="Unique features"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["other"]}
+                  />
+                {:else if cardProps.category?.toLowerCase() === "jewelry"}
+                  <Select
+                    placeholder="Size"
+                    class="select text-black w-full mt-2 "
+                    items={sizes?.map((size) => firstCapital(size))}
+                    on:change={() => {
+                      cut_shape = justValue;
+                    }}
+                    bind:justValue={cardProps["size"]}
+                  />
 
+                  <input
+                    placeholder="Laser marking"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["laser_inscription"]}
+                  />
+                {:else if cardProps.category?.toLowerCase() === "watch"}
+                  <input
+                    placeholder="Unique features"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["other"]}
+                  />
+                  <input
+                    placeholder="Grading"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["grading"]}
+                  />
+                {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
+                  {#if cardProps.category?.toLowerCase() === "motorcycle"}
                     <input
-                      placeholder="Laser marking"
+                      placeholder="Color"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["laser_inscription"]}
+                      bind:value={cardProps["exterior_color"]}
                     />
-                  {:else if cardProps.category?.toLowerCase() === "watch"}
+                  {:else}
                     <input
-                      placeholder="Unique features"
+                      placeholder="Exterior color"
                       class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["other"]}
-                      
+                      bind:value={cardProps["exterior_color"]}
                     />
-                    <input
-                      placeholder="Grading"
-                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                      bind:value={cardProps["grading"]}
-                    />
-                  {:else if cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
-                    {#if cardProps.category?.toLowerCase() === "motorcycle"}
-                      <input
-                        placeholder="Color"
-                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["exterior_color"]}
-                        
-                      />
-                    {:else}
-                      <input
-                        placeholder="Exterior color"
-                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["exterior_color"]}
-                        
-                      />
-                    {/if}
-
-                    {#if cardProps.category?.toLowerCase() === "automobile"}
-                      <input
-                        placeholder="Interior color"
-                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["interior_color"]}
-                        
-                      />
-                    {/if}
-                    {#if cardProps.category?.toLowerCase() === "motorcycle"}
-                      <input
-                        placeholder="Size"
-                        class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                        bind:value={cardProps["size"]}
-                      />
-                    {/if}
                   {/if}
-                </swiper-slide>
+
+                  {#if cardProps.category?.toLowerCase() === "automobile"}
+                    <input
+                      placeholder="Interior color"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["interior_color"]}
+                    />
+                  {/if}
+                  {#if cardProps.category?.toLowerCase() === "motorcycle"}
+                    <input
+                      placeholder="Size"
+                      class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                      bind:value={cardProps["size"]}
+                    />
+                  {/if}
+                {/if}
+              </swiper-slide>
               {#if cardProps.category?.toLowerCase() === "watch" || cardProps.category?.toLowerCase() === "jewelry" || cardProps.category?.toLowerCase() === "automobile" || cardProps.category?.toLowerCase() === "motorcycle"}
                 <swiper-slide
-                  class="slide-7 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-                  class:hidden={cardProps.category.toLowerCase() ===
-                    "clothing" ||
+                  class="slide-7 w-full h-full gird grid-row-[1fr_1fr] p-3"
+                  class:hidden={cardProps.category.toLowerCase() === "clothing" ||
                     cardProps.category.toLowerCase() === "leather" ||
                     cardProps.category.toLowerCase() === "trading cards"}
                 >
@@ -1330,50 +1291,39 @@
                 </swiper-slide>
               {/if}
               {#if category !== null}
-              <swiper-slide
-                class="slide-10 w-full h-full gird grid-row-[1fr_1fr]  p-3"
-              >
-                <p>Enter a description.</p>
-                <input
-                  placeholder="Description"
-                  class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                  bind:value={cardProps["description"]}
-                  
-                />
-              </swiper-slide>
+                <swiper-slide class="slide-10 w-full h-full gird grid-row-[1fr_1fr] p-3">
+                  <p>Enter a description.</p>
+                  <input
+                    placeholder="Description"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["description"]}
+                  />
+                </swiper-slide>
 
-              <swiper-slide
-                class="slide-8 w-full h-full gird grid-row-[1fr_1fr] general-fields p-3"
-              >
-                <input
-                  placeholder="Purchased from"
-                  class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here"
-                  bind:value={cardProps["purchasedFrom"]}
-                  
-                  on:focus={() => {
-                    flipped = true;
-                  }}
-                />
-                <input
-                  placeholder="Purchase value"
-                  class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
-                  bind:value={cardProps["purchasedValue"]}
-                />
-              </swiper-slide>
-              <swiper-slide
-                class="w-full h-full gird grid-row-[1fr_1fr]  p-3"
-              >
-                This slide is for document upload
-              </swiper-slide>
+                <swiper-slide class="slide-8 w-full h-full gird grid-row-[1fr_1fr] general-fields p-3">
+                  <input
+                    placeholder="Purchased from"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md slide-to-here"
+                    bind:value={cardProps["purchasedFrom"]}
+                    on:focus={() => {
+                      flipped = true;
+                    }}
+                  />
+                  <input
+                    placeholder="Purchase value"
+                    class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
+                    bind:value={cardProps["purchasedValue"]}
+                  />
+                </swiper-slide>
+                <swiper-slide class="w-full h-full gird grid-row-[1fr_1fr] p-3">
+                  This slide is for document upload
+                </swiper-slide>
               {/if}
-              <swiper-slide
-                class="slide-11 w-full h-full flex flex-col content-center   p-3"
-              >
-                <p class="w-full  flex justify-center p-2 ">
-                  Myne Global takes no responsibility for incorrect information
-                  inputted, and will not vet your entries. Please ensure that
-                  everything on this card is accurate. Reporting inaccurate
-                  ownership information is a violation of the usage policy.
+              <swiper-slide class="slide-11 w-full h-full flex flex-col content-center p-3">
+                <p class="w-full flex justify-center p-2">
+                  Myne Global takes no responsibility for incorrect information inputted, and will not vet your entries.
+                  Please ensure that everything on this card is accurate. Reporting inaccurate ownership information is
+                  a violation of the usage policy.
                 </p>
                 <div class="flex justify-center">
                   <input
@@ -1385,8 +1335,8 @@
                 </div>
               </swiper-slide>
             </swiper-container>
-            <div class="pagination-btns flex w-full mt-2 ">
-              <div class="w-full  flex flex-col justify-end px-2">
+            <div class="pagination-btns flex w-full mt-2">
+              <div class="w-full flex flex-col justify-end px-2">
                 <PrevButton />
               </div>
               <div class="w-full flex flex-col justify-end px-2">
@@ -1417,10 +1367,8 @@
     background-color: white;
   }
   .exitForm {
-    -webkit-animation: slide-out-bottom 0.5s
-      cubic-bezier(0.755, 0.05, 0.855, 0.06) 100ms both;
-    animation: slide-out-bottom 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06)
-      100ms both;
+    -webkit-animation: slide-out-bottom 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06) 100ms both;
+    animation: slide-out-bottom 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06) 100ms both;
   }
   /* ----------------------------------------------
  * Generated by Animista on 2023-2-13 23:25:1
@@ -1459,10 +1407,8 @@
     }
   }
   .comeBack {
-    -webkit-animation: slide-in-bottom 0.5s
-      cubic-bezier(0.68, -0.55, 0.265, 1.55) 100ms backwards;
-    animation: slide-in-bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 100ms
-      backwards;
+    -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 100ms backwards;
+    animation: slide-in-bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 100ms backwards;
   }
   /* ----------------------------------------------
  * Generated by Animista on 2023-2-14 0:6:42

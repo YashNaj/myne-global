@@ -4,7 +4,7 @@
   import { selectedCard, documentUpload ,certificate } from "$lib/utils/store";
   import { trpc } from "$lib/trpc/client";
   let loading = false;
-
+  export let data; 
 </script>
 
 <div class="w-80 h-[34rem] shadow-lg card  relative flex flex-col p-3 bg-green-900" transition:scale|local>

@@ -13,10 +13,16 @@
   import {  ArrowRight, Home, ArrowsRightLeft } from "@steeze-ui/heroicons";
   import { goto } from "$app/navigation";
   import { redirect } from "@sveltejs/kit";
-  let cardId = "";
-  console.log("currentUserId", currentUserId);
-  $: cardId = $selectedCard.id
-  $: user_id = $selectedCard.user_id
+  import type { PageData } from "../../routes/app/card/[card]/$types";
+  export let data:PageData; 
+  let cards = data.cards();
+  $: cards = $cards.data;
+  let user = data.user();
+  let cardId = data.cardId;
+  console.log($cards.data)
+  $: if($cards.data){
+  }
+  $: user_id = $user.data.userId
   $: currentUserId = user_id
 
   let selectedUserSwitch = false;
@@ -38,21 +44,11 @@
   function selectUser(user: any) {
     selectedUser = user;
   }
-  const loadUsers = async () => {
-    userStore.set([]);
-    userLoading = true;
-    if (userInput === "" || userInput === null) {
-      return userStore.set([]);
-    } else {
-      const users = await trpc($page).findUser.load.query(userInput);
-      userStore.set(users);
-    }
-    userLoading = false;
-  };
+
   const transferCard = async () => {
     loadingTransfer = true;
     await trpc($page)
-      .cards.transfer.mutate({ cardId, currentUserId, newUserId })
+      .cards.transfer.createMutation({ cardId, currentUserId, newUserId })
       .then(async (result) => {
         transferSuccess = true;
         loadingTransfer = false;
@@ -77,13 +73,11 @@
   function reloadPage() {
     location.reload();
   }
-  export let selected;
 </script>
 
 <div class="w-80 h-[30rem] shadow-lg card  relative flex flex-col p-3 bg-primary" transition:scale|local>
   <button
     on:click={() => {
-      selected = false;
       transfer.set(false);
     }}
     class="absolute top-1 right-1 btn btn-square bg-primary font-semilbold text-white border-none z-[99] "

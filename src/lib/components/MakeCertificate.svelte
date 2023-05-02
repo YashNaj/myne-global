@@ -2,10 +2,17 @@
   import { scale } from "svelte/transition";
   import { selectedCard, certificate, userCards } from "$lib/utils/store";
   import { trpc } from "$lib/trpc/client";
+  import type { PageData } from "../../routes/app/$types";
+  export let data: PageData; 
+  let cards = data.cards();
   let cardId = $selectedCard.id;
-  let card = $userCards.find((obj) => {
-    return obj.id === cardId;
+  let card; 
+  $: if ($cards.data) {
+    card = $cards.data.find((card) => {
+    return card.id === cardId;
   });
+  } 
+ 
   let loading = false;
   async function downloadCertificate() {
     console.log("body certificate", card);
