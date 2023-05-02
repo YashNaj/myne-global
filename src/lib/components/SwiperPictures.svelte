@@ -88,7 +88,7 @@
       {/if}
       <swiper-slide class="md:w-[300px] md:aspect-[1/1] w-full bg-black bg-opacity-50 rounded-2xl">
         <label
-          class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap"
+          class=" font-semibold text-center w-full h-full text-white bg-black bg-opacity-40 bg-200 normal-case flex flex-col justify-center content-center flex-nowrap rounded-2xl"
           for="single"
         >
           {#if uploading}
