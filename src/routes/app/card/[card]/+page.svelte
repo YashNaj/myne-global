@@ -7,18 +7,23 @@
   import { spring } from "svelte/motion";
   import { writable } from "svelte/store";
   import { formFieldsObject, fieldPropsObject, colors } from "$lib/utils/cardLogic";
-  import { transfer, stolen, documentUpload, certificate, selectedCard } from "$lib/utils/store";
   import StolenBadge from "$lib/components/StolenBadge.svelte";
-
-  import { cloneDeep } from "lodash";
   import { beforeUpdate, createEventDispatcher, onMount } from "svelte";
   import { supabase } from "$lib/utils/supabaseClient";
   import CardCellExpanded from "$lib/components/CardCellExpanded.svelte";
+  import type { LayoutData, PageData } from "./$types";
+  import { cubicIn, cubicOut } from "svelte/easing";
+  import SwiperPictures from "$lib/components/SwiperPictures.svelte";
+  import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
   let isCardPropsInitialized = false;
   $: isCardPropsInitialized = !!cardProps;
+  export let data: PageData; 
+
+  let cards = data.cards();
+  console.log("cards /app/card", $cards.data)
   export let myneCard;
   $: console.log("is mobile", mobile);
-
+  $: cardId = data.cardId
   // box height for expanding cards
   export let w: number;
   export let h: number;
@@ -37,9 +42,19 @@
   //card variables
   export let cardDisplayId: number = 1;
   $: cardDisplayId = cardDisplayId;
-  export let cardProps: typeof selectedCard = $selectedCard;
-  $: cardProps = $selectedCard;
+  let cardProps;
+  $: if($cards.data){
+    cardProps = $cards.data.find((card)=> card.id = cardId)
+  }
+  $: if (cardProps) {
+    formFieldsObject[cardProps?.category];
+  }
+  $: cardProps = cardProps;
+  
+  
   export let description;
+ 
+ 
   let currency;
   $: currency = purchasedValue;
   $: purchasedValue = currencyFormatter.format(purchasedValue);
@@ -51,10 +66,7 @@
 
   export let selectedFields;
 
-  $: if (cardProps) {
-    formFieldsObject[cardProps?.category];
-  }
-  $: cardProps = cardProps;
+
 
   //expansion logic
   let expandWidth = 250;
@@ -97,7 +109,6 @@
       (fieldsBackTwoValues = formFields?.fieldsBackTwo),
       (fieldsBackThreeValues = formFields?.fieldsBackThree);
   }
-  let cardId: string;
   export let cardFrontSwiperId = 1;
   export let cardBackSwiperId = 1;
   let pictureSwiper;
@@ -134,11 +145,7 @@
 
   let tiltElement;
 
-  import type { LayoutData, PageData } from "./$types";
-  import { cubicIn, cubicOut } from "svelte/easing";
-  import SwiperPictures from "$lib/components/SwiperPictures.svelte";
-  import CardFunctionModals from "$lib/components/CardFunctionModals.svelte";
-  export let data: PageData;
+
   $: pathname = data.pathname;
   const duration = 300;
   const delay = duration + 100;
