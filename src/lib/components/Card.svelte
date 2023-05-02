@@ -108,7 +108,7 @@
       >
         <div class:hidden={flipped} class="flex top-[.5rem] right-[1rem] z-[101] absolute w-justify-end">
           <a
-            href="/card/{cardProps?.id}"
+            href="/app/card/{cardProps?.id}"
             class="btn btn-ghost btn-secondary text-white top-[.5rem] right-[1rem] z-[101] normal-case"
             on:click={() => {
               selectedCard.set(structuredClone(cardProps));

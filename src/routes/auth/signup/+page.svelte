@@ -3,8 +3,9 @@
   import { enhance } from "$app/forms";
   import Alert from "$lib/components/Alert.svelte";
   import type { PageData, Snapshot } from "./$types";
-  export let form: { message?: string };
-  let data: PageData;
+  import { superForm } from "sveltekit-superforms/client";
+  import SuperDebug from "sveltekit-superforms/client/SuperDebug.svelte";
+  export let data: PageData;
   export let url = $page.url.origin;
   let firstName: string = "";
   let lastName: string = "";
@@ -19,6 +20,8 @@
   let phone: string = "";
   let address: string = "";
   let addressTwo: string = "";
+  const { form, errors, constraints, capture, restore } = superForm(data.form);
+  export const snapshot = { capture, restore };
 
   export let formData = {
     firstName,
@@ -48,15 +51,10 @@
     confirmPassword,
     phone,
   };
-
-  export const snapshot: Snapshot = {
-    capture: () => formData,
-    restore: (value) => formData,
-  };
-
-  snapshot.restore(formData);
   console.log(url);
 </script>
+
+<SuperDebug data={$form} />
 
 <form
   class="flex flex-col justify-center flex-wrap content-center text-primary p-4 overflow-y-auto"
@@ -71,7 +69,7 @@
       name="firstName"
       placeholder="First Name"
       required
-      bind:value={firstName}
+      bind:value={$form.firstName}
     />
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
@@ -79,16 +77,16 @@
       name="lastName"
       placeholder="Last Name "
       required
-      bind:value={lastName}
+      bind:value={$form.lastName}
     />
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       type="date"
       id="birthday"
       name="birthday"
-      placeholder="00/00/0000"
+      placeholder="Birthday"
       required
-      bind:value={birthday}
+      bind:value={$form.birthday}
     />
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
@@ -96,7 +94,7 @@
       name="phone"
       placeholder="+(1) (999)-999-9999"
       type="tel"
-      bind:value={phone}
+      bind:value={$form.phone}
       required
     />
 
@@ -105,7 +103,7 @@
       id="address"
       name="address"
       placeholder="Address"
-      bind:value={address}
+      bind:value={$form.address}
       required
     />
 
@@ -114,15 +112,15 @@
       id="addressTwo"
       name="addressTwo"
       placeholder="Address 2"
-      bind:value={addressTwo}
-      required
+      bind:value={$form.addressTwo}
+      
     />
     <input
       class="input input-md bg-neutral flex-2 text-primary mt-3 shadow-lg w-full"
       id="city"
       name="city"
       placeholder="City"
-      bind:value={city}
+      bind:value={$form.city}
       required
     />
 
@@ -131,7 +129,7 @@
       id="state"
       name="state"
       placeholder="State"
-      bind:value={state}
+      bind:value={$form.state}
       required
     />
     <input
@@ -139,7 +137,7 @@
       id="country"
       name="country"
       placeholder="Country"
-      bind:value={country}
+      bind:value={$form.country}
       required
     />
     <input
@@ -147,7 +145,7 @@
       id="postalZip"
       name="postalZip"
       placeholder="ZIP/Postal Code"
-      bind:value={postalZip}
+      bind:value={$form.postalZip}
       required
     />
     <input
@@ -155,7 +153,7 @@
       id="email"
       name="email"
       placeholder="Email "
-      bind:value={email}
+      bind:value={$form.email}
       required
     />
 
@@ -165,7 +163,7 @@
       id="password"
       name="password"
       placeholder="Password"
-      bind:value={password}
+      bind:value={$form.password}
       required
     />
     <input
@@ -174,7 +172,7 @@
       id="confirmPassword"
       name="confirmPassword"
       placeholder="Confirm Password"
-      bind:value={confirmPassword}
+      bind:value={$form.confirmPassword}
       required
     />
   </div>
@@ -187,34 +185,10 @@
 
 <div class="flex flex-col content-center flex-wrap justify-center">
   <div class="flex-col justify-between h-20 w-full justify center content-center">
-    {#if form?.message}
+    {#if $errors}
       <div>
-        <Alert message={form.message} />
+        <Alert message={$errors.firstName} />
       </div>
     {/if}
   </div>
 </div>
-
-<style lang="postcss">
-  :global(label) {
-    color: white;
-  }
-  form {
-  }
-
-  swiper-container {
-    width: 100%;
-    height: 110%;
-    display: flex;
-    justify-content: center;
-  }
-
-  swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-</style>

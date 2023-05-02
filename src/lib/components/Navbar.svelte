@@ -9,7 +9,8 @@
   import LogOut from "./LogOut.svelte";
   import { offset, flip, shift } from "svelte-floating-ui/dom";
   import { createFloatingActions } from "svelte-floating-ui";
-  export let role = ""; 
+  export let role = "";
+  export let isUser = false; 
   // $: pathname = data.pathname
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: "absolute",

@@ -392,7 +392,7 @@
   <div class="w-full flex justify-center h-full order-2">
     <form
       method="POST"
-      action="/add_card"
+      action="/app/add_card"
       class="h-full w-full form-gradient p-4 flex flex-col justify-between form-container text-white"
       use:enhance={()=> {
          if(formData.success = true){
@@ -463,7 +463,7 @@
                 class="slide-0 w-full h-8 p-3 grid place-items-center"
               >
                 <div class="w-full  place-items-center">
-                  <div class = 'z-99'>
+                  <div class = 'z-[99]'>
                     <Select
                       {floatingConfig}
                       placeholder="Category"
@@ -710,7 +710,6 @@
                     placeholder="Brand"
                     class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                     bind:value={cardProps["brand"]}
-                    on:focus={() => setFlip()}
                   />
                   <input
                     placeholder="Brand reference"
@@ -722,7 +721,6 @@
                     placeholder="Material"
                     class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                     bind:value={cardProps["material"]}
-                    on:focus={() => setFlip()}
                   />
                   <Select
                     placeholder="Stone"
@@ -883,7 +881,6 @@
                     placeholder="Microchip "
                     class=" text-black text-[16px] font-semibold w-full mt-2 input input-md"
                     bind:value={cardProps["microchip"]}
-                    on:focus={() => setFlip()}
                     on:focus={() => (flipped = true)}
                   />
                   <input

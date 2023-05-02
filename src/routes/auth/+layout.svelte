@@ -63,3 +63,17 @@
     <Alert message={form.message} />
   </div>
 {/if}
+
+<style lang="postcss">
+  :global(html) {
+    font-family: futura-pt;
+  }
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+    background: #0062ff;
+  }
+</style>

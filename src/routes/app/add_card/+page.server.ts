@@ -6,7 +6,7 @@ import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 export const actions: Actions = {
   default: async ({ request, locals }) => {
-    const { session, user } = await locals.validateUser();
+    const { session, user } = await locals.auth.validateUser();
     console.log("\u001b[1;31m user", user);
 
     const form = await request.formData();

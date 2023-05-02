@@ -29,7 +29,7 @@
   <div class="w-full pt-20 h-full">
     {#if $addCard}
       <div
-        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 left-0"
+        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[99] backdrop-blur-lg top-0 left-0"
         in:fly={transitionIn}
         out:fly={transitionOut}
       >
@@ -48,7 +48,7 @@
   <div class="w-full h-full pt-20">
     {#if $addCard}
       <div
-        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[998] backdrop-blur-lg top-0 left-0"
+        class="w-full h-full flex flex-wrap justify-center content-center relative bg-black bg-opacity-25 z-[99] backdrop-blur-lg top-0 left-0"
         in:fly={transitionIn}
         out:fly={transitionOut}
       >

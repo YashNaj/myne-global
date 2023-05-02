@@ -4,13 +4,15 @@ import type { PageServerLoad, Actions } from "./$types";
 import { LuciaError } from "lucia-auth";
 import { signin } from "../../../../tests/utils";
 import { currentUser } from "$lib/utils/store";
-import { superValidate } from 'sveltekit-superforms/server';
-import { z } from 'zod';
+import { superValidate } from "sveltekit-superforms/server";
+import { z } from "zod";
+
+//schema
 const loginSchema = z.object({
   email: z.string().email().nonempty(),
   password: z.string().min(8).nonempty(),
 });
-let signingIn = false;
+//load
 export const load: PageServerLoad = async ({ locals, page }) => {
   const session = await locals.auth.validate();
   const form = await superValidate(loginSchema);
@@ -21,16 +23,15 @@ export const load: PageServerLoad = async ({ locals, page }) => {
   }
   console.log("session", session);
   if (session) throw redirect(302, "/app");
-  return { form }
+  return { form };
 };
-// Set signingIn to false when redirecting
-
+//form submission
 export const actions: Actions = {
   default: async ({ request, locals, page }) => {
-    const form = await superValidate(request,loginSchema);
-    console.log(form)
-    const email = form.data.email
-    const password = form.data.password
+    const form = await superValidate(request, loginSchema);
+    console.log(form);
+    const email = form.data.email;
+    const password = form.data.password;
     console.log(form);
     if (!email || !password || typeof email !== "string" || typeof password !== "string")
       return fail(400, {
@@ -58,6 +59,9 @@ export const actions: Actions = {
       console.log(error);
       return fail(400, { signingIn: false });
     }
-    return {form}
+    if (!form.valid) {
+      return fail(400, { form });
+    }
+    return { form };
   },
 };

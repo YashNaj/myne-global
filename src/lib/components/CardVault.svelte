@@ -72,7 +72,7 @@
     {$cards.error}
   {:else if $cards.data}
     {#if $cards.data.length > 0}
-      {#each cards as card}
+      {#each $cards.data as card}
         <div
           in:fly={{ y: -10, duration: 300, delay: 400, easing: cubicIn, opacity: 1 }}
           out:fly={{ y: 10, duration: 300, delay: 400, easing: cubicOut, opacity: 0 }}

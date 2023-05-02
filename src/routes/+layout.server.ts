@@ -33,4 +33,5 @@ export const load = (async ({ url, locals }) => {
   if (session && user.valid) {
     throw redirect(202, "/app");
   } else redirect(302, "/app/unverified-email");
+  return { pathname }
 }) satisfies LayoutServerLoad;

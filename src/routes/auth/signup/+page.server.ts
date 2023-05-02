@@ -8,8 +8,25 @@ import { page } from "$app/stores";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { render } from "svelte-email";
 import SignUpEmail from "$lib/components/SignUpEmail.svelte";
-const prisma = new PrismaClient();
+import { z } from "zod";
+import { superValidate } from "sveltekit-superforms/server";
 
+const prisma = new PrismaClient();
+const registerSchema = z.object({
+  firstName: z.string().nonempty(),
+  lastName: z.string().nonempty(),
+  address: z.string().nonempty(),
+  addressTwo: z.string(),
+  city: z.string().nonempty(),
+  state: z.string().nonempty(),
+  country: z.string().nonempty(),
+  postalZip: z.string().nonempty(),
+  phone: z.string().nonempty(),
+  birthday: z.string().nonempty(),
+  email: z.string().email().nonempty(),
+  password: z.string().min(8).nonempty(),
+  confirmPassword: z.string().min(8).nonempty(),
+});
 const origin = "https://myneglobal.com" || "http://localhost:5173";
 const sendEmailVerificationLink = async (user: string, origin: string, email: string, url: string) => {
   sgMail.setApiKey(VITE_SENDGRID_API_KEY);
@@ -38,7 +55,7 @@ const sendEmailVerificationLink = async (user: string, origin: string, email: st
   const profile = await prisma.profile.findUnique({
     where: {
       user_id: user.userId,
-    },  
+    },
   });
   const token = verificationRequest?.token;
   const href = `${origin}/api/verify-email?token=${token}`;
@@ -67,32 +84,30 @@ const sendEmailVerificationLink = async (user: string, origin: string, email: st
   }
 };
 export const load: PageServerLoad = async ({ locals }) => {
+  const form = await superValidate(registerSchema);
   const session = await locals.auth.validate();
   console.log(session);
   if (session) throw redirect(302, "/app");
+  return { form };
 };
 export const actions: Actions = {
   default: async ({ request, locals, url }) => {
-    const form = await request.formData();
-    const email = form.get("email");
-    const password = form.get("password");
-    const confirmPassword = form.get("confirmPassword");
-    const firstName = form.get("firstName");
-    const lastName = form.get("lastName");
-    const address = form.get("address");
-    const addressTwo = form.get("addressTwo");
-    const city = form.get("city");
-    const state = form.get("state");
-    const country = form.get("country");
-    const postalZip = form.get("postalZip");
-    const phone = form.get("phone");
-    const birthday = form.get("birthday");
-    const valid = false;
-    console.log(form);
-    if (!email || !password || typeof email !== "string" || typeof password !== "string") {
-      console.log("Failed to enter email password");
-      return fail(400), { message: "Failed to enter email password" };
-    }
+    const form = await superValidate(request, registerSchema);
+    const {
+      firstName,
+      lastName,
+      address,
+      addressTwo,
+      city,
+      state,
+      country,
+      phone,
+      postalZip,
+      birthday,
+      password,
+      confirmPassword,
+      email,
+    } = form.data;
     if (confirmPassword !== password) {
       console.log("Passwords do not match");
       return fail(400), { message: "Passwords do not match" };
@@ -101,14 +116,15 @@ export const actions: Actions = {
       const user = await auth.createUser({
         primaryKey: {
           providerId: "email",
-          providerUserId: email,
+          providerUserId: email, 
           password,
         },
         attributes: {
           email,
-          valid,
+          valid: false,
         },
       });
+
       console.log("🚀 ~ file: +page.server.ts:102 ~ default: ~ user", user);
       const session = await auth.createSession(user.userId);
       locals.auth.setSession(session);
@@ -142,7 +158,7 @@ export const actions: Actions = {
         },
       });
       console.log("Created Email Verification Record");
-      await sendEmailVerificationLink( user, origin, email);
+      await sendEmailVerificationLink(user, origin, email);
     } catch (error) {
       if (error instanceof LuciaError) {
         return fail(400), { message: error.message };
